@@ -1,3 +1,4 @@
+import "./style/theme-default.css";
 export default function App() {
   return (
     <main>

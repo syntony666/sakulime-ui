@@ -1,27 +1,34 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
-import "./Button.css";
+import "./button.css";
 
-type ButtonVariant = "primary" | "secondary";
-type ButtonSize = "sm" | "md";
+type ButtonVariant = "normal"| "ghost" | "underline";
+type ButtonTone = "primary" | "secondary" | "success" | "waring" | "danger";
+type ButtonSize = "sm" | "md" | "lg";
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
   variant?: ButtonVariant;
+  tone?: ButtonTone;
   size?: ButtonSize;
+  invert?: boolean
 };
 
 export function Button({
   children,
-  variant = "primary",
+  variant = "normal",
+  tone = 'primary',
   size = "md",
   className = "",
   type = "button",
+  invert = false,
   ...props
 }: ButtonProps) {
   const classes = [
     "ui-button",
+    `ui-button--${tone}`,
     `ui-button--${variant}`,
     `ui-button--${size}`,
+    invert ? "is-invert": "",
     className,
   ]
     .filter(Boolean)
