@@ -1,6 +1,6 @@
 # sakulime-ui
 
-CSS-first、框架無關的設計系統。契約是 `.sl-*` class + `--sl-*` token + `<sl-*>` custom element — 任何框架或純 HTML 都能用。
+CSS-first、框架無關的設計系統。契約是 **`sl-*` attribute + `--sl-*` token** — `class` 完全留給消費者排版，任何框架或純 HTML 都能用。
 
 ## 使用
 
@@ -12,14 +12,13 @@ import "sakulime-ui/themes/sakura.css"; // 或 themes/dark.css
 // 全部元件 css
 import "sakulime-ui/sakulime.css";
 
-// 可選：註冊 <sl-*> custom elements
-import "sakulime-ui/elements.js";
+// 可選：icon helper（純 TS，產 svg 字串）
+import { icon } from "sakulime-ui";
 ```
 
 ```html
-<!-- 兩種寫法，同一份 CSS；tone/size 是通用 modifier -->
-<button class="sl-button sl-tone--primary sl-size--md">Save</button>
-<sl-button tone="primary" size="md">Save</sl-button>
+<button sl-button sl-tone="primary" sl-size="md">Save</button>
+<button sl-button sl-tone="danger" sl-invert>Delete</button>
 ```
 
 切主題：`<html data-theme="dark">`，不用 reload。
@@ -37,6 +36,7 @@ npm run lint
 
 - `src/tokens.css` — semantic token（非色 token 固定值；顏色 token 是契約）
 - `src/themes/*.css` — 主題檔，負責給顏色 token 值
-- `src/css/*.css` — 元件樣式（`.sl-*`）
+- `src/css/*.css` — 元件樣式（`[sl-*]` attribute selector）
 - `src/css/*.stories.ts` — Storybook stories（回傳 HTML 字串）
-- `src/elements/*.ts` — `<sl-*>` custom element 薄殼（vanilla TS，零依賴）
+- `src/icons/index.ts` — icon registry + `icon()` 純函式
+- `src/index.ts` — lib entry（css 抽出 + js 出口）
