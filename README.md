@@ -17,8 +17,8 @@ import "sakulime-ui/elements.js";
 ```
 
 ```html
-<!-- 兩種寫法，同一份 CSS -->
-<button class="sl-button sl-button--primary sl-button--md">Save</button>
+<!-- 兩種寫法，同一份 CSS；tone/size 是通用 modifier -->
+<button class="sl-button sl-tone--primary sl-size--md">Save</button>
 <sl-button tone="primary" size="md">Save</sl-button>
 ```
 

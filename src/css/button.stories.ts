@@ -42,8 +42,8 @@ export default meta;
 type Story = StoryObj<ButtonArgs>;
 
 function buttonClass({ tone, variant, size, invert }: ButtonArgs): string {
-  const classes = ["sl-button", `sl-button--${tone}`, `sl-button--${size}`];
-  if (variant !== "normal") classes.push(`sl-button--${variant}`);
+  const classes = ["sl-button", `sl-tone--${tone}`, `sl-size--${size}`];
+  if (variant !== "normal") classes.push(`sl-variant--${variant}`);
   if (invert) classes.push("is-invert");
   return classes.join(" ");
 }

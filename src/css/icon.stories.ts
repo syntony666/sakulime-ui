@@ -38,7 +38,7 @@ type Story = StoryObj<IconArgs>;
 
 export const ClassUsage: Story = {
   render: (args) =>
-    `<span class="sl-icon sl-icon--${args.size} sl-icon--${args.tone}">${CHECK_SVG}</span>`,
+    `<span class="sl-icon sl-size--${args.size} sl-tone--${args.tone}">${CHECK_SVG}</span>`,
 };
 
 export const ElementUsage: Story = {

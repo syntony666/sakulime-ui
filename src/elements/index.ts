@@ -1,5 +1,6 @@
 import "../css/button.css";
 import "../css/icon.css";
+import "../css/modifiers.css";
 import "./button";
 import "./icon";
 

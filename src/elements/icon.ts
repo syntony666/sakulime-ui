@@ -9,7 +9,10 @@ const ICONS: Record<string, string> = {
 
 export const SlIcon = defineElement("sl-icon", {
   class: "sl-icon",
-  modifiers: { size: "md", tone: "" },
+  modifiers: {
+    size: { class: "sl-size", default: "md" },
+    tone: { class: "sl-tone" },
+  },
   watch: ["name"],
   render(el) {
     const name = el.getAttribute("name") ?? "";

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/src/themes/dark.css" />
     <link rel="stylesheet" href="/src/css/button.css" />
     <link rel="stylesheet" href="/src/css/icon.css" />
+    <link rel="stylesheet" href="/src/css/modifiers.css" />
     <script type="module" src="/src/elements/index.ts"></script>
     <style>
       body {
@@ -46,22 +47,23 @@
     <section>
       <h2>Button — class</h2>
       <div class="row">
-        <button class="sl-button sl-button--primary sl-button--md">primary</button>
-        <button class="sl-button sl-button--secondary sl-button--md">secondary</button>
-        <button class="sl-button sl-button--success sl-button--md">success</button>
-        <button class="sl-button sl-button--warning sl-button--md">warning</button>
-        <button class="sl-button sl-button--danger sl-button--md">danger</button>
+        <button class="sl-button sl-tone--primary sl-size--md">primary</button>
+        <button class="sl-button sl-tone--secondary sl-size--md">secondary</button>
+        <button class="sl-button sl-tone--success sl-size--md">success</button>
+        <button class="sl-button sl-tone--warning sl-size--md">warning</button>
+        <button class="sl-button sl-tone--danger sl-size--md">danger</button>
       </div>
       <div class="row">
-        <button class="sl-button sl-button--primary sl-button--ghost">ghost</button>
-        <button class="sl-button sl-button--primary sl-button--underline">underline</button>
-        <button class="sl-button sl-button--primary sl-button--md is-invert">invert</button>
-        <button class="sl-button sl-button--primary sl-button--md" disabled>disabled</button>
+        <button class="sl-button sl-tone--primary sl-variant--ghost">ghost</button>
+        <button class="sl-button sl-tone--primary sl-variant--underline">underline</button>
+        <button class="sl-button sl-tone--primary sl-size--md is-invert">invert</button>
+        <button class="sl-button sl-tone--primary sl-size--md" disabled>disabled</button>
       </div>
       <div class="row">
-        <button class="sl-button sl-button--primary sl-button--sm">sm</button>
-        <button class="sl-button sl-button--primary sl-button--md">md</button>
-        <button class="sl-button sl-button--primary sl-button--lg">lg</button>
+        <button class="sl-button sl-tone--primary sl-size--sm">sm</button>
+        <button class="sl-button sl-tone--primary sl-size--md">md</button>
+        <button class="sl-button sl-tone--primary sl-size--lg">lg</button>
+        <button class="sl-button sl-tone--primary sl-size--md sl-radius--full">radius-full</button>
       </div>
     </section>
 
@@ -82,7 +84,7 @@
         <sl-icon name="x" tone="danger"></sl-icon>
         <sl-icon name="info" tone="primary"></sl-icon>
         <sl-icon name="alert" tone="warning" size="lg"></sl-icon>
-        <span class="sl-icon sl-icon--lg sl-icon--secondary">
+        <span class="sl-icon sl-size--lg sl-tone--secondary">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
         </span>
       </div>
