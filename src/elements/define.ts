@@ -26,32 +26,39 @@ export function defineElement(
   name: string,
   config: ElementConfig,
 ): CustomElementConstructor {
-  const modifiers = config.modifiers ?? {};
+  const modifiers = Object.entries(config.modifiers ?? {}).map(([attr, spec]) => {
+    const s: { class?: string; default?: string; omit?: string } =
+      typeof spec === "string" ? { default: spec } : spec;
+    return {
+      attr,
+      namespace: s.class ?? config.class,
+      default: s.default,
+      omit: s.omit,
+    };
+  });
   const states = config.states ?? [];
-  const forwardAttrs = config.forwardAttrs ?? {};
-  const namespaces = new Set([config.class]);
-  for (const spec of Object.values(modifiers)) {
-    if (typeof spec === "object" && spec.class) namespaces.add(spec.class);
-  }
-  const observed = [
-    ...Object.keys(modifiers),
-    ...states,
-    ...Object.keys(forwardAttrs),
-    ...(config.watch ?? []),
-  ];
+  const forwards = Object.entries(config.forwardAttrs ?? {}).map(
+    ([attr, spec]) => ({ attr, default: spec === true ? null : spec }),
+  );
+  const namespaces = new Set(modifiers.map((m) => m.namespace));
+
+  const isManagedClass = (cls: string): boolean =>
+    cls === config.class ||
+    cls.startsWith("is-") ||
+    [...namespaces].some((ns) => cls.startsWith(`${ns}--`));
 
   class SlElement extends HTMLElement {
-    static observedAttributes = observed;
+    static observedAttributes = [
+      ...modifiers.map((m) => m.attr),
+      ...states,
+      ...forwards.map((f) => f.attr),
+      ...(config.watch ?? []),
+    ];
 
     private innerEl: HTMLElement | null = null;
 
     connectedCallback(): void {
-      if (config.wrap && !this.innerEl) {
-        const inner = document.createElement(config.wrap);
-        while (this.firstChild) inner.appendChild(this.firstChild);
-        this.appendChild(inner);
-        this.innerEl = inner;
-      }
+      this.wrapChildren();
       this.sync();
     }
 
@@ -59,41 +66,50 @@ export function defineElement(
       this.sync();
     }
 
+    private wrapChildren(): void {
+      if (!config.wrap || this.innerEl) return;
+      const inner = document.createElement(config.wrap);
+      while (this.firstChild) inner.appendChild(this.firstChild);
+      this.appendChild(inner);
+      this.innerEl = inner;
+    }
+
     private sync(): void {
       if (config.wrap && !this.innerEl) return;
-      const target = this.innerEl ?? this;
+      this.syncClasses();
+      this.syncAttrs();
+      config.render?.(this);
+    }
 
+    private syncClasses(): void {
       const classes = [config.class];
-      for (const [attr, spec] of Object.entries(modifiers)) {
-        const s = typeof spec === "string" ? { default: spec } : spec;
-        const value = this.getAttribute(attr) ?? s.default;
-        if (value && value !== s.omit) classes.push(`${s.class ?? config.class}--${value}`);
+      for (const mod of modifiers) {
+        const value = this.getAttribute(mod.attr) ?? mod.default;
+        if (value && value !== mod.omit) {
+          classes.push(`${mod.namespace}--${value}`);
+        }
       }
       for (const state of states) {
         if (this.hasAttribute(state)) classes.push(`is-${state}`);
       }
 
       if (this.innerEl) {
-        target.className = classes.join(" ");
-        for (const [attr, spec] of Object.entries(forwardAttrs)) {
-          const value = this.getAttribute(attr) ?? (spec === true ? null : spec);
-          if (value === null) this.innerEl.removeAttribute(attr);
-          else this.innerEl.setAttribute(attr, value);
-        }
-      } else {
-        const own = this.className
-          .split(" ")
-          .filter(
-            (c) =>
-              c &&
-              c !== config.class &&
-              ![...namespaces].some((ns) => c.startsWith(`${ns}--`)) &&
-              !c.startsWith("is-"),
-          );
-        this.className = [...own, ...classes].join(" ");
+        this.innerEl.className = classes.join(" ");
+        return;
       }
+      const own = this.className
+        .split(" ")
+        .filter((c) => c && !isManagedClass(c));
+      this.className = [...own, ...classes].join(" ");
+    }
 
-      config.render?.(this);
+    private syncAttrs(): void {
+      if (!this.innerEl) return;
+      for (const fwd of forwards) {
+        const value = this.getAttribute(fwd.attr) ?? fwd.default;
+        if (value === null) this.innerEl.removeAttribute(fwd.attr);
+        else this.innerEl.setAttribute(fwd.attr, value);
+      }
     }
   }
 
