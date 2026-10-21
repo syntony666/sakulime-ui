@@ -1,73 +1,42 @@
-# React + TypeScript + Vite
+# sakulime-ui
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+CSS-first、框架無關的設計系統。契約是 `.sl-*` class + `--sl-*` token + `<sl-*>` custom element — 任何框架或純 HTML 都能用。
 
-Currently, two official plugins are available:
+## 使用
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```ts
+// tokens + 主題（必備）
+import "sakulime-ui/tokens.css";
+import "sakulime-ui/themes/sakura.css"; // 或 themes/dark.css
 
-## React Compiler
+// 全部元件 css
+import "sakulime-ui/sakulime.css";
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+// 可選：註冊 <sl-*> custom elements
+import "sakulime-ui/elements.js";
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```html
+<!-- 兩種寫法，同一份 CSS -->
+<button class="sl-button sl-button--primary sl-button--md">Save</button>
+<sl-button tone="primary" size="md">Save</sl-button>
 ```
+
+切主題：`<html data-theme="dark">`，不用 reload。
+
+## 開發
+
+```bash
+npm run dev          # landing demo page (index.html)
+npm run storybook    # Storybook — 元件文件/視覺驗收
+npm run build        # tsc 型檢 + vite lib build + 拷貝 tokens/themes → dist/
+npm run lint
+```
+
+## 結構
+
+- `src/tokens.css` — semantic token（非色 token 固定值；顏色 token 是契約）
+- `src/themes/*.css` — 主題檔，負責給顏色 token 值
+- `src/css/*.css` — 元件樣式（`.sl-*`）
+- `src/css/*.stories.ts` — Storybook stories（回傳 HTML 字串）
+- `src/elements/*.ts` — `<sl-*>` custom element 薄殼（vanilla TS，零依賴）
