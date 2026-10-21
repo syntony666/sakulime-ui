@@ -1,0 +1,108 @@
+.sl-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sl-button-border);
+  color: var(--sl-button-text);
+  border-radius: var(--sl-radius-md);
+  border: 2px solid var(--sl-button-bg);
+  transition:
+    transform 0.2s ease,
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.box:hover {
+  transform: scale(1.1);
+}
+
+/* size */
+.sl-button--sm {
+  min-height: 30px;
+  padding: 0 8px;
+  font-size: var(--sl-text-size-sm);
+}
+
+.sl-button--md {
+  min-height: 36px;
+  padding: 0 6px;
+  font-size: var(--sl-text-size-md);
+}
+
+.sl-button--lg {
+  min-height: 42px;
+  padding: 0 12px;
+  font-size: var(--sl-text-size-lg);
+}
+
+/* tone */
+.sl-button--primary {
+  --sl-button-bg: var(--sl-accent);
+  --sl-button-border: transparent;
+  --sl-button-text: var(--sl-text);
+  --sl-button-focus: var(--sl-accent);
+  --sl-button-text-invert: var(--sl-text-invert);
+}
+
+.sl-button--secondary {
+  --sl-button-bg: var(--sl-secondary);
+  --sl-button-border: transparent;
+  --sl-button-text: var(--sl-text);
+  --sl-button-text-invert: var(--sl-text-invert);
+}
+
+.sl-button--success {
+  --sl-button-bg: var(--sl-ok);
+  --sl-button-border: transparent;
+  --sl-button-text: var(--sl-text);
+  --sl-button-text-invert: var(--sl-text-invert);
+}
+
+.sl-button--warning {
+  --sl-button-bg: var(--sl-warn);
+  --sl-button-border: transparent;
+  --sl-button-text: var(--sl-text);
+  --sl-button-text-invert: var(--sl-text-invert);
+}
+
+.sl-button--danger {
+  --sl-button-bg: var(--sl-danger);
+  --sl-button-border: transparent;
+  --sl-button-text: var(--sl-text);
+  --sl-button-text-invert: var(--sl-text-invert);
+}
+
+.sl-button--ghost {
+  background: transparent;
+  border: transparent;
+  color: var(--sl-text);
+}
+
+.sl-button--underline {
+  background: transparent;
+  border: transparent;
+  margin-top: 5px;
+  color: var(--sl-button-text);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--sl-button-bg);
+  text-underline-offset: 0.3em;
+}
+
+/* state */
+.sl-button.is-invert:not(.sl-button--ghost) {
+  --sl-button-text: var(--sl-button-text-invert);
+  background: var(--sl-button-bg);
+  text-decoration-color: var(--sl-button-text);
+  border-color: transparent;
+}
+
+.sl-button:hover:not(:disabled) {
+  transform: scale(1.1);
+}
+
+.sl-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
