@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en" data-theme="sakura">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sakulime-layout playground</title>
+    <link rel="stylesheet" href="/packages/core/src/index.css" />
+    <link rel="stylesheet" href="/packages/tokens/src/tokens.css" />
+    <link rel="stylesheet" href="/packages/tokens/src/themes/sakura.css" />
+    <link rel="stylesheet" href="/packages/tokens/src/themes/dark.css" />
+    <link rel="stylesheet" href="/packages/core/src/css/button.css" />
+    <link rel="stylesheet" href="/packages/core/src/css/modifiers.css" />
+    <link rel="stylesheet" href="/packages/layout/src/layout.css" />
+    <style>
+      body {
+        background: var(--sl-bg);
+        color: var(--sl-text);
+        padding: var(--sl-space-xl);
+      }
+      section {
+        margin-block: var(--sl-space-xl);
+      }
+      h1,
+      h2 {
+        margin: 0 0 var(--sl-space-sm);
+      }
+      .controls {
+        display: flex;
+        gap: var(--sl-space-lg);
+        flex-wrap: wrap;
+        align-items: end;
+        margin-block: var(--sl-space-md);
+      }
+      label {
+        display: flex;
+        flex-direction: column;
+        gap: var(--sl-space-xs);
+        font-size: var(--sl-text-size-sm);
+      }
+      select,
+      input {
+        font: inherit;
+      }
+      .cell {
+        background: var(--sl-surface);
+        border: 1px solid var(--sl-border);
+        border-radius: var(--sl-radius-md);
+        padding: var(--sl-space-md);
+      }
+      #stage {
+        border: 1px dashed var(--sl-border);
+        border-radius: var(--sl-radius-md);
+        padding: var(--sl-space-md);
+        margin-block: var(--sl-space-sm);
+      }
+      pre {
+        background: var(--sl-surface);
+        border: 1px solid var(--sl-border);
+        border-radius: var(--sl-radius-md);
+        padding: var(--sl-space-md);
+        overflow-x: auto;
+        font-size: var(--sl-text-size-sm);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>sakulime-layout</h1>
+    <p>
+      Class 層：排版工具（attr 層見 <a href="/index.html">sakulime-core</a>）。
+      這頁只用 tokens + layout + 少量 button css — layout 可以單獨配其他 UI。
+      <label>
+        Theme:
+        <select id="theme">
+          <option value="sakura">sakura</option>
+          <option value="dark">dark</option>
+        </select>
+      </label>
+    </p>
+
+    <section>
+      <h2>Playground</h2>
+      <div class="controls">
+        <label>
+          primitive
+          <select id="primitive">
+            <option value="sl-cluster">sl-cluster</option>
+            <option value="sl-flex">sl-flex</option>
+            <option value="sl-grid">sl-grid</option>
+            <option value="sl-stack">sl-stack</option>
+          </select>
+        </label>
+        <label>
+          gap
+          <select id="gap">
+            <option value="xs">xs</option>
+            <option value="sm">sm</option>
+            <option value="md" selected>md</option>
+            <option value="lg">lg</option>
+            <option value="xl">xl</option>
+          </select>
+        </label>
+        <label>
+          items
+          <input id="count" type="range" min="2" max="12" value="6" />
+        </label>
+      </div>
+      <div id="stage"></div>
+      <pre id="code"></pre>
+    </section>
+
+    <section>
+      <h2>Container</h2>
+      <p>把視窗縮窄看 — max-width 72rem + 自動置中 + 兩側 padding。</p>
+      <div class="sl-container" style="border: 1px solid var(--sl-border); border-radius: var(--sl-radius-md)">
+        <div class="cell">sl-container</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Spacing scale</h2>
+      <div class="sl-stack sl-gap-xs">
+        <div class="cell sl-p-xs">sl-p-xs</div>
+        <div class="cell sl-p-sm">sl-p-sm</div>
+        <div class="cell sl-p-md">sl-p-md</div>
+        <div class="cell sl-p-lg">sl-p-lg</div>
+        <div class="cell sl-p-xl">sl-p-xl</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Layout + components</h2>
+      <div class="sl-cluster sl-gap-sm">
+        <button sl-button sl-tone="primary" sl-size="md">primary</button>
+        <button sl-button sl-tone="secondary" sl-size="md">secondary</button>
+        <button sl-button sl-tone="success" sl-size="md">success</button>
+        <button sl-button sl-tone="danger" sl-size="md">danger</button>
+        <button sl-button sl-tone="primary" sl-variant="ghost">ghost</button>
+      </div>
+    </section>
+
+    <script type="module">
+      const stage = document.getElementById("stage");
+      const code = document.getElementById("code");
+
+      const cells = (n) =>
+        Array.from({ length: n }, (_, i) => `<div class="cell">cell ${i + 1}</div>`).join("");
+
+      function render() {
+        const p = document.getElementById("primitive").value;
+        const g = document.getElementById("gap").value;
+        const n = Number(document.getElementById("count").value);
+        const cols = p === "sl-grid" ? ' style="grid-template-columns:repeat(3,1fr)"' : "";
+        const cls = `${p} sl-gap-${g}`;
+        stage.innerHTML = `<div class="${cls}"${cols}>${cells(n)}</div>`;
+        code.textContent = `<div class="${cls}"${cols}>…${n} cells…</div>`;
+      }
+      for (const id of ["primitive", "gap", "count"]) {
+        document.getElementById(id).addEventListener("input", render);
+      }
+      render();
+
+      document.getElementById("theme").addEventListener("change", (e) => {
+        document.documentElement.dataset.theme = e.target.value;
+      });
+    </script>
+  </body>
+</html>
