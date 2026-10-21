@@ -1,5 +1,5 @@
 /*
- * Generic modifiers — usable on any .sl-* component.
+ * Generic modifiers — sl-* attributes usable on any element.
  *
  * Two mechanisms:
  *   slot  — fills --sl-{axis}-* custom properties; components read them with
@@ -11,84 +11,84 @@
  */
 
 /* tone — --sl-tone-{bg,text,text-invert,border}; tones may also set --sl-tone-border */
-.sl-tone--primary {
+[sl-tone="primary"] {
   --sl-tone-bg: var(--sl-accent);
   --sl-tone-text: var(--sl-text);
   --sl-tone-text-invert: var(--sl-text-invert);
 }
 
-.sl-tone--secondary {
+[sl-tone="secondary"] {
   --sl-tone-bg: var(--sl-secondary);
   --sl-tone-text: var(--sl-text);
   --sl-tone-text-invert: var(--sl-text-invert);
 }
 
-.sl-tone--success {
+[sl-tone="success"] {
   --sl-tone-bg: var(--sl-ok);
   --sl-tone-text: var(--sl-text);
   --sl-tone-text-invert: var(--sl-text-invert);
 }
 
-.sl-tone--warning {
+[sl-tone="warning"] {
   --sl-tone-bg: var(--sl-warn);
   --sl-tone-text: var(--sl-text);
   --sl-tone-text-invert: var(--sl-text-invert);
 }
 
-.sl-tone--danger {
+[sl-tone="danger"] {
   --sl-tone-bg: var(--sl-danger);
   --sl-tone-text: var(--sl-text);
   --sl-tone-text-invert: var(--sl-text-invert);
 }
 
 /* size — --sl-size-{h,px} slots + font-size for em-driven elements */
-.sl-size--sm {
+[sl-size="sm"] {
   font-size: var(--sl-text-size-sm);
   --sl-size-h: 30px;
   --sl-size-px: 8px;
 }
 
-.sl-size--md {
+[sl-size="md"] {
   font-size: var(--sl-text-size-md);
   --sl-size-h: 36px;
   --sl-size-px: 6px;
 }
 
-.sl-size--lg {
+[sl-size="lg"] {
   font-size: var(--sl-text-size-lg);
   --sl-size-h: 42px;
   --sl-size-px: 12px;
 }
 
 /* radius — --sl-radius slot */
-.sl-radius--sm {
+[sl-radius="sm"] {
   --sl-radius: var(--sl-radius-sm);
 }
 
-.sl-radius--md {
+[sl-radius="md"] {
   --sl-radius: var(--sl-radius-md);
 }
 
-.sl-radius--lg {
+[sl-radius="lg"] {
   --sl-radius: var(--sl-radius-lg);
 }
 
-.sl-radius--full {
+[sl-radius="full"] {
   --sl-radius: 999px;
 }
 
-.sl-radius--none {
+[sl-radius="none"] {
   --sl-radius: 0;
 }
 
 /* variant — direct style effects */
-.sl-variant--ghost {
+[sl-variant="ghost"] {
   background: transparent;
   border-color: transparent;
   color: var(--sl-text);
 }
 
-.sl-variant--underline {
+[sl-variant="underline"] {
   background: transparent;
   border-color: transparent;
   margin-top: 5px;

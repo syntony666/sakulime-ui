@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/html-vite";
-import "../elements/index";
+import { icon } from "../icons/index";
 
 const meta = {
   title: "Modifiers",
@@ -18,8 +18,7 @@ export const Tones: Story = {
   render: () =>
     row(
       TONES.map(
-        (t) =>
-          `<button class="sl-button sl-tone--${t} sl-size--md">${t}</button>`,
+        (t) => `<button sl-button sl-tone="${t}" sl-size="md">${t}</button>`,
       ).join(""),
     ),
 };
@@ -29,7 +28,7 @@ export const TonesInvert: Story = {
     row(
       TONES.map(
         (t) =>
-          `<button class="sl-button sl-tone--${t} sl-size--md is-invert">${t}</button>`,
+          `<button sl-button sl-tone="${t}" sl-size="md" sl-invert>${t}</button>`,
       ).join(""),
     ),
 };
@@ -38,11 +37,10 @@ export const Sizes: Story = {
   render: () =>
     row(
       SIZES.map(
-        (s) =>
-          `<button class="sl-button sl-tone--primary sl-size--${s}">${s}</button>`,
+        (s) => `<button sl-button sl-tone="primary" sl-size="${s}">${s}</button>`,
       ).join("") +
-        SIZES.map(
-          (s) => `<sl-icon name="info" tone="primary" size="${s}"></sl-icon>`,
+        SIZES.map((s) =>
+          icon("info", { "sl-tone": "primary", "sl-size": s }),
         ).join(""),
     ),
 };
@@ -50,9 +48,9 @@ export const Sizes: Story = {
 export const Variants: Story = {
   render: () =>
     row(
-      `<button class="sl-button sl-tone--primary sl-variant--ghost">ghost</button>` +
-        `<button class="sl-button sl-tone--primary sl-variant--underline">underline</button>` +
-        `<button class="sl-button sl-tone--danger sl-variant--underline">underline</button>`,
+      `<button sl-button sl-tone="primary" sl-variant="ghost">ghost</button>` +
+        `<button sl-button sl-tone="primary" sl-variant="underline">underline</button>` +
+        `<button sl-button sl-tone="danger" sl-variant="underline">underline</button>`,
     ),
 };
 
@@ -62,7 +60,7 @@ export const Radius: Story = {
       ["none", "sm", "md", "lg", "full"]
         .map(
           (r) =>
-            `<button class="sl-button sl-tone--primary sl-size--md sl-radius--${r}">${r}</button>`,
+            `<button sl-button sl-tone="primary" sl-size="md" sl-radius="${r}">${r}</button>`,
         )
         .join(""),
     ),

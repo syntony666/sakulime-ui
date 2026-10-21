@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/html-vite";
-import "../elements/index";
 
 type ButtonArgs = {
   label: string;
@@ -41,19 +40,23 @@ const meta = {
 export default meta;
 type Story = StoryObj<ButtonArgs>;
 
-function buttonClass({ tone, variant, size, invert }: ButtonArgs): string {
-  const classes = ["sl-button", `sl-tone--${tone}`, `sl-size--${size}`];
-  if (variant !== "normal") classes.push(`sl-variant--${variant}`);
-  if (invert) classes.push("is-invert");
-  return classes.join(" ");
+function slAttrs({ tone, variant, size, invert, disabled }: ButtonArgs): string {
+  return [
+    "sl-button",
+    `sl-tone="${tone}"`,
+    `sl-size="${size}"`,
+    variant !== "normal" ? `sl-variant="${variant}"` : "",
+    invert ? "sl-invert" : "",
+    disabled ? "disabled" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 }
 
-export const ClassUsage: Story = {
-  render: (args) =>
-    `<button class="${buttonClass(args)}" ${args.disabled ? "disabled" : ""}>${args.label}</button>`,
+export const Button: Story = {
+  render: (args) => `<button ${slAttrs(args)}>${args.label}</button>`,
 };
 
-export const ElementUsage: Story = {
-  render: (args) =>
-    `<sl-button tone="${args.tone}" size="${args.size}" variant="${args.variant}"${args.invert ? " invert" : ""}${args.disabled ? " disabled" : ""}>${args.label}</sl-button>`,
+export const Anchor: Story = {
+  render: (args) => `<a href="#" ${slAttrs(args)}>${args.label}</a>`,
 };

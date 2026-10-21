@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/html-vite";
-import "../elements/index";
+import { icon, iconNames } from "../icons/index";
 
 type IconArgs = {
   name: string;
@@ -20,7 +20,7 @@ const meta = {
   argTypes: {
     name: {
       control: "select",
-      options: ["check", "x", "info", "alert"],
+      options: iconNames,
     },
     size: {
       control: "select",
@@ -36,12 +36,12 @@ const meta = {
 export default meta;
 type Story = StoryObj<IconArgs>;
 
-export const ClassUsage: Story = {
+export const Helper: Story = {
   render: (args) =>
-    `<span class="sl-icon sl-size--${args.size} sl-tone--${args.tone}">${CHECK_SVG}</span>`,
+    icon(args.name, { "sl-size": args.size, "sl-tone": args.tone }),
 };
 
-export const ElementUsage: Story = {
+export const Inline: Story = {
   render: (args) =>
-    `<sl-icon name="${args.name}" size="${args.size}" tone="${args.tone}"></sl-icon>`,
+    `<span sl-icon sl-size="${args.size}" sl-tone="${args.tone}">${CHECK_SVG}</span>`,
 };

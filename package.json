@@ -4,14 +4,13 @@
   "version": "0.1.0",
   "type": "module",
   "sideEffects": [
-    "*.css",
-    "./dist/elements.js"
+    "*.css"
   ],
   "files": [
     "dist"
   ],
   "exports": {
-    "./elements.js": "./dist/elements.js",
+    ".": "./dist/sakulime.js",
     "./sakulime.css": "./dist/sakulime.css",
     "./tokens.css": "./dist/tokens.css",
     "./themes/*": "./dist/themes/*"

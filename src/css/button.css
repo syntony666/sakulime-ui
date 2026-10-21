@@ -1,4 +1,4 @@
-.sl-button {
+[sl-button] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -21,18 +21,18 @@
 }
 
 /* state */
-.sl-button.is-invert:not(.sl-variant--ghost) {
+[sl-button][sl-invert]:not([sl-variant="ghost"]) {
   background: var(--sl-tone-bg, currentColor);
   color: var(--sl-tone-text-invert, var(--sl-bg));
   text-decoration-color: var(--sl-tone-text, currentColor);
   border-color: transparent;
 }
 
-.sl-button:hover:not(:disabled) {
+[sl-button]:hover:not(:disabled) {
   transform: scale(1.1);
 }
 
-.sl-button:disabled {
+[sl-button]:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }

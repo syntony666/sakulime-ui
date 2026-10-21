@@ -4,9 +4,9 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   build: {
     lib: {
-      entry: 'src/elements/index.ts',
+      entry: 'src/index.ts',
       formats: ['es'],
-      fileName: 'elements',
+      fileName: 'sakulime',
       cssFileName: 'sakulime',
     },
   },

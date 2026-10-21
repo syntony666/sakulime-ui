@@ -1,5 +1,0 @@
-/* Host of a wrapped <sl-*> element contributes no layout box —
-   the real element inside carries all styling. */
-[data-sl] {
-  display: contents;
-}

@@ -1,4 +1,4 @@
-.sl-icon {
+[sl-icon] {
   display: inline-flex;
   width: 1em;
   height: 1em;
@@ -6,7 +6,7 @@
   vertical-align: -0.125em;
 }
 
-.sl-icon svg {
+[sl-icon] svg {
   width: 100%;
   height: 100%;
 }
