@@ -1,0 +1,36 @@
+/*
+ * sakulime-ui semantic tokens
+ *
+ * Color tokens are the contract: themes/*.css provide the values,
+ * component CSS must consume them via var(--sl-*), never raw colors.
+ *
+ *   --sl-bg --sl-surface --sl-border
+ *   --sl-text --sl-text-invert
+ *   --sl-text-secondary --sl-text-muted (derived below)
+ *   --sl-accent --sl-secondary --sl-ok --sl-warn --sl-danger
+ *
+ * A theme file must be loaded or color tokens stay unset.
+ */
+
+:root {
+  /* derived text tones — follow --sl-text automatically */
+  --sl-text-secondary: color-mix(in srgb, var(--sl-text) 72%, transparent);
+  --sl-text-muted: color-mix(in srgb, var(--sl-text) 48%, transparent);
+
+  /* spacing */
+  --sl-space-xs: 4px;
+  --sl-space-sm: 8px;
+  --sl-space-md: 12px;
+  --sl-space-lg: 16px;
+  --sl-space-xl: 24px;
+
+  /* radius */
+  --sl-radius-sm: 4px;
+  --sl-radius-md: 7px;
+  --sl-radius-lg: 12px;
+
+  /* text size */
+  --sl-text-size-sm: 12px;
+  --sl-text-size-md: 16px;
+  --sl-text-size-lg: 20px;
+}
