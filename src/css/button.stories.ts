@@ -11,7 +11,7 @@ type ButtonArgs = {
 };
 
 const meta = {
-  title: "Button",
+  title: "Components/Button",
   args: {
     label: "Button",
     tone: "primary",
