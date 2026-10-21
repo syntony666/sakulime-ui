@@ -1,6 +1,6 @@
 # sakulime-ui
 
-CSS-first、框架無關的設計系統。契約是 **`sl-*` attribute + `--sl-*` token** — `class` 完全留給消費者排版，任何框架或純 HTML 都能用。
+CSS-first、框架無關的設計系統。契約是 **`sl-*` attribute（元件/狀態）+ `sl-*` class（排版工具）+ `--sl-*` token** — 任何框架或純 HTML 都能用。
 
 ## 使用
 
@@ -9,8 +9,11 @@ CSS-first、框架無關的設計系統。契約是 **`sl-*` attribute + `--sl-*
 import "sakulime-ui/tokens.css";
 import "sakulime-ui/themes/sakura.css"; // 或 themes/dark.css
 
-// 全部元件 css
+// 元件 css
 import "sakulime-ui/sakulime.css";
+
+// 可選：排版工具 class（.sl-grid/.sl-gap-md/.sl-container...）
+import "sakulime-ui/layout.css";
 
 // 可選：icon helper（純 TS，產 svg 字串）
 import { icon } from "sakulime-ui";
@@ -32,11 +35,19 @@ npm run build        # tsc 型檢 + vite lib build + 拷貝 tokens/themes → di
 npm run lint
 ```
 
-## 結構
+## 結構（npm workspaces monorepo）
 
-- `src/tokens.css` — semantic token（非色 token 固定值；顏色 token 是契約）
-- `src/themes/*.css` — 主題檔，負責給顏色 token 值
-- `src/css/*.css` — 元件樣式（`[sl-*]` attribute selector）
-- `src/css/*.stories.ts` — Storybook stories（回傳 HTML 字串）
+| 包 | 內容 | 依賴 |
+|---|---|---|
+| `sakulime-tokens` (`packages/tokens`) | `--sl-*` tokens + `themes/` — 共享基礎，純 css 無 build | — |
+| `sakulime-core` (`packages/core`) | 元件 css（`[sl-*]` attr）+ `icon()` helper → `sakulime.js`/`sakulime.css` | tokens |
+| `sakulime-layout` (`packages/layout`) | 排版工具 class（`.sl-*`）— 可單獨配其他 UI kit 用 | tokens |
+| `sakulime-ui`（repo root） | meta 包：三包 dist 組裝 → 上述 subpath 全可用 | — |
+
+各包內部：
+
+- `src/css/*.css` — 元件樣式；`src/css/*.stories.ts` — Storybook stories
 - `src/icons/index.ts` — icon registry + `icon()` 純函式
-- `src/index.ts` — lib entry（css 抽出 + js 出口）
+- `src/index.ts` — core 的 lib entry（css 抽出 + js 出口）
+
+分工：`sl-*` attr = 元件/狀態契約；`sl-*` class = 排版工具；消費者自己的排版 class 跟 `sl-` 前綴天然分開。
