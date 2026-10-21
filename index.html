@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/packages/core/src/css/button.css" />
     <link rel="stylesheet" href="/packages/core/src/css/icon.css" />
     <link rel="stylesheet" href="/packages/core/src/css/modifiers.css" />
+    <link rel="stylesheet" href="/packages/layout/src/layout.css" />
     <style>
       body {
         background: var(--sl-bg);
@@ -64,6 +65,23 @@
         <button sl-button sl-tone="primary" sl-size="md">md</button>
         <button sl-button sl-tone="primary" sl-size="lg">lg</button>
         <button sl-button sl-tone="primary" sl-size="md" sl-radius="full">radius-full</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Layout</h2>
+      <div class="sl-grid sl-gap-md" style="grid-template-columns:repeat(3,1fr)">
+        <button sl-button sl-tone="primary" sl-size="md">a</button>
+        <button sl-button sl-tone="secondary" sl-size="md">b</button>
+        <button sl-button sl-tone="success" sl-size="md">c</button>
+        <button sl-button sl-tone="warning" sl-size="md">d</button>
+        <button sl-button sl-tone="danger" sl-size="md">e</button>
+        <button sl-button sl-tone="primary" sl-variant="ghost">f</button>
+      </div>
+      <div class="sl-cluster sl-gap-sm" style="margin-top:var(--sl-space-lg)">
+        <button sl-button sl-tone="primary" sl-size="sm">cluster</button>
+        <button sl-button sl-tone="secondary" sl-size="sm">wraps</button>
+        <button sl-button sl-tone="success" sl-size="sm">items</button>
       </div>
     </section>
 
