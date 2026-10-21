@@ -1,15 +1,15 @@
 import { defineElement } from "./define";
 
 export const SlButton = defineElement("sl-button", {
-  inner: "button",
-  base: "sl-button",
-  mods: {
+  wrap: "button",
+  class: "sl-button",
+  modifiers: {
     tone: "primary",
     size: "md",
     variant: { omit: "normal" },
   },
-  flags: ["invert"],
-  forward: {
+  states: ["invert"],
+  forwardAttrs: {
     disabled: true,
     type: "button",
   },

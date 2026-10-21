@@ -8,9 +8,9 @@ const ICONS: Record<string, string> = {
 };
 
 export const SlIcon = defineElement("sl-icon", {
-  base: "sl-icon",
-  mods: { size: "md", tone: "" },
-  observe: ["name"],
+  class: "sl-icon",
+  modifiers: { size: "md", tone: "" },
+  watch: ["name"],
   render(el) {
     const name = el.getAttribute("name") ?? "";
     const body = ICONS[name];

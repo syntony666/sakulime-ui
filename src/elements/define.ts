@@ -1,19 +1,19 @@
-type ModSpec = string | { default?: string; omit?: string };
+type ModifierSpec = string | { default?: string; omit?: string };
 
 export interface ElementConfig {
-  /** Wrap children in a real inner element (e.g. "button") */
-  inner?: string;
-  /** Base class, e.g. "sl-button" */
-  base: string;
-  /** attr → `.{base}--{value}`. Value: string = default, or { default, omit } */
-  mods?: Record<string, ModSpec>;
+  /** Tag to wrap children in (e.g. "button"); omit to render into the host */
+  wrap?: string;
+  /** Base class name, e.g. "sl-button" */
+  class: string;
+  /** attr → `.{class}--{value}`. Value: string = default, or { default, omit } */
+  modifiers?: Record<string, ModifierSpec>;
   /** Boolean attrs → `.is-{attr}` */
-  flags?: string[];
-  /** Attrs forwarded to the inner element. Value: string = default when absent */
-  forward?: Record<string, string | true>;
+  states?: string[];
+  /** Attrs forwarded to the wrapped element. Value: string = default when absent */
+  forwardAttrs?: Record<string, string | true>;
   /** Extra attrs to observe (re-sync on change, no class mapping) */
-  observe?: string[];
-  /** Extra render hook, runs after class/attr sync */
+  watch?: string[];
+  /** Render hook, runs after class/attr sync */
   render?: (el: HTMLElement) => void;
 }
 
@@ -21,14 +21,14 @@ export function defineElement(
   name: string,
   config: ElementConfig,
 ): CustomElementConstructor {
-  const mods = config.mods ?? {};
-  const flags = config.flags ?? [];
-  const forward = config.forward ?? {};
+  const modifiers = config.modifiers ?? {};
+  const states = config.states ?? [];
+  const forwardAttrs = config.forwardAttrs ?? {};
   const observed = [
-    ...Object.keys(mods),
-    ...flags,
-    ...Object.keys(forward),
-    ...(config.observe ?? []),
+    ...Object.keys(modifiers),
+    ...states,
+    ...Object.keys(forwardAttrs),
+    ...(config.watch ?? []),
   ];
 
   class SlElement extends HTMLElement {
@@ -37,8 +37,8 @@ export function defineElement(
     private innerEl: HTMLElement | null = null;
 
     connectedCallback(): void {
-      if (config.inner && !this.innerEl) {
-        const inner = document.createElement(config.inner);
+      if (config.wrap && !this.innerEl) {
+        const inner = document.createElement(config.wrap);
         while (this.firstChild) inner.appendChild(this.firstChild);
         this.appendChild(inner);
         this.innerEl = inner;
@@ -51,22 +51,22 @@ export function defineElement(
     }
 
     private sync(): void {
-      if (config.inner && !this.innerEl) return;
+      if (config.wrap && !this.innerEl) return;
       const target = this.innerEl ?? this;
 
-      const classes = [config.base];
-      for (const [attr, spec] of Object.entries(mods)) {
+      const classes = [config.class];
+      for (const [attr, spec] of Object.entries(modifiers)) {
         const s = typeof spec === "string" ? { default: spec } : spec;
         const value = this.getAttribute(attr) ?? s.default;
-        if (value && value !== s.omit) classes.push(`${config.base}--${value}`);
+        if (value && value !== s.omit) classes.push(`${config.class}--${value}`);
       }
-      for (const flag of flags) {
-        if (this.hasAttribute(flag)) classes.push(`is-${flag}`);
+      for (const state of states) {
+        if (this.hasAttribute(state)) classes.push(`is-${state}`);
       }
 
       if (this.innerEl) {
         target.className = classes.join(" ");
-        for (const [attr, spec] of Object.entries(forward)) {
+        for (const [attr, spec] of Object.entries(forwardAttrs)) {
           const value = this.getAttribute(attr) ?? (spec === true ? null : spec);
           if (value === null) this.innerEl.removeAttribute(attr);
           else this.innerEl.setAttribute(attr, value);
@@ -75,7 +75,7 @@ export function defineElement(
         const own = this.className
           .split(" ")
           .filter(
-            (c) => c && c !== config.base && !c.startsWith(`${config.base}--`) && !c.startsWith("is-"),
+            (c) => c && c !== config.class && !c.startsWith(`${config.class}--`) && !c.startsWith("is-"),
           );
         this.className = [...own, ...classes].join(" ");
       }
