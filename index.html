@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>sakulime-ui</title>
-    <link rel="stylesheet" href="/src/index.css" />
-    <link rel="stylesheet" href="/src/tokens.css" />
-    <link rel="stylesheet" href="/src/themes/sakura.css" />
-    <link rel="stylesheet" href="/src/themes/dark.css" />
-    <link rel="stylesheet" href="/src/css/button.css" />
-    <link rel="stylesheet" href="/src/css/icon.css" />
-    <link rel="stylesheet" href="/src/css/modifiers.css" />
+    <link rel="stylesheet" href="/packages/core/src/index.css" />
+    <link rel="stylesheet" href="/packages/tokens/src/tokens.css" />
+    <link rel="stylesheet" href="/packages/tokens/src/themes/sakura.css" />
+    <link rel="stylesheet" href="/packages/tokens/src/themes/dark.css" />
+    <link rel="stylesheet" href="/packages/core/src/css/button.css" />
+    <link rel="stylesheet" href="/packages/core/src/css/icon.css" />
+    <link rel="stylesheet" href="/packages/core/src/css/modifiers.css" />
     <style>
       body {
         background: var(--sl-bg);
@@ -79,7 +79,7 @@
     </section>
 
     <script type="module">
-      import { icon } from "/src/icons/index.ts";
+      import { icon } from "/packages/core/src/icons/index.ts";
 
       document.getElementById("icon-row").innerHTML = [
         icon("check", { "sl-tone": "success" }),

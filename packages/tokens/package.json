@@ -1,0 +1,13 @@
+{
+  "name": "sakulime-tokens",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "files": [
+    "src"
+  ],
+  "exports": {
+    "./tokens.css": "./src/tokens.css",
+    "./themes/*": "./src/themes/*"
+  }
+}

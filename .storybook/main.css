@@ -1,7 +1,7 @@
-@import url(../src/index.css);
-@import url(../src/tokens.css);
-@import url(../src/themes/sakura.css);
-@import url(../src/themes/dark.css);
-@import url(../src/css/button.css);
-@import url(../src/css/icon.css);
-@import url(../src/css/modifiers.css);
+@import url(../packages/core/src/index.css);
+@import url(../packages/tokens/src/tokens.css);
+@import url(../packages/tokens/src/themes/sakura.css);
+@import url(../packages/tokens/src/themes/dark.css);
+@import url(../packages/core/src/css/button.css);
+@import url(../packages/core/src/css/icon.css);
+@import url(../packages/core/src/css/modifiers.css);

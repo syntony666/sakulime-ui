@@ -1,0 +1,19 @@
+{
+  "name": "sakulime-core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": "./dist/sakulime.js",
+    "./sakulime.css": "./dist/sakulime.css"
+  },
+  "scripts": {
+    "build": "vite build"
+  },
+  "dependencies": {
+    "sakulime-tokens": "*"
+  }
+}

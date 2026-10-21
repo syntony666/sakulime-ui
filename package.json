@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
   "sideEffects": [
     "*.css"
   ],
@@ -12,12 +15,13 @@
   "exports": {
     ".": "./dist/sakulime.js",
     "./sakulime.css": "./dist/sakulime.css",
+    "./layout.css": "./dist/layout.css",
     "./tokens.css": "./dist/tokens.css",
     "./themes/*": "./dist/themes/*"
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && node scripts/build.mjs",
+    "build": "tsc -b && npm run build -w sakulime-core && node scripts/build.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
