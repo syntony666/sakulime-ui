@@ -72,6 +72,7 @@ export function defineElement(
       while (this.firstChild) inner.appendChild(this.firstChild);
       this.appendChild(inner);
       this.innerEl = inner;
+      this.setAttribute("data-sl", "");
     }
 
     private sync(): void {
