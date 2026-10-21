@@ -3,55 +3,43 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>sakulime-layout playground</title>
-    <link rel="stylesheet" href="/packages/core/src/index.css" />
+    <title>sakulime-layout</title>
     <link rel="stylesheet" href="/packages/tokens/src/tokens.css" />
     <link rel="stylesheet" href="/packages/tokens/src/themes/sakura.css" />
     <link rel="stylesheet" href="/packages/tokens/src/themes/dark.css" />
-    <link rel="stylesheet" href="/packages/core/src/css/button.css" />
-    <link rel="stylesheet" href="/packages/core/src/css/modifiers.css" />
     <link rel="stylesheet" href="/packages/layout/src/layout.css" />
     <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
       body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+        line-height: 1.5;
         background: var(--sl-bg);
         color: var(--sl-text);
-        padding: var(--sl-space-xl);
-      }
-      section {
-        margin-block: var(--sl-space-xl);
       }
       h1,
       h2 {
-        margin: 0 0 var(--sl-space-sm);
-      }
-      .controls {
-        display: flex;
-        gap: var(--sl-space-lg);
-        flex-wrap: wrap;
-        align-items: end;
-        margin-block: var(--sl-space-md);
-      }
-      label {
-        display: flex;
-        flex-direction: column;
-        gap: var(--sl-space-xs);
-        font-size: var(--sl-text-size-sm);
+        margin: 0;
       }
       select,
       input {
         font: inherit;
       }
+      /* demo aids — visual boxes/frames only, no layout properties */
       .cell {
         background: var(--sl-surface);
         border: 1px solid var(--sl-border);
         border-radius: var(--sl-radius-md);
         padding: var(--sl-space-md);
       }
-      #stage {
+      .frame {
         border: 1px dashed var(--sl-border);
         border-radius: var(--sl-radius-md);
         padding: var(--sl-space-md);
-        margin-block: var(--sl-space-sm);
       }
       pre {
         background: var(--sl-surface);
@@ -60,27 +48,27 @@
         padding: var(--sl-space-md);
         overflow-x: auto;
         font-size: var(--sl-text-size-sm);
+        margin: 0;
       }
     </style>
   </head>
-  <body>
-    <h1>sakulime-layout</h1>
-    <p>
-      Class 層：排版工具（attr 層見 <a href="/index.html">sakulime-core</a>）。
-      這頁只用 tokens + layout + 少量 button css — layout 可以單獨配其他 UI。
-      <label>
-        Theme:
+  <body class="sl-stack sl-gap-xl sl-p-xl">
+    <div class="sl-flex sl-gap-lg">
+      <h1>sakulime-layout</h1>
+      <label class="sl-stack sl-gap-xs" style="margin-left: auto">
+        Theme
         <select id="theme">
           <option value="sakura">sakura</option>
           <option value="dark">dark</option>
         </select>
       </label>
-    </p>
+    </div>
+    <p style="margin: 0">這頁只載 tokens + layout.css — 頁面排版本身也用 <code>.sl-*</code> class。</p>
 
-    <section>
+    <section class="sl-stack sl-gap-md">
       <h2>Playground</h2>
-      <div class="controls">
-        <label>
+      <div class="sl-cluster sl-gap-lg">
+        <label class="sl-stack sl-gap-xs">
           primitive
           <select id="primitive">
             <option value="sl-cluster">sl-cluster</option>
@@ -89,7 +77,7 @@
             <option value="sl-stack">sl-stack</option>
           </select>
         </label>
-        <label>
+        <label class="sl-stack sl-gap-xs">
           gap
           <select id="gap">
             <option value="xs">xs</option>
@@ -99,24 +87,24 @@
             <option value="xl">xl</option>
           </select>
         </label>
-        <label>
+        <label class="sl-stack sl-gap-xs">
           items
           <input id="count" type="range" min="2" max="12" value="6" />
         </label>
       </div>
-      <div id="stage"></div>
+      <div class="frame" id="stage"></div>
       <pre id="code"></pre>
     </section>
 
-    <section>
+    <section class="sl-stack sl-gap-md">
       <h2>Container</h2>
-      <p>把視窗縮窄看 — max-width 72rem + 自動置中 + 兩側 padding。</p>
-      <div class="sl-container" style="border: 1px solid var(--sl-border); border-radius: var(--sl-radius-md)">
+      <p style="margin: 0">把視窗縮窄看 — max-width 72rem + 自動置中 + 兩側 padding。</p>
+      <div class="sl-container frame">
         <div class="cell">sl-container</div>
       </div>
     </section>
 
-    <section>
+    <section class="sl-stack sl-gap-md">
       <h2>Spacing scale</h2>
       <div class="sl-stack sl-gap-xs">
         <div class="cell sl-p-xs">sl-p-xs</div>
@@ -124,17 +112,6 @@
         <div class="cell sl-p-md">sl-p-md</div>
         <div class="cell sl-p-lg">sl-p-lg</div>
         <div class="cell sl-p-xl">sl-p-xl</div>
-      </div>
-    </section>
-
-    <section>
-      <h2>Layout + components</h2>
-      <div class="sl-cluster sl-gap-sm">
-        <button sl-button sl-tone="primary" sl-size="md">primary</button>
-        <button sl-button sl-tone="secondary" sl-size="md">secondary</button>
-        <button sl-button sl-tone="success" sl-size="md">success</button>
-        <button sl-button sl-tone="danger" sl-size="md">danger</button>
-        <button sl-button sl-tone="primary" sl-variant="ghost">ghost</button>
       </div>
     </section>
 
