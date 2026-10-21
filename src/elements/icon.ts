@@ -7,38 +7,16 @@ const ICONS: Record<string, string> = {
   alert: '<path d="M12 3 2 21h20L12 3Z"/><path d="M12 10v4M12 17h.01"/>',
 };
 
-export class SlIcon extends HTMLElement {
-  static observedAttributes = ["name", "size", "tone"];
-
-  connectedCallback(): void {
-    this.render();
-  }
-
-  attributeChangedCallback(): void {
-    if (this.isConnected) this.render();
-  }
-
-  private render(): void {
-    const name = this.getAttribute("name") ?? "";
+export const SlIcon = defineElement("sl-icon", {
+  base: "sl-icon",
+  mods: { size: "md", tone: "" },
+  observe: ["name"],
+  render(el) {
+    const name = el.getAttribute("name") ?? "";
     const body = ICONS[name];
-
-    const own = this.className
-      .split(" ")
-      .filter((c) => c && !c.startsWith("sl-icon"));
-    const size = this.getAttribute("size");
-    const tone = this.getAttribute("tone");
-    const classes = [...own, "sl-icon"];
-    if (size) classes.push(`sl-icon--${size}`);
-    if (tone) classes.push(`sl-icon--${tone}`);
-    this.className = classes.join(" ");
-
-    this.innerHTML = body
+    el.innerHTML = body
       ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`
       : "";
     if (!body && name) console.warn(`sl-icon: unknown icon "${name}"`);
-  }
-}
-
-export function defineSlIcon(): void {
-  defineElement("sl-icon", SlIcon);
-}
+  },
+});
