@@ -6,3 +6,11 @@
 @import url(../packages/core/src/css/icon.css);
 @import url(../packages/core/src/css/modifiers.css);
 @import url(../packages/layout/src/layout.css);
+
+/* demo aid for layout docs — visible boxes */
+.cell {
+  background: var(--sl-surface);
+  border: 1px solid var(--sl-border);
+  border-radius: var(--sl-radius-md);
+  padding: var(--sl-space-md);
+}

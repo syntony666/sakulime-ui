@@ -4,90 +4,109 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>sakulime-ui</title>
-    <link rel="stylesheet" href="/packages/core/src/index.css" />
     <link rel="stylesheet" href="/packages/tokens/src/tokens.css" />
     <link rel="stylesheet" href="/packages/tokens/src/themes/sakura.css" />
     <link rel="stylesheet" href="/packages/tokens/src/themes/dark.css" />
-    <link rel="stylesheet" href="/packages/core/src/css/button.css" />
-    <link rel="stylesheet" href="/packages/core/src/css/icon.css" />
-    <link rel="stylesheet" href="/packages/core/src/css/modifiers.css" />
     <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
       body {
+        margin: 0;
+        padding: var(--sl-space-xl);
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+        line-height: 1.5;
         background: var(--sl-bg);
         color: var(--sl-text);
-        padding: var(--sl-space-xl);
-      }
-      section {
-        margin-block: var(--sl-space-xl);
       }
       h1,
       h2 {
         margin: 0 0 var(--sl-space-sm);
       }
-      .row {
-        display: flex;
+      section {
+        margin-block: var(--sl-space-xl);
+      }
+      .swatches {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
         gap: var(--sl-space-md);
-        align-items: center;
-        flex-wrap: wrap;
-        margin-block: var(--sl-space-sm);
+        max-width: 720px;
+      }
+      .swatch {
+        display: flex;
+        flex-direction: column;
+        gap: var(--sl-space-xs);
+        font-size: var(--sl-text-size-sm);
+      }
+      .chip {
+        height: 56px;
+        border-radius: var(--sl-radius-md);
+        border: 1px solid var(--sl-border);
+      }
+      code,
+      pre {
+        font-size: var(--sl-text-size-sm);
+      }
+      pre {
+        background: var(--sl-surface);
+        border: 1px solid var(--sl-border);
+        border-radius: var(--sl-radius-md);
+        padding: var(--sl-space-md);
       }
     </style>
   </head>
   <body>
     <h1>sakulime-ui</h1>
-    <label>
-      Theme:
-      <select id="theme">
-        <option value="sakura">sakura</option>
-        <option value="dark">dark</option>
-      </select>
-    </label>
-    <p>排版工具層：<a href="/layout.html">sakulime-layout playground</a></p>
+    <p>
+      CSS-first design system — <code>sl-*</code> attr（元件/狀態）·
+      <code>sl-*</code> class（排版工具）· <code>--sl-*</code> tokens
+    </p>
 
     <section>
-      <h2>Button</h2>
-      <div class="row">
-        <button sl-button sl-tone="primary" sl-size="md">primary</button>
-        <button sl-button sl-tone="secondary" sl-size="md">secondary</button>
-        <button sl-button sl-tone="success" sl-size="md">success</button>
-        <button sl-button sl-tone="warning" sl-size="md">warning</button>
-        <button sl-button sl-tone="danger" sl-size="md">danger</button>
-      </div>
-      <div class="row">
-        <button sl-button sl-tone="primary" sl-variant="ghost">ghost</button>
-        <button sl-button sl-tone="primary" sl-variant="underline">underline</button>
-        <button sl-button sl-tone="primary" sl-size="md" sl-invert>invert</button>
-        <button sl-button sl-tone="primary" sl-size="md" disabled>disabled</button>
-        <a href="#" sl-button sl-tone="secondary" sl-size="md">on anchor</a>
-      </div>
-      <div class="row">
-        <button sl-button sl-tone="primary" sl-size="sm">sm</button>
-        <button sl-button sl-tone="primary" sl-size="md">md</button>
-        <button sl-button sl-tone="primary" sl-size="lg">lg</button>
-        <button sl-button sl-tone="primary" sl-size="md" sl-radius="full">radius-full</button>
-      </div>
+      <h2>Packages</h2>
+      <pre>sakulime-tokens   --sl-* tokens + themes（共享基礎）
+sakulime-core     [sl-*] 元件 css + icon() helper
+sakulime-layout   .sl-* 排版工具 class（可單獨配其他 UI）</pre>
+      <p>
+        元件與文件：<code>npm run storybook</code>（Components / Modifiers /
+        Layout docs）
+      </p>
     </section>
 
     <section>
-      <h2>Icon — helper</h2>
-      <div class="row" id="icon-row"></div>
-      <h2>Icon — inline markup</h2>
-      <div class="row">
-        <span sl-icon sl-size="lg" sl-tone="secondary">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-        </span>
-      </div>
+      <h2>Theme</h2>
+      <label>
+        data-theme:
+        <select id="theme">
+          <option value="sakura">sakura</option>
+          <option value="dark">dark</option>
+        </select>
+      </label>
+      <div class="swatches" id="swatches"></div>
     </section>
 
     <script type="module">
-      import { icon } from "/packages/core/src/icons/index.ts";
+      const COLOR_TOKENS = [
+        "bg",
+        "surface",
+        "border",
+        "text",
+        "text-secondary",
+        "text-muted",
+        "text-invert",
+        "accent",
+        "secondary",
+        "ok",
+        "warn",
+        "danger",
+      ];
 
-      document.getElementById("icon-row").innerHTML = [
-        icon("check", { "sl-tone": "success" }),
-        icon("x", { "sl-tone": "danger" }),
-        icon("info", { "sl-tone": "primary" }),
-        icon("alert", { "sl-tone": "warning", "sl-size": "lg" }),
-      ].join("");
+      document.getElementById("swatches").innerHTML = COLOR_TOKENS.map(
+        (t) =>
+          `<div class="swatch"><div class="chip" style="background:var(--sl-${t})"></div><code>--sl-${t}</code></div>`,
+      ).join("");
 
       document.getElementById("theme").addEventListener("change", (e) => {
         document.documentElement.dataset.theme = e.target.value;

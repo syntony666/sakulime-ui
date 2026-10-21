@@ -1,0 +1,85 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Layout/Utilities" />
+
+# Utilities
+
+每個 demo 的灰框 `.cell` 是展示輔助，utility 只負責排版。
+
+## Primitives
+
+### `.sl-stack` — column flow
+
+<div className="sl-stack sl-gap-md">
+  <div className="cell">a</div>
+  <div className="cell">b</div>
+  <div className="cell">c</div>
+</div>
+
+### `.sl-cluster` — wrap row，縮窗會換行
+
+<div className="sl-cluster sl-gap-sm">
+  <div className="cell">a</div>
+  <div className="cell">b</div>
+  <div className="cell">c</div>
+  <div className="cell">d</div>
+  <div className="cell">e</div>
+  <div className="cell">f</div>
+  <div className="cell">g</div>
+  <div className="cell">h</div>
+</div>
+
+### `.sl-grid` — 裸容器，自己接 columns
+
+<div
+  className="sl-grid sl-gap-md"
+  style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}
+>
+  <div className="cell">1</div>
+  <div className="cell">2</div>
+  <div className="cell">3</div>
+  <div className="cell">4</div>
+  <div className="cell">5</div>
+  <div className="cell">6</div>
+</div>
+
+## Gap
+
+`.sl-gap-{xs|sm|md|lg|xl}` 對應 `--sl-space-{v}`：
+
+<div className="sl-stack sl-gap-md">
+  {['xs', 'sm', 'md', 'lg', 'xl'].map((s) => (
+    <div key={s}>
+      <code>sl-gap-{s}</code>
+      <div className={`sl-cluster sl-gap-${s}`}>
+        <div className="cell" style={{ width: 40, height: 40 }} />
+        <div className="cell" style={{ width: 40, height: 40 }} />
+        <div className="cell" style={{ width: 40, height: 40 }} />
+      </div>
+    </div>
+  ))}
+</div>
+
+## Container
+
+`.sl-container` — max-width 72rem + 置中 + 兩側 padding，縮窗看：
+
+<div
+  className="sl-container"
+  style={{
+    border: '1px dashed var(--sl-border)',
+    borderRadius: 'var(--sl-radius-md)',
+  }}
+>
+  <div className="cell">sl-container</div>
+</div>
+
+## Margin / Padding
+
+`.sl-m-{v}` / `.sl-p-{v}` 吃同一組 `--sl-space-*` 級距：
+
+<div className="sl-stack sl-gap-xs">
+  {['xs', 'sm', 'md', 'lg', 'xl'].map((s) => (
+    <div key={s} className={`cell sl-p-${s}`}>sl-p-{s}</div>
+  ))}
+</div>

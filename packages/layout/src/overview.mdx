@@ -1,0 +1,27 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Layout/Overview" />
+
+# sakulime-layout
+
+Class 層的排版工具 — 跟 `sakulime-core` 的 `sl-*` attribute 契約分開：
+**attr 管「長什麼樣」，class 管「放哪裡」**。
+
+## 用法
+
+```ts
+import "sakulime-ui/tokens.css"; // --sl-space-* 級距
+import "sakulime-ui/layout.css";
+```
+
+可以單獨 `npm i sakulime-layout` 配其他 UI kit — 它只依賴 tokens。
+
+## 命名
+
+| 類別 | class | 值 |
+|---|---|---|
+| primitives | `.sl-container` `.sl-flex` `.sl-grid` `.sl-stack` `.sl-cluster` | — |
+| gap | `.sl-gap-{v}` | `xs sm md lg xl` → `--sl-space-{v}` |
+| spacing | `.sl-m-{v}` `.sl-p-{v}` | 同上 |
+
+每個 utility 的效果見 **Layout / Utilities**；互動試驗見 **Layout / Playground**。
