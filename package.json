@@ -5,7 +5,8 @@
   "type": "module",
   "workspaces": [
     "packages/*",
-    "packages/shared/*"
+    "packages/shared/*",
+    "docs"
   ],
   "sideEffects": [
     "*.css"
@@ -19,22 +20,20 @@
     "./sakulime.min.js": "./dist/sakulime.min.js"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "npm run dev -w sakulime-docs",
     "build": "tsc -b && npm run build -w @sakulime-ui/core && node scripts/build.mjs",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "preview": "npm run preview -w sakulime-docs",
+    "storybook": "npm run storybook -w sakulime-docs",
+    "build-storybook": "npm run build-storybook -w sakulime-docs",
+    "site": "npm run site -w sakulime-docs"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@storybook/addon-docs": "^10.4.6",
-    "@storybook/html-vite": "^10.4.6",
     "@types/node": "^24.12.3",
     "eslint": "^10.3.0",
     "eslint-plugin-storybook": "^10.4.6",
     "globals": "^17.6.0",
-    "storybook": "^10.4.6",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.59.2",
     "vite": "^8.0.12"
