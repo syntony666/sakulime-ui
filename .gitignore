@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+site
 *.local
 
 # Editor directories and files
@@ -25,6 +26,7 @@ dist-ssr
 
 *storybook.log
 storybook-static
+docs/.storybook/theme.values.ts
 
 # Plan files
 plan.md

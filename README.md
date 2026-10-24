@@ -1,53 +1,56 @@
 # sakulime-ui
 
-CSS-first、框架無關的設計系統。契約是 **`sl-*` attribute（元件/狀態）+ `sl-*` class（排版工具）+ `--sl-*` token** — 任何框架或純 HTML 都能用。
+只用 CSS 的設計系統，不綁框架。React、Vue、Svelte 能用，純 HTML 也能用。
+
+只有兩種東西：`sl-*` 屬性加在標籤上，`--sl-*` 變數管顏色跟尺寸。`class` 全部留給你。
 
 ## 使用
 
 ```ts
-// tokens + 主題（必備）
-import "sakulime-ui/tokens.css";
-import "sakulime-ui/themes/sakura.css"; // 或 themes/dark.css
-
-// 元件 css
-import "sakulime-ui/sakulime.css";
-
-// 可選：排版工具 class（.sl-grid/.sl-gap-md/.sl-container...）
-import "sakulime-ui/layout.css";
-
-// 可選：icon helper（純 TS，產 svg 字串）
-import { icon } from "sakulime-ui";
+import "sakulime-ui/sakulime.min.css";
 ```
+
+tokens、兩套主題、元件、排版都在這一個檔案。換主題：`<html data-theme="terra">`，不用重新載入。
 
 ```html
-<button sl-button sl-tone="primary" sl-size="md">Save</button>
-<button sl-button sl-tone="danger" sl-invert>Delete</button>
+<button sl-button>儲存</button>
+<button sl-button sl-tone="danger">刪除</button>
+<button sl-button sl-variant="invert">取消</button>
 ```
 
-切主題：`<html data-theme="dark">`，不用 reload。
+## 只要一部分
+
+| 要什麼 | 載什麼 |
+|---|---|
+| 元件（含顏色） | `@sakulime-ui/core/index.min.css` |
+| 排版 | `@sakulime-ui/layout/index.min.css` |
+| 只有色票 | `@sakulime-ui/theme/sakulime.min.css` |
 
 ## 開發
 
 ```bash
-npm run dev          # landing demo page (index.html)
-npm run storybook    # Storybook — 元件文件/視覺驗收
-npm run build        # tsc 型檢 + vite lib build + 拷貝 tokens/themes → dist/
+npm run storybook    # Storybook — 元件文件/視覺驗收（docs/）
+npm run build        # tsc 型檢 + core lib build + 各包 min.css + 合成 dist/
+npm run site         # Storybook 靜態站 → docs/site/
 npm run lint
 ```
 
 ## 結構（npm workspaces monorepo）
 
-| 包 | 內容 | 依賴 |
-|---|---|---|
-| `sakulime-tokens` (`packages/tokens`) | `--sl-*` tokens + `themes/` — 共享基礎，純 css 無 build | — |
-| `sakulime-core` (`packages/core`) | 元件 css（`[sl-*]` attr）+ `icon()` helper → `sakulime.js`/`sakulime.css` | tokens |
-| `sakulime-layout` (`packages/layout`) | 排版工具 class（`.sl-*`）— 可單獨配其他 UI kit 用 | tokens |
-| `sakulime-ui`（repo root） | meta 包：三包 dist 組裝 → 上述 subpath 全可用 | — |
+`packages/` 是內部工作區。對外四個入口：`sakulime-ui`（全包）、`@sakulime-ui/core`、`@sakulime-ui/layout`、`@sakulime-ui/theme`。
+
+| 位置 | 內容 |
+|---|---|
+| `packages/shared/token` | `--sl-*` 變數，建置時包進各 entry |
+| `packages/shared/theme` | 主題色票，minify 成 `dist/<名稱>.min.css` |
+| `packages/core` | 元件 entry：tokens + 主題 + 元件 → `index.min.css` / `index.min.js` |
+| `packages/layout` | 排版 entry：tokens + 排版 → `index.min.css` |
+| `dist/sakulime.min.css` | 全包：core bundle + layout |
+| `docs/` | Storybook 文件站 |
 
 各包內部：
 
-- `src/css/*.css` — 元件樣式；`src/css/*.stories.ts` — Storybook stories
-- `src/icons/index.ts` — icon registry + `icon()` 純函式
+- `src/css/*.css` — 元件樣式（stories 已移至 `docs/src/`）
 - `src/index.ts` — core 的 lib entry（css 抽出 + js 出口）
 
-分工：`sl-*` attr = 元件/狀態契約；`sl-*` class = 排版工具；消費者自己的排版 class 跟 `sl-` 前綴天然分開。
+分工：元件標記、狀態修飾、排版全部走 `sl-*` 屬性，`class` 留給你，跟 `sl-` 前綴天然分開。
