@@ -1,7 +1,4 @@
-import "../../shared/token/tokens.css";
-import "../../shared/theme/sakulime.css";
-import "../../shared/theme/terra.css";
+import "@sakulime-ui/token/tokens.css";
+import "@sakulime-ui/theme/sakulime.css";
+import "@sakulime-ui/theme/terra.css";
 import "./index.css";
-import "./css/button.css";
-import "./css/button.variant.css";
-import "./css/button.attrs.css";

@@ -8,6 +8,7 @@
   ],
   "exports": {
     ".": "./dist/index.min.css",
+    "./index.css": "./src/layout.css",
     "./index.min.css": "./dist/index.min.css"
   },
   "devDependencies": {

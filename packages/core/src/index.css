@@ -1,3 +1,7 @@
+@import "./css/button.css";
+@import "./css/button.variant.css";
+@import "./css/button.attrs.css";
+
 @layer base {
   *,
   *::before,

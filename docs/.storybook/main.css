@@ -1,13 +1,9 @@
-@import url(../../packages/shared/token/tokens.css);
-@import url(../../packages/shared/theme/sakulime.css);
-@import url(../../packages/shared/theme/terra.css);
-
-/* package entries are built; import source directly for live dev */
-@import url(../../packages/core/src/index.css);
-@import url(../../packages/core/src/css/button.css);
-@import url(../../packages/core/src/css/button.variant.css);
-@import url(../../packages/core/src/css/button.attrs.css);
-@import url(../../packages/layout/src/layout.css);
+/* these exports resolve to source files, not dist — edits go live */
+@import url(@sakulime-ui/token/tokens.css);
+@import url(@sakulime-ui/theme/sakulime.css);
+@import url(@sakulime-ui/theme/terra.css);
+@import url(@sakulime-ui/core/index.css);
+@import url(@sakulime-ui/layout/index.css);
 
 /* docs surface follows the active sakulime theme — .sbdocs doubles
    the specificity to beat addon-docs' own wrapper styles */
