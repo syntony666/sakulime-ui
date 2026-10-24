@@ -22,7 +22,7 @@ const axisArg = (name: string, desc: string, def: string, options: string[]) => 
   name,
   description: desc,
   table: { type: {}, defaultValue: { summary: `"${def}"` } },
-  control: { type: "select", labels: { "-": "-" } },
+  control: { type: "select" as const, labels: { "-": "-" } },
   options,
 });
 
