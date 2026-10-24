@@ -35,12 +35,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: npm run site
-        if: steps.changesets.outputs.published == 'true'
-      - uses: cloudflare/wrangler-action@v3
-        if: steps.changesets.outputs.published == 'true'
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: doc
-          command: deploy
