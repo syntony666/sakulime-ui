@@ -16,6 +16,16 @@ const VARIANTS = ["-", "normal", "invert", "underline", "ghost"];
 const SIZES = ["-", "sm", "md", "lg"];
 const RADII = ["-", "none", "sm", "md", "lg", "full"];
 
+// Controls row for an attr axis: name = real attr, shows the "-" option
+// and the real default, hides the Type column
+const axisArg = (name: string, desc: string, def: string, options: string[]) => ({
+  name,
+  description: desc,
+  table: { type: {}, defaultValue: { summary: `"${def}"` } },
+  control: { type: "select", labels: { "-": "-" } },
+  options,
+});
+
 const meta = {
   title: "Core/Button 按鈕",
   // stories feed the mdx page; hide them from the sidebar
@@ -38,34 +48,10 @@ const meta = {
     disabled: false,
   },
   argTypes: {
-    tone: {
-      name: "sl-tone",
-      description: "顏色",
-      table: { type: {}, defaultValue: { summary: '"primary"' } },
-      control: { type: "select", labels: { "-": "-" } },
-      options: TONES,
-    },
-    variant: {
-      name: "sl-variant",
-      description: "型態",
-      table: { type: {}, defaultValue: { summary: '"normal"' } },
-      control: { type: "select", labels: { "-": "-" } },
-      options: VARIANTS,
-    },
-    size: {
-      name: "sl-size",
-      description: "大小",
-      table: { type: {}, defaultValue: { summary: '"md"' } },
-      control: { type: "select", labels: { "-": "-" } },
-      options: SIZES,
-    },
-    radius: {
-      name: "sl-radius",
-      description: "圓角",
-      table: { type: {}, defaultValue: { summary: '"md"' } },
-      control: { type: "select", labels: { "-": "-" } },
-      options: RADII,
-    },
+    tone: axisArg("sl-tone", "顏色", "primary", TONES),
+    variant: axisArg("sl-variant", "型態", "normal", VARIANTS),
+    size: axisArg("sl-size", "大小", "md", SIZES),
+    radius: axisArg("sl-radius", "圓角", "md", RADII),
     disabled: {
       description: "停用標記 (使用html原生標籤)",
       table: { type: {}, defaultValue: { summary: "false" } },
