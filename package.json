@@ -5,6 +5,7 @@
     "type": "git",
     "url": "git+https://github.com/syntony666/sakulime-ui.git"
   },
+  "homepage": "https://sakulime-ui.syntony666.com",
   "publishConfig": {
     "access": "public"
   },
