@@ -1,0 +1,24 @@
+/* card — surface container; sl-card-media pulls flush to the edges.
+   Slots filled by attrs axes in card.attrs.css. */
+@layer base {
+  [sl-card] {
+    display: block;
+    overflow: hidden;
+    background: var(--sl-surface);
+    color: var(--sl-text);
+    border: 1px solid var(--sl-border);
+    border-radius: var(--sl-radius);
+    padding: var(--sl-pad);
+  }
+
+  [sl-card-media] {
+    margin: calc(-1 * var(--sl-pad)) calc(-1 * var(--sl-pad)) var(--sl-pad);
+  }
+
+  [sl-card-media] > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
