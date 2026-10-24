@@ -1,5 +1,7 @@
+import "../../shared/token/tokens.css";
+import "../../shared/theme/sakulime.css";
+import "../../shared/theme/terra.css";
+import "./index.css";
 import "./css/button.css";
-import "./css/icon.css";
-import "./css/modifiers.css";
-
-export { icon, iconNames } from "./icons/index";
+import "./css/button.variant.css";
+import "./css/button.attrs.css";

@@ -1,0 +1,83 @@
+/* sl-* attribute rules. Each axis lists every value; the default unions the
+   named selector with the absent-attr selector, one block serves both.
+   Axis rules fill --sl-{axis}-* slots that component css reads in base.
+   Variant rules live per component (button.variant.css).
+   Layers from tokens.css: theme < base < attrs. */
+
+@layer attrs {
+  /* tone — --sl-tone-{bg,text,text-invert}; text is the tone's readable ink */
+  /* primary is too light for ink — borrow the accent color */
+  [sl-tone="primary"],
+  [sl-button]:not([sl-tone]) {
+    --sl-tone-bg: var(--sl-primary);
+    --sl-tone-text: var(--sl-text-accent);
+    --sl-tone-text-invert: var(--sl-primary-fg);
+  }
+
+  [sl-tone="secondary"] {
+    --sl-tone-bg: var(--sl-secondary);
+    --sl-tone-text: var(--sl-secondary);
+    --sl-tone-text-invert: var(--sl-secondary-fg);
+  }
+
+  [sl-tone="success"] {
+    --sl-tone-bg: var(--sl-ok);
+    --sl-tone-text: var(--sl-ok);
+    --sl-tone-text-invert: var(--sl-text-invert);
+  }
+
+  [sl-tone="warning"] {
+    --sl-tone-bg: var(--sl-warn);
+    --sl-tone-text: var(--sl-warn);
+    /* gold is a light tone — invert text needs dark ink, not near-white */
+    --sl-tone-text-invert: var(--sl-text);
+  }
+
+  [sl-tone="danger"] {
+    --sl-tone-bg: var(--sl-danger);
+    --sl-tone-text: var(--sl-danger);
+    --sl-tone-text-invert: var(--sl-text-invert);
+  }
+
+  /* size — --sl-size-{fs,h,px} slots */
+  [sl-size="md"],
+  [sl-button]:not([sl-size]) {
+    --sl-size-fs: var(--sl-lg);
+    --sl-size-h: var(--sl-3xl);
+    --sl-size-px: var(--sl-md);
+  }
+
+  [sl-size="sm"] {
+    --sl-size-fs: var(--sl-md);
+    --sl-size-h: var(--sl-2xl);
+    --sl-size-px: var(--sl-sm);
+  }
+
+  [sl-size="lg"] {
+    --sl-size-fs: var(--sl-xl);
+    --sl-size-h: var(--sl-4xl);
+    --sl-size-px: var(--sl-lg);
+  }
+
+  /* radius — --sl-radius slot */
+  [sl-radius="sm"] {
+    --sl-radius: var(--sl-xs);
+  }
+
+  [sl-radius="md"],
+  [sl-button]:not([sl-radius]) {
+    --sl-radius: var(--sl-sm);
+  }
+
+  [sl-radius="lg"] {
+    --sl-radius: var(--sl-md);
+  }
+
+  [sl-radius="full"] {
+    --sl-radius: 999px;
+  }
+
+  [sl-radius="none"] {
+    --sl-radius: 0;
+  }
+}

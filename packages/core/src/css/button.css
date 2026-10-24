@@ -1,38 +1,27 @@
-[sl-button] {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--sl-tone-border, transparent);
-  color: var(--sl-tone-text, currentColor);
-  border-radius: var(--sl-radius, var(--sl-radius-md));
-  border: 2px solid var(--sl-tone-bg, currentColor);
-  min-height: var(--sl-size-h, 36px);
-  padding: 0 var(--sl-size-px, 6px);
-  font-size: var(--sl-text-size-md);
-  transition:
-    transform 0.2s ease,
-    background-color 160ms ease,
-    border-color 160ms ease,
-    color 160ms ease;
-}
+/* base recipe — structure only; paint lives in button.variant.css, slots in attrs */
+@layer base {
+  [sl-button] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--sl-radius);
+    border: 2px solid transparent;
+    min-height: var(--sl-size-h);
+    padding: 0 var(--sl-size-px);
+    font-size: var(--sl-size-fs);
+    transition:
+      transform 0.2s ease,
+      background-color 160ms ease,
+      border-color 160ms ease,
+      color 160ms ease;
+  }
 
-.box:hover {
-  transform: scale(1.1);
-}
+  [sl-button]:hover:not(:disabled) {
+    transform: scale(1.05);
+  }
 
-/* state */
-[sl-button][sl-invert]:not([sl-variant="ghost"]) {
-  background: var(--sl-tone-bg, currentColor);
-  color: var(--sl-tone-text-invert, var(--sl-bg));
-  text-decoration-color: var(--sl-tone-text, currentColor);
-  border-color: transparent;
-}
-
-[sl-button]:hover:not(:disabled) {
-  transform: scale(1.1);
-}
-
-[sl-button]:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+  [sl-button]:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 }

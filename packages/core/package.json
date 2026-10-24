@@ -1,5 +1,5 @@
 {
-  "name": "sakulime-core",
+  "name": "@sakulime-ui/core",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -7,13 +7,15 @@
     "dist"
   ],
   "exports": {
-    ".": "./dist/sakulime.js",
-    "./sakulime.css": "./dist/sakulime.css"
+    ".": "./dist/index.min.js",
+    "./index.min.css": "./dist/index.min.css",
+    "./index.min.js": "./dist/index.min.js"
   },
   "scripts": {
     "build": "vite build"
   },
-  "dependencies": {
-    "sakulime-tokens": "*"
+  "devDependencies": {
+    "@sakulime-ui/theme": "*",
+    "@sakulime-ui/token": "*"
   }
 }
