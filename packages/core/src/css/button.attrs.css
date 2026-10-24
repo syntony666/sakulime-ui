@@ -28,8 +28,8 @@
 
   [sl-tone="warning"] {
     --sl-tone-bg: var(--sl-warn);
-    --sl-tone-text: var(--sl-warn);
-    /* gold is a light tone — invert text needs dark ink, not near-white */
+    /* gold is a light tone — text derives darker to stay readable */
+    --sl-tone-text: color-mix(in srgb, var(--sl-warn) 55%, var(--sl-text));
     --sl-tone-text-invert: var(--sl-text);
   }
 
