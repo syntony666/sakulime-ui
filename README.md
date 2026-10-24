@@ -1,67 +1,74 @@
 # sakulime-ui
 
-只用 CSS 的設計系統，不綁框架。React、Vue、Svelte 能用，純 HTML 也能用。
+[![License](https://img.shields.io/github/license/syntony666/sakulime-ui)](LICENSE)
+[![npm](https://img.shields.io/npm/v/sakulime-ui)](https://www.npmjs.com/package/sakulime-ui)
+[![Storybook](https://img.shields.io/badge/Storybook-10-FF4785?logo=storybook&logoColor=white)](https://storybook.js.org)
 
-只有兩種東西：`sl-*` 屬性加在標籤上，`--sl-*` 變數管顏色跟尺寸。`class` 全部留給你。
+A CSS-first design system with no framework runtime — React, Vue, Svelte, or plain HTML all work. Two things only: `sl-*` attributes for components, state, and layout, plus `--sl-*` variables for color and size; `class` stays entirely yours. `sakulime-ui` ships everything in one file; `@sakulime-ui/core`, `@sakulime-ui/layout`, and `@sakulime-ui/theme` are the individual entries; `doc` is the Storybook doc site deployed to Cloudflare Workers.
 
-## 使用
+## Usage
 
 ```ts
 import "sakulime-ui/sakulime.min.css";
 ```
 
-變數、兩套主題、元件、排版都在這一個檔案。換主題：`<html data-theme="terra">`，不用重新載入。
+Variables, both themes, components, and layout ship in that single file. Switch themes with `<html data-theme="terra">` — no reload needed.
 
 ```html
-<button sl-button>儲存</button>
-<button sl-button sl-tone="danger">刪除</button>
-<button sl-button sl-variant="invert">取消</button>
+<button sl-button>Save</button>
+<button sl-button sl-tone="danger">Delete</button>
+<button sl-button sl-variant="invert">Cancel</button>
 ```
 
-## 只要一部分
+## Partial imports
 
-| 要什麼 | 載什麼 |
+| What | Import |
 |---|---|
-| 元件（含顏色） | `@sakulime-ui/core/index.min.css` |
-| 排版 | `@sakulime-ui/layout/index.min.css` |
-| 只有色票 | `@sakulime-ui/theme/sakulime.min.css` |
+| Components (with colors) | `@sakulime-ui/core/index.min.css` |
+| Layout | `@sakulime-ui/layout/index.min.css` |
+| Theme palettes only | `@sakulime-ui/theme/sakulime.min.css` |
 
-## 開發
+## Development
 
 ```bash
-npm run storybook    # Storybook — 元件文件/視覺驗收（doc/）
-npm run build        # tsc 型檢 + core lib build + 各包 min.css + 合成 dist/
-npm run site         # Storybook 靜態站 → doc/site/
-npm run deploy       # 建 site 後 wrangler deploy → Cloudflare Workers
+npm install
+npm run storybook    # Storybook — component docs and visual review (doc/)
+npm run build        # tsc typecheck + core lib build + per-package min.css + dist/
+npm run site         # static Storybook site → doc/site/
+npm run deploy       # site build + wrangler deploy → Cloudflare Workers
 npm run lint
 ```
 
-## 發版（changesets）
+## Releases (changesets)
 
-改動進版時寫一張變更單：
+Write a changeset for every change heading into a release:
 
 ```bash
-npx changeset        # 選套件、patch/minor/major、寫描述 → .changeset/*.md
+npx changeset        # pick packages, patch/minor/major, describe → .changeset/*.md
 ```
 
-日常開發在 `release/x.y.z` 分支（x.y.z 是目標版本，feature 分支從它切出、`--no-ff` merge 回去）；發版時 merge 進 `master`，GitHub Action 開 release PR（bump 版本＋產生 CHANGELOG），merge PR 即發版＋部署 doc 站。發版後 `master` merge 回下一個 `release/x.y.z`。四個套件版本綁定齊跳。細節見 CONTRIBUTING.md。
+Day-to-day work lives on `release/x.y.z` (x.y.z is the target version — feature branches fork off it and merge back with `--no-ff`). Merging into `master` makes CI open a release PR (version bump + CHANGELOG); merging that PR publishes the four packages and deploys the doc site. Afterwards merge `master` back into the next `release/x.y.z`. All four packages bump together (`fixed`). Details in CONTRIBUTING.md.
 
-## 結構（npm workspaces monorepo）
+## Repository layout (npm workspaces monorepo)
 
-`packages/` 是內部工作區。對外四個入口：`sakulime-ui`（全包）、`@sakulime-ui/core`、`@sakulime-ui/layout`、`@sakulime-ui/theme`。
+`packages/` is the internal workspace area. Four public entries: `sakulime-ui` (everything), `@sakulime-ui/core`, `@sakulime-ui/layout`, `@sakulime-ui/theme`.
 
-| 位置 | 內容 |
+| Path | Contents |
 |---|---|
-| `packages/shared` | `--sl-*` 變數（內部，不發版），建置時包進各 entry |
-| `packages/shared/theme` | 主題色票，minify 成 `dist/<名稱>.min.css` |
-| `packages/core` | 元件 entry：變數 + 主題 + 元件 → `index.min.css` / `index.min.js` |
-| `packages/layout` | 排版 entry：變數 + 排版 → `index.min.css` |
-| `dist/sakulime.min.css` | 全包：core bundle + layout |
-| `doc/` | Storybook 文件站，Workers static assets 部署（`doc/wrangler.toml`） |
+| `packages/shared` | `--sl-*` variables (internal, unpublished) — bundled into each entry at build time |
+| `packages/shared/theme` | theme palettes, minified to `dist/<name>.min.css` |
+| `packages/core` | component entry: variables + themes + components → `index.min.css` / `index.min.js` |
+| `packages/layout` | layout entry: variables + layout → `index.min.css` |
+| `dist/sakulime.min.css` | everything: core bundle + layout |
+| `doc/` | Storybook doc site, deployed via Workers static assets (`doc/wrangler.toml`) |
 
-各包內部：
+Inside each package:
 
-- `src/css/*.css` — 元件樣式（stories 已移至 `doc/src/`）
-- `src/index.ts` — core 的 lib entry（css 抽出 + js 出口）
+- `src/css/*.css` — component styles (stories live in `doc/src/`)
+- `src/index.ts` — core lib entry (extracts css + js entry)
 
-分工：元件標記、狀態修飾、排版全部走 `sl-*` 屬性，`class` 留給你，跟 `sl-` 前綴天然分開。
+The split: `sl-*` attributes carry component markup, state modifiers, and layout — `class` is left to consumers and never collides with the system.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
