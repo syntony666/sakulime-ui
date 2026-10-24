@@ -1,0 +1,24 @@
+/* generic size scale — spacing, radius, font size share the same steps.
+   layer order for the whole system lives here; files join by name, order free. */
+
+@layer theme, base, attrs;
+
+@layer theme {
+  :root {
+    /* generic scale — any gap, padding, radius or font size */
+    --sl-xs: 0.25rem;
+    --sl-sm: 0.5rem;
+    --sl-md: 0.75rem;
+    --sl-lg: 1rem;
+    --sl-xl: 1.25rem;
+    --sl-2xl: 1.5rem;
+    --sl-3xl: 2rem;
+    --sl-4xl: 2.5rem;
+    --sl-5xl: 3rem;
+
+    /* container max width */
+    --sl-container-sm: 45rem;
+    --sl-container-md: 60rem;
+    --sl-container-lg: 75rem;
+  }
+}

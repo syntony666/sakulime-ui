@@ -1,0 +1,25 @@
+{
+  "name": "@sakulime-ui/core",
+  "version": "0.1.0",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "./package.json": "./package.json",
+    ".": "./dist/index.min.js",
+    "./index.css": "./src/index.css",
+    "./index.min.css": "./dist/index.min.css",
+    "./index.min.js": "./dist/index.min.js"
+  },
+  "scripts": {
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "@sakulime-ui/shared": "*",
+    "@sakulime-ui/theme": "*"
+  }
+}

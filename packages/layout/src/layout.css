@@ -1,0 +1,22 @@
+/* layout primitives as sl-* attributes; scales come from shared vars */
+
+@layer base {
+  /* page container — <div sl-container-md>, works on any element */
+  [sl-container-sm],
+  [sl-container-md],
+  [sl-container-lg] {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: var(--sl-lg);
+  }
+
+  [sl-container-sm] {
+    max-width: var(--sl-container-sm);
+  }
+  [sl-container-md] {
+    max-width: var(--sl-container-md);
+  }
+  [sl-container-lg] {
+    max-width: var(--sl-container-lg);
+  }
+}

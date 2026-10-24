@@ -1,0 +1,32 @@
+/* button variants — each consumes the tone slots differently, writes real props */
+@layer attrs {
+  /* normal is both a named value and the default — the filled look */
+  [sl-button][sl-variant="normal"],
+  [sl-button]:not([sl-variant]) {
+    background: var(--sl-tone-bg);
+    color: var(--sl-tone-text-invert);
+    border-color: transparent;
+  }
+
+  [sl-button][sl-variant="invert"] {
+    background: transparent;
+    color: var(--sl-tone-text);
+    border-color: var(--sl-tone-bg);
+  }
+
+  [sl-button][sl-variant="ghost"] {
+    background: transparent;
+    border-color: transparent;
+    color: var(--sl-tone-text);
+  }
+
+  [sl-button][sl-variant="underline"] {
+    background: transparent;
+    border-color: transparent;
+    color: var(--sl-tone-text);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--sl-tone-bg);
+    text-underline-offset: 0.3em;
+  }
+}

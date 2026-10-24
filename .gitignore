@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+site
 *.local
 
 # Editor directories and files
@@ -25,3 +26,12 @@ dist-ssr
 
 *storybook.log
 storybook-static
+doc/.storybook/theme.values.ts
+
+# Cloudflare Workers
+.wrangler
+.dev.vars
+
+# Plan files
+plan.md
+*.plan.md

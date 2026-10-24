@@ -1,0 +1,26 @@
+{
+  "name": "sakulime-doc",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "storybook dev -p 6006 -c .storybook",
+    "preview": "vite preview --outDir site",
+    "storybook": "storybook dev -p 6006 -c .storybook",
+    "build-storybook": "storybook build -c .storybook",
+    "site": "storybook build -c .storybook -o site",
+    "deploy": "npm run site && wrangler deploy"
+  },
+  "devDependencies": {
+    "@sakulime-ui/core": "*",
+    "@sakulime-ui/layout": "*",
+    "@sakulime-ui/theme": "*",
+    "@sakulime-ui/shared": "*",
+    "@storybook/addon-docs": "^10.4.6",
+    "@storybook/html-vite": "^10.4.6",
+    "remark-gfm": "^4.0.1",
+    "storybook": "^10.4.6",
+    "vite": "^8.0.12",
+    "wrangler": "^4.45.0"
+  }
+}
