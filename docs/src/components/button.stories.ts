@@ -1,0 +1,129 @@
+import type { Meta, StoryObj } from "@storybook/html-vite";
+import { showMarkup } from "../docs-source";
+import { axis, attr, label } from "../axis";
+
+type ButtonArgs = {
+  label: string;
+  tone: string;
+  variant: string;
+  size: string;
+  radius: string;
+  disabled: boolean;
+};
+
+const TONES = ["-", "primary", "secondary", "success", "warning", "danger"];
+const VARIANTS = ["-", "normal", "invert", "underline", "ghost"];
+const SIZES = ["-", "sm", "md", "lg"];
+const RADII = ["-", "none", "sm", "md", "lg", "full"];
+
+const meta = {
+  title: "Core/Button 按鈕",
+  // stories feed the mdx page; hide them from the sidebar
+  tags: ["!dev"],
+  parameters: {
+    docs: {
+      source: {
+        // evaluated markup, not the .map() render source
+        type: "dynamic",
+        transform: showMarkup,
+      },
+    },
+  },
+  args: {
+    label: "Button",
+    tone: "-",
+    variant: "-",
+    size: "-",
+    radius: "-",
+    disabled: false,
+  },
+  argTypes: {
+    tone: {
+      name: "sl-tone",
+      description: "顏色",
+      table: { type: {}, defaultValue: { summary: '"primary"' } },
+      control: { type: "select", labels: { "-": "-" } },
+      options: TONES,
+    },
+    variant: {
+      name: "sl-variant",
+      description: "型態",
+      table: { type: {}, defaultValue: { summary: '"normal"' } },
+      control: { type: "select", labels: { "-": "-" } },
+      options: VARIANTS,
+    },
+    size: {
+      name: "sl-size",
+      description: "大小",
+      table: { type: {}, defaultValue: { summary: '"md"' } },
+      control: { type: "select", labels: { "-": "-" } },
+      options: SIZES,
+    },
+    radius: {
+      name: "sl-radius",
+      description: "圓角",
+      table: { type: {}, defaultValue: { summary: '"md"' } },
+      control: { type: "select", labels: { "-": "-" } },
+      options: RADII,
+    },
+    disabled: {
+      description: "停用標記 (使用html原生標籤)",
+      table: { type: {}, defaultValue: { summary: "false" } },
+      control: "boolean",
+    },
+    label: {
+      description: "按鈕文字",
+      table: { type: {}, defaultValue: { summary: '"Button"' } },
+    },
+  },
+} satisfies Meta<ButtonArgs>;
+
+export default meta;
+type Story = StoryObj<ButtonArgs>;
+
+// one button per axis value
+const btn =
+  (name: string, extra = "") =>
+  (v: string) =>
+    `<button sl-button${attr(name, v)}${extra}>${label(v)}</button>`;
+
+function slAttrs({
+  tone,
+  variant,
+  size,
+  radius,
+  disabled,
+}: ButtonArgs): string {
+  return (
+    "sl-button" +
+    attr("sl-tone", tone) +
+    attr("sl-variant", variant) +
+    attr("sl-size", size) +
+    attr("sl-radius", radius) +
+    (disabled ? " disabled" : "")
+  );
+}
+
+export const Button: Story = {
+  render: (args) => `<button ${slAttrs(args)}>${args.label}</button>`,
+};
+
+export const Tones: Story = {
+  render: () => axis(TONES, btn("sl-tone")),
+};
+
+export const TonesInvert: Story = {
+  render: () => axis(TONES, btn("sl-tone", attr("sl-variant", "invert"))),
+};
+
+export const Variants: Story = {
+  render: () => axis(VARIANTS, btn("sl-variant")),
+};
+
+export const Sizes: Story = {
+  render: () => axis(SIZES, btn("sl-size")),
+};
+
+export const Radius: Story = {
+  render: () => axis(RADII, btn("sl-radius")),
+};

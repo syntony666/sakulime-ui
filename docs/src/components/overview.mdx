@@ -1,0 +1,16 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import * as OverviewStories from "./overview.stories";
+
+<Meta of={OverviewStories} />
+
+# 元件
+
+不需要排版工具時，可以只載入元件，裡面也會有主題包：
+
+```ts
+import "@sakulime-ui/core/index.min.css";
+```
+
+## 基礎用法
+
+<Canvas of={OverviewStories.BasicUsage} sourceState="shown" />
