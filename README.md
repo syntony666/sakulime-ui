@@ -44,7 +44,7 @@ npm run lint
 npx changeset        # 選套件、patch/minor/major、寫描述 → .changeset/*.md
 ```
 
-merge 進 `master` 後由 GitHub Action 開 release PR（bump 版本＋產生 CHANGELOG），merge PR 即發版。手動走一樣的話：`npx changeset version` 然後 `npm run release`。
+日常開發在 `release/x.y.z` 分支（x.y.z 是目標版本，feature 分支從它切出、`--no-ff` merge 回去）；發版時 merge 進 `master`，GitHub Action 開 release PR（bump 版本＋產生 CHANGELOG），merge PR 即發版＋部署 doc 站。發版後 `master` merge 回下一個 `release/x.y.z`。四個套件版本綁定齊跳。細節見 CONTRIBUTING.md。
 
 ## 結構（npm workspaces monorepo）
 
