@@ -1,12 +1,12 @@
 {
-  "name": "@sakulime-ui/token",
+  "name": "@sakulime-ui/shared",
   "version": "0.1.0",
   "private": true,
   "type": "module",
   "files": [
-    "tokens.css"
+    "vars.css"
   ],
   "exports": {
-    "./tokens.css": "./tokens.css"
+    "./vars.css": "./vars.css"
   }
 }

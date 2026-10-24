@@ -16,7 +16,7 @@
     "build": "vite build"
   },
   "devDependencies": {
-    "@sakulime-ui/theme": "*",
-    "@sakulime-ui/token": "*"
+    "@sakulime-ui/shared": "*",
+    "@sakulime-ui/theme": "*"
   }
 }

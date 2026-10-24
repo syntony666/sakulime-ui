@@ -14,7 +14,7 @@
     "@sakulime-ui/core": "*",
     "@sakulime-ui/layout": "*",
     "@sakulime-ui/theme": "*",
-    "@sakulime-ui/token": "*",
+    "@sakulime-ui/shared": "*",
     "@storybook/addon-docs": "^10.4.6",
     "@storybook/html-vite": "^10.4.6",
     "remark-gfm": "^4.0.1",

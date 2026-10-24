@@ -9,7 +9,7 @@ const out = (dir) => {
   mkdirSync(dir, { recursive: true });
 };
 
-const tokens = read("packages/shared/token/tokens.css");
+const tokens = read("packages/shared/vars.css");
 const themeFiles = readdirSync("packages/shared/theme").filter((f) => f.endsWith(".css"));
 const layout = read("packages/layout/src/layout.css");
 

@@ -1,5 +1,5 @@
 /* these exports resolve to source files, not dist — edits go live */
-@import url(@sakulime-ui/token/tokens.css);
+@import url(@sakulime-ui/shared/vars.css);
 @import url(@sakulime-ui/theme/sakulime.css);
 @import url(@sakulime-ui/theme/terra.css);
 @import url(@sakulime-ui/core/index.css);

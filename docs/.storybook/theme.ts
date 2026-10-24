@@ -2,7 +2,7 @@ import { create } from "storybook/theming/create";
 import sl from "./theme.values";
 
 // Chrome stays neutral; the brand palette shows through the canvas
-// (tokens.css), selected states and accents — tinting every chrome
+// (vars.css), selected states and accents — tinting every chrome
 // surface with product colors is what made it look washed out.
 export default create({
   base: "light",

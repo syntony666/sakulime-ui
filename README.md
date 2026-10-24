@@ -10,7 +10,7 @@
 import "sakulime-ui/sakulime.min.css";
 ```
 
-tokens、兩套主題、元件、排版都在這一個檔案。換主題：`<html data-theme="terra">`，不用重新載入。
+變數、兩套主題、元件、排版都在這一個檔案。換主題：`<html data-theme="terra">`，不用重新載入。
 
 ```html
 <button sl-button>儲存</button>
@@ -41,10 +41,10 @@ npm run lint
 
 | 位置 | 內容 |
 |---|---|
-| `packages/shared/token` | `--sl-*` 變數，建置時包進各 entry |
+| `packages/shared` | `--sl-*` 變數（內部，不發版），建置時包進各 entry |
 | `packages/shared/theme` | 主題色票，minify 成 `dist/<名稱>.min.css` |
-| `packages/core` | 元件 entry：tokens + 主題 + 元件 → `index.min.css` / `index.min.js` |
-| `packages/layout` | 排版 entry：tokens + 排版 → `index.min.css` |
+| `packages/core` | 元件 entry：變數 + 主題 + 元件 → `index.min.css` / `index.min.js` |
+| `packages/layout` | 排版 entry：變數 + 排版 → `index.min.css` |
 | `dist/sakulime.min.css` | 全包：core bundle + layout |
 | `docs/` | Storybook 文件站 |
 

@@ -2,7 +2,7 @@
    named selector with the absent-attr selector, one block serves both.
    Axis rules fill --sl-{axis}-* slots that component css reads in base.
    Variant rules live per component (button.variant.css).
-   Layers from tokens.css: theme < base < attrs. */
+   Layers from vars.css: theme < base < attrs. */
 
 @layer attrs {
   /* tone — --sl-tone-{bg,text,text-invert}; text is the tone's readable ink */

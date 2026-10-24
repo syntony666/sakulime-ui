@@ -1,4 +1,4 @@
-/* layout primitives as sl-* attributes; scales come from shared tokens */
+/* layout primitives as sl-* attributes; scales come from shared vars */
 
 @layer base {
   /* page container — <div sl-container-md>, works on any element */

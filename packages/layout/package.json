@@ -12,6 +12,6 @@
     "./index.min.css": "./dist/index.min.css"
   },
   "devDependencies": {
-    "@sakulime-ui/token": "*"
+    "@sakulime-ui/shared": "*"
   }
 }
