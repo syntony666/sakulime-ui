@@ -14,15 +14,13 @@
     "dist"
   ],
   "exports": {
-    ".": "./dist/sakulime.js",
-    "./sakulime.css": "./dist/sakulime.css",
-    "./layout.css": "./dist/layout.css",
-    "./tokens.css": "./dist/tokens.css",
-    "./themes/*": "./dist/themes/*"
+    ".": "./dist/sakulime.min.js",
+    "./sakulime.min.css": "./dist/sakulime.min.css",
+    "./sakulime.min.js": "./dist/sakulime.min.js"
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && npm run build -w sakulime-core && node scripts/build.mjs",
+    "build": "tsc -b && npm run build -w @sakulime-ui/core && node scripts/build.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
