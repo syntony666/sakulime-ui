@@ -1,7 +1,9 @@
 {
   "name": "sakulime-ui",
-  "private": true,
   "version": "0.1.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "workspaces": [
     "packages/*",
@@ -26,9 +28,11 @@
     "preview": "npm run preview -w sakulime-docs",
     "storybook": "npm run storybook -w sakulime-docs",
     "build-storybook": "npm run build-storybook -w sakulime-docs",
-    "site": "npm run site -w sakulime-docs"
+    "site": "npm run site -w sakulime-docs",
+    "release": "changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^3.0.3",
     "@eslint/js": "^10.0.1",
     "@types/node": "^24.12.3",
     "eslint": "^10.3.0",

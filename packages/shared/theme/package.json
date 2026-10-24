@@ -1,7 +1,9 @@
 {
   "name": "@sakulime-ui/theme",
   "version": "0.1.0",
-  "private": true,
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "files": [
     "dist"

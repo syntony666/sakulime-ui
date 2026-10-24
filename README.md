@@ -35,6 +35,16 @@ npm run site         # Storybook 靜態站 → docs/site/
 npm run lint
 ```
 
+## 發版（changesets）
+
+改動進版時寫一張變更單：
+
+```bash
+npx changeset        # 選套件、patch/minor/major、寫描述 → .changeset/*.md
+```
+
+merge 進 `master` 後由 GitHub Action 開 release PR（bump 版本＋產生 CHANGELOG），merge PR 即發版。手動走一樣的話：`npx changeset version` 然後 `npm run release`。
+
 ## 結構（npm workspaces monorepo）
 
 `packages/` 是內部工作區。對外四個入口：`sakulime-ui`（全包）、`@sakulime-ui/core`、`@sakulime-ui/layout`、`@sakulime-ui/theme`。
