@@ -31,7 +31,7 @@ npm run site         # also verify the static site when touching doc/
 - `sl-*` attributes carry components, state, and layout; consumer `class` is left alone
 - `--sl-*` variables control color and size; use the shared scales, no arbitrary-value APIs outside the steps
 - CSS layer order: `theme < base < attrs`
-- User-facing strings are Taiwan Traditional Chinese
+- User-facing strings and `doc/` content (`.mdx` pages, story text) are Taiwan Traditional Chinese; repo meta-docs (README, CONTRIBUTING, AGENTS) stay in English
 - Code comments in English only, and only where they add information
 - Commit messages in English, under 50 words, conventional prefixes (`feat:`, `fix:`, `docs:`, `chore:`, `refactor:`)
 - Doc pages: `.mdx` for prose, `.stories.ts` for demos; pages with stories use `<Meta of={Stories} />`, text-only pages use `<Meta title>`
