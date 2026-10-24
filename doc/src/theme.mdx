@@ -15,9 +15,24 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
 不需要元件時，可以只載入主題：
 
+```bash
+npm install @sakulime-ui/theme
+```
+
 ```ts
 import "@sakulime-ui/theme/sakulime.min.css"; // Theme: Sakulime
 import "@sakulime-ui/theme/terra.min.css";    // Theme: Terra
+```
+
+## CDN
+
+透過 CDN 載入樣式表，直接在 `<head>...</head>` 加入標籤連結 CDN 上的檔案：
+
+```html
+<!-- Theme: Sakulime -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sakulime-ui/theme/dist/sakulime.min.css" />
+<!-- Theme: Terra -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sakulime-ui/theme/dist/terra.min.css" />    
 ```
 
 ## 切換
