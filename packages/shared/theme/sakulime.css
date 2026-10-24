@@ -1,0 +1,33 @@
+/* sakulime — default brand theme: sakura pink × citrus orange (palette: sshigure-web) */
+
+@layer theme {
+  :root,
+  :root[data-theme="sakulime"] {
+  --sl-bg: #fff3e2;
+  --sl-surface: #fffaf5;
+  --sl-border: #eed9df;
+
+  --sl-text: #441306;
+  --sl-text-strong: #1f0c03;
+  --sl-text-accent: #c2410c;
+  --sl-text-invert: #fff4f6;
+
+  /* derived text tones — follow --sl-text automatically */
+  --sl-text-secondary: color-mix(in srgb, var(--sl-text) 72%, transparent);
+  --sl-text-muted: color-mix(in srgb, var(--sl-text) 45%, transparent);
+
+  /* two primaries — color + on-color fg + soft bg tint */
+  --sl-primary: #ff5980;
+  --sl-primary-fg: #fff4f6;
+  --sl-primary-bg: #ffdde7;
+
+  --sl-secondary: #ef9222;
+  --sl-secondary-fg: #4a2408;
+  --sl-secondary-bg: #fbe6cb;
+
+  /* status */
+  --sl-ok: #0369a1;
+  --sl-warn: #ca8a04;
+  --sl-danger: #b91c1c;
+  }
+}

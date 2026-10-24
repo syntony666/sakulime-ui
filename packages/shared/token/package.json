@@ -1,0 +1,12 @@
+{
+  "name": "@sakulime-ui/token",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "files": [
+    "tokens.css"
+  ],
+  "exports": {
+    "./tokens.css": "./tokens.css"
+  }
+}
