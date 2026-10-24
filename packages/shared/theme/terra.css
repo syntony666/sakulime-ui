@@ -1,0 +1,31 @@
+/* terra — sand/stone neutrals + terracotta and purple accents */
+
+@layer theme {
+  :root[data-theme="terra"] {
+  --sl-bg: #f3efe3;
+  --sl-surface: #faf7ee;
+  --sl-border: #e5ddc9;
+
+  --sl-text: #292524;
+  --sl-text-strong: #1c1917;
+  --sl-text-accent: #9a3412;
+  --sl-text-invert: #faf7ee;
+
+  /* derived text tones — follow --sl-text automatically */
+  --sl-text-secondary: color-mix(in srgb, var(--sl-text) 72%, transparent);
+  --sl-text-muted: color-mix(in srgb, var(--sl-text) 45%, transparent);
+
+  /* two primaries — color + on-color fg + soft bg tint */
+  --sl-primary: #c05621;
+  --sl-primary-fg: #fdf4ec;
+  --sl-primary-bg: #f2ddc9;
+
+  --sl-secondary: #64748b;
+  --sl-secondary-fg: #f8fafc;
+  --sl-secondary-bg: #f1f5f9;
+
+  --sl-ok: #0369a1;
+  --sl-warn: #ca8a04;
+  --sl-danger: #b91c1c;
+  }
+}

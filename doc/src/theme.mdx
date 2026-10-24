@@ -1,0 +1,56 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="主題" />
+
+# 主題
+
+所有顏色都是 `--sl-*` 變數，主題就是一整組變數值。切換主題不用改元件，也不用換 class。
+
+內建主題：
+
+- `sakulime`：櫻花粉配橘色（預設）
+- `terra`：大地色系
+
+## 引用
+
+不需要元件時，可以只載入主題：
+
+```ts
+import "@sakulime-ui/theme/sakulime.min.css"; // Theme: Sakulime
+import "@sakulime-ui/theme/terra.min.css";    // Theme: Terra
+```
+
+## 切換
+
+把 `data-theme` 寫在 `<html>` 上，整個網頁就會換色：
+
+```html
+<html data-theme="terra">
+```
+
+## 主題色系
+
+每個顏色都是 `var(--sl-*)`，預設為 `sakulime`，切換工具列可以直接切換主題預覽。
+
+<div>
+  {(
+    [
+      ["背景", ["bg", "surface", "border"]],
+      ["文字", ["text", "text-strong", "text-accent", "text-invert", "text-secondary", "text-muted"]],
+      ["主題", ["primary", "primary-fg", "primary-bg", "secondary", "secondary-fg", "secondary-bg"]],
+      ["狀態", ["ok", "warn", "danger"]],
+    ]
+  ).map(([label, keys]) => (
+    <div key={label} style={{ margin: "16px 0" }}>
+      <div style={{ fontWeight: 600, marginBottom: 8 }}>{label}</div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
+        {keys.map((n) => (
+          <div key={n} style={{ display: "flex", width: 150, flexDirection: "column", alignItems: "center", gap: 2 }}>
+            <span style={{ display: "block", width: 140, height: 40, borderRadius: "var(--sl-xs)", background: `var(--sl-${n})`, boxShadow: "inset 0 0 0 1px rgba(0,0,0,0.08)" }} />
+            <code style={{ "width": 140, display: "inline-block", fontSize: 11, padding: "6px 8px", whiteSpace: "nowrap" }}>{`--sl-${n}`}</code>
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>

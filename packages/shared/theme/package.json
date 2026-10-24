@@ -1,0 +1,17 @@
+{
+  "name": "@sakulime-ui/theme",
+  "version": "0.1.0",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "./package.json": "./package.json",
+    "./sakulime.css": "./sakulime.css",
+    "./terra.css": "./terra.css",
+    "./*": "./dist/*"
+  }
+}

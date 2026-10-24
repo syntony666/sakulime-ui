@@ -1,0 +1,20 @@
+{
+  "name": "@sakulime-ui/layout",
+  "version": "0.1.0",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "./package.json": "./package.json",
+    ".": "./dist/index.min.css",
+    "./index.css": "./src/layout.css",
+    "./index.min.css": "./dist/index.min.css"
+  },
+  "devDependencies": {
+    "@sakulime-ui/shared": "*"
+  }
+}

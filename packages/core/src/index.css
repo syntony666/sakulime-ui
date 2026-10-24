@@ -1,0 +1,30 @@
+@import "./css/button.css";
+@import "./css/button.variant.css";
+@import "./css/button.attrs.css";
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    margin: 0;
+    color: var(--sl-text, #111827);
+    background: var(--sl-bg, #ffffff);
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+}

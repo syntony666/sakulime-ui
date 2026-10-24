@@ -13,7 +13,6 @@
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
     "noEmit": true,
-    "jsx": "react-jsx",
 
     /* Linting */
     "noUnusedLocals": true,
@@ -22,7 +21,8 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": [
-    "src",
-    ".storybook"
+    "packages/*/src",
+    "doc/src",
+    "doc/.storybook"
   ]
 }
