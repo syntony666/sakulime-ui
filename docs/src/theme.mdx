@@ -4,7 +4,7 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
 # 主題
 
-所有顏色都是 `--sl-*` 變數，主題就是一整組變數值。切主題不用換 class、不用動元件。
+所有顏色都是 `--sl-*` 變數，主題就是一整組變數值。切換主題不用改元件，也不用換 class。
 
 內建主題：
 
@@ -28,11 +28,11 @@ import "@sakulime-ui/theme/terra.min.css";    // Theme: Terra
 <html data-theme="terra">
 ```
 
-預設為 `sakulime`。工具列的刷子就是同一個開關，可以直接點看效果。
+預設為 `sakulime`。上方工具列可以直接切換主題預覽。
 
-## 調色盤
+## 主題色系
 
-色票直接吃變數，切工具列的刷子整張就會換成該主題的顏色。
+每個顏色都是 `var(--sl-*)`，切換工具列的主題就會跟著變色。
 
 <div>
   {(
