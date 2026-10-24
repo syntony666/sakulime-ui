@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/html-vite";
-import { showMarkup } from "../docs-source";
-import { axis, attr, label } from "../axis";
+import { showMarkup } from "../util/docs-source";
+import { axis, attr, label } from "../util/axis";
 
 type ButtonArgs = {
   label: string;
