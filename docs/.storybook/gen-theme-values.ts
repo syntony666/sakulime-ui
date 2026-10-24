@@ -1,5 +1,6 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
+import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 
 // The manager bundle needs literal colors — var(--sl-*) fails SB's color
@@ -7,7 +8,8 @@ import { fileURLToPath } from "node:url";
 // every storybook start.
 export function syncThemeValues(): Record<string, string> {
   const dir = dirname(fileURLToPath(import.meta.url));
-  const themeCss = readFileSync(resolve(dir, "../../packages/shared/theme/sakulime.css"), "utf8");
+  const req = createRequire(import.meta.url);
+  const themeCss = readFileSync(req.resolve("@sakulime-ui/theme/sakulime.css"), "utf8");
 
   const tokens = Object.fromEntries(
     [...themeCss.matchAll(/--sl-([\w-]+):\s*(#[0-9a-f]+)/gi)]

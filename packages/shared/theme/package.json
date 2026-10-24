@@ -7,6 +7,7 @@
     "dist"
   ],
   "exports": {
+    "./package.json": "./package.json",
     "./sakulime.css": "./sakulime.css",
     "./terra.css": "./terra.css",
     "./*": "./dist/*"

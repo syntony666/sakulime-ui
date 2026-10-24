@@ -1,6 +1,10 @@
 import { cpSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
+import { dirname } from "node:path";
+import { createRequire } from "node:module";
 import { transformSync } from "esbuild";
 
+const req = createRequire(import.meta.url);
+const pkgDir = (name) => dirname(req.resolve(`${name}/package.json`));
 const read = (path) => readFileSync(path, "utf8").trim();
 const join = (...parts) => parts.join("\n") + "\n";
 const minify = (css) => transformSync(css, { loader: "css", minify: true }).code;
@@ -9,27 +13,31 @@ const out = (dir) => {
   mkdirSync(dir, { recursive: true });
 };
 
-const tokens = read("packages/shared/vars.css");
-const themeFiles = readdirSync("packages/shared/theme").filter((f) => f.endsWith(".css"));
-const layout = read("packages/layout/src/layout.css");
+const themeDir = pkgDir("@sakulime-ui/theme");
+const layoutDir = pkgDir("@sakulime-ui/layout");
+const coreDir = pkgDir("@sakulime-ui/core");
+
+const tokens = read(req.resolve("@sakulime-ui/shared/vars.css"));
+const themeFiles = readdirSync(themeDir).filter((f) => f.endsWith(".css"));
+const layout = read(req.resolve("@sakulime-ui/layout/index.css"));
 
 // @sakulime-ui/theme — one minified palette per file
-out("packages/shared/theme/dist");
+out(`${themeDir}/dist`);
 for (const f of themeFiles) {
   const name = f.replace(".css", ".min.css");
-  writeFileSync(`packages/shared/theme/dist/${name}`, minify(read(`packages/shared/theme/${f}`)));
+  writeFileSync(`${themeDir}/dist/${name}`, minify(read(`${themeDir}/${f}`)));
 }
 
 // @sakulime-ui/layout — tokens + layout
-out("packages/layout/dist");
-writeFileSync("packages/layout/dist/index.min.css", minify(join(tokens, layout)));
+out(`${layoutDir}/dist`);
+writeFileSync(`${layoutDir}/dist/index.min.css`, minify(join(tokens, layout)));
 
 // sakulime-ui — everything: core bundle already carries tokens, themes and
 // components; the meta package only adds layout on top
 out("dist");
-const coreCss = read("packages/core/dist/index.min.css");
-const layoutCss = read("packages/layout/dist/index.min.css");
+const coreCss = read(`${coreDir}/dist/index.min.css`);
+const layoutCss = read(`${layoutDir}/dist/index.min.css`);
 writeFileSync("dist/sakulime.min.css", join(coreCss, layoutCss));
-cpSync("packages/core/dist/index.min.js", "dist/sakulime.min.js");
+cpSync(`${coreDir}/dist/index.min.js`, "dist/sakulime.min.js");
 
 console.log(`built: theme/${themeFiles.length} layout dist/`);
