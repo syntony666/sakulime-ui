@@ -6,11 +6,11 @@
 
 @layer attrs {
   /* tone — --sl-tone-{bg,text,text-invert}; text is the tone's readable ink */
-  /* primary is too light for ink — borrow the accent color */
+  /* primary is too light for ink — darken it into a readable tone */
   [sl-tone="primary"],
   [sl-button]:not([sl-tone]) {
     --sl-tone-bg: var(--sl-primary);
-    --sl-tone-text: var(--sl-text-accent);
+    --sl-tone-text: color-mix(in srgb, var(--sl-primary) 55%, var(--sl-text));
     --sl-tone-text-invert: var(--sl-primary-fg);
   }
 
