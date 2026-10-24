@@ -29,9 +29,10 @@ import "sakulime-ui/sakulime.min.css";
 ## 開發
 
 ```bash
-npm run storybook    # Storybook — 元件文件/視覺驗收（docs/）
+npm run storybook    # Storybook — 元件文件/視覺驗收（doc/）
 npm run build        # tsc 型檢 + core lib build + 各包 min.css + 合成 dist/
-npm run site         # Storybook 靜態站 → docs/site/
+npm run site         # Storybook 靜態站 → doc/site/
+npm run deploy       # 建 site 後 wrangler deploy → Cloudflare Workers
 npm run lint
 ```
 
@@ -56,11 +57,11 @@ merge 進 `master` 後由 GitHub Action 開 release PR（bump 版本＋產生 CH
 | `packages/core` | 元件 entry：變數 + 主題 + 元件 → `index.min.css` / `index.min.js` |
 | `packages/layout` | 排版 entry：變數 + 排版 → `index.min.css` |
 | `dist/sakulime.min.css` | 全包：core bundle + layout |
-| `docs/` | Storybook 文件站 |
+| `doc/` | Storybook 文件站，Workers static assets 部署（`doc/wrangler.toml`） |
 
 各包內部：
 
-- `src/css/*.css` — 元件樣式（stories 已移至 `docs/src/`）
+- `src/css/*.css` — 元件樣式（stories 已移至 `doc/src/`）
 - `src/index.ts` — core 的 lib entry（css 抽出 + js 出口）
 
 分工：元件標記、狀態修飾、排版全部走 `sl-*` 屬性，`class` 留給你，跟 `sl-` 前綴天然分開。

@@ -12,7 +12,7 @@
     "tag": true
   },
   "ignore": [
-    "sakulime-docs",
+    "sakulime-doc",
     "@sakulime-ui/shared"
   ]
 }

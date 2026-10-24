@@ -22,7 +22,7 @@
   },
   "include": [
     "packages/*/src",
-    "docs/src",
-    "docs/.storybook"
+    "doc/src",
+    "doc/.storybook"
   ]
 }

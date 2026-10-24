@@ -8,7 +8,7 @@
   "workspaces": [
     "packages/*",
     "packages/shared/*",
-    "docs"
+    "doc"
   ],
   "sideEffects": [
     "*.css"
@@ -22,13 +22,14 @@
     "./sakulime.min.js": "./dist/sakulime.min.js"
   },
   "scripts": {
-    "dev": "npm run dev -w sakulime-docs",
+    "dev": "npm run dev -w sakulime-doc",
     "build": "tsc -b && npm run build -w @sakulime-ui/core && node scripts/build.mjs",
     "lint": "eslint .",
-    "preview": "npm run preview -w sakulime-docs",
-    "storybook": "npm run storybook -w sakulime-docs",
-    "build-storybook": "npm run build-storybook -w sakulime-docs",
-    "site": "npm run site -w sakulime-docs",
+    "preview": "npm run preview -w sakulime-doc",
+    "storybook": "npm run storybook -w sakulime-doc",
+    "build-storybook": "npm run build-storybook -w sakulime-doc",
+    "site": "npm run site -w sakulime-doc",
+    "deploy": "npm run deploy -w sakulime-doc",
     "release": "changeset publish"
   },
   "devDependencies": {

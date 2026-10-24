@@ -26,7 +26,11 @@ site
 
 *storybook.log
 storybook-static
-docs/.storybook/theme.values.ts
+doc/.storybook/theme.values.ts
+
+# Cloudflare Workers
+.wrangler
+.dev.vars
 
 # Plan files
 plan.md
