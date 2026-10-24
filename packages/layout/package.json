@@ -1,15 +1,16 @@
 {
-  "name": "sakulime-layout",
+  "name": "@sakulime-ui/layout",
   "version": "0.1.0",
   "private": true,
   "type": "module",
   "files": [
-    "src"
+    "dist"
   ],
   "exports": {
-    "./layout.css": "./src/layout.css"
+    ".": "./dist/index.min.css",
+    "./index.min.css": "./dist/index.min.css"
   },
-  "dependencies": {
-    "sakulime-tokens": "*"
+  "devDependencies": {
+    "@sakulime-ui/token": "*"
   }
 }

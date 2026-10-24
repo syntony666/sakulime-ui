@@ -1,97 +1,22 @@
-/*
- * sakulime-layout — layout utility classes.
- *
- * Surface split: sl-* attributes = component/state (sakulime-core);
- * classes = layout (this package). Spacing scale comes from
- * sakulime-tokens (--sl-space-*).
- */
+/* layout primitives as sl-* attributes; scales come from shared tokens */
 
-/* page container */
-.sl-container {
-  width: 100%;
-  max-width: var(--sl-container-max, 72rem);
-  margin-inline: auto;
-  padding-inline: var(--sl-space-lg);
-}
+@layer base {
+  /* page container — <div sl-container-md>, works on any element */
+  [sl-container-sm],
+  [sl-container-md],
+  [sl-container-lg] {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: var(--sl-lg);
+  }
 
-/* flow primitives */
-.sl-flex {
-  display: flex;
-}
-
-.sl-grid {
-  display: grid;
-}
-
-.sl-stack {
-  display: flex;
-  flex-direction: column;
-}
-
-.sl-cluster {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-/* gap — named scale matching --sl-space-* */
-.sl-gap-xs {
-  gap: var(--sl-space-xs);
-}
-
-.sl-gap-sm {
-  gap: var(--sl-space-sm);
-}
-
-.sl-gap-md {
-  gap: var(--sl-space-md);
-}
-
-.sl-gap-lg {
-  gap: var(--sl-space-lg);
-}
-
-.sl-gap-xl {
-  gap: var(--sl-space-xl);
-}
-
-/* margin / padding — named scale */
-.sl-m-xs {
-  margin: var(--sl-space-xs);
-}
-
-.sl-m-sm {
-  margin: var(--sl-space-sm);
-}
-
-.sl-m-md {
-  margin: var(--sl-space-md);
-}
-
-.sl-m-lg {
-  margin: var(--sl-space-lg);
-}
-
-.sl-m-xl {
-  margin: var(--sl-space-xl);
-}
-
-.sl-p-xs {
-  padding: var(--sl-space-xs);
-}
-
-.sl-p-sm {
-  padding: var(--sl-space-sm);
-}
-
-.sl-p-md {
-  padding: var(--sl-space-md);
-}
-
-.sl-p-lg {
-  padding: var(--sl-space-lg);
-}
-
-.sl-p-xl {
-  padding: var(--sl-space-xl);
+  [sl-container-sm] {
+    max-width: var(--sl-container-sm);
+  }
+  [sl-container-md] {
+    max-width: var(--sl-container-md);
+  }
+  [sl-container-lg] {
+    max-width: var(--sl-container-lg);
+  }
 }
