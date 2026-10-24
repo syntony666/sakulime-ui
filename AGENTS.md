@@ -18,5 +18,5 @@ Working agreement for coding agents in this repo. Contributor-facing rules live 
 - `@sakulime-ui/shared` is internal-only: private and changesets-ignored. Its vars get inlined into every published bundle at build time.
 - All four packages are `fixed` — any changeset bumps them together.
 - Merge into `release/x.y.z` and then `master` with `--no-ff` only — no fast-forwards.
-- Pushing `master` runs changesets/action → "chore: release" PR → merge publishes to npm (secret: `NPM_TOKEN`). Cloudflare Workers Builds deploys `doc/` independently on `master` pushes — not part of the Action.
+- Pushing `master` runs changesets/action → "chore: release" PR → merge publishes to npm via trusted publishing (OIDC + provenance, no token). Cloudflare Workers Builds deploys `doc/` independently on `master` pushes — not part of the Action.
 - The docs subtree's history lives under `doc/` — don't rewrite those commits when rebasing.

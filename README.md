@@ -4,6 +4,8 @@
 [![npm](https://img.shields.io/npm/v/sakulime-ui)](https://www.npmjs.com/package/sakulime-ui)
 [![Storybook](https://img.shields.io/badge/Storybook-10-FF4785?logo=storybook&logoColor=white)](https://storybook.js.org)
 
+[![view - Documentation](https://img.shields.io/badge/view-Documentation-f97316?style=for-the-badge)](https://sakulime-ui.syntony666.com)
+
 A CSS-first design system with no framework runtime — React, Vue, Svelte, or plain HTML all work. Two things only: `sl-*` attributes for components, state, and layout, plus `--sl-*` variables for color and size; `class` stays entirely yours. `sakulime-ui` ships everything in one file; `@sakulime-ui/core`, `@sakulime-ui/layout`, and `@sakulime-ui/theme` are the individual entries; `doc` is the Storybook doc site deployed to Cloudflare Workers.
 
 ## Usage
