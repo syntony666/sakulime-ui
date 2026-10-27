@@ -16,6 +16,8 @@ const PADS = ["-", "none", "sm", "md", "lg"];
 const RADII = ["-", "none", "sm", "md", "lg", "full"];
 const VARIANTS = ["-", "horizontal", "hollow"];
 const INDICATES = ["-", "top", "bottom", "start", "end"];
+const CORNERS = ["-", "start", "end"];
+const CORNER_TYPES = ["-", "text-xs", "text-sm", "indicator"];
 const TONES = ["-", "primary", "secondary", "success", "warning", "danger"];
 
 // Controls row for an attr axis: name = real attr, shows the "-" option
@@ -55,7 +57,12 @@ const meta = {
     radius: axisArg("sl-radius", "圓角", "md", RADII),
     variant: axisArg("sl-variant", "型態", "-", VARIANTS),
     indicate: axisArg("sl-indicate", "標記邊緣", "-", INDICATES),
-    tone: axisArg("sl-tone", "標記顏色（搭配 sl-indicate）", "primary", TONES),
+    tone: axisArg(
+      "sl-tone",
+      "顏色（搭配 sl-indicate / sl-card-corner）",
+      "primary",
+      TONES,
+    ),
     raised: {
       description: "浮起陰影 `sl-raised`",
       table: { type: {}, defaultValue: { summary: "false" } },
@@ -132,4 +139,42 @@ export const Raised: Story = {
 export const WithMedia: Story = {
   render: () =>
     card("", media + `<div><strong>連結預覽</strong><p>貼邊圖片加內容</p></div>`),
+};
+
+const cornerIcon =
+  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" ` +
+  `stroke-width="2" stroke-linecap="round" stroke-linejoin="round">` +
+  `<path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>`;
+
+export const Corner: Story = {
+  render: (args) =>
+    `<div sl-card${attr("sl-radius", args.radius)} style="max-width: 360px">` +
+    `<span sl-card-corner${attr("sl-tone", args.tone)}>100ms</span>` +
+    `<strong>卡片標題</strong><p>卡片內容文字，描述這張卡片在展示什麼。</p></div>`,
+};
+
+export const CornerPositions: Story = {
+  render: () =>
+    axis(CORNERS, (v) =>
+      card(
+        attr("sl-tone", "secondary"),
+        (v !== "-" ? `<span sl-card-corner="${v}">NEW</span>` : "") +
+          `<strong>${label(v)}</strong><p>內容文字</p>`,
+      ),
+    ),
+};
+
+export const CornerTypes: Story = {
+  render: () =>
+    axis(CORNER_TYPES, (v) =>
+      card(
+        attr("sl-tone", "success"),
+        (v !== "-"
+          ? `<span sl-card-corner="end ${v}">100ms</span>` +
+            (v === "indicator"
+              ? `<span sl-card-corner="start indicator">${cornerIcon}</span>`
+              : "")
+          : "") + `<strong>${label(v)}</strong><p>內容文字</p>`,
+      ),
+    ),
 };

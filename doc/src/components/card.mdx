@@ -62,3 +62,47 @@ import * as CardStories from "./card.stories";
 加陰影讓卡片看起來浮起。
 
 <Canvas of={CardStories.Raised} sourceState="shown" />
+
+## 角落標記 `sl-card-corner`
+
+在卡片頂端角落放一個小標記，適合時間、狀態、數字這類補充資訊。屬性值用空格分隔，類型和位置可以自由組合。顏色跟著 `sl-tone` 走（預設 primary）：
+
+```html
+<div sl-card>
+  <span sl-card-corner="end text-sm">100ms</span>
+  ...
+</div>
+```
+
+<Canvas of={CardStories.Corner} sourceState="shown" />
+<Controls of={CardStories.Corner} include={["sl-tone", "sl-radius"]} />
+
+寫在卡片上整張統一，寫在標記上只改那一個：
+
+```html
+<div sl-card sl-tone="success">
+  <span sl-card-corner="end indicator" sl-tone="danger"></span>
+</div>
+```
+
+類型：
+
+- `text-sm`：小字標籤（省略類型時的預設）
+- `text-xs`：更小的字級
+- `indicator`：純色圓點，裡面放 `svg` 或 `img` 就變圖示（圓點不會出現；SVG 寫 `currentColor` 會跟著 `sl-tone` 的顏色）
+
+位置：
+
+- `end`：右上（預設值）
+- `start`：左上
+
+```html
+<span sl-card-corner="start text-xs">6ms</span>
+<span sl-card-corner="end indicator"></span>
+<span sl-card-corner="end indicator">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><!-- icon --></svg>
+</span>
+```
+
+<Canvas of={CardStories.CornerPositions} sourceState="shown" />
+<Canvas of={CardStories.CornerTypes} sourceState="shown" />
