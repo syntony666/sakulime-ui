@@ -3,6 +3,7 @@
 @layer base {
   [sl-card] {
     display: block;
+    position: relative;
     overflow: hidden;
     background: var(--sl-surface);
     color: var(--sl-text);
