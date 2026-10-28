@@ -42,8 +42,8 @@ Work branches off the current `release/x.y.z` branch, never directly off `master
 
 1. Create or reuse the release branch: `release/x.y.z` (x.y.z is the target version)
 2. Branch off it (`fix/…`, `feat/…`, `docs/…`); keep commits small and single-concern
-3. Add a changeset when the change affects published packages: `npx changeset` — the four packages are `fixed`, selecting any one bumps them together
+3. Add a changeset when the change affects published packages: `npx changeset` — the four packages are `fixed`, selecting any one bumps them together. Changeset files are the changelog source: each describes one user-visible change. `CHANGELOG.md` files are generated at release time — never edit them by hand. No changeset needed for `doc/`, CI, or meta-doc changes — they never reach npm
 4. Merge into `release/x.y.z` with `--no-ff` — real merge commits, no fast-forwards
 5. When the release is ready, merge `release/x.y.z` into `master` with `--no-ff` and push
-6. CI opens a "chore: release" PR — merging publishes the four packages to npm, tags the release, and deploys the doc site
+6. CI opens a "chore: release" PR — it consumes pending `.changeset/*.md`, bumps all four versions together, and rewrites each package's `CHANGELOG.md`. Merging the PR publishes to npm and creates a GitHub release for `sakulime-ui` only (notes taken from the root `CHANGELOG.md` section). The doc site deploys independently via Cloudflare Workers Builds on every `master` push
 7. After the release, merge `master` back into the next `release/x.y.z` to sync versions

@@ -21,7 +21,7 @@ export const label = (value: string) => {
 
 const SEP = '<span class="axis-sep"></span>';
 
-export const axis = (values: string[], item: (v: string) => string) =>
+export const axis = <T>(values: T[], item: (v: T) => string) =>
   `<div class="axis-row">` +
   values
     .map((v, i) => `${i === 1 && values[0] === "-" ? SEP : ""}${item(v)}`)

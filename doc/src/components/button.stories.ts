@@ -32,6 +32,8 @@ const meta = {
   tags: ["!dev"],
   parameters: {
     docs: {
+      // opt back into the TOC (disabled globally for prose pages)
+      toc: { disable: false },
       source: {
         // evaluated markup, not the .map() render source
         type: "dynamic",

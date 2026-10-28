@@ -1,0 +1,14 @@
+/* card — surface container; slots filled by attrs axes in
+   card.attrs.css. */
+@layer base {
+  [sl-card] {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    background: var(--sl-surface);
+    color: var(--sl-text);
+    border: 1px solid var(--sl-border);
+    border-radius: var(--sl-radius);
+    padding: var(--sl-pad);
+  }
+}
