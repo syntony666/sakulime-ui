@@ -8,6 +8,12 @@
 /* map vitepress chrome tokens onto the sl palette — data-theme switching
    rethemes the whole page, not just the demos */
 :root {
+  /* Latin stays on Inter (VP-bundled); zh-TW falls to the self-hosted
+     Noto Sans TC subset, with platform faces as the last resort */
+  --vp-font-family-base:
+    "Inter", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei",
+    sans-serif;
+
   --vp-c-bg: var(--sl-bg);
   --vp-c-bg-alt: var(--sl-surface);
   --vp-c-bg-elv: var(--sl-surface);
