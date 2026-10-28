@@ -208,6 +208,9 @@ body::before {
 }
 
 .sl-play-field :is(select, input) {
+  /* pin the lane too — a definite row alone jumps the auto-placement
+     queue and the control lands left of the name */
+  grid-column: 2;
   grid-row: 1 / -1;
   align-self: center;
   min-width: 0;
