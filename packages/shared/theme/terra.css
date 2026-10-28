@@ -1,31 +1,32 @@
-/* terra — sand/stone neutrals + terracotta and purple accents */
+/* terra — map-gallery palette: stone neutrals + teal accent */
 
 @layer theme {
   :root[data-theme="terra"] {
-  --sl-bg: #f3efe3;
-  --sl-surface: #faf7ee;
-  --sl-border: #e5ddc9;
+  --sl-bg: #f5f5f4;
+  --sl-surface: #fafaf9;
+  --sl-border: #d6d3d1;
 
-  --sl-text: #292524;
-  --sl-text-strong: #1c1917;
-  --sl-text-accent: #9a3412;
-  --sl-text-invert: #faf7ee;
+  --sl-text: #1f3d3d;
+  --sl-text-strong: #152e2e;
+  --sl-text-accent: #0f766e;
+  --sl-text-invert: #fafaf9;
 
   /* derived text tones — follow --sl-text automatically */
-  --sl-text-secondary: color-mix(in srgb, var(--sl-text) 72%, transparent);
-  --sl-text-muted: color-mix(in srgb, var(--sl-text) 45%, transparent);
+  --sl-text-secondary: color-mix(in srgb, var(--sl-text) 78%, transparent);
+  --sl-text-muted: color-mix(in srgb, var(--sl-text) 55%, transparent);
 
   /* two primaries — color + on-color fg + soft bg tint */
-  --sl-primary: #c05621;
-  --sl-primary-fg: #fdf4ec;
-  --sl-primary-bg: #f2ddc9;
+  --sl-primary: #4fbfc0;
+  --sl-primary-fg: #1f3d3d;
+  --sl-primary-bg: #d9efef;
 
   --sl-secondary: #64748b;
   --sl-secondary-fg: #f8fafc;
   --sl-secondary-bg: #f1f5f9;
 
-  --sl-ok: #0369a1;
-  --sl-warn: #ca8a04;
+  /* status */
+  --sl-ok: #047857;
+  --sl-warn: #e0a94e;
   --sl-danger: #b91c1c;
   }
 }
