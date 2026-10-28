@@ -6,7 +6,7 @@
 - `packages/shared/theme` — theme palettes (`@sakulime-ui/theme`)
 - `packages/core` — component styles (`@sakulime-ui/core`)
 - `packages/layout` — layout utilities (`@sakulime-ui/layout`)
-- `doc` — Storybook doc site (`sakulime-doc`), deployed to Cloudflare Workers
+- `doc` — VitePress doc site (`sakulime-doc`), deployed to Cloudflare Workers
 - repo root — all-in-one `sakulime-ui` package (`dist/sakulime.min.css`)
 
 ## Setup
@@ -15,13 +15,13 @@ Node.js 22+.
 
 ```bash
 npm install
-npm run storybook    # Storybook on :6006
+npm run dev          # VitePress doc site on :5173
 ```
 
 ## Before pushing
 
 ```bash
-npm run lint         # eslint, covers .mdx too
+npm run lint         # eslint
 npm run build        # tsc typecheck + core bundle + per-package dist
 npm run site         # also verify the static site when touching doc/
 ```
@@ -31,10 +31,10 @@ npm run site         # also verify the static site when touching doc/
 - `sl-*` attributes carry components, state, and layout; consumer `class` is left alone
 - `--sl-*` variables control color and size; use the shared scales, no arbitrary-value APIs outside the steps
 - CSS layer order: `theme < base < attrs`
-- User-facing strings and `doc/` content (`.mdx` pages, story text) are Taiwan Traditional Chinese; repo meta-docs (README, CONTRIBUTING, AGENTS) stay in English
+- User-facing strings and `doc/` content (`.md` pages, story text) are Taiwan Traditional Chinese; repo meta-docs (README, CONTRIBUTING, AGENTS) stay in English
 - Code comments in English only, and only where they add information
 - Commit messages in English, under 50 words, conventional prefixes (`feat:`, `fix:`, `docs:`, `chore:`, `refactor:`)
-- Doc pages: `.mdx` for prose, `.stories.ts` for demos; pages with stories use `<Meta of={Stories} />`, text-only pages use `<Meta title>`
+- Doc pages: `.md` for prose, `.stories.ts` for demos; stories render through the theme's `<Demo>` and `<Playground>` components
 
 ## Workflow
 

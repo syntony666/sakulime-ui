@@ -1,5 +1,5 @@
 <script setup>
-import * as ContainerStories from "../doc/src/layout/container.stories";
+import * as ContainerStories from "./src/layout/container.stories";
 </script>
 
 # Container *容器*

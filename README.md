@@ -2,7 +2,6 @@
 
 [![License](https://img.shields.io/github/license/syntony666/sakulime-ui)](LICENSE)
 [![npm](https://img.shields.io/npm/v/sakulime-ui)](https://www.npmjs.com/package/sakulime-ui)
-[![Storybook](https://img.shields.io/badge/Storybook-10-FF4785?logo=storybook&logoColor=white)](https://storybook.js.org)
 
 [![view - Documentation](https://img.shields.io/badge/view-Documentation-f97316?style=for-the-badge)](https://sakulime-ui.syntony666.com)
 
@@ -34,9 +33,9 @@ Variables, both themes, components, and layout ship in that single file. Switch 
 
 ```bash
 npm install
-npm run storybook    # Storybook — component docs and visual review (doc/)
+npm run dev          # VitePress doc site (doc/) on :5173
 npm run build        # tsc typecheck + core lib build + per-package min.css + dist/
-npm run site         # static Storybook site → doc/site/
+npm run site         # static VitePress site → doc/site/
 npm run deploy       # site build + wrangler deploy → Cloudflare Workers
 npm run lint
 ```
