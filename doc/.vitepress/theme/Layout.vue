@@ -1,21 +1,30 @@
 <script setup lang="ts">
 import DefaultTheme from "vitepress/theme";
-import sakulimeCss from "@sakulime-ui/theme/sakulime.css?raw";
-import terraCss from "@sakulime-ui/theme/terra.css?raw";
 import { onMounted, ref, watch } from "vue";
 
 const { Layout } = DefaultTheme;
 const theme = ref("sakulime");
 
-// each dot is the theme's signature primary, pulled from the palette
-// source itself — palette edits move the dots, nothing hand-synced
+// themes self-discover from the palette package — adding a css file
+// there adds a dot; its color is the palette's own --sl-primary
+const palettes = import.meta.glob("../../../packages/shared/theme/*.css", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+});
 const pick = (css: string, token: string) =>
   css.match(new RegExp(`${token}:\\s*(#[0-9a-fA-F]{6})`))?.[1] ?? "#888";
 
-const themes = [
-  { value: "sakulime", label: "Sakulime", color: pick(sakulimeCss, "--sl-primary") },
-  { value: "terra", label: "Terra", color: pick(terraCss, "--sl-primary") },
-];
+const themes = Object.keys(palettes)
+  .sort()
+  .map((path) => {
+    const name = path.match(/([^/]+)\.css$/)![1];
+    return {
+      value: name,
+      label: name[0].toUpperCase() + name.slice(1),
+      color: pick(palettes[path] as string, "--sl-primary"),
+    };
+  });
 
 // data-theme drives the sakulime token cascade — SSR has no document,
 // so set it post-mount and on every toggle
@@ -33,16 +42,16 @@ onMounted(() => {
 <template>
   <Layout>
     <template #nav-bar-content-after>
-      <div class="sl-theme-switch" role="radiogroup" aria-label="主題">
-        <button
-          v-for="t in themes"
-          :key="t.value"
-          :class="['sl-theme-dot', { active: theme === t.value }]"
-          :style="{ '--dot': t.color }"
-          :title="t.label"
-          :aria-pressed="theme === t.value"
-          @click="theme = t.value"
+      <div class="sl-theme-switch">
+        <span
+          class="sl-theme-dot"
+          :style="{ '--dot': themes.find((t) => t.value === theme)?.color }"
         />
+        <select v-model="theme" aria-label="主題">
+          <option v-for="t in themes" :key="t.value" :value="t.value">
+            {{ t.label }}
+          </option>
+        </select>
       </div>
     </template>
   </Layout>

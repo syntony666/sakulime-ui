@@ -295,12 +295,23 @@ body::before {
   white-space: nowrap;
 }
 
-/* theme switcher — two signature-color dots; the active one gets a ring */
+/* theme switcher — one signature dot for the active theme + a select,
+   stays one chip wide no matter how many themes ship */
 .sl-theme-switch {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   margin-left: 12px;
+}
+
+.sl-theme-switch select {
+  background: var(--sl-surface);
+  color: var(--sl-text);
+  border: 1px solid var(--sl-border);
+  border-radius: var(--sl-xs);
+  padding: 2px 6px;
+  font: inherit;
+  font-size: 13px;
 }
 
 .sl-theme-dot {
@@ -310,16 +321,4 @@ body::before {
   background: var(--dot);
   border: 2px solid var(--sl-surface);
   box-shadow: 0 0 0 1px var(--sl-border);
-  cursor: pointer;
-  transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease;
-}
-
-.sl-theme-dot:hover {
-  transform: scale(1.15);
-}
-
-.sl-theme-dot.active {
-  box-shadow: 0 0 0 2px var(--sl-text-accent);
 }
