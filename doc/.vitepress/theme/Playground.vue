@@ -4,6 +4,7 @@ import Demo from "./Demo.vue";
 
 type Field = {
   key: string;
+  name: string;
   desc?: string;
   kind: "select" | "boolean" | "text";
   options?: string[];
@@ -21,6 +22,8 @@ const args = reactive<Record<string, unknown>>({ ...(props.meta.args ?? {}) });
 const fields = computed<Field[]>(() =>
   Object.entries(props.meta.argTypes ?? {}).map(([key, t]) => ({
     key,
+    // axisArg() declares the real sl-* attr name; plain args fall back
+    name: t.name ?? key,
     desc: t.description,
     kind:
       t.control?.type === "boolean" || typeof args[key] === "boolean"
@@ -43,7 +46,7 @@ const descHtml = (desc?: string) =>
     <Demo :render="render" :args="args" />
     <div class="sl-play-fields">
       <label v-for="f in fields" :key="f.key" class="sl-play-field">
-        <span class="sl-play-name">{{ f.key }}</span>
+        <span class="sl-play-name">{{ f.name }}</span>
         <select v-if="f.kind === 'select'" v-model="args[f.key]">
           <option v-for="o in f.options" :key="o" :value="o">{{ o }}</option>
         </select>
