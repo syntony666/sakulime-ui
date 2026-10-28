@@ -178,7 +178,7 @@ body::before {
 }
 
 /* markup highlight — attribute names take the accent color, quoted
-   values sit on a light primary wash */
+   values get the accent pill (like the ts-button chip style) */
 .sl-demo-src .sl-hl-attr {
   color: var(--sl-text-accent);
 }
@@ -186,8 +186,8 @@ body::before {
 .sl-demo-src .sl-hl-val {
   padding: 0 0.3em;
   border-radius: var(--sl-xs);
-  background: color-mix(in srgb, var(--sl-primary) 30%, transparent);
-  color: var(--sl-text-accent);
+  background: var(--sl-primary);
+  color: var(--sl-primary-fg);
 }
 
 /* playground controls — standalone panel below the demo card.
