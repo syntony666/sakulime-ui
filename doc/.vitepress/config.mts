@@ -34,18 +34,18 @@ export default defineConfig({
       { text: "開始使用", link: "/introduction" },
       { text: "主題", link: "/theme" },
       {
+        text: "Layout",
+        items: [
+          { text: "說明", link: "/layout/" },
+          { text: `Container ${zh("容器")}`, link: "/layout/container" },
+        ],
+      },
+      {
         text: "Core",
         items: [
           { text: "說明", link: "/core/" },
           { text: `Button ${zh("按鈕")}`, link: "/core/button" },
           { text: `Card ${zh("卡片")}`, link: "/core/card" },
-        ],
-      },
-      {
-        text: "Layout",
-        items: [
-          { text: "說明", link: "/layout/" },
-          { text: `Container ${zh("容器")}`, link: "/layout/container" },
         ],
       },
     ],
