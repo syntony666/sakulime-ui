@@ -24,7 +24,7 @@ import "sakulime-ui/sakulime.min.css";
 
 個別套件引用，請見各套件及主題說明
 
-- 元件，含主題色系：[`@sakulime-ui/core`](/button)
+- 元件，含主題色系：[`@sakulime-ui/core`](/core/button)
 - 排版工具：`@sakulime-ui/layout`
 - 主題色系：[`@sakulime-ui/theme`](/theme)
 

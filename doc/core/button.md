@@ -1,5 +1,5 @@
 <script setup>
-import * as ButtonStories from "./src/components/button.stories";
+import * as ButtonStories from "../src/components/button.stories";
 </script>
 
 # Button *按鈕*
