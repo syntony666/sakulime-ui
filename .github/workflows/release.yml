@@ -16,10 +16,10 @@ jobs:
       pull-requests: write
       id-token: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org
@@ -37,10 +37,17 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_CONFIG_PROVENANCE: "true"
       - name: Create GitHub release
-        if: steps.changesets.outputs.published == 'true'
         run: |
           version=$(node -p "require('./package.json').version")
           tag="sakulime-ui@$version"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            echo "$tag already released — skipping"
+            exit 0
+          fi
+          if ! git rev-parse --verify "refs/tags/$tag" >/dev/null 2>&1; then
+            echo "no local tag — this push did not publish"
+            exit 0
+          fi
           git push origin "$tag" || true
           notes=$(awk -v v="$version" '$0 == "## " v {f=1; next} /^## / {f=0} f' CHANGELOG.md)
           gh release create "$tag" --title "$tag" --notes "${notes:-Release $tag}" --verify-tag
