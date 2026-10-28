@@ -199,15 +199,17 @@ body::before {
 
 .sl-play-field {
   display: grid;
-  /* fixed name column, flexible control — every field in a row
-     stretches together so controls stay aligned */
-  grid-template-columns: 5.5rem 1fr;
+  /* left lane holds name over desc at one width; the control gets
+     its own lane and centers against both */
+  grid-template-columns: auto 1fr;
   gap: 2px var(--sl-sm);
   align-items: center;
   font-size: 13px;
 }
 
 .sl-play-field :is(select, input) {
+  grid-row: 1 / -1;
+  align-self: center;
   min-width: 0;
 }
 
@@ -241,7 +243,7 @@ body::before {
 }
 
 .sl-play-desc {
-  grid-column: 1 / -1;
+  grid-column: 1;
   color: var(--sl-text-muted);
   font-size: 12px;
 }
