@@ -1,4 +1,5 @@
-/* terra — map-gallery palette: stone neutrals + teal accent */
+/* terra — map-gallery palette: monochrome stone, no accent hue.
+   Emphasis comes from ink depth, like the site's own gray UI */
 
 @layer theme {
   :root[data-theme="terra"] {
@@ -6,23 +7,25 @@
   --sl-surface: #fafaf9;
   --sl-border: #d6d3d1;
 
-  --sl-text: #1f3d3d;
-  --sl-text-strong: #152e2e;
-  --sl-text-accent: #0f766e;
+  --sl-text: #292524;
+  --sl-text-strong: #1c1917;
+  --sl-text-accent: #1c1917;
   --sl-text-invert: #fafaf9;
 
   /* derived text tones — follow --sl-text automatically */
   --sl-text-secondary: color-mix(in srgb, var(--sl-text) 78%, transparent);
   --sl-text-muted: color-mix(in srgb, var(--sl-text) 55%, transparent);
 
-  /* two primaries — color + on-color fg + soft bg tint */
-  --sl-primary: #4fbfc0;
-  --sl-primary-fg: #1f3d3d;
-  --sl-primary-bg: #d9efef;
+  /* primary = the site's dark/selected button (stone-700 + white) —
+     its own UI has no colored CTA */
+  --sl-primary: #44403c;
+  --sl-primary-fg: #fafaf9;
+  --sl-primary-bg: #e7e5e4;
 
-  --sl-secondary: #64748b;
-  --sl-secondary-fg: #f8fafc;
-  --sl-secondary-bg: #f1f5f9;
+  /* secondary = the quiet gray button the site actually uses */
+  --sl-secondary: #e7e5e4;
+  --sl-secondary-fg: #292524;
+  --sl-secondary-bg: #f5f5f4;
 
   /* status */
   --sl-ok: #047857;
