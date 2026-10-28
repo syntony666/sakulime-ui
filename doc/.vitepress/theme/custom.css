@@ -177,17 +177,10 @@ body::before {
   overflow-x: auto;
 }
 
-/* markup highlight — attribute names take the accent color, quoted
-   values get the accent pill (like the ts-button chip style) */
+/* markup highlight — sl-* attribute names take the accent color,
+   tags and values stay plain */
 .sl-demo-src .sl-hl-attr {
   color: var(--sl-text-accent);
-}
-
-.sl-demo-src .sl-hl-val {
-  padding: 0 0.3em;
-  border-radius: var(--sl-xs);
-  background: var(--sl-primary);
-  color: var(--sl-primary-fg);
 }
 
 /* playground controls — standalone panel below the demo card.
