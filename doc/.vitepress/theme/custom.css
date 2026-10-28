@@ -177,11 +177,13 @@ body::before {
   overflow-x: auto;
 }
 
-/* playground controls — standalone panel below the demo card */
+/* playground controls — standalone panel below the demo card.
+   Flex-wrapped fixed-width fields so controls stay compact and
+   fields pack left instead of stretching across the row */
 .sl-play-fields {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: var(--sl-sm) var(--sl-md);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sl-lg) var(--sl-2xl);
   padding: var(--sl-md) var(--sl-lg);
   background: color-mix(in srgb, var(--sl-text) 4%, var(--sl-surface));
   border: 1px solid var(--sl-border);
@@ -191,9 +193,9 @@ body::before {
 
 .sl-play-field {
   display: grid;
-  /* fixed name column so every control lines up regardless of
-     arg name length (tone vs disabled) */
-  grid-template-columns: 5.5rem 1fr;
+  /* fixed name + control columns so every field is the same width —
+     controls line up across wrapped rows */
+  grid-template-columns: 5.5rem 8rem;
   gap: 2px var(--sl-sm);
   align-items: center;
   font-size: 13px;
@@ -207,6 +209,7 @@ body::before {
 .sl-play-field select,
 .sl-play-field input[type="text"] {
   appearance: auto;
+  width: 100%;
   background: var(--sl-surface);
   color: var(--sl-text);
   border: 1px solid var(--sl-border);
