@@ -16,6 +16,21 @@ export default defineConfig({
       {},
       "try{var t=localStorage.getItem('sl-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}",
     ],
+    // zh-TW + code faces from Google Fonts — Cloudflare Fonts rewrites
+    // these to same-domain /cf-fonts at the edge, so there is no
+    // third-party request in production (Inter is VP-bundled already)
+    ["link", { rel: "preconnect", href: "https://fonts.googleapis.com" }],
+    [
+      "link",
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" },
+    ],
+    [
+      "link",
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap",
+      },
+    ],
   ],
   srcDir: "doc",
   outDir: "site",
