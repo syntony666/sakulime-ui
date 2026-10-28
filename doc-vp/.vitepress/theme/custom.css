@@ -184,6 +184,21 @@ body::before {
   font-size: 12px;
 }
 
+/* sub-label next to a main title — h1 "Button *按鈕*" only */
+.vp-doc h1 em {
+  color: var(--sl-text-muted);
+  font-style: normal;
+  font-size: 0.8em;
+  font-weight: 500;
+  margin-left: 0.2em;
+}
+
+/* sidebar sub-label — same size; dims whatever color the item
+   currently is, so active states stay in family */
+.sl-sub {
+  opacity: 0.8;
+}
+
 /* theme swatch grid — chips read --sl-* vars live so the nav dots
    recolor the whole table */
 .sl-sw-group {
