@@ -66,7 +66,7 @@ onUnmounted(() => document.removeEventListener("click", onClickOutside));
           @click="open = !open"
         >
           <span class="sl-theme-dot" :style="{ '--dot': active?.color }" />
-          <span>{{ active?.label }}</span>
+          <span class="sl-theme-name">{{ active?.label }}</span>
           <svg
             class="sl-theme-caret"
             width="12"
