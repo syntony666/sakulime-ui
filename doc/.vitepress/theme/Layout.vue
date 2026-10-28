@@ -40,12 +40,16 @@ const onClickOutside = (e: MouseEvent) => {
 };
 
 // data-theme drives the sakulime token cascade — SSR has no document,
-// so set it post-mount and on every toggle
+// so set it post-mount and on every toggle; the choice persists in
+// localStorage (restored pre-paint by the head script in config.mts)
 onMounted(() => {
+  const saved = localStorage.getItem("sl-theme");
+  if (saved && themes.some((t) => t.value === saved)) theme.value = saved;
   watch(
     theme,
     (v) => {
       document.documentElement.dataset.theme = v;
+      localStorage.setItem("sl-theme", v);
     },
     { immediate: true },
   );

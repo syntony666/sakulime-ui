@@ -8,6 +8,15 @@ export default defineConfig({
   description: "CSS-first design system",
   lang: "zh-TW",
   appearance: false,
+  head: [
+    // restore the saved theme before first paint — without this the page
+    // flashes sakulime for a frame before hydration sets data-theme
+    [
+      "script",
+      {},
+      "try{var t=localStorage.getItem('sl-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}",
+    ],
+  ],
   srcDir: "doc",
   outDir: "site",
   vite: {
