@@ -5,8 +5,9 @@ export default defineConfig({
   description: "CSS-first design system",
   lang: "zh-TW",
   appearance: false,
+  srcDir: "src",
   outDir: "site",
-  srcExclude: ["src/**", "site/**"],
+  srcExclude: ["stories/**"],
   themeConfig: {
     outline: false,
     aside: false,
