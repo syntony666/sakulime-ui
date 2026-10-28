@@ -22,7 +22,7 @@
   },
   "include": [
     "packages/*/src",
-    "doc/src",
-    "doc/.storybook"
+    "doc/stories",
+    "doc/.vitepress"
   ]
 }
