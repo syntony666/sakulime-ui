@@ -13,6 +13,8 @@
   --vp-font-family-base:
     "Inter", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei",
     sans-serif;
+  --vp-font-family-mono:
+    "JetBrains Mono", "Noto Sans TC", ui-monospace, monospace;
 
   --vp-c-bg: var(--sl-bg);
   --vp-c-bg-alt: var(--sl-surface);

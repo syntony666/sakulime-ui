@@ -11,6 +11,7 @@
     "deploy": "npm run site && wrangler deploy"
   },
   "devDependencies": {
+    "@fontsource/jetbrains-mono": "^5.3.0",
     "@fontsource/noto-sans-tc": "^5.3.1",
     "@sakulime-ui/core": "*",
     "@sakulime-ui/layout": "*",
