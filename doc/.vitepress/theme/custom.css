@@ -196,7 +196,7 @@ body::before {
 .sl-play-fields {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--sl-lg) var(--sl-2xl);
+  gap: var(--sl-lg) 3rem;
   padding: var(--sl-md) var(--sl-lg);
   background: color-mix(in srgb, var(--sl-text) 4%, var(--sl-surface));
   border: 1px solid var(--sl-border);
