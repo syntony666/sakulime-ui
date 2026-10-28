@@ -101,10 +101,13 @@ body::before {
   background: var(--sl-primary-bg);
 }
 
-/* VP draws the nav title's border-bottom at y=63 and the .divider-line
-   in flow one pixel lower — overlap them into a single seam line */
-.VPNavBar .divider {
-  margin-top: -1px;
+/* VP draws the nav title's border-bottom one pixel above the
+   .divider-line — trade the border for an outset shadow on the same
+   band so both sides of the seam meet (pulling the divider up hides it
+   behind the content background) */
+.VPNavBarTitle.has-sidebar .title {
+  border-bottom: none;
+  box-shadow: 0 1px var(--vp-c-divider);
 }
 
 /* doc column rides the layout system's own container scale — aside is
