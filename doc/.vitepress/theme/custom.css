@@ -49,12 +49,12 @@
   --vp-c-success-3: var(--sl-ok);
   --vp-c-success-soft: color-mix(in oklab, var(--sl-ok) 12%, transparent);
   --vp-c-important-1: oklch(from var(--sl-secondary) calc(l - 0.28) c h);
-  --vp-c-important-2: var(--sl-secondary);
-  --vp-c-important-3: var(--sl-secondary);
+  --vp-c-important-2: oklch(from var(--sl-secondary) calc(l - 0.36) c h);
+  --vp-c-important-3: oklch(from var(--sl-secondary) calc(l - 0.28) c h);
   --vp-c-important-soft: color-mix(in oklab, var(--sl-secondary) 20%, transparent);
   --vp-c-warning-1: oklch(from var(--sl-warn) calc(l - 0.28) c h);
-  --vp-c-warning-2: var(--sl-warn);
-  --vp-c-warning-3: var(--sl-warn);
+  --vp-c-warning-2: oklch(from var(--sl-warn) calc(l - 0.36) c h);
+  --vp-c-warning-3: oklch(from var(--sl-warn) calc(l - 0.28) c h);
   --vp-c-warning-soft: color-mix(in oklab, var(--sl-warn) 24%, transparent);
   --vp-c-danger-1: var(--sl-danger);
   --vp-c-danger-2: var(--sl-danger);
