@@ -17,10 +17,15 @@
   --vp-c-text-2: var(--sl-text-secondary);
   --vp-c-text-3: var(--sl-text-muted);
 
-  --vp-c-brand-1: var(--sl-primary);
-  --vp-c-brand-2: color-mix(in srgb, var(--sl-primary) 80%, var(--sl-text));
-  --vp-c-brand-3: var(--sl-primary);
-  --vp-c-brand-soft: color-mix(in srgb, var(--sl-primary) 14%, transparent);
+  /* interactive accent = the palette's readable-accent role: primary is
+     the decorative face (buttons, hero, hairline) where its lightness
+     is intended; text-accent is its readable sibling for links, code,
+     and selected states. raw text-accent sits at 4.0 on sakulime, so
+     -1 takes one 0.06 oklch step down to AA, -2 another for hover */
+  --vp-c-brand-1: oklch(from var(--sl-text-accent) calc(l - 0.06) c h);
+  --vp-c-brand-2: oklch(from var(--sl-text-accent) calc(l - 0.14) c h);
+  --vp-c-brand-3: oklch(from var(--sl-text-accent) calc(l - 0.06) c h);
+  --vp-c-brand-soft: color-mix(in oklab, var(--sl-text-accent) 10%, transparent);
 
   --vp-c-border: var(--sl-border);
   --vp-c-divider: var(--sl-border);
@@ -28,13 +33,45 @@
 
   --vp-c-default-soft: var(--sl-surface);
 
+  /* admonitions → status tokens; decorative-scale hues (warn,
+     secondary) get an oklch-lowered -1 for the title text, same rule
+     as brand-2 */
+  --vp-c-tip-1: var(--sl-text-accent);
+  --vp-c-tip-2: var(--sl-text-accent);
+  --vp-c-tip-3: var(--sl-text-accent);
+  --vp-c-tip-soft: var(--vp-c-brand-soft);
+  --vp-c-note-1: var(--sl-text-accent);
+  --vp-c-note-2: var(--sl-text-accent);
+  --vp-c-note-3: var(--sl-text-accent);
+  --vp-c-note-soft: var(--vp-c-brand-soft);
+  --vp-c-success-1: var(--sl-ok);
+  --vp-c-success-2: var(--sl-ok);
+  --vp-c-success-3: var(--sl-ok);
+  --vp-c-success-soft: color-mix(in oklab, var(--sl-ok) 12%, transparent);
+  --vp-c-important-1: oklch(from var(--sl-secondary) calc(l - 0.28) c h);
+  --vp-c-important-2: var(--sl-secondary);
+  --vp-c-important-3: var(--sl-secondary);
+  --vp-c-important-soft: color-mix(in oklab, var(--sl-secondary) 20%, transparent);
+  --vp-c-warning-1: oklch(from var(--sl-warn) calc(l - 0.28) c h);
+  --vp-c-warning-2: var(--sl-warn);
+  --vp-c-warning-3: var(--sl-warn);
+  --vp-c-warning-soft: color-mix(in oklab, var(--sl-warn) 24%, transparent);
+  --vp-c-danger-1: var(--sl-danger);
+  --vp-c-danger-2: var(--sl-danger);
+  --vp-c-danger-3: var(--sl-danger);
+  --vp-c-danger-soft: color-mix(in oklab, var(--sl-danger) 10%, transparent);
+  --vp-c-caution-1: var(--sl-danger);
+  --vp-c-caution-2: var(--sl-danger);
+  --vp-c-caution-3: var(--sl-danger);
+  --vp-c-caution-soft: color-mix(in oklab, var(--sl-danger) 10%, transparent);
+
   --vp-nav-bg-color: var(--sl-bg);
   --vp-sidebar-bg-color: var(--sl-bg);
   --vp-local-nav-bg-color: var(--sl-bg);
 
   --vp-code-bg: var(--sl-surface);
   --vp-code-block-bg: var(--sl-surface);
-  --vp-code-color: var(--sl-text-accent);
+  --vp-code-color: var(--vp-c-brand-1);
 
   /* home hero — brand gradient name + themed action buttons */
   --vp-home-hero-name-color: transparent;
@@ -45,10 +82,8 @@
   );
   --vp-button-brand-text: var(--sl-primary-fg);
   --vp-button-brand-bg: var(--sl-primary);
-  --vp-button-brand-hover-bg: color-mix(
-    in srgb,
-    var(--sl-primary) 82%,
-    var(--sl-text)
+  --vp-button-brand-hover-bg: oklch(
+    from var(--sl-primary) calc(l - 0.08) c h
   );
 }
 
@@ -182,6 +217,24 @@ body::before {
   grid-column: 1 / -1;
   color: var(--sl-text-muted);
   font-size: 12px;
+}
+
+/* selected sidebar item — flat tinted row. The tint grows 12px into
+   the left gutter (negative margin + equal padding, so the text itself
+   never moves) and the accent bar sits inside that gap — bar inside
+   the tint, clear of the first character */
+.VPSidebarItem.is-active > .item > .link {
+  background-color: var(--vp-c-brand-soft);
+  box-shadow: inset 3px 0 0 var(--vp-c-brand-1);
+  margin-left: -12px;
+  padding-left: 12px;
+}
+
+/* active text stays the same muted color as siblings — the bar and
+   tinted row carry the selection signal; extra classes match VP's
+   own selector weight */
+.VPSidebarItem.is-active.is-link > .item > .VPLink.link > .text {
+  color: var(--vp-c-text-2);
 }
 
 /* sub-label next to a main title — h1 "Button *按鈕*" only */
