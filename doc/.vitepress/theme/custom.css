@@ -101,6 +101,12 @@ body::before {
   background: var(--sl-primary-bg);
 }
 
+/* VP draws the nav title's border-bottom at y=63 and the .divider-line
+   in flow one pixel lower — overlap them into a single seam line */
+.VPNavBar .divider {
+  margin-top: -1px;
+}
+
 /* doc column rides the layout system's own container scale — aside is
    off (themeConfig.aside), so the reclaimed space goes to content */
 .VPDoc .content-container {
