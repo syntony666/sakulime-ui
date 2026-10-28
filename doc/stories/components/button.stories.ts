@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/html-vite";
+import type { Meta, StoryObj } from "../util/types";
 import { showMarkup } from "../util/docs-source";
 import { axis, attr, label } from "../util/axis";
 
@@ -32,6 +32,8 @@ const meta = {
   tags: ["!dev"],
   parameters: {
     docs: {
+      // opt back into the TOC (disabled globally for prose pages)
+      toc: { disable: false },
       source: {
         // evaluated markup, not the .map() render source
         type: "dynamic",

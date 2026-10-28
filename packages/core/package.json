@@ -6,6 +6,7 @@
     "url": "git+https://github.com/syntony666/sakulime-ui.git",
     "directory": "packages/core"
   },
+  "homepage": "https://sakulime-ui.syntony666.com",
   "type": "module",
   "publishConfig": {
     "access": "public"

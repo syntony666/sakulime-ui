@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/html-vite";
+import type { Meta, StoryObj } from "../util/types";
 import { showMarkup } from "../util/docs-source";
 
 const meta = {
