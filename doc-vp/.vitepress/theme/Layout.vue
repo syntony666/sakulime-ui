@@ -7,7 +7,7 @@ const theme = ref("sakulime");
 
 // each dot is the theme's signature primary — pick a color, get a theme
 const themes = [
-  { value: "sakulime", label: "Sakulime", color: "#ff5980" },
+  { value: "sakulime", label: "Sakulime", color: "#f4b160" },
   { value: "terra", label: "Terra", color: "#c05621" },
 ];
 

@@ -89,11 +89,11 @@ body::before {
   border-radius: var(--sl-xs);
 }
 
-/* table's second color — zebra rows and the header lift one step
-   above the page bg (surface is the raised tier on the sl ladder) */
+/* table's second color — zebra rows and the header take the
+   secondary tint for a warmer accent against the page */
 .vp-doc tr:nth-child(2n),
 .vp-doc th {
-  background-color: var(--sl-surface);
+  background-color: var(--sl-secondary-bg);
 }
 
 /* demo chrome — demo CONTENT styles live in demo-content.css, injected
@@ -120,22 +120,21 @@ body::before {
   margin: 0;
   padding: var(--sl-md) var(--sl-lg);
   border-top: 1px solid var(--sl-border);
-  background: var(--sl-bg);
+  background: color-mix(in srgb, var(--sl-text) 10%, var(--sl-bg));
   font-size: 13px;
   overflow-x: auto;
 }
 
-/* playground controls */
+/* playground controls — standalone panel below the demo card */
 .sl-play-fields {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: var(--sl-sm) var(--sl-md);
   padding: var(--sl-md) var(--sl-lg);
+  background: color-mix(in srgb, var(--sl-text) 4%, var(--sl-surface));
   border: 1px solid var(--sl-border);
-  border-top: 0;
-  border-radius: 0 0 var(--sl-md) var(--sl-md);
-  margin: -16px 0 16px;
-  padding-top: var(--sl-md);
+  border-radius: var(--sl-md);
+  margin: 8px 0 16px;
 }
 
 .sl-play-field {
