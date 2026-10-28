@@ -1,12 +1,10 @@
-import { Meta, Canvas, Controls } from "@storybook/addon-docs/blocks";
-import * as ButtonStories from "./button.stories";
+<script setup>
+import * as ButtonStories from "../../stories/components/button.stories";
+</script>
 
-<Meta of={ButtonStories} />
+# Button *按鈕*
 
-# Button 按鈕
-
-<Canvas of={ButtonStories.Button} sourceState="shown" />
-<Controls of={ButtonStories.Button} />
+<Playground :meta="ButtonStories.default" :render="ButtonStories.Button.render" />
 
 ## 顏色 `sl-tone`
 
@@ -18,11 +16,11 @@ import * as ButtonStories from "./button.stories";
 
 ### 實心版本
 
-<Canvas of={ButtonStories.Tones} sourceState="shown" />
+<Demo :render="ButtonStories.Tones.render" />
 
 ### 框線版本
 
-<Canvas of={ButtonStories.TonesInvert} sourceState="shown" />
+<Demo :render="ButtonStories.TonesInvert.render" />
 
 ## 型態 `sl-variant`
 
@@ -31,7 +29,7 @@ import * as ButtonStories from "./button.stories";
 - `underline`：只有底線
 - `ghost`：沒底沒框，只有字
 
-<Canvas of={ButtonStories.Variants} sourceState="shown" />
+<Demo :render="ButtonStories.Variants.render" />
 
 ## 尺寸 `sl-size`
 
@@ -39,7 +37,7 @@ import * as ButtonStories from "./button.stories";
 - `md`：一般（預設值）
 - `lg`：大
 
-<Canvas of={ButtonStories.Sizes} sourceState="shown" />
+<Demo :render="ButtonStories.Sizes.render" />
 
 ## 圓角 `sl-radius`
 
@@ -49,4 +47,4 @@ import * as ButtonStories from "./button.stories";
 - `lg`：很圓
 - `full`：膠囊形，全圓到底
 
-<Canvas of={ButtonStories.Radius} sourceState="shown" />
+<Demo :render="ButtonStories.Radius.render" />

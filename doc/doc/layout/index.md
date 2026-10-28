@@ -1,7 +1,3 @@
-import { Meta } from "@storybook/addon-docs/blocks";
-
-<Meta title="Layout/說明" />
-
 # 排版工具
 
 只需要排版工具時：

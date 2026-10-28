@@ -1,7 +1,3 @@
-import { Meta } from "@storybook/addon-docs/blocks";
-
-<Meta title="開始使用" />
-
 # Sakulime UI
 
 > 用最簡單的方式，讓你的介面變得不再單調
@@ -27,27 +23,28 @@ import "sakulime-ui/sakulime.min.css";
 ```
 
 個別套件引用，請見各套件及主題說明
-- 元件，含主題色系：[`@sakulime-ui/core`](?path=/docs/core-說明--docs)
-- 排版工具：[`@sakulime-ui/layout`](?path=/docs/layout-說明--docs)
-- 主題色系：[`@sakulime-ui/theme`](?path=/docs/主題--docs)
+
+- 元件，含主題色系：[`@sakulime-ui/core`](/core/button)
+- 排版工具：[`@sakulime-ui/layout`](/layout/container)
+- 主題色系：[`@sakulime-ui/theme`](/theme)
 
 ## 尺寸及大小
 
 一條通用 scale，間距、圓角、字級都從這裡挑。值是 rem，px 欄是基準 16px 時的換算：
 
-| 變數 | rem | px |
-|---|---|---|
-| `--sl-xs` | 0.25rem | 4px |
-| `--sl-sm` | 0.5rem | 8px |
-| `--sl-md` | 0.75rem | 12px |
-| `--sl-lg` | 1rem | 16px |
-| `--sl-xl` | 1.25rem | 20px |
-| `--sl-2xl` | 1.5rem | 24px |
-| `--sl-3xl` | 2rem | 32px |
-| `--sl-4xl` | 2.5rem | 40px |
-| `--sl-5xl` | 3rem | 48px |
-| `--sl-container-sm` | 45rem | 720px |
-| `--sl-container-md` | 60rem | 960px |
-| `--sl-container-lg` | 75rem | 1200px |
+| 變數               | rem     | px     |
+| ------------------ | ------- | ------ |
+| `--sl-xs`          | 0.25rem | 4px    |
+| `--sl-sm`          | 0.5rem  | 8px    |
+| `--sl-md`          | 0.75rem | 12px   |
+| `--sl-lg`          | 1rem    | 16px   |
+| `--sl-xl`          | 1.25rem | 20px   |
+| `--sl-2xl`         | 1.5rem  | 24px   |
+| `--sl-3xl`         | 2rem    | 32px   |
+| `--sl-4xl`         | 2.5rem  | 40px   |
+| `--sl-5xl`         | 3rem    | 48px   |
+| `--sl-container-sm` | 45rem   | 720px  |
+| `--sl-container-md` | 60rem   | 960px  |
+| `--sl-container-lg` | 75rem   | 1200px |
 
 表上沒有的值，在自己的 CSS 裡直接寫數字，不用硬湊最近的階。

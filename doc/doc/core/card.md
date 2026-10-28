@@ -1,17 +1,12 @@
-import { Meta, Canvas, Controls } from "@storybook/addon-docs/blocks";
-import * as CardStories from "./card.stories";
+<script setup>
+import * as CardStories from "../../stories/components/card.stories";
+</script>
 
-<Meta of={CardStories} />
-
-# Card 卡片
+# Card *卡片*
 
 帶邊框的內容容器，有底色、細框線、圓角和內距。可以只放文字，也能加邊緣標記和角落標記。
 
-<Canvas of={CardStories.Card} sourceState="shown" />
-<Controls
-  of={CardStories.Card}
-  include={["sl-pad", "sl-radius", "sl-variant", "sl-indicate", "sl-tone", "raised"]}
-/>
+<Playground :meta="CardStories.default" :render="CardStories.Card.render" />
 
 ## 屬性
 
@@ -23,7 +18,7 @@ import * as CardStories from "./card.stories";
 - `md`：一般（預設值）
 - `lg`：大
 
-<Canvas of={CardStories.Pads} sourceState="shown" />
+<Demo :render="CardStories.Pads.render" />
 
 ### 圓角 `sl-radius`
 
@@ -32,13 +27,13 @@ import * as CardStories from "./card.stories";
 - `md`：一般圓角（預設值）
 - `lg`：很圓
 
-<Canvas of={CardStories.Radius} sourceState="shown" />
+<Demo :render="CardStories.Radius.render" />
 
 ### 型態 `sl-variant`
 
 - `hollow`：虛線描邊，常用於上傳或空白狀態
 
-<Canvas of={CardStories.Variants} sourceState="shown" />
+<Demo :render="CardStories.Variants.render" />
 
 ### 標記 `sl-indicate` + `sl-tone`
 
@@ -46,13 +41,13 @@ import * as CardStories from "./card.stories";
 
 - `top` / `bottom` / `start` / `end`
 
-<Canvas of={CardStories.Indicated} sourceState="shown" />
+<Demo :render="CardStories.Indicated.render" />
 
 ### 浮起 `sl-raised`
 
 加陰影讓卡片看起來浮起。
 
-<Canvas of={CardStories.Raised} sourceState="shown" />
+<Demo :render="CardStories.Raised.render" />
 
 ## 子元素
 
@@ -69,8 +64,7 @@ import * as CardStories from "./card.stories";
 </div>
 ```
 
-<Canvas of={CardStories.Corner} sourceState="shown" />
-<Controls of={CardStories.Corner} include={["sl-tone", "sl-radius"]} />
+<Demo :render="CardStories.Corner.render" :args="{ radius: '-', tone: '-' }" />
 
 顏色跟著 `sl-tone` 走（預設 primary），寫在卡片上整張統一，寫在標記上只改那一個：
 
@@ -99,5 +93,5 @@ import * as CardStories from "./card.stories";
 </span>
 ```
 
-<Canvas of={CardStories.CornerPositions} sourceState="shown" />
-<Canvas of={CardStories.CornerTypes} sourceState="shown" />
+<Demo :render="CardStories.CornerPositions.render" />
+<Demo :render="CardStories.CornerTypes.render" />

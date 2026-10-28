@@ -32,8 +32,6 @@
     "build": "tsc -b && npm run build -w @sakulime-ui/core && node scripts/build.mjs",
     "lint": "eslint .",
     "preview": "npm run preview -w sakulime-doc",
-    "storybook": "npm run storybook -w sakulime-doc",
-    "build-storybook": "npm run build-storybook -w sakulime-doc",
     "site": "npm run site -w sakulime-doc",
     "deploy": "npm run deploy -w sakulime-doc",
     "release": "changeset publish"
@@ -43,11 +41,8 @@
     "@eslint/js": "^10.0.1",
     "@types/node": "^24.12.3",
     "eslint": "^10.3.0",
-    "eslint-plugin-mdx": "^3.8.2",
-    "eslint-plugin-storybook": "^10.4.6",
     "globals": "^17.6.0",
     "typescript": "~6.0.2",
-    "typescript-eslint": "^8.59.2",
-    "vite": "^8.0.12"
+    "typescript-eslint": "^8.59.2"
   }
 }
