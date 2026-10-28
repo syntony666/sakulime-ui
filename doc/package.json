@@ -11,11 +11,11 @@
     "deploy": "npm run site && wrangler deploy"
   },
   "devDependencies": {
+    "@fontsource/noto-sans-tc": "^5.3.1",
     "@sakulime-ui/core": "*",
     "@sakulime-ui/layout": "*",
     "@sakulime-ui/shared": "*",
     "@sakulime-ui/theme": "*",
-    "@storybook/html-vite": "^10.4.6",
     "vitepress": "^1.6.4",
     "wrangler": "^4.45.0"
   }
