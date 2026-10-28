@@ -27,10 +27,15 @@
 .sbdocs.sbdocs-wrapper li {
   color: var(--sl-text);
 }
-/* arg tables inside docs pages (preview side — manager panel is covered
-   by the managerHead style, which can't reach this document) */
+/* table headers default to textColor — mute them so they read as
+   column labels, not nav text (docs pages only; the Controls panel in
+   the manager keeps its own chrome styles) */
 .docblock-argstable-head th {
   color: var(--sl-text-muted);
+}
+/* disabled TOC still renders an empty aside spacer — hide it */
+.sbdocs-wrapper > aside:not(:has(.toc-wrapper)) {
+  display: none;
 }
 .sbdocs.sbdocs-wrapper a {
   color: var(--sl-primary);

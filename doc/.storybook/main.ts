@@ -2,7 +2,7 @@ import type { StorybookConfig } from '@storybook/html-vite';
 import remarkGfm from "remark-gfm";
 import { syncThemeValues } from "./gen-theme-values";
 
-const tokens = syncThemeValues();
+syncThemeValues();
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.stories.@(js|ts)", "../src/**/*.mdx"],
@@ -24,22 +24,16 @@ const config: StorybookConfig = {
     defaultName: "總覽",
   },
   staticDirs: ["../public"],
+  // the template's own <title> always wins document order — override at
+  // runtime (manager gets a hardcoded " - Storybook" suffix; the iframe's
+  // is hardcoded "Storybook")
   managerHead: (head) => `${head}
-    <title>Sakulime UI</title>
-    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />`,
-  // docs pages render inside the preview iframe — managerHead styles never reach them
+    <script>document.title = "Sakulime UI";</script>`,
   previewHead: (head) => `${head}
-    <style>
-      /* table headers default to textColor like the sidebar — mute them to
-         --sl-text-muted so they read as column labels, not nav text */
-      .docblock-argstable-head th { color: ${tokens["text-muted"]}; }
-
-      /* widen the built-in docs TOC (default 10rem) */
-      aside:has(.toc-wrapper),
-      nav:has(.toc-wrapper) { width: 14rem; }
-
-      /* disabled TOC still renders an empty aside spacer — hide it */
-      .sbdocs-wrapper > aside:not(:has(.toc-wrapper)) { display: none; }
-    </style>`,
+    <script>document.title = "Sakulime UI";</script>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />`,
 };
-export default config;
+// `title` is a runtime preset outside the typed config — it feeds the
+// manager's <title> element ("Sakulime UI - Storybook"; the script above
+// removes the suffix at runtime)
+export default { ...config, title: "Sakulime UI" };

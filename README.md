@@ -6,7 +6,7 @@
 
 [![view - Documentation](https://img.shields.io/badge/view-Documentation-f97316?style=for-the-badge)](https://sakulime-ui.syntony666.com)
 
-A CSS-first design system with no framework runtime — React, Vue, Svelte, or plain HTML all work. Two things only: `sl-*` attributes for components, state, and layout, plus `--sl-*` variables for color and size; `class` stays entirely yours. `sakulime-ui` ships everything in one file; `@sakulime-ui/core`, `@sakulime-ui/layout`, and `@sakulime-ui/theme` are the individual entries; `doc` is the Storybook doc site deployed to Cloudflare Workers.
+A CSS-first design system with no framework runtime — React, Vue, Svelte, or plain HTML all work. Two things only: `sl-*` attributes for components, state, and layout, plus `--sl-*` variables for color and size; `class` stays entirely yours. `sakulime-ui` ships everything in one file; `@sakulime-ui/core`, `@sakulime-ui/layout`, and `@sakulime-ui/theme` are the individual entries; `doc` is the Sakulime UI doc site deployed to Cloudflare Workers.
 
 ## Usage
 
@@ -62,7 +62,7 @@ Day-to-day work lives on `release/x.y.z` (x.y.z is the target version — featur
 | `packages/core` | component entry: variables + themes + components → `index.min.css` / `index.min.js` |
 | `packages/layout` | layout entry: variables + layout → `index.min.css` |
 | `dist/sakulime.min.css` | everything: core bundle + layout |
-| `doc/` | Storybook doc site, deployed via Workers static assets (`doc/wrangler.toml`) |
+| `doc/` | Sakulime UI doc site, deployed via Workers static assets (`doc/wrangler.toml`) |
 
 Inside each package:
 
