@@ -226,7 +226,7 @@ body::before {
 }
 
 .sl-play-name {
-  font-family: monospace;
+  font-family: var(--vp-font-family-mono);
   font-weight: 600;
 }
 
@@ -234,6 +234,11 @@ body::before {
   grid-column: 1 / -1;
   color: var(--sl-text-muted);
   font-size: 12px;
+}
+
+.sl-play-desc code {
+  white-space: nowrap;
+  font-size: 0.95em;
 }
 
 /* selected sidebar item — flat tinted row. The tint grows 12px into

@@ -31,6 +31,11 @@ const fields = computed<Field[]>(() =>
     options: t.options,
   })),
 );
+
+// attr names in descriptions render as nowrap code spans — keeps tokens
+// like sl-card-corner from splitting across lines in the narrow column
+const descHtml = (desc?: string) =>
+  desc?.replace(/`?(sl-[\w-]+)`?/g, (_, m) => `<code>${m}</code>`) ?? "";
 </script>
 
 <template>
@@ -44,7 +49,7 @@ const fields = computed<Field[]>(() =>
         </select>
         <input v-else-if="f.kind === 'boolean'" v-model="args[f.key]" type="checkbox" />
         <input v-else v-model="args[f.key]" type="text" />
-        <span class="sl-play-desc">{{ f.desc }}</span>
+        <span class="sl-play-desc" v-html="descHtml(f.desc)" />
       </label>
     </div>
   </div>
