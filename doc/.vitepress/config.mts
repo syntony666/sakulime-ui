@@ -1,5 +1,7 @@
 import { defineConfig } from "vitepress";
 
+const zh = (t: string) => `<em>${t}</em>`;
+
 export default defineConfig({
   title: "Sakulime UI",
   description: "CSS-first design system",
@@ -23,15 +25,15 @@ export default defineConfig({
         text: "Core",
         items: [
           { text: "說明", link: "/core/" },
-          { text: 'Button <span class="sl-sub">按鈕</span>', link: "/core/button" },
-          { text: 'Card <span class="sl-sub">卡片</span>', link: "/core/card" },
+          { text: `Button ${zh("按鈕")}`, link: "/core/button" },
+          { text: `Card ${zh("卡片")}`, link: "/core/card" },
         ],
       },
       {
         text: "Layout",
         items: [
           { text: "說明", link: "/layout/" },
-          { text: 'Container <span class="sl-sub">容器</span>', link: "/layout/container" },
+          { text: `Container ${zh("容器")}`, link: "/layout/container" },
         ],
       },
     ],

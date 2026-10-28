@@ -195,7 +195,8 @@ body::before {
 
 /* sidebar sub-label — same size; dims whatever color the item
    currently is, so active states stay in family */
-.sl-sub {
+.VPSidebarItem em {
+  font-style: normal;
   opacity: 0.8;
 }
 
