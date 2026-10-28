@@ -7,7 +7,18 @@ export default defineConfig({
   appearance: false,
   themeConfig: {
     outline: false,
+    aside: false,
+    logo: "/favicon.svg",
     nav: [],
-    sidebar: [{ text: "開始使用", link: "/" }],
+    socialLinks: [
+      { icon: "github", link: "https://github.com/syntony666/sakulime-ui" },
+    ],
+    sidebar: [
+      { text: "開始使用", link: "/introduction" },
+      {
+        text: "Core",
+        items: [{ text: "Button 按鈕", link: "/button" }],
+      },
+    ],
   },
 });
