@@ -3,10 +3,6 @@
    from the shared tone axis. */
 @layer attrs {
   /* pad — --sl-pad slot */
-  [sl-pad="none"] {
-    --sl-pad: 0;
-  }
-
   [sl-pad="sm"] {
     --sl-pad: var(--sl-md);
   }
@@ -23,15 +19,6 @@
   /* shared-axis default on card */
   [sl-card]:not([sl-radius]) {
     --sl-radius: var(--sl-sm);
-  }
-
-  /* horizontal — media becomes a flush column */
-  [sl-card][sl-variant="horizontal"] {
-    display: flex;
-  }
-
-  [sl-card][sl-variant="horizontal"] > [sl-card-media] {
-    margin: calc(-1 * var(--sl-pad)) var(--sl-pad) calc(-1 * var(--sl-pad)) calc(-1 * var(--sl-pad));
   }
 
   /* hollow — dashed outline for empty/upload states */
@@ -56,6 +43,70 @@
 
   [sl-card][sl-indicate="end"] {
     border-inline-end: 3px solid var(--sl-tone-bg, var(--sl-primary));
+  }
+
+  /* corner — space-separated tokens: type (text-sm default, text-xs,
+     indicator) + position (end default, start). Quiet chip: tone-tinted
+     ink on a translucent tone wash. z-index keeps it above any pinned
+     or out-of-flow child regardless of DOM order. */
+  [sl-card-corner] {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    inset-inline-end: 0;
+    padding: 0 var(--sl-xs);
+    font-size: var(--sl-md);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.6;
+    color: var(--sl-tone-text, color-mix(in srgb, var(--sl-primary) 55%, var(--sl-text)));
+    background: color-mix(in srgb, var(--sl-tone-bg, var(--sl-primary)) 15%, transparent);
+    border-radius: var(--sl-xs);
+  }
+
+  [sl-card-corner~="start"] {
+    inset-inline-end: auto;
+    inset-inline-start: 0;
+  }
+
+  [sl-card-corner~="text-xs"] {
+    font-size: 0.625rem;
+  }
+
+  [sl-card-corner~="indicator"] {
+    top: var(--sl-sm);
+    inset-inline-end: var(--sl-sm);
+    width: var(--sl-sm);
+    height: var(--sl-sm);
+    padding: 0;
+    font-size: 0;
+    background: var(--sl-tone-bg, var(--sl-primary));
+    border-radius: 999px;
+  }
+
+  /* with graphic content the dot drops out — child svg/img becomes the icon */
+  [sl-card-corner~="indicator"]:has(> *) {
+    top: var(--sl-xs);
+    inset-inline-end: var(--sl-xs);
+    width: var(--sl-lg);
+    height: var(--sl-lg);
+    background: transparent;
+    border-radius: 0;
+  }
+
+  [sl-card-corner~="indicator"] > :is(svg, img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: var(--sl-tone-text, color-mix(in srgb, var(--sl-primary) 55%, var(--sl-text)));
+  }
+
+  [sl-card-corner~="indicator"][sl-card-corner~="start"] {
+    inset-inline-end: auto;
+    inset-inline-start: var(--sl-sm);
+  }
+
+  [sl-card-corner~="indicator"][sl-card-corner~="start"]:has(> *) {
+    inset-inline-start: var(--sl-xs);
   }
 
   /* raised — theme-aware shadow (reusable beyond card) */
