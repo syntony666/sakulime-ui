@@ -26,7 +26,7 @@ import "sakulime-ui/sakulime.min.css";
 
 - 元件，含主題色系：[`@sakulime-ui/core`](/button)
 - 排版工具：`@sakulime-ui/layout`
-- 主題色系：`@sakulime-ui/theme`
+- 主題色系：[`@sakulime-ui/theme`](/theme)
 
 ## 尺寸及大小
 
