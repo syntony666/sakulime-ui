@@ -178,16 +178,14 @@ body::before {
 }
 
 /* markup highlight — attribute names take the accent color, quoted
-   values get the accent pill (like the ts-button chip style) */
+   values get a thick dashed underline */
 .sl-demo-src .sl-hl-attr {
   color: var(--sl-text-accent);
 }
 
 .sl-demo-src .sl-hl-val {
-  padding: 0 0.3em;
-  border-radius: var(--sl-xs);
-  background: var(--sl-primary);
-  color: var(--sl-primary-fg);
+  text-decoration: underline dashed var(--sl-primary) 2px;
+  text-underline-offset: 3px;
 }
 
 /* playground controls — standalone panel below the demo card.
