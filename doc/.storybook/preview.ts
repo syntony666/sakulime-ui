@@ -14,7 +14,7 @@ addons.ready().then((channel) => {
 const preview: Preview = {
   parameters: {
     // docs chrome is themed independently from the manager — share the same theme
-    docs: { theme, toc: { disable: true, headingSelector: "h2, h3" } },
+    docs: { theme, toc: { disable: true } },
     options: {
       storySort: {
         order: [
