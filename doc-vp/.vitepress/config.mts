@@ -18,7 +18,7 @@ export default defineConfig({
       { text: "主題", link: "/theme" },
       {
         text: "Core",
-        items: [{ text: "Button 按鈕", link: "/button" }],
+        items: [{ text: 'Button <span class="sl-sub">按鈕</span>', link: "/button" }],
       },
     ],
   },
