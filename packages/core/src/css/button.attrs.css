@@ -10,13 +10,14 @@
   [sl-tone="primary"],
   [sl-button]:not([sl-tone]) {
     --sl-tone-bg: var(--sl-primary);
-    --sl-tone-text: color-mix(in srgb, var(--sl-primary) 55%, var(--sl-text));
+    --sl-tone-text: color-mix(in srgb, var(--sl-primary) 12%, var(--sl-text));
     --sl-tone-text-invert: var(--sl-primary-fg);
   }
 
   [sl-tone="secondary"] {
     --sl-tone-bg: var(--sl-secondary);
-    --sl-tone-text: var(--sl-secondary);
+    /* pale tone — mix toward text for a readable ink */
+    --sl-tone-text: color-mix(in srgb, var(--sl-secondary) 12%, var(--sl-text));
     --sl-tone-text-invert: var(--sl-secondary-fg);
   }
 
@@ -28,9 +29,9 @@
 
   [sl-tone="warning"] {
     --sl-tone-bg: var(--sl-warn);
-    --sl-tone-text: var(--sl-warn);
-    /* gold is a light tone — invert text needs dark ink, not near-white */
-    --sl-tone-text-invert: var(--sl-text);
+    --sl-tone-text: color-mix(in srgb, var(--sl-warn) 30%, var(--sl-text-strong));
+    /* golden tone — invert text needs dark ink, not near-white */
+    --sl-tone-text-invert: color-mix(in srgb, var(--sl-text-strong) 60%, black);
   }
 
   [sl-tone="danger"] {
