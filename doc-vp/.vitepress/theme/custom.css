@@ -184,6 +184,47 @@ body::before {
   font-size: 12px;
 }
 
+/* theme swatch grid — chips read --sl-* vars live so the nav dots
+   recolor the whole table */
+.sl-sw-group {
+  margin: 16px 0;
+}
+
+.sl-sw-label {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.sl-sw-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+.sl-sw-item {
+  display: flex;
+  width: 150px;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.sl-sw-chip {
+  display: block;
+  width: 140px;
+  height: 40px;
+  border-radius: var(--sl-xs);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.vp-doc .sl-sw-name {
+  width: 140px;
+  display: inline-block;
+  font-size: 11px;
+  padding: 4px 6px;
+  white-space: nowrap;
+}
+
 /* theme switcher — two signature-color dots; the active one gets a ring */
 .sl-theme-switch {
   display: inline-flex;

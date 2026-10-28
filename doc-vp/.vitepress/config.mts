@@ -15,6 +15,7 @@ export default defineConfig({
     ],
     sidebar: [
       { text: "開始使用", link: "/introduction" },
+      { text: "主題", link: "/theme" },
       {
         text: "Core",
         items: [{ text: "Button 按鈕", link: "/button" }],
