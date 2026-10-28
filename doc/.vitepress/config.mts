@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "vitepress";
 
 const zh = (t: string) => `<em>${t}</em>`;
@@ -7,9 +8,11 @@ export default defineConfig({
   description: "CSS-first design system",
   lang: "zh-TW",
   appearance: false,
-  srcDir: "src",
+  srcDir: "doc",
   outDir: "site",
-  srcExclude: ["stories/**"],
+  vite: {
+    publicDir: fileURLToPath(new URL("../public", import.meta.url)),
+  },
   themeConfig: {
     outline: false,
     aside: false,

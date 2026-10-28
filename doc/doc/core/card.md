@@ -1,5 +1,5 @@
 <script setup>
-import * as CardStories from "../stories/components/card.stories";
+import * as CardStories from "../../stories/components/card.stories";
 </script>
 
 # Card *卡片*
