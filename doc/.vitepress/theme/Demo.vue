@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from "vue";
-import { showMarkup } from "../../stories/util/docs-source";
+import { highlightMarkup } from "../../stories/util/docs-source";
 import demoCss from "./demo-content.css?inline";
 
 const props = withDefaults(
@@ -13,7 +13,7 @@ const props = withDefaults(
 );
 
 const html = computed(() => props.render(props.args));
-const source = computed(() => showMarkup(html.value));
+const source = computed(() => highlightMarkup(html.value));
 const host = ref<HTMLElement | null>(null);
 
 // render inside a shadow root — the page's unlayered resets would
@@ -31,6 +31,6 @@ onMounted(() => {
 <template>
   <div class="sl-demo">
     <div ref="host" class="sl-demo-stage" />
-    <pre v-if="code" class="sl-demo-src"><code>{{ source }}</code></pre>
+    <pre v-if="code" class="sl-demo-src"><code v-html="source"></code></pre>
   </div>
 </template>

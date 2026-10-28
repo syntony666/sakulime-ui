@@ -172,9 +172,22 @@ body::before {
   margin: 0;
   padding: var(--sl-md) var(--sl-lg);
   border-top: 1px solid var(--sl-border);
-  background: color-mix(in srgb, var(--sl-text) 10%, var(--sl-bg));
+  background: transparent;
   font-size: 13px;
   overflow-x: auto;
+}
+
+/* markup highlight — attribute names take the accent color, quoted
+   values get the accent pill (like the ts-button chip style) */
+.sl-demo-src .sl-hl-attr {
+  color: var(--sl-text-accent);
+}
+
+.sl-demo-src .sl-hl-val {
+  padding: 0 0.3em;
+  border-radius: var(--sl-xs);
+  background: var(--sl-primary);
+  color: var(--sl-primary-fg);
 }
 
 /* playground controls — standalone panel below the demo card.
