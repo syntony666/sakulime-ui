@@ -8,13 +8,13 @@ type CardArgs = {
   variant: string;
   indicate: string;
   tone: string;
+
   raised: boolean;
-  media: boolean;
 };
 
-const PADS = ["-", "none", "sm", "md", "lg"];
-const RADII = ["-", "none", "sm", "md", "lg", "full"];
-const VARIANTS = ["-", "horizontal", "hollow"];
+const PADS = ["-", "sm", "md", "lg"];
+const RADII = ["-", "none", "sm", "md", "lg"];
+const VARIANTS = ["-", "hollow"];
 const INDICATES = ["-", "top", "bottom", "start", "end"];
 const CORNERS = ["-", "start", "end"];
 const CORNER_TYPES = ["-", "text-xs", "text-sm", "indicator"];
@@ -49,8 +49,8 @@ const meta = {
     variant: "-",
     indicate: "-",
     tone: "-",
+
     raised: false,
-    media: false,
   },
   argTypes: {
     pad: axisArg("sl-pad", "內距", "md", PADS),
@@ -68,21 +68,14 @@ const meta = {
       table: { type: {}, defaultValue: { summary: "false" } },
       control: "boolean",
     },
-    media: {
-      description: "貼邊圖片 `sl-card-media`",
-      table: { type: {}, defaultValue: { summary: "false" } },
-      control: "boolean",
-    },
   },
 } satisfies Meta<CardArgs>;
 
 export default meta;
 type Story = StoryObj<CardArgs>;
 
-const media = `<div sl-card-media><img src="https://picsum.photos/seed/sakulime/320/160" alt="" /></div>`;
-
-const card = (attrs: string, content: string) =>
-  `<div sl-card${attrs} style="max-width: 320px">${content}</div>`;
+const card = (attrs: string, content: string, w = 320) =>
+  `<div sl-card${attrs} style="width: ${w}px">${content}</div>`;
 
 // one card per axis value
 const byAxis = (name: string) => (v: string) =>
@@ -98,7 +91,6 @@ export const Card: Story = {
     attr("sl-tone", args.tone) +
     (args.raised ? " sl-raised" : "") +
     ` style="max-width: 360px">` +
-    (args.media ? media : "") +
     `<div><strong>卡片標題</strong><p>卡片內容文字，描述這張卡片在展示什麼。</p></div>` +
     `</div>`,
 };
@@ -112,14 +104,7 @@ export const Radius: Story = {
 };
 
 export const Variants: Story = {
-  render: () =>
-    axis(VARIANTS, (v) =>
-      card(
-        attr("sl-variant", v),
-        (v === "horizontal" ? media : "") +
-          `<div><strong>${label(v)}</strong><p>內容文字</p></div>`,
-      ),
-    ),
+  render: () => axis(VARIANTS, byAxis("sl-variant")),
 };
 
 export const Indicated: Story = {
@@ -134,11 +119,6 @@ export const Indicated: Story = {
 
 export const Raised: Story = {
   render: () => card(" sl-raised", `<strong>Raised</strong><p>帶陰影的浮起卡片</p>`),
-};
-
-export const WithMedia: Story = {
-  render: () =>
-    card("", media + `<div><strong>連結預覽</strong><p>貼邊圖片加內容</p></div>`),
 };
 
 const cornerIcon =

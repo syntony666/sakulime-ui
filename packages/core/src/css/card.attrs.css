@@ -3,10 +3,6 @@
    from the shared tone axis. */
 @layer attrs {
   /* pad — --sl-pad slot */
-  [sl-pad="none"] {
-    --sl-pad: 0;
-  }
-
   [sl-pad="sm"] {
     --sl-pad: var(--sl-md);
   }
@@ -23,15 +19,6 @@
   /* shared-axis default on card */
   [sl-card]:not([sl-radius]) {
     --sl-radius: var(--sl-sm);
-  }
-
-  /* horizontal — media becomes a flush column */
-  [sl-card][sl-variant="horizontal"] {
-    display: flex;
-  }
-
-  [sl-card][sl-variant="horizontal"] > [sl-card-media] {
-    margin: calc(-1 * var(--sl-pad)) var(--sl-pad) calc(-1 * var(--sl-pad)) calc(-1 * var(--sl-pad));
   }
 
   /* hollow — dashed outline for empty/upload states */
