@@ -184,11 +184,11 @@ body::before {
 }
 
 /* playground controls — standalone panel below the demo card.
-   Uniform fixed-width columns: fields align across rows and pack
-   left instead of stretching, so control edges keep their gap */
+   Fields share the row evenly (min 14rem) so it never ends in a
+   void; controls grow with the field up to a cap */
 .sl-play-fields {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 14rem);
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
   gap: var(--sl-lg) 3rem;
   padding: var(--sl-md) var(--sl-lg);
   background: color-mix(in srgb, var(--sl-text) 4%, var(--sl-surface));
@@ -199,9 +199,9 @@ body::before {
 
 .sl-play-field {
   display: grid;
-  /* fixed name + control columns so every field is the same width —
-     controls line up across wrapped rows */
-  grid-template-columns: 5.5rem 8rem;
+  /* fixed name column, flexible control — every field in a row
+     stretches together so controls stay aligned */
+  grid-template-columns: 5.5rem 1fr;
   gap: 2px var(--sl-sm);
   align-items: center;
   font-size: 13px;
@@ -216,6 +216,7 @@ body::before {
 .sl-play-field input[type="text"] {
   appearance: auto;
   width: 100%;
+  max-width: 12rem;
   background: var(--sl-surface);
   color: var(--sl-text);
   border: 1px solid var(--sl-border);
