@@ -29,6 +29,7 @@
   },
   "scripts": {
     "dev": "npm run dev -w sakulime-doc",
+    "dev:vp": "npm --prefix doc-vp run dev",
     "build": "tsc -b && npm run build -w @sakulime-ui/core && node scripts/build.mjs",
     "lint": "eslint .",
     "preview": "npm run preview -w sakulime-doc",
