@@ -356,6 +356,7 @@ body::before {
   position: absolute;
   top: calc(100% + 6px);
   right: 0;
+  z-index: 20;
   min-width: max(100%, 120px);
   margin: 0;
   padding: 4px;
@@ -368,23 +369,30 @@ body::before {
     0 2px 4px -2px rgb(0 0 0 / 0.07);
 }
 
-.sl-theme-menu li {
+.sl-theme-option {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+  width: 100%;
   padding: 6px 10px;
+  border: 0;
+  background: none;
+  font: inherit;
   font-size: 13px;
   color: var(--sl-text);
+  text-align: left;
   white-space: nowrap;
   cursor: pointer;
 }
 
-.sl-theme-menu li:hover {
+.sl-theme-option:hover,
+.sl-theme-option:focus-visible {
   background: var(--sl-primary-bg);
+  outline: none;
 }
 
-.sl-theme-menu li[aria-selected="true"] {
+.sl-theme-menu li[aria-selected="true"] .sl-theme-option {
   color: var(--sl-text-accent);
 }
 

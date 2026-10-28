@@ -1,11 +1,20 @@
 <script setup lang="ts">
 import DefaultTheme from "vitepress/theme";
-import { computed, onMounted, onUnmounted, ref, watch } from "vue";
+import {
+  computed,
+  nextTick,
+  onMounted,
+  onUnmounted,
+  ref,
+  watch,
+} from "vue";
 
 const { Layout } = DefaultTheme;
 const theme = ref("sakulime");
 const open = ref(false);
 const switchEl = ref<HTMLElement>();
+const triggerEl = ref<HTMLButtonElement>();
+const optionEls = ref<(HTMLElement | null)[]>([]);
 
 // themes self-discover from the palette package — adding a css file
 // there adds an option; its color is the palette's own --sl-primary
@@ -35,8 +44,46 @@ const choose = (value: string) => {
   open.value = false;
 };
 
+const close = (refocus = false) => {
+  open.value = false;
+  if (refocus) triggerEl.value?.focus();
+};
+
+const focusOption = (i: number) => {
+  const n = themes.length;
+  optionEls.value[((i % n) + n) % n]?.focus();
+};
+
+const openMenu = (i?: number) => {
+  open.value = true;
+  nextTick(() =>
+    focusOption(i ?? themes.findIndex((t) => t.value === theme.value)),
+  );
+};
+
+const onMenuKeydown = (e: KeyboardEvent) => {
+  const i = optionEls.value.findIndex((el) => el === document.activeElement);
+  if (e.key === "ArrowDown") {
+    e.preventDefault();
+    focusOption(i + 1);
+  } else if (e.key === "ArrowUp") {
+    e.preventDefault();
+    focusOption(i - 1);
+  } else if (e.key === "Home") {
+    e.preventDefault();
+    focusOption(0);
+  } else if (e.key === "End") {
+    e.preventDefault();
+    focusOption(themes.length - 1);
+  }
+};
+
 const onClickOutside = (e: MouseEvent) => {
   if (!switchEl.value?.contains(e.target as Node)) open.value = false;
+};
+
+const onFocusOut = (e: FocusEvent) => {
+  if (!switchEl.value?.contains(e.relatedTarget as Node)) open.value = false;
 };
 
 // data-theme drives the sakulime token cascade — SSR has no document,
@@ -61,13 +108,21 @@ onUnmounted(() => document.removeEventListener("click", onClickOutside));
 <template>
   <Layout>
     <template #nav-bar-content-after>
-      <div ref="switchEl" class="sl-theme-switch">
+      <div
+        ref="switchEl"
+        class="sl-theme-switch"
+        @keydown.escape="close(true)"
+        @focusout="onFocusOut"
+      >
         <button
+          ref="triggerEl"
           class="sl-theme-current"
           type="button"
           aria-haspopup="listbox"
           :aria-expanded="open"
           @click="open = !open"
+          @keydown.down.prevent="openMenu()"
+          @keydown.up.prevent="openMenu(themes.length - 1)"
         >
           <span class="sl-theme-dot" :style="{ '--dot': active?.color }" />
           <span class="sl-theme-name">{{ active?.label }}</span>
@@ -83,16 +138,28 @@ onUnmounted(() => document.removeEventListener("click", onClickOutside));
             <path d="m6 9 6 6 6-6" />
           </svg>
         </button>
-        <ul v-if="open" class="sl-theme-menu" role="listbox">
+        <ul
+          v-if="open"
+          class="sl-theme-menu"
+          role="listbox"
+          @keydown="onMenuKeydown"
+        >
           <li
-            v-for="t in themes"
+            v-for="(t, i) in themes"
             :key="t.value"
             role="option"
             :aria-selected="theme === t.value"
-            @click="choose(t.value)"
           >
-            <span class="sl-theme-dot" :style="{ '--dot': t.color }" />
-            <span>{{ t.label }}</span>
+            <button
+              :ref="(el) => (optionEls[i] = el as HTMLElement)"
+              class="sl-theme-option"
+              type="button"
+              tabindex="-1"
+              @click="choose(t.value)"
+            >
+              <span class="sl-theme-dot" :style="{ '--dot': t.color }" />
+              <span>{{ t.label }}</span>
+            </button>
           </li>
         </ul>
       </div>
