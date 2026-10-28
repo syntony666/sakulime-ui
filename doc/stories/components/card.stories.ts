@@ -57,12 +57,7 @@ const meta = {
     radius: axisArg("sl-radius", "圓角", "md", RADII),
     variant: axisArg("sl-variant", "型態", "-", VARIANTS),
     indicate: axisArg("sl-indicate", "標記邊緣", "-", INDICATES),
-    tone: axisArg(
-      "sl-tone",
-      "顏色（搭配 sl-indicate / sl-card-corner）",
-      "primary",
-      TONES,
-    ),
+    tone: axisArg("sl-tone", "顏色（搭配標記）", "primary", TONES),
     raised: {
       description: "浮起陰影 `sl-raised`",
       table: { type: {}, defaultValue: { summary: "false" } },
