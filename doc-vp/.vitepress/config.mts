@@ -18,7 +18,18 @@ export default defineConfig({
       { text: "主題", link: "/theme" },
       {
         text: "Core",
-        items: [{ text: 'Button <span class="sl-sub">按鈕</span>', link: "/button" }],
+        items: [
+          { text: "說明", link: "/core" },
+          { text: 'Button <span class="sl-sub">按鈕</span>', link: "/button" },
+          { text: 'Card <span class="sl-sub">卡片</span>', link: "/card" },
+        ],
+      },
+      {
+        text: "Layout",
+        items: [
+          { text: "說明", link: "/layout" },
+          { text: 'Container <span class="sl-sub">容器</span>', link: "/container" },
+        ],
       },
     ],
   },
