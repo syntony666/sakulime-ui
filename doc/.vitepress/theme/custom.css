@@ -178,14 +178,16 @@ body::before {
 }
 
 /* markup highlight — attribute names take the accent color, quoted
-   values get a thick dashed underline */
+   values sit on a light primary wash */
 .sl-demo-src .sl-hl-attr {
   color: var(--sl-text-accent);
 }
 
 .sl-demo-src .sl-hl-val {
-  text-decoration: underline dashed var(--sl-primary) 2px;
-  text-underline-offset: 3px;
+  padding: 0 0.3em;
+  border-radius: var(--sl-xs);
+  background: color-mix(in srgb, var(--sl-primary) 30%, transparent);
+  color: var(--sl-text-accent);
 }
 
 /* playground controls — standalone panel below the demo card.
