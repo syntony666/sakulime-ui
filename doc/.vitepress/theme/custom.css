@@ -199,9 +199,9 @@ body::before {
 
 .sl-play-field {
   display: grid;
-  /* left lane holds name over desc at one width; the control gets
-     its own lane and centers against both */
-  grid-template-columns: auto 1fr;
+  /* fixed left lane holds name over desc; the control lane takes the
+     rest and centers against both — same geometry in every field */
+  grid-template-columns: 10rem 1fr;
   gap: 2px var(--sl-sm);
   align-items: center;
   font-size: 13px;
