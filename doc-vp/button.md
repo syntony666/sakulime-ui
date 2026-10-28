@@ -2,7 +2,7 @@
 import * as ButtonStories from "../doc/src/components/button.stories";
 </script>
 
-# Button 按鈕
+# Button *按鈕*
 
 <Playground :meta="ButtonStories.default" :render="ButtonStories.Button.render" />
 
