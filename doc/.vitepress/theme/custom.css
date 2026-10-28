@@ -197,7 +197,7 @@ body::before {
    currently is, so active states stay in family */
 .VPSidebarItem em {
   font-style: normal;
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 /* theme swatch grid — chips read --sl-* vars live so the nav dots
