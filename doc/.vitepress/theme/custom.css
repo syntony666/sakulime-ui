@@ -198,24 +198,24 @@ body::before {
 }
 
 .sl-play-field {
-  display: grid;
-  /* fixed name + control columns so every field is the same width —
-     controls line up across wrapped rows */
-  grid-template-columns: 5.5rem 8rem;
+  display: flex;
+  flex-wrap: wrap;
+  /* name + control on one line, desc wraps to its own; the field is
+     as wide as its widest line so a long desc never wraps mid-token */
   gap: 2px var(--sl-sm);
   align-items: center;
   font-size: 13px;
 }
 
-.sl-play-field :is(select, input) {
-  min-width: 0;
+.sl-play-field select,
+.sl-play-field input[type="text"] {
+  width: 8rem;
 }
 
 /* sl tokens on form controls — the page reset leaves them bare white */
 .sl-play-field select,
 .sl-play-field input[type="text"] {
   appearance: auto;
-  width: 100%;
   background: var(--sl-surface);
   color: var(--sl-text);
   border: 1px solid var(--sl-border);
@@ -230,17 +230,18 @@ body::before {
 }
 
 .sl-play-field input[type="checkbox"] {
-  justify-self: start;
   accent-color: var(--sl-primary);
 }
 
 .sl-play-name {
+  width: 5.5rem;
   font-family: var(--vp-font-family-mono);
   font-weight: 600;
 }
 
 .sl-play-desc {
-  grid-column: 1 / -1;
+  flex-basis: 100%;
+  white-space: nowrap;
   color: var(--sl-text-muted);
   font-size: 12px;
 }
