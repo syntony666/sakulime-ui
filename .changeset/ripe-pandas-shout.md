@@ -4,4 +4,4 @@
 "@sakulime-ui/theme": minor
 ---
 
-Rework the sakulime palette: amber `sl-primary`, soft-pink `sl-secondary`, darker text tones for readability, and status colors that stay in the theme family. Tone-ink colors now derive via `color-mix` so contrast holds when palettes change.
+Rework both palettes: sakulime gets an amber `sl-primary` with soft-pink `sl-secondary`, terra switches to the map-gallery stone + teal palette with a slate `sl-secondary`. Text tones darkened for readability and status colors follow each theme's family. Tone-ink colors now derive via `color-mix` so contrast holds when palettes change.
