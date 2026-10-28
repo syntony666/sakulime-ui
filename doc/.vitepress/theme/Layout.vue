@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import DefaultTheme from "vitepress/theme";
-import { onMounted, ref, watch } from "vue";
+import { computed, onMounted, onUnmounted, ref, watch } from "vue";
 
 const { Layout } = DefaultTheme;
 const theme = ref("sakulime");
+const open = ref(false);
+const switchEl = ref<HTMLElement>();
 
 // themes self-discover from the palette package — adding a css file
-// there adds a dot; its color is the palette's own --sl-primary
+// there adds an option; its color is the palette's own --sl-primary
 const palettes = import.meta.glob("../../../packages/shared/theme/*.css", {
   query: "?raw",
   import: "default",
@@ -26,6 +28,17 @@ const themes = Object.keys(palettes)
     };
   });
 
+const active = computed(() => themes.find((t) => t.value === theme.value));
+
+const choose = (value: string) => {
+  theme.value = value;
+  open.value = false;
+};
+
+const onClickOutside = (e: MouseEvent) => {
+  if (!switchEl.value?.contains(e.target as Node)) open.value = false;
+};
+
 // data-theme drives the sakulime token cascade — SSR has no document,
 // so set it post-mount and on every toggle
 onMounted(() => {
@@ -36,22 +49,48 @@ onMounted(() => {
     },
     { immediate: true },
   );
+  document.addEventListener("click", onClickOutside);
 });
+onUnmounted(() => document.removeEventListener("click", onClickOutside));
 </script>
 
 <template>
   <Layout>
     <template #nav-bar-content-after>
-      <div class="sl-theme-switch">
-        <span
-          class="sl-theme-dot"
-          :style="{ '--dot': themes.find((t) => t.value === theme)?.color }"
-        />
-        <select v-model="theme" aria-label="主題">
-          <option v-for="t in themes" :key="t.value" :value="t.value">
-            {{ t.label }}
-          </option>
-        </select>
+      <div ref="switchEl" class="sl-theme-switch">
+        <button
+          class="sl-theme-current"
+          type="button"
+          aria-haspopup="listbox"
+          :aria-expanded="open"
+          @click="open = !open"
+        >
+          <span class="sl-theme-dot" :style="{ '--dot': active?.color }" />
+          <span>{{ active?.label }}</span>
+          <svg
+            class="sl-theme-caret"
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+          >
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+        </button>
+        <ul v-if="open" class="sl-theme-menu" role="listbox">
+          <li
+            v-for="t in themes"
+            :key="t.value"
+            role="option"
+            :aria-selected="theme === t.value"
+            @click="choose(t.value)"
+          >
+            <span class="sl-theme-dot" :style="{ '--dot': t.color }" />
+            <span>{{ t.label }}</span>
+          </li>
+        </ul>
       </div>
     </template>
   </Layout>
