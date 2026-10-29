@@ -132,15 +132,6 @@
   font-size: 18px;
 }
 
-/* closing line on the home page — the layout has no footer of its own */
-.sl-home-foot {
-  margin-top: var(--sl-5xl);
-  padding-bottom: var(--sl-2xl);
-  color: var(--sl-text-muted);
-  font-size: 13px;
-  text-align: center;
-}
-
 /* brand hairline across the top — the page's signature */
 body::before {
   content: "";

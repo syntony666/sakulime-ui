@@ -100,12 +100,7 @@ export default defineConfig({
   themeConfig: {
     outline: [2, 4],
     logo: "/favicon.svg",
-    nav: [
-      { text: "開始使用", link: "/introduction" },
-      { text: "主題", link: "/theme" },
-      { text: "Layout", link: "/layout/" },
-      { text: "Core", link: "/core/" },
-    ],
+    nav: [],
     socialLinks: [
       { icon: "github", link: "https://github.com/syntony666/sakulime-ui" },
     ],
