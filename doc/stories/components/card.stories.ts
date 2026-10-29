@@ -12,6 +12,12 @@ type CardArgs = {
   raised: boolean;
 };
 
+type SectionArgs = {
+  inset: string;
+  corner: boolean;
+  pad: string;
+};
+
 const PADS = ["-", "sm", "md", "lg"];
 const RADII = ["-", "none", "sm", "md", "lg"];
 const VARIANTS = ["-", "hollow"];
@@ -19,6 +25,7 @@ const INDICATES = ["-", "top", "bottom", "start", "end"];
 const CORNERS = ["-", "start", "end"];
 const CORNER_TYPES = ["-", "text-xs", "text-sm", "indicator"];
 const TONES = ["-", "primary", "secondary", "success", "warning", "danger"];
+const INSETS = ["-", "top", "middle", "bottom"];
 
 // Controls row for an attr axis: name = real attr, shows the "-" option
 // and the real default, hides the Type column
@@ -74,6 +81,12 @@ type Story = StoryObj<CardArgs>;
 const card = (attrs: string, content: string, w = 320) =>
   `<div sl-card${attrs} style="width: ${w}px">${content}</div>`;
 
+// shared content parts — playground cards and section demos
+const sec = (inner: string) => `<div sl-card-section>${inner}</div>`;
+const media = `<div sl-card-section="inset" class="demo-media"></div>`;
+const TITLE = `<strong>卡片標題</strong><p>卡片內容文字，描述這張卡片在展示什麼。</p>`;
+const FOOT = `<small>底部資訊</small>`;
+
 // one card per axis value
 const byAxis = (name: string) => (v: string) =>
   card(attr(name, v), `<strong>${label(v)}</strong><p>內容文字</p>`);
@@ -88,7 +101,7 @@ export const Card: Story = {
     attr("sl-tone", args.tone) +
     (args.raised ? " sl-raised" : "") +
     ` style="max-width: 360px">` +
-    `<div><strong>卡片標題</strong><p>卡片內容文字，描述這張卡片在展示什麼。</p></div>` +
+    `<div>${TITLE}</div>` +
     `</div>`,
 };
 
@@ -156,17 +169,36 @@ export const CornerTypes: Story = {
     ),
 };
 
-const media = `<div sl-card-section="inset" class="demo-media"></div>`;
-
-export const Sections: Story = {
-  render: () =>
-    card(
-      "",
-      `<span sl-card-corner="end text-sm">12</span>` +
-        media +
-        `<div sl-card-section><strong>標題</strong><p>內容文字，分區之間自動出現分隔線。</p></div>` +
-        `<div sl-card-section><small>底部資訊</small></div>`,
-    ),
+// carries its own args/argTypes so the md can bind it as a standalone
+// playground (story doubles as the Playground meta prop)
+export const Sections: StoryObj<SectionArgs> = {
+  args: { inset: "top", corner: false, pad: "-" },
+  argTypes: {
+    inset: axisArg('sl-card-section="inset"', "貼邊區塊位置", "-", INSETS),
+    corner: {
+      name: "sl-card-corner",
+      description: "角落標記（疊在貼邊內容上）",
+      table: { type: {}, defaultValue: { summary: "false" } },
+      control: "boolean",
+    },
+    pad: axisArg("sl-pad", "內距", "md", PADS),
+  },
+  render: (args) => {
+    const parts =
+      args.inset === "top"
+        ? [media, sec(TITLE), sec(FOOT)]
+        : args.inset === "middle"
+          ? [sec(TITLE), media, sec(FOOT)]
+          : args.inset === "bottom"
+            ? [sec(TITLE), sec(FOOT), media]
+            : [sec(TITLE), sec(FOOT)];
+    return card(
+      attr("sl-pad", args.pad),
+      (args.corner ? `<span sl-card-corner="end text-sm">200ms</span>` : "") +
+        parts.join(""),
+      360,
+    );
+  },
 };
 
 export const Insets: Story = {

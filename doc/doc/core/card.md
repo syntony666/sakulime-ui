@@ -126,5 +126,5 @@ import * as CardStories from "../../stories/components/card.stories";
 
 角落標記疊在貼邊內容上也可以，`sl-card-corner` 不算一般內容，不影響 inset 的位置判斷：
 
-<Demo :render="CardStories.Sections.render" />
+<Playground :meta="CardStories.Sections" :render="CardStories.Sections.render" />
 <Demo :render="CardStories.Insets.render" />
