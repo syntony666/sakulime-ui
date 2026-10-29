@@ -109,6 +109,51 @@
     inset-inline-start: var(--sl-xs);
   }
 
+  /* section — bare rows divide the card with a full-width hairline:
+     the box bleeds past the pad frame while inner padding restores
+     the content inset. */
+  [sl-card] > [sl-card-section] {
+    margin-inline: calc(var(--sl-pad) * -1);
+    padding-inline: var(--sl-pad);
+  }
+
+  [sl-card] > * + [sl-card-section] {
+    margin-top: var(--sl-pad);
+    border-top: 1px solid var(--sl-border);
+    padding-top: var(--sl-pad);
+  }
+
+  /* inset — a padding-cancelled region for edge-to-edge content
+     (img/svg/iframe/block). DOM position picks the bleeding edges;
+     a leading or trailing sl-card-corner doesn't count as content. */
+  [sl-card] > [sl-card-section="inset"] {
+    padding: 0;
+  }
+
+  [sl-card] > [sl-card-section="inset"]:first-child,
+  [sl-card] > [sl-card-corner]:first-child + [sl-card-section="inset"] {
+    margin: calc(var(--sl-pad) * -1) calc(var(--sl-pad) * -1) var(--sl-pad);
+  }
+
+  [sl-card] > [sl-card-section="inset"]:last-child,
+  [sl-card] > [sl-card-section="inset"]:has(+ [sl-card-corner]:last-child) {
+    margin: var(--sl-pad) calc(var(--sl-pad) * -1) calc(var(--sl-pad) * -1);
+  }
+
+  [sl-card] > [sl-card-section="inset"]:only-child {
+    margin: calc(var(--sl-pad) * -1);
+  }
+
+  /* the divider under an inset hugs its bottom edge */
+  [sl-card-section="inset"] + [sl-card-section] {
+    margin-top: 0;
+  }
+
+  [sl-card-section="inset"] > :is(img, svg, video, iframe) {
+    display: block;
+    width: 100%;
+  }
+
   /* raised — theme-aware shadow (reusable beyond card) */
   [sl-raised] {
     box-shadow: 0 2px 8px color-mix(in srgb, var(--sl-text) 12%, transparent);
