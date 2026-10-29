@@ -187,9 +187,12 @@ body::before {
   border-image: linear-gradient(90deg, var(--sl-primary), transparent) 1;
 }
 
+/* nowrap keeps attribute tokens whole — a break at the hyphen of
+   sl-card-corner reads as two words, not one API name */
 .vp-doc :not(pre) > code {
   border: 1px solid var(--sl-border);
   border-radius: var(--sl-xs);
+  white-space: nowrap;
 }
 
 /* table's second color — zebra rows and the header take the

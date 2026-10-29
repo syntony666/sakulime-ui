@@ -60,7 +60,7 @@ import * as CardStories from "../../stories/components/card.stories";
 
 ### 角落標記 `sl-card-corner`
 
-在卡片頂端角落放一個小標記，適合時間、狀態、數字這類補充資訊。屬性值用空格分隔，類型和位置可以自由組合。顏色跟著 `sl-tone` 走（預設 primary）：
+在卡片頂端角落放一個小標記，適合時間、狀態、數字這類補充資訊。屬性值用空格分隔，類型和位置可以自由組合：
 
 ```html
 <div sl-card>
@@ -112,6 +112,8 @@ import * as CardStories from "../../stories/components/card.stories";
   <div sl-card-section>底部</div>
 </div>
 ```
+
+<Demo :render="CardStories.BasicSections.render" />
 
 ### 貼邊 `sl-card-section="inset"`
 

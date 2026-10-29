@@ -68,7 +68,8 @@ const meta = {
     indicate: axisArg("sl-indicate", "標記邊緣", "-", INDICATES),
     tone: axisArg("sl-tone", "顏色（搭配標記）", "primary", TONES),
     raised: {
-      description: "浮起陰影 `sl-raised`",
+      name: "sl-raised",
+      description: "浮起陰影",
       table: { type: {}, defaultValue: { summary: "false" } },
       control: "boolean",
     },
@@ -168,6 +169,14 @@ export const CornerTypes: Story = {
           : "") + `<strong>${label(v)}</strong><p>內容文字</p>`,
       ),
     ),
+};
+
+// bare sections — header/content/footer hairlines without inset media;
+// content stays inline like the fence example (a lone <p> would carry
+// browser margins and sit visibly low in the section)
+export const BasicSections: Story = {
+  render: () =>
+    card("", [sec(`<strong>標題</strong>`), sec(`內容`), sec(FOOT)].join(""), 320),
 };
 
 // carries its own args/argTypes so the md can bind it as a standalone
