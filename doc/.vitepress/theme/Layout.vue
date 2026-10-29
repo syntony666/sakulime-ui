@@ -17,7 +17,7 @@ const triggerEl = ref<HTMLButtonElement>();
 const optionEls = ref<(HTMLElement | null)[]>([]);
 
 // themes self-discover from the palette package — adding a css file
-// there adds an option; its color is the palette's own --sl-primary
+// there adds an option; its color is the theme's authored seed
 const palettes = import.meta.glob("../../../packages/shared/theme/*.css", {
   query: "?raw",
   import: "default",
@@ -37,7 +37,7 @@ const themes = Object.keys(palettes)
         .split("-")
         .map((w) => w[0].toUpperCase() + w.slice(1))
         .join(" "),
-      color: pick(palettes[path] as string, "--sl-primary"),
+      color: pick(palettes[path] as string, "--sl-seed-primary"),
     };
   });
 
@@ -57,6 +57,14 @@ const focusOption = (i: number) => {
   const n = themes.length;
   optionEls.value[((i % n) + n) % n]?.focus();
 };
+
+// the menu pins its width to the trigger's real box (the divider
+// padding inflates the switch's box, so % can't express this)
+const menuWidth = ref("100%");
+watch(open, (v) => {
+  if (v && triggerEl.value)
+    menuWidth.value = `${triggerEl.value.offsetWidth}px`;
+});
 
 const openMenu = (i?: number) => {
   open.value = true;
@@ -149,6 +157,7 @@ onUnmounted(() => document.removeEventListener("click", onClickOutside));
           v-if="open"
           class="sl-theme-menu"
           role="listbox"
+          :style="{ width: menuWidth }"
           @keydown="onMenuKeydown"
         >
           <li
