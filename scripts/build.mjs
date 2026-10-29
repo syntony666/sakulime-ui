@@ -1,7 +1,7 @@
 import { cpSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 import { createRequire } from "node:module";
-import { transformSync } from "esbuild";
+import { buildSync, transformSync } from "esbuild";
 
 const req = createRequire(import.meta.url);
 const pkgDir = (name) => dirname(req.resolve(`${name}/package.json`));
@@ -21,12 +21,24 @@ const tokens = read(req.resolve("@sakulime-ui/shared/vars.css"));
 const themeFiles = readdirSync(themeDir).filter((f) => f.endsWith(".css"));
 const layout = read(req.resolve("@sakulime-ui/layout/index.css"));
 
-// @sakulime-ui/theme — one minified palette per file
+// @sakulime-ui/theme — one minified palette per file; bundle so each
+// theme's @import of the shared derived layer inlines into dist
 out(`${themeDir}/dist`);
 for (const f of themeFiles) {
   const name = f.replace(".css", ".min.css");
-  writeFileSync(`${themeDir}/dist/${name}`, minify(read(`${themeDir}/${f}`)));
+  const result = buildSync({
+    entryPoints: [`${themeDir}/${f}`],
+    bundle: true,
+    minify: true,
+    write: false,
+    outfile: name,
+    logLevel: "silent",
+  });
+  writeFileSync(`${themeDir}/dist/${name}`, result.outputFiles[0].text);
 }
+// the shared derivation layer ships too — custom themes @import it and
+// author only seeds + color-scheme
+cpSync(`${themeDir}/css/derived.css`, `${themeDir}/dist/derived.css`);
 
 // @sakulime-ui/layout — tokens + layout
 out(`${layoutDir}/dist`);

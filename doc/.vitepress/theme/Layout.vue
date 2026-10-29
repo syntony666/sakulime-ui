@@ -17,7 +17,7 @@ const triggerEl = ref<HTMLButtonElement>();
 const optionEls = ref<(HTMLElement | null)[]>([]);
 
 // themes self-discover from the palette package — adding a css file
-// there adds an option; its color is the palette's own --sl-primary
+// there adds an option; its color is the theme's authored seed
 const palettes = import.meta.glob("../../../packages/shared/theme/*.css", {
   query: "?raw",
   import: "default",
@@ -37,7 +37,9 @@ const themes = Object.keys(palettes)
         .split("-")
         .map((w) => w[0].toUpperCase() + w.slice(1))
         .join(" "),
-      color: pick(palettes[path] as string, "--sl-primary"),
+      color: pick(palettes[path] as string, "--sl-seed-primary"),
+      color2: pick(palettes[path] as string, "--sl-seed-secondary"),
+      dark: /color-scheme:\s*dark/.test(palettes[path] as string),
     };
   });
 
@@ -57,6 +59,14 @@ const focusOption = (i: number) => {
   const n = themes.length;
   optionEls.value[((i % n) + n) % n]?.focus();
 };
+
+// the menu pins its width to the trigger's real box (the divider
+// padding inflates the switch's box, so % can't express this)
+const menuWidth = ref("100%");
+watch(open, (v) => {
+  if (v && triggerEl.value)
+    menuWidth.value = `${triggerEl.value.offsetWidth}px`;
+});
 
 const openMenu = (i?: number) => {
   open.value = true;
@@ -100,10 +110,13 @@ onMounted(() => {
     theme,
     (v) => {
       document.documentElement.dataset.theme = v;
-      // the -dark suffix convention also flips vitepress's own dark
-      // internals (dual shiki themes, dark-only chrome rules)
-      document.documentElement.classList.toggle("dark", v.endsWith("-dark"));
+      // the theme's declared color-scheme flips vitepress's own dark
+      // internals (dual shiki themes, dark-only chrome rules); the
+      // flag persists so the head script restores it pre-paint
+      const dark = themes.find((t) => t.value === v)?.dark === true;
+      document.documentElement.classList.toggle("dark", dark);
       localStorage.setItem("sl-theme", v);
+      localStorage.setItem("sl-dark", dark ? "1" : "0");
     },
     { immediate: true },
   );
@@ -131,7 +144,14 @@ onUnmounted(() => document.removeEventListener("click", onClickOutside));
           @keydown.down.prevent="openMenu()"
           @keydown.up.prevent="openMenu(themes.length - 1)"
         >
-          <span class="sl-theme-dot" :style="{ '--dot': active?.color }" />
+          <span
+            class="sl-theme-dot"
+            :style="{
+              '--dot': active?.color,
+              '--dot-2': active?.color2,
+              '--dot-mode': active?.dark ? '#000' : '#fff',
+            }"
+          />
           <span class="sl-theme-name">{{ active?.label }}</span>
           <svg
             class="sl-theme-caret"
@@ -149,6 +169,7 @@ onUnmounted(() => document.removeEventListener("click", onClickOutside));
           v-if="open"
           class="sl-theme-menu"
           role="listbox"
+          :style="{ width: menuWidth }"
           @keydown="onMenuKeydown"
         >
           <li
@@ -164,7 +185,14 @@ onUnmounted(() => document.removeEventListener("click", onClickOutside));
               tabindex="-1"
               @click="choose(t.value)"
             >
-              <span class="sl-theme-dot" :style="{ '--dot': t.color }" />
+              <span
+                class="sl-theme-dot"
+                :style="{
+                  '--dot': t.color,
+                  '--dot-2': t.color2,
+                  '--dot-mode': t.dark ? '#000' : '#fff',
+                }"
+              />
               <span>{{ t.label }}</span>
             </button>
           </li>

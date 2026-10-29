@@ -20,7 +20,7 @@ export default defineConfig({
     [
       "script",
       {},
-      "try{var t=localStorage.getItem('sl-theme');if(t){var d=document.documentElement;d.dataset.theme=t;d.classList.toggle('dark',t.endsWith('-dark'))}}catch(e){}",
+      "try{var t=localStorage.getItem('sl-theme');if(t){var d=document.documentElement;d.dataset.theme=t;d.classList.toggle('dark',localStorage.getItem('sl-dark')==='1')}}catch(e){}",
     ],
     // zh-TW + code faces from Google Fonts — Cloudflare Fonts rewrites
     // these to same-domain /cf-fonts at the edge, so there is no

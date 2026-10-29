@@ -1,0 +1,16 @@
+/* umbra — the same warm stone gallery at night; the teal lean
+   still lands only on the accent ink and the primary CTA family, now
+   inverted: pale teal action and accent ink over dark stone */
+
+@import "./css/derived.css";
+
+@layer theme {
+  :root[data-theme="umbra"] {
+    color-scheme: dark;
+
+    /* seeds — the only authored colors; every other token derives */
+    --sl-seed-primary: #8fbcb4;
+    --sl-seed-secondary: #44403c;
+    --sl-seed-accent: #93c4bd;
+  }
+}
