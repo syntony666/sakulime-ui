@@ -14,6 +14,7 @@ export default defineConfig({
   cleanUrls: true,
   sitemap: { hostname: SITE },
   head: [
+    ["link", { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" }],
     // restore the saved theme before first paint — without this the page
     // flashes sakulime for a frame before hydration sets data-theme
     [
