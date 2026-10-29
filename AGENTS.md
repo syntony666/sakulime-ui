@@ -5,8 +5,9 @@ Working agreement for coding agents in this repo. Contributor-facing rules live 
 ## Protocol
 
 - Plan before implementing non-trivial work; wait for explicit approval.
-- Report after each step: files touched, what changed, verification output. Wait for review before continuing — including when a check fails.
-- State-changing actions need their own explicit approval: git checkout/merge/rebase/commit/push/reset, dependency installs, deploys.
+- After each step: verify, commit the completed concern, then report files touched, what changed, and the verification output. Wait for review before starting the next step, including when a check fails.
+- If a change spans several concerns, split it into one commit per concern before reporting.
+- State-changing actions other than commits need their own explicit approval: git checkout/merge/rebase/push/reset, dependency installs, deploys.
 - Never claim a check passed unless it was actually run and observed.
 - Commit messages in English, under 50 words.
 
