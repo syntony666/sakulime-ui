@@ -2,6 +2,8 @@
    still lands only on the accent ink and the primary CTA family, now
    inverted: pale teal action and accent ink over dark stone */
 
+@import "./css/derived.css";
+
 @layer theme {
   :root[data-theme="terra-dark"] {
     color-scheme: dark;
@@ -10,62 +12,5 @@
     --sl-seed-primary: #8fbcb4;
     --sl-seed-secondary: #44403c;
     --sl-seed-accent: #93c4bd;
-
-    /* surfaces — the secondary seed's hue is the material; chroma is
-       scaled near zero, lightness steps fixed per scheme */
-    --sl-bg: light-dark(
-      oklch(from var(--sl-seed-secondary) 96.5% calc(c * 0.3) h),
-      oklch(from var(--sl-seed-secondary) 21.5% calc(c * 0.7) h));
-    --sl-surface: light-dark(
-      oklch(from var(--sl-seed-secondary) 98.5% calc(c * 0.15) h),
-      oklch(from var(--sl-seed-secondary) 27% calc(c * 0.7) h));
-    --sl-border: light-dark(
-      oklch(from var(--sl-seed-secondary) 80% calc(c * 0.9) h),
-      oklch(from var(--sl-seed-secondary) 44.5% calc(c * 1.1) h));
-
-    /* ink ladder — the same hue at the poles */
-    --sl-text: light-dark(
-      oklch(from var(--sl-seed-secondary) 30% c h),
-      oklch(from var(--sl-seed-secondary) 92% calc(c * 0.4) h));
-    --sl-text-strong: light-dark(
-      oklch(from var(--sl-seed-secondary) 22% c h),
-      oklch(from var(--sl-seed-secondary) 97% calc(c * 0.2) h));
-    --sl-text-invert: light-dark(
-      oklch(from var(--sl-seed-secondary) 97.5% calc(c * 0.1) h),
-      oklch(from var(--sl-seed-secondary) 21.5% c h));
-    --sl-text-secondary: color-mix(in srgb, var(--sl-text) 88%, transparent);
-    --sl-text-muted: color-mix(in srgb, var(--sl-text) 78%, transparent);
-
-    /* accent — clamped into the readable ink band for this scheme */
-    --sl-text-accent: light-dark(
-      oklch(from var(--sl-seed-accent) clamp(0.15, l, 0.55) c h),
-      oklch(from var(--sl-seed-accent) clamp(0.72, l, 1) c h));
-
-    /* tone faces */
-    --sl-primary: var(--sl-seed-primary);
-    --sl-secondary: var(--sl-seed-secondary);
-
-    /* fg — the tone's own hue pushed to the far ink pole; the clamp
-       is a step on the face's lightness so it flips without a flag */
-    --sl-primary-fg: oklch(from var(--sl-primary)
-      calc(0.95 - clamp(0, (l - 0.62) * 50, 1) * 0.72)
-      calc(c * 0.35) h);
-    --sl-secondary-fg: oklch(from var(--sl-secondary)
-      calc(0.95 - clamp(0, (l - 0.62) * 50, 1) * 0.72)
-      calc(c * 0.35) h);
-
-    /* tints — the face hue pushed to a quiet tint depth */
-    --sl-primary-bg: light-dark(
-      oklch(from var(--sl-primary) 93% calc(c * 0.35) h),
-      oklch(from var(--sl-primary) 30% calc(c * 0.55) h));
-    --sl-secondary-bg: light-dark(
-      oklch(from var(--sl-secondary) 95% calc(c * 0.4) h),
-      oklch(from var(--sl-secondary) 24.5% calc(c * 0.8) h));
-
-    /* status — universal hues at scheme-fixed depth; warn pairs with
-       the strong ink so it stays deep in dark themes */
-    --sl-ok: light-dark(oklch(51% 0.10 158), oklch(68% 0.12 162));
-    --sl-warn: light-dark(oklch(80% 0.14 82), oklch(54.5% 0.11 86));
-    --sl-danger: light-dark(oklch(51% 0.18 22), oklch(67% 0.16 20));
   }
 }
