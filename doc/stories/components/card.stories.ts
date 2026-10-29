@@ -155,3 +155,26 @@ export const CornerTypes: Story = {
       ),
     ),
 };
+
+const media = `<div sl-card-section="inset" class="demo-media"></div>`;
+
+export const Sections: Story = {
+  render: () =>
+    card(
+      "",
+      `<span sl-card-corner="end text-sm">12</span>` +
+        media +
+        `<div sl-card-section><strong>標題</strong><p>內容文字，分區之間自動出現分隔線。</p></div>` +
+        `<div sl-card-section><small>底部資訊</small></div>`,
+    ),
+};
+
+export const Insets: Story = {
+  render: () =>
+    axis(["top", "middle", "bottom"], (v) => {
+      const text = `<div sl-card-section><strong>${label(v)}</strong><p>內容</p></div>`;
+      const parts =
+        v === "top" ? [media, text] : v === "bottom" ? [text, media] : [text, media, text];
+      return card("", parts.join(""), 240);
+    }),
+};

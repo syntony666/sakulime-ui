@@ -22,3 +22,10 @@
   width: 1px;
   background: var(--sl-text-muted);
 }
+
+/* demo placeholder for edge-to-edge inset content — stands in for a
+   real image so demos don't depend on external assets */
+.demo-media {
+  height: 7rem;
+  background: linear-gradient(135deg, var(--sl-primary), var(--sl-secondary));
+}
