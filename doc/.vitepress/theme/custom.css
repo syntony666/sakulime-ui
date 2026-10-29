@@ -405,10 +405,19 @@ body::before {
   margin-left: 0.2em;
 }
 
-/* pager hover gets the system's interactive cue — soft tint plus the
-   accent border; the title is already brand-1 */
+/* pager is a button, not a card — it takes the secondary tone's
+   fill/fg pair; hover deepens the fill like a pressed button */
+.VPDocFooter .pager-link {
+  background: var(--sl-secondary);
+  border-color: var(--sl-secondary);
+}
+.VPDocFooter .pager-link .desc,
+.VPDocFooter .pager-link .title {
+  color: var(--sl-secondary-fg);
+}
 .VPDocFooter .pager-link:hover {
-  background-color: var(--vp-c-brand-soft);
+  background-color: color-mix(in oklab, var(--sl-secondary) 85%, var(--sl-text));
+  border-color: transparent;
 }
 
 /* sidebar + pager sub-label — the quiet tone carries the dimming so
