@@ -53,8 +53,10 @@ import "@sakulime-ui/theme/umbra.min.css";      // Theme: Umbra
 新增一個 `.css` 檔，填三個顏色就完成了。先載入推導層 — 有裝 npm 寫套件名，沒裝就用 CDN 網址：
 
 ```css
-@import "@sakulime-ui/theme/derived.css"; /* npm */
-@import "https://cdn.jsdelivr.net/npm/@sakulime-ui/theme/dist/derived.css"; /* 或 CDN */
+/* npm */
+@import "@sakulime-ui/theme/derived.css";
+/* 或 CDN */
+@import "https://cdn.jsdelivr.net/npm/@sakulime-ui/theme/dist/derived.css";
 
 @layer theme {
   :root[data-theme="my-theme"] {
