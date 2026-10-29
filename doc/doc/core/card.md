@@ -115,7 +115,7 @@ import * as CardStories from "../../stories/components/card.stories";
 
 <Demo :render="CardStories.BasicSections.render" />
 
-### 貼邊 `sl-card-section="inset"`
+#### 貼邊 `inset`
 
 `inset` 是抵銷卡片內距的區塊，內容直接貼到卡片邊 — 圖片、地圖、色塊都行。放在第一個就貼上緣、最後一個就貼下緣、夾在中間就只貼左右，位置看 DOM 順序不用寫：
 

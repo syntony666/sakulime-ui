@@ -98,7 +98,7 @@ export default defineConfig({
     publicDir: fileURLToPath(new URL("../public", import.meta.url)),
   },
   themeConfig: {
-    outline: [2, 3],
+    outline: [2, 4],
     logo: "/favicon.svg",
     nav: [
       { text: "開始使用", link: "/introduction" },
