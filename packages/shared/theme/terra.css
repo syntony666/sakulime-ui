@@ -1,33 +1,34 @@
-/* terra — map-gallery palette: monochrome stone, no accent hue.
-   Emphasis comes from ink depth, like the site's own gray UI */
+/* terra — map-gallery palette structure: the whole theme is warm stone;
+   the cyan lean lands only on the accent ink and the primary CTA family
+   (its teal-600 action + #1f3d3d tooltip ink), so stone stays stone and
+   the accent places read as ink, not as a recolor */
 
 @layer theme {
   :root[data-theme="terra"] {
-  /* each slot owns a distinct lightness step — monochrome separation
-     comes from depth, not hue: white card / pale chip / stone page /
-     ink wash / gray fill / strong hairline */
+  /* surfaces — the stone material itself */
   --sl-bg: #f5f5f4;
   --sl-surface: #fdfcfa;
   --sl-border: #a8a29e;
 
+  /* text ladder — stone ink in discrete steps; the accent shares the
+     CTA's teal at ink depth so chrome painted by the accent still
+     reads as ink, not as a second color */
   --sl-text: #292524;
   --sl-text-strong: #1c1917;
-  --sl-text-accent: #1c1917;
+  --sl-text-accent: #1f3d3d;
   --sl-text-invert: #fafaf9;
 
-  /* derived text tones — follow --sl-text automatically; every step
-     stays ≥4.5:1 on bg/surface so quiet text still reads */
+  /* quiet rungs of the same stone ink */
   --sl-text-secondary: color-mix(in srgb, var(--sl-text) 88%, transparent);
   --sl-text-muted: color-mix(in srgb, var(--sl-text) 78%, transparent);
 
-  /* primary = the site's dark/selected button (stone-700 + white) —
-     its own UI has no colored CTA */
-  --sl-primary: #44403c;
-  --sl-primary-fg: #fafaf9;
-  --sl-primary-bg: #e7e5e4;
+  /* primary = dark teal ink — the CTA is the cyan place, like
+     map-gallery's teal-600 action on an otherwise stone UI */
+  --sl-primary: #1f3d3d;
+  --sl-primary-fg: #eef5f3;
+  --sl-primary-bg: #d8e5e2;
 
-  /* secondary = the quiet gray button the site actually uses —
-     deep enough to read as a fill instead of another surface */
+  /* secondary = the quiet stone button the site actually uses */
   --sl-secondary: #d6d3d1;
   --sl-secondary-fg: #292524;
   --sl-secondary-bg: #f0efed;

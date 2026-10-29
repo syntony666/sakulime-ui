@@ -19,8 +19,8 @@ colors:
   terra-surface: "#fdfcfa"
   terra-border: "#a8a29e"
   terra-text: "#292524"
-  terra-accent: "#1c1917"
-  terra-primary: "#44403c"
+  terra-accent: "#1f3d3d"
+  terra-primary: "#1f3d3d"
   terra-secondary: "#d6d3d1"
   terra-ok: "#047857"
   terra-warn: "#e0a94e"
@@ -81,7 +81,7 @@ components:
 
 **Creative North Star: "Cream Sakura 奶油櫻花"**
 
-奶油色紙面打底、櫻花粉做邊框與次色、覆盆紅當可讀的強調墨色 — 像和菓子店裡攤開的手冊：柔軟、甜，但每一條 hairline 都對齊得精準。系統有兩種品牌個性：`sakulime` 走活潑（奶油×琥珀×櫻花），`terra` 走沉穩（單色 stone，靠墨色深淺拉層次）；骨架完全相同，只有調色盤換人。
+奶油色紙面打底、櫻花粉做邊框與次色、覆盆紅當可讀的強調墨色 — 像和菓子店裡攤開的手冊：柔軟、甜，但每一條 hairline 都對齊得精準。系統有兩種品牌個性：`sakulime` 走活潑（奶油×琥珀×櫻花），`terra` 走沉穩（整體暖 stone，只留一個青墨色給 accent 與 CTA）；骨架完全相同，只有調色盤換人。
 
 互動感是刻意的性格：按鈕 hover 會彈起（`scale(1.05)`），控制項 hover 有邊框回饋 — 元件碰了要有反應，但反應一律走 transform/color，不走陰影。
 
@@ -111,7 +111,7 @@ components:
 - **奶白 Surface** (#fdf7f3): 卡片/code 塊的表面色，比 bg 再淺一階
 
 ### Terra（第二品牌主題）
-- 單色 stone：bg #f5f5f4、surface #fdfcfa（暖白）、text #292524、primary #44403c（石色實心）、secondary #d6d3d1、border #a8a29e。沒有彩色強調 — 強度全靠墨色深淺，每個色槽一個明度階
+- 結構照 map-gallery：整體是 stone — bg #f5f5f4、surface #fdfcfa（暖白）、text #292524、strong #1c1917、secondary #d6d3d1、border #a8a29e；青只有一個 `#1f3d3d`，同時是 accent 墨與 primary CTA（＋淡青底 #d8e5e2）— chrome 被 accent 上色時仍是墨，不是第二種顏色
 
 ### Status
 - **Ok** sakulime #3d7354 / terra #047857、**Warn** #f2cf4a / #e0a94e、**Danger** #b53349 / #b91c1c — `sl-tone` 直接取用
