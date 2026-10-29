@@ -50,10 +50,11 @@ import "@sakulime-ui/theme/umbra.min.css";      // Theme: Umbra
 
 ## 自訂主題
 
-新增一個 `.css` 檔，填三個顏色就完成了：
+新增一個 `.css` 檔，填三個顏色就完成了。先載入推導層 — 有裝 npm 寫套件名，沒裝就用 CDN 網址：
 
 ```css
-@import "@sakulime-ui/theme/derived.css";
+@import "@sakulime-ui/theme/derived.css"; /* npm */
+@import "https://cdn.jsdelivr.net/npm/@sakulime-ui/theme/dist/derived.css"; /* 或 CDN */
 
 @layer theme {
   :root[data-theme="my-theme"] {
@@ -67,7 +68,7 @@ import "@sakulime-ui/theme/umbra.min.css";      // Theme: Umbra
 
 其他顏色都不用寫 — 背景、文字、框線、成功/警告/錯誤色會依這三個顏色自動配出來，而且對比度保證可讀。
 
-要讓 `sakulime-ui` 主套件也認得這個主題，在 `packages/core/src/index.ts` import 一次、`packages/shared/theme/package.json` 的 exports 加一行。
+以上就完成了。下面這步只有**要貢獻回這個 repo、讓大家都能從 npm 載**才需要：`packages/core/src/index.ts` import 一次（編進主套件）、`packages/shared/theme/package.json` 的 exports 加一行（讓路徑可被 import）。
 
 ## 主題色系
 
