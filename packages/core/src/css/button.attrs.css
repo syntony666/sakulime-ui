@@ -30,8 +30,9 @@
   [sl-tone="warning"] {
     --sl-tone-bg: var(--sl-warn);
     --sl-tone-text: color-mix(in srgb, var(--sl-warn) 30%, var(--sl-text-strong));
-    /* golden tone — invert text needs dark ink, not near-white */
-    --sl-tone-text-invert: color-mix(in srgb, var(--sl-text-strong) 60%, black);
+    /* warn sits opposite the strong ink in every theme — light gold
+       in light themes, deep amber in dark */
+    --sl-tone-text-invert: var(--sl-text-strong);
   }
 
   [sl-tone="danger"] {

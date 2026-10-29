@@ -26,13 +26,17 @@ const palettes = import.meta.glob("../../../packages/shared/theme/*.css", {
 const pick = (css: string, token: string) =>
   css.match(new RegExp(`${token}:\\s*(#[0-9a-fA-F]{6})`))?.[1] ?? "#888";
 
+const basename = (path: string) => path.match(/([^/]+)\.css$/)![1];
 const themes = Object.keys(palettes)
-  .sort()
+  .sort((a, b) => basename(a).localeCompare(basename(b)))
   .map((path) => {
-    const name = path.match(/([^/]+)\.css$/)![1];
+    const name = basename(path);
     return {
       value: name,
-      label: name[0].toUpperCase() + name.slice(1),
+      label: name
+        .split("-")
+        .map((w) => w[0].toUpperCase() + w.slice(1))
+        .join(" "),
       color: pick(palettes[path] as string, "--sl-primary"),
     };
   });
@@ -96,6 +100,9 @@ onMounted(() => {
     theme,
     (v) => {
       document.documentElement.dataset.theme = v;
+      // the -dark suffix convention also flips vitepress's own dark
+      // internals (dual shiki themes, dark-only chrome rules)
+      document.documentElement.classList.toggle("dark", v.endsWith("-dark"));
       localStorage.setItem("sl-theme", v);
     },
     { immediate: true },

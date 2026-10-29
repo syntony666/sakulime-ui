@@ -1,0 +1,40 @@
+/* terra-dark — the same warm stone gallery at night; the teal lean
+   still lands only on the accent ink and the primary CTA family, now
+   inverted: pale teal action and accent ink over dark stone */
+
+@layer theme {
+  :root[data-theme="terra-dark"] {
+  /* surfaces — stone at night; the ladder inverts, surface lifts */
+  --sl-bg: #1c1917;
+  --sl-surface: #292524;
+  --sl-border: #57534e;
+
+  /* text ladder — pale stone ink in discrete steps; the accent is the
+     CTA's teal lifted to ink depth, so chrome painted by the accent
+     still reads as ink, not as a second color */
+  --sl-text: #e7e5e4;
+  --sl-text-strong: #fafaf9;
+  --sl-text-accent: #93c4bd;
+  --sl-text-invert: #1c1917;
+
+  /* quiet rungs of the same stone ink */
+  --sl-text-secondary: color-mix(in srgb, var(--sl-text) 88%, transparent);
+  --sl-text-muted: color-mix(in srgb, var(--sl-text) 78%, transparent);
+
+  /* primary = pale teal — the inverted CTA: light face, dark ink */
+  --sl-primary: #8fbcb4;
+  --sl-primary-fg: #18241f;
+  --sl-primary-bg: #26332f;
+
+  /* secondary = the quiet dark stone button */
+  --sl-secondary: #44403c;
+  --sl-secondary-fg: #e7e5e4;
+  --sl-secondary-bg: #2e2a27;
+
+  /* status — lifted to hold contrast on the dark stone; warn is the
+     one tone authored opposite the strong ink, so it stays deep */
+  --sl-ok: #3fb185;
+  --sl-warn: #8f6d15;
+  --sl-danger: #e5696f;
+  }
+}
