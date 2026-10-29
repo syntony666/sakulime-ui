@@ -21,11 +21,11 @@ type Story = StoryObj;
 const box = (attr: string, label: string) =>
   `<div ${attr} style="border:1px dashed var(--sl-border);border-radius:var(--sl-sm);padding:var(--sl-md);background:var(--sl-surface)">${label}</div>`;
 
-// real containers on a 1200px page — lg fills it edge to edge
+// a half-scale page — the real containers still center and edge-fill;
+// the same --sl-container-* override the docs describe does the scaling
 export const ContainerWidths: Story = {
   render: () =>
-    `<div style="overflow-x:auto">` +
-    `<div style="width:1200px;display:grid;gap:var(--sl-md)">` +
+    `<div class="demo-viewport">` +
     ["sm", "md", "lg"].map((v) => box(`sl-container-${v}`, `sl-container-${v}`)).join("") +
-    `</div></div>`,
+    `</div>`,
 };

@@ -14,6 +14,7 @@ export default defineConfig({
   cleanUrls: true,
   sitemap: { hostname: SITE },
   head: [
+    ["link", { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" }],
     // restore the saved theme before first paint — without this the page
     // flashes sakulime for a frame before hydration sets data-theme
     [
@@ -97,10 +98,14 @@ export default defineConfig({
     publicDir: fileURLToPath(new URL("../public", import.meta.url)),
   },
   themeConfig: {
-    outline: false,
-    aside: false,
+    outline: [2, 4],
     logo: "/favicon.svg",
-    nav: [],
+    nav: [
+      { text: "開始使用", link: "/introduction" },
+      { text: "主題", link: "/theme" },
+      { text: "Layout", link: "/layout/" },
+      { text: "Core", link: "/core/" },
+    ],
     socialLinks: [
       { icon: "github", link: "https://github.com/syntony666/sakulime-ui" },
     ],

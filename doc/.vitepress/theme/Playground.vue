@@ -39,6 +39,11 @@ const fields = computed<Field[]>(() =>
 // like sl-card-corner from splitting across lines in the narrow column
 const descHtml = (desc?: string) =>
   desc?.replace(/`?(sl-[\w-]+)`?/g, (_, m) => `<code>${m}</code>`) ?? "";
+
+// "-" means "don't write the attribute" — say it once as a legend row
+const hasDashOption = computed(() =>
+  fields.value.some((f) => f.options?.includes("-")),
+);
 </script>
 
 <template>
@@ -54,6 +59,9 @@ const descHtml = (desc?: string) =>
         <input v-else v-model="args[f.key]" type="text" />
         <span class="sl-play-desc" v-html="descHtml(f.desc)" />
       </label>
+      <p v-if="hasDashOption" class="sl-play-note">
+        <code>-</code> ＝ 不寫入屬性，走系統預設
+      </p>
     </div>
   </div>
 </template>

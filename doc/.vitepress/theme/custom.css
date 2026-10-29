@@ -44,13 +44,13 @@
   /* admonitions → status tokens; decorative-scale hues (warn,
      secondary) get an oklch-lowered -1 for the title text, same rule
      as brand-2 */
-  --vp-c-tip-1: var(--sl-text-accent);
-  --vp-c-tip-2: var(--sl-text-accent);
-  --vp-c-tip-3: var(--sl-text-accent);
+  --vp-c-tip-1: var(--vp-c-brand-1);
+  --vp-c-tip-2: var(--vp-c-brand-2);
+  --vp-c-tip-3: var(--vp-c-brand-1);
   --vp-c-tip-soft: var(--vp-c-brand-soft);
-  --vp-c-note-1: var(--sl-text-accent);
-  --vp-c-note-2: var(--sl-text-accent);
-  --vp-c-note-3: var(--sl-text-accent);
+  --vp-c-note-1: var(--vp-c-brand-1);
+  --vp-c-note-2: var(--vp-c-brand-2);
+  --vp-c-note-3: var(--vp-c-brand-1);
   --vp-c-note-soft: var(--vp-c-brand-soft);
   --vp-c-success-1: var(--sl-ok);
   --vp-c-success-2: var(--sl-ok);
@@ -90,9 +90,55 @@
   );
   --vp-button-brand-text: var(--sl-primary-fg);
   --vp-button-brand-bg: var(--sl-primary);
+  --vp-button-brand-hover-text: var(--sl-primary-fg);
   --vp-button-brand-hover-bg: oklch(
     from var(--sl-primary) calc(l - 0.08) c h
   );
+  --vp-button-alt-text: var(--sl-secondary-fg);
+  --vp-button-alt-bg: var(--sl-secondary-bg);
+  --vp-button-alt-hover-text: var(--sl-secondary-fg);
+  --vp-button-alt-hover-bg: var(--sl-secondary);
+}
+
+/* hero buttons take the system's own control shape — the sl radius
+   scale and the hover-scale interaction the components speak */
+.VPHero .VPButton {
+  transition:
+    transform 0.18s ease,
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease;
+}
+
+/* medium/big carry their own scoped radius — match that weight so the
+   sl step actually lands */
+.VPHero .VPButton.medium,
+.VPHero .VPButton.big {
+  border-radius: var(--sl-sm);
+}
+
+.VPHero .VPButton:hover {
+  transform: scale(1.05);
+}
+
+/* feature cards get the system's hairline back — VP paints their
+   border in the surface color, which reads as no card at all */
+.VPHomeFeatures .VPFeature {
+  border-color: var(--sl-border);
+}
+
+/* 18px restores a real step above the 14px details text */
+.VPFeature .title {
+  font-size: 18px;
+}
+
+/* closing line on the home page — the layout has no footer of its own */
+.sl-home-foot {
+  margin-top: var(--sl-5xl);
+  padding-bottom: var(--sl-2xl);
+  color: var(--sl-text-muted);
+  font-size: 13px;
+  text-align: center;
 }
 
 /* brand hairline across the top — the page's signature */
@@ -118,15 +164,20 @@ body::before {
   box-shadow: 0 1px var(--vp-c-divider);
 }
 
-/* doc column rides the layout system's own container scale — aside is
-   off (themeConfig.aside), so the reclaimed space goes to content */
+/* doc column rides the layout system's own container scale */
 .VPDoc .content-container {
   max-width: var(--sl-container-md);
 }
 
-/* doc typography follows the brand — accent headings, primary links */
-.vp-doc :is(h1, h2, h3, h4) {
+/* doc typography follows the brand — accent headings, primary links.
+   h1/h2 are display-size so the decorative accent passes AA-large;
+   h3/h4 fall under normal-text size and take the readable -1 step */
+.vp-doc :is(h1, h2) {
   color: var(--sl-text-accent);
+}
+
+.vp-doc :is(h3, h4) {
+  color: var(--vp-c-brand-1);
 }
 
 /* page title gets a gradient underline that fades out */
@@ -136,9 +187,12 @@ body::before {
   border-image: linear-gradient(90deg, var(--sl-primary), transparent) 1;
 }
 
+/* nowrap keeps attribute tokens whole — a break at the hyphen of
+   sl-card-corner reads as two words, not one API name */
 .vp-doc :not(pre) > code {
   border: 1px solid var(--sl-border);
   border-radius: var(--sl-xs);
+  white-space: nowrap;
 }
 
 /* table's second color — zebra rows and the header take the
@@ -168,10 +222,67 @@ body::before {
     0 / var(--sl-lg) var(--sl-lg);
 }
 
+/* code panel — the summary bar carries a caret, the 原始碼 label and a
+   copy button; long dumps collapse behind it, short ones stay open */
+.sl-demo-src-wrap {
+  border-top: 1px solid var(--sl-border);
+}
+
+.sl-demo-src-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--sl-sm);
+  padding: 0 var(--sl-lg);
+  color: var(--sl-text-muted);
+  font-size: var(--sl-md);
+  cursor: pointer;
+  list-style: none;
+}
+
+.sl-demo-src-bar::-webkit-details-marker {
+  display: none;
+}
+
+.sl-demo-src-bar::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform 0.15s ease;
+}
+
+.sl-demo-src-wrap[open] > .sl-demo-src-bar::before {
+  transform: rotate(45deg);
+}
+
+/* copy lives on the summary bar but only exists once the panel is
+   open — collapsed panels carry no actions */
+.sl-demo-copy {
+  display: none;
+  margin-left: auto;
+  padding: 1px 8px;
+  font: inherit;
+  font-size: 11px;
+  color: var(--sl-text);
+  background: var(--sl-surface);
+  border: 1px solid var(--sl-border);
+  border-radius: var(--sl-xs);
+  cursor: pointer;
+}
+
+.sl-demo-src-wrap[open] .sl-demo-copy {
+  display: inline-block;
+}
+
+.sl-demo-copy:hover {
+  border-color: var(--sl-primary);
+}
+
 .sl-demo-src {
   margin: 0;
-  padding: var(--sl-md) var(--sl-lg);
-  border-top: 1px solid var(--sl-border);
+  padding: var(--sl-sm) var(--sl-lg);
   background: transparent;
   font-size: 13px;
   overflow-x: auto;
@@ -180,7 +291,7 @@ body::before {
 /* markup highlight — sl-* attribute names take the accent color,
    tags and values stay plain */
 .sl-demo-src .sl-hl-attr {
-  color: var(--sl-text-accent);
+  color: var(--vp-c-brand-1);
 }
 
 /* playground controls — standalone panel below the demo card.
@@ -200,8 +311,9 @@ body::before {
 .sl-play-field {
   display: grid;
   /* fixed left lane holds name over desc; the control lane takes the
-     rest and centers against both — same geometry in every field */
-  grid-template-columns: 10rem 1fr;
+     rest and centers against both — same geometry in every field.
+     11rem + 12px names keep sl-card-section="inset" on one line */
+  grid-template-columns: 11rem 1fr;
   gap: 2px var(--sl-sm);
   align-items: center;
   font-size: 13px;
@@ -209,10 +321,12 @@ body::before {
 
 .sl-play-field :is(select, input) {
   /* pin the lane too — a definite row alone jumps the auto-placement
-     queue and the control lands left of the name */
+     queue and the control lands left of the name. end-aligned so every
+     control forms a rail at the field's right edge */
   grid-column: 2;
   grid-row: 1 / -1;
   align-self: center;
+  justify-self: end;
   min-width: 0;
 }
 
@@ -236,13 +350,28 @@ body::before {
 }
 
 .sl-play-field input[type="checkbox"] {
-  justify-self: start;
   accent-color: var(--sl-primary);
 }
 
 .sl-play-name {
   font-family: var(--vp-font-family-mono);
   font-weight: 600;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* legend row under the fields — explains what "-" means in selects.
+   Footnote treatment: negative margins pull it back so it sits --sl-sm
+   below the field rows and --sl-sm above the panel's bottom edge.
+   Needs 0-2-0 to beat .vp-doc p's paragraph margins */
+.sl-play-fields > .sl-play-note {
+  grid-column: 1 / -1;
+  margin: calc(var(--sl-sm) - var(--sl-lg)) 0
+    calc(var(--sl-sm) - var(--sl-md));
+  padding: 0;
+  color: var(--sl-text-muted);
+  font-size: 11px;
+  text-align: right;
 }
 
 .sl-play-desc {
@@ -283,12 +412,12 @@ body::before {
   margin-left: 0.2em;
 }
 
-/* sidebar + pager sub-label — same size; dims whatever color the item
-   currently is, so active states stay in family */
+/* sidebar + pager sub-label — the quiet tone carries the dimming so
+   these stay readable instead of dropping below AA via opacity */
 .VPSidebarItem em,
 .VPDocFooter em {
   font-style: normal;
-  opacity: 0.7;
+  color: var(--sl-text-muted);
 }
 
 /* theme swatch grid — chips read --sl-* vars live so the nav dots
@@ -376,8 +505,7 @@ body::before {
 }
 
 .sl-theme-caret {
-  color: var(--sl-text);
-  opacity: 0.55;
+  color: var(--sl-text-muted);
 }
 
 .sl-theme-menu {
@@ -421,7 +549,7 @@ body::before {
 }
 
 .sl-theme-menu li[aria-selected="true"] .sl-theme-option {
-  color: var(--sl-text-accent);
+  color: var(--vp-c-brand-1);
 }
 
 .sl-theme-dot {
