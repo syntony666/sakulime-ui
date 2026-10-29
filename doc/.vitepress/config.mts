@@ -3,11 +3,16 @@ import { defineConfig } from "vitepress";
 
 const zh = (t: string) => `<em>${t}</em>`;
 
+const SITE = "https://sakulime-ui.syntony666.com";
+
 export default defineConfig({
   title: "Sakulime UI",
-  description: "CSS-first design system",
+  titleTemplate: ":title | Sakulime UI",
+  description: "純 HTML + CSS 最簡單使用的 UI 介面",
   lang: "zh-TW",
   appearance: false,
+  cleanUrls: true,
+  sitemap: { hostname: SITE },
   head: [
     // restore the saved theme before first paint — without this the page
     // flashes sakulime for a frame before hydration sets data-theme
@@ -32,6 +37,60 @@ export default defineConfig({
       },
     ],
   ],
+  // TODO: replace the favicon fallback with a real 1200x630 OG image
+  transformHead({ pageData, siteData }) {
+    const path =
+      "/" +
+      pageData.relativePath
+        .replace(/\.md$/, "")
+        .replace(/(^|\/)index$/, "$1");
+    const url = SITE + path;
+    const title = pageData.frontmatter.title ?? pageData.title ?? siteData.title;
+    const desc =
+      pageData.frontmatter.description ??
+      pageData.description ??
+      siteData.description;
+    const type = path === "/" ? "website" : "article";
+    const image = SITE + "/favicon.svg";
+    const ld = (o: object) =>
+      ["script", { type: "application/ld+json" }, JSON.stringify(o)] as [
+        string,
+        Record<string, string>,
+        string,
+      ];
+    return [
+      ["link", { rel: "canonical", href: url }],
+      ["meta", { property: "og:title", content: title }],
+      ["meta", { property: "og:description", content: desc }],
+      ["meta", { property: "og:url", content: url }],
+      ["meta", { property: "og:type", content: type }],
+      ["meta", { property: "og:image", content: image }],
+      ["meta", { property: "og:locale", content: "zh_TW" }],
+      ["meta", { name: "twitter:card", content: "summary_large_image" }],
+      ["meta", { name: "twitter:title", content: title }],
+      ["meta", { name: "twitter:description", content: desc }],
+      ["meta", { name: "twitter:image", content: image }],
+      ld({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: siteData.title,
+        url: SITE,
+        inLanguage: "zh-TW",
+      }),
+      ...(type === "article"
+        ? [
+            ld({
+              "@context": "https://schema.org",
+              "@type": "TechArticle",
+              headline: title,
+              description: desc,
+              url,
+              inLanguage: "zh-TW",
+            }),
+          ]
+        : []),
+    ];
+  },
   srcDir: "doc",
   outDir: "site",
   vite: {
