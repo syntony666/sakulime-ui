@@ -20,7 +20,7 @@ type SectionArgs = {
 
 const PADS = ["-", "sm", "md", "lg"];
 const RADII = ["-", "none", "sm", "md", "lg"];
-const VARIANTS = ["-", "hollow"];
+const VARIANTS = ["-", "hollow", "plain", "blank"];
 const INDICATES = ["-", "top", "bottom", "start", "end"];
 const CORNERS = ["-", "start", "end"];
 const CORNER_TYPES = ["-", "text-xs", "text-sm", "indicator"];
@@ -219,4 +219,36 @@ export const Insets: Story = {
         v === "top" ? [media, text] : v === "bottom" ? [text, media] : [text, media, text];
       return card("", parts.join(""), 240);
     }),
+};
+
+// blank — borderless centered block; the shell variant picks the frame
+export const Blank: Story = {
+  render: () =>
+    axis(["-", "hollow", "blank"], (v) =>
+      card(
+        attr("sl-variant", v),
+        `<div sl-card-section="blank">` +
+          `<strong>${v === "hollow" ? "上傳檔案" : v === "blank" ? "查無結果" : "沒有內容"}</strong>` +
+          `<p>${v === "hollow" ? "拖拉檔案至此" : "說明文字"}</p>` +
+          (v === "-" ? `<button sl-button>建立</button>` : "") +
+          `</div>`,
+        200,
+      ),
+    ),
+};
+
+// section value axis — emphasis, selected state, hover, alignment
+export const SectionKinds: Story = {
+  render: () =>
+    card(
+      "",
+      [
+        sec(`預設區塊`),
+        `<div sl-card-section="secondary">secondary — 次要淡底</div>`,
+        `<div sl-card-section="active">active — 選中態</div>`,
+        `<div sl-card-section="interactive">interactive — 滑過來會變色</div>`,
+        `<div sl-card-section="center">center — 置中文字</div>`,
+      ].join(""),
+      320,
+    ),
 };
