@@ -36,6 +36,9 @@ for (const f of themeFiles) {
   });
   writeFileSync(`${themeDir}/dist/${name}`, result.outputFiles[0].text);
 }
+// the shared derivation layer ships too — custom themes @import it and
+// author only seeds + color-scheme
+cpSync(`${themeDir}/css/derived.css`, `${themeDir}/dist/derived.css`);
 
 // @sakulime-ui/layout — tokens + layout
 out(`${layoutDir}/dist`);
