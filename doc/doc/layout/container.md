@@ -11,7 +11,7 @@ import * as ContainerStories from "../../stories/layout/container.stories";
 
 > 把內容限制在一個寬度裡，置中，左右各留 16px。螢幕再寬，內容最多就到上限，一行字才不會太長。
 
-下面是三個真的容器，放在 1200px 寬的頁面裡。`lg` 貼滿兩邊，其他兩個照上限置中。看不完可以左右捲動。
+下面的框代表一個頁面 — 三個真實容器在裡面照常置中、貼邊。容器上限吃 `--sl-container-sm/md/lg`，demo 把數值減半才放得下整頁（想改寬度也是覆寫同三個變數）。
 
 <Demo :render="ContainerStories.ContainerWidths.render" />
 

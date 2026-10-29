@@ -29,3 +29,19 @@
   height: 7rem;
   background: linear-gradient(135deg, var(--sl-primary), var(--sl-secondary));
 }
+
+/* miniature page frame for the container demo — halving the container
+   vars scales the real attributes down to fit the stage, so all three
+   widths are visible at once instead of scrolling a full 1200px page */
+.demo-viewport {
+  --sl-container-sm: 22.5rem;
+  --sl-container-md: 30rem;
+  --sl-container-lg: 37.5rem;
+  max-width: 100%;
+  padding: var(--sl-md) 0;
+  border: 1px solid var(--sl-border);
+  border-radius: var(--sl-sm);
+  display: grid;
+  gap: var(--sl-md);
+  overflow: hidden;
+}
