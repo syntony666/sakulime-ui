@@ -519,7 +519,7 @@ body::before {
   top: calc(100% + 6px);
   right: 0;
   z-index: 20;
-  min-width: max(100%, 120px);
+  width: 100%;
   margin: 0;
   padding: 4px;
   list-style: none;
