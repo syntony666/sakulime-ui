@@ -50,48 +50,24 @@ import "@sakulime-ui/theme/terra-dark.min.css"; // Theme: Terra Dark
 
 ## 自訂主題
 
-一個主題只需要 **3 個種子色＋1 個 `color-scheme` 旗標**，其餘 13 個 `--sl-*` 變數全部由推導層（`derived.css`）算出：
+一個主題只要 3 個種子色：
 
 ```css
 @import "@sakulime-ui/theme/derived.css";
 
 @layer theme {
   :root[data-theme="my-theme"] {
-    color-scheme: light; /* 或 dark — light-dark() 依它決定極性 */
-
-    --sl-seed-primary: #…;   /* 主要行動色：CTA 面 */
-    --sl-seed-secondary: #…; /* 安靜面＋整個中性家族的 hue 來源 */
-    --sl-seed-accent: #…;    /* accent、連結、強調文字 */
+    color-scheme: light;            /* dark 就寫 dark */
+    --sl-seed-primary: #…;          /* 行動色（CTA 面）*/
+    --sl-seed-secondary: #…;        /* 安靜面，也是全部中性色的 hue */
+    --sl-seed-accent: #…;           /* accent、連結色 */
   }
 }
 ```
 
-每個種子控制的範圍：
+其他 `--sl-*` 由推導層算出：前景墨依面色深淺自動翻轉，accent 會被壓進可讀範圍，ok / warn / danger 是固定色相不隨種子變。
 
-| 種子 | 產出 |
-| --- | --- |
-| `--sl-seed-primary` | `--sl-primary` 面、`--sl-primary-fg` 墨、`--sl-primary-bg` 淡底 |
-| `--sl-seed-secondary` | `--sl-secondary` 家族，**外加** `bg`/`surface`/`border`/全部 `text-*` — 中性色的 hue 全部取自它，選個有色的 secondary 整個介面就帶那個色調 |
-| `--sl-seed-accent` | `--sl-text-accent`（連結、啟用態、標題色） |
-
-推導規則：
-
-- **前景墨自動翻轉** — 面色亮度高於 0.62 配同色系深墨、低於配淺墨。種子避免落在 0.55–0.7 的灰區，那裡的墨會卡在邊界偏灰
-- **accent 夾進可讀帶** — 亮主題壓到 L ≤ 0.55、暗主題抬到 L ≥ 0.72，給太亮或太暗的 accent 會被調整到讀得出來
-- **status 不吃種子** — ok / warn / danger 用全球通用的綠黃紅固定色相，只隨 `color-scheme` 調整深淺
-- **不能指定異色墨** — fg 永遠從面色同 hue 推導，想要「琥珀底配酒紅字」這種跳 hue 配對就得整組 `--sl-*` 自己寫（不走 seed 模型）
-
-要讓 core bundle 帶上新主題，加兩處：
-
-```ts
-// packages/core/src/index.ts
-import "@sakulime-ui/theme/my-theme.css";
-```
-
-```jsonc
-// packages/shared/theme/package.json — exports
-"./my-theme.css": "./my-theme.css",
-```
+要收進 core bundle，在 `packages/core/src/index.ts` import 一次、`packages/shared/theme/package.json` 的 exports 加一行。
 
 ## 主題色系
 
