@@ -396,6 +396,12 @@ body::before {
   margin-left: 0.2em;
 }
 
+/* pager hover gets the system's interactive cue — soft tint plus the
+   accent border; the title is already brand-1 */
+.VPDocFooter .pager-link:hover {
+  background-color: var(--vp-c-brand-soft);
+}
+
 /* sidebar + pager sub-label — the quiet tone carries the dimming so
    these stay readable instead of dropping below AA via opacity */
 .VPSidebarItem em,
@@ -407,6 +413,12 @@ body::before {
 /* active row's subtitle takes the link's accent too — one color per
    row, the size step alone carries the hierarchy */
 .VPSidebarItem.is-active em {
+  color: inherit;
+}
+
+/* hover turns the link text accent — the subtitle follows it, so the
+   whole label reacts instead of half of it */
+.VPSidebarItem .link:hover em {
   color: inherit;
 }
 
