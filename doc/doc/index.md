@@ -1,5 +1,8 @@
 ---
 layout: home
+title: Sakulime UI
+titleTemplate: false
+description: 純 HTML + CSS 最簡單使用的 UI 介面 — sl-* attributes 寫元件，--sl-* tokens 管外觀，零 runtime、零 framework 依賴。
 
 hero:
   name: Sakulime UI

@@ -1,3 +1,8 @@
+---
+title: Button 按鈕
+description: sl-button 按鈕元件 — tone、variant、size、radius 四條屬性軸自由組合，搭配原生 disabled。
+---
+
 <script setup>
 import * as ButtonStories from "../../stories/components/button.stories";
 </script>

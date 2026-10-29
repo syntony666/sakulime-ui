@@ -1,3 +1,8 @@
+---
+title: 排版工具
+description: 只需要排版工具時安裝 @sakulime-ui/layout — 容器等版面屬性，不帶元件。
+---
+
 # 排版工具
 
 只需要排版工具時：

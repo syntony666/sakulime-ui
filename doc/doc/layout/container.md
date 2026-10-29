@@ -1,3 +1,8 @@
+---
+title: Container 容器
+description: sl-container 容器 — 內容寬度軸與水平置中，頁面排版的起點。
+---
+
 <script setup>
 import * as ContainerStories from "../../stories/layout/container.stories";
 </script>
