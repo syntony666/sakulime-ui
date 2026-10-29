@@ -420,6 +420,12 @@ body::before {
   color: var(--sl-text-muted);
 }
 
+/* the active row's brand-soft tint drops muted (text@78%) under AA —
+   the subtitle climbs one ladder step to secondary on that surface */
+.VPSidebarItem.is-active em {
+  color: var(--sl-text-secondary);
+}
+
 /* theme swatch grid — chips read --sl-* vars live so the nav dots
    recolor the whole table */
 .sl-sw-group {
