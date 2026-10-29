@@ -564,9 +564,9 @@ body::before {
 /* theme dot — a diagonal split of primary over the material seed,
    with an inner ring marking the scheme (white = light, black = dark) */
 .sl-theme-dot {
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--dot) 50%, var(--dot-2) 50%);
-  box-shadow: inset 0 0 0 1.5px var(--dot-mode);
+  box-shadow: inset 0 0 0 2px var(--dot-mode);
 }
