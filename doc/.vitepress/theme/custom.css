@@ -387,6 +387,14 @@ body::before {
   padding-left: 12px;
 }
 
+/* hover previews the same shape at half strength — 5% tint, 45% bar */
+.VPSidebarItem .link:hover {
+  background-color: color-mix(in oklab, var(--sl-text-accent) 5%, transparent);
+  box-shadow: inset 3px 0 0 color-mix(in oklab, var(--sl-text-accent) 45%, transparent);
+  margin-left: -12px;
+  padding-left: 12px;
+}
+
 /* sub-label next to a main title — h1 "Button *按鈕*" only */
 .vp-doc h1 em {
   color: var(--sl-text-muted);
@@ -410,20 +418,9 @@ body::before {
   color: var(--sl-text-muted);
 }
 
-/* active row's subtitle takes the link's accent too — one color per
-   row, the size step alone carries the hierarchy */
-.VPSidebarItem.is-active em {
-  color: inherit;
-}
-
-/* sidebar hover wears the same tint as the active row — the accent
-   bar stays the selection marker */
-.VPSidebarItem .link:hover {
-  background-color: var(--vp-c-brand-soft);
-}
-
-/* hover turns the link text accent — the subtitle follows it, so the
-   whole label reacts instead of half of it */
+/* active or hovered row's subtitle takes the link's accent too — one
+   color per row, the size step alone carries the hierarchy */
+.VPSidebarItem.is-active em,
 .VPSidebarItem .link:hover em {
   color: inherit;
 }
