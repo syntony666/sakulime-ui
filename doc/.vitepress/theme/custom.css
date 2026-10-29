@@ -100,6 +100,46 @@
   --vp-button-alt-hover-bg: var(--sl-secondary);
 }
 
+/* hero buttons take the system's own control shape — the sl radius
+   scale and the hover-scale interaction the components speak */
+.VPHero .VPButton {
+  transition:
+    transform 0.18s ease,
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease;
+}
+
+/* medium/big carry their own scoped radius — match that weight so the
+   sl step actually lands */
+.VPHero .VPButton.medium,
+.VPHero .VPButton.big {
+  border-radius: var(--sl-sm);
+}
+
+.VPHero .VPButton:hover {
+  transform: scale(1.05);
+}
+
+/* feature cards get the system's hairline back — VP paints their
+   border in the surface color, which reads as no card at all */
+.VPHomeFeatures .VPFeature {
+  border-color: var(--sl-border);
+}
+
+/* 18px restores a real step above the 14px details text */
+.VPFeature .title {
+  font-size: 18px;
+}
+
+/* closing line on the home page — the layout has no footer of its own */
+.sl-home-foot {
+  margin-top: var(--sl-5xl);
+  padding-bottom: var(--sl-2xl);
+  color: var(--sl-text-muted);
+  font-size: 13px;
+  text-align: center;
+}
 
 /* brand hairline across the top — the page's signature */
 body::before {
