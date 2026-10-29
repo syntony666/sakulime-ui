@@ -38,6 +38,7 @@ const themes = Object.keys(palettes)
         .map((w) => w[0].toUpperCase() + w.slice(1))
         .join(" "),
       color: pick(palettes[path] as string, "--sl-seed-primary"),
+      dark: /color-scheme:\s*dark/.test(palettes[path] as string),
     };
   });
 
@@ -108,10 +109,13 @@ onMounted(() => {
     theme,
     (v) => {
       document.documentElement.dataset.theme = v;
-      // the -dark suffix convention also flips vitepress's own dark
-      // internals (dual shiki themes, dark-only chrome rules)
-      document.documentElement.classList.toggle("dark", v.endsWith("-dark"));
+      // the theme's declared color-scheme flips vitepress's own dark
+      // internals (dual shiki themes, dark-only chrome rules); the
+      // flag persists so the head script restores it pre-paint
+      const dark = themes.find((t) => t.value === v)?.dark === true;
+      document.documentElement.classList.toggle("dark", dark);
       localStorage.setItem("sl-theme", v);
+      localStorage.setItem("sl-dark", dark ? "1" : "0");
     },
     { immediate: true },
   );
