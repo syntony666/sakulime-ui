@@ -13,7 +13,9 @@ const stripShells = (code: string): string => {
       .replace(/<\/div>\s*$/, "")
       .trim();
   }
-  return c.replace(/<span class="axis-sep"><\/span>/g, "");
+  /* demo-only elements carry data-demo — drop the whole element; the
+     shown code should never carry demo chrome */
+  return c.replace(/<([a-z]+)[^>]*\sdata-demo(\s|>)[^>]*>.*?<\/\1>/g, "");
 };
 
 const VOID = new Set([

@@ -18,8 +18,10 @@ const NAMES: Record<string, string> = {
 
 export const label = (value: string) => NAMES[value] ?? value;
 
+// data-demo marks this as demo chrome — the docs source transform
+// drops the whole element so it never reaches the shown code
 const SEP =
-  '<span class="axis-sep" title="左側是未寫入屬性的預設，右側是具名值"></span>';
+  '<span class="axis-sep" data-demo title="左側是未寫入屬性的預設，右側是具名值"></span>';
 
 export const axis = <T>(values: T[], item: (v: T) => string) =>
   `<div class="axis-row">` +
