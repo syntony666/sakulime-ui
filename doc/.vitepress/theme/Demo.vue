@@ -12,7 +12,9 @@ const props = withDefaults(
   { code: true },
 );
 
-const html = computed(() => props.render(props.args));
+// args may be unbound for static demos — render({}) must not crash and
+// take the whole page down with it
+const html = computed(() => props.render(props.args ?? {}));
 const source = computed(() => highlightMarkup(html.value));
 const host = ref<HTMLElement | null>(null);
 

@@ -69,7 +69,7 @@ import * as CardStories from "../../stories/components/card.stories";
 </div>
 ```
 
-<Demo :render="CardStories.Corner.render" :args="{ radius: '-', tone: '-' }" />
+<Demo :render="CardStories.Corner.render" :args="CardStories.Corner.args" />
 
 顏色跟著 `sl-tone` 走（預設 primary），寫在卡片上整張統一，寫在標記上只改那一個：
 

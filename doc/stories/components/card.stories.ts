@@ -137,6 +137,7 @@ const cornerIcon =
   `<path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>`;
 
 export const Corner: Story = {
+  args: { radius: "-", tone: "-" },
   render: (args) =>
     `<div sl-card${attr("sl-radius", args.radius)} style="max-width: 360px">` +
     `<span sl-card-corner${attr("sl-tone", args.tone)}>100ms</span>` +

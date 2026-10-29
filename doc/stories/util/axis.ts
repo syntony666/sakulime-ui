@@ -2,9 +2,10 @@
 // starts with "-" (the unwritten default), a separator item is inserted
 // to split it from the named values.
 
-// "-" means the attribute is not written — the default.
-export const attr = (name: string, value: string) =>
-  value === "-" ? "" : ` ${name}="${value}"`;
+// "-" means the attribute is not written — the default. An absent
+// arg reads the same way, so render() can't emit sl-x="undefined".
+export const attr = (name: string, value?: string) =>
+  value == null || value === "-" ? "" : ` ${name}="${value}"`;
 
 // natural-language labels for values
 const NAMES: Record<string, string> = {
