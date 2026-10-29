@@ -3,32 +3,68 @@
 @layer theme {
   :root,
   :root[data-theme="sakulime"] {
-  --sl-bg: #fbf0e7;
-  --sl-surface: #fdf7f3;
-  --sl-border: #f9c6c7;
+    color-scheme: light;
 
-  --sl-text: #7d2c4b;
-  --sl-text-strong: #5c2138;
-  --sl-text-accent: #d43d5e;
-  --sl-text-invert: #fdf3f3;
+    /* seeds — the only authored colors; every other token derives */
+    --sl-seed-primary: #f4b160;
+    --sl-seed-secondary: #fdc5cf;
+    --sl-seed-accent: #d43d5e;
 
-  /* derived text tones — follow --sl-text automatically; every step
-     stays ≥4.5:1 on bg/surface so quiet text still reads */
-  --sl-text-secondary: color-mix(in srgb, var(--sl-text) 88%, transparent);
-  --sl-text-muted: color-mix(in srgb, var(--sl-text) 78%, transparent);
+    /* surfaces — the secondary seed's hue is the material; chroma is
+       scaled near zero, lightness steps fixed per scheme */
+    --sl-bg: light-dark(
+      oklch(from var(--sl-seed-secondary) 96.5% calc(c * 0.3) h),
+      oklch(from var(--sl-seed-secondary) 21.5% calc(c * 0.7) h));
+    --sl-surface: light-dark(
+      oklch(from var(--sl-seed-secondary) 98.5% calc(c * 0.15) h),
+      oklch(from var(--sl-seed-secondary) 27% calc(c * 0.7) h));
+    --sl-border: light-dark(
+      oklch(from var(--sl-seed-secondary) 80% calc(c * 0.9) h),
+      oklch(from var(--sl-seed-secondary) 44.5% calc(c * 1.1) h));
 
-  /* two primaries — color + on-color fg + soft bg tint */
-  --sl-primary: #f4b160;
-  --sl-primary-fg: #5c2138;
-  --sl-primary-bg: #fce8d0;
+    /* ink ladder — the same hue at the poles */
+    --sl-text: light-dark(
+      oklch(from var(--sl-seed-secondary) 30% c h),
+      oklch(from var(--sl-seed-secondary) 92% calc(c * 0.4) h));
+    --sl-text-strong: light-dark(
+      oklch(from var(--sl-seed-secondary) 22% c h),
+      oklch(from var(--sl-seed-secondary) 97% calc(c * 0.2) h));
+    --sl-text-invert: light-dark(
+      oklch(from var(--sl-seed-secondary) 97.5% calc(c * 0.1) h),
+      oklch(from var(--sl-seed-secondary) 21.5% c h));
+    --sl-text-secondary: color-mix(in srgb, var(--sl-text) 88%, transparent);
+    --sl-text-muted: color-mix(in srgb, var(--sl-text) 78%, transparent);
 
-  --sl-secondary: #fdc5cf;
-  --sl-secondary-fg: #5c2138;
-  --sl-secondary-bg: #fdeef1;
+    /* accent — clamped into the readable ink band for this scheme */
+    --sl-text-accent: light-dark(
+      oklch(from var(--sl-seed-accent) clamp(0.15, l, 0.55) c h),
+      oklch(from var(--sl-seed-accent) clamp(0.72, l, 1) c h));
 
-  /* status */
-  --sl-ok: #3d7354;
-  --sl-warn: #f2cf4a;
-  --sl-danger: #b53349;
+    /* tone faces */
+    --sl-primary: var(--sl-seed-primary);
+    --sl-secondary: var(--sl-seed-secondary);
+
+    /* fg — the tone's own hue pushed to the far ink pole; the clamp
+       is a step on the face's lightness so it flips without a flag */
+    --sl-primary-fg: oklch(from var(--sl-primary)
+      calc(0.95 - clamp(0, (l - 0.62) * 50, 1) * 0.72)
+      calc(c * 0.35) h);
+    --sl-secondary-fg: oklch(from var(--sl-secondary)
+      calc(0.95 - clamp(0, (l - 0.62) * 50, 1) * 0.72)
+      calc(c * 0.35) h);
+
+    /* tints — the face hue pushed to a quiet tint depth */
+    --sl-primary-bg: light-dark(
+      oklch(from var(--sl-primary) 93% calc(c * 0.35) h),
+      oklch(from var(--sl-primary) 30% calc(c * 0.55) h));
+    --sl-secondary-bg: light-dark(
+      oklch(from var(--sl-secondary) 95% calc(c * 0.4) h),
+      oklch(from var(--sl-secondary) 24.5% calc(c * 0.8) h));
+
+    /* status — universal hues at scheme-fixed depth; warn pairs with
+       the strong ink so it stays light in light themes */
+    --sl-ok: light-dark(oklch(51% 0.10 158), oklch(68% 0.12 162));
+    --sl-warn: light-dark(oklch(80% 0.14 82), oklch(54.5% 0.11 86));
+    --sl-danger: light-dark(oklch(51% 0.18 22), oklch(67% 0.16 20));
   }
 }
