@@ -4,7 +4,7 @@
 //      element carrying an sl-* attribute, that's the real markup
 //   2. strip demo-only elements — before the >< split inserts newlines
 //   3. strip demo inline styles — they aren't part of the API
-//   4. one element per line
+//   4. one element per line, indented by nesting depth
 const stripShells = (code: string): string => {
   let c = code.trim();
   while (/^<div(?![^>]*\s+sl-)[^>]*>/.test(c)) {
@@ -13,13 +13,59 @@ const stripShells = (code: string): string => {
       .replace(/<\/div>\s*$/, "")
       .trim();
   }
-  return c
-    .replace(/<span class="axis-sep"><\/span>/g, "")
-    .replace(/></g, ">\n<");
+  return c.replace(/<span class="axis-sep"><\/span>/g, "");
+};
+
+const VOID = new Set([
+  "area",
+  "base",
+  "br",
+  "col",
+  "embed",
+  "hr",
+  "img",
+  "input",
+  "link",
+  "meta",
+  "source",
+  "track",
+  "wbr",
+]);
+
+// indent by nesting depth; an open tag immediately closed on the next
+// line folds into one `<x></x>` line
+const indentMarkup = (code: string): string => {
+  const toks = code
+    .replace(/></g, ">\n<")
+    .split("\n")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const lines: string[] = [];
+  let depth = 0;
+  for (const t of toks) {
+    const tag = /^<([\w-]+)/.exec(t)?.[1];
+    const isClose = /^<\//.test(t);
+    const isOpen =
+      !!tag && !isClose && !/<\//.test(t) && !/\/>$/.test(t) && !VOID.has(tag);
+    if (isClose) {
+      const prev = lines[lines.length - 1];
+      const prevTag = /^<([\w-]+)[^>]*>$/.exec(prev?.trim() ?? "")?.[1];
+      const thisTag = /^<\/([\w-]+)>$/.exec(t)?.[1];
+      if (prevTag && prevTag === thisTag) {
+        lines[lines.length - 1] = prev + t;
+        depth--;
+        continue;
+      }
+      depth--;
+    }
+    lines.push("  ".repeat(Math.max(depth, 0)) + t);
+    if (isOpen) depth++;
+  }
+  return lines.join("\n");
 };
 
 export const showMarkup = (code: string): string =>
-  stripShells(code).replace(/\s+style="[^"]*"/g, "");
+  indentMarkup(stripShells(code).replace(/\s+style="[^"]*"/g, ""));
 
 // markup display — the demo's code panel runs the shown source through
 // a tiny tokenizer instead of a full highlighter: sl-* attribute names
