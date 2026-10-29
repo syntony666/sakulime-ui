@@ -35,6 +35,7 @@ npm run site         # also verify the static site when touching doc/
 - Code comments in English only, and only where they add information
 - Commit messages in English, under 50 words, conventional prefixes (`feat:`, `fix:`, `docs:`, `chore:`, `refactor:`)
 - Doc pages: `.md` for prose, `.stories.ts` for demos; stories render through the theme's `<Demo>` and `<Playground>` components
+- Doc pages need frontmatter `title` and `description` — canonical, OG and JSON-LD metadata is generated from them
 
 ## Workflow
 

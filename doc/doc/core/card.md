@@ -1,3 +1,8 @@
+---
+title: Card 卡片
+description: sl-card 卡片容器 — 內距、圓角、型態、邊緣標記與角落標記，全部寫在 sl-* 屬性上。
+---
+
 <script setup>
 import * as CardStories from "../../stories/components/card.stories";
 </script>

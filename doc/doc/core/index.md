@@ -1,3 +1,8 @@
+---
+title: 元件
+description: 只需要 UI 元件時安裝 @sakulime-ui/core — Button、Card 等元件全部用 sl-* 屬性驅動，附主題包。
+---
+
 # 元件
 
 不需要排版工具時，可以只載入元件，裡面也會有主題包：
