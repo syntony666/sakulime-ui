@@ -8,8 +8,10 @@
     border-color: transparent;
   }
 
+  /* invert carries the page base — the tone drops to ink + border, and
+     an opaque fill keeps it a button on patterned or tinted surfaces */
   [sl-button][sl-variant="invert"] {
-    background: transparent;
+    background: var(--sl-bg);
     color: var(--sl-tone-text);
     border-color: var(--sl-tone-bg);
   }
