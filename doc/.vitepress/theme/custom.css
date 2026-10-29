@@ -387,13 +387,6 @@ body::before {
   padding-left: 12px;
 }
 
-/* active text stays the same muted color as siblings — the bar and
-   tinted row carry the selection signal; extra classes match VP's
-   own selector weight */
-.VPSidebarItem.is-active.is-link > .item > .VPLink.link > .text {
-  color: var(--vp-c-text-2);
-}
-
 /* sub-label next to a main title — h1 "Button *按鈕*" only */
 .vp-doc h1 em {
   color: var(--sl-text-muted);
