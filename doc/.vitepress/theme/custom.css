@@ -308,8 +308,9 @@ body::before {
 .sl-play-field {
   display: grid;
   /* fixed left lane holds name over desc; the control lane takes the
-     rest and centers against both — same geometry in every field */
-  grid-template-columns: 10rem 1fr;
+     rest and centers against both — same geometry in every field.
+     11rem + 12px names keep sl-card-section="inset" on one line */
+  grid-template-columns: 11rem 1fr;
   gap: 2px var(--sl-sm);
   align-items: center;
   font-size: 13px;
@@ -317,10 +318,12 @@ body::before {
 
 .sl-play-field :is(select, input) {
   /* pin the lane too — a definite row alone jumps the auto-placement
-     queue and the control lands left of the name */
+     queue and the control lands left of the name. end-aligned so every
+     control forms a rail at the field's right edge */
   grid-column: 2;
   grid-row: 1 / -1;
   align-self: center;
+  justify-self: end;
   min-width: 0;
 }
 
@@ -344,13 +347,28 @@ body::before {
 }
 
 .sl-play-field input[type="checkbox"] {
-  justify-self: start;
   accent-color: var(--sl-primary);
 }
 
 .sl-play-name {
   font-family: var(--vp-font-family-mono);
   font-weight: 600;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* legend row under the fields — explains what "-" means in selects.
+   Footnote treatment: negative margins pull it back so it sits --sl-sm
+   below the field rows and --sl-sm above the panel's bottom edge.
+   Needs 0-2-0 to beat .vp-doc p's paragraph margins */
+.sl-play-fields > .sl-play-note {
+  grid-column: 1 / -1;
+  margin: calc(var(--sl-sm) - var(--sl-lg)) 0
+    calc(var(--sl-sm) - var(--sl-md));
+  padding: 0;
+  color: var(--sl-text-muted);
+  font-size: 11px;
+  text-align: right;
 }
 
 .sl-play-desc {
