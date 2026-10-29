@@ -36,7 +36,9 @@ import * as CardStories from "../../stories/components/card.stories";
 
 ### 型態 `sl-variant`
 
-- `hollow`：虛線描邊，常用於上傳或空白狀態
+- `hollow`：虛線描邊＋透明底，常用於上傳或空白狀態
+- `plain`：無框線，保留底色與圓角
+- `blank`：無框線＋透明底 — 整張卡只剩內距，搭 `sl-card-section="blank"` 就是純空白態
 
 <Demo :render="CardStories.Variants.render" />
 
@@ -130,3 +132,29 @@ import * as CardStories from "../../stories/components/card.stories";
 
 <Playground :meta="CardStories.Sections" :render="CardStories.Sections.render" />
 <Demo :render="CardStories.Insets.render" />
+
+#### 空白 `blank`
+
+無邊線、完全置中的內容區塊 — 空狀態、上傳區、查無結果。內容用語義元素：標題寫 `strong`、說明寫 `p`、動作放 `sl-button`：
+
+```html
+<div sl-card sl-variant="hollow">
+  <div sl-card-section="blank">
+    <strong>上傳檔案</strong>
+    <p>拖拉檔案至此</p>
+  </div>
+</div>
+```
+
+<Demo :render="CardStories.Blank.render" />
+
+#### 區塊變體
+
+分區的值可以改變底色、狀態或對齊：
+
+- `secondary`：次要資訊淡底
+- `active`：選中態（primary 淡色）
+- `interactive`：滑過變色，可點擊列
+- `center`：文字置中
+
+<Demo :render="CardStories.SectionKinds.render" />

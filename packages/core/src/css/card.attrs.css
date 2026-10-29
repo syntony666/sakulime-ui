@@ -28,6 +28,18 @@
     border-width: 2px;
   }
 
+  /* plain — frameless shell: keeps the surface fill, drops the border */
+  [sl-card][sl-variant="plain"] {
+    border: 0;
+  }
+
+  /* blank — invisible shell: no border, no fill; pairs with
+     sl-card-section="blank" for a pure blankslate block */
+  [sl-card][sl-variant="blank"] {
+    background: transparent;
+    border: 0;
+  }
+
   /* indicate — accent edge, colored by the tone axis */
   [sl-card][sl-indicate="top"] {
     border-top: 3px solid var(--sl-tone-bg, var(--sl-primary));
@@ -161,6 +173,90 @@
   [sl-card-section="inset"] > :is(img, svg, video, iframe) {
     display: block;
     width: 100%;
+  }
+
+  /* blank — borderless, fully centered empty-state block */
+  [sl-card] > [sl-card-section="blank"] {
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    gap: var(--sl-sm);
+    padding-block: var(--sl-3xl);
+    text-align: center;
+  }
+
+  [sl-card-section="blank"] :is(h1, h2, h3, h4, p) {
+    margin: 0;
+  }
+
+  [sl-card-section="blank"] :is(strong, h1, h2, h3, h4) {
+    font-size: var(--sl-lg);
+    font-weight: 600;
+    color: var(--sl-text-strong);
+  }
+
+  [sl-card-section="blank"] p {
+    color: var(--sl-text-secondary);
+    font-size: var(--sl-md);
+  }
+
+  /* secondary — quieter section for supporting content */
+  [sl-card] > [sl-card-section="secondary"] {
+    background: var(--sl-secondary-bg);
+  }
+
+  /* active — selected state on the primary family */
+  [sl-card] > [sl-card-section="active"] {
+    background: color-mix(in srgb, var(--sl-primary) 8%, var(--sl-surface));
+  }
+
+  /* interactive — hover affordance for clickable rows */
+  [sl-card] > [sl-card-section="interactive"] {
+    cursor: pointer;
+    transition: background-color 160ms ease;
+  }
+
+  [sl-card] > [sl-card-section="interactive"]:hover {
+    background: var(--sl-secondary-bg);
+  }
+
+  /* bg sections own the gap to the next divider — the fill runs
+     edge to edge instead of leaving a bare strip; at the extremes
+     they bleed to the card edges like inset */
+  [sl-card] > :is([sl-card-section="secondary"],
+                  [sl-card-section="active"],
+                  [sl-card-section="interactive"]) {
+    padding-bottom: var(--sl-pad);
+  }
+
+  :is([sl-card-section="secondary"],
+      [sl-card-section="active"],
+      [sl-card-section="interactive"]) + [sl-card-section] {
+    margin-top: 0;
+  }
+
+  [sl-card] > :is([sl-card-section="secondary"]:first-child,
+                  [sl-card-section="active"]:first-child,
+                  [sl-card-section="interactive"]:first-child,
+                  [sl-card-corner]:first-child + [sl-card-section="secondary"],
+                  [sl-card-corner]:first-child + [sl-card-section="active"],
+                  [sl-card-corner]:first-child + [sl-card-section="interactive"]) {
+    margin-top: calc(var(--sl-pad) * -1);
+    padding-top: var(--sl-pad);
+  }
+
+  [sl-card] > :is([sl-card-section="secondary"]:last-child,
+                  [sl-card-section="active"]:last-child,
+                  [sl-card-section="interactive"]:last-child,
+                  [sl-card-section="secondary"]:has(+ [sl-card-corner]:last-child),
+                  [sl-card-section="active"]:has(+ [sl-card-corner]:last-child),
+                  [sl-card-section="interactive"]:has(+ [sl-card-corner]:last-child)) {
+    margin-bottom: calc(var(--sl-pad) * -1);
+  }
+
+  /* center — horizontally centered text */
+  [sl-card] > [sl-card-section="center"] {
+    text-align: center;
   }
 
   /* raised — theme-aware shadow (reusable beyond card) */
