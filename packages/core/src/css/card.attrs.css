@@ -220,6 +220,40 @@
     background: var(--sl-secondary-bg);
   }
 
+  /* bg sections own the gap to the next divider — the fill runs
+     edge to edge instead of leaving a bare strip; at the extremes
+     they bleed to the card edges like inset */
+  [sl-card] > :is([sl-card-section="secondary"],
+                  [sl-card-section="active"],
+                  [sl-card-section="interactive"]) {
+    padding-bottom: var(--sl-pad);
+  }
+
+  :is([sl-card-section="secondary"],
+      [sl-card-section="active"],
+      [sl-card-section="interactive"]) + [sl-card-section] {
+    margin-top: 0;
+  }
+
+  [sl-card] > :is([sl-card-section="secondary"]:first-child,
+                  [sl-card-section="active"]:first-child,
+                  [sl-card-section="interactive"]:first-child,
+                  [sl-card-corner]:first-child + [sl-card-section="secondary"],
+                  [sl-card-corner]:first-child + [sl-card-section="active"],
+                  [sl-card-corner]:first-child + [sl-card-section="interactive"]) {
+    margin-top: calc(var(--sl-pad) * -1);
+    padding-top: var(--sl-pad);
+  }
+
+  [sl-card] > :is([sl-card-section="secondary"]:last-child,
+                  [sl-card-section="active"]:last-child,
+                  [sl-card-section="interactive"]:last-child,
+                  [sl-card-section="secondary"]:has(+ [sl-card-corner]:last-child),
+                  [sl-card-section="active"]:has(+ [sl-card-corner]:last-child),
+                  [sl-card-section="interactive"]:has(+ [sl-card-corner]:last-child)) {
+    margin-bottom: calc(var(--sl-pad) * -1);
+  }
+
   /* center — horizontally centered text */
   [sl-card] > [sl-card-section="center"] {
     text-align: center;
