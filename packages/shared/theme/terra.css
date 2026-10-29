@@ -3,9 +3,12 @@
 
 @layer theme {
   :root[data-theme="terra"] {
+  /* each slot owns a distinct lightness step — monochrome separation
+     comes from depth, not hue: white card / pale chip / stone page /
+     ink wash / gray fill / strong hairline */
   --sl-bg: #f5f5f4;
-  --sl-surface: #fafaf9;
-  --sl-border: #d6d3d1;
+  --sl-surface: #fdfcfa;
+  --sl-border: #a8a29e;
 
   --sl-text: #292524;
   --sl-text-strong: #1c1917;
@@ -23,10 +26,11 @@
   --sl-primary-fg: #fafaf9;
   --sl-primary-bg: #e7e5e4;
 
-  /* secondary = the quiet gray button the site actually uses */
-  --sl-secondary: #e7e5e4;
+  /* secondary = the quiet gray button the site actually uses —
+     deep enough to read as a fill instead of another surface */
+  --sl-secondary: #d6d3d1;
   --sl-secondary-fg: #292524;
-  --sl-secondary-bg: #f5f5f4;
+  --sl-secondary-bg: #f0efed;
 
   /* status */
   --sl-ok: #047857;

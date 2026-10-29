@@ -16,12 +16,12 @@ colors:
   sakulime-warn: "#f2cf4a"
   sakulime-danger: "#b53349"
   terra-bg: "#f5f5f4"
-  terra-surface: "#fafaf9"
-  terra-border: "#d6d3d1"
+  terra-surface: "#fdfcfa"
+  terra-border: "#a8a29e"
   terra-text: "#292524"
   terra-accent: "#1c1917"
   terra-primary: "#44403c"
-  terra-secondary: "#e7e5e4"
+  terra-secondary: "#d6d3d1"
   terra-ok: "#047857"
   terra-warn: "#e0a94e"
   terra-danger: "#b91c1c"
@@ -111,7 +111,7 @@ components:
 - **奶白 Surface** (#fdf7f3): 卡片/code 塊的表面色，比 bg 再淺一階
 
 ### Terra（第二品牌主題）
-- 單色 stone：bg #f5f5f4、text #292524、primary #44403c（石色實心）、secondary #e7e5e4。沒有彩色強調 — 強度全靠墨色深淺
+- 單色 stone：bg #f5f5f4、surface #fdfcfa（暖白）、text #292524、primary #44403c（石色實心）、secondary #d6d3d1、border #a8a29e。沒有彩色強調 — 強度全靠墨色深淺，每個色槽一個明度階
 
 ### Status
 - **Ok** sakulime #3d7354 / terra #047857、**Warn** #f2cf4a / #e0a94e、**Danger** #b53349 / #b91c1c — `sl-tone` 直接取用
