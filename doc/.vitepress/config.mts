@@ -101,6 +101,12 @@ export default defineConfig({
     outline: [2, 4],
     logo: "/favicon.svg",
     nav: [],
+    notFound: {
+      title: "找不到頁面",
+      quote: "網址可能打錯，或這個頁面已經移走了。",
+      linkLabel: "回首頁",
+      linkText: "回到首頁",
+    },
     socialLinks: [
       { icon: "github", link: "https://github.com/syntony666/sakulime-ui" },
     ],

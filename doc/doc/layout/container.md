@@ -1,6 +1,6 @@
 ---
 title: Container 容器
-description: sl-container 容器 — 內容寬度軸與水平置中，頁面排版的起點。
+description: sl-container 把內容限制在固定寬度，並在頁面中置中。
 ---
 
 <script setup>
@@ -11,7 +11,7 @@ import * as ContainerStories from "../../stories/layout/container.stories";
 
 > 把內容限制在一個寬度裡，置中，左右各留 16px。螢幕再寬，內容最多就到上限，一行字才不會太長。
 
-下面的框代表一個頁面 — 三個真實容器在裡面照常置中、貼邊。容器上限吃 `--sl-container-sm/md/lg`，demo 把數值減半才放得下整頁（想改寬度也是覆寫同三個變數）。
+下面三個容器放在一個縮小的頁面框裡，`lg` 貼滿兩邊，`sm` 和 `md` 照上限置中。想改寬度就覆寫 `--sl-container-sm/md/lg`。
 
 <Demo :render="ContainerStories.ContainerWidths.render" />
 

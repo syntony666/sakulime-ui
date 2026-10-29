@@ -1,6 +1,6 @@
 ---
 title: Button 按鈕
-description: sl-button 按鈕元件 — tone、variant、size、radius 四條屬性軸自由組合，搭配原生 disabled。
+description: sl-button 按鈕，用 sl-tone、sl-variant、sl-size、sl-radius 調整外觀。
 ---
 
 <script setup>

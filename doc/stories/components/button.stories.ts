@@ -55,7 +55,7 @@ const meta = {
     size: axisArg("sl-size", "大小", "md", SIZES),
     radius: axisArg("sl-radius", "圓角", "md", RADII),
     disabled: {
-      description: "停用標記 (使用html原生標籤)",
+      description: "停用標記（使用 HTML 原生標籤）",
       table: { type: {}, defaultValue: { summary: "false" } },
       control: "boolean",
     },

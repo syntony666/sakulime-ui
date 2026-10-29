@@ -1,6 +1,6 @@
 ---
 title: 元件
-description: 只需要 UI 元件時安裝 @sakulime-ui/core — Button、Card 等元件全部用 sl-* 屬性驅動，附主題包。
+description: 安裝 @sakulime-ui/core，含元件與主題包。
 ---
 
 # 元件
@@ -17,7 +17,7 @@ import "@sakulime-ui/core/index.min.css";
 
 ## CDN
 
-透過 CDN 載入樣式表，直接在 `<head>...</head>` 加入標籤連結 CDN 上的檔案：
+把下面這行放進 `<head>...</head>`：
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sakulime-ui/core/dist/index.min.css" />

@@ -60,7 +60,7 @@ const hasDashOption = computed(() =>
         <span class="sl-play-desc" v-html="descHtml(f.desc)" />
       </label>
       <p v-if="hasDashOption" class="sl-play-note">
-        <code>-</code> ＝ 不寫入屬性，走系統預設
+        <code>-</code> 表示不寫這個屬性，用預設值
       </p>
     </div>
   </div>

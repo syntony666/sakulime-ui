@@ -1,6 +1,6 @@
 ---
 title: 主題
-description: 主題是一整組 --sl-* 變數值 — 切換主題不用改元件、不用換 class，內建 sakulime 與 terra。
+description: 主題是一整組 --sl-* 變數值，切換主題不用改元件，也不用換 class。
 ---
 
 # 主題
@@ -27,7 +27,7 @@ import "@sakulime-ui/theme/terra.min.css";    // Theme: Terra
 
 ## CDN
 
-透過 CDN 載入樣式表，直接在 `<head>...</head>` 加入標籤連結 CDN 上的檔案：
+把下面兩行放進 `<head>...</head>`，要用哪個主題就載入哪一個：
 
 ```html
 <!-- Theme: Sakulime -->
@@ -46,6 +46,6 @@ import "@sakulime-ui/theme/terra.min.css";    // Theme: Terra
 
 ## 主題色系
 
-每個顏色都是 `var(--sl-*)`，預設為 `sakulime`，右上角色票可以直接切換主題預覽。
+每個顏色都是 `var(--sl-*)`，預設為 `sakulime`。右上角可以切換主題，下面的色票會跟著變。
 
 <ThemeSwatches />

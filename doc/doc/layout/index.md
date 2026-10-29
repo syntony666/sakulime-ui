@@ -1,6 +1,6 @@
 ---
 title: 排版工具
-description: 只需要排版工具時安裝 @sakulime-ui/layout — 容器等版面屬性，不帶元件。
+description: 安裝 @sakulime-ui/layout，只含排版工具。
 ---
 
 # 排版工具
@@ -17,7 +17,7 @@ import "@sakulime-ui/layout/index.min.css";
 
 ## CDN
 
-透過 CDN 載入樣式表，直接在 `<head>...</head>` 加入標籤連結 CDN 上的檔案：
+把下面這行放進 `<head>...</head>`：
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sakulime-ui/layout/dist/index.min.css" />

@@ -1,6 +1,6 @@
 ---
 title: 開始使用
-description: 用最簡單的方式讓介面不再單調 — sl-* 屬性加在標籤上、--sl-* 變數管顏色與尺寸，class 留給你自己。
+description: sl-* 屬性加在標籤上，--sl-* 變數管顏色跟尺寸，class 留給你。
 ---
 
 # Sakulime UI
@@ -21,13 +21,13 @@ import "sakulime-ui/sakulime.min.css";
 
 ## CDN
 
-透過 CDN 載入樣式表，直接在 `<head>...</head>` 加入標籤連結 CDN 上的檔案：
+把下面這行放進 `<head>...</head>`：
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakulime-ui/dist/sakulime.min.css" />
 ```
 
-個別套件引用，請見各套件及主題說明
+個別套件的說明：
 
 - 元件，含主題色系：[`@sakulime-ui/core`](/core/button)
 - 排版工具：[`@sakulime-ui/layout`](/layout/container)

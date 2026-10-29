@@ -1,6 +1,6 @@
 ---
 title: Card 卡片
-description: sl-card 卡片容器 — 內距、圓角、型態、邊緣標記、角落標記與分區，全部寫在 sl-* 屬性上。
+description: sl-card 卡片容器，可以設定內距、圓角、型態、標記和分區。
 ---
 
 <script setup>
@@ -36,9 +36,9 @@ import * as CardStories from "../../stories/components/card.stories";
 
 ### 型態 `sl-variant`
 
-- `hollow`：虛線描邊＋透明底，常用於上傳或空白狀態
-- `plain`：無框線，保留底色與圓角
-- `blank`：無框線＋透明底 — 整張卡只剩內距，搭 `sl-card-section="blank"` 就是純空白態
+- `hollow`：虛線描邊、透明底，常用在上傳或空白狀態
+- `plain`：拿掉框線，保留底色和圓角
+- `blank`：拿掉框線和底色，只剩內距
 
 <Demo :render="CardStories.Variants.render" />
 
@@ -105,7 +105,7 @@ import * as CardStories from "../../stories/components/card.stories";
 
 ### 分區 `sl-card-section`
 
-把卡片分成多個區塊，區塊之間自動出現滿版分隔線 — 第一個區塊不畫線，可以當 header 用：
+把卡片切成幾個區塊，區塊之間會自動出現一條分隔線。第一個區塊不畫線，可以當標題區：
 
 ```html
 <div sl-card>
@@ -119,7 +119,7 @@ import * as CardStories from "../../stories/components/card.stories";
 
 #### 貼邊 `inset`
 
-`inset` 是抵銷卡片內距的區塊，內容直接貼到卡片邊 — 圖片、地圖、色塊都行。放在第一個就貼上緣、最後一個就貼下緣、夾在中間就只貼左右，位置看 DOM 順序不用寫：
+`inset` 會把卡片內距抵銷掉，讓內容直接貼到卡片邊緣，放圖片、地圖或色塊都合適。放在第一個就貼上緣，放在最後一個就貼下緣，夾在中間只貼左右兩邊，位置照順序自動判斷：
 
 ```html
 <div sl-card>
@@ -128,14 +128,14 @@ import * as CardStories from "../../stories/components/card.stories";
 </div>
 ```
 
-角落標記疊在貼邊內容上也可以，`sl-card-corner` 不算一般內容，不影響 inset 的位置判斷：
+角落標記疊在貼邊內容上也行。`sl-card-corner` 不算一般內容，不會影響 inset 的位置判斷：
 
 <Playground :meta="CardStories.Sections" :render="CardStories.Sections.render" />
 <Demo :render="CardStories.Insets.render" />
 
 #### 空白 `blank`
 
-無邊線、完全置中的內容區塊 — 空狀態、上傳區、查無結果。內容用語義元素：標題寫 `strong`、說明寫 `p`、動作放 `sl-button`：
+沒有框線、內容完全置中的區塊，用來放空狀態、上傳區或查無結果。裡面直接用 `strong` 寫標題、`p` 寫說明，按鈕放 `sl-button`，不用另外加 class：
 
 ```html
 <div sl-card sl-variant="hollow">
@@ -150,11 +150,11 @@ import * as CardStories from "../../stories/components/card.stories";
 
 #### 區塊變體
 
-分區的值可以改變底色、狀態或對齊：
+分區還有這幾種變化：
 
-- `secondary`：次要資訊淡底
-- `active`：選中態（primary 淡色）
-- `interactive`：滑過變色，可點擊列
+- `secondary`：次要內容的淡底
+- `active`：目前選取的那一塊（primary 淡色）
+- `interactive`：滑鼠移過去會變色，適合整列都能點的清單
 - `center`：文字置中
 
 <Demo :render="CardStories.SectionKinds.render" />
