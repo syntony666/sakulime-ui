@@ -219,10 +219,67 @@ body::before {
     0 / var(--sl-lg) var(--sl-lg);
 }
 
+/* code panel — the summary bar carries a caret, the 原始碼 label and a
+   copy button; long dumps collapse behind it, short ones stay open */
+.sl-demo-src-wrap {
+  border-top: 1px solid var(--sl-border);
+}
+
+.sl-demo-src-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--sl-sm);
+  padding: 0 var(--sl-lg);
+  color: var(--sl-text-muted);
+  font-size: var(--sl-md);
+  cursor: pointer;
+  list-style: none;
+}
+
+.sl-demo-src-bar::-webkit-details-marker {
+  display: none;
+}
+
+.sl-demo-src-bar::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform 0.15s ease;
+}
+
+.sl-demo-src-wrap[open] > .sl-demo-src-bar::before {
+  transform: rotate(45deg);
+}
+
+/* copy lives on the summary bar but only exists once the panel is
+   open — collapsed panels carry no actions */
+.sl-demo-copy {
+  display: none;
+  margin-left: auto;
+  padding: 1px 8px;
+  font: inherit;
+  font-size: 11px;
+  color: var(--sl-text);
+  background: var(--sl-surface);
+  border: 1px solid var(--sl-border);
+  border-radius: var(--sl-xs);
+  cursor: pointer;
+}
+
+.sl-demo-src-wrap[open] .sl-demo-copy {
+  display: inline-block;
+}
+
+.sl-demo-copy:hover {
+  border-color: var(--sl-primary);
+}
+
 .sl-demo-src {
   margin: 0;
-  padding: var(--sl-md) var(--sl-lg);
-  border-top: 1px solid var(--sl-border);
+  padding: var(--sl-sm) var(--sl-lg);
   background: transparent;
   font-size: 13px;
   overflow-x: auto;

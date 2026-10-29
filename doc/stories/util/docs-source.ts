@@ -64,8 +64,20 @@ const indentMarkup = (code: string): string => {
   return lines.join("\n");
 };
 
+// demo-only classes (demo-media etc.) aren't part of the API — strip
+// them from shown markup so the snippet pastes clean
+const stripDemoClasses = (code: string): string =>
+  code
+    .replace(/class="([^"]*)"/g, (_, list: string) => {
+      const kept = list.split(/\s+/).filter((c) => !c.startsWith("demo-"));
+      return kept.length ? `class="${kept.join(" ")}"` : "";
+    })
+    .replace(/\s+(?=>)/g, "");
+
 export const showMarkup = (code: string): string =>
-  indentMarkup(stripShells(code).replace(/\s+style="[^"]*"/g, ""));
+  indentMarkup(
+    stripDemoClasses(stripShells(code).replace(/\s+style="[^"]*"/g, "")),
+  );
 
 // markup display — the demo's code panel runs the shown source through
 // a tiny tokenizer instead of a full highlighter: sl-* attribute names
