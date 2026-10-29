@@ -10,12 +10,12 @@
   --sl-surface: #fdfcfa;
   --sl-border: #a8a29e;
 
-  /* text ladder — stone ink in discrete steps; only the accent veers
-     cyan so links/headings separate from body ink by hue, not just
-     depth */
+  /* text ladder — stone ink in discrete steps; the accent shares the
+     CTA's teal at ink depth so chrome painted by the accent still
+     reads as ink, not as a second color */
   --sl-text: #292524;
   --sl-text-strong: #1c1917;
-  --sl-text-accent: #2e7a82;
+  --sl-text-accent: #1f3d3d;
   --sl-text-invert: #fafaf9;
 
   /* quiet rungs of the same stone ink */
