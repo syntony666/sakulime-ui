@@ -68,8 +68,6 @@ import "@sakulime-ui/theme/umbra.min.css";      // Theme: Umbra
 
 其他顏色都不用寫 — 背景、文字、框線、成功/警告/錯誤色會依這三個顏色自動配出來，而且對比度保證可讀。
 
-以上就完成了。下面這步只有**要貢獻回這個 repo、讓大家都能從 npm 載**才需要：`packages/core/src/index.ts` import 一次（編進主套件）、`packages/shared/theme/package.json` 的 exports 加一行（讓路徑可被 import）。
-
 ## 主題色系
 
 每個顏色都是 `var(--sl-*)`，預設為 `sakulime`。右上角可以切換主題，下面的色票會跟著變。
