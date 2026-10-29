@@ -416,6 +416,12 @@ body::before {
   color: inherit;
 }
 
+/* sidebar hover = the system's interactive tint (same role as the
+   card's interactive section); the accent bar stays active-only */
+.VPSidebarItem .link:hover {
+  background-color: var(--sl-secondary-bg);
+}
+
 /* hover turns the link text accent — the subtitle follows it, so the
    whole label reacts instead of half of it */
 .VPSidebarItem .link:hover em {
