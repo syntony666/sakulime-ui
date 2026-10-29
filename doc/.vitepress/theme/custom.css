@@ -414,12 +414,12 @@ body::before {
   background-color: var(--vp-c-brand-soft);
 }
 
-/* sidebar + pager sub-label — the quiet tone carries the dimming so
-   these stay readable instead of dropping below AA via opacity */
+/* sidebar + pager sub-label — opacity dims the subtitle inside the
+   row's own ink, so it stays in the same color family */
 .VPSidebarItem em,
 .VPDocFooter em {
   font-style: normal;
-  color: var(--sl-text-muted);
+  opacity: 65%;
 }
 
 /* active or hovered row's subtitle takes the link's accent too — one
