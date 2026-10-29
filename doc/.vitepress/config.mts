@@ -92,15 +92,29 @@ export default defineConfig({
         : []),
     ];
   },
+  // these labels are hardcoded in VitePress theme components and have no
+  // config option, so the built HTML gets patched instead
+  transformHtml(code) {
+    return code
+      .replaceAll('aria-label="extra navigation"', 'aria-label="其他導覽"')
+      .replaceAll('aria-label="mobile navigation"', 'aria-label="行動版導覽"')
+      .replaceAll('aria-label="Permalink to &quot;', 'aria-label="錨點 &quot;');
+  },
+  markdown: {
+    codeCopyButtonTitle: "複製",
+  },
   srcDir: "doc",
   outDir: "site",
   vite: {
     publicDir: fileURLToPath(new URL("../public", import.meta.url)),
   },
   themeConfig: {
-    outline: [2, 4],
+    outline: { level: [2, 4], label: "本頁目錄" },
     logo: "/favicon.svg",
-    nav: [],
+    docFooter: { prev: "上一頁", next: "下一頁" },
+    sidebarMenuLabel: "選單",
+    returnToTopLabel: "回到頂部",
+    skipToContentLabel: "跳到內容",
     notFound: {
       title: "找不到頁面",
       quote: "網址可能打錯，或這個頁面已經移走了。",
