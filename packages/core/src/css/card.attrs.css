@@ -59,7 +59,7 @@
     font-variant-numeric: tabular-nums;
     line-height: 1.6;
     color: var(--sl-tone-text, color-mix(in srgb, var(--sl-primary) 55%, var(--sl-text)));
-    background: color-mix(in srgb, var(--sl-tone-bg, var(--sl-primary)) 15%, transparent);
+    background: color-mix(in srgb, var(--sl-tone-bg, var(--sl-primary)) 20%, var(--sl-surface));
     border-radius: var(--sl-xs);
   }
 
