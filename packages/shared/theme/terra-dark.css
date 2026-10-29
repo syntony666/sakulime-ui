@@ -31,9 +31,10 @@
   --sl-secondary-fg: #e7e5e4;
   --sl-secondary-bg: #2e2a27;
 
-  /* status — lifted to hold contrast on the dark stone */
+  /* status — lifted to hold contrast on the dark stone; warn is the
+     one tone authored opposite the strong ink, so it stays deep */
   --sl-ok: #3fb185;
-  --sl-warn: #e3b34f;
+  --sl-warn: #8f6d15;
   --sl-danger: #e5696f;
   }
 }
