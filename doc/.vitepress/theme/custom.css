@@ -416,10 +416,10 @@ body::before {
   color: inherit;
 }
 
-/* sidebar hover = the system's interactive tint (same role as the
-   card's interactive section); the accent bar stays active-only */
+/* sidebar hover = one step deeper than the section tint — the
+   accent bar stays active-only */
 .VPSidebarItem .link:hover {
-  background-color: var(--sl-secondary-bg);
+  background-color: var(--sl-secondary);
 }
 
 /* hover turns the link text accent — the subtitle follows it, so the
