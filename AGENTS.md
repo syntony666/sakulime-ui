@@ -7,7 +7,8 @@ Working agreement for coding agents in this repo. Contributor-facing rules live 
 - Plan before implementing non-trivial work; wait for explicit approval.
 - After each step: verify, commit the completed concern, then report files touched, what changed, and the verification output. Wait for review before starting the next step, including when a check fails.
 - If a change spans several concerns, split it into one commit per concern before reporting.
-- Commits and routine pushes to non-`master` branches don't need approval — commit each completed concern and push verified work. checkout/merge/rebase/reset, `master` pushes, dependency installs, and deploys still need explicit approval.
+- All changes land on a topic branch first, however small — `release/*` gets `--no-ff` merges only, never direct commits.
+- Commits don't need approval — commit each completed concern. Other state-changing actions still need their own instruction: git checkout/merge/rebase/push/reset, dependency installs, deploys. Push only when told — report branch status without asking "push?" at the end of tasks.
 - Never claim a check passed unless it was actually run and observed.
 - Commit messages in English, under 50 words.
 
