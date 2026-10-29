@@ -12,9 +12,10 @@
   --sl-text-accent: #d43d5e;
   --sl-text-invert: #fdf3f3;
 
-  /* derived text tones — follow --sl-text automatically */
-  --sl-text-secondary: color-mix(in srgb, var(--sl-text) 78%, transparent);
-  --sl-text-muted: color-mix(in srgb, var(--sl-text) 55%, transparent);
+  /* derived text tones — follow --sl-text automatically; every step
+     stays ≥4.5:1 on bg/surface so quiet text still reads */
+  --sl-text-secondary: color-mix(in srgb, var(--sl-text) 88%, transparent);
+  --sl-text-muted: color-mix(in srgb, var(--sl-text) 78%, transparent);
 
   /* two primaries — color + on-color fg + soft bg tint */
   --sl-primary: #f4b160;
