@@ -5,4 +5,4 @@
 "@sakulime-ui/theme": minor
 ---
 
-Add the `terra-dark` theme — terra's dark variant as a separately importable palette (`@sakulime-ui/theme/terra-dark.css`).
+Add the `umbra` theme — the warm stone gallery at night as a separately importable palette (`@sakulime-ui/theme/umbra.css`).

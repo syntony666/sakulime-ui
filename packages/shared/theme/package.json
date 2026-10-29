@@ -18,7 +18,7 @@
     "./package.json": "./package.json",
     "./sakulime.css": "./sakulime.css",
     "./terra.css": "./terra.css",
-    "./terra-dark.css": "./terra-dark.css",
+    "./umbra.css": "./umbra.css",
     "./*": "./dist/*"
   }
 }

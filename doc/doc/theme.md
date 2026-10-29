@@ -11,7 +11,7 @@ description: 主題是一整組 --sl-* 變數值，切換主題不用改元件�
 
 - `sakulime`：櫻花粉配橘色（預設）
 - `terra`：大地色系
-- `terra-dark`：terra 的深色版
+- `umbra`：深暖石底配淡青色的暗色主題
 
 ## 引用
 
@@ -24,7 +24,7 @@ npm install @sakulime-ui/theme
 ```ts
 import "@sakulime-ui/theme/sakulime.min.css";   // Theme: Sakulime
 import "@sakulime-ui/theme/terra.min.css";      // Theme: Terra
-import "@sakulime-ui/theme/terra-dark.min.css"; // Theme: Terra Dark
+import "@sakulime-ui/theme/umbra.min.css";      // Theme: Umbra
 ```
 
 ## CDN
@@ -36,8 +36,8 @@ import "@sakulime-ui/theme/terra-dark.min.css"; // Theme: Terra Dark
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sakulime-ui/theme/dist/sakulime.min.css" />
 <!-- Theme: Terra -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sakulime-ui/theme/dist/terra.min.css" />
-<!-- Theme: Terra Dark -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sakulime-ui/theme/dist/terra-dark.min.css" />
+<!-- Theme: Umbra -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sakulime-ui/theme/dist/umbra.min.css" />
 ```
 
 ## 切換
