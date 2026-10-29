@@ -11,4 +11,5 @@ export type Meta<Args = Record<string, unknown>> = {
 export type StoryObj<Args = Record<string, unknown>> = {
   render?: (args: Args) => string;
   args?: Partial<Args>;
+  argTypes?: Record<string, unknown>;
 };

@@ -1,6 +1,6 @@
 ---
 title: Card 卡片
-description: sl-card 卡片容器 — 內距、圓角、型態、邊緣標記與角落標記，全部寫在 sl-* 屬性上。
+description: sl-card 卡片容器 — 內距、圓角、型態、邊緣標記、角落標記與分區，全部寫在 sl-* 屬性上。
 ---
 
 <script setup>
@@ -100,3 +100,31 @@ import * as CardStories from "../../stories/components/card.stories";
 
 <Demo :render="CardStories.CornerPositions.render" />
 <Demo :render="CardStories.CornerTypes.render" />
+
+### 分區 `sl-card-section`
+
+把卡片分成多個區塊，區塊之間自動出現滿版分隔線 — 第一個區塊不畫線，可以當 header 用：
+
+```html
+<div sl-card>
+  <div sl-card-section>標題</div>
+  <div sl-card-section>內容</div>
+  <div sl-card-section>底部</div>
+</div>
+```
+
+### 貼邊 `sl-card-section="inset"`
+
+`inset` 是抵銷卡片內距的區塊，內容直接貼到卡片邊 — 圖片、地圖、色塊都行。放在第一個就貼上緣、最後一個就貼下緣、夾在中間就只貼左右，位置看 DOM 順序不用寫：
+
+```html
+<div sl-card>
+  <div sl-card-section="inset"><img src="…"></div>
+  <div sl-card-section>內容</div>
+</div>
+```
+
+角落標記疊在貼邊內容上也可以，`sl-card-corner` 不算一般內容，不影響 inset 的位置判斷：
+
+<Playground :meta="CardStories.Sections" :render="CardStories.Sections.render" />
+<Demo :render="CardStories.Insets.render" />

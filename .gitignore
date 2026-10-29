@@ -35,3 +35,7 @@ doc/.storybook/theme.values.ts
 # Plan files
 plan.md
 *.plan.md
+
+# impeccable-ignore-start
+.impeccable/
+# impeccable-ignore-end
