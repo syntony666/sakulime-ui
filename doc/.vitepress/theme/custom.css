@@ -405,11 +405,10 @@ body::before {
   margin-left: 0.2em;
 }
 
-/* pager text takes the button's on-page ink — the same color the
-   tone uses for its label on surfaces, not the brand accent */
-.VPDocFooter .pager-link .desc,
+/* pager title is a page name — same ink as the h1 it links to
+   (text-accent, not the darker brand-1 shift) */
 .VPDocFooter .pager-link .title {
-  color: color-mix(in srgb, var(--sl-primary) 12%, var(--sl-text));
+  color: var(--sl-text-accent);
 }
 .VPDocFooter .pager-link:hover {
   background-color: var(--vp-c-brand-soft);
