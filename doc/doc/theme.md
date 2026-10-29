@@ -50,24 +50,24 @@ import "@sakulime-ui/theme/terra-dark.min.css"; // Theme: Terra Dark
 
 ## 自訂主題
 
-一個主題只要 3 個種子色：
+新增一個 `.css` 檔，填三個顏色就完成了：
 
 ```css
 @import "@sakulime-ui/theme/derived.css";
 
 @layer theme {
   :root[data-theme="my-theme"] {
-    color-scheme: light;            /* dark 就寫 dark */
-    --sl-seed-primary: #…;          /* 行動色（CTA 面）*/
-    --sl-seed-secondary: #…;        /* 安靜面，也是全部中性色的 hue */
-    --sl-seed-accent: #…;           /* accent、連結色 */
+    color-scheme: light;            /* 深色主題就寫 dark */
+    --sl-seed-primary: #…;          /* 主要行動色，例如按鈕面 */
+    --sl-seed-secondary: #…;        /* 次要色，背景、文字、框線的色調都跟它走 */
+    --sl-seed-accent: #…;           /* 點綴色，例如連結 */
   }
 }
 ```
 
-其他 `--sl-*` 由推導層算出：前景墨依面色深淺自動翻轉，accent 會被壓進可讀範圍，ok / warn / danger 是固定色相不隨種子變。
+其他顏色都不用寫 — 背景、文字、框線、成功/警告/錯誤色會依這三個顏色自動配出來，而且對比度保證可讀。
 
-要收進 core bundle，在 `packages/core/src/index.ts` import 一次、`packages/shared/theme/package.json` 的 exports 加一行。
+要讓 `sakulime-ui` 主套件也認得這個主題，在 `packages/core/src/index.ts` import 一次、`packages/shared/theme/package.json` 的 exports 加一行。
 
 ## 主題色系
 
