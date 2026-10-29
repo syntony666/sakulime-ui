@@ -1,4 +1,4 @@
-/* card attrs — sl-pad axis, variants, indicate, raised.
+/* card attrs — sl-pad axis, variants, indicate, corner, section, raised.
    Variant/indicate/raised rules live per component; tone slot comes
    from the shared tone axis. */
 @layer attrs {
@@ -109,9 +109,8 @@
     inset-inline-start: var(--sl-xs);
   }
 
-  /* section — bare rows divide the card with a full-width hairline:
-     the box bleeds past the pad frame while inner padding restores
-     the content inset. */
+  /* sections — the box bleeds past the pad frame so divider hairlines
+     run edge to edge; inner padding puts the content back in line */
   [sl-card] > [sl-card-section] {
     margin-inline: calc(var(--sl-pad) * -1);
     padding-inline: var(--sl-pad);
@@ -123,28 +122,38 @@
     padding-top: var(--sl-pad);
   }
 
-  /* inset — a padding-cancelled region for edge-to-edge content
-     (img/svg/iframe/block). DOM position picks the bleeding edges;
-     a leading or trailing sl-card-corner doesn't count as content. */
+  /* a leading corner doesn't count as content — the section after it
+     is still the first block, so no divider or gap above it */
+  [sl-card] > [sl-card-corner]:first-child + [sl-card-section] {
+    margin-top: 0;
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  /* inset — a padding-cancelled region for edge-to-edge content (img/
+     svg/iframe/block). DOM order picks the bleeding edges; a leading or
+     trailing corner doesn't count as content */
   [sl-card] > [sl-card-section="inset"] {
     padding: 0;
   }
 
-  [sl-card] > [sl-card-section="inset"]:first-child,
-  [sl-card] > [sl-card-corner]:first-child + [sl-card-section="inset"] {
-    margin: calc(var(--sl-pad) * -1) calc(var(--sl-pad) * -1) var(--sl-pad);
+  [sl-card] > :is([sl-card-section="inset"]:first-child,
+                 [sl-card-corner]:first-child + [sl-card-section="inset"]) {
+    margin-top: calc(var(--sl-pad) * -1);
+    border-top: 0;
   }
 
-  [sl-card] > [sl-card-section="inset"]:last-child,
-  [sl-card] > [sl-card-section="inset"]:has(+ [sl-card-corner]:last-child) {
-    margin: var(--sl-pad) calc(var(--sl-pad) * -1) calc(var(--sl-pad) * -1);
+  [sl-card] > :is([sl-card-section="inset"]:last-child,
+                 [sl-card-section="inset"]:has(+ [sl-card-corner]:last-child)) {
+    margin-bottom: calc(var(--sl-pad) * -1);
   }
 
-  [sl-card] > [sl-card-section="inset"]:only-child {
-    margin: calc(var(--sl-pad) * -1);
+  /* followers own the gap — a section's divider hugs the image edge,
+     anything else gets the pad spacing itself */
+  [sl-card-section="inset"] + * {
+    margin-top: var(--sl-pad);
   }
 
-  /* the divider under an inset hugs its bottom edge */
   [sl-card-section="inset"] + [sl-card-section] {
     margin-top: 0;
   }
