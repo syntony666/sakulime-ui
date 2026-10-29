@@ -148,7 +148,7 @@ import * as CardStories from "../../stories/components/card.stories";
 
 <Demo :render="CardStories.Blank.render" />
 
-#### 區塊變體
+#### 區塊型態
 
 分區還有這幾種變化：
 
