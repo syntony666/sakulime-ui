@@ -404,10 +404,10 @@ body::before {
   color: var(--sl-text-muted);
 }
 
-/* the active row's brand-soft tint drops muted (text@78%) under AA —
-   the subtitle climbs one ladder step to secondary on that surface */
+/* active row's subtitle takes the link's accent too — one color per
+   row, the size step alone carries the hierarchy */
 .VPSidebarItem.is-active em {
-  color: var(--sl-text-secondary);
+  color: inherit;
 }
 
 /* theme swatch grid — chips read --sl-* vars live so the nav dots
