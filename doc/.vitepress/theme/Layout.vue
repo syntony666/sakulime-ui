@@ -38,6 +38,7 @@ const themes = Object.keys(palettes)
         .map((w) => w[0].toUpperCase() + w.slice(1))
         .join(" "),
       color: pick(palettes[path] as string, "--sl-seed-primary"),
+      color2: pick(palettes[path] as string, "--sl-seed-secondary"),
       dark: /color-scheme:\s*dark/.test(palettes[path] as string),
     };
   });
@@ -143,7 +144,14 @@ onUnmounted(() => document.removeEventListener("click", onClickOutside));
           @keydown.down.prevent="openMenu()"
           @keydown.up.prevent="openMenu(themes.length - 1)"
         >
-          <span class="sl-theme-dot" :style="{ '--dot': active?.color }" />
+          <span
+            class="sl-theme-dot"
+            :style="{
+              '--dot': active?.color,
+              '--dot-2': active?.color2,
+              '--dot-mode': active?.dark ? '#000' : '#fff',
+            }"
+          />
           <span class="sl-theme-name">{{ active?.label }}</span>
           <svg
             class="sl-theme-caret"
@@ -177,7 +185,14 @@ onUnmounted(() => document.removeEventListener("click", onClickOutside));
               tabindex="-1"
               @click="choose(t.value)"
             >
-              <span class="sl-theme-dot" :style="{ '--dot': t.color }" />
+              <span
+                class="sl-theme-dot"
+                :style="{
+                  '--dot': t.color,
+                  '--dot-2': t.color2,
+                  '--dot-mode': t.dark ? '#000' : '#fff',
+                }"
+              />
               <span>{{ t.label }}</span>
             </button>
           </li>
