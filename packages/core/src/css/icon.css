@@ -1,0 +1,22 @@
+/* icon — marker sizing: an svg carrying sl-icon (or a wrapper element
+   whose sl-icon value the resolver filled) renders at 1em, inherits
+   ink (or --sl-tone-bg when a generic tone is set), and sits on the
+   text baseline */
+@layer base {
+  [sl-icon] {
+    /* self-default seals ancestor tone slots — inside a filled button
+       --sl-tone-bg IS the button's surface and would turn the icon
+       invisible; sl-tone written on the icon itself still recolors it */
+    --sl-tone-bg: currentColor;
+    display: inline-flex;
+    width: 1em;
+    height: 1em;
+    color: var(--sl-tone-bg);
+    vertical-align: -0.125em;
+  }
+
+  [sl-icon] svg {
+    width: 100%;
+    height: 100%;
+  }
+}
