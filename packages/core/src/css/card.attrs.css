@@ -39,8 +39,15 @@
     inset-inline-start: 0;
   }
 
-  /* per-child insets — a chip hugs the corner edge, a dot or icon
-     needs air so it doesn't straddle the border */
+  /* corner tab — a chip hugs the top + side edges with a small
+     uniform radius; the card's overflow clip still rounds the
+     corner-facing corner to its own curve */
+  [sl-card-corner][sl-chip] {
+    border-radius: var(--sl-xs);
+  }
+
+  /* a dot or icon floats — it needs air so it doesn't straddle
+     the border */
   [sl-card-corner][sl-dot] {
     top: var(--sl-sm);
     inset-inline-end: var(--sl-sm);
