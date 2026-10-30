@@ -162,29 +162,46 @@ body::before {
 }
 
 /* the container page drops the TOC and runs a fixed, centered rail:
-   outer-space | sidebar 120 | space 40 | content 1240 | outer-space.
-   At 1440 that's 20/120/40/1240/20; wider viewports grow both outer
-   gutters equally. Inner paddings go to zero so the demo column is
-   the full 1240 and lg can show its real 1200 width */
+   outer-space | sidebar 200 | space 40 | content 1240 | outer-space.
+   The rail is 1480 wide; beyond that both outer gutters grow equally.
+   Navbar title/content/divider are remapped onto the same rail so
+   the top bar keeps aligning with the sidebar edge. Inner paddings
+   go to zero so the demo column is the full 1240 */
 @media (min-width: 1440px) {
   .container-wide .VPSidebar {
-    padding-left: calc((100vw - var(--vp-layout-max-width)) / 2 + 20px);
-    width: calc((100vw - var(--vp-layout-max-width)) / 2 + 140px);
+    padding-left: max(32px, calc((100vw - 1480px) / 2));
+    width: calc(max(0px, (100vw - 1480px) / 2) + 200px);
   }
   .container-wide .VPContent.has-sidebar {
-    padding-left: calc((100vw - var(--vp-layout-max-width)) / 2 + 180px);
-    padding-right: calc((100vw - var(--vp-layout-max-width)) / 2 + 20px);
+    padding-left: calc(max(0px, (100vw - 1480px) / 2) + 240px);
+    padding-right: max(0px, calc((100vw - 1480px) / 2));
+  }
+  .container-wide .VPNavBar.has-sidebar .title {
+    padding-left: calc(max(0px, (100vw - 1480px) / 2) + 32px);
+    width: calc(max(0px, (100vw - 1480px) / 2) + 240px);
+  }
+  .container-wide .VPNavBar.has-sidebar .content {
+    padding-left: calc(max(0px, (100vw - 1480px) / 2) + 240px);
+    padding-right: calc(max(0px, (100vw - 1480px) / 2) + 32px);
+  }
+  .container-wide .VPNavBar.has-sidebar .divider {
+    padding-left: calc(max(0px, (100vw - 1480px) / 2) + 240px);
   }
 }
 @media (min-width: 960px) and (max-width: 1439.9px) {
   .container-wide .VPSidebar {
-    width: 160px;
-    padding-left: 20px;
-    padding-right: 40px;
+    width: 200px;
   }
   .container-wide .VPContent.has-sidebar {
-    padding-left: 180px;
-    padding-right: 20px;
+    padding-left: 240px;
+    padding-right: 0;
+  }
+  .container-wide .VPNavBar.has-sidebar .title {
+    width: 240px;
+  }
+  .container-wide .VPNavBar.has-sidebar .content,
+  .container-wide .VPNavBar.has-sidebar .divider {
+    padding-left: 240px;
   }
 }
 .container-wide .VPDoc {
