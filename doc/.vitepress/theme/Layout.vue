@@ -122,7 +122,9 @@ onUnmounted(() => document.removeEventListener("click", onClickOutside));
 <template>
   <Layout>
     <template #nav-bar-content-after>
-      <span class="sl-version">v{{ version }}</span>
+      <div>
+        <span class="sl-version">v{{ version }}</span>
+      </div>
       <div
         ref="switchEl"
         class="sl-theme-switch"
