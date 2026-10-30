@@ -1,6 +1,6 @@
 import type { Meta, DemoObj } from "../util/types";
 import { showMarkup } from "../util/docs-source";
-import { axis, attr, label } from "../util/axis";
+import { axis, axisArg, attr, label } from "../util/axis";
 
 type ButtonArgs = {
   label: string;
@@ -15,16 +15,6 @@ const TONES = ["-", "primary", "secondary", "success", "warning", "danger"];
 const VARIANTS = ["-", "normal", "invert", "underline", "ghost"];
 const SIZES = ["-", "sm", "md", "lg"];
 const RADII = ["-", "none", "sm", "md", "lg", "full"];
-
-// Controls row for an attr axis: name = real attr, shows the "-" option
-// and the real default, hides the Type column
-const axisArg = (name: string, desc: string, def: string, options: string[]) => ({
-  name,
-  description: desc,
-  table: { type: {}, defaultValue: { summary: `"${def}"` } },
-  control: { type: "select" as const, labels: { "-": "-" } },
-  options,
-});
 
 const meta = {
   title: "Core/Button 按鈕",
