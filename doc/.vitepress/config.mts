@@ -1,8 +1,12 @@
 import { fileURLToPath } from "node:url";
+import { createRequire } from "node:module";
 import customSelectors from "postcss-custom-selectors";
 import { defineConfig } from "vitepress";
 
 const zh = (t: string) => `<em>${t}</em>`;
+
+// package version → css var → the badge left of the GitHub icon
+const { version } = createRequire(import.meta.url)("../../package.json");
 
 const SITE = "https://sakulime-ui.syntony666.com";
 
@@ -16,6 +20,7 @@ export default defineConfig({
   sitemap: { hostname: SITE },
   head: [
     ["link", { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" }],
+    ["style", {}, `:root{--sl-doc-version:"${version}"}`],
     // restore the saved theme before first paint — without this the page
     // flashes sakulime for a frame before hydration sets data-theme
     [

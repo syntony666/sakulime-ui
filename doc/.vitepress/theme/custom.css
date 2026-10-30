@@ -226,6 +226,16 @@ body::before {
   max-width: calc(var(--sl-container-lg) + 8px);
 }
 
+/* version badge before the GitHub icon — value comes from
+   package.json through an inline style tag in config.mts */
+.VPNavBarSocialLinks::before {
+  content: "v" var(--sl-doc-version);
+  align-self: center;
+  font-family: var(--vp-font-family-mono);
+  font-size: 12px;
+  color: var(--sl-text-muted);
+}
+
 /* doc typography follows the brand — accent headings, primary links.
    h1/h2 are display-size so the decorative accent passes AA-large;
    h3/h4 fall under normal-text size and take the readable -1 step */
