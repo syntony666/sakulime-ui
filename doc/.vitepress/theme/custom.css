@@ -161,49 +161,28 @@ body::before {
   max-width: var(--sl-container-md);
 }
 
-/* the container page drops the TOC and runs a fixed, centered rail:
-   outer-space | sidebar 200 | space 40 | content 1240 | outer-space.
-   The rail is 1480 wide; beyond that both outer gutters grow equally.
-   Navbar title/content/divider are remapped onto the same rail so
-   the top bar keeps aligning with the sidebar edge. Inner paddings
-   go to zero so the demo column is the full 1240 */
+/* site-wide rail, driven by VitePress's own layout vars:
+   window-pad | sidebar 200 | content 1240 | window-pad, centered.
+   sidebar-width carries its 32px internal pad (200+32); layout-max
+   adds the 32px window pad VP only applies on the left, mirrored on
+   the right below so both gutters stay equal */
+:root {
+  --vp-sidebar-width: 232px;
+  --vp-layout-max-width: min(1504px, 100vw);
+}
 @media (min-width: 1440px) {
-  .container-wide .VPSidebar {
-    padding-left: max(32px, calc((100vw - 1480px) / 2));
-    width: calc(max(0px, (100vw - 1480px) / 2) + 200px);
-  }
-  .container-wide .VPContent.has-sidebar {
-    padding-left: calc(max(0px, (100vw - 1480px) / 2) + 240px);
-    padding-right: max(20px, calc((100vw - 1480px) / 2));
-  }
-  .container-wide .VPNavBar.has-sidebar div.title {
-    padding-left: max(32px, calc((100vw - 1480px) / 2));
-    width: calc(max(0px, (100vw - 1480px) / 2) + 240px);
-  }
-  .container-wide .VPNavBar.has-sidebar div.content {
-    padding-left: calc(max(0px, (100vw - 1480px) / 2) + 240px);
-    padding-right: calc(max(0px, (100vw - 1480px) / 2) + 32px);
-  }
-  .container-wide .VPNavBar.has-sidebar .divider {
-    padding-left: calc(max(0px, (100vw - 1480px) / 2) + 240px);
+  :root .VPContent.has-sidebar {
+    padding-right: calc((100vw - var(--vp-layout-max-width)) / 2 + 32px);
   }
 }
 @media (min-width: 960px) and (max-width: 1439.9px) {
-  .container-wide .VPSidebar {
-    width: 200px;
-  }
-  .container-wide .VPContent.has-sidebar {
-    padding-left: 240px;
-    padding-right: 20px;
-  }
-  .container-wide .VPNavBar.has-sidebar div.title {
-    width: 240px;
-  }
-  .container-wide .VPNavBar.has-sidebar div.content,
-  .container-wide .VPNavBar.has-sidebar .divider {
-    padding-left: 240px;
+  :root .VPContent.has-sidebar {
+    padding-right: 32px;
   }
 }
+
+/* the container page drops the TOC — inner paddings go to zero so the
+   demo column is the full 1240 and lg can show its real 1200 width */
 .container-wide .VPDoc {
   padding-left: 0;
   padding-right: 0;
