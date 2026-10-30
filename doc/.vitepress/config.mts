@@ -129,6 +129,7 @@ export default defineConfig({
     ],
     sidebar: [
       { text: "開始使用", link: "/introduction" },
+      { text: "屬性", link: "/attrs" },
       { text: "主題", link: "/theme" },
       {
         text: "Layout",
