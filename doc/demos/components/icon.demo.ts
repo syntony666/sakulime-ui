@@ -121,11 +121,15 @@ export const Disabled: Demo = {
     ),
 };
 
+// one CJK phrase per value — margins only read against characters
+// that carry no source spaces; bare sl-icon-space means both sides
 export const Spaced: Demo = {
   render: () =>
-    `<p>準備起飛 <i sl-icon="lucide:send" sl-icon-space="start"></i>` +
-    `<i sl-icon="lucide:car" sl-icon-space="end"></i> Tesla` +
-    `透過搜尋 <i sl-icon="lucide:search" sl-icon-space></i> 功能可以找到你要的事物。</p>`,
+    axis(["-", "start", "end", "both"], (v) =>
+      `<span>${label(v)} 使用<i sl-icon="lucide:search"${
+        v === "both" ? " sl-icon-space" : attr("sl-icon-space", v)
+      }></i>搜尋</span>`,
+    ),
 };
 
 // card + corner + icon — the corner's tone colors the badge icon,
