@@ -20,3 +20,84 @@
     height: 100%;
   }
 }
+
+/* modifiers — space-separated tokens after the name:
+   `sl-icon="lucide:zap spin"` or `sl-icon="spin"` on a pasted svg */
+@layer attrs {
+  /* sizes — the glyph stays 1em of the element, so scaling its
+     font-size scales the icon relative to context */
+  [sl-icon~="sm"] {
+    font-size: 0.75em;
+  }
+  [sl-icon~="lg"] {
+    font-size: 1.5em;
+  }
+  [sl-icon~="xl"] {
+    font-size: 2.5em;
+  }
+  [sl-icon~="2xl"] {
+    font-size: 4em;
+  }
+
+  /* orientation — the independent transform properties compose, so a
+     flip and a rotate can stack on one icon */
+  [sl-icon~="flip-h"] {
+    scale: -1 1;
+  }
+  [sl-icon~="flip-v"] {
+    scale: 1 -1;
+  }
+  [sl-icon~="rotate-90"] {
+    rotate: 90deg;
+  }
+  [sl-icon~="rotate-180"] {
+    rotate: 180deg;
+  }
+  [sl-icon~="rotate-270"] {
+    rotate: 270deg;
+  }
+
+  [sl-icon~="spin"] {
+    animation: sl-icon-spin 2s linear infinite;
+  }
+  @keyframes sl-icon-spin {
+    to {
+      rotate: 360deg;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [sl-icon~="spin"] {
+      animation: none;
+    }
+  }
+
+  /* frames — a bordered box around the glyph, following its ink.
+     content-box keeps the glyph area at 1em — under a border-box reset
+     padding+border would otherwise eat the whole frame */
+  [sl-icon~="circular"],
+  [sl-icon~="rounded"] {
+    box-sizing: content-box;
+    padding: 0.35em;
+    border: 2px solid currentColor;
+  }
+  [sl-icon~="circular"] {
+    border-radius: 999px;
+  }
+  [sl-icon~="rounded"] {
+    border-radius: var(--sl-sm);
+  }
+
+  /* states + spacing */
+  [sl-icon~="disabled"] {
+    opacity: 0.4;
+  }
+  [sl-icon~="space"] {
+    margin-inline: 0.3em;
+  }
+  [sl-icon~="space-start"] {
+    margin-inline-start: 0.3em;
+  }
+  [sl-icon~="space-end"] {
+    margin-inline-end: 0.3em;
+  }
+}

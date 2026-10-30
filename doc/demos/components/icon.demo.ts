@@ -1,6 +1,6 @@
 import type { Meta, DemoObj } from "../util/types";
 import { showMarkup } from "../util/docs-source";
-import { axis, axisArg, attr } from "../util/axis";
+import { axis, axisArg, attr, label } from "../util/axis";
 import { registerPack } from "@sakulime-ui/core/icons";
 import lucide from "@iconify-json/lucide/icons.json";
 
@@ -75,6 +75,50 @@ export const InContext: Demo = {
       `<i sl-icon="lucide:${v}"></i> ${v === "trash" ? "刪除" : "新增"}` +
       `</button>`,
     ),
+};
+
+// modifiers — space-separated tokens after the name; "-" is bare
+const mod = (v: string) => (v === "-" ? "" : ` ${v}`);
+
+export const ModSizes: Demo = {
+  render: () =>
+    axis(["-", "sm", "lg", "xl", "2xl"], (v) =>
+      `<span>${label(v)} <i sl-icon="lucide:house${mod(v)}"></i></span>`,
+    ),
+};
+
+// trending-up reads clearly under flips and rotations
+export const Transforms: Demo = {
+  render: () =>
+    axis(["-", "flip-h", "flip-v", "rotate-90", "rotate-180", "rotate-270"], (v) =>
+      `<i sl-icon="lucide:trending-up${mod(v)}"></i>`,
+    ),
+};
+
+export const Spin: Demo = {
+  render: () =>
+    axis(["loader", "loader-circle", "refresh-cw", "cog"], (v) =>
+      `<i sl-icon="lucide:${v} spin"></i>`,
+    ),
+};
+
+export const Frames: Demo = {
+  render: () =>
+    axis(["-", "circular", "rounded"], (v) =>
+      `<i sl-icon="lucide:house${mod(v)}"></i>`,
+    ),
+};
+
+export const Disabled: Demo = {
+  render: () =>
+    axis(["-", "disabled"], (v) => `<i sl-icon="lucide:users${mod(v)}"></i>`),
+};
+
+export const Spaced: Demo = {
+  render: () =>
+    `<p>準備起飛 <i sl-icon="lucide:send space-start"></i>` +
+    `<i sl-icon="lucide:car space-end"></i> Tesla` +
+    `透過搜尋 <i sl-icon="lucide:search space"></i> 功能可以找到你要的事物。</p>`,
 };
 
 // card + corner + icon — the corner's tone colors the badge icon,

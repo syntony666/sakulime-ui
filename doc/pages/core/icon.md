@@ -81,6 +81,41 @@ Iconify 圖包是永久開源授權的資料檔（lucide 是 ISC、Simple Icons 
 
 <Demo :render="IconDemos.Sizes.render" />
 
+## 修飾詞
+
+`sl-icon` 的值在名稱後面可以接修飾詞（空格分隔），手貼的 svg 一樣能用——`sl-icon="spin"` 就行：
+
+### 尺寸
+
+`sm`、`lg`、`xl`、`2xl`——以所在字級為基準縮放：
+
+<Demo :render="IconDemos.ModSizes.render" />
+
+### 變形
+
+`flip-h`、`flip-v` 翻轉，`rotate-90`／`rotate-180`／`rotate-270` 旋轉，可以疊加：
+
+<Demo :render="IconDemos.Transforms.render" />
+
+### 旋轉動畫
+
+`spin` 讓圖示不停旋轉（系統 `prefers-reduced-motion` 時自動停用）：
+
+<Demo :render="IconDemos.Spin.render" />
+
+### 外框
+
+`circular` 圓框、`rounded` 圓角框，框線跟著圖示墨色：
+
+<Demo :render="IconDemos.Frames.render" />
+
+### 狀態與間距
+
+`disabled` 淡化圖示；`space-start`、`space-end`、`space` 在前、後或兩側加空隙：
+
+<Demo :render="IconDemos.Disabled.render" />
+<Demo :render="IconDemos.Spaced.render" />
+
 ## 放進元件
 
 圖示繼承所在元件的墨色，按鈕、卡片角落標記都能直接放：
