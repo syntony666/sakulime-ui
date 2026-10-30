@@ -9,6 +9,8 @@ import * as ButtonDemos from "../../demos/components/button.demo";
 
 # Button *按鈕*
 
+`sl-button` 寫在 `button` 或 `a` 上，值決定型態，通用屬性調外觀。
+
 <Playground :meta="ButtonDemos.default" :render="ButtonDemos.Button.render" />
 
 ## 型態

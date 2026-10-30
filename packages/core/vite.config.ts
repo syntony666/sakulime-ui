@@ -3,7 +3,7 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   css: {
-    /* expands the :--sl-* consumer lists in css/axes.css */
+    /* expands the :--sl-* consumer lists in css/generic.css */
     postcss: { plugins: [customSelectors()] },
   },
   build: {
