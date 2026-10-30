@@ -1,60 +1,22 @@
-/* card attrs — sl-pad axis, variants, indicate, corner, section, raised.
-   Variant/indicate/raised rules live per component; tone slot comes
-   from the shared tone axis. */
+/* card attrs — indicate, corner, section, plus the card's wiring for
+   the shared interactive attribute. Tone/radius/pad values come from
+   generic.css; the card's slot defaults and variants live in card.css. */
 @layer attrs {
-  /* pad — --sl-pad slot */
-  [sl-pad="sm"] {
-    --sl-pad: var(--sl-md);
+  /* indicate — accent edge, colored by the tone attribute */
+  [sl-card][sl-card-indicate="top"] {
+    border-top: 3px solid var(--sl-tone-bg);
   }
 
-  [sl-pad="md"],
-  [sl-card]:not([sl-pad]) {
-    --sl-pad: var(--sl-lg);
+  [sl-card][sl-card-indicate="bottom"] {
+    border-bottom: 3px solid var(--sl-tone-bg);
   }
 
-  [sl-pad="lg"] {
-    --sl-pad: var(--sl-2xl);
+  [sl-card][sl-card-indicate="start"] {
+    border-inline-start: 3px solid var(--sl-tone-bg);
   }
 
-  /* shared-axis default on card */
-  [sl-card]:not([sl-radius]) {
-    --sl-radius: var(--sl-sm);
-  }
-
-  /* hollow — dashed outline for empty/upload states */
-  [sl-card][sl-variant="hollow"] {
-    background: transparent;
-    border-style: dashed;
-    border-width: 2px;
-  }
-
-  /* plain — frameless shell: keeps the surface fill, drops the border */
-  [sl-card][sl-variant="plain"] {
-    border: 0;
-  }
-
-  /* blank — invisible shell: no border, no fill; pairs with
-     sl-card-section="blank" for a pure blankslate block */
-  [sl-card][sl-variant="blank"] {
-    background: transparent;
-    border: 0;
-  }
-
-  /* indicate — accent edge, colored by the tone axis */
-  [sl-card][sl-indicate="top"] {
-    border-top: 3px solid var(--sl-tone-bg, var(--sl-primary));
-  }
-
-  [sl-card][sl-indicate="bottom"] {
-    border-bottom: 3px solid var(--sl-tone-bg, var(--sl-primary));
-  }
-
-  [sl-card][sl-indicate="start"] {
-    border-inline-start: 3px solid var(--sl-tone-bg, var(--sl-primary));
-  }
-
-  [sl-card][sl-indicate="end"] {
-    border-inline-end: 3px solid var(--sl-tone-bg, var(--sl-primary));
+  [sl-card][sl-card-indicate="end"] {
+    border-inline-end: 3px solid var(--sl-tone-bg);
   }
 
   /* corner — space-separated tokens: type (text-sm default, text-xs,
@@ -70,8 +32,8 @@
     font-size: var(--sl-md);
     font-variant-numeric: tabular-nums;
     line-height: 1.6;
-    color: var(--sl-tone-text, color-mix(in srgb, var(--sl-primary) 55%, var(--sl-text)));
-    background: color-mix(in srgb, var(--sl-tone-bg, var(--sl-primary)) 20%, var(--sl-surface));
+    color: var(--sl-tone-text);
+    background: color-mix(in srgb, var(--sl-tone-bg) 20%, var(--sl-surface));
     border-radius: var(--sl-xs);
   }
 
@@ -91,7 +53,7 @@
     height: var(--sl-sm);
     padding: 0;
     font-size: 0;
-    background: var(--sl-tone-bg, var(--sl-primary));
+    background: var(--sl-tone-bg);
     border-radius: 999px;
   }
 
@@ -109,7 +71,7 @@
     display: block;
     width: 100%;
     height: 100%;
-    color: var(--sl-tone-text, color-mix(in srgb, var(--sl-primary) 55%, var(--sl-text)));
+    color: var(--sl-tone-text);
   }
 
   [sl-card-corner~="indicator"][sl-card-corner~="start"] {
@@ -210,14 +172,15 @@
     background: color-mix(in srgb, var(--sl-primary) 8%, var(--sl-surface));
   }
 
-  /* interactive — the whole card is clickable; hover lifts it like
-     a button */
-  [sl-card][sl-card-interactive] {
+  /* interactive — shared generic: the whole card is clickable, and
+     hover plays back whatever the attribute put in the --sl-i-* slots */
+  [sl-card][sl-interactive] {
     cursor: pointer;
   }
 
-  [sl-card][sl-card-interactive]:hover {
-    transform: scale(1.05);
+  [sl-card][sl-interactive]:hover {
+    transform: var(--sl-i-transform);
+    box-shadow: var(--sl-i-shadow);
   }
 
   /* bg sections own the gap to the next divider — the fill runs
@@ -251,10 +214,5 @@
   /* center — horizontally centered text */
   [sl-card] > [sl-card-section="center"] {
     text-align: center;
-  }
-
-  /* raised — theme-aware shadow (reusable beyond card) */
-  [sl-raised] {
-    box-shadow: 0 2px 8px color-mix(in srgb, var(--sl-text) 12%, transparent);
   }
 }

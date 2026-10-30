@@ -1,6 +1,10 @@
+/* the layer order travels with the css — consumers importing this
+   file alone (shadow-dom demos, partial imports) get the declared
+   order no matter which import surfaces first */
+@layer theme, base, attrs;
+
+@import "./css/generic.css";
 @import "./css/button.css";
-@import "./css/button.variant.css";
-@import "./css/button.attrs.css";
 @import "./css/card.css";
 @import "./css/card.attrs.css";
 

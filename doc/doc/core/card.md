@@ -34,7 +34,13 @@ import * as CardStories from "../../stories/components/card.stories";
 
 <Demo :render="CardStories.Radius.render" />
 
-### 型態 `sl-variant`
+### 型態
+
+型態直接寫在 `sl-card` 的值裡，不寫值就是一般卡片：
+
+```html
+<div sl-card="hollow">…</div>
+```
 
 - `hollow`：虛線描邊、透明底，常用在上傳或空白狀態
 - `plain`：拿掉框線，保留底色和圓角
@@ -42,7 +48,7 @@ import * as CardStories from "../../stories/components/card.stories";
 
 <Demo :render="CardStories.Variants.render" />
 
-### 標記 `sl-indicate` + `sl-tone`
+### 標記 `sl-card-indicate` + `sl-tone`
 
 在卡片邊緣加一條強調色，顏色跟著 `sl-tone` 走（預設 primary）：
 
@@ -50,21 +56,24 @@ import * as CardStories from "../../stories/components/card.stories";
 
 <Demo :render="CardStories.Indicated.render" />
 
-### 浮起 `sl-raised`
+### 互動 `sl-interactive`
 
-加陰影讓卡片看起來浮起。
+整張卡片變成一個可點擊的動作：游標變 pointer，滑鼠移過去播放互動效果。不寫值是 `grow`：
 
-<Demo :render="CardStories.Raised.render" />
-
-### 互動 `sl-card-interactive`
-
-整張卡片變成一個可點擊的動作，游標變 pointer，滑鼠移過去卡片會浮起。要讓點擊開啟頁面，把屬性直接寫在 `<a>` 上，卡片本身就是連結：
-
-```html
-<a sl-card sl-card-interactive href="/detail">…</a>
-```
+- `grow`：放大
+- `lift`：浮起＋陰影
+- `raise`：只有陰影浮現
+- `press`：下壓縮小
 
 <Demo :render="CardStories.Interactive.render" />
+
+要讓點擊開啟頁面，把屬性直接寫在 `<a>` 上，卡片本身就是連結：
+
+```html
+<a sl-card sl-interactive href="/detail">…</a>
+```
+
+<Demo :render="CardStories.InteractiveLink.render" />
 
 ## 子元素
 
@@ -148,7 +157,7 @@ import * as CardStories from "../../stories/components/card.stories";
 沒有框線、內容完全置中的區塊，用來放空狀態、上傳區或查無結果。裡面直接用 `strong` 寫標題、`p` 寫說明，按鈕放 `sl-button`，不用另外加 class：
 
 ```html
-<div sl-card sl-variant="hollow">
+<div sl-card="hollow">
   <div sl-card-section="blank">
     <strong>上傳檔案</strong>
     <p>拖拉檔案至此</p>

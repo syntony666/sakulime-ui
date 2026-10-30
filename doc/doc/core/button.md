@@ -1,6 +1,6 @@
 ---
 title: Button 按鈕
-description: sl-button 按鈕，用 sl-tone、sl-variant、sl-size、sl-radius 調整外觀。
+description: sl-button 按鈕，值決定型態，再用 sl-tone、sl-size、sl-radius 調整外觀。
 ---
 
 <script setup>
@@ -27,7 +27,13 @@ import * as ButtonStories from "../../stories/components/button.stories";
 
 <Demo :render="ButtonStories.TonesInvert.render" />
 
-## 型態 `sl-variant`
+## 型態
+
+型態直接寫在 `sl-button` 的值裡，不寫值就是 `normal`：
+
+```html
+<button sl-button="invert">按鈕</button>
+```
 
 - `normal`：整顆填滿（預設值）
 - `invert`：只剩框線跟字

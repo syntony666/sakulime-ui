@@ -8,9 +8,7 @@ type CardArgs = {
   variant: string;
   indicate: string;
   tone: string;
-
-  raised: boolean;
-  interactive: boolean;
+  interactive: string;
 };
 
 type SectionArgs = {
@@ -26,6 +24,7 @@ const INDICATES = ["-", "top", "bottom", "start", "end"];
 const CORNERS = ["-", "start", "end"];
 const CORNER_TYPES = ["-", "text-xs", "text-sm", "indicator"];
 const TONES = ["-", "primary", "secondary", "success", "warning", "danger"];
+const INTERACTIVES = ["-", "grow", "lift", "raise", "press"];
 const INSETS = ["-", "top", "middle", "bottom"];
 
 // Controls row for an attr axis: name = real attr, shows the "-" option
@@ -59,28 +58,15 @@ const meta = {
     variant: "-",
     indicate: "-",
     tone: "-",
-
-    raised: false,
-    interactive: false,
+    interactive: "-",
   },
   argTypes: {
     pad: axisArg("sl-pad", "內距", "md", PADS),
     radius: axisArg("sl-radius", "圓角", "md", RADII),
-    variant: axisArg("sl-variant", "型態", "-", VARIANTS),
-    indicate: axisArg("sl-indicate", "標記邊緣", "-", INDICATES),
+    variant: axisArg("sl-card", "型態", "-", VARIANTS),
+    indicate: axisArg("sl-card-indicate", "標記邊緣", "-", INDICATES),
     tone: axisArg("sl-tone", "顏色（搭配標記）", "primary", TONES),
-    raised: {
-      name: "sl-raised",
-      description: "浮起陰影",
-      table: { type: {}, defaultValue: { summary: "false" } },
-      control: "boolean",
-    },
-    interactive: {
-      name: "sl-card-interactive",
-      description: "整張可點",
-      table: { type: {}, defaultValue: { summary: "false" } },
-      control: "boolean",
-    },
+    interactive: axisArg("sl-interactive", "互動（hover 效果）", "grow", INTERACTIVES),
   },
 } satisfies Meta<CardArgs>;
 
@@ -89,6 +75,12 @@ type Story = StoryObj<CardArgs>;
 
 const card = (attrs: string, content: string, w = 320) =>
   `<div sl-card${attrs} style="width: ${w}px">${content}</div>`;
+
+// the marker itself carries the variant value — bare = default frame
+const cardMarker = (v: string) => (v === "-" ? "sl-card" : `sl-card="${v}"`);
+
+const vcard = (v: string, content: string, w = 320) =>
+  `<div ${cardMarker(v)} style="width: ${w}px">${content}</div>`;
 
 // shared content parts — playground cards and section demos
 const sec = (inner: string) => `<div sl-card-section>${inner}</div>`;
@@ -102,14 +94,12 @@ const byAxis = (name: string) => (v: string) =>
 
 export const Card: Story = {
   render: (args) =>
-    `<div sl-card` +
+    `<div ${cardMarker(args.variant)}` +
     attr("sl-pad", args.pad) +
     attr("sl-radius", args.radius) +
-    attr("sl-variant", args.variant) +
-    attr("sl-indicate", args.indicate) +
+    attr("sl-card-indicate", args.indicate) +
     attr("sl-tone", args.tone) +
-    (args.raised ? " sl-raised" : "") +
-    (args.interactive ? " sl-card-interactive" : "") +
+    attr("sl-interactive", args.interactive) +
     ` style="max-width: 360px">` +
     `<div>${TITLE}</div>` +
     `</div>`,
@@ -124,27 +114,35 @@ export const Radius: Story = {
 };
 
 export const Variants: Story = {
-  render: () => axis(VARIANTS, byAxis("sl-variant")),
+  render: () =>
+    axis(VARIANTS, (v) => vcard(v, `<strong>${label(v)}</strong><p>內容文字</p>`)),
 };
 
 export const Indicated: Story = {
   render: () =>
     axis(TONES, (v) =>
       card(
-        attr("sl-indicate", "start") + attr("sl-tone", v),
+        attr("sl-card-indicate", "start") + attr("sl-tone", v),
         `<strong>${label(v)}</strong><p>內容文字</p>`,
       ),
     ),
 };
 
-export const Raised: Story = {
-  render: () => card(" sl-raised", `<strong>Raised</strong><p>帶陰影的浮起卡片</p>`),
-};
-
+// hover affordances — one card per axis value; "-" shows a static card
 export const Interactive: Story = {
   render: () =>
-    `<a sl-card sl-card-interactive href="#" style="width: 320px">` +
-    `<strong>可點卡片</strong><p>整張卡片是一個連結，滑鼠移過去會浮起。</p></a>`,
+    axis(INTERACTIVES, (v) =>
+      card(
+        attr("sl-interactive", v),
+        `<strong>${label(v)}</strong><p>滑鼠移過去看效果</p>`,
+      ),
+    ),
+};
+
+export const InteractiveLink: Story = {
+  render: () =>
+    `<a sl-card sl-interactive href="#" style="width: 320px">` +
+    `<strong>可點卡片</strong><p>整張卡片是一個連結，滑鼠移過去會放大。</p></a>`,
 };
 
 const cornerIcon =
@@ -240,8 +238,8 @@ export const Insets: Story = {
 export const Blank: Story = {
   render: () =>
     axis(["-", "hollow", "blank"], (v) =>
-      card(
-        attr("sl-variant", v),
+      vcard(
+        v,
         `<div sl-card-section="blank">` +
           `<strong>${v === "hollow" ? "上傳檔案" : v === "blank" ? "查無結果" : "沒有內容"}</strong>` +
           `<p>${v === "hollow" ? "拖拉檔案至此" : "說明文字"}</p>` +

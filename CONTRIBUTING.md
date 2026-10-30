@@ -38,6 +38,14 @@ npm run site         # also verify the static site when touching doc/
 - New themes: drop a `.css` in `packages/shared/theme` (three seeds + `color-scheme`; see `css/derived.css`), then import it once in `packages/core/src/index.ts` to bundle it into core, and add a `./<name>.css` line to `packages/shared/theme/package.json` exports so the path is importable
 - Doc pages need frontmatter `title` and `description` — canonical, OG and JSON-LD metadata is generated from them
 
+## Component CSS rules
+
+- Generic attributes (`sl-tone`, `sl-size`, `sl-radius`, `sl-pad`, `sl-interactive`) live in `css/generic.css`. Each expands through its own `@custom-selector` consumer list and only ever sets `--sl-*` slot variables, never physical properties
+- A component that reads a slot must self-default it inside its own `@layer base` rule. That default is what seals a generic attribute set on an ancestor from leaking in
+- Component parts (`sl-card-corner`, `sl-card-section`) never self-default — they inherit their component's slots, so a part follows the card's `sl-tone`. Adding a part to a consumer list still lets the attribute work when written on the part itself
+- Component-specific attributes are namespaced `sl-<comp>-<attr>`; the marker value carries the variant (`sl-card="hollow"`), a bare marker means the default variant
+- `@custom-selector` expands via `postcss-custom-selectors`; both Vite pipelines (core build and doc site) already run it — never hand-write the `:is()` expansion
+
 ## Workflow
 
 Work branches off the current `release/x.y.z` branch, never directly off `master`:
