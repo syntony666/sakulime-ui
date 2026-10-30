@@ -1,0 +1,18 @@
+/* dot — a status point: an empty inline marker whose ink comes from
+   sl-tone (or the text ink it inherits). 0.5em keeps it at x-height so
+   it tracks the surrounding font-size */
+@layer base {
+  [sl-dot] {
+    /* self-default seals ancestor tone slots — sl-tone written on the
+       dot itself still recolors it */
+    --sl-tone-bg: currentColor;
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    /* lift to optical center — baseline seating reads low against
+       full-height (CJK) glyphs */
+    vertical-align: 0.125em;
+    border-radius: 999px;
+    background: var(--sl-tone-bg);
+  }
+}
