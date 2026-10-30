@@ -4,12 +4,12 @@ description: sl-button 按鈕，值決定型態，再用 sl-tone、sl-size、sl-
 ---
 
 <script setup>
-import * as ButtonStories from "../../stories/components/button.stories";
+import * as ButtonDemos from "../../demos/components/button.demo";
 </script>
 
 # Button *按鈕*
 
-<Playground :meta="ButtonStories.default" :render="ButtonStories.Button.render" />
+<Playground :meta="ButtonDemos.default" :render="ButtonDemos.Button.render" />
 
 ## 顏色 `sl-tone`
 
@@ -21,11 +21,11 @@ import * as ButtonStories from "../../stories/components/button.stories";
 
 ### 實心版本
 
-<Demo :render="ButtonStories.Tones.render" />
+<Demo :render="ButtonDemos.Tones.render" />
 
 ### 框線版本
 
-<Demo :render="ButtonStories.TonesInvert.render" />
+<Demo :render="ButtonDemos.TonesInvert.render" />
 
 ## 型態
 
@@ -40,7 +40,7 @@ import * as ButtonStories from "../../stories/components/button.stories";
 - `underline`：只有底線
 - `ghost`：沒底沒框，只有字
 
-<Demo :render="ButtonStories.Variants.render" />
+<Demo :render="ButtonDemos.Variants.render" />
 
 ## 尺寸 `sl-size`
 
@@ -48,7 +48,7 @@ import * as ButtonStories from "../../stories/components/button.stories";
 - `md`：一般（預設值）
 - `lg`：大
 
-<Demo :render="ButtonStories.Sizes.render" />
+<Demo :render="ButtonDemos.Sizes.render" />
 
 ## 圓角 `sl-radius`
 
@@ -58,4 +58,4 @@ import * as ButtonStories from "../../stories/components/button.stories";
 - `lg`：很圓
 - `full`：膠囊形，全圓到底
 
-<Demo :render="ButtonStories.Radius.render" />
+<Demo :render="ButtonDemos.Radius.render" />

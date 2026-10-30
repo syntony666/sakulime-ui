@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from "../util/types";
+import type { Meta, DemoObj } from "../util/types";
 import { showMarkup } from "../util/docs-source";
-import { axis, attr, label } from "../util/axis";
+import { axis, axisArg, attr, label } from "../util/axis";
 
 type ButtonArgs = {
   label: string;
@@ -16,19 +16,9 @@ const VARIANTS = ["-", "normal", "invert", "underline", "ghost"];
 const SIZES = ["-", "sm", "md", "lg"];
 const RADII = ["-", "none", "sm", "md", "lg", "full"];
 
-// Controls row for an attr axis: name = real attr, shows the "-" option
-// and the real default, hides the Type column
-const axisArg = (name: string, desc: string, def: string, options: string[]) => ({
-  name,
-  description: desc,
-  table: { type: {}, defaultValue: { summary: `"${def}"` } },
-  control: { type: "select" as const, labels: { "-": "-" } },
-  options,
-});
-
 const meta = {
   title: "Core/Button 按鈕",
-  // stories feed the mdx page; hide them from the sidebar
+  // demos feed the md page; hide them from the sidebar
   tags: ["!dev"],
   parameters: {
     docs: {
@@ -67,7 +57,7 @@ const meta = {
 } satisfies Meta<ButtonArgs>;
 
 export default meta;
-type Story = StoryObj<ButtonArgs>;
+type Demo = DemoObj<ButtonArgs>;
 
 // the marker itself carries the variant value — bare = normal
 const marker = (v: string) => (v === "-" ? "sl-button" : `sl-button="${v}"`);
@@ -94,27 +84,27 @@ function slAttrs({
   );
 }
 
-export const Button: Story = {
+export const Button: Demo = {
   render: (args) => `<button ${slAttrs(args)}>${args.label}</button>`,
 };
 
-export const Tones: Story = {
+export const Tones: Demo = {
   render: () => axis(TONES, btn("sl-tone")),
 };
 
-export const TonesInvert: Story = {
+export const TonesInvert: Demo = {
   render: () => axis(TONES, btn("sl-tone", "invert")),
 };
 
-export const Variants: Story = {
+export const Variants: Demo = {
   render: () =>
     axis(VARIANTS, (v) => `<button ${marker(v)}>${label(v)}</button>`),
 };
 
-export const Sizes: Story = {
+export const Sizes: Demo = {
   render: () => axis(SIZES, btn("sl-size")),
 };
 
-export const Radius: Story = {
+export const Radius: Demo = {
   render: () => axis(RADII, btn("sl-radius")),
 };

@@ -4,7 +4,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/syntony666/sakulime-ui.git",
-    "directory": "packages/shared/theme"
+    "directory": "packages/theme"
   },
   "homepage": "https://sakulime-ui.syntony666.com",
   "type": "module",

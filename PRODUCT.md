@@ -25,7 +25,7 @@ sakulime-ui 是一套 CSS-first 設計系統：只有兩件事 — `sl-*` 屬性
 - npm workspaces monorepo，四個 public entry：`sakulime-ui`（全包）、`@sakulime-ui/core`、`@sakulime-ui/layout`、`@sakulime-ui/theme`
 - `packages/shared` 內部專用（private，變數 build 時 inline 進各 bundle）
 - VitePress 文件站 `doc/` → `doc/site` 靜態輸出 → Cloudflare Workers（`doc/wrangler.toml`），線上 https://sakulime-ui.syntony666.com
-- demo 由 `doc/stories/*.stories.ts` 渲染，經 `Demo`/`Playground` 元件注入 Shadow DOM，避免 VitePress reset 干擾設計系統 cascade
+- demo 由 `doc/demos/*.demo.ts` 渲染，經 `Demo`/`Playground` 元件注入 Shadow DOM，避免 VitePress reset 干擾設計系統 cascade
 - 發佈走 changesets（四包 fixed 同版），master push → release PR → trusted publishing
 
 ## Capabilities and Constraints
@@ -43,8 +43,8 @@ sakulime-ui 是一套 CSS-first 設計系統：只有兩件事 — `sl-*` 屬性
 
 ## Evidence on Hand
 
-- 文件站本身即最完整的 demo：每個元件頁有 Playground（story args/argTypes 驅動）＋靜態 demo 列＋自動縮排的即時 markup
-- `doc/stories/components/*.stories.ts` 是 demo 資料來源（button、card）
+- 文件站本身即最完整的 demo：每個元件頁有 Playground（demo args/argTypes 驅動）＋靜態 demo 列＋自動縮排的即時 markup
+- `doc/demos/components/*.demo.ts` 是 demo 資料來源（button、card）
 - 無使用者見證、案例、下載數據 — 對外證據目前只有產品本身
 
 ## Product Principles

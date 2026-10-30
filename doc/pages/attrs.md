@@ -70,8 +70,10 @@ sakulime 的 API 全是 HTML 屬性，沒有 class、沒有 JS。屬性分四種
 
 ```html
 <div sl-card sl-tone="success">
-  <span sl-card-corner>10ms</span>                     <!-- 跟著卡片，success -->
-  <span sl-card-corner="end" sl-tone="danger">!</span> <!-- 只有自己，danger -->
+  <!-- 跟著卡片，success -->
+  <span sl-card-corner>10ms</span>
+  <!-- 只有自己，danger -->
+  <span sl-card-corner="end" sl-tone="danger">!</span>
 </div>
 ```
 

@@ -29,3 +29,18 @@ export const axis = <T>(values: T[], item: (v: T) => string) =>
     .map((v, i) => `${i === 1 && values[0] === "-" ? SEP : ""}${item(v)}`)
     .join("") +
   `</div>`;
+
+// Controls row for an attr axis: name = real attr, shows the "-" option
+// and the real default, hides the Type column
+export const axisArg = (
+  name: string,
+  desc: string,
+  def: string,
+  options: string[],
+) => ({
+  name,
+  description: desc,
+  table: { type: {}, defaultValue: { summary: `"${def}"` } },
+  control: { type: "select" as const, labels: { "-": "-" } },
+  options,
+});

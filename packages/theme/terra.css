@@ -3,7 +3,7 @@
    (its teal-600 action + #1f3d3d tooltip ink), so stone stays stone and
    the accent places read as ink, not as a recolor */
 
-@import "./css/derived.css";
+@import "./_internal/derived.css";
 
 @layer theme {
   :root[data-theme="terra"] {

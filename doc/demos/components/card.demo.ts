@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from "../util/types";
+import type { Meta, DemoObj } from "../util/types";
 import { showMarkup } from "../util/docs-source";
-import { axis, attr, label } from "../util/axis";
+import { axis, axisArg, attr, label } from "../util/axis";
 
 type CardArgs = {
   pad: string;
@@ -27,19 +27,9 @@ const TONES = ["-", "primary", "secondary", "success", "warning", "danger"];
 const INTERACTIVES = ["-", "grow", "lift", "raise", "press"];
 const INSETS = ["-", "top", "middle", "bottom"];
 
-// Controls row for an attr axis: name = real attr, shows the "-" option
-// and the real default, hides the Type column
-const axisArg = (name: string, desc: string, def: string, options: string[]) => ({
-  name,
-  description: desc,
-  table: { type: {}, defaultValue: { summary: `"${def}"` } },
-  control: { type: "select" as const, labels: { "-": "-" } },
-  options,
-});
-
 const meta = {
   title: "Core/Card 卡片",
-  // stories feed the mdx page; hide them from the sidebar
+  // demos feed the md page; hide them from the sidebar
   tags: ["!dev"],
   parameters: {
     docs: {
@@ -71,7 +61,7 @@ const meta = {
 } satisfies Meta<CardArgs>;
 
 export default meta;
-type Story = StoryObj<CardArgs>;
+type Demo = DemoObj<CardArgs>;
 
 const card = (attrs: string, content: string, w = 320) =>
   `<div sl-card${attrs} style="width: ${w}px">${content}</div>`;
@@ -92,7 +82,7 @@ const FOOT = `<small>底部資訊</small>`;
 const byAxis = (name: string) => (v: string) =>
   card(attr(name, v), `<strong>${label(v)}</strong><p>內容文字</p>`);
 
-export const Card: Story = {
+export const Card: Demo = {
   render: (args) =>
     `<div ${cardMarker(args.variant)}` +
     attr("sl-pad", args.pad) +
@@ -105,20 +95,20 @@ export const Card: Story = {
     `</div>`,
 };
 
-export const Pads: Story = {
+export const Pads: Demo = {
   render: () => axis(PADS, byAxis("sl-pad")),
 };
 
-export const Radius: Story = {
+export const Radius: Demo = {
   render: () => axis(RADII, byAxis("sl-radius")),
 };
 
-export const Variants: Story = {
+export const Variants: Demo = {
   render: () =>
     axis(VARIANTS, (v) => vcard(v, `<strong>${label(v)}</strong><p>內容文字</p>`)),
 };
 
-export const Indicated: Story = {
+export const Indicated: Demo = {
   render: () =>
     axis(TONES, (v) =>
       card(
@@ -129,7 +119,7 @@ export const Indicated: Story = {
 };
 
 // hover affordances — one card per axis value; "-" shows a static card
-export const Interactive: Story = {
+export const Interactive: Demo = {
   render: () =>
     axis(INTERACTIVES, (v) =>
       card(
@@ -139,7 +129,7 @@ export const Interactive: Story = {
     ),
 };
 
-export const InteractiveLink: Story = {
+export const InteractiveLink: Demo = {
   render: () =>
     `<a sl-card sl-interactive href="#" style="width: 320px">` +
     `<strong>可點卡片</strong><p>整張卡片是一個連結，滑鼠移過去會放大。</p></a>`,
@@ -150,7 +140,7 @@ const cornerIcon =
   `stroke-width="2" stroke-linecap="round" stroke-linejoin="round">` +
   `<path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>`;
 
-export const Corner: Story = {
+export const Corner: Demo = {
   args: { radius: "-", tone: "-" },
   render: (args) =>
     `<div sl-card${attr("sl-radius", args.radius)} style="max-width: 360px">` +
@@ -158,7 +148,7 @@ export const Corner: Story = {
     `<strong>卡片標題</strong><p>卡片內容文字，描述這張卡片在展示什麼。</p></div>`,
 };
 
-export const CornerPositions: Story = {
+export const CornerPositions: Demo = {
   render: () =>
     axis(CORNERS, (v) =>
       card(
@@ -169,7 +159,7 @@ export const CornerPositions: Story = {
     ),
 };
 
-export const CornerTypes: Story = {
+export const CornerTypes: Demo = {
   render: () =>
     axis(CORNER_TYPES, (v) =>
       card(
@@ -187,14 +177,14 @@ export const CornerTypes: Story = {
 // bare sections — header/content/footer hairlines without inset media;
 // content stays inline like the fence example (a lone <p> would carry
 // browser margins and sit visibly low in the section)
-export const BasicSections: Story = {
+export const BasicSections: Demo = {
   render: () =>
     card("", [sec(`<strong>標題</strong>`), sec(`內容`), sec(FOOT)].join(""), 320),
 };
 
 // carries its own args/argTypes so the md can bind it as a standalone
 // playground (story doubles as the Playground meta prop)
-export const Sections: StoryObj<SectionArgs> = {
+export const Sections: DemoObj<SectionArgs> = {
   args: { inset: "top", corner: false, pad: "-" },
   argTypes: {
     inset: axisArg('sl-card-section="inset"', "貼邊區塊位置", "-", INSETS),
@@ -224,7 +214,7 @@ export const Sections: StoryObj<SectionArgs> = {
   },
 };
 
-export const Insets: Story = {
+export const Insets: Demo = {
   render: () =>
     axis(["top", "middle", "bottom"], (v) => {
       const text = `<div sl-card-section><strong>${label(v)}</strong><p>內容</p></div>`;
@@ -235,7 +225,7 @@ export const Insets: Story = {
 };
 
 // blank — borderless centered block; the shell variant picks the frame
-export const Blank: Story = {
+export const Blank: Demo = {
   render: () =>
     axis(["-", "hollow", "blank"], (v) =>
       vcard(
@@ -251,7 +241,7 @@ export const Blank: Story = {
 };
 
 // section value axis — emphasis, selected state, hover, alignment
-export const SectionKinds: Story = {
+export const SectionKinds: Demo = {
   render: () =>
     card(
       "",

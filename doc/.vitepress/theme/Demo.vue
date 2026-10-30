@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from "vue";
-import { highlightMarkup, showMarkup } from "../../stories/util/docs-source";
+import { highlightMarkup, showMarkup } from "../../demos/util/docs-source";
 import demoCss from "./demo-content.css?inline";
 
 const props = withDefaults(
