@@ -48,7 +48,7 @@ import * as CardStories from "../../stories/components/card.stories";
 
 <Demo :render="CardStories.Variants.render" />
 
-### 標記 `sl-indicate` + `sl-tone`
+### 標記 `sl-card-indicate` + `sl-tone`
 
 在卡片邊緣加一條強調色，顏色跟著 `sl-tone` 走（預設 primary）：
 

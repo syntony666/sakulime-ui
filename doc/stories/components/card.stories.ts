@@ -67,7 +67,7 @@ const meta = {
     pad: axisArg("sl-pad", "內距", "md", PADS),
     radius: axisArg("sl-radius", "圓角", "md", RADII),
     variant: axisArg("sl-card", "型態", "-", VARIANTS),
-    indicate: axisArg("sl-indicate", "標記邊緣", "-", INDICATES),
+    indicate: axisArg("sl-card-indicate", "標記邊緣", "-", INDICATES),
     tone: axisArg("sl-tone", "顏色（搭配標記）", "primary", TONES),
     raised: {
       name: "sl-raised",
@@ -111,7 +111,7 @@ export const Card: Story = {
     `<div ${cardMarker(args.variant)}` +
     attr("sl-pad", args.pad) +
     attr("sl-radius", args.radius) +
-    attr("sl-indicate", args.indicate) +
+    attr("sl-card-indicate", args.indicate) +
     attr("sl-tone", args.tone) +
     (args.raised ? " sl-raised" : "") +
     (args.interactive ? " sl-card-interactive" : "") +
@@ -137,7 +137,7 @@ export const Indicated: Story = {
   render: () =>
     axis(TONES, (v) =>
       card(
-        attr("sl-indicate", "start") + attr("sl-tone", v),
+        attr("sl-card-indicate", "start") + attr("sl-tone", v),
         `<strong>${label(v)}</strong><p>內容文字</p>`,
       ),
     ),

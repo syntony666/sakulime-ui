@@ -174,7 +174,7 @@ components:
 - **Surface:** `--sl-surface` 底＋1px `--sl-border`＋`sl-radius`＋`--sl-pad`（預設 16px）
 - **子元素 — 角落標記 `sl-card-corner`:** 頂角 chip，`end`（右上）/`start`（左上）＋ `text-sm`/`text-xs`/`indicator` 型態；底色是 tone 20% + surface 的不透明 tint — 疊在圖片上也讀得到；`indicator` 為實色圓點，裡面放 svg/img 變 icon
 - **子元素 — 分區 `sl-card-section`:** 滿版 hairline 分隔的內容列；第一節不畫線（=header）；`="inset"` 抵銷內距做滿版區塊（圖/地圖/色塊），位置由 DOM 順序決定（首節貼上、末節貼下、中間貼左右）；leading/trailing corner 不算內容
-- **Options:** `sl-card="hollow"`（虛線描邊）、`sl-indicate`（邊緣強調色條）、`sl-raised`（選配陰影）、`sl-pad`（sm/md/lg）
+- **Options:** `sl-card="hollow"`（虛線描邊）、`sl-card-indicate`（邊緣強調色條）、`sl-raised`（選配陰影）、`sl-pad`（sm/md/lg）
 
 ### Demo Chrome（文件站元件）
 - **Stage:** 圓點格紙背景＋`--sl-3xl` padding＋細框，內容在 Shadow DOM 裡渲染

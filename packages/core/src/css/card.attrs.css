@@ -3,19 +3,19 @@
    variants live in card.css. */
 @layer attrs {
   /* indicate — accent edge, colored by the tone axis */
-  [sl-card][sl-indicate="top"] {
+  [sl-card][sl-card-indicate="top"] {
     border-top: 3px solid var(--sl-tone-bg);
   }
 
-  [sl-card][sl-indicate="bottom"] {
+  [sl-card][sl-card-indicate="bottom"] {
     border-bottom: 3px solid var(--sl-tone-bg);
   }
 
-  [sl-card][sl-indicate="start"] {
+  [sl-card][sl-card-indicate="start"] {
     border-inline-start: 3px solid var(--sl-tone-bg);
   }
 
-  [sl-card][sl-indicate="end"] {
+  [sl-card][sl-card-indicate="end"] {
     border-inline-end: 3px solid var(--sl-tone-bg);
   }
 
