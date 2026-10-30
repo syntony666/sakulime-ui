@@ -246,7 +246,7 @@ export const SectionKinds: Story = {
         sec(`預設區塊`),
         `<div sl-card-section="secondary">secondary：次要內容</div>`,
         `<div sl-card-section="active">active：目前選取</div>`,
-        `<div sl-card-section="interactive">interactive：滑鼠移過去會變色</div>`,
+        `<div sl-card-section="interactive">interactive：滑鼠移過去會變色＋整張浮起</div>`,
         `<div sl-card-section="center">center：文字置中</div>`,
       ].join(""),
       320,

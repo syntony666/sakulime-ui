@@ -154,7 +154,7 @@ import * as CardStories from "../../stories/components/card.stories";
 
 - `secondary`：次要內容的淡底
 - `active`：目前選取的那一塊（primary 淡色）
-- `interactive`：滑鼠移過去會變色，適合整列都能點的清單
+- `interactive`：滑鼠移過去會變色、整張卡浮起，適合整列都能點的清單
 - `center`：文字置中
 
 <Demo :render="CardStories.SectionKinds.render" />
