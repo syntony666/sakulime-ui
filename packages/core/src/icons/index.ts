@@ -76,22 +76,24 @@ export const iconNames = (prefix: string) =>
   Object.keys(packs.get(prefix)?.icons ?? {});
 
 /* DOM resolver — fills <i sl-icon="si-github"> placeholders through the
-   shared resolver layer. TAG marks a successful fill only: placeholders
-   whose pack isn't registered yet stay open and retry on later passes,
-   so a late registerPack still reaches them. */
+   shared resolver layer. TAG stores the resolved name so a later
+   setAttribute with a different name re-fills; placeholders whose pack
+   isn't registered yet stay open and retry on later passes, so a late
+   registerPack still reaches them. */
 const TAG = "data-sl-resolved";
 
 const fillIcon = (el: HTMLElement) => {
-  if (el instanceof SVGElement || el.hasAttribute(TAG)) return;
+  if (el instanceof SVGElement) return;
   const name = el.getAttribute("sl-icon");
   if (!name) {
     el.setAttribute(TAG, "");
     return;
   }
+  if (el.getAttribute(TAG) === name) return;
   const svg = icon(name);
   if (svg) {
     el.innerHTML = svg;
-    el.setAttribute(TAG, "");
+    el.setAttribute(TAG, name);
   }
 };
 
