@@ -234,6 +234,15 @@ body::before {
   white-space: nowrap;
 }
 
+/* nav chrome sheds under the mobile breakpoint — the bar keeps only
+   logo, the theme trigger (dot + caret) and the hamburger */
+@media (max-width: 767.9px) {
+  .sl-version,
+  .sl-theme-name {
+    display: none;
+  }
+}
+
 /* doc typography follows the brand — accent headings, primary links.
    h1/h2 are display-size so the decorative accent passes AA-large;
    h3/h4 fall under normal-text size and take the readable -1 step */
