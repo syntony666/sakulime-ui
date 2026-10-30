@@ -1,4 +1,5 @@
 import { fileURLToPath } from "node:url";
+import customSelectors from "postcss-custom-selectors";
 import { defineConfig } from "vitepress";
 
 const zh = (t: string) => `<em>${t}</em>`;
@@ -107,6 +108,8 @@ export default defineConfig({
   outDir: "site",
   vite: {
     publicDir: fileURLToPath(new URL("../public", import.meta.url)),
+    /* docs consume core's source css — expand :--sl-* selectors here too */
+    css: { postcss: { plugins: [customSelectors()] } },
   },
   themeConfig: {
     outline: { level: [2, 4], label: "本頁目錄" },
