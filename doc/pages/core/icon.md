@@ -13,7 +13,7 @@ import * as IconDemos from "../../demos/components/icon.demo";
 
 <Playground :meta="IconDemos.default" :render="IconDemos.Icon.render" />
 
-## 用法
+## 使用
 
 ### 貼 svg
 
@@ -28,7 +28,7 @@ import * as IconDemos from "../../demos/components/icon.demo";
 
 ### 寫名稱 `<i sl-icon="package:name">`
 
-註冊圖包之後，任何元素寫名稱就會被填成圖示——package 名跟 icon 名用 `:` 分隔最穩（`-` 也行，但只在 package 名是單字時安全）：
+註冊圖包（見下方[安裝](#安裝)）之後，任何元素寫名稱就會被填成圖示——package 名跟 icon 名用 `:` 分隔最穩（`-` 也行，但只在 package 名是單字時安全）：
 
 ```html
 <i sl-icon="lucide:zap"></i>
@@ -50,42 +50,36 @@ import { icon } from "sakulime-ui";
 // → <a sl-card><svg sl-icon viewBox="0 0 24 24" …>…</svg><strong>標題</strong></a>
 ```
 
-## 環境需求
+## 安裝
 
-三種用法要的 JS 程度不同：
+套件本體不含任何圖包資料——要用什麼自己註冊；package 名自訂，會變成 `sl-icon` 值的前綴。JS 需求依環境分三種裝法：
 
-| 環境 | 能用什麼 |
-|---|---|
-| 純 HTML+CSS（零 JS）| 只有「貼 svg」——圖形是 svg 自己畫的，`sl-icon` 只管外觀 |
-| 無打包器的瀏覽器頁 | `<script type="module">` 從 CDN import，圖包也抓 CDN JSON |
-| 打包器／SSG | 三種全開 |
+### 打包器
 
-免打包器寫法：
+`@iconify-json/*` 是永久開源授權的資料檔（lucide 是 ISC、Simple Icons 是 CC0），建議當 devDep 裝——產出的是 markup 字串，JSON 不會進使用者的 bundle：
+
+```ts
+import { registerPack } from "sakulime-ui";
+import lucide from "@iconify-json/lucide/icons.json";
+
+registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
+```
+
+### 免打包器
+
+`<script type="module">` 從 CDN import 套件，圖包給 URL 讓 `registerPack` 自己 fetch（完成後會自動補上頁面裡的佔位）：
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakulime-ui@0.3/dist/sakulime.min.css">
 <script type="module">
   import { registerPack } from "https://cdn.jsdelivr.net/npm/sakulime-ui@0.3/dist/sakulime.min.js";
-  registerPack("lucide", "https://cdn.jsdelivr.net/npm/@iconify-json/lucide/icons.json");
+  registerPack("si", "https://esm.sh/@iconify-json/simple-icons/icons.json");
 </script>
 ```
 
-## 註冊圖包 `registerPack`
+### 純 HTML+CSS
 
-套件本體不含任何圖包資料——要用什麼自己註冊。package 名自訂，會變成 `sl-icon` 值的前綴：
-
-```ts
-import { registerPack } from "sakulime-ui";
-
-// npm：整包 Iconify JSON 一次掛上
-import lucide from "@iconify-json/lucide/icons.json";
-registerPack("lucide", lucide);
-
-// CDN：給 URL，fetch 完成後自動補上頁面裡的佔位
-registerPack("si", "https://esm.sh/@iconify-json/simple-icons/icons.json");
-```
-
-Iconify 圖包是永久開源授權的資料檔（lucide 是 ISC、Simple Icons 是 CC0），建議當 devDep 裝——產出的是 markup 字串，JSON 不會進使用者的 bundle。
+零 JS 頁面 `<link>` 載入 CSS 就好——「貼 svg」不需要任何 JS；「寫名稱」跟 `icon()` 都要 JS 在場。
 
 輔助函式：`packNames()` 列已註冊的包、`iconNames(prefix)` 列包內圖示、`resolveIcons(root)` 手動解析指定 root（Shadow DOM 內的佔位元素要自己餵給它）。
 
