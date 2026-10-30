@@ -18,14 +18,11 @@ const meta = {
 export default meta;
 type Demo = DemoObj;
 
-const box = (attr: string, label: string) =>
-  `<div ${attr} style="border:1px dashed var(--sl-border);border-radius:var(--sl-sm);padding:var(--sl-md);background:var(--sl-surface)">${label}</div>`;
+// the dashed edge is each container's real bounds; .demo-w is stamped
+// with the rendered px by Demo's measure prop
+const box = (attr: string) =>
+  `<div ${attr} class="demo-frame">${attr} <span class="demo-w"></span></div>`;
 
-// a half-scale page — the real containers still center and edge-fill;
-// the same --sl-container-* override the docs describe does the scaling
 export const ContainerWidths: Demo = {
-  render: () =>
-    `<div class="demo-viewport">` +
-    ["sm", "md", "lg"].map((v) => box(`sl-container-${v}`, `sl-container-${v}`)).join("") +
-    `</div>`,
+  render: () => ["sm", "md", "lg"].map((v) => box(`sl-container-${v}`)).join(""),
 };

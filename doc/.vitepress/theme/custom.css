@@ -172,10 +172,7 @@ body::before {
   padding-right: var(--sl-lg);
 }
 .container-wide .VPDoc .content-container {
-  max-width: calc(var(--sl-container-lg) + var(--sl-3xl) * 2 + 8px);
-}
-.container-wide .sl-demo-stage {
-  padding: var(--sl-md);
+  max-width: calc(var(--sl-container-lg) + 8px);
 }
 
 /* doc typography follows the brand — accent headings, primary links.
@@ -229,6 +226,11 @@ body::before {
   background: var(--sl-surface)
     radial-gradient(circle, var(--sl-border) 1.25px, transparent 1.25px) 0
     0 / var(--sl-lg) var(--sl-lg);
+}
+
+/* Demo pad=false — the demo runs edge to edge inside its stage */
+.sl-demo-stage-flush {
+  padding: 0;
 }
 
 /* code panel — the summary bar carries a caret, the 原始碼 label and a

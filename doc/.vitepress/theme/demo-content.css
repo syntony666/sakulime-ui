@@ -30,14 +30,18 @@
   background: linear-gradient(135deg, var(--sl-primary), var(--sl-secondary));
 }
 
-/* page frame for the container demo — containers render at real width;
-   narrow stages clip lg rather than shrinking it */
-.demo-viewport {
-  max-width: 100%;
-  padding: var(--sl-md) 0;
-  border: 1px solid var(--sl-border);
+/* live container demos — the dashed edge is each container's real
+   bound; .demo-w carries the rendered px stamped by Demo's measure */
+.demo-frame {
+  border: 1px dashed var(--sl-border);
   border-radius: var(--sl-sm);
-  display: grid;
-  gap: var(--sl-md);
-  overflow: hidden;
+  background: var(--sl-surface);
+  padding: var(--sl-md);
+  margin-block: var(--sl-md);
+  font-size: 13px;
+}
+
+.demo-w {
+  color: var(--sl-text-muted);
+  font-variant-numeric: tabular-nums;
 }
