@@ -13,28 +13,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 <Playground :meta="CardDemos.default" :render="CardDemos.Card.render" />
 
-## 屬性
-
-以下屬性都寫在 `<div sl-card>` 本體上。
-
-### 內距 `sl-pad`
-
-- `sm`：小
-- `md`：一般（預設值）
-- `lg`：大
-
-<Demo :render="CardDemos.Pads.render" />
-
-### 圓角 `sl-radius`
-
-- `none`：直角
-- `sm`：微圓
-- `md`：一般圓角（預設值）
-- `lg`：很圓
-
-<Demo :render="CardDemos.Radius.render" />
-
-### 型態
+## 型態
 
 型態直接寫在 `sl-card` 的值裡，不寫值就是一般卡片：
 
@@ -48,13 +27,32 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 <Demo :render="CardDemos.Variants.render" />
 
-### 標記 `sl-card-indicate` + `sl-tone`
+## 屬性
 
-在卡片邊緣加一條強調色，顏色跟著 `sl-tone` 走（預設 primary）：
+以下屬性都寫在 `<div sl-card>` 本體上。
 
-- `top` / `bottom` / `start` / `end`
+### 顏色 `sl-tone`
+
+`sl-tone` 不會改變卡片本體的底色，它決定標記邊條跟角落標記的顏色（預設 primary）：
 
 <Demo :render="CardDemos.Indicated.render" />
+
+### 圓角 `sl-radius`
+
+- `none`：直角
+- `sm`：微圓
+- `md`：一般圓角（預設值）
+- `lg`：很圓
+
+<Demo :render="CardDemos.Radius.render" />
+
+### 內距 `sl-pad`
+
+- `sm`：小
+- `md`：一般（預設值）
+- `lg`：大
+
+<Demo :render="CardDemos.Pads.render" />
 
 ### 互動 `sl-interactive`
 
@@ -75,6 +73,19 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 <Demo :render="CardDemos.InteractiveLink.render" />
 
+## 修飾詞
+
+### 標記 `sl-card-indicate`
+
+在卡片邊緣加一條強調色，顏色跟著 `sl-tone` 走（預設 primary）：
+
+- `top`：上緣
+- `bottom`：下緣
+- `start`：左緣
+- `end`：右緣
+
+<Demo :render="CardDemos.Indicates.render" />
+
 ## 子元素
 
 放進卡片裡的零件。
@@ -90,7 +101,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 </div>
 ```
 
-<Demo :render="CardDemos.Corner.render" :args="CardDemos.Corner.args" />
+<Playground :meta="CardDemos.Corner" :render="CardDemos.Corner.render" />
 
 顏色跟著 `sl-tone` 走（預設 primary），寫在卡片上整張統一，寫在標記上只改那一個：
 
@@ -136,6 +147,8 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 <Demo :render="CardDemos.BasicSections.render" />
 
+<Playground :meta="CardDemos.Sections" :render="CardDemos.Sections.render" />
+
 #### 貼邊 `inset`
 
 `inset` 會把卡片內距抵銷掉，讓內容直接貼到卡片邊緣，放圖片、地圖或色塊都合適。放在第一個就貼上緣，放在最後一個就貼下緣，夾在中間只貼左右兩邊，位置照順序自動判斷：
@@ -149,7 +162,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 角落標記疊在貼邊內容上也行。`sl-card-corner` 不算一般內容，不會影響 inset 的位置判斷：
 
-<Playground :meta="CardDemos.Sections" :render="CardDemos.Sections.render" />
+<Demo :render="CardDemos.Sections.render" :args="CardDemos.Sections.args" />
 <Demo :render="CardDemos.Insets.render" />
 
 #### 空白 `blank`

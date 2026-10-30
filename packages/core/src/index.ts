@@ -6,3 +6,4 @@ import "./index.css";
 
 export { icon, iconNames, registerPack, packNames, resolveIcons } from "./icons/index";
 export type { IconifyPack } from "./icons/index";
+export { registerResolver, resolve, installResolver } from "./resolve";

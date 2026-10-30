@@ -9,6 +9,8 @@
    MutationObserver for later additions. Outside a DOM (SSG) the
    resolver never installs — icon() stays a pure lookup. */
 
+import { installResolver, registerResolver, resolve } from "../resolve";
+
 type IconifyBody = {
   body: string;
   width?: number;
@@ -24,6 +26,15 @@ export type IconifyPack = {
 };
 
 const packs = new Map<string, IconifyPack>();
+
+/* warn once per unique name — failed placeholders stay un-resolved and
+   retry on later passes, so repeated lookups must not spam */
+const warned = new Set<string>();
+const warnOnce = (name: string, msg: string) => {
+  if (warned.has(name)) return;
+  warned.add(name);
+  console.warn(msg);
+};
 
 /* "pack:name" — a colon splits at the first colon (multi-word pack
    names allowed); without one the first dash is the separator, so
@@ -46,14 +57,14 @@ const markup = (entry: IconifyBody, pack: IconifyPack) => {
 export const icon = (name: string): string => {
   const p = parse(name);
   if (!p) {
-    console.warn(`sl-icon: bad name "${name}" — expected "pack:name"`);
+    warnOnce(name, `sl-icon: bad name "${name}" — expected "pack:name"`);
     return "";
   }
   const [prefix, id] = p;
   const pack = packs.get(prefix);
   const entry = pack?.icons[id];
   if (!entry) {
-    console.warn(`sl-icon: unknown icon "${name}"${pack ? "" : ` — pack "${prefix}" not registered`}`);
+    warnOnce(name, `sl-icon: unknown icon "${name}"${pack ? "" : ` — pack "${prefix}" not registered`}`);
     return "";
   }
   return markup(entry, pack);
@@ -64,36 +75,33 @@ export const packNames = () => [...packs.keys()];
 export const iconNames = (prefix: string) =>
   Object.keys(packs.get(prefix)?.icons ?? {});
 
-/* DOM resolver — fills <i sl-icon="si-github"> placeholders. Elements
-   keep their sl-icon value (it documents the icon); resolution is
-   marked once via dataset so the observer doesn't loop. */
+/* DOM resolver — fills <i sl-icon="si-github"> placeholders through the
+   shared resolver layer. TAG marks a successful fill only: placeholders
+   whose pack isn't registered yet stay open and retry on later passes,
+   so a late registerPack still reaches them. */
 const TAG = "data-sl-resolved";
+
+const fillIcon = (el: HTMLElement) => {
+  if (el instanceof SVGElement || el.hasAttribute(TAG)) return;
+  const name = el.getAttribute("sl-icon");
+  if (!name) {
+    el.setAttribute(TAG, "");
+    return;
+  }
+  const svg = icon(name);
+  if (svg) {
+    el.innerHTML = svg;
+    el.setAttribute(TAG, "");
+  }
+};
+
+registerResolver("sl-icon", fillIcon);
 
 /* exported for hosts that render into shadow roots — MutationObserver
    can't see inside them, so the host resolves its own tree (the docs
    Demo component does exactly this after each render) */
 export const resolveIcons = (root: ParentNode = document) => {
-  root.querySelectorAll<HTMLElement>(`[sl-icon]:not([${TAG}])`).forEach((el) => {
-    const name = el.getAttribute("sl-icon");
-    if (!name || el instanceof SVGElement) return;
-    el.setAttribute(TAG, "");
-    const svg = icon(name);
-    if (svg) el.innerHTML = svg;
-  });
-};
-
-let observer: MutationObserver | undefined;
-const installResolver = () => {
-  if (typeof document === "undefined" || observer) return;
-  resolveIcons(document);
-  observer = new MutationObserver((records) => {
-    for (const r of records) {
-      for (const node of r.addedNodes) {
-        if (node instanceof HTMLElement) resolveIcons(node.parentNode ?? node);
-      }
-    }
-  });
-  observer.observe(document.documentElement, { childList: true, subtree: true });
+  root.querySelectorAll<HTMLElement>("[sl-icon]").forEach(fillIcon);
 };
 
 export const registerPack = async (
@@ -106,6 +114,9 @@ export const registerPack = async (
   packs.set(prefix, source);
   if (typeof document !== "undefined") {
     installResolver();
-    resolveIcons(document);
+    // not redundant for the 2nd+ pack: installResolver() early-returns
+    // once armed, and this pass fills placeholders that were waiting on
+    // exactly this prefix
+    resolve(document);
   }
 };

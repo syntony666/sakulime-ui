@@ -5,9 +5,9 @@ description: sl-* 屬性語法總覽：元件標記、元件設定、子元素�
 
 # 屬性
 
-sakulime 的 API 全是 HTML 屬性，沒有 class、沒有 JS。屬性分四種，看等號寫在哪裡就知道是哪一種。
+sakulime 的 API 全是 HTML 屬性，沒有 class。外觀全靠 CSS；圖示名稱解析這類功能才有選配的 JS。屬性分四種，看等號寫在哪裡就知道是哪一種。
 
-## 四種形式
+## 形式
 
 ### 元件標記 `sl-<元件>[="<型態>"]`
 
@@ -40,13 +40,11 @@ sakulime 的 API 全是 HTML 屬性，沒有 class、沒有 JS。屬性分四種
 
 ### 通用屬性 `sl-<屬性>="<值>"`
 
-跨元件共用的值，哪些元素能用看下面的總表。
-
-## 通用屬性總表
+跨元件共用的值。
 
 | 屬性 | 值 | 適用元素 | 說明 |
 |---|---|---|---|
-| `sl-tone` | `primary` `secondary` `success` `warning` `danger` | `sl-button`、`sl-card`、`sl-card-corner` | 主題色調，背景與文字色自動配好 |
+| `sl-tone` | `primary` `secondary` `success` `warning` `danger` | `sl-button`、`sl-card`、`sl-card-corner`、`sl-icon` | 主題色調，背景與文字色自動配好 |
 | `sl-size` | `sm` `md` `lg` | `sl-button` | 高度與字級 |
 | `sl-radius` | `none` `sm` `md` `lg` `full` | `sl-button`、`sl-card` | 圓角 |
 | `sl-pad` | `sm` `md` `lg` | `sl-card` | 內距 |

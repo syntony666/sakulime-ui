@@ -226,6 +226,15 @@ body::before {
   max-width: calc(var(--sl-container-lg) + 8px);
 }
 
+/* version tag next to the theme switcher — rendered in Layout.vue */
+.sl-version {
+  margin-left: var(--sl-md);
+  font-family: var(--vp-font-family-mono);
+  font-size: 12px;
+  color: var(--sl-text-muted);
+  white-space: nowrap;
+}
+
 /* doc typography follows the brand — accent headings, primary links.
    h1/h2 are display-size so the decorative accent passes AA-large;
    h3/h4 fall under normal-text size and take the readable -1 step */
@@ -245,11 +254,13 @@ body::before {
 }
 
 /* nowrap keeps attribute tokens whole — a break at the hyphen of
-   sl-card-corner reads as two words, not one API name */
+   sl-card-corner reads as two words, not one API name. ligatures off:
+   the mono font fuses ="< sequences in tokens like sl-<元件>[=...] */
 .vp-doc :not(pre) > code {
   border: 1px solid var(--sl-border);
   border-radius: var(--sl-xs);
   white-space: nowrap;
+  font-variant-ligatures: none;
 }
 
 /* long code lines scroll sideways; an overlay scrollbar stays hidden
@@ -381,12 +392,12 @@ body::before {
 }
 
 /* playground controls — standalone panel below the demo card.
-   Fields share the row evenly (min 14rem) so it never ends in a
-   void; controls grow with the field up to a cap */
+   Fields share the row evenly (min 19rem: 11rem name lane leaves
+   ~7.5rem of usable control lane even in the narrowest field) */
 .sl-play-fields {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
-  gap: var(--sl-lg) 3rem;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: var(--sl-lg) var(--sl-lg);
   padding: var(--sl-md) var(--sl-lg);
   background: color-mix(in srgb, var(--sl-text) 4%, var(--sl-surface));
   border: 1px solid var(--sl-border);
@@ -421,7 +432,8 @@ body::before {
 .sl-play-field input[type="text"] {
   appearance: auto;
   width: 100%;
-  max-width: 12rem;
+  /* fill the control lane — longer options stay readable */
+  max-width: 16rem;
   background: var(--sl-surface);
   color: var(--sl-text);
   border: 1px solid var(--sl-border);
@@ -621,7 +633,10 @@ body::before {
   top: calc(100% + 6px);
   right: 0;
   z-index: 20;
-  width: 100%;
+  /* the trigger shrinks to dot + caret on mobile — the menu still
+     needs its natural width, never narrower than the trigger */
+  width: max-content;
+  min-width: 100%;
   margin: 0;
   padding: 4px;
   list-style: none;
@@ -672,6 +687,54 @@ body::before {
   box-shadow:
     inset 0 0 0 1.75px var(--dot-mode),
     0 0 0 1px color-mix(in oklab, var(--sl-text) 22%, transparent);
+}
+
+/* github stays in the bar at every width — VP hides .social-links
+   below 1280px (class + data-v scoped selector needs the same weight).
+   Its -8px margin-right was VP's tuck toward the menu; with the
+   version chip on the right it swallows the gap, so zero it out */
+.VPNavBar .social-links {
+  display: flex;
+  align-items: center;
+  margin-right: 0;
+}
+
+/* the "..." flyout only ever held the social links — with them shown
+   inline it opens an empty box */
+.VPNavBar .VPNavBarExtra {
+  display: none;
+}
+
+/* no hamburger at any width — the bar keeps github | version |
+   theme-switch everywhere, VP's responsive collapse is off */
+.VPNavBar .VPNavBarHamburger {
+  display: none;
+}
+
+/* mobile bar reads "github | 0.2.0 | dot picker" — the divider goes
+   with the name, the trigger shrinks to a compact dot + caret chip */
+@media (max-width: 767.9px) {
+  .sl-theme-switch {
+    margin-left: 0;
+    padding-left: 0;
+    border-left: none;
+  }
+
+  .sl-theme-name {
+    display: none;
+  }
+
+  .sl-theme-current {
+    min-width: 0;
+  }
+}
+
+/* under ~480px the cluster still outgrows the bar — drop the wordmark
+   text, the logo mark alone carries the brand */
+@media (max-width: 479.9px) {
+  .VPNavBarTitle .title {
+    font-size: 0;
+  }
 }
 
 /* motion is decorative — apply it instantly for reduced-motion users */

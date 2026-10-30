@@ -8,8 +8,10 @@ import {
   ref,
   watch,
 } from "vue";
+import pkg from "../../../package.json";
 
 const { Layout } = DefaultTheme;
+const { version } = pkg;
 const theme = ref("sakulime");
 const open = ref(false);
 const switchEl = ref<HTMLElement>();
@@ -59,14 +61,6 @@ const focusOption = (i: number) => {
   const n = themes.length;
   optionEls.value[((i % n) + n) % n]?.focus();
 };
-
-// the menu pins its width to the trigger's real box (the divider
-// padding inflates the switch's box, so % can't express this)
-const menuWidth = ref("100%");
-watch(open, (v) => {
-  if (v && triggerEl.value)
-    menuWidth.value = `${triggerEl.value.offsetWidth}px`;
-});
 
 const openMenu = (i?: number) => {
   open.value = true;
@@ -128,6 +122,9 @@ onUnmounted(() => document.removeEventListener("click", onClickOutside));
 <template>
   <Layout>
     <template #nav-bar-content-after>
+      <div>
+        <span class="sl-version">v{{ version }}</span>
+      </div>
       <div
         ref="switchEl"
         class="sl-theme-switch"
@@ -171,7 +168,6 @@ onUnmounted(() => document.removeEventListener("click", onClickOutside));
           v-if="open"
           class="sl-theme-menu"
           role="listbox"
-          :style="{ width: menuWidth }"
           @keydown="onMenuKeydown"
         >
           <li
