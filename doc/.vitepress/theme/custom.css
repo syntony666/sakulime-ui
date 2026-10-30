@@ -245,11 +245,13 @@ body::before {
 }
 
 /* nowrap keeps attribute tokens whole — a break at the hyphen of
-   sl-card-corner reads as two words, not one API name */
+   sl-card-corner reads as two words, not one API name. ligatures off:
+   the mono font fuses ="< sequences in tokens like sl-<元件>[=...] */
 .vp-doc :not(pre) > code {
   border: 1px solid var(--sl-border);
   border-radius: var(--sl-xs);
   white-space: nowrap;
+  font-variant-ligatures: none;
 }
 
 /* long code lines scroll sideways; an overlay scrollbar stays hidden
@@ -385,7 +387,7 @@ body::before {
    ~7.5rem of usable control lane even in the narrowest field) */
 .sl-play-fields {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
   gap: var(--sl-lg) var(--sl-lg);
   padding: var(--sl-md) var(--sl-lg);
   background: color-mix(in srgb, var(--sl-text) 4%, var(--sl-surface));
@@ -422,7 +424,7 @@ body::before {
   appearance: auto;
   width: 100%;
   /* fill the control lane — longer options stay readable */
-  max-width: 15rem;
+  max-width: 16rem;
   background: var(--sl-surface);
   color: var(--sl-text);
   border: 1px solid var(--sl-border);
