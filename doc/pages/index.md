@@ -5,7 +5,7 @@ titleTemplate: false
 
 hero:
   name: Sakulime UI
-  text: 純 HTML + CSS
+  text: CSS 優先
   tagline: 最簡單使用的 UI 介面
   actions:
     - theme: brand
@@ -21,5 +21,5 @@ features:
   - title: 自由度高
     details: 顏色、間距、字級都放在變數裡，想改哪一個就改哪一個，原本的 class 照樣能用。
   - title: 速度快
-    details: 整包 CSS 不到 10 KB，也沒有 JavaScript，頁面不用等程式載入。
+    details: 整包 CSS 不到 10 KB 就有全部元件。JS 只做圖示名稱解析這類選配功能，不載也不缺東西。
 ---

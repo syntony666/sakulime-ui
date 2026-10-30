@@ -5,7 +5,7 @@ description: sl-* 屬性語法總覽：元件標記、元件設定、子元素�
 
 # 屬性
 
-sakulime 的 API 全是 HTML 屬性，沒有 class、沒有 JS。屬性分四種，看等號寫在哪裡就知道是哪一種。
+sakulime 的 API 全是 HTML 屬性，沒有 class。外觀全靠 CSS；圖示名稱解析這類功能才有選配的 JS。屬性分四種，看等號寫在哪裡就知道是哪一種。
 
 ## 四種形式
 

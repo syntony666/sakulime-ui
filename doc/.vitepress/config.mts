@@ -13,7 +13,7 @@ const SITE = "https://sakulime-ui.syntony666.com";
 export default defineConfig({
   title: "Sakulime UI",
   titleTemplate: ":title | Sakulime UI",
-  description: "純 HTML + CSS 最簡單使用的 UI 介面",
+  description: "CSS-first，寫 HTML 屬性就有的 UI 介面",
   lang: "zh-TW",
   appearance: false,
   cleanUrls: true,
