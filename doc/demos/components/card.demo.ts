@@ -1,6 +1,12 @@
 import type { Meta, DemoObj } from "../util/types";
 import { showMarkup } from "../util/docs-source";
 import { axis, axisArg, attr, label } from "../util/axis";
+import { icon, registerPack } from "@sakulime-ui/core/icons";
+import lucide from "@iconify-json/lucide/icons.json";
+
+// icon packs are consumer-registered — the package ships the lookup
+// machinery only; here the demo feeds it lucide's Iconify JSON
+registerPack("lucide", lucide);
 
 type CardArgs = {
   pad: string;
@@ -135,11 +141,6 @@ export const InteractiveLink: Demo = {
     `<strong>可點卡片</strong><p>整張卡片是一個連結，滑鼠移過去會放大。</p></a>`,
 };
 
-const cornerIcon =
-  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" ` +
-  `stroke-width="2" stroke-linecap="round" stroke-linejoin="round">` +
-  `<path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>`;
-
 export const Corner: Demo = {
   args: { radius: "-", tone: "-" },
   render: (args) =>
@@ -167,7 +168,7 @@ export const CornerTypes: Demo = {
         (v !== "-"
           ? `<span sl-card-corner="end ${v}">100ms</span>` +
             (v === "indicator"
-              ? `<span sl-card-corner="start indicator">${cornerIcon}</span>`
+              ? `<span sl-card-corner="start indicator">${icon("lucide:zap")}</span>`
               : "")
           : "") + `<strong>${label(v)}</strong><p>內容文字</p>`,
       ),

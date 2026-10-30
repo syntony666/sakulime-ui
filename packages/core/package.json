@@ -18,6 +18,7 @@
     "./package.json": "./package.json",
     ".": "./dist/index.min.js",
     "./index.css": "./src/index.css",
+    "./icons": "./src/icons/index.ts",
     "./index.min.css": "./dist/index.min.css",
     "./index.min.js": "./dist/index.min.js"
   },
