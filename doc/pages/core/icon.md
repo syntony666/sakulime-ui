@@ -26,9 +26,9 @@ import * as IconDemos from "../../demos/components/icon.demo";
 </svg>
 ```
 
-### 寫名稱 `<i sl-icon="包:名">`
+### 寫名稱 `<i sl-icon="package:name">`
 
-註冊圖包之後，任何元素寫名稱就會被填成圖示——包名跟 icon 名用 `:` 分隔最穩（`-` 也行，但只在包名是單字時安全）：
+註冊圖包之後，任何元素寫名稱就會被填成圖示——package 名跟 icon 名用 `:` 分隔最穩（`-` 也行，但只在 package 名是單字時安全）：
 
 ```html
 <i sl-icon="lucide:zap"></i>
@@ -41,7 +41,7 @@ import * as IconDemos from "../../demos/components/icon.demo";
 
 ### `icon()` 產 markup
 
-SSG／模板場景用 `icon("包:名")` 拿 svg 字串，同步、零 DOM 依賴：
+SSG／模板場景用 `icon("package:name")` 拿 svg 字串，同步、零 DOM 依賴：
 
 ```ts
 import { icon } from "sakulime-ui";
@@ -52,7 +52,7 @@ import { icon } from "sakulime-ui";
 
 ## 註冊圖包 `registerPack`
 
-套件本體不含任何圖包資料——要用什麼自己註冊。包名自訂，會變成 `sl-icon` 值的前綴：
+套件本體不含任何圖包資料——要用什麼自己註冊。package 名自訂，會變成 `sl-icon` 值的前綴：
 
 ```ts
 import { registerPack } from "sakulime-ui";
