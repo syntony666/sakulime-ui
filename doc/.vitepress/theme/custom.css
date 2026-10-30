@@ -483,23 +483,40 @@ body::before {
   font-size: 0.95em;
 }
 
-/* selected sidebar item — flat tinted row. The tint grows 12px into
-   the left gutter (negative margin + equal padding, so the text itself
-   never moves) and the accent bar sits inside that gap — bar inside
-   the tint, clear of the first character */
-.VPSidebarItem.is-active > .item > .link {
-  background-color: var(--vp-c-brand-soft);
-  box-shadow: inset 3px 0 0 var(--vp-c-brand-1);
-  margin-left: -12px;
-  padding-left: 12px;
+/* VitePress draws its own .indicator on the active row — inside a
+   nested group it lands on the .items guide line and doubles our
+   inset accent bar. Ours wins; hide theirs everywhere */
+.VPSidebarItem .indicator {
+  display: none;
 }
 
-/* hover previews the same shape at half strength — 5% tint, 45% bar */
+/* selected sidebar item — flat tinted row with an accent bar on its
+   inner left edge */
+.VPSidebarItem.is-active > .item > .link {
+  background-color: var(--vp-c-brand-soft);
+  box-shadow: inset 2px 0 0 var(--vp-c-brand-1);
+  margin-left: -10px;
+  padding-left: 10px;
+}
+
+/* hover previews the same shape quieter — faint tint, divider-toned
+   bar (opaque, so the guide line can't show through it) */
 .VPSidebarItem .link:hover {
-  background-color: color-mix(in oklab, var(--sl-text-accent) 5%, transparent);
-  box-shadow: inset 3px 0 0 color-mix(in oklab, var(--sl-text-accent) 45%, transparent);
-  margin-left: -12px;
-  padding-left: 12px;
+  background-color: color-mix(in oklab, var(--sl-text-accent) 3%, transparent);
+  box-shadow: inset 2px 0 0 var(--vp-c-divider);
+  margin-left: -10px;
+  padding-left: 10px;
+}
+
+/* rows under a group's .items guide line reach the line instead — the
+   tint grows 17px left (16px guide indent + 1px guide border) so the
+   accent bar lands on the guide, which then reads as one line that
+   goes accent at the selected row. Rows with no guide keep their own
+   left edge */
+.VPSidebarItem .items .items .VPSidebarItem.is-active > .item > .link,
+.VPSidebarItem .items .items .VPSidebarItem .link:hover {
+  margin-left: -17px;
+  padding-left: 17px;
 }
 
 /* sub-label next to a main title — h1 "Button *按鈕*" only */

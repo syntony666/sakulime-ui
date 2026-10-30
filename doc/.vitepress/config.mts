@@ -179,11 +179,19 @@ export default defineConfig({
         text: "Core",
         items: [
           { text: "說明", link: "/core/" },
-          { text: `Button ${zh("按鈕")}`, link: "/core/button" },
-          { text: `Card ${zh("卡片")}`, link: "/core/card" },
-          { text: `Icon ${zh("圖示")}`, link: "/core/icon" },
-          { text: `Dot ${zh("狀態點")}`, link: "/core/dot" },
-          { text: `Chip ${zh("膠囊")}`, link: "/core/chip" },
+          {
+            text: "基本元件",
+            items: [
+              { text: `Button ${zh("按鈕")}`, link: "/core/button" },
+              { text: `Icon ${zh("圖示")}`, link: "/core/icon" },
+              { text: `Dot ${zh("狀態點")}`, link: "/core/dot" },
+              { text: `Chip ${zh("膠囊")}`, link: "/core/chip" },
+            ],
+          },
+          {
+            text: "容器",
+            items: [{ text: `Card ${zh("卡片")}`, link: "/core/card" }],
+          },
         ],
       },
     ],
