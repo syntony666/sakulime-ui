@@ -226,14 +226,12 @@ body::before {
   max-width: calc(var(--sl-container-lg) + 8px);
 }
 
-/* version badge before the GitHub icon — value comes from
-   package.json through an inline style tag in config.mts */
-.VPNavBarSocialLinks::before {
-  content: "v" var(--sl-doc-version);
-  align-self: center;
+/* version tag next to the theme switcher — rendered in Layout.vue */
+.sl-version {
   font-family: var(--vp-font-family-mono);
   font-size: 12px;
   color: var(--sl-text-muted);
+  white-space: nowrap;
 }
 
 /* doc typography follows the brand — accent headings, primary links.

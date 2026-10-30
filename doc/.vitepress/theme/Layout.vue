@@ -8,8 +8,10 @@ import {
   ref,
   watch,
 } from "vue";
+import pkg from "../../../package.json";
 
 const { Layout } = DefaultTheme;
+const { version } = pkg;
 const theme = ref("sakulime");
 const open = ref(false);
 const switchEl = ref<HTMLElement>();
@@ -128,6 +130,7 @@ onUnmounted(() => document.removeEventListener("click", onClickOutside));
 <template>
   <Layout>
     <template #nav-bar-content-after>
+      <span class="sl-version">v{{ version }}</span>
       <div
         ref="switchEl"
         class="sl-theme-switch"
