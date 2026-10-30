@@ -28,14 +28,16 @@ import * as IconDemos from "../../demos/components/icon.demo";
 
 ### 寫名稱 `<i sl-icon="package:name">`
 
-註冊圖包之後（見下方[安裝](#安裝)），任何元素寫上名稱就會換成圖示。名稱格式是 `package:name`，用 `:` 分隔最穩。`-` 也行，但只在 package 名是單字時安全。
+註冊圖包之後（見[安裝](#安裝)），任何元素寫上名稱就會換成圖示：
 
 ```html
 <i sl-icon="lucide:zap"></i>
 <i sl-icon="si-github"></i>
 ```
 
-標籤不限 `<i>`，`<span>`、`<icon>` 也行。但**一定要寫結束標籤**。`<i sl-icon="x"/>` 的自封閉寫法在原生 HTML 無效，標籤會保持開啟，把後面的內容變成它的子元素。JSX 或模板編譯的環境沒有這個問題。
+名稱格式是 `package:name`。分隔符號用 `:` 最穩，`-` 只在 package 名是單字時安全。
+
+佔位標籤慣用 `<i>`，`<span>`、`<icon>` 也行。結束標籤**一定要寫**。自封閉 `<i/>` 在原生 HTML 無效，標籤會保持開啟，把後面的內容變成子元素。JSX 或模板編譯的環境沒有這個問題。
 
 第一次呼叫 `registerPack` 會自動啟動解析器，並監聽後來新增的元素。
 
