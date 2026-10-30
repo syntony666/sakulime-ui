@@ -4,10 +4,14 @@
    text baseline */
 @layer base {
   [sl-icon] {
+    /* self-default seals ancestor tone slots — inside a filled button
+       --sl-tone-bg IS the button's surface and would turn the icon
+       invisible; sl-tone written on the icon itself still recolors it */
+    --sl-tone-bg: currentColor;
     display: inline-flex;
     width: 1em;
     height: 1em;
-    color: var(--sl-tone-bg, currentColor);
+    color: var(--sl-tone-bg);
     vertical-align: -0.125em;
   }
 
