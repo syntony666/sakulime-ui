@@ -12,7 +12,7 @@ web
 
 ## Product Purpose
 
-sakulime-ui 是一套 CSS-first 設計系統：只有兩件事 — `sl-*` 屬性管元件、狀態、modifier、版面，`--sl-*` 變數管顏色與尺度。沒有 framework adapter、沒有 JS 行為層、沒有 custom elements — `class` 完全留給使用者，永不跟系統衝突。
+sakulime-ui 是一套 CSS-first 設計系統：只有兩件事 — `sl-*` 屬性管元件、狀態、modifier、版面，`--sl-*` 變數管顏色與尺度。沒有 framework adapter、沒有 custom elements — `class` 完全留給使用者，永不跟系統衝突。JS 只做選配增強（如圖示名稱解析），CSS 永遠是本體。
 
 成功 = 開發者在任何框架（或不寫框架）都能直接採用，且單一 CSS 檔就能帶走整套系統。
 
@@ -33,7 +33,7 @@ sakulime-ui 是一套 CSS-first 設計系統：只有兩件事 — `sl-*` 屬性
 - 元件層：`sl-card`、`sl-button` 等（屬性值即型態，如 `sl-card="hollow"`）；元件設定：`sl-card-indicate` 等；子元素層：`sl-card-corner`、`sl-card-section` 等；通用屬性：`sl-pad`、`sl-radius`、`sl-tone`、`sl-interactive`；版面：`sl-*` layout 屬性
 - 顏色用 CSS Color 4/5：`oklch()`、`color-mix()`，目標 WCAG AA
 - Google Fonts 走 `<link>`/`preconnect`，Cloudflare Fonts rewrite 成 same-origin `/cf-fonts`
-- 所有行為純 CSS selector 實作 — 不引 JS runtime 是硬約束
+- 所有外觀行為純 CSS selector 實作；資料驅動的功能（如圖示名稱解析）走共用 resolver，屬於選配增強
 - **未定**：英文版文件（zh-TW 為目前唯一語言，之後再評估）
 
 ## Brand Commitments
@@ -49,7 +49,7 @@ sakulime-ui 是一套 CSS-first 設計系統：只有兩件事 — `sl-*` 屬性
 
 ## Product Principles
 
-1. **CSS 就是全部** — 行為、狀態、配置全走 selector + custom property；不為任何場景引 runtime
+1. **CSS 就是全部外觀** — 行為、狀態、配置全走 selector + custom property；JS 只存在於選配的增強層
 2. **`class` 是使用者的** — 系統只用 `sl-*`，永不與消費端命名衝突
 3. **一份檔案帶走** — 單一 CSS 即完整系統；分包（core/layout/theme）是取用彈性，不是依賴層級
 4. **文件即證據** — 文件站的 demo 要真實可互動（Playground），markup 要能直接抄走

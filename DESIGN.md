@@ -1,6 +1,6 @@
 ---
 name: Sakulime UI
-description: CSS-first design system — sl-* attributes, --sl-* tokens, zero runtime
+description: CSS-first design system — sl-* attributes, --sl-* tokens, optional JS enhancements
 colors:
   sakulime-bg: "#fbf0e7"
   sakulime-surface: "#fdf7f3"
