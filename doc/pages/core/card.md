@@ -33,7 +33,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 ### 顏色 `sl-tone`
 
-`sl-tone` 不會改變卡片本體的底色，它決定標記邊條跟角落標記的顏色（預設 primary）：
+`sl-tone` 不會改變卡片本體的底色，它決定標記邊條的顏色（預設 primary）：
 
 <Demo :render="CardDemos.Indicated.render" />
 
@@ -92,46 +92,32 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 ### 角落標記 `sl-card-corner`
 
-在卡片頂端角落放一個小標記，適合時間、狀態、數字這類補充資訊。屬性值用空格分隔，類型和位置可以自由組合：
+把元素釘在卡片頂端角落，適合時間、狀態、數字這類補充資訊。`sl-card-corner` 只管位置——長相由同一個元素上的小元件屬性決定：
 
 ```html
 <div sl-card>
-  <span sl-card-corner="end text-sm">100ms</span>
+  <span sl-card-corner sl-chip>100ms</span>
   ...
 </div>
 ```
 
 <Playground :meta="CardDemos.Corner" :render="CardDemos.Corner.render" />
 
-顏色跟著 `sl-tone` 走（預設 primary），寫在卡片上整張統一，寫在標記上只改那一個：
-
-```html
-<div sl-card sl-tone="success">
-  <span sl-card-corner="end indicator" sl-tone="danger"></span>
-</div>
-```
-
-類型：
-
-- `text-sm`：小字標籤（省略類型時的預設）
-- `text-xs`：更小的字級
-- `indicator`：純色圓點，裡面放 `svg` 或 `img` 就變圖示（圓點不會出現；SVG 寫 `currentColor` 會跟著 `sl-tone` 的顏色）
-
 位置：
 
-- `end`：右上（預設值）
+- 不寫值／`end`：右上
 - `start`：左上
 
+內容組合——`sl-chip` 文字膠囊、`sl-dot` 狀態點、`sl-icon` 圖示；`sl-tone` 寫在同一個元素上染色：
+
 ```html
-<span sl-card-corner="start text-xs">6ms</span>
-<span sl-card-corner="end indicator"></span>
-<span sl-card-corner="end indicator">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><!-- icon --></svg>
-</span>
+<span sl-card-corner sl-chip sl-tone="primary">200ms</span>
+<i sl-card-corner sl-dot sl-tone="danger"></i>
+<i sl-card-corner="start" sl-icon="lucide:zap" sl-tone="warning"></i>
 ```
 
 <Demo :render="CardDemos.CornerPositions.render" />
-<Demo :render="CardDemos.CornerTypes.render" />
+<Demo :render="CardDemos.CornerKinds.render" />
 
 ### 分區 `sl-card-section`
 

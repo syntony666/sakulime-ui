@@ -100,7 +100,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ### 顏色 `sl-tone`
 
-`sl-icon` 在 `sl-tone` 的消費名單裡，寫上就染成對應色。放在 `sl-card`、`sl-card-corner` 裡會繼承元件的 tone。
+`sl-icon` 在 `sl-tone` 的消費名單裡，寫在 icon 自己身上就染成對應色；不寫繼承文字墨色。
 
 <Demo :render="IconDemos.Tones.render" />
 
@@ -166,10 +166,10 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ## 組合
 
-圖示繼承所在元件的墨色，按鈕和卡片角落標記都能直接放。
+圖示繼承所在元件的墨色，按鈕裡直接放；疊上 `sl-card-corner` 就釘到卡片角落，`sl-tone` 寫在 icon 自己身上染色。
 
 <Demo :render="IconDemos.InContext.render" />
 
-組合起來看。角落標記用 `sl-tone` 染色，裡面的圖示跟著變色；標題裡的圖示繼承文字墨色。
+組合起來看。角落的圖示自己帶 `sl-tone`；標題裡的圖示繼承文字墨色。
 
 <Demo :render="IconDemos.InCard.render" />

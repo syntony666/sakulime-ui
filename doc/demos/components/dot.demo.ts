@@ -63,3 +63,11 @@ export const StatusList: Demo = {
     ).join("") +
     `</ul>`,
 };
+
+// sl-card-corner pins the dot to a card corner — same element, no wrapper
+export const InCorner: Demo = {
+  render: () =>
+    `<div sl-card style="width: 240px">` +
+    `<i sl-card-corner sl-dot sl-tone="danger"></i>` +
+    `<strong>系統狀態</strong><p>有服務異常，需要處理。</p></div>`,
+};

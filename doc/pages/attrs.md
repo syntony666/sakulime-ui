@@ -33,7 +33,7 @@ sakulime 的 API 全是 HTML 屬性，沒有 class。外觀全靠 CSS；圖示�
 
 ```html
 <div sl-card>
-  <span sl-card-corner="end text-sm">NEW</span>
+  <span sl-card-corner sl-chip>NEW</span>
   <div sl-card-section>內容</div>
 </div>
 ```
@@ -44,7 +44,7 @@ sakulime 的 API 全是 HTML 屬性，沒有 class。外觀全靠 CSS；圖示�
 
 | 屬性 | 值 | 適用元素 | 說明 |
 |---|---|---|---|
-| `sl-tone` | `primary` `secondary` `success` `warning` `danger` | `sl-button`、`sl-card`、`sl-card-corner`、`sl-icon`、`sl-dot`、`sl-chip` | 主題色調，背景與文字色自動配好 |
+| `sl-tone` | `primary` `secondary` `success` `warning` `danger` | `sl-button`、`sl-card`、`sl-icon`、`sl-dot`、`sl-chip` | 主題色調，背景與文字色自動配好 |
 | `sl-size` | `sm` `md` `lg` | `sl-button` | 高度與字級 |
 | `sl-radius` | `none` `sm` `md` `lg` `full` | `sl-button`、`sl-card` | 圓角 |
 | `sl-pad` | `sm` `md` `lg` | `sl-card` | 內距 |
@@ -64,14 +64,12 @@ sakulime 的 API 全是 HTML 屬性，沒有 class。外觀全靠 CSS；圖示�
 <button sl-button sl-tone="danger">按鈕</button>
 ```
 
-不過元件可以把值傳給自己的零件：`sl-tone` 寫在卡片上，裡面的角落標記會跟著變色。要讓某一個標記不一樣，直接寫在它自己身上就能蓋過：
+子元素零件也一樣——它們只管自己的職責，不繼承元件的通用屬性。要染色就寫在會顯示顏色的那一個元素上：
 
 ```html
-<div sl-card sl-tone="success">
-  <!-- 跟著卡片，success -->
-  <span sl-card-corner>10ms</span>
-  <!-- 只有自己，danger -->
-  <span sl-card-corner="end" sl-tone="danger">!</span>
+<div sl-card>
+  <!-- sl-card-corner 只管位置；顏色寫在 sl-dot 自己身上 -->
+  <i sl-card-corner sl-dot sl-tone="danger"></i>
 </div>
 ```
 
