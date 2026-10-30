@@ -85,3 +85,7 @@ Iconify 圖包是永久開源授權的資料檔（lucide 是 ISC、Simple Icons 
 
 <Demo :render="IconDemos.Inline.render" />
 <Demo :render="IconDemos.InContext.render" />
+
+組合起來：角落標記用 `sl-tone` 染色、圖示跟著變色，標題裡的圖示則吃文字墨色：
+
+<Demo :render="IconDemos.InCard.render" />
