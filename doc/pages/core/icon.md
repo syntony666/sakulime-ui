@@ -1,6 +1,6 @@
 ---
 title: Icon 圖示
-description: sl-icon 圖示標記，大小跟字級走、用 sl-tone 上色；圖包由消費者註冊，icon() 產生 SVG 字串。
+description: sl-icon 圖示標記，大小跟字級走、用 sl-tone 上色；圖示包由消費者註冊，icon() 產生 SVG 字串。
 ---
 
 <script setup>
@@ -15,7 +15,7 @@ import * as IconDemos from "../../demos/components/icon.demo";
 
 ## 使用
 
-### 貼 SVG
+### SVG
 
 從 icon 庫（lucide、Simple Icons、icones.js.org）複製一段 SVG 貼進 HTML，加上 `sl-icon` 就生效。這條路徑不需要任何 JS。
 
@@ -26,9 +26,9 @@ import * as IconDemos from "../../demos/components/icon.demo";
 </svg>
 ```
 
-### 寫名稱 `<i sl-icon="...">`
+### `<i sl-icon="...">`
 
-註冊圖包之後（見[安裝](#安裝)），任何元素寫上名稱就會換成圖示：
+註冊圖示包之後（見[安裝](#安裝)），任何元素寫上名稱就會換成圖示：
 
 ```html
 <i sl-icon="lucide:zap"></i>
@@ -56,9 +56,9 @@ import { icon } from "sakulime-ui";
 
 ## 安裝
 
-套件本體不含任何圖包資料，要用什麼自己註冊。package 名自訂，會變成 `sl-icon` 值的前綴。JS 需求依環境分三種裝法。
+套件本體不含任何圖示包資料，要用什麼自己註冊。package 名自訂，會變成 `sl-icon` 值的前綴。JS 需求依環境分三種裝法。
 
-### 打包器
+### bundler
 
 `@iconify-json/*` 是永久開源授權的資料檔（lucide 是 ISC、Simple Icons 是 CC0），建議當 devDep 裝。產出的是 SVG 字串，JSON 不會進使用者的 bundle。
 
@@ -69,9 +69,9 @@ import lucide from "@iconify-json/lucide/icons.json";
 registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 ```
 
-### 免打包器
+### CDN
 
-`<script type="module">` 從 CDN import 套件，圖包給 URL 讓 `registerPack` 自己 fetch。fetch 完成後，頁面裡的佔位會自動補上。
+`<script type="module">` 從 CDN import 套件，圖示包給 URL 讓 `registerPack` 自己 fetch。fetch 完成後，頁面裡的佔位會自動補上。
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakulime-ui/dist/sakulime.min.css">
