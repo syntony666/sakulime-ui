@@ -4,14 +4,17 @@
 @layer base {
   [sl-chip] {
     /* self-default seals ancestor tone slots — no tone reads as a
-       neutral text-ink wash; sl-tone on the chip recolors it */
+       neutral text-ink wash; sl-tone on the chip recolors it.
+       --sl-size-fs defaults to the em-based 0.875em; sl-size swaps
+       in absolute steps and the whole capsule scales with it */
     --sl-tone-bg: currentColor;
     --sl-tone-text: currentColor;
+    --sl-size-fs: 0.875em;
     display: inline-flex;
     align-items: center;
     gap: 0.3em;
     padding: 0.2em 0.6em;
-    font-size: 0.875em;
+    font-size: var(--sl-size-fs);
     line-height: 1.4;
     color: var(--sl-tone-text);
     background: color-mix(in srgb, var(--sl-tone-bg) 20%, var(--sl-surface));

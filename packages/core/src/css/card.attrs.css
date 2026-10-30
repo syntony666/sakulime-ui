@@ -41,8 +41,11 @@
 
   /* corner tab — a chip hugs the top + side edges with a small
      uniform radius; the card's overflow clip still rounds the
-     corner-facing corner to its own curve */
+     corner-facing corner to its own curve. font-size re-asserts the
+     chip's own slot — the corner's 16px context would otherwise
+     win the attrs layer over it */
   [sl-card-corner][sl-chip] {
+    font-size: var(--sl-size-fs);
     border-radius: var(--sl-xs);
   }
 
