@@ -37,19 +37,7 @@ import * as IconDemos from "../../demos/components/icon.demo";
 
 標籤不限 `<i>`（`<span>`、`<icon>` 都行），但**一定要寫結束標籤**——`<i sl-icon="x"/>` 自封閉在原生 HTML 無效，標籤會保持開啟並吃掉後面的內容（JSX／模板編譯的環境除外）。
 
-頁面上第一次呼叫 `registerPack` 時會自動啟動解析器，並監聽後來新增的元素。
-
-這種用法要 JS 在場才會生效，但**不需要打包器**——`<script type="module">` 直接從 CDN import、圖包也從 CDN 抓 JSON 就行：
-
-```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakulime-ui@0.3/dist/sakulime.min.css">
-<script type="module">
-  import { registerPack } from "https://cdn.jsdelivr.net/npm/sakulime-ui@0.3/dist/sakulime.min.js";
-  registerPack("lucide", "https://cdn.jsdelivr.net/npm/@iconify-json/lucide/icons.json");
-</script>
-```
-
-連 `<script>` 都沒有的純 HTML+CSS 頁面，只有「貼 svg」一種用法——圖形本來就是 svg 自己畫的，`sl-icon` 只負責外觀，不需要任何 JS。
+第一次呼叫 `registerPack` 會自動啟動解析器，並監聽後來新增的元素。
 
 ### `icon()` 產 markup
 
@@ -60,6 +48,26 @@ import { icon } from "sakulime-ui";
 
 `<a sl-card>${icon("lucide:zap")}<strong>標題</strong></a>`
 // → <a sl-card><svg sl-icon viewBox="0 0 24 24" …>…</svg><strong>標題</strong></a>
+```
+
+## 環境需求
+
+三種用法要的 JS 程度不同：
+
+| 環境 | 能用什麼 |
+|---|---|
+| 純 HTML+CSS（零 JS）| 只有「貼 svg」——圖形是 svg 自己畫的，`sl-icon` 只管外觀 |
+| 無打包器的瀏覽器頁 | `<script type="module">` 從 CDN import，圖包也抓 CDN JSON |
+| 打包器／SSG | 三種全開 |
+
+免打包器寫法：
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakulime-ui@0.3/dist/sakulime.min.css">
+<script type="module">
+  import { registerPack } from "https://cdn.jsdelivr.net/npm/sakulime-ui@0.3/dist/sakulime.min.js";
+  registerPack("lucide", "https://cdn.jsdelivr.net/npm/@iconify-json/lucide/icons.json");
+</script>
 ```
 
 ## 註冊圖包 `registerPack`
@@ -87,11 +95,15 @@ Iconify 圖包是永久開源授權的資料檔（lucide 是 ISC、Simple Icons 
 
 <Demo :render="IconDemos.Tones.render" />
 
-## 大小
+## 大小與對齊
 
 固定 `1em`——跟著所在文字的字級縮放，插進句子、按鈕、標題都是當下的文字大小：
 
 <Demo :render="IconDemos.Sizes.render" />
+
+插在句子裡會騎著文字底線：
+
+<Demo :render="IconDemos.Inline.render" />
 
 ## 修飾詞
 
@@ -121,18 +133,20 @@ Iconify 圖包是永久開源授權的資料檔（lucide 是 ISC、Simple Icons 
 
 <Demo :render="IconDemos.Frames.render" />
 
-### 狀態與間距
-
-`sl-icon-disabled` 淡化圖示；`sl-icon-space` 兩側加空隙，`="start"`／`="end"` 只加前或後：
+### 淡化 `sl-icon-disabled`
 
 <Demo :render="IconDemos.Disabled.render" />
+
+### 間距 `sl-icon-space`
+
+bare 兩側加空隙，`="start"`／`="end"` 只加前或後：
+
 <Demo :render="IconDemos.Spaced.render" />
 
 ## 放進元件
 
 圖示繼承所在元件的墨色，按鈕、卡片角落標記都能直接放：
 
-<Demo :render="IconDemos.Inline.render" />
 <Demo :render="IconDemos.InContext.render" />
 
 組合起來：角落標記用 `sl-tone` 染色、圖示跟著變色，標題裡的圖示則吃文字墨色：
