@@ -16,7 +16,7 @@ type IconArgs = {
 };
 
 const TONES = ["-", "primary", "secondary", "success", "warning", "danger"];
-const NAMES = ["zap", "heart", "star", "rocket", "check", "arrow-right", "trash", "plus"];
+const NAMES = ["star", "zap", "heart", "rocket", "check", "arrow-right", "trash", "plus"];
 
 const meta = {
   title: "Core/Icon 圖示",
@@ -31,7 +31,7 @@ const meta = {
     },
   },
   args: {
-    name: "zap",
+    name: "star",
     tone: "-",
     size: "-",
     flip: "-",
@@ -42,7 +42,7 @@ const meta = {
     space: "-",
   },
   argTypes: {
-    name: axisArg("sl-icon", "圖示名稱", "zap", NAMES),
+    name: axisArg("sl-icon", "圖示名稱", "star", NAMES),
     tone: axisArg("sl-tone", "顏色", "-", TONES),
     size: axisArg("sl-icon-size", "尺寸", "-", ["-", "sm", "lg", "xl", "2xl"]),
     flip: axisArg("sl-icon-flip", "翻轉", "-", ["-", "h", "v"]),
@@ -73,7 +73,7 @@ export const Icon: Demo = {
 
 export const Tones: Demo = {
   render: () =>
-    axis(TONES, (v) => `<i sl-icon="lucide:zap"${attr("sl-tone", v)}></i>`),
+    axis(TONES, (v) => `<i sl-icon="lucide:star"${attr("sl-tone", v)}></i>`),
 };
 
 // 1em — the icon tracks the font-size of whatever it sits inside
@@ -81,7 +81,7 @@ const SIZES = [14, 16, 20, 28];
 export const Sizes: Demo = {
   render: () =>
     axis(SIZES, (v) =>
-      `<span style="font-size: ${v}px"><i sl-icon="lucide:zap"></i> ${v}px</span>`,
+      `<span style="font-size: ${v}px"><i sl-icon="lucide:star"></i> ${v}px</span>`,
     ),
 };
 
@@ -163,7 +163,7 @@ export const Spaced: Demo = {
 export const InCard: Demo = {
   render: () =>
     `<div sl-card style="width: 300px">` +
-    `<span sl-card-corner="end indicator" sl-tone="success"><i sl-icon="lucide:zap"></i></span>` +
+    `<span sl-card-corner="end indicator" sl-tone="success"><i sl-icon="lucide:star"></i></span>` +
     `<strong><i sl-icon="lucide:rocket" sl-icon-space="end"></i> 學了一些俄語，我想對大家說</strong>` +
     `<p>noʎ ʇɹnɥ puɐ ǝı̣ן ɐ ןןǝʇ ɐuuoƃ ɹǝʌǝN
 ǝʎqpooƃ ʎɐs ɐuuoƃ ɹǝʌǝN
