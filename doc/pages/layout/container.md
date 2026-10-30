@@ -2,6 +2,7 @@
 title: Container 容器
 description: sl-container 把內容限制在固定寬度，並在頁面中置中。
 aside: false
+outline: false
 pageClass: container-wide
 ---
 
