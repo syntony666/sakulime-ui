@@ -157,7 +157,7 @@ export const Disabled: Demo = {
 // a word-leading icon only needs end
 export const Spaced: Demo = {
   render: () =>
-    `<p>喔愛<i sl-icon="lucide:heart"sl-icon-space="end"></i>` +
+    `<p>喔愛<i sl-icon="lucide:heart" sl-icon-space="end"></i>` +
     `蝦咪喜愛<i sl-icon="lucide:circle-question-mark"></i><br>` +
     `你跨挖ㄟ<i sl-icon="lucide:eye"></i>眼神，` +
     `那欸價逆<i sl-icon="lucide:heart" sl-icon-space="start"></i>可愛</p>`,
