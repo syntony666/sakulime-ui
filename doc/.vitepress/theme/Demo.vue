@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
 import { highlightMarkup, showMarkup } from "../../demos/util/docs-source";
 import demoCss from "./demo-content.css?inline";
 
@@ -8,8 +8,12 @@ const props = withDefaults(
     render: (args?: Record<string, unknown>) => string;
     args?: Record<string, unknown>;
     code?: boolean;
+    pad?: boolean;
+    // selector for live elements to size-annotate — each match's .demo-w
+    // badge shows the element's rendered width in px
+    measure?: string;
   }>(),
-  { code: true },
+  { code: true, pad: true },
 );
 
 // args may be unbound for static demos — render({}) must not crash and
@@ -41,17 +45,40 @@ onMounted(() => {
   style.textContent = demoCss;
   const stage = document.createElement("div");
   root.append(style, stage);
-  watch(html, (v) => (stage.innerHTML = v), { immediate: true });
+  const measure = () => {
+    if (!props.measure) return;
+    stage.querySelectorAll<HTMLElement>(props.measure).forEach((el) => {
+      const badge = el.querySelector(".demo-w");
+      if (badge) badge.textContent = `${el.offsetWidth}px`;
+    });
+  };
+  watch(
+    html,
+    async (v) => {
+      stage.innerHTML = v;
+      await nextTick();
+      measure();
+    },
+    { immediate: true },
+  );
+  const observer = new ResizeObserver(measure);
+  observer.observe(stage);
+  onUnmounted(() => observer.disconnect());
 });
 </script>
 
 <template>
   <div class="sl-demo">
-    <div ref="host" class="sl-demo-stage" />
+    <div ref="host" class="sl-demo-stage" :class="{ 'sl-demo-stage-flush': !pad }" />
     <details v-if="code" class="sl-demo-src-wrap" :open="!collapsible">
       <summary class="sl-demo-src-bar">
         <span class="sl-demo-src-label">原始碼</span>
-        <button type="button" class="sl-demo-copy" @click.prevent.stop="copy">
+        <button
+          type="button"
+          class="sl-demo-copy"
+          aria-live="polite"
+          @click.prevent.stop="copy"
+        >
           {{ copied ? "已複製" : "複製" }}
         </button>
       </summary>

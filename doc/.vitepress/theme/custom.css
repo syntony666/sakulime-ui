@@ -156,9 +156,49 @@ body::before {
   box-shadow: 0 1px var(--vp-c-divider);
 }
 
-/* doc column rides the layout system's own container scale */
-.VPDoc .content-container {
+/* doc column rides the layout system's own container scale — match
+   VP's own .has-aside + data-v-scoped 688px cap's specificity so
+   source order decides */
+.VPDoc.has-aside .content .content-container {
   max-width: var(--sl-container-md);
+}
+
+/* site-wide rail, driven by VitePress's own layout vars:
+   window-pad | sidebar 200 | content 1240 | window-pad, centered.
+   sidebar-width carries its 32px internal pad (200+32); layout-max
+   adds the 32px window pad VP only applies on the left, mirrored on
+   the right below so both gutters stay equal */
+:root {
+  --sl-doc-column: 1240px;
+  --vp-sidebar-width: 232px;
+  --vp-layout-max-width: min(
+    calc(var(--sl-doc-column) + var(--vp-sidebar-width) + 32px),
+    100vw
+  );
+}
+@media (min-width: 1440px) {
+  :root .VPContent.has-sidebar {
+    padding-right: calc((100vw - var(--vp-layout-max-width)) / 2 + 32px);
+  }
+}
+@media (min-width: 960px) and (max-width: 1439.9px) {
+  :root .VPContent.has-sidebar {
+    padding-right: 32px;
+  }
+}
+
+/* the container page drops the TOC — inner paddings go to zero so the
+   demo column is the full 1240 and lg can show its real 1200 width */
+.container-wide .VPDoc {
+  padding-left: 0;
+  padding-right: 0;
+}
+.container-wide .VPDoc .content {
+  padding-left: 0;
+  padding-right: 0;
+}
+.container-wide .VPDoc .content-container {
+  max-width: calc(var(--sl-container-lg) + 8px);
 }
 
 /* doc typography follows the brand — accent headings, primary links.
@@ -212,6 +252,11 @@ body::before {
   background: var(--sl-surface)
     radial-gradient(circle, var(--sl-border) 1.25px, transparent 1.25px) 0
     0 / var(--sl-lg) var(--sl-lg);
+}
+
+/* Demo pad=false — the demo runs edge to edge inside its stage */
+.sl-demo-stage-flush {
+  padding: 0;
 }
 
 /* code panel — the summary bar carries a caret, the 原始碼 label and a
@@ -578,4 +623,14 @@ body::before {
   box-shadow:
     inset 0 0 0 1.75px var(--dot-mode),
     0 0 0 1px color-mix(in oklab, var(--sl-text) 22%, transparent);
+}
+
+/* motion is decorative — apply it instantly for reduced-motion users */
+@media (prefers-reduced-motion: reduce) {
+  .VPHero .VPButton,
+  .sl-demo-src-bar::before,
+  .VPDocFooter .pager-link,
+  .sl-theme-current {
+    transition: none;
+  }
 }

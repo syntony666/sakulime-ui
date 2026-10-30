@@ -58,7 +58,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 ### 互動 `sl-interactive`
 
-整張卡片變成一個可點擊的動作：游標變 pointer，滑鼠移過去播放互動效果。不寫值是 `grow`：
+整張卡片變成一個可點擊的動作，游標變 pointer，滑鼠移過去播放互動效果。不寫值是 `grow`：
 
 - `grow`：放大
 - `lift`：浮起＋陰影

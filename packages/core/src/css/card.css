@@ -26,6 +26,12 @@
   a[sl-card] {
     text-decoration: none;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    [sl-card] {
+      transition: none;
+    }
+  }
 }
 
 /* variants — the marker's value picks the frame; bare sl-card ("")

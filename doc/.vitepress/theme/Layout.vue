@@ -146,6 +146,7 @@ onUnmounted(() => document.removeEventListener("click", onClickOutside));
         >
           <span
             class="sl-theme-dot"
+            aria-hidden="true"
             :style="{
               '--dot': active?.color,
               '--dot-2': active?.color2,
@@ -155,6 +156,7 @@ onUnmounted(() => document.removeEventListener("click", onClickOutside));
           <span class="sl-theme-name">{{ active?.label }}</span>
           <svg
             class="sl-theme-caret"
+            aria-hidden="true"
             width="12"
             height="12"
             viewBox="0 0 24 24"
@@ -187,6 +189,7 @@ onUnmounted(() => document.removeEventListener("click", onClickOutside));
             >
               <span
                 class="sl-theme-dot"
+                aria-hidden="true"
                 :style="{
                   '--dot': t.color,
                   '--dot-2': t.color2,

@@ -1,6 +1,9 @@
 ---
 title: Container 容器
 description: sl-container 把內容限制在固定寬度，並在頁面中置中。
+aside: false
+outline: false
+pageClass: container-wide
 ---
 
 <script setup>
@@ -11,9 +14,13 @@ import * as ContainerDemos from "../../demos/layout/container.demo";
 
 > 把內容限制在一個寬度裡，置中，左右各留 16px。螢幕再寬，內容最多就到上限，一行字才不會太長。
 
-下面三個容器放在一個縮小的頁面框裡，`lg` 貼滿兩邊，`sm` 和 `md` 照上限置中。想改寬度就覆寫 `--sl-container-sm/md/lg`。
+下面三個容器是真的屬性，數值標籤顯示當下實際渲染的寬度，拉視窗寬度會跟著變。夠寬時 `lg` 就是 1200px，變窄就貼邊。
 
-<Demo :render="ContainerDemos.ContainerWidths.render" />
+<Demo
+  :render="ContainerDemos.ContainerWidths.render"
+  :pad="false"
+  measure="[sl-container-sm], [sl-container-md], [sl-container-lg]"
+/>
 
 ## 屬性
 
