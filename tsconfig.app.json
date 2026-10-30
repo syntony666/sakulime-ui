@@ -9,6 +9,11 @@
 
     /* Bundler mode */
     "moduleResolution": "bundler",
+    /* exports resolve ./icons to an untyped dist bundle; typecheck doc
+       imports against the source the vite aliases in doc config use */
+    "paths": {
+      "@sakulime-ui/core/icons": ["./packages/core/src/icons/index.ts"]
+    },
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
