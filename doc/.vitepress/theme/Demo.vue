@@ -51,7 +51,12 @@ onMounted(() => {
     <details v-if="code" class="sl-demo-src-wrap" :open="!collapsible">
       <summary class="sl-demo-src-bar">
         <span class="sl-demo-src-label">原始碼</span>
-        <button type="button" class="sl-demo-copy" @click.prevent.stop="copy">
+        <button
+          type="button"
+          class="sl-demo-copy"
+          aria-live="polite"
+          @click.prevent.stop="copy"
+        >
           {{ copied ? "已複製" : "複製" }}
         </button>
       </summary>

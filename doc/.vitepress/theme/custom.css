@@ -579,3 +579,13 @@ body::before {
     inset 0 0 0 1.75px var(--dot-mode),
     0 0 0 1px color-mix(in oklab, var(--sl-text) 22%, transparent);
 }
+
+/* motion is decorative — apply it instantly for reduced-motion users */
+@media (prefers-reduced-motion: reduce) {
+  .VPHero .VPButton,
+  .sl-demo-src-bar::before,
+  .VPDocFooter .pager-link,
+  .sl-theme-current {
+    transition: none;
+  }
+}
