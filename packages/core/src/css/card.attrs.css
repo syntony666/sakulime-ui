@@ -1,26 +1,7 @@
-/* card attrs — sl-pad axis, variants, indicate, corner, section, raised.
-   Variant/indicate/raised rules live per component; tone slot comes
-   from the shared tone axis. */
+/* card attrs — variants, indicate, corner, section, interactive.
+   Shared axes (tone/radius/pad) come from axes.css; the card's slot
+   defaults live in card.css base. */
 @layer attrs {
-  /* pad — --sl-pad slot */
-  [sl-pad="sm"] {
-    --sl-pad: var(--sl-md);
-  }
-
-  [sl-pad="md"],
-  [sl-card]:not([sl-pad]) {
-    --sl-pad: var(--sl-lg);
-  }
-
-  [sl-pad="lg"] {
-    --sl-pad: var(--sl-2xl);
-  }
-
-  /* shared-axis default on card */
-  [sl-card]:not([sl-radius]) {
-    --sl-radius: var(--sl-sm);
-  }
-
   /* hollow — dashed outline for empty/upload states */
   [sl-card][sl-variant="hollow"] {
     background: transparent;
@@ -42,19 +23,19 @@
 
   /* indicate — accent edge, colored by the tone axis */
   [sl-card][sl-indicate="top"] {
-    border-top: 3px solid var(--sl-tone-bg, var(--sl-primary));
+    border-top: 3px solid var(--sl-tone-bg);
   }
 
   [sl-card][sl-indicate="bottom"] {
-    border-bottom: 3px solid var(--sl-tone-bg, var(--sl-primary));
+    border-bottom: 3px solid var(--sl-tone-bg);
   }
 
   [sl-card][sl-indicate="start"] {
-    border-inline-start: 3px solid var(--sl-tone-bg, var(--sl-primary));
+    border-inline-start: 3px solid var(--sl-tone-bg);
   }
 
   [sl-card][sl-indicate="end"] {
-    border-inline-end: 3px solid var(--sl-tone-bg, var(--sl-primary));
+    border-inline-end: 3px solid var(--sl-tone-bg);
   }
 
   /* corner — space-separated tokens: type (text-sm default, text-xs,
@@ -70,8 +51,8 @@
     font-size: var(--sl-md);
     font-variant-numeric: tabular-nums;
     line-height: 1.6;
-    color: var(--sl-tone-text, color-mix(in srgb, var(--sl-primary) 55%, var(--sl-text)));
-    background: color-mix(in srgb, var(--sl-tone-bg, var(--sl-primary)) 20%, var(--sl-surface));
+    color: var(--sl-tone-text);
+    background: color-mix(in srgb, var(--sl-tone-bg) 20%, var(--sl-surface));
     border-radius: var(--sl-xs);
   }
 
@@ -91,7 +72,7 @@
     height: var(--sl-sm);
     padding: 0;
     font-size: 0;
-    background: var(--sl-tone-bg, var(--sl-primary));
+    background: var(--sl-tone-bg);
     border-radius: 999px;
   }
 
@@ -109,7 +90,7 @@
     display: block;
     width: 100%;
     height: 100%;
-    color: var(--sl-tone-text, color-mix(in srgb, var(--sl-primary) 55%, var(--sl-text)));
+    color: var(--sl-tone-text);
   }
 
   [sl-card-corner~="indicator"][sl-card-corner~="start"] {
@@ -251,10 +232,5 @@
   /* center — horizontally centered text */
   [sl-card] > [sl-card-section="center"] {
     text-align: center;
-  }
-
-  /* raised — theme-aware shadow (reusable beyond card) */
-  [sl-raised] {
-    box-shadow: 0 2px 8px color-mix(in srgb, var(--sl-text) 12%, transparent);
   }
 }

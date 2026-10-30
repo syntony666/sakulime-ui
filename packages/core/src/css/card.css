@@ -2,6 +2,13 @@
    card.attrs.css. */
 @layer base {
   [sl-card] {
+    /* consumed axes + defaults — tone feeds indicate/corner via
+       inheritance; self-defaulting seals axis attributes set on
+       ancestors from leaking in */
+    --sl-tone-bg: var(--sl-primary);
+    --sl-tone-text: color-mix(in srgb, var(--sl-primary) 55%, var(--sl-text));
+    --sl-radius: var(--sl-sm);
+    --sl-pad: var(--sl-lg);
     display: block;
     position: relative;
     overflow: hidden;

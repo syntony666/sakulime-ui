@@ -1,33 +1,37 @@
-/* sl-* attribute rules. Each axis lists every value; the default unions the
-   named selector with the absent-attr selector, one block serves both.
-   Axis rules fill --sl-{axis}-* slots that component css reads in base.
-   Variant rules live per component (button.variant.css).
-   Layers from vars.css: theme < base < attrs. */
+/* shared axes — the cross-component attribute vocabulary. Each axis
+   expands through its own consumer list: the attribute only produces
+   --sl-*-axis slots on elements in that list. Consumers self-default
+   the slots they read in their own base rules, so an axis attribute
+   on an ancestor can never leak in. */
+@custom-selector :--sl-axis-tone [sl-button], [sl-card], [sl-card-corner];
+@custom-selector :--sl-axis-size [sl-button];
+@custom-selector :--sl-axis-radius [sl-button], [sl-card];
+@custom-selector :--sl-axis-pad [sl-card];
+@custom-selector :--sl-axis-raised [sl-card];
 
 @layer attrs {
   /* tone — --sl-tone-{bg,text,text-invert}; text is the tone's readable ink */
   /* primary is too light for ink — darken it into a readable tone */
-  [sl-tone="primary"],
-  [sl-button]:not([sl-tone]) {
+  :--sl-axis-tone[sl-tone="primary"] {
     --sl-tone-bg: var(--sl-primary);
     --sl-tone-text: color-mix(in srgb, var(--sl-primary) 12%, var(--sl-text));
     --sl-tone-text-invert: var(--sl-primary-fg);
   }
 
-  [sl-tone="secondary"] {
+  :--sl-axis-tone[sl-tone="secondary"] {
     --sl-tone-bg: var(--sl-secondary);
     /* pale tone — mix toward text for a readable ink */
     --sl-tone-text: color-mix(in srgb, var(--sl-secondary) 12%, var(--sl-text));
     --sl-tone-text-invert: var(--sl-secondary-fg);
   }
 
-  [sl-tone="success"] {
+  :--sl-axis-tone[sl-tone="success"] {
     --sl-tone-bg: var(--sl-ok);
     --sl-tone-text: var(--sl-ok);
     --sl-tone-text-invert: var(--sl-text-invert);
   }
 
-  [sl-tone="warning"] {
+  :--sl-axis-tone[sl-tone="warning"] {
     --sl-tone-bg: var(--sl-warn);
     --sl-tone-text: color-mix(in srgb, var(--sl-warn) 30%, var(--sl-text-strong));
     /* warn sits opposite the strong ink in every theme — light gold
@@ -35,51 +39,67 @@
     --sl-tone-text-invert: var(--sl-text-strong);
   }
 
-  [sl-tone="danger"] {
+  :--sl-axis-tone[sl-tone="danger"] {
     --sl-tone-bg: var(--sl-danger);
     --sl-tone-text: var(--sl-danger);
     --sl-tone-text-invert: var(--sl-text-invert);
   }
 
   /* size — --sl-size-{fs,h,px} slots */
-  [sl-size="md"],
-  [sl-button]:not([sl-size]) {
+  :--sl-axis-size[sl-size="md"] {
     --sl-size-fs: var(--sl-lg);
     --sl-size-h: var(--sl-3xl);
     --sl-size-px: var(--sl-md);
   }
 
-  [sl-size="sm"] {
+  :--sl-axis-size[sl-size="sm"] {
     --sl-size-fs: var(--sl-md);
     --sl-size-h: var(--sl-2xl);
     --sl-size-px: var(--sl-sm);
   }
 
-  [sl-size="lg"] {
+  :--sl-axis-size[sl-size="lg"] {
     --sl-size-fs: var(--sl-xl);
     --sl-size-h: var(--sl-4xl);
     --sl-size-px: var(--sl-lg);
   }
 
   /* radius — --sl-radius slot */
-  [sl-radius="sm"] {
+  :--sl-axis-radius[sl-radius="sm"] {
     --sl-radius: var(--sl-xs);
   }
 
-  [sl-radius="md"],
-  [sl-button]:not([sl-radius]) {
+  :--sl-axis-radius[sl-radius="md"] {
     --sl-radius: var(--sl-sm);
   }
 
-  [sl-radius="lg"] {
+  :--sl-axis-radius[sl-radius="lg"] {
     --sl-radius: var(--sl-md);
   }
 
-  [sl-radius="full"] {
+  :--sl-axis-radius[sl-radius="full"] {
     --sl-radius: 999px;
   }
 
-  [sl-radius="none"] {
+  :--sl-axis-radius[sl-radius="none"] {
     --sl-radius: 0;
+  }
+
+  /* pad — --sl-pad slot */
+  :--sl-axis-pad[sl-pad="sm"] {
+    --sl-pad: var(--sl-md);
+  }
+
+  :--sl-axis-pad[sl-pad="md"] {
+    --sl-pad: var(--sl-lg);
+  }
+
+  :--sl-axis-pad[sl-pad="lg"] {
+    --sl-pad: var(--sl-2xl);
+  }
+
+  /* raised — theme-aware shadow */
+  :--sl-axis-raised[sl-raised] {
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--sl-text) 12%, transparent);
   }
 }
