@@ -33,6 +33,9 @@
 /* live container demos — the dashed edge is each container's real
    bound; .demo-w carries the rendered px stamped by Demo's measure */
 .demo-frame {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
   border: 1px dashed var(--sl-border);
   border-radius: var(--sl-sm);
   background: var(--sl-surface);

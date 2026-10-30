@@ -161,15 +161,12 @@ body::before {
   max-width: var(--sl-container-md);
 }
 
-/* the container page drops the TOC — reclaim the dead aside space and
-   slim the right gutter so the demo stage shows real widths. lg still
-   clips slightly below ~1700px viewports (sidebar eats 352px) */
+/* the container page drops the TOC — reclaim the dead aside space so
+   the column can reach the real lg width; inner VPDoc/content padding
+   stays symmetric, and once the column outgrows the lg cap the demo
+   centers on its own auto margins, keeping the gutters equal */
 .container-wide .VPContent.has-sidebar {
   padding-right: 0;
-}
-.container-wide .VPDoc.has-sidebar,
-.container-wide .VPDoc.has-sidebar .content {
-  padding-right: var(--sl-lg);
 }
 .container-wide .VPDoc .content-container {
   max-width: calc(var(--sl-container-lg) + 8px);
