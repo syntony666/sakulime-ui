@@ -56,6 +56,16 @@ import * as CardStories from "../../stories/components/card.stories";
 
 <Demo :render="CardStories.Raised.render" />
 
+### 互動 `sl-card-interactive`
+
+整張卡片變成一個可點擊的動作 — 游標變 pointer，滑鼠移過去卡片會浮起：
+
+```html
+<div sl-card sl-card-interactive>…</div>
+```
+
+<Demo :render="CardStories.Interactive.render" />
+
 ## 子元素
 
 放進卡片裡的零件。
@@ -154,7 +164,6 @@ import * as CardStories from "../../stories/components/card.stories";
 
 - `secondary`：次要內容的淡底
 - `active`：目前選取的那一塊（primary 淡色）
-- `interactive`：滑鼠移過去會變色、整張卡浮起，適合整列都能點的清單
 - `center`：文字置中
 
 <Demo :render="CardStories.SectionKinds.render" />
