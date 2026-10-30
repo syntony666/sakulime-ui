@@ -93,8 +93,9 @@ export const Sizes: Demo = {
 // mid-sentence — the icon rides the text baseline
 export const Inline: Demo = {
   render: () =>
-    `<p>狀態 <i sl-icon="lucide:zap" sl-tone="success"></i> 正常，` +
-    `點 <i sl-icon="lucide:arrow-right"></i> 看詳細內容。</p>`,
+    `<p>他很壞 <i sl-icon="lucide:megaphone" sl-tone="danger"></i>` +
+    `<i sl-icon="lucide:zap"></i><i sl-icon="lucide:zap"></i><i sl-icon="lucide:zap"></i>` +
+    ` 嘟<i sl-icon="lucide:arrow-up-right"></i> 嘟<i sl-icon="lucide:arrow-right"></i> 嘟<i sl-icon="lucide:arrow-down-right"></i></p>`,
 };
 
 // icons inside real components inherit their ink
@@ -156,10 +157,10 @@ export const Disabled: Demo = {
 // a word-leading icon only needs end
 export const Spaced: Demo = {
   render: () =>
-    `<p>喔愛<i sl-icon="lucide:heart" sl-icon-space></i>` +
-    `什麼是愛<i sl-icon="lucide:circle-question-mark" sl-icon-space="start"></i><br>` +
-    `你看我的<i sl-icon="lucide:eye" sl-icon-space="end"></i>眼神，` +
-    `怎麼這麼<i sl-icon="lucide:heart" sl-icon-space></i>可愛</p>`,
+    `<p>喔愛<i sl-icon="lucide:heart"sl-icon-space="end"></i>` +
+    `蝦咪喜愛<i sl-icon="lucide:circle-question-mark"></i><br>` +
+    `你跨挖ㄟ<i sl-icon="lucide:eye"></i>眼神，` +
+    `那欸價逆<i sl-icon="lucide:heart" sl-icon-space="start"></i>可愛</p>`,
 };
 
 // card + corner + icon — the corner's tone colors the badge icon,
@@ -168,6 +169,11 @@ export const InCard: Demo = {
   render: () =>
     `<div sl-card style="width: 300px">` +
     `<span sl-card-corner="end indicator" sl-tone="success"><i sl-icon="lucide:zap"></i></span>` +
-    `<strong><i sl-icon="lucide:rocket" sl-icon-space="end"></i> 功能上線</strong>` +
-    `<p>角落標記與標題都能直接放圖示。</p></div>`,
+    `<strong><i sl-icon="lucide:rocket" sl-icon-space="end"></i> 學了一些俄語，我想對大家說</strong>` +
+    `<p>noʎ ʇɹnɥ puɐ ǝı̣ן ɐ ןןǝʇ ɐuuoƃ ɹǝʌǝN
+ǝʎqpooƃ ʎɐs ɐuuoƃ ɹǝʌǝN
+ʎɹɔ noʎ ǝʞɐɯ ɐuuoƃ ɹǝʌǝN
+noʎ ʇɹǝsǝp puɐ punoɹɐ unɹ ɐuuoƃ ɹǝʌǝN
+uʍop noʎ ʇǝן ɐuuoƃ ɹǝʌǝN
+dn noʎ ǝʌı̣ƃ ɐuuoƃ ɹǝʌǝN</p></div>`,
 };
