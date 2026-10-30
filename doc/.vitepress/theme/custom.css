@@ -122,6 +122,31 @@
   transform: scale(1.05);
 }
 
+/* the home page has no footer; without this the hero and cards stack at
+   the top and leave half the viewport blank. #app outranks the scoped
+   .VPHome[data-v-*] rule that sets the 128px bottom margin. */
+#app .VPHome {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: calc(100vh - var(--vp-nav-height));
+  margin-bottom: 0;
+}
+
+/* the markdown wrapper's auto block margin eats the free space before
+   justify-content can share it (home body is empty, so nothing moves) */
+#app .VPHome > .vp-doc {
+  margin-block: 0;
+}
+
+/* the hero's 144px top padding clears the nav when it sits at the page
+   top; centered, it only pushes the text below the optical middle */
+@media (min-width: 960px) {
+  #app .VPHome .VPHero {
+    padding-top: var(--vp-nav-height);
+  }
+}
+
 /* feature cards get the system's hairline back — VP paints their
    border in the surface color, which reads as no card at all */
 .VPHomeFeatures .VPFeature {
