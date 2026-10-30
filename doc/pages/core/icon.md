@@ -83,27 +83,27 @@ Iconify 圖包是永久開源授權的資料檔（lucide 是 ISC、Simple Icons 
 
 ## 修飾詞
 
-`sl-icon` 的值在名稱後面可以接修飾詞（空格分隔），手貼的 svg 一樣能用——`sl-icon="spin"` 就行：
+修飾詞是 `sl-icon-` 名稱空間的獨立屬性，寫在名稱旁邊；手貼的 svg 一樣能用（`<svg sl-icon sl-icon-spin>`）：
 
-### 尺寸
+### 尺寸 `sl-icon-size`
 
 `sm`、`lg`、`xl`、`2xl`——以所在字級為基準縮放：
 
 <Demo :render="IconDemos.ModSizes.render" />
 
-### 變形
+### 變形 `sl-icon-flip`、`sl-icon-rotate`
 
-`flip-h`、`flip-v` 翻轉，`rotate-90`／`rotate-180`／`rotate-270` 旋轉，可以疊加：
+`flip="h"`、`flip="v"` 翻轉，`rotate="90"`／`"180"`／`"270"` 旋轉，可以疊加：
 
 <Demo :render="IconDemos.Transforms.render" />
 
-### 旋轉動畫
+### 旋轉動畫 `sl-icon-spin`
 
-`spin` 讓圖示不停旋轉（系統 `prefers-reduced-motion` 時自動停用）：
+讓圖示不停旋轉（系統 `prefers-reduced-motion` 時自動停用）：
 
 <Demo :render="IconDemos.Spin.render" />
 
-### 外框
+### 外框 `sl-icon-frame`
 
 `circular` 圓框、`rounded` 圓角框，框線跟著圖示墨色：
 
@@ -111,7 +111,7 @@ Iconify 圖包是永久開源授權的資料檔（lucide 是 ISC、Simple Icons 
 
 ### 狀態與間距
 
-`disabled` 淡化圖示；`space-start`、`space-end`、`space` 在前、後或兩側加空隙：
+`sl-icon-disabled` 淡化圖示；`sl-icon-space` 兩側加空隙，`="start"`／`="end"` 只加前或後：
 
 <Demo :render="IconDemos.Disabled.render" />
 <Demo :render="IconDemos.Spaced.render" />

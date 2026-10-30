@@ -77,48 +77,55 @@ export const InContext: Demo = {
     ),
 };
 
-// modifiers — space-separated tokens after the name; "-" is bare
-const mod = (v: string) => (v === "-" ? "" : ` ${v}`);
-
+// modifiers — namespaced attrs alongside the marker; "-" is bare
 export const ModSizes: Demo = {
   render: () =>
     axis(["-", "sm", "lg", "xl", "2xl"], (v) =>
-      `<span>${label(v)} <i sl-icon="lucide:house${mod(v)}"></i></span>`,
+      `<span>${label(v)} <i sl-icon="lucide:house"${attr("sl-icon-size", v)}></i></span>`,
     ),
 };
 
 // trending-up reads clearly under flips and rotations
 export const Transforms: Demo = {
   render: () =>
-    axis(["-", "flip-h", "flip-v", "rotate-90", "rotate-180", "rotate-270"], (v) =>
-      `<i sl-icon="lucide:trending-up${mod(v)}"></i>`,
+    axis(
+      ["-", "flip-h", "flip-v", "rotate-90", "rotate-180", "rotate-270"],
+      (v) => {
+        const [kind, val] = v.split("-");
+        const a =
+          kind === "flip" ? attr("sl-icon-flip", val) :
+          kind === "rotate" ? attr("sl-icon-rotate", val) : "";
+        return `<i sl-icon="lucide:trending-up"${a}></i>`;
+      },
     ),
 };
 
 export const Spin: Demo = {
   render: () =>
     axis(["loader", "loader-circle", "refresh-cw", "cog"], (v) =>
-      `<i sl-icon="lucide:${v} spin"></i>`,
+      `<i sl-icon="lucide:${v}" sl-icon-spin></i>`,
     ),
 };
 
 export const Frames: Demo = {
   render: () =>
     axis(["-", "circular", "rounded"], (v) =>
-      `<i sl-icon="lucide:house${mod(v)}"></i>`,
+      `<i sl-icon="lucide:house"${attr("sl-icon-frame", v)}></i>`,
     ),
 };
 
 export const Disabled: Demo = {
   render: () =>
-    axis(["-", "disabled"], (v) => `<i sl-icon="lucide:users${mod(v)}"></i>`),
+    axis(["-", "disabled"], (v) =>
+      `<i sl-icon="lucide:users"${v === "-" ? "" : " sl-icon-disabled"}></i>`,
+    ),
 };
 
 export const Spaced: Demo = {
   render: () =>
-    `<p>準備起飛 <i sl-icon="lucide:send space-start"></i>` +
-    `<i sl-icon="lucide:car space-end"></i> Tesla` +
-    `透過搜尋 <i sl-icon="lucide:search space"></i> 功能可以找到你要的事物。</p>`,
+    `<p>準備起飛 <i sl-icon="lucide:send" sl-icon-space="start"></i>` +
+    `<i sl-icon="lucide:car" sl-icon-space="end"></i> Tesla` +
+    `透過搜尋 <i sl-icon="lucide:search" sl-icon-space></i> 功能可以找到你要的事物。</p>`,
 };
 
 // card + corner + icon — the corner's tone colors the badge icon,

@@ -21,43 +21,44 @@
   }
 }
 
-/* modifiers — space-separated tokens after the name:
-   `sl-icon="lucide:zap spin"` or `sl-icon="spin"` on a pasted svg */
+/* modifiers — namespaced attrs alongside the marker, e.g.
+   `<i sl-icon="lucide:zap" sl-icon-spin>`; they also work on a pasted
+   svg (`<svg sl-icon sl-icon-spin>`) */
 @layer attrs {
   /* sizes — the glyph stays 1em of the element, so scaling its
      font-size scales the icon relative to context */
-  [sl-icon~="sm"] {
+  [sl-icon][sl-icon-size="sm"] {
     font-size: 0.75em;
   }
-  [sl-icon~="lg"] {
+  [sl-icon][sl-icon-size="lg"] {
     font-size: 1.5em;
   }
-  [sl-icon~="xl"] {
+  [sl-icon][sl-icon-size="xl"] {
     font-size: 2.5em;
   }
-  [sl-icon~="2xl"] {
+  [sl-icon][sl-icon-size="2xl"] {
     font-size: 4em;
   }
 
   /* orientation — the independent transform properties compose, so a
      flip and a rotate can stack on one icon */
-  [sl-icon~="flip-h"] {
+  [sl-icon][sl-icon-flip="h"] {
     scale: -1 1;
   }
-  [sl-icon~="flip-v"] {
+  [sl-icon][sl-icon-flip="v"] {
     scale: 1 -1;
   }
-  [sl-icon~="rotate-90"] {
+  [sl-icon][sl-icon-rotate="90"] {
     rotate: 90deg;
   }
-  [sl-icon~="rotate-180"] {
+  [sl-icon][sl-icon-rotate="180"] {
     rotate: 180deg;
   }
-  [sl-icon~="rotate-270"] {
+  [sl-icon][sl-icon-rotate="270"] {
     rotate: 270deg;
   }
 
-  [sl-icon~="spin"] {
+  [sl-icon][sl-icon-spin] {
     animation: sl-icon-spin 2s linear infinite;
   }
   @keyframes sl-icon-spin {
@@ -66,7 +67,7 @@
     }
   }
   @media (prefers-reduced-motion: reduce) {
-    [sl-icon~="spin"] {
+    [sl-icon][sl-icon-spin] {
       animation: none;
     }
   }
@@ -74,30 +75,31 @@
   /* frames — a bordered box around the glyph, following its ink.
      content-box keeps the glyph area at 1em — under a border-box reset
      padding+border would otherwise eat the whole frame */
-  [sl-icon~="circular"],
-  [sl-icon~="rounded"] {
+  [sl-icon][sl-icon-frame] {
     box-sizing: content-box;
     padding: 0.35em;
     border: 2px solid currentColor;
   }
-  [sl-icon~="circular"] {
+  [sl-icon][sl-icon-frame="circular"] {
     border-radius: 999px;
   }
-  [sl-icon~="rounded"] {
+  [sl-icon][sl-icon-frame="rounded"] {
     border-radius: var(--sl-sm);
   }
 
-  /* states + spacing */
-  [sl-icon~="disabled"] {
+  /* states + spacing — bare sl-icon-space means both sides */
+  [sl-icon][sl-icon-disabled] {
     opacity: 0.4;
   }
-  [sl-icon~="space"] {
+  [sl-icon][sl-icon-space] {
     margin-inline: 0.3em;
   }
-  [sl-icon~="space-start"] {
+  [sl-icon][sl-icon-space="start"] {
     margin-inline-start: 0.3em;
+    margin-inline-end: 0;
   }
-  [sl-icon~="space-end"] {
+  [sl-icon][sl-icon-space="end"] {
+    margin-inline-start: 0;
     margin-inline-end: 0.3em;
   }
 }

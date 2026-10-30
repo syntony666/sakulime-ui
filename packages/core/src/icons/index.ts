@@ -25,28 +25,22 @@ export type IconifyPack = {
 
 const packs = new Map<string, IconifyPack>();
 
-/* the first whitespace token is "pack:name" — anything after it is a
-   modifier token the CSS layer reads (spin, circular, …). A colon
-   splits at the first colon (multi-word pack names allowed); without
-   one the first dash is the separator, so dash syntax only works for
-   single-word prefixes */
+/* "pack:name" — a colon splits at the first colon (multi-word pack
+   names allowed); without one the first dash is the separator, so
+   dash syntax only works for single-word prefixes */
 const parse = (name: string): [string, string] | null => {
-  const head = name.trim().split(/\s+/)[0];
-  const c = head.indexOf(":");
-  if (c > 0) return [head.slice(0, c), head.slice(c + 1)];
-  const d = head.indexOf("-");
-  return d > 0 ? [head.slice(0, d), head.slice(d + 1)] : null;
+  const c = name.indexOf(":");
+  if (c > 0) return [name.slice(0, c), name.slice(c + 1)];
+  const d = name.indexOf("-");
+  return d > 0 ? [name.slice(0, d), name.slice(d + 1)] : null;
 };
 
-/* the emitted svg carries the full spec back as its value — it
-   self-documents the source name and lets modifier tokens (spin etc.)
-   reach the CSS the same way a hand-written placeholder would */
-const markup = (entry: IconifyBody, pack: IconifyPack, spec: string) => {
+const markup = (entry: IconifyBody, pack: IconifyPack) => {
   const w = entry.width ?? pack.width ?? 24;
   const h = entry.height ?? pack.height ?? 24;
   const x = entry.left ?? 0;
   const y = entry.top ?? 0;
-  return `<svg sl-icon="${spec}" viewBox="${x} ${y} ${w} ${h}" aria-hidden="true">${entry.body}</svg>`;
+  return `<svg sl-icon viewBox="${x} ${y} ${w} ${h}" aria-hidden="true">${entry.body}</svg>`;
 };
 
 export const icon = (name: string): string => {
@@ -62,7 +56,7 @@ export const icon = (name: string): string => {
     console.warn(`sl-icon: unknown icon "${name}"${pack ? "" : ` — pack "${prefix}" not registered`}`);
     return "";
   }
-  return markup(entry, pack, name);
+  return markup(entry, pack);
 };
 
 export const packNames = () => [...packs.keys()];
@@ -83,9 +77,7 @@ export const resolveIcons = (root: ParentNode = document) => {
     const name = el.getAttribute("sl-icon");
     if (!name || el instanceof SVGElement) return;
     el.setAttribute(TAG, "");
-    // name only — modifier tokens stay on the wrapper; if the filled
-    // svg carried them too, transforms would apply twice
-    const svg = icon(name.trim().split(/\s+/)[0]);
+    const svg = icon(name);
     if (svg) el.innerHTML = svg;
   });
 };
