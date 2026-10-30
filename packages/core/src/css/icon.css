@@ -40,8 +40,8 @@
     font-size: 4em;
   }
 
-  /* orientation — the independent transform properties compose, so a
-     flip and a rotate can stack on one icon */
+  /* orientation — flip/rotate use the independent transform properties
+     while spin animates `transform`, so all three stack on one icon */
   [sl-icon][sl-icon-flip="h"] {
     scale: -1 1;
   }
@@ -63,7 +63,7 @@
   }
   @keyframes sl-icon-spin {
     to {
-      rotate: 360deg;
+      transform: rotate(360deg);
     }
   }
   @media (prefers-reduced-motion: reduce) {

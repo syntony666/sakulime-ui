@@ -140,6 +140,8 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 讓圖示不停旋轉。系統設了 `prefers-reduced-motion` 時自動停用。
 
+跟 `sl-icon-rotate`、`sl-icon-flip` 同時寫也會疊加——靜態角度保留，動畫在之上轉整圈。
+
 <Demo :render="IconDemos.Spin.render" />
 
 ### 外框 `sl-icon-frame`
