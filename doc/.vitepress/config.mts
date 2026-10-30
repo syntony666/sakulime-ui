@@ -104,7 +104,7 @@ export default defineConfig({
   markdown: {
     codeCopyButtonTitle: "複製",
   },
-  srcDir: "doc",
+  srcDir: "pages",
   outDir: "site",
   vite: {
     publicDir: fileURLToPath(new URL("../public", import.meta.url)),
