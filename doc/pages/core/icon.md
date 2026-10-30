@@ -85,7 +85,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 零 JS 頁面用 `<link>` 載入 CSS 就好。「貼 svg」不需要任何 JS；「寫名稱」跟 `icon()` 都要 JS 在場。
 
-輔助函式有三個。`packNames()` 列出已註冊的包，`iconNames(prefix)` 列出包內圖示，`resolveIcons(root)` 手動解析指定 root，Shadow DOM 內的佔位元素要自己傳給它。
+輔助函式有三個。`packNames()` 列出已註冊的包，`iconNames(prefix)` 列出包內圖示，`resolveIcons(root)` 手動解析指定 root，Shadow DOM 內的佔位元素要自己傳給它。要讓其他 `sl-*` 屬性接上同一套解析機器，用 `registerResolver(attr, fn)`。
 
 ## 顏色 `sl-tone`
 
