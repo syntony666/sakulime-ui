@@ -169,10 +169,10 @@ body::before {
    adds the 32px window pad VP only applies on the left, mirrored on
    the right below so both gutters stay equal */
 :root {
-  --vp-doc-column: 1240px;
+  --sl-doc-column: 1240px;
   --vp-sidebar-width: 232px;
   --vp-layout-max-width: min(
-    calc(var(--vp-doc-column) + var(--vp-sidebar-width) + 32px),
+    calc(var(--sl-doc-column) + var(--vp-sidebar-width) + 32px),
     100vw
   );
 }
