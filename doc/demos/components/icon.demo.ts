@@ -138,6 +138,6 @@ export const InCard: Demo = {
   render: () =>
     `<div sl-card style="width: 300px">` +
     `<span sl-card-corner="end indicator" sl-tone="success"><i sl-icon="lucide:zap"></i></span>` +
-    `<strong><i sl-icon="lucide:rocket"></i> 功能上線</strong>` +
+    `<strong><i sl-icon="lucide:rocket" sl-icon-space="end"></i> 功能上線</strong>` +
     `<p>角落標記與標題都能直接放圖示。</p></div>`,
 };
