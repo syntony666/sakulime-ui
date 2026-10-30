@@ -161,11 +161,38 @@ body::before {
   max-width: var(--sl-container-md);
 }
 
-/* the container page drops the TOC — reclaim the dead aside space so
-   the column can reach the real lg width; inner VPDoc/content padding
-   stays symmetric, and once the column outgrows the lg cap the demo
-   centers on its own auto margins, keeping the gutters equal */
-.container-wide .VPContent.has-sidebar {
+/* the container page drops the TOC and runs a fixed, centered rail:
+   outer-space | sidebar 120 | space 40 | content 1240 | outer-space.
+   At 1440 that's 20/120/40/1240/20; wider viewports grow both outer
+   gutters equally. Inner paddings go to zero so the demo column is
+   the full 1240 and lg can show its real 1200 width */
+@media (min-width: 1440px) {
+  .container-wide .VPSidebar {
+    padding-left: calc((100vw - var(--vp-layout-max-width)) / 2 + 20px);
+    width: calc((100vw - var(--vp-layout-max-width)) / 2 + 140px);
+  }
+  .container-wide .VPContent.has-sidebar {
+    padding-left: calc((100vw - var(--vp-layout-max-width)) / 2 + 180px);
+    padding-right: calc((100vw - var(--vp-layout-max-width)) / 2 + 20px);
+  }
+}
+@media (min-width: 960px) and (max-width: 1439.9px) {
+  .container-wide .VPSidebar {
+    width: 160px;
+    padding-left: 20px;
+    padding-right: 40px;
+  }
+  .container-wide .VPContent.has-sidebar {
+    padding-left: 180px;
+    padding-right: 20px;
+  }
+}
+.container-wide .VPDoc {
+  padding-left: 0;
+  padding-right: 0;
+}
+.container-wide .VPDoc .content {
+  padding-left: 0;
   padding-right: 0;
 }
 .container-wide .VPDoc .content-container {
