@@ -30,7 +30,7 @@ sakulime-ui 是一套 CSS-first 設計系統：只有兩件事 — `sl-*` 屬性
 
 ## Capabilities and Constraints
 
-- 元件層：`sl-card`、`sl-button` 等；子元素層：`sl-card-corner`、`sl-card-section` 等；共享軸：`sl-pad`、`sl-radius`、`sl-variant`、`sl-tone`、`sl-raised`、`sl-indicate`；版面：`sl-*` layout 屬性
+- 元件層：`sl-card`、`sl-button` 等（屬性值即型態，如 `sl-card="hollow"`）；子元素層：`sl-card-corner`、`sl-card-section` 等；共享軸：`sl-pad`、`sl-radius`、`sl-tone`、`sl-raised`、`sl-indicate`；版面：`sl-*` layout 屬性
 - 顏色用 CSS Color 4/5：`oklch()`、`color-mix()`，目標 WCAG AA
 - Google Fonts 走 `<link>`/`preconnect`，Cloudflare Fonts rewrite 成 same-origin `/cf-fonts`
 - 所有行為純 CSS selector 實作 — 不引 JS runtime 是硬約束

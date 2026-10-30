@@ -25,3 +25,26 @@
     text-decoration: none;
   }
 }
+
+/* variants — the marker's value picks the frame; bare sl-card ("")
+   is the default bordered surface and needs no rule */
+@layer attrs {
+  /* hollow — dashed outline for empty/upload states */
+  [sl-card="hollow"] {
+    background: transparent;
+    border-style: dashed;
+    border-width: 2px;
+  }
+
+  /* plain — frameless shell: keeps the surface fill, drops the border */
+  [sl-card="plain"] {
+    border: 0;
+  }
+
+  /* blank — invisible shell: no border, no fill; pairs with
+     sl-card-section="blank" for a pure blankslate block */
+  [sl-card="blank"] {
+    background: transparent;
+    border: 0;
+  }
+}

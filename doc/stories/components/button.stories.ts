@@ -51,7 +51,7 @@ const meta = {
   },
   argTypes: {
     tone: axisArg("sl-tone", "顏色", "primary", TONES),
-    variant: axisArg("sl-variant", "型態", "normal", VARIANTS),
+    variant: axisArg("sl-button", "型態", "normal", VARIANTS),
     size: axisArg("sl-size", "大小", "md", SIZES),
     radius: axisArg("sl-radius", "圓角", "md", RADII),
     disabled: {
@@ -69,11 +69,14 @@ const meta = {
 export default meta;
 type Story = StoryObj<ButtonArgs>;
 
-// one button per axis value
+// the marker itself carries the variant value — bare = normal
+const marker = (v: string) => (v === "-" ? "sl-button" : `sl-button="${v}"`);
+
+// one button per axis value; a fixed variant rides the marker when given
 const btn =
-  (name: string, extra = "") =>
+  (name: string, variant = "") =>
   (v: string) =>
-    `<button sl-button${attr(name, v)}${extra}>${label(v)}</button>`;
+    `<button ${variant ? `sl-button="${variant}"` : "sl-button"}${attr(name, v)}>${label(v)}</button>`;
 
 function slAttrs({
   tone,
@@ -83,9 +86,8 @@ function slAttrs({
   disabled,
 }: ButtonArgs): string {
   return (
-    "sl-button" +
+    marker(variant) +
     attr("sl-tone", tone) +
-    attr("sl-variant", variant) +
     attr("sl-size", size) +
     attr("sl-radius", radius) +
     (disabled ? " disabled" : "")
@@ -101,11 +103,12 @@ export const Tones: Story = {
 };
 
 export const TonesInvert: Story = {
-  render: () => axis(TONES, btn("sl-tone", attr("sl-variant", "invert"))),
+  render: () => axis(TONES, btn("sl-tone", "invert")),
 };
 
 export const Variants: Story = {
-  render: () => axis(VARIANTS, btn("sl-variant")),
+  render: () =>
+    axis(VARIANTS, (v) => `<button ${marker(v)}>${label(v)}</button>`),
 };
 
 export const Sizes: Story = {

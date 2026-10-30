@@ -18,7 +18,7 @@ Variables, both themes, components, and layout ship in that single file. Switch 
 ```html
 <button sl-button>Save</button>
 <button sl-button sl-tone="danger">Delete</button>
-<button sl-button sl-variant="invert">Cancel</button>
+<button sl-button="invert">Cancel</button>
 ```
 
 ## Partial imports

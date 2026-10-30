@@ -34,7 +34,13 @@ import * as CardStories from "../../stories/components/card.stories";
 
 <Demo :render="CardStories.Radius.render" />
 
-### 型態 `sl-variant`
+### 型態
+
+型態直接寫在 `sl-card` 的值裡，不寫值就是一般卡片：
+
+```html
+<div sl-card="hollow">…</div>
+```
 
 - `hollow`：虛線描邊、透明底，常用在上傳或空白狀態
 - `plain`：拿掉框線，保留底色和圓角
@@ -148,7 +154,7 @@ import * as CardStories from "../../stories/components/card.stories";
 沒有框線、內容完全置中的區塊，用來放空狀態、上傳區或查無結果。裡面直接用 `strong` 寫標題、`p` 寫說明，按鈕放 `sl-button`，不用另外加 class：
 
 ```html
-<div sl-card sl-variant="hollow">
+<div sl-card="hollow">
   <div sl-card-section="blank">
     <strong>上傳檔案</strong>
     <p>拖拉檔案至此</p>

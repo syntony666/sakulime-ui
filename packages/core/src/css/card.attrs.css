@@ -1,26 +1,7 @@
-/* card attrs — variants, indicate, corner, section, interactive.
-   Shared axes (tone/radius/pad) come from axes.css; the card's slot
-   defaults live in card.css base. */
+/* card attrs — indicate, corner, section, interactive. Shared axes
+   (tone/radius/pad) come from axes.css; the card's slot defaults and
+   variants live in card.css. */
 @layer attrs {
-  /* hollow — dashed outline for empty/upload states */
-  [sl-card][sl-variant="hollow"] {
-    background: transparent;
-    border-style: dashed;
-    border-width: 2px;
-  }
-
-  /* plain — frameless shell: keeps the surface fill, drops the border */
-  [sl-card][sl-variant="plain"] {
-    border: 0;
-  }
-
-  /* blank — invisible shell: no border, no fill; pairs with
-     sl-card-section="blank" for a pure blankslate block */
-  [sl-card][sl-variant="blank"] {
-    background: transparent;
-    border: 0;
-  }
-
   /* indicate — accent edge, colored by the tone axis */
   [sl-card][sl-indicate="top"] {
     border-top: 3px solid var(--sl-tone-bg);

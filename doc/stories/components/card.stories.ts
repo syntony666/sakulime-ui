@@ -66,7 +66,7 @@ const meta = {
   argTypes: {
     pad: axisArg("sl-pad", "內距", "md", PADS),
     radius: axisArg("sl-radius", "圓角", "md", RADII),
-    variant: axisArg("sl-variant", "型態", "-", VARIANTS),
+    variant: axisArg("sl-card", "型態", "-", VARIANTS),
     indicate: axisArg("sl-indicate", "標記邊緣", "-", INDICATES),
     tone: axisArg("sl-tone", "顏色（搭配標記）", "primary", TONES),
     raised: {
@@ -90,6 +90,12 @@ type Story = StoryObj<CardArgs>;
 const card = (attrs: string, content: string, w = 320) =>
   `<div sl-card${attrs} style="width: ${w}px">${content}</div>`;
 
+// the marker itself carries the variant value — bare = default frame
+const cardMarker = (v: string) => (v === "-" ? "sl-card" : `sl-card="${v}"`);
+
+const vcard = (v: string, content: string, w = 320) =>
+  `<div ${cardMarker(v)} style="width: ${w}px">${content}</div>`;
+
 // shared content parts — playground cards and section demos
 const sec = (inner: string) => `<div sl-card-section>${inner}</div>`;
 const media = `<div sl-card-section="inset" class="demo-media"></div>`;
@@ -102,10 +108,9 @@ const byAxis = (name: string) => (v: string) =>
 
 export const Card: Story = {
   render: (args) =>
-    `<div sl-card` +
+    `<div ${cardMarker(args.variant)}` +
     attr("sl-pad", args.pad) +
     attr("sl-radius", args.radius) +
-    attr("sl-variant", args.variant) +
     attr("sl-indicate", args.indicate) +
     attr("sl-tone", args.tone) +
     (args.raised ? " sl-raised" : "") +
@@ -124,7 +129,8 @@ export const Radius: Story = {
 };
 
 export const Variants: Story = {
-  render: () => axis(VARIANTS, byAxis("sl-variant")),
+  render: () =>
+    axis(VARIANTS, (v) => vcard(v, `<strong>${label(v)}</strong><p>內容文字</p>`)),
 };
 
 export const Indicated: Story = {
@@ -240,8 +246,8 @@ export const Insets: Story = {
 export const Blank: Story = {
   render: () =>
     axis(["-", "hollow", "blank"], (v) =>
-      card(
-        attr("sl-variant", v),
+      vcard(
+        v,
         `<div sl-card-section="blank">` +
           `<strong>${v === "hollow" ? "上傳檔案" : v === "blank" ? "查無結果" : "沒有內容"}</strong>` +
           `<p>${v === "hollow" ? "拖拉檔案至此" : "說明文字"}</p>` +
