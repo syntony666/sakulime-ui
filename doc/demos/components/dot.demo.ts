@@ -56,8 +56,10 @@ const SERVICES = [
 ] as const;
 export const StatusList: Demo = {
   render: () =>
+    `<ul style="list-style: none; padding: 0; margin: 0">` +
     SERVICES.map(
       ([tone, name]) =>
-        `<div><i sl-dot sl-tone="${tone}"></i> ${name}</div>`,
-    ).join(""),
+        `<li><i sl-dot sl-tone="${tone}"></i> ${name}</li>`,
+    ).join("") +
+    `</ul>`,
 };
