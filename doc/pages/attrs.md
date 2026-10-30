@@ -5,7 +5,7 @@ description: sl-* 屬性語法總覽：元件標記、元件設定、子元素�
 
 # 屬性
 
-sakulime 的 API 全是 HTML 屬性，沒有 class、沒有 JS。屬性分四種，各自由等號的位置回答不同的問題。
+sakulime 的 API 全是 HTML 屬性，沒有 class、沒有 JS。屬性分四種，看等號寫在哪裡就知道是哪一種。
 
 ## 四種形式
 
@@ -40,24 +40,24 @@ sakulime 的 API 全是 HTML 屬性，沒有 class、沒有 JS。屬性分四種
 
 ### 通用屬性 `sl-<屬性>="<值>"`
 
-跨元件共用的值域，哪些元素能吃看下面的總表。
+跨元件共用的值，哪些元素能用看下面的總表。
 
 ## 通用屬性總表
 
-| 屬性 | 值 | 作用對象 | 說明 |
+| 屬性 | 值 | 適用元素 | 說明 |
 |---|---|---|---|
 | `sl-tone` | `primary` `secondary` `success` `warning` `danger` | `sl-button`、`sl-card`、`sl-card-corner` | 主題色調，背景與文字色自動配好 |
 | `sl-size` | `sm` `md` `lg` | `sl-button` | 高度與字級 |
 | `sl-radius` | `none` `sm` `md` `lg` `full` | `sl-button`、`sl-card` | 圓角 |
 | `sl-pad` | `sm` `md` `lg` | `sl-card` | 內距 |
-| `sl-interactive` | `grow` `lift` `raise` `press` | `sl-card` | hover 互動效果，不寫值是 `grow` |
+| `sl-interactive` | `grow` `lift` `raise` `press` | `sl-card` | 滑鼠移過去的效果，不寫值是 `grow` |
 
 ## 作用範圍
 
-通用屬性只對「作用對象」欄列出的元素有效。寫在外層元素上不會影響裡面的元件：
+通用屬性只對「適用元素」欄列出的元素有效。寫在外層元素上不會影響裡面的元件：
 
 ```html
-<!-- 無效：div 不是作用對象，按鈕不受影響 -->
+<!-- 無效：div 不是適用元素，按鈕不受影響 -->
 <div sl-tone="danger">
   <button sl-button>按鈕</button>
 </div>

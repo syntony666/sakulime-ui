@@ -14,7 +14,7 @@ import * as ContainerDemos from "../../demos/layout/container.demo";
 
 > 把內容限制在一個寬度裡，置中，左右各留 16px。螢幕再寬，內容最多就到上限，一行字才不會太長。
 
-下面三個容器是真的屬性，數值標籤顯示當下實際渲染的寬度，拉視窗寬度會跟著變。夠寬時 `lg` 就是 1200px，變窄就貼邊。
+下面是三個真的容器，數值標籤顯示當下實際的寬度，拉視窗寬度會跟著變。夠寬時 `lg` 就是 1200px，變窄就貼邊。
 
 <Demo
   :render="ContainerDemos.ContainerWidths.render"
