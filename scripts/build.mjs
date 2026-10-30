@@ -19,7 +19,9 @@ const coreDir = pkgDir("@sakulime-ui/core");
 
 const tokens = read(req.resolve("@sakulime-ui/shared/vars.css"));
 const themeFiles = readdirSync(themeDir).filter((f) => f.endsWith(".css"));
-const layout = read(req.resolve("@sakulime-ui/layout/index.css"));
+/* read the source file, not the ./index.css export — that subpath now
+   resolves to the dist artifact this script produces */
+const layout = read(`${layoutDir}/src/layout.css`);
 
 // @sakulime-ui/theme — one minified palette per file; bundle so each
 // theme's @import of the shared derived layer inlines into dist

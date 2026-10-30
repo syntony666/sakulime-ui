@@ -16,9 +16,9 @@
   ],
   "exports": {
     "./package.json": "./package.json",
-    "./sakulime.css": "./sakulime.css",
-    "./terra.css": "./terra.css",
-    "./umbra.css": "./umbra.css",
+    "./sakulime.css": "./dist/sakulime.min.css",
+    "./terra.css": "./dist/terra.min.css",
+    "./umbra.css": "./dist/umbra.min.css",
     "./*": "./dist/*"
   }
 }
