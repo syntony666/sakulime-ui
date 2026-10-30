@@ -252,6 +252,26 @@ body::before {
   white-space: nowrap;
 }
 
+/* long code lines scroll sideways; an overlay scrollbar stays hidden
+   until you have already scrolled, so the CDN urls just look cut off */
+.vp-doc pre {
+  scrollbar-width: thin;
+  scrollbar-color: var(--sl-border) transparent;
+}
+
+.vp-doc pre::-webkit-scrollbar {
+  height: 8px;
+}
+
+.vp-doc pre::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.vp-doc pre::-webkit-scrollbar-thumb {
+  background: var(--sl-border);
+  border-radius: var(--sl-xs);
+}
+
 /* table's second color — zebra rows and the header take the
    secondary tint for a warmer accent against the page */
 .vp-doc tr:nth-child(2n),
