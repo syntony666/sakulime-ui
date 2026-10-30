@@ -19,22 +19,19 @@
     border-inline-end: 3px solid var(--sl-tone-bg);
   }
 
-  /* corner — space-separated tokens: type (text-sm default, text-xs,
-     indicator) + position (end default, start). Quiet chip: tone-tinted
-     ink on a translucent tone wash. z-index keeps it above any pinned
-     or out-of-flow child regardless of DOM order. */
+  /* corner — pure positional part: `end` (default) / `start` pins the
+     element to a card corner; the look comes from a small attr on the
+     same element (sl-chip, sl-dot, sl-icon). font-size is the em
+     context — a dot lands at 8px, an icon at 16px, a chip at 14px.
+     z-index keeps it above any pinned or out-of-flow child regardless
+     of DOM order */
   [sl-card-corner] {
     position: absolute;
     z-index: 1;
     top: 0;
     inset-inline-end: 0;
-    padding: 0 var(--sl-xs);
-    font-size: var(--sl-md);
+    font-size: var(--sl-lg);
     font-variant-numeric: tabular-nums;
-    line-height: 1.6;
-    color: var(--sl-tone-text);
-    background: color-mix(in srgb, var(--sl-tone-bg) 20%, var(--sl-surface));
-    border-radius: var(--sl-xs);
   }
 
   [sl-card-corner~="start"] {
@@ -42,44 +39,25 @@
     inset-inline-start: 0;
   }
 
-  [sl-card-corner~="text-xs"] {
-    font-size: 0.625rem;
-  }
-
-  [sl-card-corner~="indicator"] {
+  /* per-child insets — a chip hugs the corner edge, a dot or icon
+     needs air so it doesn't straddle the border */
+  [sl-card-corner][sl-dot] {
     top: var(--sl-sm);
     inset-inline-end: var(--sl-sm);
-    width: var(--sl-sm);
-    height: var(--sl-sm);
-    padding: 0;
-    font-size: 0;
-    background: var(--sl-tone-bg);
-    border-radius: 999px;
   }
 
-  /* with graphic content the dot drops out — child svg/img becomes the icon */
-  [sl-card-corner~="indicator"]:has(> *) {
+  [sl-card-corner][sl-icon] {
     top: var(--sl-xs);
     inset-inline-end: var(--sl-xs);
-    width: var(--sl-lg);
-    height: var(--sl-lg);
-    background: transparent;
-    border-radius: 0;
   }
 
-  [sl-card-corner~="indicator"] > :is(svg, img, [sl-icon]) {
-    display: block;
-    width: 100%;
-    height: 100%;
-    color: var(--sl-tone-text);
-  }
-
-  [sl-card-corner~="indicator"][sl-card-corner~="start"] {
+  [sl-card-corner~="start"][sl-dot] {
     inset-inline-end: auto;
     inset-inline-start: var(--sl-sm);
   }
 
-  [sl-card-corner~="indicator"][sl-card-corner~="start"]:has(> *) {
+  [sl-card-corner~="start"][sl-icon] {
+    inset-inline-end: auto;
     inset-inline-start: var(--sl-xs);
   }
 
