@@ -1,6 +1,6 @@
 import type { Meta, DemoObj } from "../util/types";
 import { showMarkup } from "../util/docs-source";
-import { axis, axisArg, attr, label } from "../util/axis";
+import { axis, axisArg, attr, boolArg, label } from "../util/axis";
 import { registerPack } from "@sakulime-ui/core/icons";
 import lucide from "@iconify-json/lucide/icons.json";
 
@@ -11,6 +11,13 @@ registerPack("lucide", lucide);
 type IconArgs = {
   name: string;
   tone: string;
+  size: string;
+  flip: string;
+  rotate: string;
+  spin: boolean;
+  frame: string;
+  disabled: boolean;
+  space: string;
 };
 
 const TONES = ["-", "primary", "secondary", "success", "warning", "danger"];
@@ -31,10 +38,24 @@ const meta = {
   args: {
     name: "zap",
     tone: "-",
+    size: "-",
+    flip: "-",
+    rotate: "-",
+    spin: false,
+    frame: "-",
+    disabled: false,
+    space: "-",
   },
   argTypes: {
     name: axisArg("sl-icon", "圖示名稱", "zap", NAMES),
     tone: axisArg("sl-tone", "顏色", "-", TONES),
+    size: axisArg("sl-icon-size", "尺寸", "-", ["-", "sm", "lg", "xl", "2xl"]),
+    flip: axisArg("sl-icon-flip", "翻轉", "-", ["-", "h", "v"]),
+    rotate: axisArg("sl-icon-rotate", "旋轉", "-", ["-", "90", "180", "270"]),
+    spin: boolArg("sl-icon-spin", "旋轉動畫"),
+    frame: axisArg("sl-icon-frame", "外框", "-", ["-", "circular", "rounded"]),
+    disabled: boolArg("sl-icon-disabled", "淡化"),
+    space: axisArg("sl-icon-space", "間距", "-", ["-", "start", "end", "both"]),
   },
 } satisfies Meta<IconArgs>;
 
@@ -43,7 +64,16 @@ type Demo = DemoObj<IconArgs>;
 
 export const Icon: Demo = {
   render: (args) =>
-    `<i sl-icon="lucide:${args.name}"${attr("sl-tone", args.tone)}></i>`,
+    `<i sl-icon="lucide:${args.name}"` +
+    attr("sl-tone", args.tone) +
+    attr("sl-icon-size", args.size) +
+    attr("sl-icon-flip", args.flip) +
+    attr("sl-icon-rotate", args.rotate) +
+    (args.spin ? " sl-icon-spin" : "") +
+    attr("sl-icon-frame", args.frame) +
+    (args.disabled ? " sl-icon-disabled" : "") +
+    (args.space === "both" ? " sl-icon-space" : attr("sl-icon-space", args.space)) +
+    `></i>`,
 };
 
 export const Tones: Demo = {

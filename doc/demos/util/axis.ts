@@ -44,3 +44,11 @@ export const axisArg = (
   control: { type: "select" as const, labels: { "-": "-" } },
   options,
 });
+
+// checkbox control for flag attrs (bare attr = on, absent = off)
+export const boolArg = (name: string, desc: string) => ({
+  name,
+  description: desc,
+  table: { type: {}, defaultValue: { summary: "false" } },
+  control: { type: "boolean" as const },
+});
