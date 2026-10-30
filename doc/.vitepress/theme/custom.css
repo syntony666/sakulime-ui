@@ -722,6 +722,9 @@ body::before {
 
   .sl-theme-current {
     min-width: 0;
+    /* match the github icon's tap-target height — a 26px chip reads
+       squat next to its 36px neighbor */
+    padding-block: 7px;
   }
 }
 
