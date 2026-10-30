@@ -161,6 +161,23 @@ body::before {
   max-width: var(--sl-container-md);
 }
 
+/* the container page drops the TOC — reclaim the dead aside space and
+   slim the right gutter so the demo stage shows real widths. lg still
+   clips slightly below ~1700px viewports (sidebar eats 352px) */
+.container-wide .VPContent.has-sidebar {
+  padding-right: 0;
+}
+.container-wide .VPDoc.has-sidebar,
+.container-wide .VPDoc.has-sidebar .content {
+  padding-right: var(--sl-lg);
+}
+.container-wide .VPDoc .content-container {
+  max-width: calc(var(--sl-container-lg) + var(--sl-3xl) * 2 + 8px);
+}
+.container-wide .sl-demo-stage {
+  padding: var(--sl-md);
+}
+
 /* doc typography follows the brand — accent headings, primary links.
    h1/h2 are display-size so the decorative accent passes AA-large;
    h3/h4 fall under normal-text size and take the readable -1 step */
