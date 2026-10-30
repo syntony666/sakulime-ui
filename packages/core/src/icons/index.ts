@@ -25,9 +25,14 @@ export type IconifyPack = {
 
 const packs = new Map<string, IconifyPack>();
 
+/* "pack:name" — a colon splits at the first colon (multi-word pack
+   names allowed); without one the first dash is the separator, so
+   dash syntax only works for single-word prefixes */
 const parse = (name: string): [string, string] | null => {
-  const m = name.match(/^([a-z0-9]+)[-:](.+)$/);
-  return m ? [m[1], m[2]] : null;
+  const c = name.indexOf(":");
+  if (c > 0) return [name.slice(0, c), name.slice(c + 1)];
+  const d = name.indexOf("-");
+  return d > 0 ? [name.slice(0, d), name.slice(d + 1)] : null;
 };
 
 const markup = (entry: IconifyBody, pack: IconifyPack) => {
@@ -59,10 +64,9 @@ export const packNames = () => [...packs.keys()];
 export const iconNames = (prefix: string) =>
   Object.keys(packs.get(prefix)?.icons ?? {});
 
-/* DOM resolver — fills <i sl-icon="si-github"> placeholders. Split on
-   the first dash/colon so "si-x" and "si:x" both work. Elements keep
-   their sl-icon value (it documents the icon); resolution is marked
-   once via dataset so the observer doesn't loop. */
+/* DOM resolver — fills <i sl-icon="si-github"> placeholders. Elements
+   keep their sl-icon value (it documents the icon); resolution is
+   marked once via dataset so the observer doesn't loop. */
 const TAG = "data-sl-resolved";
 
 /* exported for hosts that render into shadow roots — MutationObserver
