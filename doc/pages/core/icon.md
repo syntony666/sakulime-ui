@@ -37,7 +37,19 @@ import * as IconDemos from "../../demos/components/icon.demo";
 
 標籤不限 `<i>`（`<span>`、`<icon>` 都行），但**一定要寫結束標籤**——`<i sl-icon="x"/>` 自封閉在原生 HTML 無效，標籤會保持開啟並吃掉後面的內容（JSX／模板編譯的環境除外）。
 
-頁面上第一次呼叫 `registerPack` 時會自動啟動解析器，並監聽後來新增的元素。要 JS 在場才會生效——純靜態輸出請用另外兩種。
+頁面上第一次呼叫 `registerPack` 時會自動啟動解析器，並監聽後來新增的元素。
+
+這種用法要 JS 在場才會生效，但**不需要打包器**——`<script type="module">` 直接從 CDN import、圖包也從 CDN 抓 JSON 就行：
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakulime-ui@0.3/dist/sakulime.min.css">
+<script type="module">
+  import { registerPack } from "https://cdn.jsdelivr.net/npm/sakulime-ui@0.3/dist/sakulime.min.js";
+  registerPack("lucide", "https://cdn.jsdelivr.net/npm/@iconify-json/lucide/icons.json");
+</script>
+```
+
+連 `<script>` 都沒有的純 HTML+CSS 頁面，只有「貼 svg」一種用法——圖形本來就是 svg 自己畫的，`sl-icon` 只負責外觀，不需要任何 JS。
 
 ### `icon()` 產 markup
 
