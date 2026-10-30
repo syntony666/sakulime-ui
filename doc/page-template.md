@@ -89,8 +89,8 @@ Inside `## 屬性`, `###` order follows the canonical table in `attrs.md`:
 |---|---|---|
 | `#` | `Name *中文名*` | `# Card *卡片*` |
 | `##` | fixed section name, plain | `## 屬性` |
-| `###` | `中文名 `attr`` | `### 角落標記 `sl-card-corner`` |
-| `####` | `名稱` or `名稱 `value`` | `#### 貼邊 `inset`` |
+| `###` | ``中文名 `attr` `` | ``### 角落標記 `sl-card-corner` `` |
+| `####` | `名稱` or ``名稱 `value` `` | ``#### 貼邊 `inset` `` |
 
 A `###` documenting behavior rather than an attribute (e.g. icon's
 `### 大小與對齊`) drops the attr chip. `####` groups demos under one `###`
@@ -137,3 +137,12 @@ Bind a standalone demo with args (no playground chrome) via
   English inside backticks.
 - One idea per sentence; no em dashes; value lists instead of inline chips
   when enumerating.
+
+## Guide and reference pages
+
+Non-component pages — `introduction.md`, `attrs.md`, `theme.md`, section
+`index.md`s, and the `layout: home` landing — don't follow the skeleton.
+Their `##` sections are named by content (`## 安裝`, `## CDN`, `## 切換`…),
+and they carry no demos unless a demo file exists for them. Everything else
+still applies: frontmatter, heading format (``### 名稱 `attr` `` where the
+section documents an attribute), value lists, prose rules.
