@@ -116,6 +116,8 @@ import * as CardDemos from "../../demos/components/card.demo";
 <i sl-card-corner="start" sl-icon="lucide:zap" sl-tone="warning"></i>
 ```
 
+角落 chip 要調字級就寫 `sl-size`（`sm`/`md`/`lg`），整顆膠囊等比縮放。
+
 <Demo :render="CardDemos.CornerPositions.render" />
 <Demo :render="CardDemos.CornerKinds.render" />
 

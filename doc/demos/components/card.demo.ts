@@ -16,6 +16,7 @@ type CornerArgs = {
   position: string;
   kind: string;
   tone: string;
+  size: string;
 };
 
 type SectionArgs = {
@@ -154,24 +155,26 @@ export const InteractiveLink: Demo = {
 };
 
 // corner is position only — the look is a small attr on the same element
-const cornerEl = (position: string, kind: string, tone: string) => {
+const cornerEl = (position: string, kind: string, tone: string, size = "-") => {
   const pos = position === "start" ? `="start"` : "";
   const t = attr("sl-tone", tone);
+  const s = kind === "chip" ? attr("sl-size", size) : "";
   if (kind === "dot") return `<i sl-card-corner${pos} sl-dot${t}></i>`;
   if (kind === "icon") return `<i sl-card-corner${pos} sl-icon="lucide:zap"${t}></i>`;
-  return `<span sl-card-corner${pos} sl-chip${t}>100ms</span>`;
+  return `<span sl-card-corner${pos} sl-chip${t}${s}>100ms</span>`;
 };
 
 export const Corner: DemoObj<CornerArgs> = {
-  args: { position: "-", kind: "chip", tone: "-" },
+  args: { position: "-", kind: "chip", tone: "-", size: "-" },
   argTypes: {
     position: axisArg("sl-card-corner", "位置", "end", ["-", "start", "end"]),
     kind: axisArg("組合", "角落內容：同元素疊加的 attr", "chip", CORNER_KINDS),
     tone: axisArg("sl-tone", "顏色", "primary", TONES),
+    size: axisArg("sl-size", "大小（chip 限定）", "-", ["-", "sm", "md", "lg"]),
   },
   render: (args) =>
     `<div sl-card style="max-width: 360px">` +
-    cornerEl(args.position, args.kind, args.tone) +
+    cornerEl(args.position, args.kind, args.tone, args.size) +
     `<strong>卡片標題</strong><p>卡片內容文字，描述這張卡片在展示什麼。</p></div>`,
 };
 
