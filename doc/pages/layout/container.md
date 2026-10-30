@@ -24,6 +24,8 @@ import * as ContainerDemos from "../../demos/layout/container.demo";
 
 ## 屬性
 
+### 尺寸
+
 - `sl-container-sm`：720px
 - `sl-container-md`：960px
 - `sl-container-lg`：1200px
