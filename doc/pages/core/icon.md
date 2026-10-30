@@ -72,9 +72,9 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 `<script type="module">` 從 CDN import 套件，圖包給 URL 讓 `registerPack` 自己 fetch。fetch 完成後，頁面裡的佔位會自動補上。
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakulime-ui@0.3/dist/sakulime.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakulime-ui/dist/sakulime.min.css">
 <script type="module">
-  import { registerPack } from "https://cdn.jsdelivr.net/npm/sakulime-ui@0.3/dist/sakulime.min.js";
+  import { registerPack } from "https://cdn.jsdelivr.net/npm/sakulime-ui/dist/sakulime.min.js";
   registerPack("si", "https://esm.sh/@iconify-json/simple-icons/icons.json");
 </script>
 ```
