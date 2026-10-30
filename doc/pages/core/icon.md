@@ -28,7 +28,7 @@ import * as IconDemos from "../../demos/components/icon.demo";
 
 ### 寫名稱 `<i sl-icon="包:名">`
 
-註冊圖包之後，任何元素寫名稱就會被填成圖示——包名跟 icon 名用 `-` 或 `:` 分隔：
+註冊圖包之後，任何元素寫名稱就會被填成圖示——包名跟 icon 名用 `:` 分隔最穩（`-` 也行，但只在包名是單字時安全）：
 
 ```html
 <i sl-icon="lucide:zap"></i>
