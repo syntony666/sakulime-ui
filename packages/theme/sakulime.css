@@ -1,0 +1,15 @@
+/* sakulime — default brand theme: peachy sakura × amber (palette: colordrop 131616) */
+
+@import "./_internal/derived.css";
+
+@layer theme {
+  :root,
+  :root[data-theme="sakulime"] {
+    color-scheme: light;
+
+    /* seeds — the only authored colors; every other token derives */
+    --sl-seed-primary: #f4b160;
+    --sl-seed-secondary: #fdc5cf;
+    --sl-seed-accent: #d43d5e;
+  }
+}

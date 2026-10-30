@@ -1,0 +1,65 @@
+---
+title: Button 按鈕
+description: sl-button 按鈕，值決定型態，再用 sl-tone、sl-size、sl-radius 調整外觀。
+---
+
+<script setup>
+import * as ButtonDemos from "../../demos/components/button.demo";
+</script>
+
+# Button *按鈕*
+
+`sl-button` 寫在 `button` 或 `a` 上，值決定型態，通用屬性調外觀。
+
+<Playground :meta="ButtonDemos.default" :render="ButtonDemos.Button.render" />
+
+## 型態
+
+型態直接寫在 `sl-button` 的值裡，不寫值就是 `normal`：
+
+```html
+<button sl-button="invert">按鈕</button>
+```
+
+- `normal`：整顆填滿（預設值）
+- `invert`：只剩框線跟字
+- `underline`：只有底線
+- `ghost`：沒底沒框，只有字
+
+<Demo :render="ButtonDemos.Variants.render" />
+
+## 屬性
+
+### 顏色 `sl-tone`
+
+- `primary`：主題主色（預設值）
+- `secondary`：主題副色
+- `success`：代表成功
+- `warning`：代表警告
+- `danger`：代表危險
+
+#### 實心版本
+
+<Demo :render="ButtonDemos.Tones.render" />
+
+#### 框線版本
+
+<Demo :render="ButtonDemos.TonesInvert.render" />
+
+### 尺寸 `sl-size`
+
+- `sm`：小
+- `md`：一般（預設值）
+- `lg`：大
+
+<Demo :render="ButtonDemos.Sizes.render" />
+
+### 圓角 `sl-radius`
+
+- `none`：直角
+- `sm`：微圓
+- `md`：一般圓角（預設值）
+- `lg`：很圓
+- `full`：膠囊形，全圓到底
+
+<Demo :render="ButtonDemos.Radius.render" />

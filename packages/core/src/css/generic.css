@@ -1,0 +1,120 @@
+/* generic attributes — the cross-component attribute vocabulary. Each
+   one expands through its own consumer list: the attribute only
+   produces --sl-* slots on elements in that list. Consumers
+   self-default the slots they read in their own base rules, so an
+   attribute on an ancestor can never leak in. */
+@custom-selector :--sl-generic-tone [sl-button], [sl-card], [sl-card-corner], [sl-icon];
+@custom-selector :--sl-generic-size [sl-button];
+@custom-selector :--sl-generic-radius [sl-button], [sl-card];
+@custom-selector :--sl-generic-pad [sl-card];
+@custom-selector :--sl-generic-interactive [sl-card];
+
+@layer attrs {
+  /* tone — --sl-tone-{bg,text,text-invert}; text is the tone's readable ink */
+  /* primary is too light for ink — darken it into a readable tone */
+  :--sl-generic-tone[sl-tone="primary"] {
+    --sl-tone-bg: var(--sl-primary);
+    --sl-tone-text: color-mix(in srgb, var(--sl-primary) 12%, var(--sl-text));
+    --sl-tone-text-invert: var(--sl-primary-fg);
+  }
+
+  :--sl-generic-tone[sl-tone="secondary"] {
+    --sl-tone-bg: var(--sl-secondary);
+    /* pale tone — mix toward text for a readable ink */
+    --sl-tone-text: color-mix(in srgb, var(--sl-secondary) 12%, var(--sl-text));
+    --sl-tone-text-invert: var(--sl-secondary-fg);
+  }
+
+  :--sl-generic-tone[sl-tone="success"] {
+    --sl-tone-bg: var(--sl-ok);
+    --sl-tone-text: var(--sl-ok);
+    --sl-tone-text-invert: var(--sl-text-invert);
+  }
+
+  :--sl-generic-tone[sl-tone="warning"] {
+    --sl-tone-bg: var(--sl-warn);
+    --sl-tone-text: color-mix(in srgb, var(--sl-warn) 30%, var(--sl-text-strong));
+    /* warn sits opposite the strong ink in every theme — light gold
+       in light themes, deep amber in dark */
+    --sl-tone-text-invert: var(--sl-text-strong);
+  }
+
+  :--sl-generic-tone[sl-tone="danger"] {
+    --sl-tone-bg: var(--sl-danger);
+    --sl-tone-text: var(--sl-danger);
+    --sl-tone-text-invert: var(--sl-text-invert);
+  }
+
+  /* size — --sl-size-{fs,h,px} slots */
+  :--sl-generic-size[sl-size="md"] {
+    --sl-size-fs: var(--sl-lg);
+    --sl-size-h: var(--sl-3xl);
+    --sl-size-px: var(--sl-md);
+  }
+
+  :--sl-generic-size[sl-size="sm"] {
+    --sl-size-fs: var(--sl-md);
+    --sl-size-h: var(--sl-2xl);
+    --sl-size-px: var(--sl-sm);
+  }
+
+  :--sl-generic-size[sl-size="lg"] {
+    --sl-size-fs: var(--sl-xl);
+    --sl-size-h: var(--sl-4xl);
+    --sl-size-px: var(--sl-lg);
+  }
+
+  /* radius — --sl-radius slot */
+  :--sl-generic-radius[sl-radius="sm"] {
+    --sl-radius: var(--sl-xs);
+  }
+
+  :--sl-generic-radius[sl-radius="md"] {
+    --sl-radius: var(--sl-sm);
+  }
+
+  :--sl-generic-radius[sl-radius="lg"] {
+    --sl-radius: var(--sl-md);
+  }
+
+  :--sl-generic-radius[sl-radius="full"] {
+    --sl-radius: 999px;
+  }
+
+  :--sl-generic-radius[sl-radius="none"] {
+    --sl-radius: 0;
+  }
+
+  /* pad — --sl-pad slot */
+  :--sl-generic-pad[sl-pad="sm"] {
+    --sl-pad: var(--sl-md);
+  }
+
+  :--sl-generic-pad[sl-pad="md"] {
+    --sl-pad: var(--sl-lg);
+  }
+
+  :--sl-generic-pad[sl-pad="lg"] {
+    --sl-pad: var(--sl-2xl);
+  }
+
+  /* interactive — --sl-i-{transform,shadow} slots; consumers read them
+     on :hover. Bare sl-interactive ("") means grow */
+  :--sl-generic-interactive[sl-interactive=""],
+  :--sl-generic-interactive[sl-interactive="grow"] {
+    --sl-i-transform: scale(1.05);
+  }
+
+  :--sl-generic-interactive[sl-interactive="lift"] {
+    --sl-i-transform: translateY(-4px);
+    --sl-i-shadow: 0 6px 16px color-mix(in srgb, var(--sl-text) 18%, transparent);
+  }
+
+  :--sl-generic-interactive[sl-interactive="raise"] {
+    --sl-i-shadow: 0 2px 8px color-mix(in srgb, var(--sl-text) 12%, transparent);
+  }
+
+  :--sl-generic-interactive[sl-interactive="press"] {
+    --sl-i-transform: scale(0.97);
+  }
+}

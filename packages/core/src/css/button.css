@@ -1,9 +1,20 @@
-/* base recipe — structure only; paint lives in button.variant.css, slots in attrs */
+/* base recipe — structure + the default (normal) variant paint.
+   The slot defaults at the top are the component's consumed-generic
+   manifest: each one shadows any inherited generic value, so generic
+   attributes only take effect when set on the element itself. */
 @layer base {
   [sl-button] {
+    --sl-tone-bg: var(--sl-primary);
+    --sl-tone-text: color-mix(in srgb, var(--sl-primary) 12%, var(--sl-text));
+    --sl-tone-text-invert: var(--sl-primary-fg);
+    --sl-size-fs: var(--sl-lg);
+    --sl-size-h: var(--sl-3xl);
+    --sl-size-px: var(--sl-md);
+    --sl-radius: var(--sl-sm);
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 0.4em;
     border-radius: var(--sl-radius);
     border: 2px solid transparent;
     min-height: var(--sl-size-h);
@@ -14,6 +25,9 @@
       background-color 160ms ease,
       border-color 160ms ease,
       color 160ms ease;
+    /* normal — the filled default look */
+    background: var(--sl-tone-bg);
+    color: var(--sl-tone-text-invert);
   }
 
   [sl-button]:hover:not(:disabled) {
@@ -23,5 +37,39 @@
   [sl-button]:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [sl-button] {
+      transition: none;
+    }
+  }
+}
+
+/* variants — the marker's value picks the look; bare sl-button ("" )
+   is normal and needs no rule since base already paints it */
+@layer attrs {
+  /* invert carries the page base — the tone drops to ink + border, and
+     an opaque fill keeps it a button on patterned or tinted surfaces */
+  [sl-button="invert"] {
+    background: var(--sl-bg);
+    color: var(--sl-tone-text);
+    border-color: var(--sl-tone-bg);
+  }
+
+  [sl-button="ghost"] {
+    background: transparent;
+    border-color: transparent;
+    color: var(--sl-tone-text);
+  }
+
+  [sl-button="underline"] {
+    background: transparent;
+    border-color: transparent;
+    color: var(--sl-tone-text);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--sl-tone-bg);
+    text-underline-offset: 0.3em;
   }
 }

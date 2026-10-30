@@ -1,0 +1,24 @@
+{
+  "name": "@sakulime-ui/theme",
+  "version": "0.2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syntony666/sakulime-ui.git",
+    "directory": "packages/theme"
+  },
+  "homepage": "https://sakulime-ui.syntony666.com",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "./package.json": "./package.json",
+    "./sakulime.css": "./dist/sakulime.min.css",
+    "./terra.css": "./dist/terra.min.css",
+    "./umbra.css": "./dist/umbra.min.css",
+    "./*": "./dist/*"
+  }
+}

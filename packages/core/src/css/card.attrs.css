@@ -1,48 +1,22 @@
-/* card attrs — sl-pad axis, variants, indicate, raised.
-   Variant/indicate/raised rules live per component; tone slot comes
-   from the shared tone axis. */
+/* card attrs — indicate, corner, section, plus the card's wiring for
+   the shared interactive attribute. Tone/radius/pad values come from
+   generic.css; the card's slot defaults and variants live in card.css. */
 @layer attrs {
-  /* pad — --sl-pad slot */
-  [sl-pad="sm"] {
-    --sl-pad: var(--sl-md);
+  /* indicate — accent edge, colored by the tone attribute */
+  [sl-card][sl-card-indicate="top"] {
+    border-top: 3px solid var(--sl-tone-bg);
   }
 
-  [sl-pad="md"],
-  [sl-card]:not([sl-pad]) {
-    --sl-pad: var(--sl-lg);
+  [sl-card][sl-card-indicate="bottom"] {
+    border-bottom: 3px solid var(--sl-tone-bg);
   }
 
-  [sl-pad="lg"] {
-    --sl-pad: var(--sl-2xl);
+  [sl-card][sl-card-indicate="start"] {
+    border-inline-start: 3px solid var(--sl-tone-bg);
   }
 
-  /* shared-axis default on card */
-  [sl-card]:not([sl-radius]) {
-    --sl-radius: var(--sl-sm);
-  }
-
-  /* hollow — dashed outline for empty/upload states */
-  [sl-card][sl-variant="hollow"] {
-    background: transparent;
-    border-style: dashed;
-    border-width: 2px;
-  }
-
-  /* indicate — accent edge, colored by the tone axis */
-  [sl-card][sl-indicate="top"] {
-    border-top: 3px solid var(--sl-tone-bg, var(--sl-primary));
-  }
-
-  [sl-card][sl-indicate="bottom"] {
-    border-bottom: 3px solid var(--sl-tone-bg, var(--sl-primary));
-  }
-
-  [sl-card][sl-indicate="start"] {
-    border-inline-start: 3px solid var(--sl-tone-bg, var(--sl-primary));
-  }
-
-  [sl-card][sl-indicate="end"] {
-    border-inline-end: 3px solid var(--sl-tone-bg, var(--sl-primary));
+  [sl-card][sl-card-indicate="end"] {
+    border-inline-end: 3px solid var(--sl-tone-bg);
   }
 
   /* corner — space-separated tokens: type (text-sm default, text-xs,
@@ -58,8 +32,8 @@
     font-size: var(--sl-md);
     font-variant-numeric: tabular-nums;
     line-height: 1.6;
-    color: var(--sl-tone-text, color-mix(in srgb, var(--sl-primary) 55%, var(--sl-text)));
-    background: color-mix(in srgb, var(--sl-tone-bg, var(--sl-primary)) 15%, transparent);
+    color: var(--sl-tone-text);
+    background: color-mix(in srgb, var(--sl-tone-bg) 20%, var(--sl-surface));
     border-radius: var(--sl-xs);
   }
 
@@ -79,7 +53,7 @@
     height: var(--sl-sm);
     padding: 0;
     font-size: 0;
-    background: var(--sl-tone-bg, var(--sl-primary));
+    background: var(--sl-tone-bg);
     border-radius: 999px;
   }
 
@@ -93,11 +67,11 @@
     border-radius: 0;
   }
 
-  [sl-card-corner~="indicator"] > :is(svg, img) {
+  [sl-card-corner~="indicator"] > :is(svg, img, [sl-icon]) {
     display: block;
     width: 100%;
     height: 100%;
-    color: var(--sl-tone-text, color-mix(in srgb, var(--sl-primary) 55%, var(--sl-text)));
+    color: var(--sl-tone-text);
   }
 
   [sl-card-corner~="indicator"][sl-card-corner~="start"] {
@@ -109,8 +83,136 @@
     inset-inline-start: var(--sl-xs);
   }
 
-  /* raised — theme-aware shadow (reusable beyond card) */
-  [sl-raised] {
-    box-shadow: 0 2px 8px color-mix(in srgb, var(--sl-text) 12%, transparent);
+  /* sections — the box bleeds past the pad frame so divider hairlines
+     run edge to edge; inner padding puts the content back in line */
+  [sl-card] > [sl-card-section] {
+    margin-inline: calc(var(--sl-pad) * -1);
+    padding-inline: var(--sl-pad);
+  }
+
+  [sl-card] > * + [sl-card-section] {
+    margin-top: var(--sl-pad);
+    border-top: 1px solid var(--sl-border);
+    padding-top: var(--sl-pad);
+  }
+
+  /* a leading corner doesn't count as content — the section after it
+     is still the first block, so no divider or gap above it */
+  [sl-card] > [sl-card-corner]:first-child + [sl-card-section] {
+    margin-top: 0;
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  /* inset — a padding-cancelled region for edge-to-edge content (img/
+     svg/iframe/block). DOM order picks the bleeding edges; a leading or
+     trailing corner doesn't count as content */
+  [sl-card] > [sl-card-section="inset"] {
+    padding: 0;
+  }
+
+  [sl-card] > :is([sl-card-section="inset"]:first-child,
+                 [sl-card-corner]:first-child + [sl-card-section="inset"]) {
+    margin-top: calc(var(--sl-pad) * -1);
+    border-top: 0;
+  }
+
+  [sl-card] > :is([sl-card-section="inset"]:last-child,
+                 [sl-card-section="inset"]:has(+ [sl-card-corner]:last-child)) {
+    margin-bottom: calc(var(--sl-pad) * -1);
+  }
+
+  /* followers own the gap — a section's divider hugs the image edge,
+     anything else gets the pad spacing itself */
+  [sl-card-section="inset"] + * {
+    margin-top: var(--sl-pad);
+  }
+
+  [sl-card-section="inset"] + [sl-card-section] {
+    margin-top: 0;
+  }
+
+  [sl-card-section="inset"] > :is(img, svg, video, iframe) {
+    display: block;
+    width: 100%;
+  }
+
+  /* blank — borderless, fully centered empty-state block */
+  [sl-card] > [sl-card-section="blank"] {
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    gap: var(--sl-sm);
+    padding-block: var(--sl-3xl);
+    text-align: center;
+  }
+
+  [sl-card-section="blank"] :is(h1, h2, h3, h4, p) {
+    margin: 0;
+  }
+
+  [sl-card-section="blank"] :is(strong, h1, h2, h3, h4) {
+    font-size: var(--sl-lg);
+    font-weight: 600;
+    color: var(--sl-text-strong);
+  }
+
+  [sl-card-section="blank"] p {
+    color: var(--sl-text-secondary);
+    font-size: var(--sl-md);
+  }
+
+  /* secondary — quieter section for supporting content */
+  [sl-card] > [sl-card-section="secondary"] {
+    background: var(--sl-secondary-bg);
+  }
+
+  /* active — selected state on the primary family */
+  [sl-card] > [sl-card-section="active"] {
+    background: color-mix(in srgb, var(--sl-primary) 8%, var(--sl-surface));
+  }
+
+  /* interactive — shared generic: the whole card is clickable, and
+     hover plays back whatever the attribute put in the --sl-i-* slots */
+  [sl-card][sl-interactive] {
+    cursor: pointer;
+  }
+
+  [sl-card][sl-interactive]:hover {
+    transform: var(--sl-i-transform);
+    box-shadow: var(--sl-i-shadow);
+  }
+
+  /* bg sections own the gap to the next divider — the fill runs
+     edge to edge instead of leaving a bare strip; at the extremes
+     they bleed to the card edges like inset */
+  [sl-card] > :is([sl-card-section="secondary"],
+                  [sl-card-section="active"]) {
+    padding-bottom: var(--sl-pad);
+  }
+
+  :is([sl-card-section="secondary"],
+      [sl-card-section="active"]) + [sl-card-section] {
+    margin-top: 0;
+  }
+
+  [sl-card] > :is([sl-card-section="secondary"]:first-child,
+                  [sl-card-section="active"]:first-child,
+                  [sl-card-corner]:first-child + [sl-card-section="secondary"],
+                  [sl-card-corner]:first-child + [sl-card-section="active"]) {
+    margin-top: calc(var(--sl-pad) * -1);
+    padding-top: var(--sl-pad);
+  }
+
+  [sl-card] > :is([sl-card-section="secondary"]:last-child,
+                  [sl-card-section="active"]:last-child,
+                  [sl-card-section="secondary"]:has(+ [sl-card-corner]:last-child),
+                  [sl-card-section="active"]:has(+ [sl-card-corner]:last-child)) {
+    margin-bottom: calc(var(--sl-pad) * -1);
+  }
+
+  /* center — horizontally centered text */
+  [sl-card] > [sl-card-section="center"] {
+    text-align: center;
   }
 }

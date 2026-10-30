@@ -1,7 +1,16 @@
-/* card — surface container; slots filled by attrs axes in
-   card.attrs.css. */
+/* card — surface container; slots filled by generic attributes in
+   generic.css. */
 @layer base {
   [sl-card] {
+    /* consumed generics + defaults — tone feeds indicate/corner via
+       inheritance; self-defaulting seals generic attributes set on
+       ancestors from leaking in */
+    --sl-tone-bg: var(--sl-primary);
+    --sl-tone-text: color-mix(in srgb, var(--sl-primary) 55%, var(--sl-text));
+    --sl-radius: var(--sl-sm);
+    --sl-pad: var(--sl-lg);
+    --sl-i-transform: none;
+    --sl-i-shadow: none;
     display: block;
     position: relative;
     overflow: hidden;
@@ -10,5 +19,40 @@
     border: 1px solid var(--sl-border);
     border-radius: var(--sl-radius);
     padding: var(--sl-pad);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  /* a card that is itself a link drops the anchor underline */
+  a[sl-card] {
+    text-decoration: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [sl-card] {
+      transition: none;
+    }
+  }
+}
+
+/* variants — the marker's value picks the frame; bare sl-card ("")
+   is the default bordered surface and needs no rule */
+@layer attrs {
+  /* hollow — dashed outline for empty/upload states */
+  [sl-card="hollow"] {
+    background: transparent;
+    border-style: dashed;
+    border-width: 2px;
+  }
+
+  /* plain — frameless shell: keeps the surface fill, drops the border */
+  [sl-card="plain"] {
+    border: 0;
+  }
+
+  /* blank — invisible shell: no border, no fill; pairs with
+     sl-card-section="blank" for a pure blankslate block */
+  [sl-card="blank"] {
+    background: transparent;
+    border: 0;
   }
 }

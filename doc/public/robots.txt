@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sakulime-ui.syntony666.com/sitemap.xml

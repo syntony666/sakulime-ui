@@ -1,0 +1,17 @@
+/* terra — map-gallery palette structure: the whole theme is warm stone;
+   the cyan lean lands only on the accent ink and the primary CTA family
+   (its teal-600 action + #1f3d3d tooltip ink), so stone stays stone and
+   the accent places read as ink, not as a recolor */
+
+@import "./_internal/derived.css";
+
+@layer theme {
+  :root[data-theme="terra"] {
+    color-scheme: light;
+
+    /* seeds — the only authored colors; every other token derives */
+    --sl-seed-primary: #1f3d3d;
+    --sl-seed-secondary: #d6d3d1;
+    --sl-seed-accent: #1f3d3d;
+  }
+}

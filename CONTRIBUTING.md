@@ -3,7 +3,7 @@
 ## Repository layout
 
 - `packages/shared` — `--sl-*` variables source (`@sakulime-ui/shared`, internal, not published)
-- `packages/shared/theme` — theme palettes (`@sakulime-ui/theme`)
+- `packages/theme` — theme palettes (`@sakulime-ui/theme`)
 - `packages/core` — component styles (`@sakulime-ui/core`)
 - `packages/layout` — layout utilities (`@sakulime-ui/layout`)
 - `doc` — VitePress doc site (`sakulime-doc`), deployed to Cloudflare Workers
@@ -34,7 +34,17 @@ npm run site         # also verify the static site when touching doc/
 - User-facing strings and `doc/` content (`.md` pages, story text) are Taiwan Traditional Chinese; repo meta-docs (README, CONTRIBUTING, AGENTS) stay in English
 - Code comments in English only, and only where they add information
 - Commit messages in English, under 50 words, conventional prefixes (`feat:`, `fix:`, `docs:`, `chore:`, `refactor:`)
-- Doc pages: `.md` for prose, `.stories.ts` for demos; stories render through the theme's `<Demo>` and `<Playground>` components
+- Doc pages: `.md` for prose, `.demo.ts` for demos; demos render through the theme's `<Demo>` and `<Playground>` components. Page structure — fixed section order, heading format, playground placement — is defined in [`doc/page-template.md`](doc/page-template.md); follow it for every component page
+- New themes: drop a `.css` in `packages/theme` (three seeds + `color-scheme`; see `_internal/derived.css`), then import it once in `packages/core/src/index.ts` to bundle it into core, and add a `./<name>.css` line to `packages/theme/package.json` exports so the path is importable
+- Doc pages need frontmatter `title` and `description` — canonical, OG and JSON-LD metadata is generated from them
+
+## Component CSS rules
+
+- Generic attributes (`sl-tone`, `sl-size`, `sl-radius`, `sl-pad`, `sl-interactive`) live in `css/generic.css`. Each expands through its own `@custom-selector` consumer list and only ever sets `--sl-*` slot variables, never physical properties
+- A component that reads a slot must self-default it inside its own `@layer base` rule. That default is what seals a generic attribute set on an ancestor from leaking in
+- Component parts (`sl-card-corner`, `sl-card-section`) never self-default — they inherit their component's slots, so a part follows the card's `sl-tone`. Adding a part to a consumer list still lets the attribute work when written on the part itself
+- Component-specific attributes are namespaced `sl-<comp>-<attr>`; the marker value carries the variant (`sl-card="hollow"`), a bare marker means the default variant
+- `@custom-selector` expands via `postcss-custom-selectors`; both Vite pipelines (core build and doc site) already run it — never hand-write the `:is()` expansion
 
 ## Workflow
 
