@@ -299,9 +299,13 @@ body::before {
     0 / var(--sl-lg) var(--sl-lg);
 }
 
-/* Demo pad=false — the demo runs edge to edge inside its stage */
+/* Demo pad=false — the demo runs edge to edge inside its stage.
+   flow-root keeps frame margins inside the stage: with no padding or
+   border they would collapse through and leave page-bg bands at the
+   top and bottom of the demo box */
 .sl-demo-stage-flush {
   padding: 0;
+  display: flow-root;
 }
 
 /* code panel — the summary bar carries a caret, the 原始碼 label and a
