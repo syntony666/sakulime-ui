@@ -10,5 +10,11 @@
     border: 1px solid var(--sl-border);
     border-radius: var(--sl-radius);
     padding: var(--sl-pad);
+    transition: transform 0.2s ease;
+  }
+
+  /* a card that is itself a link drops the anchor underline */
+  a[sl-card] {
+    text-decoration: none;
   }
 }

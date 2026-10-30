@@ -10,6 +10,7 @@ type CardArgs = {
   tone: string;
 
   raised: boolean;
+  interactive: boolean;
 };
 
 type SectionArgs = {
@@ -60,6 +61,7 @@ const meta = {
     tone: "-",
 
     raised: false,
+    interactive: false,
   },
   argTypes: {
     pad: axisArg("sl-pad", "內距", "md", PADS),
@@ -70,6 +72,12 @@ const meta = {
     raised: {
       name: "sl-raised",
       description: "浮起陰影",
+      table: { type: {}, defaultValue: { summary: "false" } },
+      control: "boolean",
+    },
+    interactive: {
+      name: "sl-card-interactive",
+      description: "整張可點",
       table: { type: {}, defaultValue: { summary: "false" } },
       control: "boolean",
     },
@@ -101,6 +109,7 @@ export const Card: Story = {
     attr("sl-indicate", args.indicate) +
     attr("sl-tone", args.tone) +
     (args.raised ? " sl-raised" : "") +
+    (args.interactive ? " sl-card-interactive" : "") +
     ` style="max-width: 360px">` +
     `<div>${TITLE}</div>` +
     `</div>`,
@@ -130,6 +139,12 @@ export const Indicated: Story = {
 
 export const Raised: Story = {
   render: () => card(" sl-raised", `<strong>Raised</strong><p>帶陰影的浮起卡片</p>`),
+};
+
+export const Interactive: Story = {
+  render: () =>
+    `<a sl-card sl-card-interactive href="#" style="width: 320px">` +
+    `<strong>可點卡片</strong><p>整張卡片是一個連結，滑鼠移過去會浮起。</p></a>`,
 };
 
 const cornerIcon =
@@ -246,7 +261,6 @@ export const SectionKinds: Story = {
         sec(`預設區塊`),
         `<div sl-card-section="secondary">secondary：次要內容</div>`,
         `<div sl-card-section="active">active：目前選取</div>`,
-        `<div sl-card-section="interactive">interactive：滑鼠移過去會變色</div>`,
         `<div sl-card-section="center">center：文字置中</div>`,
       ].join(""),
       320,

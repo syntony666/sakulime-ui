@@ -210,47 +210,41 @@
     background: color-mix(in srgb, var(--sl-primary) 8%, var(--sl-surface));
   }
 
-  /* interactive — hover affordance for clickable rows */
-  [sl-card] > [sl-card-section="interactive"] {
+  /* interactive — the whole card is clickable; hover lifts it like
+     a button */
+  [sl-card][sl-card-interactive] {
     cursor: pointer;
-    transition: background-color 160ms ease;
   }
 
-  [sl-card] > [sl-card-section="interactive"]:hover {
-    background: var(--sl-secondary-bg);
+  [sl-card][sl-card-interactive]:hover {
+    transform: scale(1.05);
   }
 
   /* bg sections own the gap to the next divider — the fill runs
      edge to edge instead of leaving a bare strip; at the extremes
      they bleed to the card edges like inset */
   [sl-card] > :is([sl-card-section="secondary"],
-                  [sl-card-section="active"],
-                  [sl-card-section="interactive"]) {
+                  [sl-card-section="active"]) {
     padding-bottom: var(--sl-pad);
   }
 
   :is([sl-card-section="secondary"],
-      [sl-card-section="active"],
-      [sl-card-section="interactive"]) + [sl-card-section] {
+      [sl-card-section="active"]) + [sl-card-section] {
     margin-top: 0;
   }
 
   [sl-card] > :is([sl-card-section="secondary"]:first-child,
                   [sl-card-section="active"]:first-child,
-                  [sl-card-section="interactive"]:first-child,
                   [sl-card-corner]:first-child + [sl-card-section="secondary"],
-                  [sl-card-corner]:first-child + [sl-card-section="active"],
-                  [sl-card-corner]:first-child + [sl-card-section="interactive"]) {
+                  [sl-card-corner]:first-child + [sl-card-section="active"]) {
     margin-top: calc(var(--sl-pad) * -1);
     padding-top: var(--sl-pad);
   }
 
   [sl-card] > :is([sl-card-section="secondary"]:last-child,
                   [sl-card-section="active"]:last-child,
-                  [sl-card-section="interactive"]:last-child,
                   [sl-card-section="secondary"]:has(+ [sl-card-corner]:last-child),
-                  [sl-card-section="active"]:has(+ [sl-card-corner]:last-child),
-                  [sl-card-section="interactive"]:has(+ [sl-card-corner]:last-child)) {
+                  [sl-card-section="active"]:has(+ [sl-card-corner]:last-child)) {
     margin-bottom: calc(var(--sl-pad) * -1);
   }
 
