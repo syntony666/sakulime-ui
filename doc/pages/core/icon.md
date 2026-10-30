@@ -1,6 +1,6 @@
 ---
 title: Icon 圖示
-description: sl-icon 圖示標記，大小跟字級走、用 sl-tone 上色；圖包由消費者註冊，icon() 產生 svg 字串。
+description: sl-icon 圖示標記，大小跟字級走、用 sl-tone 上色；圖包由消費者註冊，icon() 產生 SVG 字串。
 ---
 
 <script setup>
@@ -9,15 +9,15 @@ import * as IconDemos from "../../demos/components/icon.demo";
 
 # Icon *圖示*
 
-`sl-icon` 是加在 svg 上的屬性標記。它不是元素、不渲染內容，只控制 svg 在行內的大小、顏色與對齊。加了之後大小固定 `1em`，顏色繼承 `currentColor`（或寫 `sl-tone`），垂直位置對齊文字底線。
+`sl-icon` 是加在 SVG 上的屬性標記。它不是元素、不渲染內容，只控制 SVG 在行內的大小、顏色與對齊。加了之後大小固定 `1em`，顏色繼承 `currentColor`（或寫 `sl-tone`），垂直位置對齊文字底線。
 
 <Playground :meta="IconDemos.default" :render="IconDemos.Icon.render" />
 
 ## 使用
 
-### 貼 svg
+### 貼 SVG
 
-從 icon 庫（lucide、Simple Icons、icones.js.org）複製一段 svg 貼進 HTML，加上 `sl-icon` 就生效。這條路徑不需要任何 JS。
+從 icon 庫（lucide、Simple Icons、icones.js.org）複製一段 SVG 貼進 HTML，加上 `sl-icon` 就生效。這條路徑不需要任何 JS。
 
 ```html
 <svg sl-icon viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -43,9 +43,9 @@ import * as IconDemos from "../../demos/components/icon.demo";
 
 第一次呼叫 `registerPack` 會自動啟動解析器，並監聽後來新增的元素。
 
-### `icon()` 產生 svg 字串
+### `icon()` 產生 SVG 字串
 
-SSG 或模板場景用 `icon("package:name")` 產生 svg 字串。同步執行、不依賴 DOM。
+SSG 或模板場景用 `icon("package:name")` 產生 SVG 字串。同步執行、不依賴 DOM。
 
 ```ts
 import { icon } from "sakulime-ui";
@@ -60,7 +60,7 @@ import { icon } from "sakulime-ui";
 
 ### 打包器
 
-`@iconify-json/*` 是永久開源授權的資料檔（lucide 是 ISC、Simple Icons 是 CC0），建議當 devDep 裝。產出的是 svg 字串，JSON 不會進使用者的 bundle。
+`@iconify-json/*` 是永久開源授權的資料檔（lucide 是 ISC、Simple Icons 是 CC0），建議當 devDep 裝。產出的是 SVG 字串，JSON 不會進使用者的 bundle。
 
 ```ts
 import { registerPack } from "sakulime-ui";
@@ -83,7 +83,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ### 純 HTML+CSS
 
-零 JS 頁面用 `<link>` 載入 CSS 就好。「貼 svg」不需要任何 JS；「寫名稱」跟 `icon()` 都要 JS 在場。
+零 JS 頁面用 `<link>` 載入 CSS 就好。「貼 SVG」不需要任何 JS；「寫名稱」跟 `icon()` 都要 JS 在場。
 
 輔助函式有三個。`packNames()` 列出已註冊的包，`iconNames(prefix)` 列出包內圖示，`resolveIcons(root)` 手動解析指定 root，Shadow DOM 內的佔位元素要自己傳給它。要讓其他 `sl-*` 屬性接上同一套解析機器，用 `registerResolver(attr, fn)`。
 
@@ -105,7 +105,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ## 修飾詞
 
-修飾詞是 `sl-icon-` 名稱空間的獨立屬性，寫在名稱旁邊。手貼的 svg 一樣能用，例如 `<svg sl-icon sl-icon-spin>`。
+修飾詞是 `sl-icon-` 名稱空間的獨立屬性，寫在名稱旁邊。手貼的 SVG 一樣能用，例如 `<svg sl-icon sl-icon-spin>`。
 
 ### 尺寸 `sl-icon-size`
 
@@ -113,7 +113,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 <Demo :render="IconDemos.ModSizes.render" />
 
-### 變形 `sl-icon-flip`、`sl-icon-rotate`
+### 變形 `sl-icon-flip/rotate`
 
 `flip="h"`、`flip="v"` 翻轉，`rotate="90"`、`"180"`、`"270"` 旋轉，兩者可以疊加。
 
