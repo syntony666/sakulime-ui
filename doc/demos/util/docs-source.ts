@@ -34,34 +34,46 @@ const VOID = new Set([
   "wbr",
 ]);
 
-// indent by nesting depth; an open tag immediately closed on the next
-// line folds into one `<x></x>` line
+// indent by nesting depth — tag and text tokens are split cleanly, so
+// `<i></i> 14px` keeps its close tag on the same line and `<x>text</x>`
+// folds into one line when nothing was pushed between open and close
 const indentMarkup = (code: string): string => {
-  const toks = code
-    .replace(/></g, ">\n<")
-    .split("\n")
+  const toks = (code.match(/<[^>]*>|[^<]+/g) ?? [])
     .map((s) => s.trim())
     .filter(Boolean);
   const lines: string[] = [];
-  let depth = 0;
+  const stack: { tag: string; line: number }[] = [];
   for (const t of toks) {
-    const tag = /^<([\w-]+)/.exec(t)?.[1];
-    const isClose = /^<\//.test(t);
-    const isOpen =
-      !!tag && !isClose && !/<\//.test(t) && !/\/>$/.test(t) && !VOID.has(tag);
-    if (isClose) {
-      const prev = lines[lines.length - 1];
-      const prevTag = /^<([\w-]+)[^>]*>$/.exec(prev?.trim() ?? "")?.[1];
-      const thisTag = /^<\/([\w-]+)>$/.exec(t)?.[1];
-      if (prevTag && prevTag === thisTag) {
-        lines[lines.length - 1] = prev + t;
-        depth--;
-        continue;
+    const open = /^<([\w-]+)/.exec(t)?.[1];
+    const close = /^<\/([\w-]+)>$/.exec(t)?.[1];
+    if (close) {
+      const top = stack[stack.length - 1];
+      if (top?.tag === close) {
+        stack.pop();
+        if (top.line === lines.length - 1) {
+          lines[top.line] += t;
+          continue;
+        }
       }
-      depth--;
+      lines.push("  ".repeat(stack.length) + t);
+      continue;
     }
-    lines.push("  ".repeat(Math.max(depth, 0)) + t);
-    if (isOpen) depth++;
+    if (open && !/\/>$/.test(t) && !VOID.has(open)) {
+      lines.push("  ".repeat(stack.length) + t);
+      stack.push({ tag: open, line: lines.length - 1 });
+      continue;
+    }
+    if (open) {
+      // void / self-closing tag — own line, nothing to close
+      lines.push("  ".repeat(stack.length) + t);
+      continue;
+    }
+    // text run — content glues onto the open element's line; text after
+    // a folded element trails that line with a space
+    const top = stack[stack.length - 1];
+    if (top?.line === lines.length - 1) lines[top.line] += t;
+    else if (lines.length) lines[lines.length - 1] += " " + t;
+    else lines.push(t);
   }
   return lines.join("\n");
 };
