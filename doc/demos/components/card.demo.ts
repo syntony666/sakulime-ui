@@ -56,7 +56,7 @@ const meta = {
     variant: axisArg("sl-card", "型態", "-", VARIANTS),
     indicate: axisArg("sl-card-indicate", "標記邊緣", "-", INDICATES),
     tone: axisArg("sl-tone", "顏色（搭配標記）", "primary", TONES),
-    interactive: axisArg("sl-interactive", "互動（hover 效果）", "grow", INTERACTIVES),
+    interactive: axisArg("sl-interactive", "互動（滑鼠移過去）", "grow", INTERACTIVES),
   },
 } satisfies Meta<CardArgs>;
 
