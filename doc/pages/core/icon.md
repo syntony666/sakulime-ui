@@ -13,7 +13,7 @@ import * as IconDemos from "../../demos/components/icon.demo";
 
 <Playground :meta="IconDemos.default" :render="IconDemos.Icon.render" />
 
-## 三種用法
+## 用法
 
 ### 貼 svg
 
