@@ -406,12 +406,17 @@ body::before {
 }
 
 /* pager title is a page name — same ink as the h1 it links to
-   (text-accent, not the darker brand-1 shift) */
+   (text-accent, not the darker brand-1 shift); hover lifts like
+   the sl-button affordance */
+.VPDocFooter .pager-link {
+  transition: transform 0.2s ease;
+}
 .VPDocFooter .pager-link .title {
   color: var(--sl-text-accent);
 }
 .VPDocFooter .pager-link:hover {
   background-color: var(--vp-c-brand-soft);
+  transform: scale(1.05);
 }
 
 /* sidebar + pager sub-label — opacity dims the subtitle inside the
