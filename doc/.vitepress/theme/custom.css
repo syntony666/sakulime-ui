@@ -156,8 +156,10 @@ body::before {
   box-shadow: 0 1px var(--vp-c-divider);
 }
 
-/* doc column rides the layout system's own container scale */
-.VPDoc .content-container {
+/* doc column rides the layout system's own container scale — match
+   VP's own .has-aside + data-v-scoped 688px cap's specificity so
+   source order decides */
+.VPDoc.has-aside .content .content-container {
   max-width: var(--sl-container-md);
 }
 
