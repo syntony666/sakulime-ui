@@ -87,13 +87,15 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 輔助函式有三個。`packNames()` 列出已註冊的包，`iconNames(prefix)` 列出包內圖示，`resolveIcons(root)` 手動解析指定 root，Shadow DOM 內的佔位元素要自己傳給它。要讓其他 `sl-*` 屬性接上同一套解析機器，用 `registerResolver(attr, fn)`。
 
-## 顏色 `sl-tone`
+## 屬性
+
+### 顏色 `sl-tone`
 
 `sl-icon` 在 `sl-tone` 的消費名單裡，寫上就染成對應色。放在 `sl-card`、`sl-card-corner` 裡會繼承元件的 tone。
 
 <Demo :render="IconDemos.Tones.render" />
 
-## 大小與對齊
+### 大小與對齊
 
 大小固定 `1em`，跟著所在文字的字級縮放。插進句子、按鈕、標題，都是當下的文字大小。
 
@@ -141,7 +143,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 <Demo :render="IconDemos.Spaced.render" />
 
-## 放進元件
+## 組合
 
 圖示繼承所在元件的墨色，按鈕和卡片角落標記都能直接放。
 
