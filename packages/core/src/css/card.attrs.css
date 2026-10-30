@@ -1,6 +1,6 @@
-/* card attrs — indicate, corner, section, interactive. Shared axes
-   (tone/radius/pad) come from axes.css; the card's slot defaults and
-   variants live in card.css. */
+/* card attrs — indicate, corner, section, plus the card's wiring for
+   the shared interactive axis. Tone/radius/pad values come from
+   axes.css; the card's slot defaults and variants live in card.css. */
 @layer attrs {
   /* indicate — accent edge, colored by the tone axis */
   [sl-card][sl-card-indicate="top"] {
@@ -172,14 +172,15 @@
     background: color-mix(in srgb, var(--sl-primary) 8%, var(--sl-surface));
   }
 
-  /* interactive — the whole card is clickable; hover lifts it like
-     a button */
-  [sl-card][sl-card-interactive] {
+  /* interactive — shared axis: the whole card is clickable, and hover
+     plays back whatever the axis put in the --sl-i-* slots */
+  [sl-card][sl-interactive] {
     cursor: pointer;
   }
 
-  [sl-card][sl-card-interactive]:hover {
-    transform: scale(1.05);
+  [sl-card][sl-interactive]:hover {
+    transform: var(--sl-i-transform);
+    box-shadow: var(--sl-i-shadow);
   }
 
   /* bg sections own the gap to the next divider — the fill runs

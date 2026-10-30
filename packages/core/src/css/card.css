@@ -9,6 +9,8 @@
     --sl-tone-text: color-mix(in srgb, var(--sl-primary) 55%, var(--sl-text));
     --sl-radius: var(--sl-sm);
     --sl-pad: var(--sl-lg);
+    --sl-i-transform: none;
+    --sl-i-shadow: none;
     display: block;
     position: relative;
     overflow: hidden;
@@ -17,7 +19,7 @@
     border: 1px solid var(--sl-border);
     border-radius: var(--sl-radius);
     padding: var(--sl-pad);
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
   /* a card that is itself a link drops the anchor underline */

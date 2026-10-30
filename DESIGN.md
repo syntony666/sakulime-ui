@@ -88,7 +88,7 @@ components:
 **Key Characteristics:**
 - 屬性即 API：`sl-*` attribute 寫元件/狀態/modifier，`--sl-*` 變數管顏色尺度，`class` 永遠留給使用者
 - 單一尺度：xs→5xl 九階，間距/圓角/字級共用同一套台階
-- Flat by default：結構靠 hairline + 色階 tint，陰影是選配的 `sl-raised`
+- Flat by default：結構靠 hairline + 色階 tint，陰影只出現在互動 hover（`sl-interactive`）
 - 頁面 signature：頂端 2px 漸層 hairline（primary→accent）＋ hero 名稱漸層字
 - Demo canvas：圓點格紙（1rem 格）當尺規，元件邊緣落在格點上
 
@@ -143,15 +143,15 @@ components:
 
 ## Elevation & Depth
 
-**Flat by default。** 系統沒有常駐陰影 — 層次靠 hairline（`--sl-border`）＋色階 tint（surface vs bg vs soft-mix）表達。陰影只出現在浮層：theme 下拉選單、以及明確宣告 `sl-raised` 的卡片。
+**Flat by default。** 系統沒有常駐陰影 — 層次靠 hairline（`--sl-border`）＋色階 tint（surface vs bg vs soft-mix）表達。陰影只出現在浮層與互動 hover：theme 下拉選單、以及宣告 `sl-interactive` 的卡片。
 
 ### Shadow Vocabulary
-- **Raised** (`0 2px 8px color-mix(in srgb, var(--sl-text) 12%, transparent)`): `sl-raised` 選配浮起
+- **Raise** (`0 2px 8px color-mix(in srgb, var(--sl-text) 12%, transparent)`): `sl-interactive="raise"` 的 hover 浮起影
 - **Overlay** (`0 4px 6px -1px / 0 2px 4px -2px rgb(0 0 0 / .07)`): 下拉選單等浮層
 - **Demo frame** (`0 1px 2px text 6%`): demo 外框極淡的定界影
 
 ### Named Rules
-**The Flat-By-Default Rule.** 表面預設是平的。深度靠狀態（hover transform）或明確的 `sl-raised` 表達，不常駐。
+**The Flat-By-Default Rule.** 表面預設是平的。深度靠 hover 互動（`sl-interactive`）表達，不常駐。
 
 ## Shapes
 
@@ -174,7 +174,7 @@ components:
 - **Surface:** `--sl-surface` 底＋1px `--sl-border`＋`sl-radius`＋`--sl-pad`（預設 16px）
 - **子元素 — 角落標記 `sl-card-corner`:** 頂角 chip，`end`（右上）/`start`（左上）＋ `text-sm`/`text-xs`/`indicator` 型態；底色是 tone 20% + surface 的不透明 tint — 疊在圖片上也讀得到；`indicator` 為實色圓點，裡面放 svg/img 變 icon
 - **子元素 — 分區 `sl-card-section`:** 滿版 hairline 分隔的內容列；第一節不畫線（=header）；`="inset"` 抵銷內距做滿版區塊（圖/地圖/色塊），位置由 DOM 順序決定（首節貼上、末節貼下、中間貼左右）；leading/trailing corner 不算內容
-- **Options:** `sl-card="hollow"`（虛線描邊）、`sl-card-indicate`（邊緣強調色條）、`sl-raised`（選配陰影）、`sl-pad`（sm/md/lg）
+- **Options:** `sl-card="hollow"`（虛線描邊）、`sl-card-indicate`（邊緣強調色條）、`sl-interactive`（hover 互動）、`sl-pad`（sm/md/lg）
 
 ### Demo Chrome（文件站元件）
 - **Stage:** 圓點格紙背景＋`--sl-3xl` padding＋細框，內容在 Shadow DOM 裡渲染
@@ -192,7 +192,7 @@ components:
 
 ### Don't:
 - **Don't** 用 `class` 做系統樣式 — `class` 是消費者的命名空間
-- **Don't** 給元件常駐陰影 — 浮起走 `sl-raised` 明確宣告
+- **Don't** 給元件常駐陰影 — 浮起走 `sl-interactive` 明確宣告
 - **Don't** 拿 `--sl-primary`/`--sl-secondary` 當文字色 — 用 `text-accent` 或 tone-text 混合
 - **Don't** 為元件外觀引 JS runtime — 需要行為時找 selector 方案（`:has()`、相鄰、positional）
 - **Don't** 讓 corner 影響分區判位 — leading/trailing `sl-card-corner` 不算內容節點

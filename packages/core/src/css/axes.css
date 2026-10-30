@@ -7,7 +7,7 @@
 @custom-selector :--sl-axis-size [sl-button];
 @custom-selector :--sl-axis-radius [sl-button], [sl-card];
 @custom-selector :--sl-axis-pad [sl-card];
-@custom-selector :--sl-axis-raised [sl-card];
+@custom-selector :--sl-axis-interactive [sl-card];
 
 @layer attrs {
   /* tone — --sl-tone-{bg,text,text-invert}; text is the tone's readable ink */
@@ -98,8 +98,23 @@
     --sl-pad: var(--sl-2xl);
   }
 
-  /* raised — theme-aware shadow */
-  :--sl-axis-raised[sl-raised] {
-    box-shadow: 0 2px 8px color-mix(in srgb, var(--sl-text) 12%, transparent);
+  /* interactive — --sl-i-{transform,shadow} slots; consumers read them
+     on :hover. Bare sl-interactive ("") means grow */
+  :--sl-axis-interactive[sl-interactive=""],
+  :--sl-axis-interactive[sl-interactive="grow"] {
+    --sl-i-transform: scale(1.05);
+  }
+
+  :--sl-axis-interactive[sl-interactive="lift"] {
+    --sl-i-transform: translateY(-4px);
+    --sl-i-shadow: 0 6px 16px color-mix(in srgb, var(--sl-text) 18%, transparent);
+  }
+
+  :--sl-axis-interactive[sl-interactive="raise"] {
+    --sl-i-shadow: 0 2px 8px color-mix(in srgb, var(--sl-text) 12%, transparent);
+  }
+
+  :--sl-axis-interactive[sl-interactive="press"] {
+    --sl-i-transform: scale(0.97);
   }
 }
