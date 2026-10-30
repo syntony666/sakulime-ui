@@ -1,4 +1,4 @@
-/* the layer contract travels with the css — consumers importing this
+/* the layer order travels with the css — consumers importing this
    file alone (shadow-dom demos, partial imports) get the declared
    order no matter which import surfaces first */
 @layer theme, base, attrs;
