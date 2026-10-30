@@ -144,6 +144,7 @@ export default defineConfig({
           { text: "說明", link: "/core/" },
           { text: `Button ${zh("按鈕")}`, link: "/core/button" },
           { text: `Card ${zh("卡片")}`, link: "/core/card" },
+          { text: `Icon ${zh("圖示")}`, link: "/core/icon" },
         ],
       },
     ],
