@@ -35,6 +35,8 @@ import * as IconDemos from "../../demos/components/icon.demo";
 <i sl-icon="si-github"></i>
 ```
 
+標籤不限 `<i>`（`<span>`、`<icon>` 都行），但**一定要寫結束標籤**——`<i sl-icon="x"/>` 自封閉在原生 HTML 無效，標籤會保持開啟並吃掉後面的內容（JSX／模板編譯的環境除外）。
+
 頁面上第一次呼叫 `registerPack` 時會自動啟動解析器，並監聽後來新增的元素。要 JS 在場才會生效——純靜態輸出請用另外兩種。
 
 ### `icon()` 產 markup
