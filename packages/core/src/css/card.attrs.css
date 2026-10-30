@@ -220,6 +220,11 @@
     background: var(--sl-secondary-bg);
   }
 
+  /* a card holding interactive sections lifts on hover like a button */
+  [sl-card]:has(> [sl-card-section="interactive"]):hover {
+    transform: scale(1.05);
+  }
+
   /* bg sections own the gap to the next divider — the fill runs
      edge to edge instead of leaving a bare strip; at the extremes
      they bleed to the card edges like inset */
