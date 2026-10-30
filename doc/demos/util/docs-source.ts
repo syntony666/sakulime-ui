@@ -8,6 +8,19 @@
 const stripShells = (code: string): string => {
   let c = code.trim();
   while (/^<div(?![^>]*\s+sl-)[^>]*>/.test(c)) {
+    /* strip the pair only when the trailing </div> really closes the
+       leading <div> — sibling divs aren't a shell and must survive */
+    const divs = c.match(/<\/?div[^>]*>/g) ?? [];
+    let depth = 0;
+    let closesAt = -1;
+    for (let i = 0; i < divs.length; i++) {
+      depth += divs[i].startsWith("</") ? -1 : 1;
+      if (depth === 0) {
+        closesAt = i;
+        break;
+      }
+    }
+    if (closesAt !== divs.length - 1 || !/<\/div>\s*$/.test(c)) break;
     c = c
       .replace(/^<div[^>]*>/, "")
       .replace(/<\/div>\s*$/, "")
