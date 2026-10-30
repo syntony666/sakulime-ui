@@ -6,6 +6,8 @@ const zh = (t: string) => `<em>${t}</em>`;
 
 const SITE = "https://sakulime-ui.syntony666.com";
 
+const src = (p: string) => fileURLToPath(new URL(`../../${p}`, import.meta.url));
+
 export default defineConfig({
   title: "Sakulime UI",
   titleTemplate: ":title | Sakulime UI",
@@ -110,6 +112,41 @@ export default defineConfig({
     publicDir: fileURLToPath(new URL("../public", import.meta.url)),
     /* docs consume core's source css — expand :--sl-* selectors here too */
     css: { postcss: { plugins: [customSelectors()] } },
+    /* package exports point at dist for publishing; alias the specifiers
+       the docs import back to source so edits live-reload — keep this
+       list in sync with the workspaces' exports maps */
+    resolve: {
+      alias: [
+        {
+          find: "@sakulime-ui/shared/vars.css",
+          replacement: src("packages/shared/vars.css"),
+        },
+        {
+          find: "@sakulime-ui/theme/sakulime.css",
+          replacement: src("packages/theme/sakulime.css"),
+        },
+        {
+          find: "@sakulime-ui/theme/terra.css",
+          replacement: src("packages/theme/terra.css"),
+        },
+        {
+          find: "@sakulime-ui/theme/umbra.css",
+          replacement: src("packages/theme/umbra.css"),
+        },
+        {
+          find: "@sakulime-ui/core/index.css",
+          replacement: src("packages/core/src/index.css"),
+        },
+        {
+          find: "@sakulime-ui/core/icons",
+          replacement: src("packages/core/src/icons/index.ts"),
+        },
+        {
+          find: "@sakulime-ui/layout/index.css",
+          replacement: src("packages/layout/src/layout.css"),
+        },
+      ],
+    },
   },
   themeConfig: {
     outline: { level: [2, 4], label: "本頁目錄" },
