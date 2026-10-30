@@ -143,10 +143,8 @@ export const Raised: Story = {
 
 export const Interactive: Story = {
   render: () =>
-    card(
-      " sl-card-interactive",
-      `<strong>可點卡片</strong><p>整張卡片是一個動作，滑鼠移過去會浮起。</p>`,
-    ),
+    `<a sl-card sl-card-interactive href="#" style="width: 320px">` +
+    `<strong>可點卡片</strong><p>整張卡片是一個連結，滑鼠移過去會浮起。</p></a>`,
 };
 
 const cornerIcon =
