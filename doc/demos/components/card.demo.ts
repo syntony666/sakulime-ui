@@ -120,6 +120,17 @@ export const Variants: Demo = {
     axis(VARIANTS, (v) => vcard(v, `<strong>${label(v)}</strong><p>內容文字</p>`)),
 };
 
+// position axis — the tone axis lives on Indicated in the tone section
+export const Indicates: Demo = {
+  render: () =>
+    axis(["top", "bottom", "start", "end"], (v) =>
+      card(
+        attr("sl-card-indicate", v) + attr("sl-tone", "secondary"),
+        `<strong>${label(v)}</strong><p>內容文字</p>`,
+      ),
+    ),
+};
+
 export const Indicated: Demo = {
   render: () =>
     axis(TONES, (v) =>
