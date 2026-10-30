@@ -174,13 +174,13 @@ body::before {
   }
   .container-wide .VPContent.has-sidebar {
     padding-left: calc(max(0px, (100vw - 1480px) / 2) + 240px);
-    padding-right: max(0px, calc((100vw - 1480px) / 2));
+    padding-right: max(20px, calc((100vw - 1480px) / 2));
   }
-  .container-wide .VPNavBar.has-sidebar .title {
-    padding-left: calc(max(0px, (100vw - 1480px) / 2) + 32px);
+  .container-wide .VPNavBar.has-sidebar div.title {
+    padding-left: max(32px, calc((100vw - 1480px) / 2));
     width: calc(max(0px, (100vw - 1480px) / 2) + 240px);
   }
-  .container-wide .VPNavBar.has-sidebar .content {
+  .container-wide .VPNavBar.has-sidebar div.content {
     padding-left: calc(max(0px, (100vw - 1480px) / 2) + 240px);
     padding-right: calc(max(0px, (100vw - 1480px) / 2) + 32px);
   }
@@ -194,12 +194,12 @@ body::before {
   }
   .container-wide .VPContent.has-sidebar {
     padding-left: 240px;
-    padding-right: 0;
+    padding-right: 20px;
   }
-  .container-wide .VPNavBar.has-sidebar .title {
+  .container-wide .VPNavBar.has-sidebar div.title {
     width: 240px;
   }
-  .container-wide .VPNavBar.has-sidebar .content,
+  .container-wide .VPNavBar.has-sidebar div.content,
   .container-wide .VPNavBar.has-sidebar .divider {
     padding-left: 240px;
   }
