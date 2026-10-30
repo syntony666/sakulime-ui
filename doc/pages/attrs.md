@@ -44,7 +44,7 @@ sakulime 的 API 全是 HTML 屬性，沒有 class。外觀全靠 CSS；圖示�
 
 | 屬性 | 值 | 適用元素 | 說明 |
 |---|---|---|---|
-| `sl-tone` | `primary` `secondary` `success` `warning` `danger` | `sl-button`、`sl-card`、`sl-card-corner` | 主題色調，背景與文字色自動配好 |
+| `sl-tone` | `primary` `secondary` `success` `warning` `danger` | `sl-button`、`sl-card`、`sl-card-corner`、`sl-icon` | 主題色調，背景與文字色自動配好 |
 | `sl-size` | `sm` `md` `lg` | `sl-button` | 高度與字級 |
 | `sl-radius` | `none` `sm` `md` `lg` `full` | `sl-button`、`sl-card` | 圓角 |
 | `sl-pad` | `sm` `md` `lg` | `sl-card` | 內距 |
