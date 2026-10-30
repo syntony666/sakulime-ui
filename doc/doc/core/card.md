@@ -58,7 +58,7 @@ import * as CardStories from "../../stories/components/card.stories";
 
 ### 互動 `sl-card-interactive`
 
-整張卡片變成一個可點擊的動作 — 游標變 pointer，滑鼠移過去卡片會浮起。要跳轉的話直接把屬性寫在 `<a>` 上，卡片本身就是連結：
+整張卡片變成一個可點擊的動作，游標變 pointer，滑鼠移過去卡片會浮起。要讓點擊開啟頁面，把屬性直接寫在 `<a>` 上，卡片本身就是連結：
 
 ```html
 <a sl-card sl-card-interactive href="/detail">…</a>
