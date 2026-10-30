@@ -122,7 +122,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 <Demo :render="IconDemos.ModSizes.render" />
 
-### 變形 `sl-icon-flip/rotate`
+### 變形
 
 `flip="h"`、`flip="v"` 翻轉，`rotate="90"`、`"180"`、`"270"` 旋轉，兩者可以疊加。
 
