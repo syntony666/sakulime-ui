@@ -182,6 +182,7 @@ export default defineConfig({
           { text: `Button ${zh("按鈕")}`, link: "/core/button" },
           { text: `Card ${zh("卡片")}`, link: "/core/card" },
           { text: `Icon ${zh("圖示")}`, link: "/core/icon" },
+          { text: `Chip ${zh("膠囊")}`, link: "/core/chip" },
         ],
       },
     ],

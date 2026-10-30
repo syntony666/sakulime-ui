@@ -183,6 +183,11 @@ components:
 - **Modifiers:** `sl-icon-*` 名稱空間（size/flip/rotate/spin/frame/disabled/space）— flip/rotate 走獨立 transform 屬性、spin 動 `transform`，三者可疊加；手貼 `<svg sl-icon>` 同樣生效
 - **JS 選配：** `sl-icon="pack:name"` 由共用 resolver 填 svg；不載 JS 就手貼 `<svg sl-icon>`
 
+### Chips `sl-chip`
+- **Size:** 內文 `0.875em` 跟字級走 — em 制，放在標題或 meta 列都自動合比例
+- **Surface:** tone 20% + surface 的霧面底＋tone-text 墨 — 沒寫 tone 是中性墨色 wash；`999px` 膠囊形
+- **Composition:** `inline-flex`＋`0.3em` gap — `<i sl-icon>` 直接放進去就對齊
+
 ### Demo Chrome（文件站元件）
 - **Stage:** 圓點格紙背景＋`--sl-3xl` padding＋細框，內容在 Shadow DOM 裡渲染
 - **Playground:** demo 下方的控制面板 — 欄位 `10rem` 名稱欄＋控制項欄，mono 標籤、12px muted 說明
