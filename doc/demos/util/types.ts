@@ -1,5 +1,4 @@
-// Minimal story shape consumed by the docs theme — replaces the
-// @storybook/html-vite types the stories were written against.
+// Minimal demo shape consumed by the docs theme.
 export type Meta<Args = Record<string, unknown>> = {
   title?: string;
   tags?: string[];
@@ -8,7 +7,7 @@ export type Meta<Args = Record<string, unknown>> = {
   argTypes?: Record<string, unknown>;
 };
 
-export type StoryObj<Args = Record<string, unknown>> = {
+export type DemoObj<Args = Record<string, unknown>> = {
   render?: (args: Args) => string;
   args?: Partial<Args>;
   argTypes?: Record<string, unknown>;

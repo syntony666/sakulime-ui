@@ -4,14 +4,14 @@ description: sl-card 卡片容器，可以設定內距、圓角、型態、標�
 ---
 
 <script setup>
-import * as CardStories from "../../stories/components/card.stories";
+import * as CardDemos from "../../demos/components/card.demo";
 </script>
 
 # Card *卡片*
 
 帶邊框的內容容器，有底色、細框線、圓角和內距。可以只放文字，也能加邊緣標記和角落標記。
 
-<Playground :meta="CardStories.default" :render="CardStories.Card.render" />
+<Playground :meta="CardDemos.default" :render="CardDemos.Card.render" />
 
 ## 屬性
 
@@ -23,7 +23,7 @@ import * as CardStories from "../../stories/components/card.stories";
 - `md`：一般（預設值）
 - `lg`：大
 
-<Demo :render="CardStories.Pads.render" />
+<Demo :render="CardDemos.Pads.render" />
 
 ### 圓角 `sl-radius`
 
@@ -32,7 +32,7 @@ import * as CardStories from "../../stories/components/card.stories";
 - `md`：一般圓角（預設值）
 - `lg`：很圓
 
-<Demo :render="CardStories.Radius.render" />
+<Demo :render="CardDemos.Radius.render" />
 
 ### 型態
 
@@ -46,7 +46,7 @@ import * as CardStories from "../../stories/components/card.stories";
 - `plain`：拿掉框線，保留底色和圓角
 - `blank`：拿掉框線和底色，只剩內距
 
-<Demo :render="CardStories.Variants.render" />
+<Demo :render="CardDemos.Variants.render" />
 
 ### 標記 `sl-card-indicate` + `sl-tone`
 
@@ -54,7 +54,7 @@ import * as CardStories from "../../stories/components/card.stories";
 
 - `top` / `bottom` / `start` / `end`
 
-<Demo :render="CardStories.Indicated.render" />
+<Demo :render="CardDemos.Indicated.render" />
 
 ### 互動 `sl-interactive`
 
@@ -65,7 +65,7 @@ import * as CardStories from "../../stories/components/card.stories";
 - `raise`：只有陰影浮現
 - `press`：下壓縮小
 
-<Demo :render="CardStories.Interactive.render" />
+<Demo :render="CardDemos.Interactive.render" />
 
 要讓點擊開啟頁面，把屬性直接寫在 `<a>` 上，卡片本身就是連結：
 
@@ -73,7 +73,7 @@ import * as CardStories from "../../stories/components/card.stories";
 <a sl-card sl-interactive href="/detail">…</a>
 ```
 
-<Demo :render="CardStories.InteractiveLink.render" />
+<Demo :render="CardDemos.InteractiveLink.render" />
 
 ## 子元素
 
@@ -90,7 +90,7 @@ import * as CardStories from "../../stories/components/card.stories";
 </div>
 ```
 
-<Demo :render="CardStories.Corner.render" :args="CardStories.Corner.args" />
+<Demo :render="CardDemos.Corner.render" :args="CardDemos.Corner.args" />
 
 顏色跟著 `sl-tone` 走（預設 primary），寫在卡片上整張統一，寫在標記上只改那一個：
 
@@ -119,8 +119,8 @@ import * as CardStories from "../../stories/components/card.stories";
 </span>
 ```
 
-<Demo :render="CardStories.CornerPositions.render" />
-<Demo :render="CardStories.CornerTypes.render" />
+<Demo :render="CardDemos.CornerPositions.render" />
+<Demo :render="CardDemos.CornerTypes.render" />
 
 ### 分區 `sl-card-section`
 
@@ -134,7 +134,7 @@ import * as CardStories from "../../stories/components/card.stories";
 </div>
 ```
 
-<Demo :render="CardStories.BasicSections.render" />
+<Demo :render="CardDemos.BasicSections.render" />
 
 #### 貼邊 `inset`
 
@@ -149,8 +149,8 @@ import * as CardStories from "../../stories/components/card.stories";
 
 角落標記疊在貼邊內容上也行。`sl-card-corner` 不算一般內容，不會影響 inset 的位置判斷：
 
-<Playground :meta="CardStories.Sections" :render="CardStories.Sections.render" />
-<Demo :render="CardStories.Insets.render" />
+<Playground :meta="CardDemos.Sections" :render="CardDemos.Sections.render" />
+<Demo :render="CardDemos.Insets.render" />
 
 #### 空白 `blank`
 
@@ -165,7 +165,7 @@ import * as CardStories from "../../stories/components/card.stories";
 </div>
 ```
 
-<Demo :render="CardStories.Blank.render" />
+<Demo :render="CardDemos.Blank.render" />
 
 #### 區塊型態
 
@@ -175,4 +175,4 @@ import * as CardStories from "../../stories/components/card.stories";
 - `active`：目前選取的那一塊（primary 淡色）
 - `center`：文字置中
 
-<Demo :render="CardStories.SectionKinds.render" />
+<Demo :render="CardDemos.SectionKinds.render" />

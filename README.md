@@ -65,7 +65,7 @@ Day-to-day work lives on `release/x.y.z` (x.y.z is the target version — featur
 
 Inside each package:
 
-- `src/css/*.css` — component styles (stories live in `doc/src/`)
+- `src/css/*.css` — component styles (demos live in `doc/demos/`)
 - `src/index.ts` — core lib entry (extracts css + js entry)
 
 The split: `sl-*` attributes carry component markup, state modifiers, and layout — `class` is left to consumers and never collides with the system.

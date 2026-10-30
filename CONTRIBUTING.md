@@ -34,7 +34,7 @@ npm run site         # also verify the static site when touching doc/
 - User-facing strings and `doc/` content (`.md` pages, story text) are Taiwan Traditional Chinese; repo meta-docs (README, CONTRIBUTING, AGENTS) stay in English
 - Code comments in English only, and only where they add information
 - Commit messages in English, under 50 words, conventional prefixes (`feat:`, `fix:`, `docs:`, `chore:`, `refactor:`)
-- Doc pages: `.md` for prose, `.stories.ts` for demos; stories render through the theme's `<Demo>` and `<Playground>` components
+- Doc pages: `.md` for prose, `.demo.ts` for demos; demos render through the theme's `<Demo>` and `<Playground>` components
 - New themes: drop a `.css` in `packages/theme` (three seeds + `color-scheme`; see `_internal/derived.css`), then import it once in `packages/core/src/index.ts` to bundle it into core, and add a `./<name>.css` line to `packages/theme/package.json` exports so the path is importable
 - Doc pages need frontmatter `title` and `description` — canonical, OG and JSON-LD metadata is generated from them
 

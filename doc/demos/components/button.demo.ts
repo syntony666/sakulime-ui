@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "../util/types";
+import type { Meta, DemoObj } from "../util/types";
 import { showMarkup } from "../util/docs-source";
 import { axis, attr, label } from "../util/axis";
 
@@ -28,7 +28,7 @@ const axisArg = (name: string, desc: string, def: string, options: string[]) => 
 
 const meta = {
   title: "Core/Button 按鈕",
-  // stories feed the mdx page; hide them from the sidebar
+  // demos feed the md page; hide them from the sidebar
   tags: ["!dev"],
   parameters: {
     docs: {
@@ -67,7 +67,7 @@ const meta = {
 } satisfies Meta<ButtonArgs>;
 
 export default meta;
-type Story = StoryObj<ButtonArgs>;
+type Demo = DemoObj<ButtonArgs>;
 
 // the marker itself carries the variant value — bare = normal
 const marker = (v: string) => (v === "-" ? "sl-button" : `sl-button="${v}"`);
@@ -94,27 +94,27 @@ function slAttrs({
   );
 }
 
-export const Button: Story = {
+export const Button: Demo = {
   render: (args) => `<button ${slAttrs(args)}>${args.label}</button>`,
 };
 
-export const Tones: Story = {
+export const Tones: Demo = {
   render: () => axis(TONES, btn("sl-tone")),
 };
 
-export const TonesInvert: Story = {
+export const TonesInvert: Demo = {
   render: () => axis(TONES, btn("sl-tone", "invert")),
 };
 
-export const Variants: Story = {
+export const Variants: Demo = {
   render: () =>
     axis(VARIANTS, (v) => `<button ${marker(v)}>${label(v)}</button>`),
 };
 
-export const Sizes: Story = {
+export const Sizes: Demo = {
   render: () => axis(SIZES, btn("sl-size")),
 };
 
-export const Radius: Story = {
+export const Radius: Demo = {
   render: () => axis(RADII, btn("sl-radius")),
 };

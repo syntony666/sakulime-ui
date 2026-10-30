@@ -1,4 +1,4 @@
-// Shared docs.source transform for gallery stories — the shown code
+// Shared docs.source transform for gallery demos — the shown code
 // should read like real usage, not the render implementation:
 //   1. strip anonymous wrapper divs (row/stage shells) — stop at any
 //      element carrying an sl-* attribute, that's the real markup
