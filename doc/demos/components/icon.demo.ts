@@ -121,15 +121,15 @@ export const Disabled: Demo = {
     ),
 };
 
-// one CJK phrase per value — margins only read against characters
-// that carry no source spaces; bare sl-icon-space means both sides
+// lyric line — each icon sits where its margin side reads naturally:
+// mid-phrase takes both sides, a line-end icon only needs start, and
+// a word-leading icon only needs end
 export const Spaced: Demo = {
   render: () =>
-    axis(["-", "start", "end", "both"], (v) =>
-      `<span>${label(v)} 使用<i sl-icon="lucide:search"${
-        v === "both" ? " sl-icon-space" : attr("sl-icon-space", v)
-      }></i>搜尋</span>`,
-    ),
+    `<p>喔愛<i sl-icon="lucide:heart" sl-icon-space></i>` +
+    `什麼是愛<i sl-icon="lucide:circle-question-mark" sl-icon-space="start"></i><br>` +
+    `你看我的<i sl-icon="lucide:eye" sl-icon-space="end"></i>眼神，` +
+    `怎麼這麼<i sl-icon="lucide:heart" sl-icon-space></i>可愛</p>`,
 };
 
 // card + corner + icon — the corner's tone colors the badge icon,
