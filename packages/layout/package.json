@@ -17,7 +17,7 @@
   "exports": {
     "./package.json": "./package.json",
     ".": "./dist/index.min.css",
-    "./index.css": "./src/layout.css",
+    "./index.css": "./dist/index.min.css",
     "./index.min.css": "./dist/index.min.css"
   },
   "devDependencies": {
