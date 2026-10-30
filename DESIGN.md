@@ -176,6 +176,13 @@ components:
 - **子元素 — 分區 `sl-card-section`:** 滿版 hairline 分隔的內容列；第一節不畫線（=header）；`="inset"` 抵銷內距做滿版區塊（圖/地圖/色塊），位置由 DOM 順序決定（首節貼上、末節貼下、中間貼左右）；leading/trailing corner 不算內容
 - **Options:** `sl-card="hollow"`（虛線描邊）、`sl-card-indicate`（邊緣強調色條）、`sl-interactive`（hover 互動）、`sl-pad`（sm/md/lg）
 
+### Icons `sl-icon`
+- **Size:** 預設 `1em` 跟字級走 — 插在句子裡就是字高；`sl-icon-size` sm(0.75em)/lg(1.5em)/xl(2.5em)/2xl(4em) 以所在字級為基準縮放
+- **Alignment:** `inline-flex`＋`vertical-align:-0.125em` — 視覺坐上文字底線，inline 放置不頂行
+- **Ink:** `currentColor` 繼承文字墨色；`sl-tone` 寫在 icon 自己身上可染色 — self-default 封印父層 tone slot，實心按鈕裡的 icon 不會被 button surface 吃掉
+- **Modifiers:** `sl-icon-*` 名稱空間（size/flip/rotate/spin/frame/disabled/space）— flip/rotate 走獨立 transform 屬性、spin 動 `transform`，三者可疊加；手貼 `<svg sl-icon>` 同樣生效
+- **JS 選配：** `sl-icon="pack:name"` 由共用 resolver 填 svg；不載 JS 就手貼 `<svg sl-icon>`
+
 ### Demo Chrome（文件站元件）
 - **Stage:** 圓點格紙背景＋`--sl-3xl` padding＋細框，內容在 Shadow DOM 裡渲染
 - **Playground:** demo 下方的控制面板 — 欄位 `10rem` 名稱欄＋控制項欄，mono 標籤、12px muted 說明

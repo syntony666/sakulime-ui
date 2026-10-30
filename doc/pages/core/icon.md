@@ -75,6 +75,8 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakulime-ui/dist/sakulime.min.css">
+
+<!-- 加上下面這段 -->
 <script type="module">
   import { registerPack } from "https://cdn.jsdelivr.net/npm/sakulime-ui/dist/sakulime.min.js";
   registerPack("si", "https://esm.sh/@iconify-json/simple-icons/icons.json");
@@ -139,6 +141,8 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 ### 旋轉動畫 `sl-icon-spin`
 
 讓圖示不停旋轉。系統設了 `prefers-reduced-motion` 時自動停用。
+
+跟 `sl-icon-rotate`、`sl-icon-flip` 同時寫也會疊加——靜態角度保留，動畫在之上轉整圈。
 
 <Demo :render="IconDemos.Spin.render" />
 

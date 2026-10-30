@@ -83,6 +83,11 @@ import * as XDemos from "../../demos/components/x.demo";
 Inside `## 屬性`, `###` order follows the canonical table in `attrs.md`:
 `sl-tone` → `sl-size` → `sl-radius` → `sl-pad` → `sl-interactive`.
 
+`## 組合` is documented by the component being composed *into* others —
+usually the smaller one shows how it drops into larger pieces (icon shows
+itself inside cards and buttons); container components don't open a section
+per placeable child. Omit the section entirely when no combo is worth showing.
+
 ## Heading format
 
 | Level | Format | Example |
