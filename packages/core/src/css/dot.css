@@ -11,7 +11,7 @@
     height: 0.5em;
     /* lift to optical center — baseline seating reads low against
        full-height (CJK) glyphs */
-    vertical-align: 0.125em;
+    vertical-align: 0.1em;
     border-radius: 999px;
     background: var(--sl-tone-bg);
   }
