@@ -188,6 +188,11 @@ components:
 - **Ink:** `currentColor` 繼承文字墨色；`sl-tone` 染成狀態色 — self-default 封印父層 tone slot
 - **Shape:** `inline-block` 純圓 — 空元素，不放內容（要 icon 用 `sl-icon` 組合）
 
+### Chips `sl-chip`
+- **Size:** 內文 `0.875em` 跟字級走 — em 制，放在標題或 meta 列都自動合比例
+- **Surface:** tone 20% + surface 的霧面底＋tone-text 墨 — 沒寫 tone 是中性墨色 wash；`999px` 膠囊形
+- **Composition:** `inline-flex`＋`0.3em` gap — `<i sl-icon>` 直接放進去就對齊
+
 ### Demo Chrome（文件站元件）
 - **Stage:** 圓點格紙背景＋`--sl-3xl` padding＋細框，內容在 Shadow DOM 裡渲染
 - **Playground:** demo 下方的控制面板 — 欄位 `10rem` 名稱欄＋控制項欄，mono 標籤、12px muted 說明

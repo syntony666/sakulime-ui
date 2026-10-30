@@ -8,6 +8,7 @@
 @import "./css/card.css";
 @import "./css/card.attrs.css";
 @import "./css/dot.css";
+@import "./css/chip.css";
 @import "./css/icon.css";
 
 @layer base {

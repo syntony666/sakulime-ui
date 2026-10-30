@@ -1,0 +1,21 @@
+/* chip — a small capsule tag: icon + a line of text in a quiet tone
+   wash. em-based so it scales with the surrounding font-size; the
+   inner gap pairs with <i sl-icon> directly */
+@layer base {
+  [sl-chip] {
+    /* self-default seals ancestor tone slots — no tone reads as a
+       neutral text-ink wash; sl-tone on the chip recolors it */
+    --sl-tone-bg: currentColor;
+    --sl-tone-text: currentColor;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
+    padding: 0.2em 0.6em;
+    font-size: 0.875em;
+    line-height: 1.4;
+    color: var(--sl-tone-text);
+    background: color-mix(in srgb, var(--sl-tone-bg) 20%, var(--sl-surface));
+    border-radius: 999px;
+    vertical-align: -0.05em;
+  }
+}
