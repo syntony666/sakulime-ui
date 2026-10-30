@@ -155,7 +155,7 @@ components:
 
 ## Shapes
 
-- **圓角軸**：`sl-radius` none/sm(4)/md(8，預設)/lg(12)/full(999) — 映射到通用尺度台階
+- **圓角屬性**：`sl-radius` none/sm(4)/md(8，預設)/lg(12)/full(999) — 映射到通用尺度台階
 - **卡片裁切**：`overflow:hidden` 讓 inset 出血內容自動吃卡片圓角 — 貼邊內容不用自己圓角
 - **Hairline 語言**：1px `--sl-border` 無所不在 — 卡片邊、section 分隔線（滿版）、h1 漸層底線、sidebar 選中條 3px accent bar
 - **Signature 形狀**：頂端 2px 漸層 hairline；corner chip 方形小圓角（`--sl-xs`）貼卡片頂角
@@ -164,7 +164,7 @@ components:
 
 ### Buttons `sl-button`
 - **Character:** 碰了會彈 — `hover: scale(1.05)` 是刻意的活潑回饋
-- **Shape:** `sl-radius` 軸（預設 md=8px），2px transparent border 撐住箱型
+- **Shape:** `sl-radius` 屬性（預設 md=8px），2px transparent border 撐住箱型
 - **Variants:** `normal`（實心=預設）/ `invert`（描邊）/ `ghost`（無框）/ `underline`（2px 底線，0.3em offset）
 - **Tones:** `sl-tone` primary/secondary/success/warning/danger — bg/text/invert 三 slot 自動配色
 - **Sizes:** `sl-size` sm/md/lg — 高度吃尺度台階（24/32/40px），字級 12/16/20px

@@ -3,7 +3,7 @@
    order no matter which import surfaces first */
 @layer theme, base, attrs;
 
-@import "./css/axes.css";
+@import "./css/generic.css";
 @import "./css/button.css";
 @import "./css/card.css";
 @import "./css/card.attrs.css";

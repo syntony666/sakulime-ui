@@ -1,6 +1,6 @@
 /* base recipe — structure + the default (normal) variant paint.
-   The slot defaults at the top are the component's consumed-axis
-   manifest: each one shadows any inherited axis value, so axis
+   The slot defaults at the top are the component's consumed-generic
+   manifest: each one shadows any inherited generic value, so generic
    attributes only take effect when set on the element itself. */
 @layer base {
   [sl-button] {
