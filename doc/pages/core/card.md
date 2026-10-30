@@ -90,7 +90,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 </div>
 ```
 
-<Demo :render="CardDemos.Corner.render" :args="CardDemos.Corner.args" />
+<Playground :meta="CardDemos.Corner" :render="CardDemos.Corner.render" />
 
 顏色跟著 `sl-tone` 走（預設 primary），寫在卡片上整張統一，寫在標記上只改那一個：
 
@@ -136,6 +136,8 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 <Demo :render="CardDemos.BasicSections.render" />
 
+<Playground :meta="CardDemos.Sections" :render="CardDemos.Sections.render" />
+
 #### 貼邊 `inset`
 
 `inset` 會把卡片內距抵銷掉，讓內容直接貼到卡片邊緣，放圖片、地圖或色塊都合適。放在第一個就貼上緣，放在最後一個就貼下緣，夾在中間只貼左右兩邊，位置照順序自動判斷：
@@ -149,7 +151,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 角落標記疊在貼邊內容上也行。`sl-card-corner` 不算一般內容，不會影響 inset 的位置判斷：
 
-<Playground :meta="CardDemos.Sections" :render="CardDemos.Sections.render" />
+<Demo :render="CardDemos.Sections.render" :args="CardDemos.Sections.args" />
 <Demo :render="CardDemos.Insets.render" />
 
 #### 空白 `blank`

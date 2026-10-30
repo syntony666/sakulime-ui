@@ -1,6 +1,6 @@
 import type { Meta, DemoObj } from "../util/types";
 import { showMarkup } from "../util/docs-source";
-import { axis, axisArg, attr, label } from "../util/axis";
+import { axis, axisArg, attr, boolArg, label } from "../util/axis";
 import { registerPack } from "@sakulime-ui/core/icons";
 import lucide from "@iconify-json/lucide/icons.json";
 
@@ -15,6 +15,12 @@ type CardArgs = {
   indicate: string;
   tone: string;
   interactive: string;
+};
+
+type CornerArgs = {
+  position: string;
+  type: string;
+  tone: string;
 };
 
 type SectionArgs = {
@@ -141,12 +147,24 @@ export const InteractiveLink: Demo = {
     `<strong>可點卡片</strong><p>整張卡片是一個連結，滑鼠移過去會放大。</p></a>`,
 };
 
-export const Corner: Demo = {
-  args: { radius: "-", tone: "-" },
-  render: (args) =>
-    `<div sl-card${attr("sl-radius", args.radius)} style="max-width: 360px">` +
-    `<span sl-card-corner${attr("sl-tone", args.tone)}>100ms</span>` +
-    `<strong>卡片標題</strong><p>卡片內容文字，描述這張卡片在展示什麼。</p></div>`,
+// position and type tokens merge into the corner's single attr value
+export const Corner: DemoObj<CornerArgs> = {
+  args: { position: "-", type: "-", tone: "-" },
+  argTypes: {
+    position: axisArg("sl-card-corner", "位置", "end", ["-", "start", "end"]),
+    type: axisArg("sl-card-corner", "類型", "text-sm", CORNER_TYPES),
+    tone: axisArg("sl-tone", "顏色", "primary", TONES),
+  },
+  render: (args) => {
+    const v = [args.position, args.type].filter((t) => t !== "-").join(" ");
+    const inner =
+      args.type === "indicator" ? `<i sl-icon="lucide:zap"></i>` : "100ms";
+    return (
+      `<div sl-card style="max-width: 360px">` +
+      `<span sl-card-corner${v ? `="${v}"` : ""}${attr("sl-tone", args.tone)}>${inner}</span>` +
+      `<strong>卡片標題</strong><p>卡片內容文字，描述這張卡片在展示什麼。</p></div>`
+    );
+  },
 };
 
 export const CornerPositions: Demo = {
@@ -189,12 +207,7 @@ export const Sections: DemoObj<SectionArgs> = {
   args: { inset: "top", corner: false, pad: "-" },
   argTypes: {
     inset: axisArg('sl-card-section="inset"', "貼邊區塊位置", "-", INSETS),
-    corner: {
-      name: "sl-card-corner",
-      description: "角落標記（疊在貼邊內容上）",
-      table: { type: {}, defaultValue: { summary: "false" } },
-      control: "boolean",
-    },
+    corner: boolArg("sl-card-corner", "角落標記（疊在貼邊內容上）"),
     pad: axisArg("sl-pad", "內距", "md", PADS),
   },
   render: (args) => {
