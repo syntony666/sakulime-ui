@@ -2,7 +2,7 @@
    still lands only on the accent ink and the primary CTA family, now
    inverted: pale teal action and accent ink over dark stone */
 
-@import "./css/derived.css";
+@import "./_internal/derived.css";
 
 @layer theme {
   :root[data-theme="umbra"] {

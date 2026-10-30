@@ -1,6 +1,6 @@
 /* sakulime — default brand theme: peachy sakura × amber (palette: colordrop 131616) */
 
-@import "./css/derived.css";
+@import "./_internal/derived.css";
 
 @layer theme {
   :root,
