@@ -26,7 +26,7 @@ import * as IconDemos from "../../demos/components/icon.demo";
 </svg>
 ```
 
-### `<i sl-icon="...">`
+### 用圖示包 `<i sl-icon="...">`
 
 註冊圖示包之後（見[安裝](#安裝)），任何元素寫上名稱就會換成圖示：
 
@@ -58,7 +58,7 @@ import { icon } from "sakulime-ui";
 
 套件本體不含任何圖示包資料，要用什麼自己註冊。package 名自訂，會變成 `sl-icon` 值的前綴。JS 需求依環境分三種裝法。
 
-### bundler
+### Bundler
 
 `@iconify-json/*` 是永久開源授權的資料檔（lucide 是 ISC、Simple Icons 是 CC0），建議當 devDep 裝。產出的是 SVG 字串，JSON 不會進使用者的 bundle。
 
@@ -83,9 +83,16 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ### 純 HTML+CSS
 
-零 JS 頁面用 `<link>` 載入 CSS 就好。「貼 SVG」不需要任何 JS；「寫名稱」跟 `icon()` 都要 JS 在場。
+零 JS 頁面用 `<link>` 載入 CSS 就好。「貼 SVG」不需要任何 JS；「套用圖示包」跟 `icon()` 都要 JS 在場。
 
-輔助函式有三個。`packNames()` 列出已註冊的包，`iconNames(prefix)` 列出包內圖示，`resolveIcons(root)` 手動解析指定 root，Shadow DOM 內的佔位元素要自己傳給它。要讓其他 `sl-*` 屬性接上同一套解析機器，用 `registerResolver(attr, fn)`。
+::: details 輔助API（JS 在場才用得到）
+
+- `packNames()`：列出已註冊的圖示包
+- `iconNames(prefix)`：列出指定包的圖示名
+- `resolveIcons(root)`：手動解析 root 底下的佔位；Shadow DOM 內的元素要自己傳進來
+- `registerResolver(attr, fn)`：讓其他 `sl-*` 屬性接上同一套解析機器
+
+:::
 
 ## 屬性
 
