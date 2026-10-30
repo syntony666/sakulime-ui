@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
+import { resolveIcons } from "@sakulime-ui/core/icons";
 import { highlightMarkup, showMarkup } from "../../demos/util/docs-source";
 import demoCss from "./demo-content.css?inline";
 
@@ -56,6 +57,9 @@ onMounted(() => {
     html,
     async (v) => {
       stage.innerHTML = v;
+      // the document observer can't see into shadow roots — demos
+      // resolve their own <i sl-icon="pack:name"> placeholders
+      resolveIcons(stage);
       await nextTick();
       measure();
     },

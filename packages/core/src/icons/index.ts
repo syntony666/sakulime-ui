@@ -64,7 +64,11 @@ export const iconNames = (prefix: string) =>
    their sl-icon value (it documents the icon); resolution is marked
    once via dataset so the observer doesn't loop. */
 const TAG = "data-sl-resolved";
-const resolveAll = (root: ParentNode) => {
+
+/* exported for hosts that render into shadow roots — MutationObserver
+   can't see inside them, so the host resolves its own tree (the docs
+   Demo component does exactly this after each render) */
+export const resolveIcons = (root: ParentNode = document) => {
   root.querySelectorAll<HTMLElement>(`[sl-icon]:not([${TAG}])`).forEach((el) => {
     const name = el.getAttribute("sl-icon");
     if (!name || el instanceof SVGElement) return;
@@ -77,11 +81,11 @@ const resolveAll = (root: ParentNode) => {
 let observer: MutationObserver | undefined;
 const installResolver = () => {
   if (typeof document === "undefined" || observer) return;
-  resolveAll(document);
+  resolveIcons(document);
   observer = new MutationObserver((records) => {
     for (const r of records) {
       for (const node of r.addedNodes) {
-        if (node instanceof HTMLElement) resolveAll(node.parentNode ?? node);
+        if (node instanceof HTMLElement) resolveIcons(node.parentNode ?? node);
       }
     }
   });
@@ -98,6 +102,6 @@ export const registerPack = async (
   packs.set(prefix, source);
   if (typeof document !== "undefined") {
     installResolver();
-    resolveAll(document);
+    resolveIcons(document);
   }
 };
