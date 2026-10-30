@@ -118,13 +118,21 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ### 尺寸 `sl-icon-size`
 
-`sm`、`lg`、`xl`、`2xl`，以所在字級為基準縮放。
+以所在字級為基準縮放，不寫值是 `1em`：
+
+- `sm`：`0.75em`
+- `lg`：`1.5em`
+- `xl`：`2.5em`
+- `2xl`：`4em`
 
 <Demo :render="IconDemos.ModSizes.render" />
 
 ### 變形
 
-`flip="h"`、`flip="v"` 翻轉，`rotate="90"`、`"180"`、`"270"` 旋轉，兩者可以疊加。
+- `sl-icon-flip="h"`／`="v"`：水平／垂直翻轉
+- `sl-icon-rotate="90"`／`"180"`／`"270"`：旋轉角度
+
+兩者可以疊加。
 
 <Demo :render="IconDemos.Transforms.render" />
 
@@ -146,7 +154,9 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ### 間距 `sl-icon-space`
 
-寫 bare `sl-icon-space` 兩側都加空隙，`="start"`、`="end"` 只加前或後。
+- `start`：只加前面
+- `end`：只加後面
+- 不寫值：兩側都加
 
 <Demo :render="IconDemos.Spaced.render" />
 
