@@ -62,14 +62,6 @@ const focusOption = (i: number) => {
   optionEls.value[((i % n) + n) % n]?.focus();
 };
 
-// the menu pins its width to the trigger's real box (the divider
-// padding inflates the switch's box, so % can't express this)
-const menuWidth = ref("100%");
-watch(open, (v) => {
-  if (v && triggerEl.value)
-    menuWidth.value = `${triggerEl.value.offsetWidth}px`;
-});
-
 const openMenu = (i?: number) => {
   open.value = true;
   nextTick(() =>
@@ -174,7 +166,6 @@ onUnmounted(() => document.removeEventListener("click", onClickOutside));
           v-if="open"
           class="sl-theme-menu"
           role="listbox"
-          :style="{ width: menuWidth }"
           @keydown="onMenuKeydown"
         >
           <li

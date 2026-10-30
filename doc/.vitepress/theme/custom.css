@@ -632,7 +632,10 @@ body::before {
   top: calc(100% + 6px);
   right: 0;
   z-index: 20;
-  width: 100%;
+  /* the trigger shrinks to dot + caret on mobile — the menu still
+     needs its natural width, never narrower than the trigger */
+  width: max-content;
+  min-width: 100%;
   margin: 0;
   padding: 4px;
   list-style: none;
@@ -695,6 +698,12 @@ body::before {
 /* the "..." flyout only ever held the social links — with them shown
    inline it opens an empty box */
 .VPNavBar .VPNavBarExtra {
+  display: none;
+}
+
+/* no hamburger at any width — the bar keeps github | version |
+   theme-switch everywhere, VP's responsive collapse is off */
+.VPNavBar .VPNavBarHamburger {
   display: none;
 }
 
