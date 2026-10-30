@@ -11,22 +11,6 @@ import * as ButtonDemos from "../../demos/components/button.demo";
 
 <Playground :meta="ButtonDemos.default" :render="ButtonDemos.Button.render" />
 
-## 顏色 `sl-tone`
-
-- `primary`：主題主色（預設值）
-- `secondary`：主題副色
-- `success`：代表成功
-- `warning`：代表警告
-- `danger`：代表危險
-
-### 實心版本
-
-<Demo :render="ButtonDemos.Tones.render" />
-
-### 框線版本
-
-<Demo :render="ButtonDemos.TonesInvert.render" />
-
 ## 型態
 
 型態直接寫在 `sl-button` 的值裡，不寫值就是 `normal`：
@@ -42,7 +26,25 @@ import * as ButtonDemos from "../../demos/components/button.demo";
 
 <Demo :render="ButtonDemos.Variants.render" />
 
-## 尺寸 `sl-size`
+## 屬性
+
+### 顏色 `sl-tone`
+
+- `primary`：主題主色（預設值）
+- `secondary`：主題副色
+- `success`：代表成功
+- `warning`：代表警告
+- `danger`：代表危險
+
+#### 實心版本
+
+<Demo :render="ButtonDemos.Tones.render" />
+
+#### 框線版本
+
+<Demo :render="ButtonDemos.TonesInvert.render" />
+
+### 尺寸 `sl-size`
 
 - `sm`：小
 - `md`：一般（預設值）
@@ -50,7 +52,7 @@ import * as ButtonDemos from "../../demos/components/button.demo";
 
 <Demo :render="ButtonDemos.Sizes.render" />
 
-## 圓角 `sl-radius`
+### 圓角 `sl-radius`
 
 - `none`：直角
 - `sm`：微圓
