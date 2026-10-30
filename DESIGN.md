@@ -172,7 +172,7 @@ components:
 
 ### Cards `sl-card`
 - **Surface:** `--sl-surface` 底＋1px `--sl-border`＋`sl-radius`＋`--sl-pad`（預設 16px）
-- **子元素 — 角落標記 `sl-card-corner`:** 頂角 chip，`end`（右上）/`start`（左上）＋ `text-sm`/`text-xs`/`indicator` 型態；底色是 tone 20% + surface 的不透明 tint — 疊在圖片上也讀得到；`indicator` 為實色圓點，裡面放 svg/img 變 icon
+- **子元素 — 角落標記 `sl-card-corner`:** 純位置件，`end`（右上，預設）/`start`（左上）＋z-index 壓過釘住的內容；`font-size: var(--sl-lg)` 當 em context — 長相由同元素疊加的小元件決定：`sl-chip` 貼邊角落標籤（四角 `--sl-xs` 小圓角，朝卡角那角由卡片 `overflow` 裁出同色曲線）、`sl-dot` 8px 點、`sl-icon` 16px 圖示，後兩者各退 `--sl-sm`/`--sl-xs` 內縮浮起
 - **子元素 — 分區 `sl-card-section`:** 滿版 hairline 分隔的內容列；第一節不畫線（=header）；`="inset"` 抵銷內距做滿版區塊（圖/地圖/色塊），位置由 DOM 順序決定（首節貼上、末節貼下、中間貼左右）；leading/trailing corner 不算內容
 - **Options:** `sl-card="hollow"`（虛線描邊）、`sl-card-indicate`（邊緣強調色條）、`sl-interactive`（hover 互動）、`sl-pad`（sm/md/lg）
 
@@ -189,8 +189,8 @@ components:
 - **Shape:** `inline-block` 純圓 — 空元素，不放內容（要 icon 用 `sl-icon` 組合）
 
 ### Chips `sl-chip`
-- **Size:** 內文 `0.875em` 跟字級走 — em 制，放在標題或 meta 列都自動合比例
-- **Surface:** tone 20% + surface 的霧面底＋tone-text 墨 — 沒寫 tone 是中性墨色 wash；`999px` 膠囊形
+- **Size:** 內文 `0.875em` 跟字級走 — em 制，放在標題或 meta 列都自動合比例；`sl-size`（sm/md/lg → 12/16/20px）換成絕對字級，padding/gap 是 em 所以整顆等比縮放
+- **Surface:** tone 20% + surface 的霧面底＋tone-text 墨 — 沒寫 tone 是中性墨色 wash；`999px` 膠囊形（角落情境縮成 `--sl-xs`）
 - **Composition:** `inline-flex`＋`0.3em` gap — `<i sl-icon>` 直接放進去就對齊
 
 ### Demo Chrome（文件站元件）

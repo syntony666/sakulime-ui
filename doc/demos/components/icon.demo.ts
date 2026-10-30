@@ -158,12 +158,12 @@ export const Spaced: Demo = {
     `那欸價逆<i sl-icon="lucide:heart" sl-icon-space="start"></i>可愛</p>`,
 };
 
-// card + corner + icon — the corner's tone colors the badge icon,
-// and a plain icon in the title just rides the heading ink
+// card + corner + icon — the icon pins itself to the corner and
+// sl-tone on it recolors; a plain icon in the title just rides the ink
 export const InCard: Demo = {
   render: () =>
     `<div sl-card style="width: 300px">` +
-    `<span sl-card-corner="end indicator" sl-tone="success"><i sl-icon="lucide:star"></i></span>` +
+    `<i sl-card-corner sl-icon="lucide:star" sl-tone="success"></i>` +
     `<strong><i sl-icon="lucide:rocket" sl-icon-space="end"></i> 學了一些俄語，我想對大家說</strong>` +
     `<p>noʎ ʇɹnɥ puɐ ǝı̣ן ɐ ןןǝʇ ɐuuoƃ ɹǝʌǝN
 ǝʎqpooƃ ʎɐs ɐuuoƃ ɹǝʌǝN

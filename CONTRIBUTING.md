@@ -42,7 +42,7 @@ npm run site         # also verify the static site when touching doc/
 
 - Generic attributes (`sl-tone`, `sl-size`, `sl-radius`, `sl-pad`, `sl-interactive`) live in `css/generic.css`. Each expands through its own `@custom-selector` consumer list and only ever sets `--sl-*` slot variables, never physical properties
 - A component that reads a slot must self-default it inside its own `@layer base` rule. That default is what seals a generic attribute set on an ancestor from leaking in
-- Component parts (`sl-card-corner`, `sl-card-section`) never self-default — they inherit their component's slots, so a part follows the card's `sl-tone`. Adding a part to a consumer list still lets the attribute work when written on the part itself
+- Component parts (`sl-card-corner`, `sl-card-section`) never self-default — a part that reads a slot inherits it from its component (a section follows the card's `--sl-pad`). Adding a part to a consumer list still lets the attribute work when written on the part itself
 - Component-specific attributes are namespaced `sl-<comp>-<attr>`; the marker value carries the variant (`sl-card="hollow"`), a bare marker means the default variant
 - `@custom-selector` expands via `postcss-custom-selectors`; both Vite pipelines (core build and doc site) already run it — never hand-write the `:is()` expansion
 

@@ -3,8 +3,8 @@
    produces --sl-* slots on elements in that list. Consumers
    self-default the slots they read in their own base rules, so an
    attribute on an ancestor can never leak in. */
-@custom-selector :--sl-generic-tone [sl-button], [sl-card], [sl-card-corner], [sl-icon], [sl-dot], [sl-chip];
-@custom-selector :--sl-generic-size [sl-button];
+@custom-selector :--sl-generic-tone [sl-button], [sl-card], [sl-icon], [sl-dot], [sl-chip];
+@custom-selector :--sl-generic-size [sl-button], [sl-chip];
 @custom-selector :--sl-generic-radius [sl-button], [sl-card];
 @custom-selector :--sl-generic-pad [sl-card];
 @custom-selector :--sl-generic-interactive [sl-card];

@@ -33,6 +33,10 @@ em 制——膠囊內的字是所在字級的 `0.875em`，跟著上下文縮放�
 
 <Demo :render="ChipDemos.Sizes.render" />
 
+要固定字級就寫 `sl-size`：`sm`（12px）／`md`（16px）／`lg`（20px）。padding 和 gap 都是 em，整顆膠囊跟著字級等比縮放：
+
+<Demo :render="ChipDemos.SizeKinds.render" />
+
 ## 組合
 
 `<i sl-icon>` 直接放進去，gap 跟墨色自動對齊。
@@ -42,3 +46,11 @@ em 制——膠囊內的字是所在字級的 `0.875em`，跟著上下文縮放�
 meta 列實際長這樣：
 
 <Demo :render="ChipDemos.MetaRow.render" />
+
+疊上 `sl-card-corner` 就釘到卡片角落，當數值或版本標籤剛好：
+
+```html
+<span sl-card-corner sl-chip sl-tone="primary">200ms</span>
+```
+
+<Demo :render="ChipDemos.InCorner.render" />
