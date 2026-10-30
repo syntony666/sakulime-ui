@@ -18,7 +18,7 @@ const optionEls = ref<(HTMLElement | null)[]>([]);
 
 // themes self-discover from the palette package — adding a css file
 // there adds an option; its color is the theme's authored seed
-const palettes = import.meta.glob("../../../packages/shared/theme/*.css", {
+const palettes = import.meta.glob("../../../packages/theme/*.css", {
   query: "?raw",
   import: "default",
   eager: true,

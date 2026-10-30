@@ -57,7 +57,7 @@ Day-to-day work lives on `release/x.y.z` (x.y.z is the target version — featur
 | Path | Contents |
 |---|---|
 | `packages/shared` | `--sl-*` variables (internal, unpublished) — bundled into each entry at build time |
-| `packages/shared/theme` | theme palettes, minified to `dist/<name>.min.css` |
+| `packages/theme` | theme palettes, minified to `dist/<name>.min.css` |
 | `packages/core` | component entry: variables + themes + components → `index.min.css` / `index.min.js` |
 | `packages/layout` | layout entry: variables + layout → `index.min.css` |
 | `dist/sakulime.min.css` | everything: core bundle + layout |
