@@ -115,7 +115,7 @@ One bullet per value, default annotated:
 
 ```markdown
 - `sm`：小
-- `md`：一般（預設值）
+- `md`：一般（預設）
 - `lg`：大
 ```
 
@@ -150,11 +150,47 @@ Bind a standalone demo with args (no playground chrome) via
 - One idea per sentence; no em dashes; value lists instead of inline chips
   when enumerating.
 
+## Shared-attribute pages
+
+Pages under `doc/pages/attrs/` document one generic attribute each. They
+don't follow the component skeleton — their fixed shape is smaller:
+
+```markdown
+# <Name> *<中文名>*
+
+> <one-sentence intro in a blockquote — what the attr does, plain terms>
+
+## 用法
+
+<syntax block + one-line explanation + Demo>
+
+## 選項
+
+| 選項 | <data column> |
+<one row per option; the second column holds whatever fits — px, 效果,
+用途; add the rem→16px note when px appears>
+
+## 適用元素
+
+<lead-in sentence>
+
+| 元素 | <behavior column> |
+<one row per applicable element; the column is named for what it
+describes — 預設, 作用, 沒標示時, 備註>
+```
+
+- Frontmatter `description` and the intro stay a single short sentence.
+- Both tables always — no prose lists for options or scope.
+- Demo file at `doc/demos/attrs/<name>.demo.ts`; sidebar entry in the
+  通用屬性 group.
+
 ## Guide and reference pages
 
-Non-component pages — `introduction.md`, `attrs.md`, `theme.md`, section
-`index.md`s, and the `layout: home` landing — don't follow the skeleton.
-Their `##` sections are named by content (`## 安裝`, `## CDN`, `## 切換`…),
-and they carry no demos unless a demo file exists for them. Everything else
-still applies: frontmatter, heading format (``### 名稱 `attr` `` where the
-section documents an attribute), value lists, prose rules.
+Non-component pages — `introduction.md`, `attrs.md` (the overview page
+itself; the `attrs/*.md` entries follow the shared-attribute skeleton
+above), `theme.md`, section `index.md`s, and the `layout: home` landing —
+don't follow the skeleton. Their `##` sections are named by content
+(`## 安裝`, `## CDN`, `## 切換`…), and they carry no demos unless a demo
+file exists for them. Everything else still applies: frontmatter, heading
+format (``### 名稱 `attr` `` where the section documents an attribute),
+value lists, prose rules.
