@@ -43,6 +43,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 - `sm`：微圓
 - `md`：一般圓角（預設值）
 - `lg`：很圓
+- `full`：一行膠囊——半徑封頂在一個行高，卡片一長高中段就變直線
 
 <Demo :render="CardDemos.Radius.render" />
 
