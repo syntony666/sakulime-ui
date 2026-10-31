@@ -17,7 +17,7 @@ import * as ChipDemos from "../../demos/components/chip.demo";
 
 ### 顏色 `sl-tone`
 
-`sl-chip` 是 `sl-tone` 的適用元素。沒給是文字顏色調出的中性色底。
+`sl-chip` 是 `sl-tone` 的適用元素。沒給是文字顏色調出的中性底色。
 
 - `primary`：主題主色
 - `secondary`：主題副色

@@ -27,7 +27,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### 顏色 `sl-tone`
 
-`sl-notice` 是 `sl-tone` 的適用元素。沒給是 primary 淺色底，資訊通知的標準色。
+`sl-notice` 是 `sl-tone` 的適用元素。沒給是 primary 淺底色，資訊通知的標準色。
 
 - `primary`：主題主色（預設）
 - `secondary`：主題副色
