@@ -168,21 +168,48 @@ export default defineConfig({
       { text: "開始使用", link: "/introduction" },
       {
         text: "屬性",
-        link: "/attrs",
         items: [
-          { text: `Tone ${zh("色調")}`, link: "/attrs/tone" },
-          { text: `Size ${zh("尺寸")}`, link: "/attrs/size" },
-          { text: `Radius ${zh("圓角")}`, link: "/attrs/radius" },
-          { text: `Pad ${zh("內距")}`, link: "/attrs/pad" },
-          { text: `Interactive ${zh("互動")}`, link: "/attrs/interactive" },
-          { text: `Gap ${zh("共用間距")}`, link: "/attrs/gap" },
+          { text: "總覽", link: "/attrs" },
+          {
+            text: "通用屬性",
+            items: [
+              { text: `Tone ${zh("色調")}`, link: "/attrs/tone" },
+              { text: `Size ${zh("尺寸")}`, link: "/attrs/size" },
+              { text: `Radius ${zh("圓角")}`, link: "/attrs/radius" },
+              { text: `Pad ${zh("內距")}`, link: "/attrs/pad" },
+              { text: `Interactive ${zh("互動")}`, link: "/attrs/interactive" },
+              { text: `Gap ${zh("共用間距")}`, link: "/attrs/gap" },
+            ],
+          },
         ],
       },
       { text: "主題", link: "/theme" },
       {
+        text: "元件 Core",
+        items: [
+          { text: "安裝", link: "/core/" },
+          {
+            text: "基本元件",
+            items: [
+              { text: `Button ${zh("按鈕")}`, link: "/core/button" },
+              { text: `Icon ${zh("圖示")}`, link: "/core/icon" },
+              { text: `Dot ${zh("狀態點")}`, link: "/core/dot" },
+              { text: `Chip ${zh("膠囊")}`, link: "/core/chip" },
+            ],
+          },
+          {
+            text: "容器",
+            items: [
+              { text: `Card ${zh("卡片")}`, link: "/core/card" },
+              { text: `Notice ${zh("通知")}`, link: "/core/notice" },
+            ],
+          },
+        ],
+      },
+      {
         text: "排版 Layout",
         items: [
-          { text: "說明", link: "/layout/" },
+          { text: "安裝", link: "/layout/" },
           {
             text: "格局設計",
             items: [
@@ -200,28 +227,6 @@ export default defineConfig({
               { text: `Sidebar ${zh("側欄")}`, link: "/layout/sidebar" },
               { text: `Footer ${zh("頁尾")}`, link: "/layout/footer" },
               { text: `Toast ${zh("通知角")}`, link: "/layout/toast" },
-            ],
-          },
-        ],
-      },
-      {
-        text: "元件 Core",
-        items: [
-          { text: "說明", link: "/core/" },
-          {
-            text: "基本元件",
-            items: [
-              { text: `Button ${zh("按鈕")}`, link: "/core/button" },
-              { text: `Icon ${zh("圖示")}`, link: "/core/icon" },
-              { text: `Dot ${zh("狀態點")}`, link: "/core/dot" },
-              { text: `Chip ${zh("膠囊")}`, link: "/core/chip" },
-            ],
-          },
-          {
-            text: "容器",
-            items: [
-              { text: `Card ${zh("卡片")}`, link: "/core/card" },
-              { text: `Notice ${zh("通知")}`, link: "/core/notice" },
             ],
           },
         ],
