@@ -15,7 +15,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 ## 型態
 
-型態是 `sl-card` 的值，不寫值就是一般卡片：
+型態是 `sl-card` 的選項，沒給就是一般卡片：
 
 ```html
 <div sl-card="hollow">…</div>
@@ -41,7 +41,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 - `none`：直角
 - `sm`：微圓
-- `md`：一般圓角（預設值）
+- `md`：一般圓角（預設）
 - `lg`：很圓
 - `full`：一行膠囊，半徑最多一個行高，卡片一長高中段就變直線
 
@@ -50,14 +50,14 @@ import * as CardDemos from "../../demos/components/card.demo";
 ### 內距 `sl-pad`
 
 - `sm`：小
-- `md`：一般（預設值）
+- `md`：一般（預設）
 - `lg`：大
 
 <Demo :render="CardDemos.Pads.render" />
 
 ### 互動 `sl-interactive`
 
-整張卡片看起來可以點，游標變成手指，滑鼠移過去就有反應。不寫值是 `grow`：
+整張卡片看起來可以點，游標變成手指，滑鼠移過去就有反應。沒給是 `grow`：
 
 - `grow`：放大
 - `lift`：浮起＋陰影
@@ -106,7 +106,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 位置：
 
-- 不寫值／`end`：右上
+- 沒給／`end`：右上
 - `start`：左上
 
 內容組合，`sl-chip` 文字膠囊、`sl-dot` 狀態點、`sl-icon` 圖示都可以放；`sl-tone` 寫在同一個元素上染色：

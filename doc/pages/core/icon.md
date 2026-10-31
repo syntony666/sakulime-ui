@@ -57,7 +57,7 @@ import { icon } from "sakulime-ui";
 
 ## 安裝
 
-套件本體不含任何圖示包資料，用到哪一包才註冊哪一包。package 名自訂，會變成 `sl-icon` 值的前綴。JS 需求依環境分三種裝法。
+套件本體不含任何圖示包資料，用到哪一包才註冊哪一包。package 名自訂，會變成 `sl-icon` 標示的前綴。JS 需求依環境分三種裝法。
 
 ### Bundler
 
@@ -107,7 +107,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ### 顏色 `sl-tone`
 
-`sl-icon` 是 `sl-tone` 的適用元素，`sl-tone` 標在圖示本身；不寫值繼承文字墨色。
+`sl-icon` 是 `sl-tone` 的適用元素，`sl-tone` 標示在圖示本身；沒給就繼承文字墨色。
 
 <Demo :render="IconDemos.Tones.render" />
 
@@ -127,7 +127,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ### 尺寸 `sl-icon-size`
 
-以所在字級為基準縮放，不寫值是 `1em`：
+以所在字級為基準縮放，沒給是 `1em`：
 
 - `sm`：`0.75em`
 - `lg`：`1.5em`
@@ -167,7 +167,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 - `start`：只加前面
 - `end`：只加後面
-- 不寫值：兩側都加
+- 沒給：兩側都加
 
 <Demo :render="IconDemos.Spaced.render" />
 
