@@ -34,14 +34,6 @@
   [sl-notice] a {
     color: inherit;
   }
-
-  /* icon pins to the first text line instead of floating mid-block
-     when the copy wraps — offset = (1.4 line-height − 1em icon) / 2,
-     which lands it dead-center on a single line too */
-  [sl-notice] > [sl-icon] {
-    align-self: flex-start;
-    margin-block-start: 0.2em;
-  }
 }
 
 @layer attrs {
