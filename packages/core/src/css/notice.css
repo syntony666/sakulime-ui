@@ -24,9 +24,13 @@
     --sl-radius: var(--sl-radius-full);
     /* one inline flow — icon, copy, and links all live in the same
        running text block, so a bare <i> or <a> is just inline content
-       and can never become its own column. actions pin to an edge
-       with floats; flow-root contains them */
-    display: flow-root;
+       and can never become its own column */
+    display: block;
+    position: relative;
+    /* the lane an edge-pinned action reserves in the padding — sized
+       to the canonical compact control (~--sl-sm of padding around a
+       --sl-2xl box); wider controls widen it */
+    --sl-action-w: calc(var(--sl-2xl) + var(--sl-sm) * 2);
     line-height: 1.4;
     /* strip proportions — vertical sits at 3/4 of the pad slot,
        horizontal at 3/2 so the capsule ends breathe */
@@ -62,29 +66,38 @@
     max-width: 100%;
   }
 
-  /* action — a float pinned to the trailing edge. the inner margin is
-     the wrap gap: line boxes shorten against it, so copy keeps its
-     distance even under fit. edge compensation: compact controls
-     carry ~--sl-sm of inner padding, and the wider capsule pad adds
-     another half slot — pulling both out keeps the glyph at a plain
-     1×pad inset instead of receding with the roomier content padding */
+  /* action — absolutely pinned to its edge and vertically centered;
+     :has() reserves its lane in the padding so copy never runs under
+     it. the lane = glyph inset + slot + wrap gap, so the glyph keeps
+     a plain 1×pad inset and copy keeps its distance even under fit */
+  [sl-notice]:has(> [sl-notice-action]) {
+    padding-inline-end: calc(
+      var(--sl-pad) - var(--sl-sm) + var(--sl-action-w) + var(--sl-md) + 0.6em
+    );
+  }
+
+  [sl-notice]:has(> [sl-notice-action="start"]) {
+    padding-inline-start: calc(
+      var(--sl-pad) - var(--sl-sm) + var(--sl-action-w) + 0.6em - var(--sl-sm)
+    );
+  }
+
   [sl-notice-action] {
-    float: inline-end;
-    margin-inline-start: calc(var(--sl-md) + 0.6em);
-    margin-inline-end: calc(-1 * var(--sl-sm) - var(--sl-pad) * 0.5);
+    position: absolute;
+    inset-inline-end: calc(var(--sl-pad) - var(--sl-sm));
+    top: 50%;
+    translate: 0 -50%;
   }
 
-  /* "start" floats it to the leading edge — the inner margin absorbs
-     the control's own padding so the copy sits a plain 0.6em gap away,
-     like a leading icon */
+  /* "start" pins it to the leading edge — the smaller inner gap makes
+     the copy sit a leading-icon distance away */
   [sl-notice-action="start"] {
-    float: inline-start;
-    margin-inline-start: calc(-1 * var(--sl-sm) - var(--sl-pad) * 0.5);
-    margin-inline-end: calc(0.6em - var(--sl-sm));
+    inset-inline-end: auto;
+    inset-inline-start: calc(var(--sl-pad) - var(--sl-sm));
   }
 
-  /* content align — "end" right-aligns every line; beside an end
-     float the shortened line boxes make the copy hug the action */
+  /* content align — "end" right-aligns every line; copy stops at the
+     reserved action lane, which reads as hugging the action */
   [sl-notice-align="end"] {
     text-align: end;
   }
