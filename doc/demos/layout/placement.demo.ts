@@ -46,6 +46,16 @@ export const StackMiddleEnd: Demo = {
     `</div>`,
 };
 
+// "center" flips the row into three zones (sl-bar's trick) — the marked
+// cell is the row's true midpoint even with an end sibling on the line
+export const RowCenterEnd: Demo = {
+  render: () =>
+    `<div sl-row>` +
+    `<div class="demo-cell" sl-place="center">sl-place="center"</div>` +
+    `<div class="demo-cell" sl-place="end">sl-place="end"</div>` +
+    `</div>`,
+};
+
 // a row centres children vertically by default, so the block-axis marks
 // that actually move a cell are "top" and "bottom" — "middle" marks
 // nothing here. "end" pushes right and stays centred

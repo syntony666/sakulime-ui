@@ -39,7 +39,7 @@ import * as PlacementDemos from "../../demos/layout/placement.demo";
 同一組值在各種排版原語裡的表現：
 
 - `sl-stack sl-flow` 或裸 block 子層：直接生效，元素要比容器窄才有空間可推
-- `sl-row` 子層：`sl-place="end"` 推到行尾、`sl-place="center"` 在左右子層之間置中；row 預設垂直置中，`middle` 標了不變，要靠上靠下用 `top`/`bottom`
+- `sl-row` 子層：`end` 推到行尾；`center` 讓整列切成三區（跟 `sl-bar` 同機制），標記的子層定在列中線；row 預設垂直置中，`middle` 標了不變，要靠上靠下用 `top`/`bottom`
 - `sl-stack` 子層：水平值變成左右對齊，標了之後寬度縮回內容寬，不用自己寫寬度；`middle` 一組管垂直，stack 要有高度才有空間可吸
 - `sl-grid` 子層：格子維持軌道寬，元素在自己的格子裡對齊，兩軸的值都通
 - `sl-bar` 的三區、`sl-with-sidebar` 的順序語意各自有定義，見各頁
@@ -51,6 +51,10 @@ import * as PlacementDemos from "../../demos/layout/placement.demo";
 `sl-place="middle"` 把子層定在垂直正中間，上下的空間平分，前後的子層被推到兩端：
 
 <Demo :render="PlacementDemos.StackMiddleEnd.render" />
+
+標了 `sl-place="center"` 的 row 會切成三區：中間格定在列中線（真中間，不被 `end` 分走空間）、`end` 格進右區，沒標的子層依序填進左區：
+
+<Demo :render="PlacementDemos.RowCenterEnd.render" />
 
 `sl-row` 的子層預設垂直置中，所以列內能動的只有 `top`/`bottom`，`sl-place="end"` 推到右邊、垂直方向留在置中位：
 
