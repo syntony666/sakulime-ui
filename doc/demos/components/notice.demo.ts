@@ -151,7 +151,7 @@ export const WithAction: Demo = {
 // text element keeps it inline in the paragraph (wraps flow full
 // width under it); a direct-child icon stays its own column item
 const LONG =
-  "系統將於 11/2 02:00–03:00 進行例行維護，期間 API 回應可能延遲，寫入操作會排入佇列，並於維護結束後自動重放，若有長時間執行中的工作請提前儲存。";
+  "系統將於 11/2 02:00–03:00 進行例行維護，期間 API 回應可能延遲，寫入操作會排入佇列，並於維護結束後自動重放，若有長時間執行中的工作請提前儲存。維護完成後會以浮動通知確認，期間如有異常請回報值班工程師。";
 
 export const Multiline: Demo = {
   render: () =>
