@@ -41,6 +41,8 @@ import * as ShellDemos from "../../demos/layout/shell.demo";
 
 <Demo :render="ShellDemos.TopbarZones.render" />
 
+`sl-row` 裡也通用：`sl-end` 把子層推到行尾，`sl-center` 在兄弟之間置中。
+
 ## 側欄 `sl-with-sidebar`
 
 ```html
