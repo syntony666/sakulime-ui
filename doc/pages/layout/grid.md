@@ -37,7 +37,7 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 </div>
 ```
 
-子層照順序填，滿一列自動換下一列。欄數是固定的，不會因為容器變窄掉欄；要分斷點掉欄就掛 `sl-cols-md`、`sl-cols-sm`，只要手機單欄的話標 `sl-collapse` 就好，見[響應式](/layout/responsive)。
+子層照順序填，滿一列自動換下一列。欄數是固定的，不會因為容器變窄掉欄；要分斷點掉欄就掛 `sl-cols-md`、`sl-cols-sm`，只要手機單欄的話標 `sl-collapse` 就好，見[響應式設計](/layout/responsive)。
 
 <Demo
   :render="GridDemos.Cols.render"

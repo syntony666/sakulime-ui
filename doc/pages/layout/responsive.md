@@ -1,5 +1,5 @@
 ---
-title: Responsive 響應式
+title: RWD 響應式設計
 description: 三階斷點對應 container 尺度，需要響應式的屬性掛斷點後綴。
 ---
 
@@ -7,7 +7,7 @@ description: 三階斷點對應 container 尺度，需要響應式的屬性掛�
 import * as RwdDemos from "../../demos/layout/responsive.demo";
 </script>
 
-# Responsive *響應式*
+# RWD *響應式設計*
 
 > 三階斷點，對應 container 尺度。需要響應式的屬性掛 `sl-<屬性>-<斷點>` 後綴。
 
