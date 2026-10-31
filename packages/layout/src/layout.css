@@ -51,6 +51,20 @@
     );
   }
 
+  /* sl-span — a grid child takes N tracks; over the remaining run it
+     just wraps to the next row like any other item */
+  [sl-grid] > [sl-span="2"]  { grid-column: span 2; }
+  [sl-grid] > [sl-span="3"]  { grid-column: span 3; }
+  [sl-grid] > [sl-span="4"]  { grid-column: span 4; }
+  [sl-grid] > [sl-span="5"]  { grid-column: span 5; }
+  [sl-grid] > [sl-span="6"]  { grid-column: span 6; }
+  [sl-grid] > [sl-span="7"]  { grid-column: span 7; }
+  [sl-grid] > [sl-span="8"]  { grid-column: span 8; }
+  [sl-grid] > [sl-span="9"]  { grid-column: span 9; }
+  [sl-grid] > [sl-span="10"] { grid-column: span 10; }
+  [sl-grid] > [sl-span="11"] { grid-column: span 11; }
+  [sl-grid] > [sl-span="12"] { grid-column: span 12; }
+
   /* flow — margin-based sibling rhythm for unwrapped content: articles,
      forms, any element whose children should keep normal block layout
      instead of becoming flex items */
@@ -274,4 +288,31 @@
   [sl-gap="3xl"] { --sl-gap: var(--sl-3xl); }
   [sl-gap="4xl"] { --sl-gap: var(--sl-4xl); }
   [sl-gap="5xl"] { --sl-gap: var(--sl-5xl); }
+
+  /* sl-cols — explicit track count, replaces the auto-fill template.
+     Attrs layer because it must win over that base rule */
+  [sl-grid][sl-cols="2"]  { grid-template-columns: repeat(2, 1fr); }
+  [sl-grid][sl-cols="3"]  { grid-template-columns: repeat(3, 1fr); }
+  [sl-grid][sl-cols="4"]  { grid-template-columns: repeat(4, 1fr); }
+  [sl-grid][sl-cols="5"]  { grid-template-columns: repeat(5, 1fr); }
+  [sl-grid][sl-cols="6"]  { grid-template-columns: repeat(6, 1fr); }
+  [sl-grid][sl-cols="7"]  { grid-template-columns: repeat(7, 1fr); }
+  [sl-grid][sl-cols="8"]  { grid-template-columns: repeat(8, 1fr); }
+  [sl-grid][sl-cols="9"]  { grid-template-columns: repeat(9, 1fr); }
+  [sl-grid][sl-cols="10"] { grid-template-columns: repeat(10, 1fr); }
+  [sl-grid][sl-cols="11"] { grid-template-columns: repeat(11, 1fr); }
+  [sl-grid][sl-cols="12"] { grid-template-columns: repeat(12, 1fr); }
+
+  /* collapse for an explicit grid — same opt-in and breakpoint as
+     sl-row: one column, and spans release since they are meaningless
+     on a single track */
+  @media (width < 40rem) {
+    [sl-grid][sl-collapse] {
+      grid-template-columns: 1fr;
+    }
+
+    [sl-grid][sl-collapse] > [sl-span] {
+      grid-column: auto;
+    }
+  }
 }
