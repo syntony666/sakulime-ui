@@ -50,7 +50,7 @@ import * as PlacementDemos from "../../demos/layout/placement.demo";
 
 <Demo :render="PlacementDemos.StackMiddleEnd.render" />
 
-在 `sl-row` 同一列裡兩軸標記可以疊著用，`sl-middle` 管列內高度、`sl-end` 管左右位置：
+同一列裡看差異：`sl-middle` 的子層垂直置中，`sl-end` 的子層只推到右邊、還是待在頂部：
 
 <Demo :render="PlacementDemos.RowMiddleEnd.render" />
 

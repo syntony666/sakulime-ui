@@ -46,13 +46,13 @@ export const StackMiddleEnd: Demo = {
     `</div>`,
 };
 
-// both marks on one line — sl-middle centres the cell in the row's line
-// box, compounding sl-end pins it to the right edge at the same height
+// one mark per child on the same line — sl-middle centres its cell
+// vertically in the line box, sl-end only pushes right and stays on top
 export const RowMiddleEnd: Demo = {
   render: () =>
     `<div sl-row style="height: 8rem">` +
-    `<div class="demo-cell" sl-middle>sl-middle 左中</div>` +
-    `<div class="demo-cell" sl-middle sl-end>sl-middle + sl-end 右中</div>` +
+    `<div class="demo-cell" sl-middle>sl-middle</div>` +
+    `<div class="demo-cell" sl-end>sl-end</div>` +
     `</div>`,
 };
 
