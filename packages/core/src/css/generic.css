@@ -78,7 +78,7 @@
   }
 
   :--sl-generic-radius[sl-radius="full"] {
-    --sl-radius: 999px;
+    --sl-radius: 9999px;
   }
 
   :--sl-generic-radius[sl-radius="none"] {

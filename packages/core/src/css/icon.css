@@ -81,7 +81,7 @@
     border: 2px solid currentColor;
   }
   [sl-icon][sl-icon-frame="circular"] {
-    border-radius: 999px;
+    border-radius: 9999px;
   }
   [sl-icon][sl-icon-frame="rounded"] {
     border-radius: var(--sl-sm);

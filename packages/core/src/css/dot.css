@@ -12,7 +12,7 @@
     /* lift to optical center — baseline seating reads low against
        full-height (CJK) glyphs */
     vertical-align: 0.1em;
-    border-radius: 999px;
+    border-radius: 9999px;
     background: var(--sl-tone-bg);
   }
 }
