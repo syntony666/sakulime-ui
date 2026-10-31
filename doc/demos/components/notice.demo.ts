@@ -137,10 +137,10 @@ export const ActionPlay: Demo = {
     `</div>`,
 };
 
-// sl-notice-action sits at the trailing edge in both widths — fill
-// pushes it to the container edge, fit keeps it at the content end;
-// a spacer slot guarantees air before it either way. the dismiss
-// itself is consumer code
+// sl-notice-action floats to the trailing edge — the wrap margin
+// keeps copy at a distance even when the capsule shrink-wraps (fit);
+// on multi-line copy it parks beside the line where it's written.
+// the dismiss itself is consumer code
 export const WithAction: Demo = {
   render: () =>
     `<div class="demo-stack">` +
@@ -163,16 +163,14 @@ export const WithAction: Demo = {
     `</div>`,
 };
 
-// long copy wraps inside the capsule — writing the icon inside a
-// text element keeps it inline in the paragraph (wraps flow full
-// width under it); a direct-child icon stays its own column item
+// long copy wraps inside the capsule — the icon is inline content,
+// so wrapped lines flow full width under it
 const LONG =
   "系統將於 11/2 02:00–03:00 進行例行維護，期間 API 回應可能延遲，寫入操作會排入佇列，並於維護結束後自動重放，若有長時間執行中的工作請提前儲存。維護完成後會以浮動通知確認，期間如有異常請回報值班工程師。";
 
 // banner playground — a bare notice in document flow; controls cover
 // width, icon on/off, single vs wrapped lines, and end alignment.
-// icon always sits inside the text element — inline flow, wraps full
-// width under it
+// the icon is ordinary inline content — no wrapper needed
 export const BannerMeta = {
   args: { variant: "-", icon: "有", lines: "單行", align: "-" },
   argTypes: {
@@ -199,7 +197,7 @@ export const BannerPlay: Demo = {
     const inner =
       a.icon === "無"
         ? text
-        : `<span><i sl-icon="lucide:triangle-alert"></i> ${text}</span>`;
+        : `<i sl-icon="lucide:triangle-alert"></i> ${text}`;
     return `<div ${marker(a.variant)} sl-tone="warning"${attr("sl-notice-align", a.align)}>${inner}</div>`;
   },
 };

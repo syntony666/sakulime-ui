@@ -77,7 +77,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 - 不寫值：靠右（尾端）——內側固定留一段距離，文字再長也不會貼上去
 - `start`：靠左（開頭）——站在 icon 的位置，像 leading icon 一樣貼著內容
 
-action 裡的 icon 跟著按鈕字級走（`sl-size="sm"` 約 12px），要大一點就給 `<i>` 掛 `sl-icon-size`。
+折行時它停在所寫位置的那一行——寫在最後是動作列式的尾端，寫在最前就釘第一行。action 裡的 icon 跟著按鈕字級走（`sl-size="sm"` 約 12px），要大一點就給 `<i>` 掛 `sl-icon-size`。
 
 <Playground :meta="NoticeDemos.ActionMeta" :render="NoticeDemos.ActionPlay.render" />
 
@@ -106,7 +106,7 @@ action 裡的 icon 跟著按鈕字級走（`sl-size="sm"` 約 12px），要大�
 
 <Playground :meta="NoticeDemos.BannerMeta" :render="NoticeDemos.BannerPlay.render" />
 
-內容切「多行」看折行——膠囊跟著長高、`full` 圓角封頂後中段變直，`end` 對齊下每一行都靠右。icon 寫在 `<span>` 裡就是行內圖示，折行滿寬流下去。
+內容切「多行」看折行——膠囊跟著長高、`full` 圓角封頂後中段變直，`end` 對齊下每一行都靠右。icon 直接寫進內容就是行內圖示，折行滿寬流下去，不用特別包裝。
 
 ### Toast *浮動通知*
 
