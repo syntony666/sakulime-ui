@@ -98,6 +98,10 @@ action 裡的 icon 跟著按鈕字級走（`sl-size="sm"` 約 12px），要大�
 
 ## 用法
 
+`sl-notice` 不分橫幅版或浮動通知版——同一條放進文件流是橫幅，包進你自己的容器就是浮動通知。切「用法」直接比較：
+
+<Playground :meta="NoticeDemos.UsageMeta" :render="NoticeDemos.UsagePlay.render" />
+
 ### Banner *橫幅*
 
 放進文件流就是滿寬橫幅——`<i sl-icon>` 開頭、訊息跟連結照順序排，連結會跟著通知墨色走。不放 icon 的話文字直接從邊緣起頭，不會留空：

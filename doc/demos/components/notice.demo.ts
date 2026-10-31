@@ -187,6 +187,38 @@ export const Multiline: Demo = {
     `</div>`,
 };
 
+// usage playground — the same notice in its two roles: bare in flow
+// reads as a banner; inside a consumer container it reads as toast
+const USAGES = ["banner", "toast"];
+
+export const UsageMeta = {
+  args: { usage: "banner", variant: "-", icon: "有" },
+  argTypes: {
+    usage: {
+      name: "用法",
+      description: "banner = 放進文件流／toast = 包進自備容器",
+      control: { type: "select" as const },
+      options: USAGES,
+    },
+    variant: axisArg("sl-notice", "寬度", "-", VARIANTS),
+    icon: {
+      name: "圖示",
+      control: { type: "select" as const },
+      options: ["有", "無"],
+    },
+  },
+};
+
+export const UsagePlay: Demo = {
+  render: (a) => {
+    const notice =
+      `<div ${marker(a.variant)} sl-tone="warning">` +
+      (a.icon === "無" ? "" : `<i sl-icon="lucide:triangle-alert"></i> `) +
+      `排程維護將於 30 分鐘後開始</div>`;
+    return a.usage === "toast" ? `<div class="demo-toast">${notice}</div>` : notice;
+  },
+};
+
 // toast is just a notice in a consumer-fixed wrapper — placement
 // (corner, stacking, timeout) is consumer CSS, not this package.
 // .demo-toast mimics a corner stack inside the demo frame
