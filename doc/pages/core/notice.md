@@ -72,27 +72,13 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### 動作 `sl-notice-action`
 
-要放邊緣的控制項就標 `sl-notice-action`——`fit` 的時候靠內容尾端。dismiss 鈕或動作連結都放這，關閉行為自己接：
+邊緣控制項——dismiss 鈕、動作連結，關閉行為自己接：
 
-- 不寫值：靠右（尾端）——內側固定留一段距離，文字再長也不會貼上去
-- `start`：靠左（開頭）——站在 icon 的位置，像 leading icon 一樣貼著內容
-
-永遠釘在邊緣、垂直置中——折幾行位置都不變，文字不會流過它底下。保留位寬度照 canonical 的 ghost `sm` 按鈕算，放更寬的控制（例如文字連結）就在消費端把 `--sl-action-w` 加大。action 裡的 icon 跟著按鈕字級走（`sl-size="sm"` 約 12px），要大一點就給 `<i>` 掛 `sl-icon-size`。
+- 不寫值：靠右（尾端）；`start`：靠左（開頭）——兩個可以共存
+- 垂直置中，文字不會流過它底下；放更寬的控制就把 `--sl-action-w` 加大
+- `<i>` 跟著按鈕字級走，要大一點掛 `sl-icon-size`
 
 <Playground :meta="NoticeDemos.ActionMeta" :render="NoticeDemos.ActionPlay.render" />
-
-兩個可以一起放——下面第三條就是左右各一個：
-
-```html
-<div sl-notice sl-tone="danger">
-  <i sl-icon="lucide:octagon-alert"></i>
-  部署失敗：Build #423 在 migrate 階段逾時。
-  <a href="#">查看記錄</a>
-  <button sl-button="ghost" sl-size="sm" sl-notice-action aria-label="關閉">
-    <i sl-icon="lucide:x"></i>
-  </button>
-</div>
-```
 
 <Demo :render="NoticeDemos.WithAction.render" />
 
