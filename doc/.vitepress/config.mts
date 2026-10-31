@@ -225,7 +225,7 @@ export default defineConfig({
           {
             text: "頁面區塊",
             items: [
-              { text: `Bar ${zh("邊列")}`, link: "/layout/bar" },
+              { text: `Bar ${zh("橫幅")}`, link: "/layout/bar" },
               { text: `Sidebar ${zh("側邊欄")}`, link: "/layout/sidebar" },
               { text: `Toast ${zh("通知角")}`, link: "/layout/toast" },
             ],

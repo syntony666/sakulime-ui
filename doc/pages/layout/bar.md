@@ -1,15 +1,15 @@
 ---
-title: Bar 邊列
-description: 滿寬的邊緣橫帶，黏頂或黏底，也能固定在視窗邊，內部左中右三區排列。
+title: Bar 橫幅
+description: 滿寬的邊緣橫幅，黏頂或黏底，也能固定在視窗邊，內部左中右三區排列。
 ---
 
 <script setup>
 import * as BarDemos from "../../demos/layout/bar.demo";
 </script>
 
-# Bar *邊列*
+# Bar *橫幅*
 
-> 頁面頂端或底端的滿寬橫帶。值選邊緣，預設捲到邊就黏住，要固定在視窗邊加 `sl-fixed`。內部左中右三區，放什麼都可以。
+> 頁面頂端或底端的滿寬橫幅。值選邊緣，預設捲到邊就黏住，要固定在視窗邊加 `sl-fixed`。內部左中右三區，放什麼都可以。
 
 ## 用法
 
@@ -22,7 +22,7 @@ import * as BarDemos from "../../demos/layout/bar.demo";
 
 <Demo :render="BarDemos.BarTop.render" />
 
-`sl-bar` 不給值就是一條普通文流橫帶，沒有邊緣語意，當區塊分隔帶用。
+`sl-bar` 不給值就是一條普通文流橫幅，沒有邊緣語意，當區塊分隔帶用。
 
 ## 邊緣跟定位
 
@@ -57,7 +57,7 @@ fixed 的 bar 脫離文流，body 會在對應邊自動補上 bar 高度的內�
 ## 尺寸與外觀
 
 - 高度是 `--sl-bar-h`，預設 3.5rem（56px），內容高就撐高
-- 上下內距讀 `--sl-bar-pad`，沒設就看 `sl-pad` 標示，再沒有就 `md`（12px）。頁尾那種厚橫帶：`sl-bar="bottom" sl-pad="lg"`
+- 上下內距讀 `--sl-bar-pad`，沒設就看 `sl-pad` 標示，再沒有就 `md`（12px）。頁尾那種厚橫幅：`sl-bar="bottom" sl-pad="lg"`
 - 內部間距預設 `md`（12px）。只想改一條就寫 `--sl-bar-gap`；[`sl-gap`](/attrs/gap) 標示在 bar 自己或外層都行
 - 底色 `--sl-bg`、邊緣那側 hairline（頂→下線、底→上線）、左右內距 `--sl-lg`（16px）、z-index 50
 
