@@ -1,5 +1,5 @@
 ---
-title: Container 容器
+title: Container 頁面容器
 description: 把內容限制在一個寬度裡置中。
 aside: false
 outline: false
@@ -10,7 +10,7 @@ pageClass: container-wide
 import * as ContainerDemos from "../../demos/layout/container.demo";
 </script>
 
-# Container *容器*
+# Container *頁面容器*
 
 > 把內容限制在一個寬度裡置中，左右留一點邊距。螢幕再寬，一行字也不會拉到讀不下去。
 

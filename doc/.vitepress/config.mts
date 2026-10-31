@@ -169,13 +169,13 @@ export default defineConfig({
       { text: "屬性", link: "/attrs" },
       { text: "主題", link: "/theme" },
       {
-        text: "Layout",
+        text: "排版 Layout",
         items: [
           { text: "說明", link: "/layout/" },
-          { text: `Container ${zh("容器")}`, link: "/layout/container" },
           {
             text: "格局",
             items: [
+              { text: `Container ${zh("頁面容器")}`, link: "/layout/container" },
               { text: `Stack ${zh("堆疊")}`, link: "/layout/stack" },
               { text: `Row ${zh("橫列")}`, link: "/layout/row" },
               { text: `Grid ${zh("格網")}`, link: "/layout/grid" },
@@ -193,7 +193,7 @@ export default defineConfig({
         ],
       },
       {
-        text: "Core",
+        text: "元件 Core",
         items: [
           { text: "說明", link: "/core/" },
           {
