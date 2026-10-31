@@ -19,6 +19,19 @@ export const Cols: Demo = {
     `</div></div>`,
 };
 
+// same slot, two card variants — the md breakpoint swaps them
+export const Card: Demo = {
+  render: () =>
+    `<div sl-card sl-hide-md>` +
+    `<div sl-card-section>` +
+    `<strong>桌面版卡片</strong><p>60rem 以上輪到這張，資訊量可以放得比較滿。</p>` +
+    `</div></div>` +
+    `<div sl-card sl-show-md>` +
+    `<div sl-card-section>` +
+    `<strong>手機版卡片</strong><p>60rem 以下換這張上場，內容精簡。</p>` +
+    `</div></div>`,
+};
+
 export const Hide: Demo = {
   render: () =>
     `<div sl-grid sl-cols="3">` +
