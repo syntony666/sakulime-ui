@@ -219,6 +219,7 @@ export default defineConfig({
               { text: `Grid ${zh("網格系統")}`, link: "/layout/grid" },
               { text: `Flow ${zh("子層間距")}`, link: "/layout/flow" },
               { text: `RWD ${zh("響應式設計")}`, link: "/layout/responsive" },
+              { text: `Placement ${zh("對齊")}`, link: "/layout/placement" },
             ],
           },
           {

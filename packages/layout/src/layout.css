@@ -173,16 +173,6 @@
     justify-self: end;
   }
 
-  /* the same marks inside a plain row — sl-end pushes the child to the
-     line's end, sl-center centers it between its siblings */
-  [sl-row] > [sl-center] {
-    margin-inline: auto;
-  }
-
-  [sl-row] > [sl-end] {
-    margin-inline-start: auto;
-  }
-
   /* toast — the fixed corner region that holds notices. Width and
      corner offsets are vars; the value moves the corner */
   [sl-toast] {
@@ -410,5 +400,32 @@
   }
   @media (width >= 45rem) {
     [sl-show-sm] { display: none; }
+  }
+
+  /* placement marks — auto margins absorb free space, so the same marks
+     work on block boxes, flex items, and grid items without a scoped
+     rule per parent. In a stretch context (sl-stack children) they also
+     shrink the item back to its content width. Structural marks like the
+     topbar/footer zones keep their scoped rules on top of these */
+  [sl-start] {
+    margin-inline-end: auto;
+  }
+
+  [sl-center] {
+    margin-inline: auto;
+  }
+
+  [sl-end] {
+    margin-inline-start: auto;
+  }
+
+  /* the sidebar marks pin order, not margins — the generic margin would
+     only open dead space between the rail and the content column */
+  [sl-with-sidebar] > [sl-start] {
+    margin-inline-end: 0;
+  }
+
+  [sl-with-sidebar] > [sl-end] {
+    margin-inline-start: 0;
   }
 }
