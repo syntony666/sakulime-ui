@@ -40,7 +40,7 @@ rounded:
   sm: "4px"
   md: "8px"
   lg: "12px"
-  full: "999px"
+  full: "9999px"
 spacing:
   xs: "4px"
   sm: "8px"
@@ -190,7 +190,7 @@ components:
 
 ### Chips `sl-chip`
 - **Size:** 內文 `0.875em` 跟字級走 — em 制，放在標題或 meta 列都自動合比例；`sl-size`（sm/md/lg → 12/16/20px）換成絕對字級，padding/gap 是 em 所以整顆等比縮放
-- **Surface:** tone 20% + surface 的霧面底＋tone-text 墨 — 沒寫 tone 是中性墨色 wash；`999px` 膠囊形（角落情境縮成 `--sl-xs`）
+- **Surface:** tone 20% + surface 的霧面底＋tone-text 墨 — 沒寫 tone 是中性墨色 wash；`9999px` 膠囊形（角落情境縮成 `--sl-xs`）
 - **Composition:** `inline-flex`＋`0.3em` gap — `<i sl-icon>` 直接放進去就對齊
 
 ### Demo Chrome（文件站元件）
