@@ -10,7 +10,7 @@ const cell = (t: string) => `<div class="demo-cell">${t}</div>`;
 // is narrower than its container
 export const FlowCenter: Demo = {
   render: () =>
-    `<div sl-flow>` +
+    `<div sl-stack sl-flow>` +
     `<div sl-card style="width: 18rem" sl-center>sl-center 置中</div>` +
     `</div>`,
 };

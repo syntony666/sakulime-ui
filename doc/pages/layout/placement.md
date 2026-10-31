@@ -14,7 +14,7 @@ import * as PlacementDemos from "../../demos/layout/placement.demo";
 ## 用法
 
 ```html
-<div sl-flow>
+<div sl-stack sl-flow>
   <div sl-card sl-center style="width: 18rem">置中的卡片</div>
 </div>
 ```
@@ -33,7 +33,7 @@ import * as PlacementDemos from "../../demos/layout/placement.demo";
 
 同一組標記在各種排版原語裡的表現：
 
-- `sl-flow` 或裸 block 子層：直接生效，元素要比容器窄才有空間可推
+- `sl-stack sl-flow` 或裸 block 子層：直接生效，元素要比容器窄才有空間可推
 - `sl-row` 子層：`sl-end` 推到行尾、`sl-center` 在左右子層之間置中
 - `sl-stack` 子層：變成水平對齊，標了之後寬度縮回內容寬，不用自己寫寬度
 - `sl-grid` 子層：格子維持軌道寬，元素在自己的格子裡對齊

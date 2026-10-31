@@ -19,15 +19,51 @@
   }
 
   /* stack — vertical rhythm. The parent owns spacing: direct children
-     lose their block margins so the gap value is the whole story */
+     lose their block margins so the gap value is the whole story.
+     sl-flow is the prose mode: children keep normal block layout and
+     their own margins, so the sibling rhythm rides on margins instead
+     of the flex gap. sl-cols splits the stack into balanced text
+     columns — both modes drop flex for block layout */
   [sl-stack] {
     display: flex;
     flex-direction: column;
     gap: var(--sl-stack-gap, var(--sl-gap, var(--sl-md)));
   }
 
-  [sl-stack] > * {
+  [sl-stack][sl-flow],
+  [sl-stack][sl-cols] {
+    display: block;
+  }
+
+  [sl-stack]:not([sl-flow]):not([sl-cols]) > * {
     margin-block: 0;
+  }
+
+  [sl-stack][sl-flow] > * + *,
+  [sl-stack][sl-cols] > * + * {
+    margin-block-start: var(--sl-stack-gap, var(--sl-gap, var(--sl-md)));
+  }
+
+  [sl-stack][sl-cols] {
+    column-gap: var(--sl-stack-gap, var(--sl-gap, var(--sl-md)));
+  }
+
+  [sl-stack][sl-cols="2"]  { column-count: 2; }
+  [sl-stack][sl-cols="3"]  { column-count: 3; }
+  [sl-stack][sl-cols="4"]  { column-count: 4; }
+  [sl-stack][sl-cols="5"]  { column-count: 5; }
+  [sl-stack][sl-cols="6"]  { column-count: 6; }
+  [sl-stack][sl-cols="7"]  { column-count: 7; }
+  [sl-stack][sl-cols="8"]  { column-count: 8; }
+  [sl-stack][sl-cols="9"]  { column-count: 9; }
+  [sl-stack][sl-cols="10"] { column-count: 10; }
+  [sl-stack][sl-cols="11"] { column-count: 11; }
+  [sl-stack][sl-cols="12"] { column-count: 12; }
+
+  /* sl-span inside a multicol stack spans every column — a heading
+     across the flow */
+  [sl-stack][sl-cols] > [sl-span] {
+    column-span: all;
   }
 
   /* row — horizontal run that wraps; tag rows, button groups */
@@ -62,13 +98,6 @@
   [sl-grid] > [sl-span="10"] { grid-column: span 10; }
   [sl-grid] > [sl-span="11"] { grid-column: span 11; }
   [sl-grid] > [sl-span="12"] { grid-column: span 12; }
-
-  /* flow — margin-based sibling rhythm for unwrapped content: articles,
-     forms, any element whose children should keep normal block layout
-     instead of becoming flex items */
-  [sl-flow] > * + * {
-    margin-block-start: var(--sl-flow-gap, var(--sl-gap, var(--sl-md)));
-  }
 
   /* opt-in collapse — <div sl-row sl-collapse> turns into a vertical
      stack on narrow viewports. Tag rows keep wrapping instead, so the
@@ -250,16 +279,6 @@
   [sl-grid="3xl"] { --sl-grid-gap: var(--sl-3xl); }
   [sl-grid="4xl"] { --sl-grid-gap: var(--sl-4xl); }
   [sl-grid="5xl"] { --sl-grid-gap: var(--sl-5xl); }
-
-  [sl-flow="xs"]  { --sl-flow-gap: var(--sl-xs); }
-  [sl-flow="sm"]  { --sl-flow-gap: var(--sl-sm); }
-  [sl-flow="md"]  { --sl-flow-gap: var(--sl-md); }
-  [sl-flow="lg"]  { --sl-flow-gap: var(--sl-lg); }
-  [sl-flow="xl"]  { --sl-flow-gap: var(--sl-xl); }
-  [sl-flow="2xl"] { --sl-flow-gap: var(--sl-2xl); }
-  [sl-flow="3xl"] { --sl-flow-gap: var(--sl-3xl); }
-  [sl-flow="4xl"] { --sl-flow-gap: var(--sl-4xl); }
-  [sl-flow="5xl"] { --sl-flow-gap: var(--sl-5xl); }
 
   [sl-with-sidebar="xs"]  { --sl-sidebar-gap: var(--sl-xs); }
   [sl-with-sidebar="sm"]  { --sl-sidebar-gap: var(--sl-sm); }

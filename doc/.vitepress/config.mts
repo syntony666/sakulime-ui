@@ -217,7 +217,6 @@ export default defineConfig({
               { text: `Stack ${zh("堆疊")}`, link: "/layout/stack" },
               { text: `Row ${zh("橫列")}`, link: "/layout/row" },
               { text: `Grid ${zh("網格系統")}`, link: "/layout/grid" },
-              { text: `Flow ${zh("子層間距")}`, link: "/layout/flow" },
               { text: `RWD ${zh("響應式設計")}`, link: "/layout/responsive" },
               { text: `Placement ${zh("對齊")}`, link: "/layout/placement" },
             ],
