@@ -137,10 +137,10 @@ export const ActionPlay: Demo = {
     `</div>`,
 };
 
-// sl-notice-action floats to the trailing edge — the wrap margin
-// keeps copy at a distance even when the capsule shrink-wraps (fit);
-// on multi-line copy it parks beside the line where it's written.
-// the dismiss itself is consumer code
+// sl-notice-action pins to its edge, vertically centered — :has()
+// reserves its lane in the padding so wrapped copy never runs under
+// it, even when the capsule shrink-wraps (fit). the dismiss itself
+// is consumer code
 export const WithAction: Demo = {
   render: () =>
     `<div class="demo-stack">` +

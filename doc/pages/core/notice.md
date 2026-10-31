@@ -77,7 +77,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 - 不寫值：靠右（尾端）——內側固定留一段距離，文字再長也不會貼上去
 - `start`：靠左（開頭）——站在 icon 的位置，像 leading icon 一樣貼著內容
 
-折行時它停在所寫位置的那一行——寫在最後是動作列式的尾端，寫在最前就釘第一行。action 裡的 icon 跟著按鈕字級走（`sl-size="sm"` 約 12px），要大一點就給 `<i>` 掛 `sl-icon-size`。
+永遠釘在邊緣、垂直置中——折幾行位置都不變，文字不會流過它底下。保留位寬度照 canonical 的 ghost `sm` 按鈕算，放更寬的控制（例如文字連結）就在消費端把 `--sl-action-w` 加大。action 裡的 icon 跟著按鈕字級走（`sl-size="sm"` 約 12px），要大一點就給 `<i>` 掛 `sl-icon-size`。
 
 <Playground :meta="NoticeDemos.ActionMeta" :render="NoticeDemos.ActionPlay.render" />
 
