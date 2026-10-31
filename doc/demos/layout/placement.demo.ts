@@ -11,7 +11,7 @@ const cell = (t: string) => `<div class="demo-cell">${t}</div>`;
 export const FlowCenter: Demo = {
   render: () =>
     `<div sl-stack sl-flow>` +
-    `<div sl-card style="width: 18rem" sl-center>sl-center 置中</div>` +
+    `<div sl-card style="width: 18rem" sl-place="center">sl-place="center" 置中</div>` +
     `</div>`,
 };
 
@@ -20,7 +20,7 @@ export const RowEnd: Demo = {
     `<div sl-row>` +
     cell("一般子層") +
     cell("一般子層") +
-    `<div class="demo-cell" sl-end>sl-end 推到行尾</div>` +
+    `<div class="demo-cell" sl-place="end">sl-place="end" 推到行尾</div>` +
     `</div>`,
 };
 
@@ -30,39 +30,39 @@ export const StackMarks: Demo = {
   render: () =>
     `<div sl-stack>` +
     cell("不標：拉滿") +
-    `<div class="demo-cell" sl-center>sl-center</div>` +
-    `<div class="demo-cell" sl-end>sl-end</div>` +
+    `<div class="demo-cell" sl-place="center">sl-place="center"</div>` +
+    `<div class="demo-cell" sl-place="end">sl-place="end"</div>` +
     `</div>`,
 };
 
-// block-axis marks in a tall stack — sl-middle centres vertically and
-// pushes the others apart, sl-end stays pinned to the right edge
+// block-axis marks in a tall stack — "middle" centres vertically and
+// pushes the others apart, "end" stays pinned to the right edge
 export const StackMiddleEnd: Demo = {
   render: () =>
     `<div sl-stack style="height: 12rem">` +
     cell("一般子層") +
-    `<div class="demo-cell" sl-middle>sl-middle 垂直置中</div>` +
-    `<div class="demo-cell" sl-end>sl-end 靠右</div>` +
+    `<div class="demo-cell" sl-place="middle">sl-place="middle" 垂直置中</div>` +
+    `<div class="demo-cell" sl-place="end">sl-place="end" 靠右</div>` +
     `</div>`,
 };
 
-// one mark per child on the same line — sl-middle centres its cell
-// vertically in the line box, sl-end only pushes right and stays on top
+// one value per child on the same line — "middle" centres its cell
+// vertically in the line box, "end" only pushes right and stays on top
 export const RowMiddleEnd: Demo = {
   render: () =>
     `<div sl-row style="height: 8rem">` +
-    `<div class="demo-cell" sl-middle>sl-middle</div>` +
-    `<div class="demo-cell" sl-end>sl-end</div>` +
+    `<div class="demo-cell" sl-place="middle">sl-place="middle"</div>` +
+    `<div class="demo-cell" sl-place="end">sl-place="end"</div>` +
     `</div>`,
 };
 
-// all three marks on grid items — the tracks keep their size and each
-// item shrinks to content width, pinned to its own cell's edge
+// all three inline values on grid items — the tracks keep their size and
+// each item shrinks to content width, pinned to its own cell's edge
 export const GridCell: Demo = {
   render: () =>
     `<div sl-grid sl-cols="3">` +
-    `<div class="demo-cell" sl-start>sl-start</div>` +
-    `<div class="demo-cell" sl-center>sl-center</div>` +
-    `<div class="demo-cell" sl-end>sl-end</div>` +
+    `<div class="demo-cell" sl-place="start">sl-place="start"</div>` +
+    `<div class="demo-cell" sl-place="center">sl-place="center"</div>` +
+    `<div class="demo-cell" sl-place="end">sl-place="end"</div>` +
     `</div>`,
 };

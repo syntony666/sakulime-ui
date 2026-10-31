@@ -15,12 +15,12 @@ export const BarTop: Demo = {
     `</div>`,
 };
 
-// three zones in one bar — the 1fr/auto/1fr grid makes sl-center the
-// true bar center; sl-end pins the far edge regardless of source order
+// three zones in one bar — the 1fr/auto/1fr grid makes sl-place="center"
+// the true bar center; "end" pins the far edge regardless of source order
 export const BarZones: Demo = {
   render: () =>
     `<div sl-bar="top" style="position: static">` +
-    `${cell("Logo")}${cell("中間").replace('class="demo-cell"', 'class="demo-cell" sl-center')}${cell("右邊").replace('class="demo-cell"', 'class="demo-cell" sl-end')}` +
+    `${cell("Logo")}${cell("中間").replace('class="demo-cell"', 'class="demo-cell" sl-place="center"')}${cell("右邊").replace('class="demo-cell"', 'class="demo-cell" sl-place="end"')}` +
     `</div>`,
 };
 

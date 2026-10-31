@@ -40,13 +40,13 @@ fixed 的 bar 脫離文流，body 會在對應邊自動補上 bar 高度的內�
 
 ## 三區排列
 
-內部是 `1fr auto 1fr` 的網格：子層依序佔左、中、右三區，置中是整條 bar 的中點，不是剩餘空間的中點。標示 `sl-center` 固定在中間、`sl-end` 固定在尾端。兩個子層時第二個預設落在中間，推到右邊標示 `sl-end`：
+內部是 `1fr auto 1fr` 的網格：子層依序佔左、中、右三區，置中是整條 bar 的中點，不是剩餘空間的中點。標示 `sl-place="center"` 固定在中間、`sl-place="end"` 固定在尾端。兩個子層時第二個預設落在中間，推到右邊標示 `sl-place="end"`：
 
 ```html
 <div sl-bar="top">
   <div>Logo</div>
-  <div sl-center>中間</div>
-  <div sl-end>右邊</div>
+  <div sl-place="center">中間</div>
+  <div sl-place="end">右邊</div>
 </div>
 ```
 

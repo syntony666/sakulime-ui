@@ -179,14 +179,15 @@
     padding-block-end: var(--sl-bar-h, 3.5rem);
   }
 
-  /* zone children — sl-center pins the true center column, sl-end pins
-     the far edge; unmarked children fill zones in source order */
-  [sl-bar] > [sl-center] {
+  /* zone children — sl-place="center" pins the true center column,
+     "end" pins the far edge; unmarked children fill zones in source
+     order */
+  [sl-bar] > [sl-place~="center"] {
     grid-column: 2;
     justify-self: center;
   }
 
-  [sl-bar] > [sl-end] {
+  [sl-bar] > [sl-place~="end"] {
     grid-column: 3;
     justify-self: end;
   }
@@ -211,14 +212,14 @@
     min-width: var(--sl-sidebar-min, 55%);
   }
 
-  /* rail placement — unmarked rails keep source order; sl-start pins a
-     rail first, sl-end pins it last, regardless of where it sits in the
-     markup. Same marks as the topbar/footer zones */
-  [sl-with-sidebar] > [sl-start] {
+  /* rail placement — unmarked rails keep source order; sl-place="start"
+     pins a rail first, "end" pins it last, regardless of where it sits
+     in the markup */
+  [sl-with-sidebar] > [sl-place~="start"] {
     order: -1;
   }
 
-  [sl-with-sidebar] > [sl-end] {
+  [sl-with-sidebar] > [sl-place~="end"] {
     order: 1;
   }
 
@@ -441,45 +442,48 @@
     [sl-show-sm] { display: none; }
   }
 
-  /* placement marks — auto margins absorb free space, so the same marks
-     work on block boxes, flex items, and grid items without a scoped
-     rule per parent. In a stretch context (sl-stack children) they also
-     shrink the item back to its content width. Structural marks like the
-     topbar/footer zones keep their scoped rules on top of these */
-  [sl-start] {
+  /* placement marks — sl-place takes one value per axis: start/center/
+     end move the inline edge, top/middle/bottom the block edge, and two
+     words compose (sl-place="middle end" pins right-centre). Auto
+     margins absorb free space, so the same marks work on block boxes,
+     flex items, and grid items without a scoped rule per parent. In a
+     stretch context (sl-stack children) they also shrink the item back
+     to its content width. Structural marks like the bar zones keep
+     their scoped rules on top of these */
+  [sl-place~="start"] {
     margin-inline-end: auto;
   }
 
-  [sl-center] {
+  [sl-place~="center"] {
     margin-inline: auto;
   }
 
-  [sl-end] {
+  [sl-place~="end"] {
     margin-inline-start: auto;
   }
 
-  /* same marks on the block axis — they pin vertically wherever a flex
-     line or grid cell hands out free space; in plain block flow auto
-     margins resolve to zero and stay inert */
-  [sl-top] {
+  /* block-axis values — they pin vertically wherever a flex line or
+     grid cell hands out free space; in plain block flow auto margins
+     resolve to zero and stay inert */
+  [sl-place~="top"] {
     margin-block-end: auto;
   }
 
-  [sl-middle] {
+  [sl-place~="middle"] {
     margin-block: auto;
   }
 
-  [sl-bottom] {
+  [sl-place~="bottom"] {
     margin-block-start: auto;
   }
 
   /* the sidebar marks pin order, not margins — the generic margin would
      only open dead space between the rail and the content column */
-  [sl-with-sidebar] > [sl-start] {
+  [sl-with-sidebar] > [sl-place~="start"] {
     margin-inline-end: 0;
   }
 
-  [sl-with-sidebar] > [sl-end] {
+  [sl-with-sidebar] > [sl-place~="end"] {
     margin-inline-start: 0;
   }
 }
