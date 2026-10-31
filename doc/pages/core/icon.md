@@ -90,10 +90,10 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 零 JS 頁面用 `<link>` 載入 CSS 即可。
 
 ::: info JS 需求
-「貼 SVG」不需要任何 JS；「套用圖示包」跟 `icon()` 都要 JS 在場。
+「貼 SVG」不需要任何 JS；「套用圖示包」跟 `icon()` 都需要 JS。
 :::
 
-::: details 輔助 API（JS 在場才用得到）
+::: details 輔助 API（需要 JS）
 
 - `packNames()`：列出已註冊的圖示包
 - `iconNames(prefix)`：列出指定包的圖示名
@@ -122,7 +122,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ## 修飾詞
 
-修飾詞是 `sl-icon-` 名稱空間的獨立屬性，寫在名稱旁邊。手貼的 SVG 一樣能用，例如 `<svg sl-icon sl-icon-spin>`。
+修飾詞是 `sl-icon-` 名稱空間的獨立屬性，寫在名稱旁邊。直接貼進頁面的 SVG 也適用，例如 `<svg sl-icon sl-icon-spin>`。
 
 ### 尺寸 `sl-icon-size`
 
@@ -172,10 +172,10 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ## 組合
 
-圖示繼承所在元件的墨色，放進按鈕裡；疊上 `sl-card-corner` 就釘到卡片角落，`sl-tone` 寫在 icon 自己身上染色。
+圖示繼承所在元件的墨色，放進按鈕裡；疊上 `sl-card-corner` 就固定到卡片角落，`sl-tone` 寫在 icon 自己身上染色。
 
 <Demo :render="IconDemos.InContext.render" />
 
-組合起來看。角落的圖示自己帶 `sl-tone`；標題裡的圖示繼承文字墨色。
+組合之後：角落的圖示自己帶 `sl-tone`；標題裡的圖示繼承文字墨色。
 
 <Demo :render="IconDemos.InCard.render" />

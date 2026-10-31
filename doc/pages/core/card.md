@@ -93,7 +93,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 ### 角落標記 `sl-card-corner`
 
-把元素釘在卡片頂端角落，適合時間、狀態、數字這類補充資訊。`sl-card-corner` 決定位置，長相由同一個元素上的小元件屬性決定：
+把元素固定在卡片頂端角落，適合時間、狀態、數字這類補充資訊。`sl-card-corner` 決定位置，長相由同一個元素上的小元件屬性決定：
 
 ```html
 <div sl-card>

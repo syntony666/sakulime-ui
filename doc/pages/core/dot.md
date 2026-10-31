@@ -39,7 +39,7 @@ import * as DotDemos from "../../demos/components/dot.demo";
 
 <Demo :render="DotDemos.StatusList.render" />
 
-疊上 `sl-card-corner` 就釘到卡片角落（不寫值是 `end` 右上，`start` 左上），同一個元素，不用再包一層：
+疊上 `sl-card-corner` 就固定到卡片角落（不寫值是 `end` 右上，`start` 左上），同一個元素，不用再包一層：
 
 ```html
 <i sl-card-corner sl-dot sl-tone="danger"></i>

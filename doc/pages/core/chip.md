@@ -47,7 +47,7 @@ meta 列實際長這樣：
 
 <Demo :render="ChipDemos.MetaRow.render" />
 
-疊上 `sl-card-corner` 就釘到卡片角落，當數值或版本標籤剛好：
+疊上 `sl-card-corner` 就固定到卡片角落，當數值或版本標籤剛好：
 
 ```html
 <span sl-card-corner sl-chip sl-tone="primary">200ms</span>
