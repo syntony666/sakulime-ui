@@ -45,4 +45,4 @@ import * as SidebarDemos from "../../demos/layout/sidebar.demo";
 
 ### 間距
 
-`sl-with-sidebar` 的值就是間距，預設 `lg`（16px），`xs`–`5xl` 全階。只想改一個容器就寫 `--sl-sidebar-gap`；`sl-gap` 寫在容器自己或外層都行，裡面沒寫值的 `sl-stack`、`sl-row`、`sl-grid` 都會吃到。
+`sl-with-sidebar` 的值就是間距，預設 `lg`（16px），`xs`–`5xl` 全階。只想改一個容器就寫 `--sl-sidebar-gap`；[`sl-gap`](/layout/gap) 寫在容器自己或外層都行，裡面沒寫值的 `sl-stack`、`sl-row`、`sl-grid` 都會吃到。

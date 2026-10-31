@@ -49,5 +49,5 @@ import * as TopbarDemos from "../../demos/layout/topbar.demo";
 ### 尺寸與外觀
 
 - 高度吃 `--sl-topbar-h`，預設 3.5rem（56px）。要改高度寫在 `:root`，fixed 時 body 的自動補償才跟得到
-- 內部間距預設 `md`（12px）。只想改一條就寫 `--sl-topbar-gap`；`sl-gap` 寫在頂列自己或外層都行。
+- 內部間距預設 `md`（12px）。只想改一條就寫 `--sl-topbar-gap`；[`sl-gap`](/layout/gap) 寫在頂列自己或外層都行。
 - 底色 `--sl-bg`、底部 hairline、左右內距 `--sl-lg`（16px）、z-index 50

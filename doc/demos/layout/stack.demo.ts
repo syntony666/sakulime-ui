@@ -19,9 +19,3 @@ export const Gaps: Demo = {
     ),
 };
 
-// generic sl-gap works on any gap-reading element — here it feeds the
-// bare sl-stack, since sl-stack itself carries no value to win over it
-export const GenericGap: Demo = {
-  render: () =>
-    `<div sl-stack sl-gap="3xl">${cells()}</div>`,
-};

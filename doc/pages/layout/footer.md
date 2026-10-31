@@ -37,4 +37,4 @@ import * as FooterDemos from "../../demos/layout/footer.demo";
 
 - 頂端 hairline
 - 上下內距 `2xl`（32px），左右內距 `--sl-lg`（16px）
-- 間距預設 `md`（12px）。只想改一個就寫 `--sl-footer-gap`；`sl-gap` 寫在頁尾自己或外層都行。
+- 間距預設 `md`（12px）。只想改一個就寫 `--sl-footer-gap`；[`sl-gap`](/layout/gap) 寫在頁尾自己或外層都行。

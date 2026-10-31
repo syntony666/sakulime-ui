@@ -45,9 +45,7 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 | `4xl` | 40px         |
 | `5xl` | 48px         |
 
-表列 px 以根字級 16px 換算，尺規本身吃 rem。只想改一個容器就寫 `--sl-stack-gap`（例如 `style="--sl-stack-gap: 6px"`）；想一整區一起改，`sl-gap` 寫在容器自己或外層都行，裡面沒寫值的 `sl-stack`、`sl-row`、`sl-grid` 都會吃到：
-
-<Demo :render="StackDemos.GenericGap.render" />
+表列 px 以根字級 16px 換算，尺規本身吃 rem。只想改一個容器就寫 `--sl-stack-gap`（例如 `style="--sl-stack-gap: 6px"`）；想一整區一起改就用 [`sl-gap`](/layout/gap)。
 
 ### 行為
 

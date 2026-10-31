@@ -565,7 +565,6 @@ body::before {
 }
 .VPDocFooter .pager-link:hover {
   background-color: var(--vp-c-brand-soft);
-  transform: scale(1.05);
 }
 
 /* sidebar + pager sub-label — opacity dims the subtitle inside the
