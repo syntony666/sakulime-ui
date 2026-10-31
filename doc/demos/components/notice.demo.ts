@@ -10,6 +10,8 @@ type NoticeArgs = {
   radius: string;
   align: string;
   action: string;
+  usage: string;
+  icon: string;
 };
 
 const TONES = ["-", "primary", "secondary", "success", "warning", "danger"];
