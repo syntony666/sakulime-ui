@@ -58,5 +58,9 @@
   [sl-notice-action] {
     order: 10;
     margin-inline-start: auto;
+    /* edge compensation — compact controls carry ~--sl-sm of inner
+       padding; pull the box out so the glyph lands at the same inset
+       as the leading icon instead of receding behind it */
+    margin-inline-end: calc(-1 * var(--sl-sm));
   }
 }
