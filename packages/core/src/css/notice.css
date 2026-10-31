@@ -43,9 +43,20 @@
     max-width: 100%;
   }
 
-  /* action — trailing slot for dismiss/cta; auto margin pushes it
-     to the far edge regardless of copy length */
+  /* action — trailing slot for dismiss/cta; the spacer riding before
+     it guarantees air around the control even when the capsule
+     shrink-wraps (fit), while auto margins push the pair to the far
+     edge. without :has the action's own auto margin still pushes it */
+  [sl-notice]:has(> [sl-notice-action])::before {
+    content: "";
+    order: 9;
+    flex: none;
+    width: var(--sl-md);
+    margin-inline-start: auto;
+  }
+
   [sl-notice-action] {
+    order: 10;
     margin-inline-start: auto;
   }
 }
