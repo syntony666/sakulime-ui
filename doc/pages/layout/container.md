@@ -17,7 +17,7 @@ import * as ContainerDemos from "../../demos/layout/container.demo";
 ## 用法
 
 ```html
-<div sl-container-md>
+<div sl-container="md">
   ...
 </div>
 ```
@@ -29,16 +29,16 @@ import * as ContainerDemos from "../../demos/layout/container.demo";
 <Demo
   :render="ContainerDemos.ContainerWidths.render"
   :pad="false"
-  measure="[sl-container-sm], [sl-container-md], [sl-container-lg]"
+  measure="[sl-container]"
 />
 
 巢狀沒有額外效果，塞進窄父層的話裡層只跟父層一樣寬。
 
 ## 尺寸
 
-- `sl-container-sm`：45rem（720px）
-- `sl-container-md`：60rem（960px）
-- `sl-container-lg`：75rem（1200px）
+- `sl-container="sm"`：45rem（720px）
+- `sl-container="md"`：60rem（960px），不給值的預設
+- `sl-container="lg"`：75rem（1200px）
 
 寬度是 rem，px 是以根字級 16px 換算的參考。
 
