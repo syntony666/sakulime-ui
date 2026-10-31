@@ -7,7 +7,7 @@
 @custom-selector :--sl-generic-size [sl-button], [sl-chip];
 @custom-selector :--sl-generic-radius [sl-button], [sl-card], [sl-notice];
 @custom-selector :--sl-generic-pad [sl-card], [sl-notice];
-@custom-selector :--sl-generic-interactive [sl-card];
+@custom-selector :--sl-generic-interactive [sl-card], [sl-button];
 
 @layer attrs {
   /* tone — --sl-tone-{bg,text,text-invert}; text is the tone's readable ink */

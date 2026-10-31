@@ -14,7 +14,10 @@ export const Interactive: Demo = {
     axis(["grow", "lift", "raise", "press"], (v) =>
       frame(
         `sl-interactive="${v}"`,
-        `<div sl-card sl-interactive="${v}" sl-pad style="width: 9rem; text-align: center">滑鼠移過來</div>`
+        `<div sl-row>` +
+          `<div sl-card sl-interactive="${v}" sl-pad style="width: 7rem; text-align: center">滑鼠移過來</div>` +
+          `<button sl-button sl-interactive="${v}">按鈕</button>` +
+        `</div>`
       )
     ),
 };

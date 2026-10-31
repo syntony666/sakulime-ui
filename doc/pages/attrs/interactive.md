@@ -15,9 +15,10 @@ import * as InteractiveDemos from "../../demos/attrs/interactive.demo";
 
 ```html
 <div sl-card sl-interactive="lift">卡片</div>
+<button sl-button sl-interactive="press">按鈕</button>
 ```
 
-滑鼠移到卡片上才看得到差異：
+滑鼠移上去才看得到差異：
 
 <Demo :render="InteractiveDemos.Interactive.render" />
 
@@ -27,4 +28,4 @@ import * as InteractiveDemos from "../../demos/attrs/interactive.demo";
 
 ## 適用元素
 
-`sl-card`。
+`sl-card`、`sl-button`。`sl-button` 沒標示時 hover 本來就是 `grow` 放大，標了 `sl-interactive` 換成指定的效果。

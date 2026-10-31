@@ -11,6 +11,8 @@
     --sl-size-h: var(--sl-3xl);
     --sl-size-px: var(--sl-md);
     --sl-radius: var(--sl-sm);
+    --sl-i-transform: none;
+    --sl-i-shadow: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -22,6 +24,7 @@
     font-size: var(--sl-size-fs);
     transition:
       transform 0.2s ease,
+      box-shadow 0.2s ease,
       background-color 160ms ease,
       border-color 160ms ease,
       color 160ms ease;
@@ -71,5 +74,12 @@
     text-decoration-thickness: 2px;
     text-decoration-color: var(--sl-tone-bg);
     text-underline-offset: 0.3em;
+  }
+
+  /* sl-interactive picks the hover effect — attrs layer wins over the
+     base grow; the slots self-default so unset reads none */
+  [sl-button][sl-interactive]:hover:not(:disabled) {
+    transform: var(--sl-i-transform);
+    box-shadow: var(--sl-i-shadow);
   }
 }
