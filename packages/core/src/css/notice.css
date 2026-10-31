@@ -22,9 +22,11 @@
       max(1lh, var(--sl-2xl)) + var(--sl-pad) * 0.75 + 3px
     );
     --sl-radius: var(--sl-radius-full);
-    display: flex;
-    align-items: center;
-    gap: 0.6em;
+    /* one inline flow — icon, copy, and links all live in the same
+       running text block, so a bare <i> or <a> is just inline content
+       and can never become its own column. actions pin to an edge
+       with floats; flow-root contains them */
+    display: flow-root;
     line-height: 1.4;
     /* strip proportions — vertical sits at 3/4 of the pad slot,
        horizontal at 3/2 so the capsule ends breathe */
@@ -60,58 +62,30 @@
     max-width: 100%;
   }
 
-  /* action — edge control slot, end (default) or ="start". the spacer
-     pseudo rides on the control's inner side, guaranteeing air even
-     when the capsule shrink-wraps (fit); its auto margin plus the
-     action's own still push everything to the edge without :has.
-     edge compensation: compact controls carry ~--sl-sm of inner
-     padding, and the wider capsule pad adds another half slot —
-     pulling both out keeps the glyph at a plain 1×pad inset instead
-     of receding with the roomier content padding */
+  /* action — a float pinned to the trailing edge. the inner margin is
+     the wrap gap: line boxes shorten against it, so copy keeps its
+     distance even under fit. edge compensation: compact controls
+     carry ~--sl-sm of inner padding, and the wider capsule pad adds
+     another half slot — pulling both out keeps the glyph at a plain
+     1×pad inset instead of receding with the roomier content padding */
   [sl-notice-action] {
-    order: 10;
-    margin-inline-start: auto;
+    float: inline-end;
+    margin-inline-start: calc(var(--sl-md) + 0.6em);
     margin-inline-end: calc(-1 * var(--sl-sm) - var(--sl-pad) * 0.5);
   }
 
-  /* "start" pins it to the leading edge instead — and the same
-     compensation on the text side pulls the control's own padding in,
-     so the copy sits a plain gap away like a leading icon */
+  /* "start" floats it to the leading edge — the inner margin absorbs
+     the control's own padding so the copy sits a plain 0.6em gap away,
+     like a leading icon */
   [sl-notice-action="start"] {
-    order: -10;
+    float: inline-start;
     margin-inline-start: calc(-1 * var(--sl-sm) - var(--sl-pad) * 0.5);
-    margin-inline-end: calc(-1 * var(--sl-sm));
+    margin-inline-end: calc(0.6em - var(--sl-sm));
   }
 
-  [sl-notice]:has(> [sl-notice-action]:not([sl-notice-action="start"]))::after {
-    content: "";
-    order: 9;
-    flex: none;
-    width: var(--sl-md);
-    margin-inline-start: auto;
-  }
-
-  /* content align — "end" parks the copy at the trailing edge: a
-     ::before pusher eats the free space on its start side (it orders
-     right behind a start action, so leading controls stay put), and
-     the end side's auto margins drop so the copy really hugs the edge */
-  /* and the copy itself right-aligns once it wraps to multiple lines */
+  /* content align — "end" right-aligns every line; beside an end
+     float the shortened line boxes make the copy hug the action */
   [sl-notice-align="end"] {
     text-align: end;
-  }
-
-  [sl-notice-align="end"]::before {
-    content: "";
-    order: -9;
-    flex: none;
-    margin-inline-start: auto;
-  }
-
-  [sl-notice-align="end"] [sl-notice-action]:not([sl-notice-action="start"]) {
-    margin-inline-start: 0;
-  }
-
-  [sl-notice-align="end"]:has(> [sl-notice-action]:not([sl-notice-action="start"]))::after {
-    margin-inline-start: 0;
   }
 }
