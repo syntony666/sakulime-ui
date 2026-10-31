@@ -57,8 +57,10 @@
       oklch(from var(--sl-secondary) 24.5% calc(c * 0.8) h));
 
     /* status — universal hues at scheme-fixed depth; warn pairs with
-       the strong ink so it stays deep in dark themes */
-    --sl-ok: light-dark(oklch(51% 0.10 158), oklch(68% 0.12 162));
+       the strong ink so it stays deep in dark themes. light-side ok
+       sits at 45% — the shallowest depth that keeps tone-text on a
+       20% tone wash at WCAG AA (4.7:1 measured) */
+    --sl-ok: light-dark(oklch(45% 0.10 158), oklch(68% 0.12 162));
     --sl-warn: light-dark(oklch(80% 0.14 82), oklch(54.5% 0.11 86));
     --sl-danger: light-dark(oklch(51% 0.18 22), oklch(67% 0.16 20));
   }
