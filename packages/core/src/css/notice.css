@@ -1,8 +1,9 @@
 /* notice — a notification surface: capsule wash + floating frame.
    In normal flow it reads as a full-width banner; inside the
    consumer's own fixed wrapper it reads as a toast. icon, copy, and
-   actions line up inline; sl-notice-action pushes to the trailing
-   edge. Placement, dismiss, and timeout stay with the consumer */
+   links run in one inline flow; a direct-child sl-notice-action pins
+   centered to its edge with the lane reserved in the padding.
+   Placement, dismiss, and timeout stay with the consumer */
 @layer base {
   [sl-notice] {
     /* self-defaults seal ancestor slots — bare reads as an info
@@ -31,6 +32,11 @@
        to the canonical compact control (~--sl-sm of padding around a
        --sl-2xl box); wider controls widen it */
     --sl-action-w: calc(var(--sl-2xl) + var(--sl-sm) * 2);
+    /* glyph distance from the capsule edge — the control's own ~sm
+       padding absorbs the rest of --sl-pad */
+    --sl-action-inset: calc(var(--sl-pad) - var(--sl-sm));
+    /* breathing room the copy keeps from the action lane */
+    --sl-notice-gap: 0.6em;
     line-height: 1.4;
     /* strip proportions — vertical sits at 3/4 of the pad slot,
        horizontal at 3/2 so the capsule ends breathe */
@@ -69,31 +75,38 @@
   /* action — absolutely pinned to its edge and vertically centered;
      :has() reserves its lane in the padding so copy never runs under
      it. the lane = glyph inset + slot + wrap gap, so the glyph keeps
-     a plain 1×pad inset and copy keeps its distance even under fit */
-  [sl-notice]:has(> [sl-notice-action]) {
+     a plain 1×pad inset and copy keeps its distance even under fit.
+     each edge reserves only the lane it actually has — the end rule
+     must not fire on a start-only notice */
+  [sl-notice]:has(> [sl-notice-action]:not([sl-notice-action="start"])) {
     padding-inline-end: calc(
-      var(--sl-pad) - var(--sl-sm) + var(--sl-action-w) + var(--sl-md) + 0.6em
+      var(--sl-action-inset) + var(--sl-action-w) + var(--sl-md) +
+        var(--sl-notice-gap)
     );
   }
 
+  /* the start lane runs tighter — the control's own trailing padding
+     makes up the rest of the leading-icon distance */
   [sl-notice]:has(> [sl-notice-action="start"]) {
     padding-inline-start: calc(
-      var(--sl-pad) - var(--sl-sm) + var(--sl-action-w) + 0.6em - var(--sl-sm)
+      var(--sl-action-inset) + var(--sl-action-w) + var(--sl-notice-gap) -
+        var(--sl-sm)
     );
   }
 
-  [sl-notice-action] {
+  /* direct-child only — the same contract :has() uses for the lane,
+     so a nested attr can never pin without a lane reserved for it */
+  [sl-notice] > [sl-notice-action] {
     position: absolute;
-    inset-inline-end: calc(var(--sl-pad) - var(--sl-sm));
+    inset-inline-end: var(--sl-action-inset);
     top: 50%;
     translate: 0 -50%;
   }
 
-  /* "start" pins it to the leading edge — the smaller inner gap makes
-     the copy sit a leading-icon distance away */
-  [sl-notice-action="start"] {
+  /* "start" pins it to the leading edge */
+  [sl-notice] > [sl-notice-action="start"] {
     inset-inline-end: auto;
-    inset-inline-start: calc(var(--sl-pad) - var(--sl-sm));
+    inset-inline-start: var(--sl-action-inset);
   }
 
   /* content align — "end" right-aligns every line; copy stops at the
