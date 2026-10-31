@@ -51,6 +51,10 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 <Demo :render="NoticeDemos.Radius.render" />
 
+折行三行看得最清楚——圓弧只爬一行高，中段變直線（順便展示行內 icon 跟 `align="end"`）：
+
+<Demo :render="NoticeDemos.Multiline.render" />
+
 ### 厚度 `sl-pad`
 
 預設薄條。`sm`／`md`／`lg` 調整上下厚度，`lg` 拿來放公告型的多行內容：
@@ -106,13 +110,7 @@ action 裡的 icon 跟著按鈕字級走（`sl-size="sm"` 約 12px），要大�
 
 <Playground :meta="NoticeDemos.BannerMeta" :render="NoticeDemos.BannerPlay.render" />
 
-內容長了就直接折行，膠囊跟著長高——預設 `full` 圓角封頂一行高，三行起兩端之間的中段變直線。
-
-icon 放哪決定它的角色：寫在文字元素（`<span>`）裡是行內圖示，折行滿寬流下去；直接放在 notice 下是獨立一欄，文字不會繞到它底下。
-
-`sl-notice-align="end"` 的話每一行都靠右：
-
-<Demo :render="NoticeDemos.Multiline.render" />
+內容長了就直接折行，膠囊跟著長高。icon 放哪決定它的角色：寫在文字元素（`<span>`）裡是行內圖示，折行滿寬流下去；直接放在 notice 下是獨立一欄，文字不會繞到它底下。`sl-notice-align="end"` 的話每一行都靠右。
 
 ### Toast *浮動通知*
 
