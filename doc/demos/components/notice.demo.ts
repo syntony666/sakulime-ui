@@ -147,9 +147,9 @@ export const WithAction: Demo = {
     `</div>`,
 };
 
-// long copy wraps inside the capsule — the icon pins to the first
-// text line instead of floating mid-block, and sl-notice-align="end"
-// right-aligns every line, not just the block
+// long copy wraps inside the capsule — items just center against
+// the block as one row, and sl-notice-align="end" right-aligns
+// every line, not just the block
 const LONG =
   "系統將於 11/2 02:00–03:00 進行例行維護，期間 API 回應可能延遲，寫入操作會排入佇列，並於維護結束後自動重放，若有長時間執行中的工作請提前儲存。";
 

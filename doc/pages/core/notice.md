@@ -102,7 +102,7 @@ action 裡的 icon 跟著按鈕字級走（`sl-size="sm"` 約 12px），要大�
 
 <Demo :render="NoticeDemos.NoIcon.render" />
 
-內容長了就直接折行——膠囊跟著長高、圓端照樣圓，icon 釘在第一行而不是浮在整塊中間，`sl-notice-align="end"` 的話每一行都靠右：
+內容長了就直接折行——膠囊跟著長高、圓端照樣圓，`sl-notice-align="end"` 的話每一行都靠右：
 
 <Demo :render="NoticeDemos.Multiline.render" />
 
