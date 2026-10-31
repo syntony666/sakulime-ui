@@ -147,20 +147,20 @@ export const WithAction: Demo = {
     `</div>`,
 };
 
-// long copy wraps inside the capsule — items just center against
-// the block as one row, and sl-notice-align="end" right-aligns
-// every line, not just the block
+// long copy wraps inside the capsule — writing the icon inside a
+// text element keeps it inline in the paragraph (wraps flow full
+// width under it); a direct-child icon stays its own column item
 const LONG =
   "系統將於 11/2 02:00–03:00 進行例行維護，期間 API 回應可能延遲，寫入操作會排入佇列，並於維護結束後自動重放，若有長時間執行中的工作請提前儲存。";
 
 export const Multiline: Demo = {
   render: () =>
     `<div class="demo-stack">` +
-    `<div sl-notice sl-tone="primary"><i sl-icon="lucide:info"></i> ${LONG}</div>` +
-    `<div sl-notice sl-tone="warning"><i sl-icon="lucide:triangle-alert"></i> ${LONG}` +
+    `<div sl-notice sl-tone="primary"><span><i sl-icon="lucide:info"></i> ${LONG}</span></div>` +
+    `<div sl-notice sl-tone="warning"><span><i sl-icon="lucide:triangle-alert"></i> ${LONG}</span>` +
     `<button sl-button="ghost" sl-size="sm" sl-notice-action aria-label="關閉"><i sl-icon="lucide:x" sl-icon-size="lg"></i></button>` +
     `</div>` +
-    `<div sl-notice sl-notice-align="end" sl-tone="secondary"><i sl-icon="lucide:info"></i> ${LONG}</div>` +
+    `<div sl-notice sl-notice-align="end" sl-tone="secondary"><span><i sl-icon="lucide:info"></i> ${LONG}</span></div>` +
     `</div>`,
 };
 
