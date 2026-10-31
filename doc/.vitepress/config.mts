@@ -173,7 +173,7 @@ export default defineConfig({
         items: [
           { text: "說明", link: "/layout/" },
           {
-            text: "格局",
+            text: "格局設計",
             items: [
               { text: `Container ${zh("頁面容器")}`, link: "/layout/container" },
               { text: `Stack ${zh("堆疊")}`, link: "/layout/stack" },
