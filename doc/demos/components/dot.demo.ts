@@ -1,30 +1,17 @@
 import type { Meta, DemoObj } from "../util/types";
-import { showMarkup } from "../util/docs-source";
-import { axis, axisArg, attr } from "../util/axis";
+import { axis, axisArg, attr, TONES } from "../util/axis";
 
 type DotArgs = {
   tone: string;
 };
 
-const TONES = ["-", "primary", "secondary", "success", "warning", "danger"];
 
 const meta = {
-  title: "Core/Dot 狀態點",
-  tags: ["!dev"],
-  parameters: {
-    docs: {
-      toc: { disable: false },
-      source: {
-        type: "dynamic",
-        transform: showMarkup,
-      },
-    },
-  },
   args: {
     tone: "-",
   },
   argTypes: {
-    tone: axisArg("sl-tone", "顏色", "-", TONES),
+    tone: axisArg("sl-tone", "顏色", TONES),
   },
 } satisfies Meta<DotArgs>;
 

@@ -51,13 +51,13 @@ const hasDashOption = computed(() =>
     <Demo :render="render" :args="args" />
     <div class="sl-play-fields">
       <label v-for="f in fields" :key="f.key" class="sl-play-field">
-        <span class="sl-play-name">{{ f.name }}</span>
+        <code class="sl-play-name" translate="no">{{ f.name }}</code>
         <select v-if="f.kind === 'select'" v-model="args[f.key]">
           <option v-for="o in f.options" :key="o" :value="o">{{ o }}</option>
         </select>
         <input v-else-if="f.kind === 'boolean'" v-model="args[f.key]" type="checkbox" />
-        <input v-else v-model="args[f.key]" type="text" />
-        <span class="sl-play-desc" v-html="descHtml(f.desc)" />
+        <input v-else v-model="args[f.key]" type="text" spellcheck="false" />
+        <span v-if="f.desc" class="sl-play-desc" v-html="descHtml(f.desc)" />
       </label>
       <p v-if="hasDashOption" class="sl-play-note">
         <code>-</code> 表示不寫這個屬性，用預設值

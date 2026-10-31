@@ -110,14 +110,14 @@ export const showMarkup = (code: string): string =>
 // a tiny tokenizer instead of a full highlighter: sl-* attribute names
 // get the accent color, quoted values get a pill, tag scaffold stays
 // plain. Escaping happens per-token, so the output is safe for v-html.
+// input is already-normalized markup (showMarkup's output)
 const escHtml = (s: string): string =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 const hlSpan = (cls: string, s: string): string =>
   `<span class="${cls}">${escHtml(s)}</span>`;
 
-export const highlightMarkup = (code: string): string => {
-  const src = showMarkup(code);
+export const highlightMarkup = (src: string): string => {
   let out = "";
   let inTag = false;
   let i = 0;

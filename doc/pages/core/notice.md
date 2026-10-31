@@ -74,11 +74,12 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 邊緣控制項——dismiss 鈕、動作連結，關閉行為自己接：
 
+- 寫在 `sl-notice` 的直接子層；巢在內容裡的只是靜態內容，不會釘邊緣
 - 不寫值：靠右（尾端）；`start`：靠左（開頭）——兩個可以共存
 - 垂直置中，文字不會流過它底下；放更寬的控制就把 `--sl-action-w` 加大
 - `<i>` 跟著按鈕字級走，要大一點掛 `sl-icon-size`
 
-<Playground :meta="NoticeDemos.ActionMeta" :render="NoticeDemos.ActionPlay.render" />
+<Playground :meta="NoticeDemos.ActionPlay" :render="NoticeDemos.ActionPlay.render" />
 
 ## 用法
 
@@ -86,12 +87,12 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 滿寬一條——icon、訊息、連結照順序排，連結會跟著通知墨色走：
 
-<Playground :meta="NoticeDemos.BannerMeta" :render="NoticeDemos.BannerPlay.render" />
+<Playground :meta="NoticeDemos.BannerPlay" :render="NoticeDemos.BannerPlay.render" />
 
 內容切「多行」看折行——膠囊跟著長高、`full` 圓角封頂後中段變直，`end` 對齊下每一行都靠右。icon 直接寫進內容就是行內圖示，折行滿寬流下去，不用特別包裝。
 
 ### Toast *浮動通知*
 
-放哪個角落、怎麼疊、何時消失都是你的 CSS 跟狀態機——本包只管膠囊的長相：
+放哪個角落、怎麼疊、何時消失都是你的 CSS 跟狀態機——本包只管膠囊的長相。要讓讀屏器播報新通知，容器自己掛 `role="status"`（或 `aria-live="polite"`）：
 
-<Playground :meta="NoticeDemos.ToastMeta" :render="NoticeDemos.ToastPlay.render" />
+<Playground :meta="NoticeDemos.ToastPlay" :render="NoticeDemos.ToastPlay.render" />

@@ -20,8 +20,8 @@ const props = withDefaults(
 // args may be unbound for static demos — render({}) must not crash and
 // take the whole page down with it
 const html = computed(() => props.render(props.args ?? {}));
-const source = computed(() => highlightMarkup(html.value));
 const plain = computed(() => showMarkup(html.value));
+const source = computed(() => highlightMarkup(plain.value));
 
 // axis dumps run 25-40 lines for a one-token delta — collapse those;
 // short snippets (playground output) stay open as living evidence
@@ -31,21 +31,42 @@ const collapsible = computed(() => lineCount.value > COLLAPSE_LINES);
 
 const copied = ref(false);
 const copy = async () => {
-  await navigator.clipboard.writeText(plain.value);
+  try {
+    await navigator.clipboard.writeText(plain.value);
+  } catch {
+    return;
+  }
   copied.value = true;
   setTimeout(() => (copied.value = false), 1500);
 };
 
 const host = ref<HTMLElement | null>(null);
 
+// one parsed sheet shared by every demo stage — a per-shadow <style>
+// node would re-parse the same css for each of ~40 demos on a page
+let sharedSheet: CSSStyleSheet | undefined;
+const stageSheet = () => {
+  sharedSheet ??= (() => {
+    const s = new CSSStyleSheet();
+    s.replaceSync(demoCss);
+    return s;
+  })();
+  return sharedSheet;
+};
+
 // render inside a shadow root — the page's unlayered resets would
 // otherwise beat the whole sl layer system (theme < base < attrs)
 onMounted(() => {
   const root = host.value!.attachShadow({ mode: "open" });
-  const style = document.createElement("style");
-  style.textContent = demoCss;
+  try {
+    root.adoptedStyleSheets = [stageSheet()];
+  } catch {
+    const style = document.createElement("style");
+    style.textContent = demoCss;
+    root.appendChild(style);
+  }
   const stage = document.createElement("div");
-  root.append(style, stage);
+  root.appendChild(stage);
   const measure = () => {
     if (!props.measure) return;
     stage.querySelectorAll<HTMLElement>(props.measure).forEach((el) => {
@@ -65,9 +86,11 @@ onMounted(() => {
     },
     { immediate: true },
   );
-  const observer = new ResizeObserver(measure);
-  observer.observe(stage);
-  onUnmounted(() => observer.disconnect());
+  if (props.measure) {
+    const observer = new ResizeObserver(measure);
+    observer.observe(stage);
+    onUnmounted(() => observer.disconnect());
+  }
 });
 </script>
 

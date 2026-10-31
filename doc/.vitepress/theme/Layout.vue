@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import DefaultTheme from "vitepress/theme";
-import { useRoute } from "vitepress";
 import {
   computed,
   nextTick,
@@ -13,7 +12,6 @@ import pkg from "../../../package.json";
 
 const { Layout } = DefaultTheme;
 const { version } = pkg;
-const route = useRoute();
 const theme = ref("sakulime");
 const open = ref(false);
 const switchEl = ref<HTMLElement>();
@@ -51,7 +49,7 @@ const active = computed(() => themes.find((t) => t.value === theme.value));
 
 const choose = (value: string) => {
   theme.value = value;
-  open.value = false;
+  close(true);
 };
 
 const close = (refocus = false) => {
@@ -124,13 +122,9 @@ const patchOutlineGloss = () => {
 onMounted(() => {
   patchOutlineGloss();
   // outline links land after mount and the whole nav re-renders on
-  // every client nav — observe the tree instead of hooking the route
+  // every client nav — the observer covers both, no route hook needed
   const glossObserver = new MutationObserver(patchOutlineGloss);
   glossObserver.observe(document.body, { childList: true, subtree: true });
-  watch(
-    () => route.path,
-    () => nextTick(patchOutlineGloss),
-  );
   const saved = localStorage.getItem("sl-theme");
   if (saved && themes.some((t) => t.value === saved)) theme.value = saved;
   watch(
@@ -203,16 +197,13 @@ onUnmounted(() => document.removeEventListener("click", onClickOutside));
           role="listbox"
           @keydown="onMenuKeydown"
         >
-          <li
-            v-for="(t, i) in themes"
-            :key="t.value"
-            role="option"
-            :aria-selected="theme === t.value"
-          >
+          <li v-for="(t, i) in themes" :key="t.value" role="presentation">
             <button
               :ref="(el) => (optionEls[i] = el as HTMLElement)"
               class="sl-theme-option"
               type="button"
+              role="option"
+              :aria-selected="theme === t.value"
               tabindex="-1"
               @click="choose(t.value)"
             >

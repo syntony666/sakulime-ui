@@ -1,7 +1,8 @@
 import type { Meta, DemoObj } from "../util/types";
-import { showMarkup } from "../util/docs-source";
-import { axis, axisArg, attr, boolArg, label } from "../util/axis";
+import { axis, axisArg, attr, boolArg, label, TONES, mark } from "../util/axis";
 import "../util/icons";
+
+const cardMarker = mark("sl-card");
 
 type CardArgs = {
   pad: string;
@@ -31,25 +32,10 @@ const VARIANTS = ["-", "hollow", "plain", "blank"];
 const INDICATES = ["-", "top", "bottom", "start", "end"];
 const CORNERS = ["-", "start", "end"];
 const CORNER_KINDS = ["chip", "dot", "icon"];
-const TONES = ["-", "primary", "secondary", "success", "warning", "danger"];
 const INTERACTIVES = ["-", "grow", "lift", "raise", "press"];
 const INSETS = ["-", "top", "middle", "bottom"];
 
 const meta = {
-  title: "Core/Card 卡片",
-  // demos feed the md page; hide them from the sidebar
-  tags: ["!dev"],
-  parameters: {
-    docs: {
-      // opt back into the TOC (disabled globally for prose pages)
-      toc: { disable: false },
-      source: {
-        // evaluated markup, not the .map() render source
-        type: "dynamic",
-        transform: showMarkup,
-      },
-    },
-  },
   args: {
     pad: "-",
     radius: "-",
@@ -59,12 +45,12 @@ const meta = {
     interactive: "-",
   },
   argTypes: {
-    pad: axisArg("sl-pad", "內距", "md", PADS),
-    radius: axisArg("sl-radius", "圓角", "md", RADII),
-    variant: axisArg("sl-card", "型態", "-", VARIANTS),
-    indicate: axisArg("sl-card-indicate", "標記邊緣", "-", INDICATES),
-    tone: axisArg("sl-tone", "顏色（搭配標記）", "primary", TONES),
-    interactive: axisArg("sl-interactive", "互動（滑鼠移過去）", "grow", INTERACTIVES),
+    pad: axisArg("sl-pad", "內距", PADS),
+    radius: axisArg("sl-radius", "圓角", RADII),
+    variant: axisArg("sl-card", "型態", VARIANTS),
+    indicate: axisArg("sl-card-indicate", "標記邊緣", INDICATES),
+    tone: axisArg("sl-tone", "顏色（搭配標記）", TONES),
+    interactive: axisArg("sl-interactive", "互動（滑鼠移過去）", INTERACTIVES),
   },
 } satisfies Meta<CardArgs>;
 
@@ -74,8 +60,6 @@ type Demo = DemoObj<CardArgs>;
 const card = (attrs: string, content: string, w = 320) =>
   `<div sl-card${attrs} style="width: ${w}px">${content}</div>`;
 
-// the marker itself carries the variant value — bare = default frame
-const cardMarker = (v: string) => (v === "-" ? "sl-card" : `sl-card="${v}"`);
 
 const vcard = (v: string, content: string, w = 320) =>
   `<div ${cardMarker(v)} style="width: ${w}px">${content}</div>`;
@@ -167,10 +151,10 @@ const cornerEl = (position: string, kind: string, tone: string, size = "-") => {
 export const Corner: DemoObj<CornerArgs> = {
   args: { position: "-", kind: "chip", tone: "-", size: "-" },
   argTypes: {
-    position: axisArg("sl-card-corner", "位置", "end", ["-", "start", "end"]),
-    kind: axisArg("組合", "角落內容：同元素疊加的 attr", "chip", CORNER_KINDS),
-    tone: axisArg("sl-tone", "顏色", "primary", TONES),
-    size: axisArg("sl-size", "大小（chip 限定）", "-", ["-", "sm", "md", "lg"]),
+    position: axisArg("sl-card-corner", "位置", ["-", "start", "end"]),
+    kind: axisArg("組合", "角落內容：同元素疊加的 attr", CORNER_KINDS),
+    tone: axisArg("sl-tone", "顏色", TONES),
+    size: axisArg("sl-size", "大小（chip 限定）", ["-", "sm", "md", "lg"]),
   },
   render: (args) =>
     `<div sl-card style="max-width: 360px">` +
@@ -210,13 +194,13 @@ export const BasicSections: Demo = {
 };
 
 // carries its own args/argTypes so the md can bind it as a standalone
-// playground (story doubles as the Playground meta prop)
+// playground (demo object doubles as the Playground meta prop)
 export const Sections: DemoObj<SectionArgs> = {
   args: { inset: "top", corner: false, pad: "-" },
   argTypes: {
-    inset: axisArg('sl-card-section="inset"', "貼邊區塊位置", "-", INSETS),
+    inset: axisArg('sl-card-section="inset"', "貼邊區塊位置", INSETS),
     corner: boolArg("sl-card-corner", "角落標記（疊在貼邊內容上）"),
-    pad: axisArg("sl-pad", "內距", "md", PADS),
+    pad: axisArg("sl-pad", "內距", PADS),
   },
   render: (args) => {
     const parts =

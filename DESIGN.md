@@ -201,7 +201,7 @@ components:
 
 ### Demo Chrome（文件站元件）
 - **Stage:** 圓點格紙背景＋`--sl-3xl` padding＋細框，內容在 Shadow DOM 裡渲染
-- **Playground:** demo 下方的控制面板 — 欄位 `10rem` 名稱欄＋控制項欄，mono 標籤、12px muted 說明
+- **Playground:** demo 下方的控制面板 — 欄位 `11rem` 名稱欄＋控制項欄，mono 標籤、12px muted 說明
 - **Sidebar active:** 軟 tint 底＋內側 3px accent bar，文字色不變 — 選中態由面而非字表達
 - **Theme switcher:** nav 裡「github | Theme」chip — 圓點＋名稱，下拉每列帶主題 signature 圓點
 

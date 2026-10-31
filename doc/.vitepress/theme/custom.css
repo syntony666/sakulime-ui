@@ -392,8 +392,8 @@ body::before {
 }
 
 /* playground controls — standalone panel below the demo card.
-   Fields share the row evenly (min 19rem: 11rem name lane leaves
-   ~7.5rem of usable control lane even in the narrowest field) */
+   Fields share the row evenly (min 16rem: 11rem name lane leaves
+   ~5rem of usable control lane even in the narrowest field) */
 .sl-play-fields {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
@@ -452,15 +452,25 @@ body::before {
   border-color: var(--sl-primary);
 }
 
+.sl-play-field :is(select, input):focus-visible {
+  outline: 2px solid var(--sl-primary);
+  outline-offset: 1px;
+}
+
 .sl-play-field input[type="checkbox"] {
   accent-color: var(--sl-primary);
 }
 
+/* the name renders as <code> for semantics — normalize vp-doc's
+   inline-code chip styling back to a plain label */
 .sl-play-name {
   font-family: var(--vp-font-family-mono);
   font-weight: 600;
   font-size: 12px;
   white-space: nowrap;
+  background: none;
+  border-radius: 0;
+  padding: 0;
 }
 
 /* legend row under the fields — explains what "-" means in selects.
@@ -703,13 +713,17 @@ body::before {
   cursor: pointer;
 }
 
-.sl-theme-option:hover,
-.sl-theme-option:focus-visible {
+.sl-theme-option:hover {
   background: var(--sl-primary-bg);
-  outline: none;
 }
 
-.sl-theme-menu li[aria-selected="true"] .sl-theme-option {
+.sl-theme-option:focus-visible {
+  background: var(--sl-primary-bg);
+  outline: 2px solid var(--sl-primary);
+  outline-offset: -2px;
+}
+
+.sl-theme-menu .sl-theme-option[aria-selected="true"] {
   color: var(--vp-c-brand-1);
 }
 
@@ -749,7 +763,7 @@ body::before {
   display: none;
 }
 
-/* mobile bar reads "github | 0.2.0 | dot picker" — the divider goes
+/* mobile bar reads "github | version | dot picker" — the divider goes
    with the name, the trigger shrinks to a compact dot + caret chip */
 @media (max-width: 767.9px) {
   .sl-theme-switch {
