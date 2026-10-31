@@ -28,7 +28,7 @@ import * as IconDemos from "../../demos/components/icon.demo";
 
 ### 用圖示包 `<i sl-icon="...">`
 
-註冊圖示包之後（見[安裝](#安裝)），任何元素寫上名稱就會換成圖示：
+註冊圖示包之後（見[安裝](#安裝)），元素標上圖示名就會換成圖示：
 
 ```html
 <i sl-icon="lucide:zap"></i>
@@ -107,7 +107,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ### 顏色 `sl-tone`
 
-`sl-icon` 是 `sl-tone` 的適用元素，寫在圖示自己身上就染成對應色；不寫繼承文字墨色。
+`sl-icon` 是 `sl-tone` 的適用元素，`sl-tone` 標在圖示本身；不寫值繼承文字墨色。
 
 <Demo :render="IconDemos.Tones.render" />
 

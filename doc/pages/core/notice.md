@@ -15,7 +15,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ## 型態
 
-寬度寫在 `sl-notice` 的值裡，不寫值就是滿版（填滿容器）：
+寬度是 `sl-notice` 的值，不寫值就是滿版（填滿容器）：
 
 - `fit`：縮成內容的寬度，浮動通知或配合訊息長度的場合
 

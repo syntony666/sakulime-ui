@@ -15,7 +15,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 ## 型態
 
-型態寫在 `sl-card` 的值裡，不寫值就是一般卡片：
+型態是 `sl-card` 的值，不寫值就是一般卡片：
 
 ```html
 <div sl-card="hollow">…</div>

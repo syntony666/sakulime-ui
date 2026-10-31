@@ -15,7 +15,7 @@ import * as ButtonDemos from "../../demos/components/button.demo";
 
 ## 型態
 
-型態寫在 `sl-button` 的值裡，不寫值就是 `normal`：
+型態是 `sl-button` 的值，不寫值就是 `normal`：
 
 ```html
 <button sl-button="invert">按鈕</button>

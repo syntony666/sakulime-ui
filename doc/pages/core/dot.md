@@ -17,7 +17,7 @@ import * as DotDemos from "../../demos/components/dot.demo";
 
 ### 顏色 `sl-tone`
 
-`sl-dot` 是 `sl-tone` 的適用元素，寫上就染成對應色。不寫就繼承文字墨色。
+`sl-dot` 是 `sl-tone` 的適用元素。不寫值繼承文字墨色。
 
 - `primary`：主題主色
 - `secondary`：主題副色
