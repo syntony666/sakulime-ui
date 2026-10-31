@@ -22,8 +22,8 @@ export const Cols: Demo = {
 export const Hide: Demo = {
   render: () =>
     `<div sl-grid sl-cols="3">` +
+    `<div class="demo-cell" sl-show-md>sl-show-md</div>` +
     `<div class="demo-cell">常駐</div>` +
     `<div class="demo-cell" sl-hide-md>sl-hide-md</div>` +
-    `<div class="demo-cell" sl-hide-sm>sl-hide-sm</div>` +
     `</div>`,
 };

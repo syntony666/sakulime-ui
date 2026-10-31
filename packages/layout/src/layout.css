@@ -399,4 +399,16 @@
 
     [sl-hide-sm] { display: none; }
   }
+
+  /* sl-show — the mirror of sl-hide: hidden above its breakpoint, so
+     a hide/show pair swaps content across the line */
+  @media (width >= 75rem) {
+    [sl-show-lg] { display: none; }
+  }
+  @media (width >= 60rem) {
+    [sl-show-md] { display: none; }
+  }
+  @media (width >= 45rem) {
+    [sl-show-sm] { display: none; }
+  }
 }
