@@ -1,10 +1,48 @@
 import type { Meta, DemoObj } from "../util/types";
+import { attr } from "../util/axis";
 
 const meta = {} satisfies Meta;
 export default meta;
 type Demo = DemoObj;
 
 const cell = (t: string) => `<div class="demo-cell">${t}</div>`;
+
+// playground — two cells, one sl-place group each (inline + block
+// selects compose into the attribute). The stage swaps parents so the
+// same marks can be tried across 文流 / row / stack / grid; a fixed
+// height gives block-axis values room everywhere except plain flow
+type PlaceArgs = { zone: string; axA: string; ayA: string; axB: string; ayB: string };
+const PX = ["-", "start", "center", "end"];
+const PY = ["-", "top", "middle", "bottom"];
+
+export const PlacePlay: DemoObj<PlaceArgs> = {
+  args: { zone: "橫列", axA: "center", ayA: "-", axB: "end", ayB: "-" },
+  argTypes: {
+    zone: {
+      name: "排版",
+      description: "同一組標記換父層試",
+      control: { type: "select" as const },
+      options: ["文流", "橫列", "堆疊", "格網"],
+    },
+    axA: { name: "A 水平", description: "A 的 `sl-place` 水平值", control: { type: "select" as const }, options: PX },
+    ayA: { name: "A 垂直", description: "A 的 `sl-place` 垂直值", control: { type: "select" as const }, options: PY },
+    axB: { name: "B 水平", description: "B 的 `sl-place` 水平值", control: { type: "select" as const }, options: PX },
+    ayB: { name: "B 垂直", description: "B 的 `sl-place` 垂直值", control: { type: "select" as const }, options: PY },
+  },
+  render: (a) => {
+    const pA = [a.axA, a.ayA].filter((v) => v !== "-").join(" ");
+    const pB = [a.axB, a.ayB].filter((v) => v !== "-").join(" ");
+    const inner =
+      `<div class="demo-cell"${attr("sl-place", pA || "-")}>A${pA ? "：" + pA : ""}</div>` +
+      `<div class="demo-cell"${attr("sl-place", pB || "-")}>B${pB ? "：" + pB : ""}</div>`;
+    switch (a.zone) {
+      case "橫列": return `<div sl-row style="height: 9rem">${inner}</div>`;
+      case "堆疊": return `<div sl-stack style="height: 9rem">${inner}</div>`;
+      case "格網": return `<div sl-grid style="height: 9rem">${inner}</div>`;
+      default: return `<div sl-stack sl-flow style="height: 9rem">${inner}</div>`;
+    }
+  },
+};
 
 // no layout parent needed — the mark works on any block-level child that
 // is narrower than its container

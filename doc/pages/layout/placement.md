@@ -34,6 +34,10 @@ import * as PlacementDemos from "../../demos/layout/placement.demo";
 
 <Demo :render="PlacementDemos.FlowCenter.render" />
 
+兩格各給一組值，換父層看同一組標記的表現：
+
+<Playground :meta="PlacementDemos.PlacePlay" :render="PlacementDemos.PlacePlay.render" />
+
 ## 排版父層裡
 
 同一組值在各種排版原語裡的表現：
