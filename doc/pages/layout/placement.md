@@ -50,4 +50,8 @@ import * as PlacementDemos from "../../demos/layout/placement.demo";
 
 <Demo :render="PlacementDemos.StackMiddleEnd.render" />
 
+在 `sl-row` 同一列裡兩軸標記可以疊著用，`sl-middle` 管列內高度、`sl-end` 管左右位置：
+
+<Demo :render="PlacementDemos.RowMiddleEnd.render" />
+
 <Demo :render="PlacementDemos.GridCell.render" />

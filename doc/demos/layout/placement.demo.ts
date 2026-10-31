@@ -46,6 +46,16 @@ export const StackMiddleEnd: Demo = {
     `</div>`,
 };
 
+// both marks on one line — sl-middle centres the cell in the row's line
+// box, compounding sl-end pins it to the right edge at the same height
+export const RowMiddleEnd: Demo = {
+  render: () =>
+    `<div sl-row style="height: 8rem">` +
+    `<div class="demo-cell" sl-middle>sl-middle 左中</div>` +
+    `<div class="demo-cell" sl-middle sl-end>sl-middle + sl-end 右中</div>` +
+    `</div>`,
+};
+
 // all three marks on grid items — the tracks keep their size and each
 // item shrinks to content width, pinned to its own cell's edge
 export const GridCell: Demo = {
