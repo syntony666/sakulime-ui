@@ -28,7 +28,13 @@ import * as PadDemos from "../../demos/attrs/pad.demo";
 
 ## 選項
 
-`sm`、`md`、`lg`，預設 `md`。
+px 以根字級 16px 換算，尺規本身是 rem：
+
+| 選項 | 內距 |
+| --- | --- |
+| `sm` | 12px |
+| `md`（預設） | 16px |
+| `lg` | 24px |
 
 ## 適用元素
 

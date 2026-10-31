@@ -24,7 +24,13 @@ import * as SizeDemos from "../../demos/attrs/size.demo";
 
 ## 選項
 
-`sm`、`md`、`lg`，預設 `md`。
+px 以根字級 16px 換算，尺規本身是 rem。高度是 `sl-button` 的，`sl-chip` 只取字級：
+
+| 選項 | 字級 | 高度 |
+| --- | --- | --- |
+| `sm` | 12px | 24px |
+| `md`（預設） | 16px | 32px |
+| `lg` | 20px | 40px |
 
 ## 適用元素
 

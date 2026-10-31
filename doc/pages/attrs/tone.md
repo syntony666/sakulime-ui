@@ -24,7 +24,13 @@ import * as ToneDemos from "../../demos/attrs/tone.demo";
 
 ## 選項
 
-`primary`、`secondary`、`success`、`warning`、`danger`。
+| 選項 | 用途 |
+| --- | --- |
+| `primary` | 主色 |
+| `secondary` | 次要色 |
+| `success` | 成功、完成的回饋 |
+| `warning` | 需要注意的提醒 |
+| `danger` | 錯誤、危險操作 |
 
 ## 適用元素
 

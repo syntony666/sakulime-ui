@@ -24,7 +24,12 @@ import * as InteractiveDemos from "../../demos/attrs/interactive.demo";
 
 ## 選項
 
-`grow`、`lift`、`raise`、`press`，沒給是 `grow`。
+| 選項 | 效果 |
+| --- | --- |
+| `grow`（預設） | 放大 1.05 |
+| `lift` | 浮起 4px 加陰影 |
+| `raise` | 只有陰影 |
+| `press` | 壓下 0.97 |
 
 ## 適用元素
 
