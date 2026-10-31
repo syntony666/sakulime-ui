@@ -24,9 +24,7 @@ import * as ToastDemos from "../../demos/layout/toast.demo";
 
 <Demo :render="ToastDemos.Toast.render" />
 
-## 屬性
-
-### 位置
+## 位置
 
 標示換角落，預設右下：
 
@@ -39,7 +37,7 @@ import * as ToastDemos from "../../demos/layout/toast.demo";
 | `top-end`        | 右上 |
 | `top-center`     | 中上 |
 
-### 尺寸與間距
+## 尺寸與間距
 
 - fixed，z-index 60，會蓋在 `sl-topbar` 上面
 - 寬度是 `--sl-toast-w`，預設 22rem（352px）；視窗放不下自動縮，不會凸出

@@ -22,9 +22,7 @@ import * as SidebarDemos from "../../demos/layout/sidebar.demo";
 
 <Demo :render="SidebarDemos.SidebarStart.render" />
 
-## 屬性
-
-### 位置
+## 位置
 
 未標示的側欄看 HTML 順序：上面那個是放前面在左；放後面就在右：
 
@@ -38,13 +36,13 @@ import * as SidebarDemos from "../../demos/layout/sidebar.demo";
 
 <Demo :render="SidebarDemos.SidebarBoth.render" />
 
-### 尺寸
+## 尺寸
 
 - 側欄寬是 `--sl-sidebar-w`，預設 16rem（256px），可以各別覆寫
 - 主欄下限是 `--sl-sidebar-min`，預設 55%：主欄被擠到下限以下時整組換行，側欄變滿寬排在上面
 - 換行看容器可用寬度，不是視窗斷點，塞進窄容器照樣會掉
 
-### 間距
+## 間距
 
 px 以根字級 16px 換算，尺規本身是 rem。
 

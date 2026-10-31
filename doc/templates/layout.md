@@ -1,7 +1,8 @@
 # Layout pages
 
 Pages under `doc/pages/layout/` document one primitive or region each
-(`stack`, `row`, `grid`, `topbar`…). Fixed shape:
+(`stack`, `row`, `grid`, `topbar`…). Sections are flat `##` named by
+feature, ordered by importance — `間距` always last:
 
 ```markdown
 # <Name> *<中文名>*
@@ -10,20 +11,21 @@ Pages under `doc/pages/layout/` document one primitive or region each
 
 ## 用法
 
-<syntax block + lead-in + Demo>
+<syntax block + demo + the primitive's mechanics in prose>
 
-## 屬性
+## <feature>
 
-### <aspect>
+<one section per distinct feature — `## 欄數`, `## 跨欄`,
+`## 窄屏直排 `sl-collapse``, `## 三區排列`>
 
-<text/table + Demo where useful>
+## 間距
+
+<px note + nine-step scale table + var/sl-gap line — only on
+gap-reading primitives>
 ```
 
-- `## 屬性` groups the page's configurable surface. Each `###` covers one
-  knob, named for what it does — `### 間距`, `### 位置`, `### 尺寸`,
-  `### 欄數`, `### 跨欄` — or carries an attr chip when it documents an
-  attribute (`### 窄屏直排 `sl-collapse``).
-- `### 間距` opens with the px note, then the nine-step scale table with
-  `md`（預設）— same table shape as shared-attribute pages.
-- Behavior notes that aren't an attribute get a `### 行為` section.
+- Mechanics that aren't a feature get written into the `用法` prose —
+  no `行為` grab-bag section, no `屬性` wrapper level.
+- `間距` opens with the px note, then the scale table with `md`（預設）;
+  primitives without a gap knob (`container`) skip the section entirely.
 - Demo file at `doc/demos/layout/<name>.demo.ts`.
