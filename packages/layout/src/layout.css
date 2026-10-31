@@ -72,9 +72,15 @@
   [sl-stack][sl-cols="12"] { column-count: 12; }
 
   /* sl-span inside a multicol stack spans every column — a heading
-     across the flow */
+     across the flow. Its margin-end carries the gap to the row below;
+     the next child's own margin-start must not fire, or it would only
+     push down the first column and skew the column tops */
   [sl-stack][sl-cols] > [sl-span] {
     column-span: all;
+    margin-block-end: var(--sl-stack-gap, var(--sl-gap, var(--sl-md)));
+  }
+  [sl-stack][sl-cols] > [sl-span] + * {
+    margin-block-start: 0;
   }
 
   /* row — horizontal run that wraps; tag rows, button groups */
