@@ -197,7 +197,7 @@ components:
 - **Surface:** tone 12% wash 膠囊＋tone-text 墨 — 浮空框：`3px solid var(--sl-surface)` 環帶把 wash 跟外緣 `box-shadow` 2px tone/border 混色細線隔開
 - **Shape:** 預設膠囊端 — chip 的 block 級兄弟；`full` 是「一行膠囊」（半徑 = 一行高），一、二行全圓、三行起中段跑直線；`sl-radius` 可轉 `sm/md/lg/none`
 - **Width:** 預設填滿容器（橫幅）；`sl-notice="fit"` 縮內容寬 — 元件只管寬度，位置/堆疊/dismiss 全留消費端
-- **Composition:** flex row `0.6em` gap — icon、訊息、連結、`sl-notice-action`（auto margin 推尾端）；沒 icon 文字從 padding 邊起頭不留空槽
+- **Composition:** `display: block` 行內流 — icon、訊息、連結同一串文字流；`sl-notice-action` 直接子層 absolute 置中釘邊緣，`:has()` 在 padding 預留專用欄（`--sl-action-w` 槽位）
 
 ### Demo Chrome（文件站元件）
 - **Stage:** 圓點格紙背景＋`--sl-3xl` padding＋細框，內容在 Shadow DOM 裡渲染
