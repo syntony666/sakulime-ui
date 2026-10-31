@@ -31,7 +31,7 @@ npm run site         # also verify the static site when touching doc/
 - `sl-*` attributes carry components, state, and layout; consumer `class` is left alone
 - `--sl-*` variables control color and size; use the shared scales, no arbitrary-value APIs outside the steps
 - CSS layer order: `theme < base < attrs`
-- User-facing strings and `doc/` content (`.md` pages, story text) are Taiwan Traditional Chinese; repo meta-docs (README, CONTRIBUTING, AGENTS) stay in English
+- User-facing strings and `doc/` content (`.md` pages, demo text) are Taiwan Traditional Chinese; repo meta-docs (README, CONTRIBUTING, AGENTS) stay in English
 - Code comments in English only, and only where they add information
 - Commit messages in English, under 50 words, conventional prefixes (`feat:`, `fix:`, `docs:`, `chore:`, `refactor:`)
 - Doc pages: `.md` for prose, `.demo.ts` for demos; demos render through the theme's `<Demo>` and `<Playground>` components. Page structure — fixed section order, heading format, playground placement — is defined in [`doc/page-template.md`](doc/page-template.md); follow it for every component page

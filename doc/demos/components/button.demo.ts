@@ -1,5 +1,5 @@
 import type { Meta, DemoObj } from "../util/types";
-import { axis, axisArg, attr, label, TONES, mark } from "../util/axis";
+import { axis, axisArg, attr, boolArg, label, TONES, mark } from "../util/axis";
 
 const marker = mark("sl-button");
 
@@ -30,10 +30,7 @@ const meta = {
     variant: axisArg("sl-button", "型態", VARIANTS),
     size: axisArg("sl-size", "大小", SIZES),
     radius: axisArg("sl-radius", "圓角", RADII),
-    disabled: {
-      description: "停用（HTML 原生屬性）",
-      control: "boolean",
-    },
+    disabled: boolArg("disabled", "停用（HTML 原生屬性）"),
     label: {
       description: "按鈕文字",
     },

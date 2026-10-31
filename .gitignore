@@ -24,10 +24,6 @@ site
 *.sln
 *.sw?
 
-*storybook.log
-storybook-static
-doc/.storybook/theme.values.ts
-
 # Cloudflare Workers
 .wrangler
 .dev.vars
