@@ -1,5 +1,4 @@
 import type { Meta, DemoObj } from "../util/types";
-import { showMarkup } from "../util/docs-source";
 import { axis, axisArg, attr, boolArg, label, TONES } from "../util/axis";
 import "../util/icons";
 
@@ -18,17 +17,6 @@ type IconArgs = {
 const NAMES = ["star", "zap", "heart", "rocket", "check", "arrow-right", "trash", "plus"];
 
 const meta = {
-  title: "Core/Icon 圖示",
-  tags: ["!dev"],
-  parameters: {
-    docs: {
-      toc: { disable: false },
-      source: {
-        type: "dynamic",
-        transform: showMarkup,
-      },
-    },
-  },
   args: {
     name: "star",
     tone: "-",
@@ -41,15 +29,15 @@ const meta = {
     space: "-",
   },
   argTypes: {
-    name: axisArg("sl-icon", "圖示名稱", "star", NAMES),
-    tone: axisArg("sl-tone", "顏色", "-", TONES),
-    size: axisArg("sl-icon-size", "尺寸", "-", ["-", "sm", "lg", "xl", "2xl"]),
-    flip: axisArg("sl-icon-flip", "翻轉", "-", ["-", "h", "v"]),
-    rotate: axisArg("sl-icon-rotate", "旋轉", "-", ["-", "90", "180", "270"]),
+    name: axisArg("sl-icon", "圖示名稱", NAMES),
+    tone: axisArg("sl-tone", "顏色", TONES),
+    size: axisArg("sl-icon-size", "尺寸", ["-", "sm", "lg", "xl", "2xl"]),
+    flip: axisArg("sl-icon-flip", "翻轉", ["-", "h", "v"]),
+    rotate: axisArg("sl-icon-rotate", "旋轉", ["-", "90", "180", "270"]),
     spin: boolArg("sl-icon-spin", "旋轉動畫"),
-    frame: axisArg("sl-icon-frame", "外框", "-", ["-", "circular", "rounded"]),
+    frame: axisArg("sl-icon-frame", "外框", ["-", "circular", "rounded"]),
     disabled: boolArg("sl-icon-disabled", "淡化"),
-    space: axisArg("sl-icon-space", "間距", "-", ["-", "start", "end", "both"]),
+    space: axisArg("sl-icon-space", "間距", ["-", "start", "end", "both"]),
   },
 } satisfies Meta<IconArgs>;
 

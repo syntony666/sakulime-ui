@@ -1,5 +1,4 @@
 import type { Meta, DemoObj } from "../util/types";
-import { showMarkup } from "../util/docs-source";
 import { axis, axisArg, attr, label, TONES, mark } from "../util/axis";
 
 const marker = mark("sl-button");
@@ -18,20 +17,6 @@ const SIZES = ["-", "sm", "md", "lg"];
 const RADII = ["-", "none", "sm", "md", "lg", "full"];
 
 const meta = {
-  title: "Core/Button 按鈕",
-  // demos feed the md page; hide them from the sidebar
-  tags: ["!dev"],
-  parameters: {
-    docs: {
-      // opt back into the TOC (disabled globally for prose pages)
-      toc: { disable: false },
-      source: {
-        // evaluated markup, not the .map() render source
-        type: "dynamic",
-        transform: showMarkup,
-      },
-    },
-  },
   args: {
     label: "Button",
     tone: "-",
@@ -41,18 +26,16 @@ const meta = {
     disabled: false,
   },
   argTypes: {
-    tone: axisArg("sl-tone", "顏色", "primary", TONES),
-    variant: axisArg("sl-button", "型態", "normal", VARIANTS),
-    size: axisArg("sl-size", "大小", "md", SIZES),
-    radius: axisArg("sl-radius", "圓角", "md", RADII),
+    tone: axisArg("sl-tone", "顏色", TONES),
+    variant: axisArg("sl-button", "型態", VARIANTS),
+    size: axisArg("sl-size", "大小", SIZES),
+    radius: axisArg("sl-radius", "圓角", RADII),
     disabled: {
       description: "停用（HTML 原生屬性）",
-      table: { type: {}, defaultValue: { summary: "false" } },
       control: "boolean",
     },
     label: {
       description: "按鈕文字",
-      table: { type: {}, defaultValue: { summary: '"Button"' } },
     },
   },
 } satisfies Meta<ButtonArgs>;

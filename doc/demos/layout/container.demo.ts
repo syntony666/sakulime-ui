@@ -1,18 +1,6 @@
 import type { Meta, DemoObj } from "../util/types";
-import { showMarkup } from "../util/docs-source";
 
 const meta = {
-  title: "Layout/Container 容器",
-  // demos feed the md page; hide them from the sidebar
-  tags: ["!dev"],
-  parameters: {
-    docs: {
-      source: {
-        type: "dynamic",
-        transform: showMarkup,
-      },
-    },
-  },
 } satisfies Meta;
 
 export default meta;

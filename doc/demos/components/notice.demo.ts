@@ -1,5 +1,4 @@
 import type { Meta, DemoObj } from "../util/types";
-import { showMarkup } from "../util/docs-source";
 import { axis, axisArg, attr, label, TONES, mark } from "../util/axis";
 import "../util/icons";
 
@@ -22,17 +21,6 @@ const ALIGNS = ["-", "end"];
 const ACTIONS = ["-", "end", "start", "both"];
 
 const meta = {
-  title: "Core/Notice 通知",
-  tags: ["!dev"],
-  parameters: {
-    docs: {
-      toc: { disable: false },
-      source: {
-        type: "dynamic",
-        transform: showMarkup,
-      },
-    },
-  },
   args: {
     tone: "-",
     variant: "-",
@@ -41,11 +29,11 @@ const meta = {
     align: "-",
   },
   argTypes: {
-    tone: axisArg("sl-tone", "顏色", "-", TONES),
-    variant: axisArg("sl-notice", "寬度", "-", VARIANTS),
-    pad: axisArg("sl-pad", "厚度", "-", PADS),
-    radius: axisArg("sl-radius", "圓角", "-", RADII),
-    align: axisArg("sl-notice-align", "對齊", "-", ALIGNS),
+    tone: axisArg("sl-tone", "顏色", TONES),
+    variant: axisArg("sl-notice", "寬度", VARIANTS),
+    pad: axisArg("sl-pad", "厚度", PADS),
+    radius: axisArg("sl-radius", "圓角", RADII),
+    align: axisArg("sl-notice-align", "對齊", ALIGNS),
   },
 } satisfies Meta<NoticeArgs>;
 
@@ -122,8 +110,8 @@ const BELL_BTN = `<button sl-button="ghost" sl-size="sm" sl-notice-action="start
 export const ActionMeta = {
   args: { action: "both", variant: "-" },
   argTypes: {
-    action: axisArg("sl-notice-action", "位置", "both", ACTIONS),
-    variant: axisArg("sl-notice", "寬度", "-", VARIANTS),
+    action: axisArg("sl-notice-action", "位置", ACTIONS),
+    variant: axisArg("sl-notice", "寬度", VARIANTS),
   },
 };
 
@@ -147,7 +135,7 @@ const LONG =
 export const BannerMeta = {
   args: { variant: "-", icon: "有", lines: "單行", align: "-", action: "-" },
   argTypes: {
-    variant: axisArg("sl-notice", "寬度", "-", VARIANTS),
+    variant: axisArg("sl-notice", "寬度", VARIANTS),
     icon: {
       name: "圖示",
       description: "無 icon 文字從邊緣起頭",
@@ -160,8 +148,8 @@ export const BannerMeta = {
       control: { type: "select" as const },
       options: ["單行", "多行"],
     },
-    align: axisArg("sl-notice-align", "對齊", "-", ALIGNS),
-    action: axisArg("sl-notice-action", "動作", "-", ACTIONS),
+    align: axisArg("sl-notice-align", "對齊", ALIGNS),
+    action: axisArg("sl-notice-action", "動作", ACTIONS),
   },
 };
 
@@ -197,7 +185,7 @@ export const ToastMeta = {
       control: { type: "select" as const },
       options: ["1", "2", "3"],
     },
-    variant: axisArg("sl-notice", "寬度", "-", VARIANTS),
+    variant: axisArg("sl-notice", "寬度", VARIANTS),
   },
 };
 

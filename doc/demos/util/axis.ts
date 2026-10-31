@@ -41,17 +41,11 @@ export const axis = <T>(values: T[], item: (v: T) => string, col = false) =>
   `</div>`;
 
 // Controls row for an attr axis: name = real attr, shows the "-" option
-// and the real default, hides the Type column
-export const axisArg = (
-  name: string,
-  desc: string,
-  def: string,
-  options: string[],
-) => ({
+// and marks the real default in the option list
+export const axisArg = (name: string, desc: string, options: string[]) => ({
   name,
   description: desc,
-  table: { type: {}, defaultValue: { summary: `"${def}"` } },
-  control: { type: "select" as const, labels: { "-": "-" } },
+  control: { type: "select" as const },
   options,
 });
 
@@ -59,6 +53,5 @@ export const axisArg = (
 export const boolArg = (name: string, desc: string) => ({
   name,
   description: desc,
-  table: { type: {}, defaultValue: { summary: "false" } },
   control: { type: "boolean" as const },
 });

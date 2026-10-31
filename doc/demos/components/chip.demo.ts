@@ -1,5 +1,4 @@
 import type { Meta, DemoObj } from "../util/types";
-import { showMarkup } from "../util/docs-source";
 import { axis, axisArg, attr, label, TONES } from "../util/axis";
 import "../util/icons";
 
@@ -11,24 +10,13 @@ type ChipArgs = {
 const SIZES = ["-", "sm", "md", "lg"];
 
 const meta = {
-  title: "Core/Chip 膠囊",
-  tags: ["!dev"],
-  parameters: {
-    docs: {
-      toc: { disable: false },
-      source: {
-        type: "dynamic",
-        transform: showMarkup,
-      },
-    },
-  },
   args: {
     tone: "-",
     size: "-",
   },
   argTypes: {
-    tone: axisArg("sl-tone", "顏色", "-", TONES),
-    size: axisArg("sl-size", "大小", "-", SIZES),
+    tone: axisArg("sl-tone", "顏色", TONES),
+    size: axisArg("sl-size", "大小", SIZES),
   },
 } satisfies Meta<ChipArgs>;
 
