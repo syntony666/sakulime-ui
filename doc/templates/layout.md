@@ -1,7 +1,7 @@
 # Layout pages
 
 Pages under `doc/pages/layout/` document one primitive or region each
-(`stack`, `row`, `grid`, `topbar`…). Sections are flat `##` named by
+(`stack`, `row`, `grid`, `bar`…). Sections are flat `##` named by
 feature, ordered by importance — `間距` always last:
 
 ```markdown

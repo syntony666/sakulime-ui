@@ -37,7 +37,7 @@ import * as PlacementDemos from "../../demos/layout/placement.demo";
 - `sl-row` 子層：`sl-end` 推到行尾、`sl-center` 在左右子層之間置中
 - `sl-stack` 子層：變成水平對齊，標了之後寬度縮回內容寬，不用自己寫寬度
 - `sl-grid` 子層：格子維持軌道寬，元素在自己的格子裡對齊
-- `sl-topbar`、`sl-footer` 的三區、`sl-with-sidebar` 的順序語意各自有定義，見各頁
+- `sl-bar` 的三區、`sl-with-sidebar` 的順序語意各自有定義，見各頁
 
 <Demo :render="PlacementDemos.RowEnd.render" />
 
