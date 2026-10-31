@@ -16,6 +16,7 @@
     display: flex;
     align-items: center;
     gap: 0.6em;
+    line-height: 1.4;
     /* strip proportions — vertical sits at 3/4 of the pad slot */
     padding: calc(var(--sl-pad) * 0.75) var(--sl-pad);
     color: var(--sl-tone-text);
@@ -32,6 +33,14 @@
   /* links keep the notice's ink — browser blue would fight the wash */
   [sl-notice] a {
     color: inherit;
+  }
+
+  /* icon pins to the first text line instead of floating mid-block
+     when the copy wraps — offset = (1.4 line-height − 1em icon) / 2,
+     which lands it dead-center on a single line too */
+  [sl-notice] > [sl-icon] {
+    align-self: flex-start;
+    margin-block-start: 0.2em;
   }
 }
 
@@ -80,6 +89,11 @@
      ::before pusher eats the free space on its start side (or the
      start spacer grows the margin it already sits on), and the end
      side's auto margins drop so the copy really hugs the edge */
+  /* and the copy itself right-aligns once it wraps to multiple lines */
+  [sl-notice-align="end"] {
+    text-align: end;
+  }
+
   [sl-notice-align="end"]::before {
     content: "";
     order: -9;
