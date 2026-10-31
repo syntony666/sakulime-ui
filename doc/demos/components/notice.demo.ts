@@ -184,6 +184,7 @@ export const BannerMeta = {
     },
     lines: {
       name: "內容",
+      description: "切多行看折行行為",
       control: { type: "select" as const },
       options: ["單行", "多行"],
     },
@@ -218,6 +219,7 @@ export const ToastMeta = {
   argTypes: {
     count: {
       name: "數量",
+      description: "容器裡的通知條數",
       control: { type: "select" as const },
       options: ["1", "2", "3"],
     },
