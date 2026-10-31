@@ -51,7 +51,7 @@ const hasDashOption = computed(() =>
     <Demo :render="render" :args="args" />
     <div class="sl-play-fields">
       <label v-for="f in fields" :key="f.key" class="sl-play-field">
-        <code class="sl-play-name" translate="no">{{ f.name }}</code>
+        <span class="sl-play-name" translate="no">{{ f.name }}</span>
         <select v-if="f.kind === 'select'" v-model="args[f.key]">
           <option v-for="o in f.options" :key="o" :value="o">{{ o }}</option>
         </select>

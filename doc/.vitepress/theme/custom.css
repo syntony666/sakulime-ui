@@ -461,16 +461,11 @@ body::before {
   accent-color: var(--sl-primary);
 }
 
-/* the name renders as <code> for semantics — normalize vp-doc's
-   inline-code chip styling back to a plain label */
 .sl-play-name {
   font-family: var(--vp-font-family-mono);
   font-weight: 600;
   font-size: 12px;
   white-space: nowrap;
-  background: none;
-  border-radius: 0;
-  padding: 0;
 }
 
 /* legend row under the fields — explains what "-" means in selects.
