@@ -9,6 +9,7 @@ type NoticeArgs = {
   pad: string;
   radius: string;
   align: string;
+  action: string;
 };
 
 const TONES = ["-", "primary", "secondary", "success", "warning", "danger"];
@@ -16,6 +17,7 @@ const VARIANTS = ["-", "fit"];
 const PADS = ["-", "sm", "md", "lg"];
 const RADII = ["-", "sm", "md", "lg", "full", "none"];
 const ALIGNS = ["-", "end"];
+const ACTIONS = ["-", "end", "start", "both"];
 
 const meta = {
   title: "Core/Notice 通知",
@@ -119,6 +121,27 @@ export const Aligns: Demo = {
         `<div sl-notice sl-tone="secondary"${attr("sl-notice-align", v)}><i sl-icon="lucide:info"></i> ${v === "-" ? "靠左（預設）" : "靠右"}的訊息</div>`,
       true,
     ),
+};
+
+// action playground for the 子元素 section — placement × width
+const X_BTN = `<button sl-button="ghost" sl-size="sm" sl-notice-action aria-label="關閉"><i sl-icon="lucide:x" sl-icon-size="lg"></i></button>`;
+const BELL_BTN = `<button sl-button="ghost" sl-size="sm" sl-notice-action="start" aria-label="靜音"><i sl-icon="lucide:bell-off" sl-icon-size="lg"></i></button>`;
+
+export const ActionMeta = {
+  args: { action: "both", variant: "-" },
+  argTypes: {
+    action: axisArg("sl-notice-action", "位置", "both", ACTIONS),
+    variant: axisArg("sl-notice", "寬度", "-", VARIANTS),
+  },
+};
+
+export const ActionPlay: Demo = {
+  render: (a) =>
+    `<div ${marker(a.variant)} sl-tone="warning">` +
+    (a.action === "start" || a.action === "both" ? BELL_BTN : "") +
+    `排程維護將於 30 分鐘後開始` +
+    (a.action === "end" || a.action === "both" ? X_BTN : "") +
+    `</div>`,
 };
 
 // sl-notice-action sits at the trailing edge in both widths — fill

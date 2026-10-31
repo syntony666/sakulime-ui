@@ -79,6 +79,8 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 action 裡的 icon 跟著按鈕字級走（`sl-size="sm"` 約 12px），要大一點就給 `<i>` 掛 `sl-icon-size`。
 
+<Playground :meta="NoticeDemos.ActionMeta" :render="NoticeDemos.ActionPlay.render" />
+
 兩個可以一起放——下面第三條就是左右各一個：
 
 ```html
