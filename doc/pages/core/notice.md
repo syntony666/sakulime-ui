@@ -74,6 +74,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 邊緣控制項——dismiss 鈕、動作連結，關閉行為自己接：
 
+- 寫在 `sl-notice` 的直接子層；巢在內容裡的只是靜態內容，不會釘邊緣
 - 不寫值：靠右（尾端）；`start`：靠左（開頭）——兩個可以共存
 - 垂直置中，文字不會流過它底下；放更寬的控制就把 `--sl-action-w` 加大
 - `<i>` 跟著按鈕字級走，要大一點掛 `sl-icon-size`
@@ -92,6 +93,6 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### Toast *浮動通知*
 
-放哪個角落、怎麼疊、何時消失都是你的 CSS 跟狀態機——本包只管膠囊的長相：
+放哪個角落、怎麼疊、何時消失都是你的 CSS 跟狀態機——本包只管膠囊的長相。要讓讀屏器播報新通知，容器自己掛 `role="status"`（或 `aria-live="polite"`）：
 
 <Playground :meta="NoticeDemos.ToastPlay" :render="NoticeDemos.ToastPlay.render" />

@@ -35,14 +35,6 @@
   height: 1px;
 }
 
-/* generic vertical stack for demos that show more than one state in
-   one frame — no width constraint, the children decide */
-.demo-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
 /* demo-only toast wrapper — stands in for the consumer's own fixed
    container (a demo- class, so shown markup drops it). A narrow column:
    notices fill their container; the width is the consumer's choice */
