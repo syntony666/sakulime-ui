@@ -166,6 +166,7 @@ export default defineConfig({
     ],
     sidebar: [
       { text: "開始使用", link: "/introduction" },
+      { text: "主題", link: "/theme" },
       {
         text: "屬性",
         items: [
@@ -183,7 +184,6 @@ export default defineConfig({
           },
         ],
       },
-      { text: "主題", link: "/theme" },
       {
         text: "元件 Core",
         items: [
