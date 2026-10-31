@@ -60,6 +60,83 @@
       align-items: stretch;
     }
   }
+
+  /* topbar — sticky by default; ="fixed" pins it to the viewport, and
+     then the next region has to pad for its height itself */
+  [sl-topbar] {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: var(--sl-topbar-gap, var(--sl-md));
+    min-height: var(--sl-topbar-h, 3.5rem);
+    padding-inline: var(--sl-lg);
+    background: var(--sl-bg);
+    border-block-end: 1px solid var(--sl-border);
+  }
+
+  [sl-topbar="fixed"] {
+    position: fixed;
+    inset-inline: 0;
+  }
+
+  /* sidebar shell — children marked sl-sidebar are the rails, anything
+     else is content. Side follows source order; two marked children
+     give both rails. The content min-width is the wrap trigger */
+  [sl-with-sidebar] {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sl-sidebar-gap, var(--sl-lg));
+  }
+
+  [sl-with-sidebar] > [sl-sidebar] {
+    flex-basis: var(--sl-sidebar-w, 16rem);
+    flex-grow: 1;
+  }
+
+  [sl-with-sidebar] > :not([sl-sidebar]) {
+    flex-basis: 0;
+    flex-grow: 999;
+    min-width: var(--sl-sidebar-min, 55%);
+  }
+
+  /* footer — hairline + breathing room; contents compose freely */
+  [sl-footer] {
+    border-block-start: 1px solid var(--sl-border);
+    padding-block: var(--sl-2xl);
+    padding-inline: var(--sl-lg);
+  }
+
+  /* toast — the fixed corner region that holds notices. Width and
+     corner offsets are vars; the value moves the corner */
+  [sl-toast] {
+    position: fixed;
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sl-toast-gap, var(--sl-md));
+    width: min(var(--sl-toast-w, 22rem), calc(100vw - 2 * var(--sl-lg)));
+    inset-block-end: var(--sl-toast-b, var(--sl-lg));
+    inset-inline-end: var(--sl-toast-e, var(--sl-lg));
+  }
+
+  [sl-toast="start"] {
+    inset-inline-end: auto;
+    inset-inline-start: var(--sl-toast-e, var(--sl-lg));
+  }
+
+  [sl-toast="top-end"] {
+    inset-block-end: auto;
+    inset-block-start: var(--sl-toast-b, var(--sl-lg));
+  }
+
+  [sl-toast="top-start"] {
+    inset-block-end: auto;
+    inset-block-start: var(--sl-toast-b, var(--sl-lg));
+    inset-inline-end: auto;
+    inset-inline-start: var(--sl-toast-e, var(--sl-lg));
+  }
 }
 
 @layer attrs {
@@ -93,4 +170,14 @@
   [sl-grid="3xl"] { --sl-grid-gap: var(--sl-3xl); }
   [sl-grid="4xl"] { --sl-grid-gap: var(--sl-4xl); }
   [sl-grid="5xl"] { --sl-grid-gap: var(--sl-5xl); }
+
+  [sl-with-sidebar="xs"]  { --sl-sidebar-gap: var(--sl-xs); }
+  [sl-with-sidebar="sm"]  { --sl-sidebar-gap: var(--sl-sm); }
+  [sl-with-sidebar="md"]  { --sl-sidebar-gap: var(--sl-md); }
+  [sl-with-sidebar="lg"]  { --sl-sidebar-gap: var(--sl-lg); }
+  [sl-with-sidebar="xl"]  { --sl-sidebar-gap: var(--sl-xl); }
+  [sl-with-sidebar="2xl"] { --sl-sidebar-gap: var(--sl-2xl); }
+  [sl-with-sidebar="3xl"] { --sl-sidebar-gap: var(--sl-3xl); }
+  [sl-with-sidebar="4xl"] { --sl-sidebar-gap: var(--sl-4xl); }
+  [sl-with-sidebar="5xl"] { --sl-sidebar-gap: var(--sl-5xl); }
 }
