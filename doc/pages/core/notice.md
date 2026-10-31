@@ -64,7 +64,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 中間內容的位置，`fit` 下沒有空間可推所以無感：
 
 - 不寫值：靠左（預設）
-- `end`：靠右
+- `end`：靠右；折行時每一行都靠右
 
 <Demo :render="NoticeDemos.Aligns.render" />
 
@@ -99,6 +99,10 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 放進文件流就是滿寬橫幅——`<i sl-icon>` 開頭、訊息跟連結照順序排，連結會跟著通知墨色走。不放 icon 的話文字直接從邊緣起頭，不會留空：
 
 <Demo :render="NoticeDemos.NoIcon.render" />
+
+內容長了就直接折行——膠囊跟著長高、圓端照樣圓，icon 釘在第一行而不是浮在整塊中間，`sl-notice-align="end"` 的話每一行都靠右：
+
+<Demo :render="NoticeDemos.Multiline.render" />
 
 ### Toast *浮動通知*
 

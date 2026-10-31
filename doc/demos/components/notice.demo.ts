@@ -147,6 +147,23 @@ export const WithAction: Demo = {
     `</div>`,
 };
 
+// long copy wraps inside the capsule — the icon pins to the first
+// text line instead of floating mid-block, and sl-notice-align="end"
+// right-aligns every line, not just the block
+const LONG =
+  "系統將於 11/2 02:00–03:00 進行例行維護，期間 API 回應可能延遲，寫入操作會排入佇列，並於維護結束後自動重放，若有長時間執行中的工作請提前儲存。";
+
+export const Multiline: Demo = {
+  render: () =>
+    `<div class="demo-stack">` +
+    `<div sl-notice sl-tone="primary"><i sl-icon="lucide:info"></i> ${LONG}</div>` +
+    `<div sl-notice sl-tone="warning"><i sl-icon="lucide:triangle-alert"></i> ${LONG}` +
+    `<button sl-button="ghost" sl-size="sm" sl-notice-action aria-label="關閉"><i sl-icon="lucide:x"></i></button>` +
+    `</div>` +
+    `<div sl-notice sl-notice-align="end" sl-tone="secondary"><i sl-icon="lucide:info"></i> ${LONG}</div>` +
+    `</div>`,
+};
+
 // toast is just a notice in a consumer-fixed wrapper — placement
 // (corner, stacking, timeout) is consumer CSS, not this package.
 // .demo-toast mimics a corner stack inside the demo frame
