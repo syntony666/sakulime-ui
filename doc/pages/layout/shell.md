@@ -29,7 +29,7 @@ import * as ShellDemos from "../../demos/layout/shell.demo";
 
 ### 三區排列
 
-內部是 `1fr auto 1fr` 的格網：子層依序佔左、中、右三區，置中是整條 bar 的中點，不是剩餘空間的中點。標 `sl-center` 釘中間、`sl-end` 釘尾端——兩個子層時第二個預設落在中間，要推到右邊就標 `sl-end`：
+內部是 `1fr auto 1fr` 的格網：子層依序佔左、中、右三區，置中是整條 bar 的中點，不是剩餘空間的中點。標 `sl-center` 固定在中間、`sl-end` 固定在尾端。兩個子層時第二個預設落在中間，要推到右邊就標 `sl-end`：
 
 ```html
 <div sl-topbar>
