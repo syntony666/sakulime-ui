@@ -74,8 +74,9 @@
 
   /* opt-in collapse — <div sl-row sl-collapse> turns into a vertical
      stack on narrow viewports. Tag rows keep wrapping instead, so the
-     attribute is never implied */
-  @media (width < 40rem) {
+     attribute is never implied. 45rem is the sm breakpoint — the same
+     number as --sl-container-sm */
+  @media (width < 45rem) {
     [sl-row][sl-collapse] {
       flex-direction: column;
       align-items: stretch;
@@ -291,6 +292,7 @@
 
   /* sl-cols — explicit track count, replaces the auto-fill template.
      Attrs layer because it must win over that base rule */
+  [sl-grid][sl-cols="1"]  { grid-template-columns: repeat(1, 1fr); }
   [sl-grid][sl-cols="2"]  { grid-template-columns: repeat(2, 1fr); }
   [sl-grid][sl-cols="3"]  { grid-template-columns: repeat(3, 1fr); }
   [sl-grid][sl-cols="4"]  { grid-template-columns: repeat(4, 1fr); }
@@ -303,16 +305,98 @@
   [sl-grid][sl-cols="11"] { grid-template-columns: repeat(11, 1fr); }
   [sl-grid][sl-cols="12"] { grid-template-columns: repeat(12, 1fr); }
 
-  /* collapse for an explicit grid — same opt-in and breakpoint as
-     sl-row: one column, and spans release since they are meaningless
-     on a single track */
-  @media (width < 40rem) {
-    [sl-grid][sl-collapse] {
-      grid-template-columns: 1fr;
-    }
+  /* sl-cols-<bp> — the track count at narrower widths; breakpoints
+     mirror the container scale (lg <75rem, md <60rem, sm <45rem — the
+     hardcoded twins of --sl-container-*). Blocks run wide to narrow so
+     the smallest hit wins at equal specificity. A span wider than the
+     active count clamps to a full row instead of spawning implicit
+     tracks, and a one-column hit releases spans entirely */
+  @media (width < 75rem) {
+    [sl-grid][sl-cols-lg="1"]  { grid-template-columns: repeat(1, 1fr); }
+    [sl-grid][sl-cols-lg="2"]  { grid-template-columns: repeat(2, 1fr); }
+    [sl-grid][sl-cols-lg="3"]  { grid-template-columns: repeat(3, 1fr); }
+    [sl-grid][sl-cols-lg="4"]  { grid-template-columns: repeat(4, 1fr); }
+    [sl-grid][sl-cols-lg="5"]  { grid-template-columns: repeat(5, 1fr); }
+    [sl-grid][sl-cols-lg="6"]  { grid-template-columns: repeat(6, 1fr); }
+    [sl-grid][sl-cols-lg="7"]  { grid-template-columns: repeat(7, 1fr); }
+    [sl-grid][sl-cols-lg="8"]  { grid-template-columns: repeat(8, 1fr); }
+    [sl-grid][sl-cols-lg="9"]  { grid-template-columns: repeat(9, 1fr); }
+    [sl-grid][sl-cols-lg="10"] { grid-template-columns: repeat(10, 1fr); }
+    [sl-grid][sl-cols-lg="11"] { grid-template-columns: repeat(11, 1fr); }
+    [sl-grid][sl-cols-lg="12"] { grid-template-columns: repeat(12, 1fr); }
 
-    [sl-grid][sl-collapse] > [sl-span] {
-      grid-column: auto;
-    }
+    [sl-grid][sl-cols-lg="1"]  > [sl-span] { grid-column: auto; }
+    [sl-grid][sl-cols-lg="2"]  > :is([sl-span="3"],[sl-span="4"],[sl-span="5"],[sl-span="6"],[sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 2; }
+    [sl-grid][sl-cols-lg="3"]  > :is([sl-span="4"],[sl-span="5"],[sl-span="6"],[sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 3; }
+    [sl-grid][sl-cols-lg="4"]  > :is([sl-span="5"],[sl-span="6"],[sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 4; }
+    [sl-grid][sl-cols-lg="5"]  > :is([sl-span="6"],[sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 5; }
+    [sl-grid][sl-cols-lg="6"]  > :is([sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 6; }
+    [sl-grid][sl-cols-lg="7"]  > :is([sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 7; }
+    [sl-grid][sl-cols-lg="8"]  > :is([sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 8; }
+    [sl-grid][sl-cols-lg="9"]  > :is([sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 9; }
+    [sl-grid][sl-cols-lg="10"] > :is([sl-span="11"],[sl-span="12"]) { grid-column: span 10; }
+    [sl-grid][sl-cols-lg="11"] > :is([sl-span="12"]) { grid-column: span 11; }
+
+    [sl-hide-lg] { display: none; }
+  }
+  @media (width < 60rem) {
+    [sl-grid][sl-cols-md="1"]  { grid-template-columns: repeat(1, 1fr); }
+    [sl-grid][sl-cols-md="2"]  { grid-template-columns: repeat(2, 1fr); }
+    [sl-grid][sl-cols-md="3"]  { grid-template-columns: repeat(3, 1fr); }
+    [sl-grid][sl-cols-md="4"]  { grid-template-columns: repeat(4, 1fr); }
+    [sl-grid][sl-cols-md="5"]  { grid-template-columns: repeat(5, 1fr); }
+    [sl-grid][sl-cols-md="6"]  { grid-template-columns: repeat(6, 1fr); }
+    [sl-grid][sl-cols-md="7"]  { grid-template-columns: repeat(7, 1fr); }
+    [sl-grid][sl-cols-md="8"]  { grid-template-columns: repeat(8, 1fr); }
+    [sl-grid][sl-cols-md="9"]  { grid-template-columns: repeat(9, 1fr); }
+    [sl-grid][sl-cols-md="10"] { grid-template-columns: repeat(10, 1fr); }
+    [sl-grid][sl-cols-md="11"] { grid-template-columns: repeat(11, 1fr); }
+    [sl-grid][sl-cols-md="12"] { grid-template-columns: repeat(12, 1fr); }
+
+    [sl-grid][sl-cols-md="1"]  > [sl-span] { grid-column: auto; }
+    [sl-grid][sl-cols-md="2"]  > :is([sl-span="3"],[sl-span="4"],[sl-span="5"],[sl-span="6"],[sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 2; }
+    [sl-grid][sl-cols-md="3"]  > :is([sl-span="4"],[sl-span="5"],[sl-span="6"],[sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 3; }
+    [sl-grid][sl-cols-md="4"]  > :is([sl-span="5"],[sl-span="6"],[sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 4; }
+    [sl-grid][sl-cols-md="5"]  > :is([sl-span="6"],[sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 5; }
+    [sl-grid][sl-cols-md="6"]  > :is([sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 6; }
+    [sl-grid][sl-cols-md="7"]  > :is([sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 7; }
+    [sl-grid][sl-cols-md="8"]  > :is([sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 8; }
+    [sl-grid][sl-cols-md="9"]  > :is([sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 9; }
+    [sl-grid][sl-cols-md="10"] > :is([sl-span="11"],[sl-span="12"]) { grid-column: span 10; }
+    [sl-grid][sl-cols-md="11"] > :is([sl-span="12"]) { grid-column: span 11; }
+
+    [sl-hide-md] { display: none; }
+  }
+  @media (width < 45rem) {
+    [sl-grid][sl-cols-sm="1"]  { grid-template-columns: repeat(1, 1fr); }
+    [sl-grid][sl-cols-sm="2"]  { grid-template-columns: repeat(2, 1fr); }
+    [sl-grid][sl-cols-sm="3"]  { grid-template-columns: repeat(3, 1fr); }
+    [sl-grid][sl-cols-sm="4"]  { grid-template-columns: repeat(4, 1fr); }
+    [sl-grid][sl-cols-sm="5"]  { grid-template-columns: repeat(5, 1fr); }
+    [sl-grid][sl-cols-sm="6"]  { grid-template-columns: repeat(6, 1fr); }
+    [sl-grid][sl-cols-sm="7"]  { grid-template-columns: repeat(7, 1fr); }
+    [sl-grid][sl-cols-sm="8"]  { grid-template-columns: repeat(8, 1fr); }
+    [sl-grid][sl-cols-sm="9"]  { grid-template-columns: repeat(9, 1fr); }
+    [sl-grid][sl-cols-sm="10"] { grid-template-columns: repeat(10, 1fr); }
+    [sl-grid][sl-cols-sm="11"] { grid-template-columns: repeat(11, 1fr); }
+    [sl-grid][sl-cols-sm="12"] { grid-template-columns: repeat(12, 1fr); }
+
+    [sl-grid][sl-cols-sm="1"]  > [sl-span] { grid-column: auto; }
+    [sl-grid][sl-cols-sm="2"]  > :is([sl-span="3"],[sl-span="4"],[sl-span="5"],[sl-span="6"],[sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 2; }
+    [sl-grid][sl-cols-sm="3"]  > :is([sl-span="4"],[sl-span="5"],[sl-span="6"],[sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 3; }
+    [sl-grid][sl-cols-sm="4"]  > :is([sl-span="5"],[sl-span="6"],[sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 4; }
+    [sl-grid][sl-cols-sm="5"]  > :is([sl-span="6"],[sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 5; }
+    [sl-grid][sl-cols-sm="6"]  > :is([sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 6; }
+    [sl-grid][sl-cols-sm="7"]  > :is([sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 7; }
+    [sl-grid][sl-cols-sm="8"]  > :is([sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 8; }
+    [sl-grid][sl-cols-sm="9"]  > :is([sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 9; }
+    [sl-grid][sl-cols-sm="10"] > :is([sl-span="11"],[sl-span="12"]) { grid-column: span 10; }
+    [sl-grid][sl-cols-sm="11"] > :is([sl-span="12"]) { grid-column: span 11; }
+
+    /* sl-collapse — the sm shorthand: one column, spans release */
+    [sl-grid][sl-collapse] { grid-template-columns: 1fr; }
+    [sl-grid][sl-collapse] > [sl-span] { grid-column: auto; }
+
+    [sl-hide-sm] { display: none; }
   }
 }
