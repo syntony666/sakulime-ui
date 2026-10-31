@@ -31,7 +31,7 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 
 ### 間距
 
-`sl-stack` 的值就是間距，裸寫是 `md`：
+`sl-stack` 的值就是間距，預設 `md`：
 
 | 值    | 間距         |
 | ----- | ------------ |

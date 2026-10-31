@@ -26,13 +26,13 @@ import * as TopbarDemos from "../../demos/layout/topbar.demo";
 
 ### 型態
 
-- 裸寫 `sl-topbar`：**sticky**，內容滾到頂就停住，不佔版面外
+- 預設 **sticky**，內容滾到頂就停住，不佔版面外
 - `sl-topbar="static"`：普通區塊，跟著頁面一起滾走
 - `sl-topbar="fixed"`：固定在視窗頂部。body 自動補上 bar 高度的內距，下面的內容不會被蓋住
 
 ### 三區排列
 
-內部是 `1fr auto 1fr` 的格網：子層依序佔左、中、右三區，置中是整條 bar 的中點，不是剩餘空間的中點。標 `sl-center` 固定在中間、`sl-end` 固定在尾端。兩個子層時第二個預設落在中間，要推到右邊就標 `sl-end`：
+內部是 `1fr auto 1fr` 的格網：子層依序佔左、中、右三區，置中是整條 bar 的中點，不是剩餘空間的中點。標 `sl-center` 固定在中間、`sl-end` 固定在尾端。兩個子層時第二個預設落在中間，推到右邊標 `sl-end`：
 
 ```html
 <div sl-topbar>

@@ -31,7 +31,7 @@ import * as RowDemos from "../../demos/layout/row.demo";
 
 ### 間距
 
-`sl-row` 的值就是間距，裸寫是 `md`：
+`sl-row` 的值就是間距，預設 `md`：
 
 | 值    | 間距         |
 | ----- | ------------ |

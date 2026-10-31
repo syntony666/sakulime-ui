@@ -31,7 +31,7 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 
 ### 間距
 
-`sl-grid` 的值就是間距，裸寫是 `md`：
+`sl-grid` 的值就是間距，預設 `md`：
 
 | 值    | 間距         |
 | ----- | ------------ |
