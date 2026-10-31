@@ -34,7 +34,7 @@ import * as IconDemos from "../../demos/components/icon.demo";
 <i sl-icon="lucide:zap"></i>
 <i sl-icon="si-github"></i>
 ```
-
+::: info 語法細節
 名稱格式是 `package:name`。分隔符號用 `:` 最穩，`-` 只在 package 名是單字時安全。
 
 佔位標籤慣用 `<i>`，`<span>`、`<icon>` 也行。
@@ -42,6 +42,7 @@ import * as IconDemos from "../../demos/components/icon.demo";
 結束標籤**一定要寫**。JSX 或模板編譯的環境沒有此問題。
 
 第一次呼叫 `registerPack` 會自動啟動解析器，並監聽後來新增的元素。
+:::
 
 ### `icon()` 產生 SVG 字串
 
@@ -60,7 +61,7 @@ import { icon } from "sakulime-ui";
 
 ### Bundler
 
-::: info
+::: info @iconify-json/*
 `@iconify-json/*` 是永久開源授權的資料檔（lucide 是 ISC、Simple Icons 是 CC0），建議當 devDep 裝。產出的是 SVG 字串，JSON 不會進使用者的 bundle。
 :::
 
