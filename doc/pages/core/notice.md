@@ -82,11 +82,9 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ## 用法
 
-`sl-notice` 不分橫幅版或浮動通知版——同一條放進文件流是橫幅，包進你自己的容器就是浮動通知。
-
 ### Banner *橫幅*
 
-放進文件流就是滿寬橫幅——`<i sl-icon>` 開頭、訊息跟連結照順序排，連結會跟著通知墨色走：
+滿寬一條——icon、訊息、連結照順序排，連結會跟著通知墨色走：
 
 <Playground :meta="NoticeDemos.BannerMeta" :render="NoticeDemos.BannerPlay.render" />
 
@@ -94,6 +92,6 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### Toast *浮動通知*
 
-幾條塞進你自己的容器（`fixed`、grid、什麼都好）就是浮動通知——放哪個角落、怎麼疊、何時消失都是你的 CSS 跟狀態機，本包只管膠囊的長相：
+放哪個角落、怎麼疊、何時消失都是你的 CSS 跟狀態機——本包只管膠囊的長相：
 
 <Playground :meta="NoticeDemos.ToastMeta" :render="NoticeDemos.ToastPlay.render" />
