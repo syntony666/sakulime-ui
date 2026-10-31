@@ -31,7 +31,26 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 
 ### 間距
 
-- `sl-stack`：預設 `md`（12px）
-- `sl-stack="xs"` 到 `sl-stack="5xl"`：對應尺規全階
+`sl-stack` 的值就是間距，裸寫是 `md`：
 
-改單一容器的話寫 `--sl-stack-gap`。間距是容器的事，子元素不用寫 margin。
+| 值    | 間距         |
+| ----- | ------------ |
+| `xs`  | 4px          |
+| `sm`  | 8px          |
+| `md`  | 12px（預設） |
+| `lg`  | 16px         |
+| `xl`  | 20px         |
+| `2xl` | 24px         |
+| `3xl` | 32px         |
+| `4xl` | 40px         |
+| `5xl` | 48px         |
+
+改單一容器寫 `--sl-stack-gap`，例如 `style="--sl-stack-gap: 6px"`。
+
+### 行為
+
+- 永遠垂直排列，沒有斷點變化
+- 相鄰子層的垂直距離 = 間距值，第一個上面跟最後一個下面不加距離
+- 子元素的上下 margin 清成 0，左右 margin 不動
+- 子元素寬度拉滿容器（flex 預設 stretch），要收窄自己寫寬度
+- 間距是容器的事，子元素不用寫 margin

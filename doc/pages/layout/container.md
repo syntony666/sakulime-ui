@@ -46,4 +46,4 @@ import * as ContainerDemos from "../../demos/layout/container.demo";
 
 ### 內距
 
-左右內距吃 `--sl-lg`。改單一容器就自己寫 `padding-inline`；覆寫 `--sl-lg` 的話，所有用到它的元素都會跟著變。
+左右內距吃 `--sl-lg`（16px）。改單一容器就自己寫 `padding-inline`；覆寫 `--sl-lg` 的話，所有用到它的元素都會跟著變。
