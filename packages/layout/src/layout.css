@@ -49,6 +49,16 @@
       minmax(var(--sl-grid-min, 14rem), 1fr)
     );
   }
+
+  /* opt-in collapse — <div sl-row sl-collapse> turns into a vertical
+     stack on narrow viewports. Tag rows keep wrapping instead, so the
+     attribute is never implied */
+  @media (width < 40rem) {
+    [sl-row][sl-collapse] {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
 }
 
 @layer attrs {

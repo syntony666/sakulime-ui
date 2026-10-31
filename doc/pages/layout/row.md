@@ -35,3 +35,16 @@ import * as RowDemos from "../../demos/layout/row.demo";
 - `sl-row="xs"` 到 `sl-row="5xl"`：對應尺規全階
 
 改單一容器的話寫 `--sl-row-gap`。
+
+### 窄屏直排 `sl-collapse`
+
+寫了 `sl-collapse`，視窗窄於 40rem（640px）就變成垂直堆疊、子元素拉滿寬：
+
+```html
+<div sl-row sl-collapse>
+  <button sl-button>送出</button>
+  <button sl-button>取消</button>
+</div>
+```
+
+不寫就永遠是橫列。標籤列在手機上通常還是要橫著排。斷點只跟視窗寬度走；不同數值的話，media query 自己寫。
