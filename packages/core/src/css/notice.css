@@ -28,6 +28,10 @@
        and can never become its own column */
     display: block;
     position: relative;
+    /* a long token or URL must wrap instead of tearing the capsule —
+       break-word keeps fit's shrink-wrap honest (anywhere would
+       deflate the min-content width) */
+    overflow-wrap: break-word;
     /* the lane an edge-pinned action reserves in the padding — sized
        to the canonical compact control (~--sl-sm of padding around a
        --sl-2xl box); wider controls widen it */
@@ -52,9 +56,18 @@
     border-radius: var(--sl-radius);
   }
 
-  /* links keep the notice's ink — browser blue would fight the wash */
+  /* links keep the notice's ink — browser blue would fight the wash.
+     the underline stays: color alone can't carry link affordance */
   [sl-notice] a {
     color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-color: color-mix(in srgb, currentColor 55%, transparent);
+    text-underline-offset: 0.3em;
+  }
+
+  [sl-notice] a:hover {
+    text-decoration-color: currentColor;
   }
 }
 
