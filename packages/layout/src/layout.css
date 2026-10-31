@@ -458,6 +458,21 @@
     margin-inline-start: auto;
   }
 
+  /* same marks on the block axis — they pin vertically wherever a flex
+     line or grid cell hands out free space; in plain block flow auto
+     margins resolve to zero and stay inert */
+  [sl-top] {
+    margin-block-end: auto;
+  }
+
+  [sl-middle] {
+    margin-block: auto;
+  }
+
+  [sl-bottom] {
+    margin-block-start: auto;
+  }
+
   /* the sidebar marks pin order, not margins — the generic margin would
      only open dead space between the rail and the content column */
   [sl-with-sidebar] > [sl-start] {

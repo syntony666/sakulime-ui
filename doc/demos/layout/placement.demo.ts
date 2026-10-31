@@ -35,6 +35,17 @@ export const StackMarks: Demo = {
     `</div>`,
 };
 
+// block-axis marks in a tall stack — sl-middle centres vertically and
+// pushes the others apart, sl-end stays pinned to the right edge
+export const StackMiddleEnd: Demo = {
+  render: () =>
+    `<div sl-stack style="height: 12rem">` +
+    cell("一般子層") +
+    `<div class="demo-cell" sl-middle>sl-middle 垂直置中</div>` +
+    `<div class="demo-cell" sl-end>sl-end 靠右</div>` +
+    `</div>`,
+};
+
 // all three marks on grid items — the tracks keep their size and each
 // item shrinks to content width, pinned to its own cell's edge
 export const GridCell: Demo = {
