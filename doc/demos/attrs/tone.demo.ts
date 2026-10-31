@@ -1,6 +1,6 @@
-import type { Meta, DemoObj } from "./util/types";
-import { axis, attr, TONES } from "./util/axis";
-import "./util/icons";
+import type { Meta, DemoObj } from "../util/types";
+import { axis, attr, TONES } from "../util/axis";
+import "../util/icons";
 
 const meta = {} satisfies Meta;
 export default meta;
@@ -22,26 +22,6 @@ export const Tones: Demo = {
           `<i sl-dot${attr("sl-tone", v)}></i>` +
           `<i sl-icon="lucide:star"${attr("sl-tone", v)}></i>` +
           `</div>`
-      )
-    ),
-};
-
-export const Radius: Demo = {
-  render: () =>
-    axis(["none", "sm", "md", "lg", "full"], (v) =>
-      frame(
-        `sl-radius="${v}"`,
-        `<div sl-card${attr("sl-radius", v)} sl-pad style="width: 9rem; text-align: center">卡片</div>`
-      )
-    ),
-};
-
-export const Interactive: Demo = {
-  render: () =>
-    axis(["grow", "lift", "raise", "press"], (v) =>
-      frame(
-        `sl-interactive="${v}"`,
-        `<div sl-card sl-interactive="${v}" sl-pad style="width: 9rem; text-align: center">滑鼠移過來</div>`
       )
     ),
 };

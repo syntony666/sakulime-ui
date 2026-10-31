@@ -47,7 +47,7 @@ px 以根字級 16px 換算，尺規本身是 rem。
 | `4xl` | 40px         |
 | `5xl` | 48px         |
 
-只想改一個容器就寫 `--sl-stack-gap`（例如 `style="--sl-stack-gap: 6px"`）；想一整區一起改就用 [`sl-gap`](/layout/gap)。
+只想改一個容器就寫 `--sl-stack-gap`（例如 `style="--sl-stack-gap: 6px"`）；想一整區一起改就用 [`sl-gap`](/attrs/gap)。
 
 ### 行為
 

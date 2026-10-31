@@ -4,7 +4,7 @@ description: 給排版屬性共用的間距值。
 ---
 
 <script setup>
-import * as GapDemos from "../../demos/layout/gap.demo";
+import * as GapDemos from "../../demos/attrs/gap.demo";
 </script>
 
 # Gap *共用間距*

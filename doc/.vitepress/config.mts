@@ -166,13 +166,23 @@ export default defineConfig({
     ],
     sidebar: [
       { text: "開始使用", link: "/introduction" },
-      { text: "屬性", link: "/attrs" },
+      {
+        text: "屬性",
+        link: "/attrs",
+        items: [
+          { text: `Tone ${zh("色調")}`, link: "/attrs/tone" },
+          { text: `Size ${zh("尺寸")}`, link: "/attrs/size" },
+          { text: `Radius ${zh("圓角")}`, link: "/attrs/radius" },
+          { text: `Pad ${zh("內距")}`, link: "/attrs/pad" },
+          { text: `Interactive ${zh("互動")}`, link: "/attrs/interactive" },
+          { text: `Gap ${zh("共用間距")}`, link: "/attrs/gap" },
+        ],
+      },
       { text: "主題", link: "/theme" },
       {
         text: "排版 Layout",
         items: [
           { text: "說明", link: "/layout/" },
-          { text: `Gap ${zh("共用間距")}`, link: "/layout/gap" },
           {
             text: "格局設計",
             items: [
