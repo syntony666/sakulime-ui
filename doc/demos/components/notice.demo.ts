@@ -170,17 +170,18 @@ const LONG =
   "系統將於 11/2 02:00–03:00 進行例行維護，期間 API 回應可能延遲，寫入操作會排入佇列，並於維護結束後自動重放，若有長時間執行中的工作請提前儲存。維護完成後會以浮動通知確認，期間如有異常請回報值班工程師。";
 
 // banner playground — a bare notice in document flow; controls cover
-// width, icon placement (inline-in-span vs own column item), wrapping
-// and end alignment
+// width, icon on/off, single vs wrapped lines, and end alignment.
+// icon always sits inside the text element — inline flow, wraps full
+// width under it
 export const BannerMeta = {
-  args: { variant: "-", icon: "行內", lines: "單行", align: "-" },
+  args: { variant: "-", icon: "有", lines: "單行", align: "-" },
   argTypes: {
     variant: axisArg("sl-notice", "寬度", "-", VARIANTS),
     icon: {
       name: "圖示",
-      description: "行內 = 寫在 <span> 裡／獨立欄 = notice 直接子層",
+      description: "無 icon 文字從邊緣起頭",
       control: { type: "select" as const },
-      options: ["行內", "獨立欄", "無"],
+      options: ["有", "無"],
     },
     lines: {
       name: "內容",
@@ -194,14 +195,11 @@ export const BannerMeta = {
 
 export const BannerPlay: Demo = {
   render: (a) => {
-    const icon = `<i sl-icon="lucide:triangle-alert"></i>`;
     const text = a.lines === "多行" ? LONG : "排程維護將於 30 分鐘後開始";
     const inner =
       a.icon === "無"
         ? text
-        : a.icon === "行內"
-          ? `<span>${icon} ${text}</span>`
-          : `${icon} ${text}`;
+        : `<span><i sl-icon="lucide:triangle-alert"></i> ${text}</span>`;
     return `<div ${marker(a.variant)} sl-tone="warning"${attr("sl-notice-align", a.align)}>${inner}</div>`;
   },
 };
