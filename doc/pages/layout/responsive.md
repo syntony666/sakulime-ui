@@ -59,6 +59,8 @@ px 以根字級 16px 換算。三階跟 [container](/layout/container) 的頁面
   :render="RwdDemos.Hide.render"
 />
 
+配對要用同一個斷點才無縫交接。混著配：show 小、hide 大，中間段兩個都不見（故意的話就是留空）；show 大、hide 小，中間段兩個同時出現。
+
 ## 更深的需求
 
 要別的斷點或更細的行為，media query 自己寫：
