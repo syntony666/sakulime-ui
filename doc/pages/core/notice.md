@@ -80,8 +80,6 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 <Playground :meta="NoticeDemos.ActionMeta" :render="NoticeDemos.ActionPlay.render" />
 
-<Demo :render="NoticeDemos.WithAction.render" />
-
 ## 用法
 
 `sl-notice` 不分橫幅版或浮動通知版——同一條放進文件流是橫幅，包進你自己的容器就是浮動通知。

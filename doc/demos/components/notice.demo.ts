@@ -137,32 +137,6 @@ export const ActionPlay: Demo = {
     `</div>`,
 };
 
-// sl-notice-action pins to its edge, vertically centered — :has()
-// reserves its lane in the padding so wrapped copy never runs under
-// it, even when the capsule shrink-wraps (fit). the dismiss itself
-// is consumer code
-export const WithAction: Demo = {
-  render: () =>
-    `<div class="demo-stack">` +
-    `<div sl-notice sl-tone="danger">` +
-    `<i sl-icon="lucide:octagon-alert"></i>` +
-    `部署失敗：Build #423 在 migrate 階段逾時。` +
-    `<a href="#">查看記錄</a>` +
-    `<button sl-button="ghost" sl-size="sm" sl-notice-action aria-label="關閉"><i sl-icon="lucide:x" sl-icon-size="lg"></i></button>` +
-    `</div>` +
-    `<div sl-notice="fit" sl-tone="success">` +
-    `<i sl-icon="lucide:check"></i>` +
-    `已儲存變更` +
-    `<button sl-button="ghost" sl-size="sm" sl-notice-action aria-label="關閉"><i sl-icon="lucide:x" sl-icon-size="lg"></i></button>` +
-    `</div>` +
-    `<div sl-notice sl-tone="warning">` +
-    `<button sl-button="ghost" sl-size="sm" sl-notice-action="start" aria-label="靜音"><i sl-icon="lucide:bell-off" sl-icon-size="lg"></i></button>` +
-    `排程維護將於 30 分鐘後開始` +
-    `<button sl-button="ghost" sl-size="sm" sl-notice-action aria-label="關閉"><i sl-icon="lucide:x" sl-icon-size="lg"></i></button>` +
-    `</div>` +
-    `</div>`,
-};
-
 // long copy wraps inside the capsule — the icon is inline content,
 // so wrapped lines flow full width under it
 const LONG =
