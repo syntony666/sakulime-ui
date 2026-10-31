@@ -27,7 +27,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### 顏色 `sl-tone`
 
-`sl-notice` 是 `sl-tone` 的適用元素。沒給是 primary 淡底，資訊通知的標準色。
+`sl-notice` 是 `sl-tone` 的適用元素。沒給是 primary 淺色底，資訊通知的標準色。
 
 - `primary`：主題主色（預設）
 - `secondary`：主題副色
@@ -83,7 +83,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### Banner *橫幅*
 
-滿版一條，圖示、訊息、連結照順序排，連結沿用通知的墨色：
+滿版一條，圖示、訊息、連結照順序排，連結沿用通知的文字顏色：
 
 <Playground :meta="NoticeDemos.BannerPlay" :render="NoticeDemos.BannerPlay.render" />
 

@@ -34,7 +34,7 @@ import * as ToneDemos from "../../demos/attrs/tone.demo";
 | --- | --- |
 | `sl-button` | `primary` |
 | `sl-card` | `primary`，只染邊緣強調條，不動卡片底色 |
-| `sl-icon` | 繼承文字墨色 |
-| `sl-dot` | 繼承文字墨色 |
-| `sl-chip` | 文字墨色調出的中性底 |
-| `sl-notice` | `primary` 淡底 |
+| `sl-icon` | 繼承文字顏色 |
+| `sl-dot` | 繼承文字顏色 |
+| `sl-chip` | 中性色底，由文字顏色調出 |
+| `sl-notice` | `primary` 淺色底 |

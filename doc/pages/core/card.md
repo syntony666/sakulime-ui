@@ -173,7 +173,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 分區還有這幾種變化：
 
-- `secondary`：次要內容的淡底
+- `secondary`：次要內容的淺色底
 - `active`：目前選取的那一塊（primary 淡色）
 - `center`：文字置中
 

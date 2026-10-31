@@ -1,6 +1,6 @@
 ---
 title: Icon 圖示
-description: 讓圖示跟著文字走的標記，大小跟字級、顏色跟墨色。
+description: 讓圖示跟著文字走的標記，大小跟字級、顏色跟文字。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as IconDemos from "../../demos/components/icon.demo";
 
 # Icon *圖示*
 
-> 讓圖示跟著文字走的標記。大小跟著字級、顏色跟著墨色，垂直位置對齊底線。
+> 讓圖示跟著文字走的標記。大小跟著字級、顏色跟著文字，垂直位置對齊底線。
 
 <Playground :meta="IconDemos.default" :render="IconDemos.Icon.render" />
 
@@ -107,7 +107,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ### 顏色 `sl-tone`
 
-`sl-icon` 是 `sl-tone` 的適用元素，`sl-tone` 標示在圖示本身；沒給就繼承文字墨色。
+`sl-icon` 是 `sl-tone` 的適用元素，`sl-tone` 標示在圖示本身；沒給就繼承文字顏色。
 
 <Demo :render="IconDemos.Tones.render" />
 
@@ -155,7 +155,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ### 外框 `sl-icon-frame`
 
-`circular` 是圓框，`rounded` 是圓角框，框線顏色跟著圖示墨色。
+`circular` 是圓框，`rounded` 是圓角框，框線顏色跟著圖示的顏色。
 
 <Demo :render="IconDemos.Frames.render" />
 
@@ -173,10 +173,10 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ## 組合
 
-圖示繼承所在元件的墨色，放進按鈕裡；疊上 `sl-card-corner` 就固定到卡片角落，`sl-tone` 寫在 icon 自己身上染色。
+圖示繼承所在元件的文字顏色，放進按鈕裡；疊上 `sl-card-corner` 就固定到卡片角落，`sl-tone` 標示在 icon 自己身上染色。
 
 <Demo :render="IconDemos.InContext.render" />
 
-組合之後：角落的圖示自己帶 `sl-tone`；標題裡的圖示繼承文字墨色。
+組合之後：角落的圖示自己帶 `sl-tone`；標題裡的圖示繼承文字顏色。
 
 <Demo :render="IconDemos.InCard.render" />
