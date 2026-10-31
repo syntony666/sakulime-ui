@@ -32,7 +32,7 @@ import * as TopbarDemos from "../../demos/layout/topbar.demo";
 
 ### 三區排列
 
-內部是 `1fr auto 1fr` 的格網：子層依序佔左、中、右三區，置中是整條 bar 的中點，不是剩餘空間的中點。標示 `sl-center` 固定在中間、`sl-end` 固定在尾端。兩個子層時第二個預設落在中間，推到右邊標示 `sl-end`：
+內部是 `1fr auto 1fr` 的網格：子層依序佔左、中、右三區，置中是整條 bar 的中點，不是剩餘空間的中點。標示 `sl-center` 固定在中間、`sl-end` 固定在尾端。兩個子層時第二個預設落在中間，推到右邊標示 `sl-end`：
 
 ```html
 <div sl-topbar>

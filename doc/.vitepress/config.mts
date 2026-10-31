@@ -216,7 +216,7 @@ export default defineConfig({
               { text: `Container ${zh("頁面容器")}`, link: "/layout/container" },
               { text: `Stack ${zh("堆疊")}`, link: "/layout/stack" },
               { text: `Row ${zh("橫列")}`, link: "/layout/row" },
-              { text: `Grid ${zh("格網")}`, link: "/layout/grid" },
+              { text: `Grid ${zh("網格系統")}`, link: "/layout/grid" },
               { text: `Flow ${zh("子層間距")}`, link: "/layout/flow" },
               { text: `Responsive ${zh("響應式")}`, link: "/layout/responsive" },
             ],

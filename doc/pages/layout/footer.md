@@ -27,7 +27,7 @@ import * as FooterDemos from "../../demos/layout/footer.demo";
 
 ### 三區排列
 
-跟頂列同一套 `1fr auto 1fr` 格網：子層依序佔左、中、右，標示 `sl-center` 固定中間、`sl-end` 固定尾端，多出的子層會換到新行：
+跟頂列同一套 `1fr auto 1fr` 網格：子層依序佔左、中、右，標示 `sl-center` 固定中間、`sl-end` 固定尾端，多出的子層會換到新行：
 
 <Demo :render="FooterDemos.FooterZones.render" />
 
