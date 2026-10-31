@@ -190,7 +190,10 @@ export default defineConfig({
           },
           {
             text: "容器",
-            items: [{ text: `Card ${zh("卡片")}`, link: "/core/card" }],
+            items: [
+              { text: `Card ${zh("卡片")}`, link: "/core/card" },
+              { text: `Notice ${zh("通知")}`, link: "/core/notice" },
+            ],
           },
         ],
       },

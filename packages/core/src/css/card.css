@@ -9,9 +9,10 @@
     --sl-tone-text: color-mix(in srgb, var(--sl-primary) 55%, var(--sl-text));
     --sl-radius: var(--sl-sm);
     /* "full" caps at one line height plus the pad/border edge share —
-       a short card reads fully rounded, a taller one runs straight
-       past the first row instead of ballooning into 9999px curves */
-    --sl-radius-full: calc(max(1.5em, var(--sl-2xl)) + var(--sl-pad) + 1px);
+       lh tracks the element's own line-height; a short card reads
+       fully rounded, a taller one runs straight past the first row
+       instead of ballooning into 9999px curves */
+    --sl-radius-full: calc(max(1lh, var(--sl-2xl)) + var(--sl-pad) + 1px);
     --sl-pad: var(--sl-lg);
     --sl-i-transform: none;
     --sl-i-shadow: none;

@@ -1,0 +1,104 @@
+/* notice — a notification surface: capsule wash + floating frame.
+   In normal flow it reads as a full-width banner; inside the
+   consumer's own fixed wrapper it reads as a toast. icon, copy, and
+   actions line up inline; sl-notice-action pushes to the trailing
+   edge. Placement, dismiss, and timeout stay with the consumer */
+@layer base {
+  [sl-notice] {
+    /* self-defaults seal ancestor slots — bare reads as an info
+       notice (primary tint); sl-tone recolors the whole capsule */
+    --sl-tone-bg: var(--sl-primary);
+    --sl-tone-text: color-mix(in srgb, var(--sl-primary) 12%, var(--sl-text));
+    --sl-tone-text-invert: var(--sl-primary-fg);
+    --sl-pad: var(--sl-md);
+    /* block-level capsule — the chip's big sibling: wash, no frame.
+       "full" caps the radius at one line height (text line or the
+       usual control height, whichever is taller — lh tracks the
+       element's own line-height) plus an edge share: exactly half
+       of a two-line box, so two lines still round off completely
+       but taller copy runs straight down the middle instead of
+       stretching the ends */
+    --sl-radius-full: calc(
+      max(1lh, var(--sl-2xl)) + var(--sl-pad) * 0.75 + 3px
+    );
+    --sl-radius: var(--sl-radius-full);
+    /* one inline flow — icon, copy, and links all live in the same
+       running text block, so a bare <i> or <a> is just inline content
+       and can never become its own column */
+    display: block;
+    position: relative;
+    /* the lane an edge-pinned action reserves in the padding — sized
+       to the canonical compact control (~--sl-sm of padding around a
+       --sl-2xl box); wider controls widen it */
+    --sl-action-w: calc(var(--sl-2xl) + var(--sl-sm) * 2);
+    line-height: 1.4;
+    /* strip proportions — vertical sits at 3/4 of the pad slot,
+       horizontal at 3/2 so the capsule ends breathe */
+    padding: calc(var(--sl-pad) * 0.75) calc(var(--sl-pad) * 1.5);
+    color: var(--sl-tone-text);
+    /* floating frame — the wash stops at the padding edge, a surface
+       band fills the border gap, and a 2px ring sits on the outer
+       edge like a detached frame line */
+    background-color: color-mix(in srgb, var(--sl-tone-bg) 12%, var(--sl-surface));
+    background-clip: padding-box;
+    border: 3px solid var(--sl-surface);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--sl-tone-bg) 28%, var(--sl-border));
+    border-radius: var(--sl-radius);
+  }
+
+  /* links keep the notice's ink — browser blue would fight the wash */
+  [sl-notice] a {
+    color: inherit;
+  }
+}
+
+@layer attrs {
+  /* the generic sl-radius="full" hands out 9999px — for a notice it
+     means the same one-line cap as the self-default */
+  [sl-notice][sl-radius="full"] {
+    --sl-radius: var(--sl-radius-full);
+  }
+
+  /* fit — shrink-wrap to content instead of filling the row; the
+     toast-friendly width inside a consumer wrapper */
+  [sl-notice="fit"] {
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  /* action — absolutely pinned to its edge and vertically centered;
+     :has() reserves its lane in the padding so copy never runs under
+     it. the lane = glyph inset + slot + wrap gap, so the glyph keeps
+     a plain 1×pad inset and copy keeps its distance even under fit */
+  [sl-notice]:has(> [sl-notice-action]) {
+    padding-inline-end: calc(
+      var(--sl-pad) - var(--sl-sm) + var(--sl-action-w) + var(--sl-md) + 0.6em
+    );
+  }
+
+  [sl-notice]:has(> [sl-notice-action="start"]) {
+    padding-inline-start: calc(
+      var(--sl-pad) - var(--sl-sm) + var(--sl-action-w) + 0.6em - var(--sl-sm)
+    );
+  }
+
+  [sl-notice-action] {
+    position: absolute;
+    inset-inline-end: calc(var(--sl-pad) - var(--sl-sm));
+    top: 50%;
+    translate: 0 -50%;
+  }
+
+  /* "start" pins it to the leading edge — the smaller inner gap makes
+     the copy sit a leading-icon distance away */
+  [sl-notice-action="start"] {
+    inset-inline-end: auto;
+    inset-inline-start: calc(var(--sl-pad) - var(--sl-sm));
+  }
+
+  /* content align — "end" right-aligns every line; copy stops at the
+     reserved action lane, which reads as hugging the action */
+  [sl-notice-align="end"] {
+    text-align: end;
+  }
+}

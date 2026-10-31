@@ -409,19 +409,24 @@ body::before {
   display: grid;
   /* fixed left lane holds name over desc; the control lane takes the
      rest and centers against both — same geometry in every field.
-     11rem + 12px names keep sl-card-section="inset" on one line */
+     11rem + 12px names keep sl-card-section="inset" on one line.
+     align-content:start pins row 1 (name+control) to the top rail —
+     without it, a taller sibling's stretch feeds the auto rows and
+     sinks fields with shorter descs */
   grid-template-columns: 11rem 1fr;
   gap: 2px var(--sl-sm);
   align-items: center;
+  align-content: start;
   font-size: 13px;
 }
 
 .sl-play-field :is(select, input) {
-  /* pin the lane too — a definite row alone jumps the auto-placement
-     queue and the control lands left of the name. end-aligned so every
-     control forms a rail at the field's right edge */
+  /* pin the lane — a definite row alone jumps the auto-placement
+     queue and the control lands left of the name. row 1 shares the
+     name's line; the desc stays in row 2 so its length (or absence)
+     can't shift the name/control rail between fields */
   grid-column: 2;
-  grid-row: 1 / -1;
+  grid-row: 1;
   align-self: center;
   justify-self: end;
   min-width: 0;

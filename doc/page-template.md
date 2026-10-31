@@ -63,6 +63,9 @@ import * as XDemos from "../../demos/components/x.demo";
 <Playground :meta="XDemos.<Part>" :render="XDemos.<Part>.render" />
 #### <value variant> `<value>`
 
+## 用法
+### <English term> *<中文名>*
+
 ## 組合
 ```
 
@@ -78,6 +81,7 @@ import * as XDemos from "../../demos/components/x.demo";
 | 屬性 | Generic attrs — `sl-tone`, `sl-size`, `sl-radius`, `sl-pad`, `sl-interactive` | any generic attr applies |
 | 修飾詞 | Component settings `sl-<x>-<setting>` written on the component itself | component has settings |
 | 子元素 | Parts `sl-<x>-<part>` written on inner elements | component has parts |
+| 用法 | The component's own usage forms — same component, different roles (e.g. notice in-flow = banner, inside a fixed wrapper = toast) | component plays distinct roles |
 | 組合 | Use inside/with other components | meaningful combos exist |
 
 Inside `## 屬性`, `###` order follows the canonical table in `attrs.md`:
@@ -98,7 +102,10 @@ per placeable child. Omit the section entirely when no combo is worth showing.
 | `####` | `名稱` or ``名稱 `value` `` | ``#### 貼邊 `inset` `` |
 
 A `###` documenting behavior rather than an attribute (e.g. icon's
-`### 大小與對齊`) drops the attr chip. `####` groups demos under one `###`
+`### 大小與對齊`) drops the attr chip. A `###` under `## 用法` names a
+usage form in both languages — English first, Chinese as the glossed
+sub-label, mirroring `# Name *中文名*` (e.g. `### Banner *橫幅*`,
+`### Toast *浮動通知*`). `####` groups demos under one `###`
 (e.g. button's `#### 實心版本` / `#### 框線版本`) or lists a part's value
 variants (e.g. card-section's `#### 貼邊 `inset``).
 
