@@ -11,7 +11,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 通知用的膠囊訊息，「部署失敗」「系統維護中」「已儲存變更」這類狀況都適用。
 
-直接放進內容，就是頁面頂端的滿版橫幅；包進固定在角落的容器，就變成浮動通知。同一個元件，位置你決定。
+直接放進內容，就是頁面頂端的滿版橫幅；包進固定在角落的容器，就變成浮動通知。同一個元件，兩種用法。
 
 <Playground :meta="NoticeDemos.default" :render="NoticeDemos.Notice.render" />
 
@@ -29,7 +29,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### 顏色 `sl-tone`
 
-`sl-notice` 是 `sl-tone` 的適用元素。不寫值是 primary 淡底，一般資訊通知用這個就好。
+`sl-notice` 是 `sl-tone` 的適用元素。不寫值是 primary 淡底，資訊通知的標準色。
 
 - `primary`：主題主色（預設值）
 - `secondary`：主題副色
@@ -72,7 +72,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### 動作 `sl-notice-action`
 
-釘在邊緣的控制項，例如關閉鈕或動作連結，點擊行為自己處理：
+釘在邊緣的控制項，例如關閉鈕或動作連結，點擊後的行為由頁面實作：
 
 - 寫在 `sl-notice` 的直接子層；放到更深層的只是普通內容，不會釘邊緣
 - 不寫值靠右（尾端），`start` 靠左（開頭），兩個可以同時存在
@@ -93,6 +93,6 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### Toast *浮動通知*
 
-放在哪個角落、怎麼疊、什麼時候消失由你決定，這裡只管膠囊的樣子：
+放在哪個角落、怎麼疊、什麼時候消失，由頁面決定：
 
 <Playground :meta="NoticeDemos.ToastPlay" :render="NoticeDemos.ToastPlay.render" />

@@ -64,11 +64,11 @@ sakulime 的 API 全是 HTML 屬性，沒有 class。外觀全靠 CSS；圖示�
 <button sl-button sl-tone="danger">按鈕</button>
 ```
 
-子元素零件也一樣——它們只管自己的職責，不繼承元件的通用屬性。要染色就寫在會顯示顏色的那一個元素上：
+子元素零件也一樣，各自獨立，不繼承元件的通用屬性。要染色就寫在會顯示顏色的那一個元素上：
 
 ```html
 <div sl-card>
-  <!-- sl-card-corner 只管位置；顏色寫在 sl-dot 自己身上 -->
+  <!-- sl-card-corner 決定位置；顏色寫在 sl-dot 自己身上 -->
   <i sl-card-corner sl-dot sl-tone="danger"></i>
 </div>
 ```

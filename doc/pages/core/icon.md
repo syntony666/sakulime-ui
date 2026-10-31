@@ -1,6 +1,6 @@
 ---
 title: Icon 圖示
-description: 讓圖示跟著文字走的標記，大小跟字級、顏色跟墨色；圖示包要自己註冊。
+description: 讓圖示跟著文字走的標記，大小跟字級、顏色跟墨色。
 ---
 
 <script setup>
@@ -56,7 +56,7 @@ import { icon } from "sakulime-ui";
 
 ## 安裝
 
-套件本體不含任何圖示包資料，要用什麼自己註冊。package 名自訂，會變成 `sl-icon` 值的前綴。JS 需求依環境分三種裝法。
+套件本體不含任何圖示包資料，要用哪一包就註冊哪一包。package 名自訂，會變成 `sl-icon` 值的前綴。JS 需求依環境分三種裝法。
 
 ### Bundler
 
@@ -85,7 +85,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ### 純 HTML+CSS
 
-零 JS 頁面用 `<link>` 載入 CSS 就好。「貼 SVG」不需要任何 JS；「套用圖示包」跟 `icon()` 都要 JS 在場。
+零 JS 頁面用 `<link>` 載入 CSS 即可。「貼 SVG」不需要任何 JS；「套用圖示包」跟 `icon()` 都要 JS 在場。
 
 ::: details 輔助 API（JS 在場才用得到）
 

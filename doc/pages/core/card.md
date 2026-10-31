@@ -9,7 +9,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 # Card *卡片*
 
-帶邊框的內容容器，有底色、細框線、圓角和內距，拿來裝任何一段內容。
+帶邊框的內容容器，有底色、細框線、圓角和內距。
 
 <Playground :meta="CardDemos.default" :render="CardDemos.Card.render" />
 
@@ -93,7 +93,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 ### 角落標記 `sl-card-corner`
 
-把元素釘在卡片頂端角落，適合時間、狀態、數字這類補充資訊。`sl-card-corner` 只管位置，長相由同一個元素上的小元件屬性決定：
+把元素釘在卡片頂端角落，適合時間、狀態、數字這類補充資訊。`sl-card-corner` 決定位置，長相由同一個元素上的小元件屬性決定：
 
 ```html
 <div sl-card>
