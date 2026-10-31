@@ -1,6 +1,6 @@
 ---
 title: Dot 狀態點
-description: 跟著字級走的 0.5em 狀態圓點，sl-tone 染成各種狀態色。
+description: 一顆小圓點，插進句子、列表、表格都會對齊文字。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as DotDemos from "../../demos/components/dot.demo";
 
 # Dot *狀態點*
 
-一顆 0.5em 的圓點，插進句子、列表、表格都對齊文字。`sl-tone` 染成狀態色。
+一顆小圓點，插進句子、列表、表格都會對齊文字。
 
 <Playground :meta="DotDemos.default" :render="DotDemos.Dot.render" />
 
@@ -17,7 +17,7 @@ import * as DotDemos from "../../demos/components/dot.demo";
 
 ### 顏色 `sl-tone`
 
-`sl-dot` 在 `sl-tone` 的消費名單裡，寫上就染成對應色。不寫就繼承文字墨色。
+`sl-dot` 是 `sl-tone` 的適用元素，寫上就染成對應色。不寫就繼承文字墨色。
 
 - `primary`：主題主色
 - `secondary`：主題副色
@@ -29,7 +29,7 @@ import * as DotDemos from "../../demos/components/dot.demo";
 
 ### 大小與對齊
 
-大小固定 `0.5em`，跟著所在文字的字級縮放——不用寫尺寸屬性。
+大小固定 `0.5em`，跟著所在文字的字級縮放，不用寫尺寸屬性。
 
 <Demo :render="DotDemos.Sizes.render" />
 
@@ -39,7 +39,7 @@ import * as DotDemos from "../../demos/components/dot.demo";
 
 <Demo :render="DotDemos.StatusList.render" />
 
-疊上 `sl-card-corner` 就釘到卡片角落（不寫值是 `end` 右上，`start` 左上）——同一個元素，不用再包一層：
+疊上 `sl-card-corner` 就釘到卡片角落（不寫值是 `end` 右上，`start` 左上），同一個元素，不用再包一層：
 
 ```html
 <i sl-card-corner sl-dot sl-tone="danger"></i>

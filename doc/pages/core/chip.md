@@ -1,6 +1,6 @@
 ---
 title: Chip 膠囊
-description: icon 加一行字的小膠囊條目，em 制跟字級縮放，sl-tone 染色。
+description: 圖示配一行字的小膠囊，標籤列、資訊列這種一排小項目都合用。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as ChipDemos from "../../demos/components/chip.demo";
 
 # Chip *膠囊*
 
-icon 加一行字的小膠囊，用在 meta 列、標籤列、header 條目。`sl-tone` 染色。
+圖示配一行字的小膠囊，標籤列、資訊列這種一排小項目都合用。
 
 <Playground :meta="ChipDemos.default" :render="ChipDemos.Chip.render" />
 
@@ -17,7 +17,7 @@ icon 加一行字的小膠囊，用在 meta 列、標籤列、header 條目。`s
 
 ### 顏色 `sl-tone`
 
-`sl-chip` 在 `sl-tone` 的消費名單裡，寫上就染成對應色。不寫是文字墨色調出的中性底。
+`sl-chip` 是 `sl-tone` 的適用元素，寫上就染成對應色。不寫是文字墨色調出的中性底。
 
 - `primary`：主題主色
 - `secondary`：主題副色
@@ -29,7 +29,7 @@ icon 加一行字的小膠囊，用在 meta 列、標籤列、header 條目。`s
 
 ### 大小與對齊
 
-em 制——膠囊內的字是所在字級的 `0.875em`，跟著上下文縮放，不用寫尺寸屬性。
+em 制，膠囊內的字是所在字級的 `0.875em`，跟著周圍字級一起縮放，不用寫尺寸屬性。
 
 <Demo :render="ChipDemos.Sizes.render" />
 

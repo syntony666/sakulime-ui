@@ -72,6 +72,6 @@ import "@sakulime-ui/theme/umbra.min.css";      // Theme: Umbra
 
 ## 主題色系
 
-每個顏色都是 `var(--sl-*)`，預設為 `sakulime`。右上角可以切換主題，下面的色票會跟著變。
+每個顏色都是 `var(--sl-*)`，預設為 `sakulime`。右上角可以切換主題，下面的顏色會跟著變。
 
 <ThemeSwatches />

@@ -1,6 +1,6 @@
 ---
 title: Notice 通知
-description: 通知膠囊。放進內容是頁面橫幅，包進固定定位的容器就是角落浮動通知。
+description: 通知膠囊。放進內容是頁面橫幅，包進固定在角落的容器就是浮動通知。
 ---
 
 <script setup>
@@ -9,9 +9,9 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 # Notice *通知*
 
-通知用的膠囊訊息，「部署失敗」「系統維護中」「已儲存變更」這類狀況都適用。`sl-tone` 決定底色、框線、墨色；關閉跟自動消失的行為留給消費者，這裡只管長相。
+通知用的膠囊訊息，「部署失敗」「系統維護中」「已儲存變更」這類狀況都適用。
 
-直接放進內容，就是頁面頂端的滿版橫幅；包進 `fixed` 容器，就變成浮在角落的通知。同一個元件，位置你決定。
+直接放進內容，就是頁面頂端的滿版橫幅；包進固定在角落的容器，就變成浮動通知。同一個元件，位置你決定。
 
 <Playground :meta="NoticeDemos.default" :render="NoticeDemos.Notice.render" />
 
@@ -93,6 +93,6 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### Toast *浮動通知*
 
-放在哪個角落、怎麼疊、什麼時候消失，都是你的 CSS 跟狀態機的事，這個套件只管膠囊的樣子。要讓螢幕閱讀器報出新通知，容器自己加 `role="status"`（或 `aria-live="polite"`）：
+放在哪個角落、怎麼疊、什麼時候消失由你決定，這裡只管膠囊的樣子：
 
 <Playground :meta="NoticeDemos.ToastPlay" :render="NoticeDemos.ToastPlay.render" />

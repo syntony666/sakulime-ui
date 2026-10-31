@@ -1,6 +1,6 @@
 ---
 title: Icon 圖示
-description: sl-icon 圖示標記，大小跟字級走、用 sl-tone 上色；圖示包由消費者註冊，icon() 產生 SVG 字串。
+description: 讓圖示跟著文字走的標記，大小跟字級、顏色跟墨色；圖示包要自己註冊。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as IconDemos from "../../demos/components/icon.demo";
 
 # Icon *圖示*
 
-`sl-icon` 是加在 SVG 上的屬性標記。它不是元素、不渲染內容，只控制 SVG 在行內的大小、顏色與對齊。加了之後大小固定 `1em`，顏色繼承 `currentColor`（或寫 `sl-tone`），垂直位置對齊文字底線。
+讓圖示跟著文字走的標記。大小跟著字級、顏色跟著墨色，垂直位置對齊底線。
 
 <Playground :meta="IconDemos.default" :render="IconDemos.Icon.render" />
 
@@ -87,7 +87,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 零 JS 頁面用 `<link>` 載入 CSS 就好。「貼 SVG」不需要任何 JS；「套用圖示包」跟 `icon()` 都要 JS 在場。
 
-::: details 輔助API（JS 在場才用得到）
+::: details 輔助 API（JS 在場才用得到）
 
 - `packNames()`：列出已註冊的圖示包
 - `iconNames(prefix)`：列出指定包的圖示名
@@ -100,7 +100,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ### 顏色 `sl-tone`
 
-`sl-icon` 在 `sl-tone` 的消費名單裡，寫在 icon 自己身上就染成對應色；不寫繼承文字墨色。
+`sl-icon` 是 `sl-tone` 的適用元素，寫在圖示自己身上就染成對應色；不寫繼承文字墨色。
 
 <Demo :render="IconDemos.Tones.render" />
 
@@ -142,7 +142,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 讓圖示不停旋轉。系統設了 `prefers-reduced-motion` 時自動停用。
 
-跟 `sl-icon-rotate`、`sl-icon-flip` 同時寫也會疊加——靜態角度保留，動畫在之上轉整圈。
+跟 `sl-icon-rotate`、`sl-icon-flip` 同時寫也會疊加，靜態角度保留、動畫再疊上整圈旋轉。
 
 <Demo :render="IconDemos.Spin.render" />
 
