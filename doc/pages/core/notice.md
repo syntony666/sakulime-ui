@@ -98,15 +98,13 @@ action 裡的 icon 跟著按鈕字級走（`sl-size="sm"` 約 12px），要大�
 
 ## 用法
 
-`sl-notice` 不分橫幅版或浮動通知版——同一條放進文件流是橫幅，包進你自己的容器就是浮動通知。切「用法」直接比較：
-
-<Playground :meta="NoticeDemos.UsageMeta" :render="NoticeDemos.UsagePlay.render" />
+`sl-notice` 不分橫幅版或浮動通知版——同一條放進文件流是橫幅，包進你自己的容器就是浮動通知。
 
 ### Banner *橫幅*
 
-放進文件流就是滿寬橫幅——`<i sl-icon>` 開頭、訊息跟連結照順序排，連結會跟著通知墨色走。不放 icon 的話文字直接從邊緣起頭，不會留空：
+放進文件流就是滿寬橫幅——`<i sl-icon>` 開頭、訊息跟連結照順序排，連結會跟著通知墨色走。圖示切到「無」的話文字直接從邊緣起頭，不會留空：
 
-<Demo :render="NoticeDemos.NoIcon.render" />
+<Playground :meta="NoticeDemos.BannerMeta" :render="NoticeDemos.BannerPlay.render" />
 
 內容長了就直接折行，膠囊跟著長高——預設 `full` 圓角封頂一行高，三行起兩端之間的中段變直線。
 
@@ -120,4 +118,4 @@ icon 放哪決定它的角色：寫在文字元素（`<span>`）裡是行內圖�
 
 幾條塞進你自己的容器（`fixed`、grid、什麼都好）就是浮動通知——放哪個角落、怎麼疊、何時消失都是你的 CSS 跟狀態機，本包只管膠囊的長相：
 
-<Demo :render="NoticeDemos.AsToast.render" />
+<Playground :meta="NoticeDemos.ToastMeta" :render="NoticeDemos.ToastPlay.render" />

@@ -10,8 +10,8 @@ type NoticeArgs = {
   radius: string;
   align: string;
   action: string;
-  usage: string;
   icon: string;
+  count: string;
 };
 
 const TONES = ["-", "primary", "secondary", "success", "warning", "danger"];
@@ -79,16 +79,6 @@ export const Widths: Demo = {
       ["-", "fit"],
       (v) =>
         `<div ${marker(v)} sl-tone="success"><i sl-icon="lucide:check"></i> ${v === "-" ? "全寬" : "內容寬"}</div>`,
-      true,
-    ),
-};
-
-// no icon — text starts flush at the padding edge, the flex gap
-// only exists between items
-export const NoIcon: Demo = {
-  render: () =>
-    axis(["-", "fit"], (v) =>
-      `<div ${marker(v)} sl-tone="secondary">${v === "-" ? "全寬" : "內容寬"}純文字通知</div>`,
       true,
     ),
 };
@@ -189,19 +179,11 @@ export const Multiline: Demo = {
     `</div>`,
 };
 
-// usage playground — the same notice in its two roles: bare in flow
-// reads as a banner; inside a consumer container it reads as toast
-const USAGES = ["banner", "toast"];
-
-export const UsageMeta = {
-  args: { usage: "banner", variant: "-", icon: "有" },
+// banner playground — a bare notice in document flow; toggling the
+// icon shows copy starting flush at the padding edge
+export const BannerMeta = {
+  args: { variant: "-", icon: "有" },
   argTypes: {
-    usage: {
-      name: "用法",
-      description: "banner = 放進文件流／toast = 包進自備容器",
-      control: { type: "select" as const },
-      options: USAGES,
-    },
     variant: axisArg("sl-notice", "寬度", "-", VARIANTS),
     icon: {
       name: "圖示",
@@ -211,24 +193,41 @@ export const UsageMeta = {
   },
 };
 
-export const UsagePlay: Demo = {
-  render: (a) => {
-    const notice =
-      `<div ${marker(a.variant)} sl-tone="warning">` +
-      (a.icon === "無" ? "" : `<i sl-icon="lucide:triangle-alert"></i> `) +
-      `排程維護將於 30 分鐘後開始</div>`;
-    return a.usage === "toast" ? `<div class="demo-toast">${notice}</div>` : notice;
+export const BannerPlay: Demo = {
+  render: (a) =>
+    `<div ${marker(a.variant)} sl-tone="warning">` +
+    (a.icon === "無" ? "" : `<i sl-icon="lucide:triangle-alert"></i> `) +
+    `排程維護將於 30 分鐘後開始</div>`,
+};
+
+// toast playground — the consumer owns the container (.demo-toast);
+// stacking N notices in it, per-notice width is the only sl-side knob
+const TOASTS = [
+  ["success", "check", "已儲存變更"],
+  ["warning", "triangle-alert", "部署已排入佇列，前方還有 2 個 build"],
+  ["-", "bell", `新版本 v0.3.1 可用 <a href="#">查看更新</a>`],
+];
+
+export const ToastMeta = {
+  args: { count: "3", variant: "-" },
+  argTypes: {
+    count: {
+      name: "數量",
+      control: { type: "select" as const },
+      options: ["1", "2", "3"],
+    },
+    variant: axisArg("sl-notice", "寬度", "-", VARIANTS),
   },
 };
 
-// toast is just a notice in a consumer-fixed wrapper — placement
-// (corner, stacking, timeout) is consumer CSS, not this package.
-// .demo-toast mimics a corner stack inside the demo frame
-export const AsToast: Demo = {
-  render: () =>
+export const ToastPlay: Demo = {
+  render: (a) =>
     `<div class="demo-toast">` +
-    `<div sl-notice sl-tone="success"><i sl-icon="lucide:check"></i> 已儲存變更</div>` +
-    `<div sl-notice sl-tone="warning"><i sl-icon="lucide:triangle-alert"></i> 部署已排入佇列，前方還有 2 個 build</div>` +
-    `<div sl-notice="fit"><i sl-icon="lucide:bell"></i> 新版本 v0.3.1 可用 <a href="#">查看更新</a></div>` +
+    TOASTS.slice(0, Number(a.count))
+      .map(
+        ([tone, icon, body]) =>
+          `<div ${marker(a.variant)}${attr("sl-tone", tone)}><i sl-icon="lucide:${icon}"></i> ${body}</div>`,
+      )
+      .join("") +
     `</div>`,
 };
