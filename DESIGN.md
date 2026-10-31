@@ -155,7 +155,7 @@ components:
 
 ## Shapes
 
-- **圓角屬性**：`sl-radius` none/sm(4)/md(8，預設)/lg(12)/full(999) — 映射到通用尺度台階
+- **圓角屬性**：`sl-radius` none/sm(4)/md(8，預設)/lg(12)/full — 映射到通用尺度台階；`full` 在卡片/通知上是「一行膠囊」封頂（半徑 = 一行高），其他元件仍是大值膠囊
 - **卡片裁切**：`overflow:hidden` 讓 inset 出血內容自動吃卡片圓角 — 貼邊內容不用自己圓角
 - **Hairline 語言**：1px `--sl-border` 無所不在 — 卡片邊、section 分隔線（滿版）、h1 漸層底線、sidebar 選中條 3px accent bar
 - **Signature 形狀**：頂端 2px 漸層 hairline；corner chip 方形小圓角（`--sl-xs`）貼卡片頂角
