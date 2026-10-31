@@ -18,21 +18,21 @@ import * as ToneDemos from "../../demos/attrs/tone.demo";
 <span sl-chip sl-tone="success">完成</span>
 ```
 
-同一個值套在不同元件上的樣子：
+同一個 `sl-tone` 套在不同元件上的樣子：
 
 <Demo :render="ToneDemos.Tones.render" />
 
 ## 屬性
 
-### 值
+### 選項
 
 `primary`、`secondary`、`success`、`warning`、`danger`。
 
 ### 適用元素
 
-沒給值的預設每個元件不同：
+沒給的話，各元件的預設不同：
 
-| 元素 | 沒給值 |
+| 元素 | 預設 |
 | --- | --- |
 | `sl-button` | `primary` |
 | `sl-card` | `primary`，只染邊緣強調條，不動卡片底色 |

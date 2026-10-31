@@ -29,7 +29,7 @@ export const mark = (name: string) => (v: string) =>
 // data-demo marks this as demo chrome — the docs source transform
 // drops the whole element so it never reaches the shown code
 const SEP =
-  '<span class="axis-sep" data-demo title="左側是未寫入屬性的預設，右側是具名值"></span>';
+  '<span class="axis-sep" data-demo title="左側是未標示屬性的預設，右側是具名選項"></span>';
 
 // col stacks items vertically — for block-level components (banner)
 // where a horizontal wrap row would shrink-wrap them into pills

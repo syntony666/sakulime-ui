@@ -16,7 +16,7 @@ export const Basic: Demo = {
   render: () =>
     `<article sl-flow="lg">` +
     `<h3>文件標題</h3>` +
-    `<p>標題跟段落保留自己的 margin，所以這裡的距離是兩者取大的；卡片跟通知沒有 margin，距離就是間距值本身。</p>` +
+    `<p>標題跟段落保留自己的 margin，所以這裡的距離是兩者取大的；卡片跟通知沒有 margin，距離就是間距本身。</p>` +
     `<div sl-card>卡片內容</div>` +
     `<div sl-notice>通知內容</div>` +
     `</article>`,

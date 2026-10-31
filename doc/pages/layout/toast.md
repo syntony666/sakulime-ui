@@ -28,9 +28,9 @@ import * as ToastDemos from "../../demos/layout/toast.demo";
 
 ### 位置
 
-值換角落，預設右下：
+標示換角落，預設右下：
 
-| 值               | 位置 |
+| 選項             | 位置 |
 | ---------------- | ---- |
 | 預設              | 右下 |
 | `start`          | 左下 |

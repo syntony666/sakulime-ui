@@ -23,9 +23,9 @@ import * as InteractiveDemos from "../../demos/attrs/interactive.demo";
 
 ## 屬性
 
-### 值
+### 選項
 
-`grow`、`lift`、`raise`、`press`，沒給值是 `grow`。
+`grow`、`lift`、`raise`、`press`，沒給是 `grow`。
 
 ### 適用元素
 

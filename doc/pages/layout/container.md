@@ -24,7 +24,7 @@ import * as ContainerDemos from "../../demos/layout/container.demo";
 
 標示在任何元素上都生效。這是純容器，不適用 `sl-tone` 那些通用屬性，要底色跟圓角的話配 `sl-card`。
 
-下面是三個真的容器，數值標籤顯示當下實際的寬度，拉視窗寬度會跟著變。夠寬時 `lg` 就是 `75rem`（1200px），變窄就貼邊。
+下面是三個真的容器，數字標籤顯示當下實際的寬度，拉視窗寬度會跟著變。夠寬時 `lg` 就是 `75rem`（1200px），變窄就貼邊。
 
 <Demo
   :render="ContainerDemos.ContainerWidths.render"
@@ -42,9 +42,9 @@ import * as ContainerDemos from "../../demos/layout/container.demo";
 - `sl-container-md`：60rem（960px）
 - `sl-container-lg`：75rem（1200px）
 
-寬度是 rem，px 是以根字級 16px 換算的參考值。
+寬度是 rem，px 是以根字級 16px 換算的參考。
 
-更改數值的話，覆寫 `--sl-container-sm/md/lg`。
+要改寬度的話，覆寫 `--sl-container-sm/md/lg`。
 
 ### 內距
 

@@ -24,7 +24,7 @@ import * as RadiusDemos from "../../demos/attrs/radius.demo";
 
 ## 屬性
 
-### 值
+### 選項
 
 `none`、`sm`、`md`、`lg`、`full`，預設 `md`。
 
