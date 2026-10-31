@@ -25,7 +25,7 @@ import * as GapDemos from "../../demos/layout/gap.demo";
 
 <Demo :render="GapDemos.Region.render" />
 
-讀 `sl-gap` 的屬性：`sl-stack`、`sl-row`、`sl-grid`、`sl-with-sidebar`、`sl-topbar`、`sl-footer`、`sl-toast`。
+讀 `sl-gap` 的屬性：`sl-stack`、`sl-row`、`sl-grid`、`sl-flow`、`sl-with-sidebar`、`sl-topbar`、`sl-footer`、`sl-toast`。
 
 - 標示在自己身上：`<div sl-stack sl-gap="xs">` 這個 stack 的間距就是 xs，跟 `sl-stack="xs"` 一樣
 - 標示在外層：值會繼承給裡面所有讀 `sl-gap` 的屬性
