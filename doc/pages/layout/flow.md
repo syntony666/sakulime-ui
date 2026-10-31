@@ -22,7 +22,7 @@ import * as FlowDemos from "../../demos/layout/flow.demo";
 </article>
 ```
 
-子層不用標任何東西，間距自動補在兄弟之間，第一個上面不加。卡片通知這種沒 margin 的元件隔得開，標題段落保留自己的間距：
+子層不用標任何東西，間距自動補在相鄰子層之間，第一個上面不加。卡片通知這種沒 margin 的元件隔得開，標題段落保留自己的間距：
 
 <Demo :render="FlowDemos.Basic.render" />
 
