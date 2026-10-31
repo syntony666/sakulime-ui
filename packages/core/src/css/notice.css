@@ -92,12 +92,11 @@
     );
   }
 
-  /* the start lane runs tighter — the control's own trailing padding
-     makes up the rest of the leading-icon distance */
+  /* the start lane reserves the same width as the end lane */
   [sl-notice]:has(> [sl-notice-action="start"]) {
     padding-inline-start: calc(
-      var(--sl-action-inset) + var(--sl-action-w) + var(--sl-notice-gap) -
-        var(--sl-sm)
+      var(--sl-action-inset) + var(--sl-action-w) + var(--sl-md) +
+        var(--sl-notice-gap)
     );
   }
 
