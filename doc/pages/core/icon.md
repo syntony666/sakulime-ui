@@ -9,7 +9,7 @@ import * as IconDemos from "../../demos/components/icon.demo";
 
 # Icon *圖示*
 
-讓圖示跟著文字走的標記。大小跟著字級、顏色跟著墨色，垂直位置對齊底線。
+> 讓圖示跟著文字走的標記。大小跟著字級、顏色跟著墨色，垂直位置對齊底線。
 
 <Playground :meta="IconDemos.default" :render="IconDemos.Icon.render" />
 
@@ -60,7 +60,9 @@ import { icon } from "sakulime-ui";
 
 ### Bundler
 
+::: info
 `@iconify-json/*` 是永久開源授權的資料檔（lucide 是 ISC、Simple Icons 是 CC0），建議當 devDep 裝。產出的是 SVG 字串，JSON 不會進使用者的 bundle。
+:::
 
 ```ts
 import { registerPack } from "sakulime-ui";
@@ -85,7 +87,11 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ### 純 HTML+CSS
 
-零 JS 頁面用 `<link>` 載入 CSS 即可。「貼 SVG」不需要任何 JS；「套用圖示包」跟 `icon()` 都要 JS 在場。
+零 JS 頁面用 `<link>` 載入 CSS 即可。
+
+::: info JS 需求
+「貼 SVG」不需要任何 JS；「套用圖示包」跟 `icon()` 都要 JS 在場。
+:::
 
 ::: details 輔助 API（JS 在場才用得到）
 

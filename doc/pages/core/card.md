@@ -9,7 +9,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 # Card *卡片*
 
-帶邊框的內容容器，有底色、細框線、圓角和內距。
+> 帶邊框的內容容器，有底色、細框線、圓角和內距。
 
 <Playground :meta="CardDemos.default" :render="CardDemos.Card.render" />
 

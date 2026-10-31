@@ -9,7 +9,7 @@ import * as ButtonDemos from "../../demos/components/button.demo";
 
 # Button *按鈕*
 
-按鈕的樣式，寫在按鈕或連結的標記上就生效。
+> 按鈕的樣式，寫在按鈕或連結的標記上就生效。
 
 <Playground :meta="ButtonDemos.default" :render="ButtonDemos.Button.render" />
 

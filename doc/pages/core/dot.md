@@ -9,7 +9,7 @@ import * as DotDemos from "../../demos/components/dot.demo";
 
 # Dot *狀態點*
 
-一顆小圓點，插進句子、列表、表格都會對齊文字。
+> 一顆小圓點，插進句子、列表、表格都會對齊文字。
 
 <Playground :meta="DotDemos.default" :render="DotDemos.Dot.render" />
 

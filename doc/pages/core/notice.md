@@ -9,9 +9,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 # Notice *通知*
 
-通知用的膠囊訊息，「部署失敗」「系統維護中」「已儲存變更」這類狀況都適用。
-
-直接放進內容，就是頁面頂端的滿版橫幅；包進固定在角落的容器，就變成浮動通知。同一個元件，兩種用法。
+> 通知用的膠囊訊息，「部署失敗」「系統維護中」「已儲存變更」這類狀況都適用。直接放進內容，就是頁面頂端的滿版橫幅；包進固定在角落的容器，就變成浮動通知。同一個元件，兩種用法。
 
 <Playground :meta="NoticeDemos.default" :render="NoticeDemos.Notice.render" />
 

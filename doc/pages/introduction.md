@@ -54,4 +54,6 @@ import "sakulime-ui/sakulime.min.css";
 | `--sl-container-md` | 60rem   | 960px  |
 | `--sl-container-lg` | 75rem   | 1200px |
 
+::: tip
 表上沒有的值，在自己的 CSS 裡直接寫數字，不用硬湊最近的階。
+:::

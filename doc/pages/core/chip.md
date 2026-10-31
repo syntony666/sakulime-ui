@@ -9,7 +9,7 @@ import * as ChipDemos from "../../demos/components/chip.demo";
 
 # Chip *膠囊*
 
-圖示配一行字的小膠囊，用在標籤列、資訊列這種一排小項目。
+> 圖示配一行字的小膠囊，用在標籤列、資訊列這種一排小項目。
 
 <Playground :meta="ChipDemos.default" :render="ChipDemos.Chip.render" />
 
