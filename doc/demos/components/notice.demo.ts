@@ -8,12 +8,14 @@ type NoticeArgs = {
   variant: string;
   pad: string;
   radius: string;
+  align: string;
 };
 
 const TONES = ["-", "primary", "secondary", "success", "warning", "danger"];
 const VARIANTS = ["-", "fit"];
 const PADS = ["-", "sm", "md", "lg"];
 const RADII = ["-", "sm", "md", "lg", "full", "none"];
+const ALIGNS = ["-", "end"];
 
 const meta = {
   title: "Core/Notice 通知",
@@ -32,12 +34,14 @@ const meta = {
     variant: "-",
     pad: "-",
     radius: "-",
+    align: "-",
   },
   argTypes: {
     tone: axisArg("sl-tone", "顏色", "-", TONES),
     variant: axisArg("sl-notice", "寬度", "-", VARIANTS),
     pad: axisArg("sl-pad", "厚度", "-", PADS),
     radius: axisArg("sl-radius", "圓角", "-", RADII),
+    align: axisArg("sl-notice-align", "對齊", "-", ALIGNS),
   },
 } satisfies Meta<NoticeArgs>;
 
@@ -51,7 +55,7 @@ const BODY = `<i sl-icon="lucide:info"></i> 系統將於 11/2 02:00–03:00 例�
 
 export const Notice: Demo = {
   render: (a) =>
-    `<div ${marker(a.variant)}${attr("sl-tone", a.tone)}${attr("sl-pad", a.pad)}${attr("sl-radius", a.radius)}>${BODY}</div>`,
+    `<div ${marker(a.variant)}${attr("sl-tone", a.tone)}${attr("sl-pad", a.pad)}${attr("sl-radius", a.radius)}${attr("sl-notice-align", a.align)}>${BODY}</div>`,
 };
 
 export const Tones: Demo = {
@@ -101,6 +105,18 @@ export const Radius: Demo = {
       RADII,
       (v) =>
         `<div sl-notice sl-tone="secondary"${attr("sl-radius", v)}>${label(v)} 圓角</div>`,
+      true,
+    ),
+};
+
+// sl-notice-align moves the copy, not the frame — "end" parks it at
+// the trailing edge (no visible effect under fit, nothing to push)
+export const Aligns: Demo = {
+  render: () =>
+    axis(
+      ["-", "end"],
+      (v) =>
+        `<div sl-notice sl-tone="secondary"${attr("sl-notice-align", v)}><i sl-icon="lucide:info"></i> ${v === "-" ? "靠左（預設）" : "靠右"}的訊息</div>`,
       true,
     ),
 };

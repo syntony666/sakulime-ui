@@ -57,6 +57,17 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 <Demo :render="NoticeDemos.Pads.render" />
 
+## 修飾詞
+
+### 對齊 `sl-notice-align`
+
+中間內容的位置，`fit` 下沒有空間可推所以無感：
+
+- 不寫值：靠左（預設）
+- `end`：靠右
+
+<Demo :render="NoticeDemos.Aligns.render" />
+
 ## 子元素
 
 ### 動作 `sl-notice-action`
