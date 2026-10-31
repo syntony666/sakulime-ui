@@ -519,13 +519,29 @@ body::before {
   padding-left: 17px;
 }
 
-/* sub-label next to a main title — h1 "Button *按鈕*" only */
-.vp-doc h1 em {
+/* sub-label next to a main title — h1 "Button *按鈕*" and usage-form
+   h3 "Banner *橫幅*": the gloss reads as dimmed ink, not emphasis */
+.vp-doc :is(h1, h3) em {
   color: var(--sl-text-muted);
   font-style: normal;
   font-size: 0.8em;
   font-weight: 500;
   margin-left: 0.2em;
+}
+
+/* page-TOC gloss — the outline flattens heading markup to text, so
+   Layout wraps the trailing CJK run in .toc-gloss; dim it inside the
+   link's own ink, matching the sidebar subtitle treatment */
+.VPDocOutlineItem .toc-gloss {
+  opacity: 65%;
+}
+
+/* trailing sl-* token — mono keeps the code identity, a light dim
+   keeps the Chinese label leading */
+.VPDocOutlineItem .toc-attr {
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.95em;
+  opacity: 80%;
 }
 
 /* pager title is a page name — same ink as the h1 it links to
