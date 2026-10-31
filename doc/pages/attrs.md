@@ -49,7 +49,7 @@ description: sl-* 屬性語法總覽：元件標記、元件設定、子元素�
 | `sl-radius` | `none` `sm` `md` `lg` `full` | `sl-button`、`sl-card`、`sl-notice` | 圓角 |
 | `sl-pad` | `sm` `md` `lg` | `sl-card`、`sl-notice` | 內距 |
 | `sl-interactive` | `grow` `lift` `raise` `press` | `sl-card` | 滑鼠移過去的效果，不寫值是 `grow` |
-| `sl-gap` | `xs` `sm` `md` `lg` `xl` `2xl` `3xl` `4xl` `5xl` | `sl-stack`、`sl-row`、`sl-grid`、`sl-with-sidebar`、`sl-topbar`、`sl-footer`、`sl-toast` | 間距，元素自己的屬性值優先 |
+| `sl-gap` | `xs` `sm` `md` `lg` `xl` `2xl` `3xl` `4xl` `5xl` | `sl-stack`、`sl-row`、`sl-grid`、`sl-with-sidebar`、`sl-topbar`、`sl-footer`、`sl-toast` | 一次改整區間距，自己寫了值的不受影響 |
 
 ## 作用範圍
 
