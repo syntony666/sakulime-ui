@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import DefaultTheme from "vitepress/theme";
+import { useRoute } from "vitepress";
 import {
   computed,
   nextTick,
@@ -12,6 +13,7 @@ import pkg from "../../../package.json";
 
 const { Layout } = DefaultTheme;
 const { version } = pkg;
+const route = useRoute();
 const theme = ref("sakulime");
 const open = ref(false);
 const switchEl = ref<HTMLElement>();
@@ -94,10 +96,41 @@ const onFocusOut = (e: FocusEvent) => {
   if (!switchEl.value?.contains(e.relatedTarget as Node)) open.value = false;
 };
 
+// the page TOC flattens heading markup to plain text — a usage-form h3
+// like "Banner *橫幅*" loses its gloss styling, and an attr h3 like
+// "動作 `sl-notice-action`" loses the code look. wrap the trailing CJK
+// or sl-* run in a span so css can restore the sub-label/code
+// hierarchy. the childElementCount guard keeps the observer from
+// re-entering on its own writes
+const GLOSS_TAIL = /^(.+?)\s+([一-鿿豈-﫿％-￯　-〿]+)$/;
+const ATTR_TAIL = /^(.+?)\s+(sl-\S+)$/;
+const patchOutlineGloss = () => {
+  document.querySelectorAll(".VPDocOutlineItem a").forEach((a) => {
+    if (a.childElementCount > 0) return;
+    const text = a.textContent ?? "";
+    const m = text.match(GLOSS_TAIL) ?? text.match(ATTR_TAIL);
+    if (!m) return;
+    a.textContent = `${m[1]} `;
+    const span = document.createElement("span");
+    span.className = m[2].startsWith("sl-") ? "toc-attr" : "toc-gloss";
+    span.textContent = m[2];
+    a.appendChild(span);
+  });
+};
+
 // data-theme drives the sakulime token cascade — SSR has no document,
 // so set it post-mount and on every toggle; the choice persists in
 // localStorage (restored pre-paint by the head script in config.mts)
 onMounted(() => {
+  patchOutlineGloss();
+  // outline links land after mount and the whole nav re-renders on
+  // every client nav — observe the tree instead of hooking the route
+  const glossObserver = new MutationObserver(patchOutlineGloss);
+  glossObserver.observe(document.body, { childList: true, subtree: true });
+  watch(
+    () => route.path,
+    () => nextTick(patchOutlineGloss),
+  );
   const saved = localStorage.getItem("sl-theme");
   if (saved && themes.some((t) => t.value === saved)) theme.value = saved;
   watch(
