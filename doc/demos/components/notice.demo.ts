@@ -172,7 +172,7 @@ const LONG =
 // width, icon on/off, single vs wrapped lines, and end alignment.
 // the icon is ordinary inline content — no wrapper needed
 export const BannerMeta = {
-  args: { variant: "-", icon: "有", lines: "單行", align: "-" },
+  args: { variant: "-", icon: "有", lines: "單行", align: "-", action: "-" },
   argTypes: {
     variant: axisArg("sl-notice", "寬度", "-", VARIANTS),
     icon: {
@@ -188,17 +188,22 @@ export const BannerMeta = {
       options: ["單行", "多行"],
     },
     align: axisArg("sl-notice-align", "對齊", "-", ALIGNS),
+    action: axisArg("sl-notice-action", "動作", "-", ACTIONS),
   },
 };
 
 export const BannerPlay: Demo = {
   render: (a) => {
     const text = a.lines === "多行" ? LONG : "排程維護將於 30 分鐘後開始";
-    const inner =
-      a.icon === "無"
-        ? text
-        : `<i sl-icon="lucide:triangle-alert"></i> ${text}`;
-    return `<div ${marker(a.variant)} sl-tone="warning"${attr("sl-notice-align", a.align)}>${inner}</div>`;
+    const icon = a.icon === "無" ? "" : `<i sl-icon="lucide:triangle-alert"></i> `;
+    return (
+      `<div ${marker(a.variant)} sl-tone="warning"${attr("sl-notice-align", a.align)}>` +
+      (a.action === "start" || a.action === "both" ? BELL_BTN : "") +
+      icon +
+      text +
+      (a.action === "end" || a.action === "both" ? X_BTN : "") +
+      `</div>`
+    );
   },
 };
 
