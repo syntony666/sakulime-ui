@@ -45,7 +45,7 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 | `4xl` | 40px         |
 | `5xl` | 48px         |
 
-欄距跟行距吃同一個值。改單一容器寫 `--sl-grid-gap`，或寫通用的 `sl-gap`，原語自己的值優先。
+表列 px 以根字級 16px 換算，尺規本身吃 rem。欄距跟行距吃同一個值。改單一容器寫 `--sl-grid-gap`，或寫通用的 `sl-gap`，原語自己的值優先。
 
 ### 欄寬
 

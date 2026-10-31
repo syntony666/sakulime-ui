@@ -45,7 +45,7 @@ import * as RowDemos from "../../demos/layout/row.demo";
 | `4xl` | 40px         |
 | `5xl` | 48px         |
 
-水平間距跟換行後的行距吃同一個值。改單一容器寫 `--sl-row-gap`，或寫通用的 `sl-gap`，原語自己的值優先。
+表列 px 以根字級 16px 換算，尺規本身吃 rem。水平間距跟換行後的行距吃同一個值。改單一容器寫 `--sl-row-gap`，或寫通用的 `sl-gap`，原語自己的值優先。
 
 ### 行為
 
