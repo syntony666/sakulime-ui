@@ -40,10 +40,24 @@ import * as SidebarDemos from "../../demos/layout/sidebar.demo";
 
 ### 尺寸
 
-- 側欄寬吃 `--sl-sidebar-w`，預設 16rem（256px），可以各別覆寫
-- 主欄下限吃 `--sl-sidebar-min`，預設 55%：主欄被擠到下限以下時整組換行，側欄變滿寬排在上面
+- 側欄寬是 `--sl-sidebar-w`，預設 16rem（256px），可以各別覆寫
+- 主欄下限是 `--sl-sidebar-min`，預設 55%：主欄被擠到下限以下時整組換行，側欄變滿寬排在上面
 - 換行看容器可用寬度，不是視窗斷點，塞進窄容器照樣會掉
 
 ### 間距
 
-`sl-with-sidebar` 的值就是間距，預設 `lg`（16px），`xs`–`5xl` 全階。只想改一個容器就寫 `--sl-sidebar-gap`；[`sl-gap`](/layout/gap) 寫在容器自己或外層都行，裡面沒寫值的 `sl-stack`、`sl-row`、`sl-grid` 都會吃到。
+`sl-with-sidebar` 的值就是間距，預設 `lg`（16px）：
+
+| 值    | 間距         |
+| ----- | ------------ |
+| `xs`  | 4px          |
+| `sm`  | 8px          |
+| `md`  | 12px         |
+| `lg`  | 16px（預設） |
+| `xl`  | 20px         |
+| `2xl` | 24px         |
+| `3xl` | 32px         |
+| `4xl` | 40px         |
+| `5xl` | 48px         |
+
+表列 px 以根字級 16px 換算，尺規本身是 rem。只想改一個容器就寫 `--sl-sidebar-gap`；[`sl-gap`](/layout/gap) 寫在容器自己或外層都行，裡面沒寫值的 `sl-stack`、`sl-row`、`sl-grid` 都會生效。
