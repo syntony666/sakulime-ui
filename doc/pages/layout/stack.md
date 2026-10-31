@@ -45,7 +45,7 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 | `4xl` | 40px         |
 | `5xl` | 48px         |
 
-改單一容器寫 `--sl-stack-gap`，例如 `style="--sl-stack-gap: 6px"`。
+改單一容器寫 `--sl-stack-gap`，例如 `style="--sl-stack-gap: 6px"`，或寫通用的 `sl-gap`，原語自己的值優先。
 
 ### 行為
 

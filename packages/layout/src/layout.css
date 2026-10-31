@@ -25,7 +25,7 @@
   [sl-stack] {
     display: flex;
     flex-direction: column;
-    gap: var(--sl-stack-gap, var(--sl-md));
+    gap: var(--sl-stack-gap, var(--sl-gap, var(--sl-md)));
   }
 
   [sl-stack] > * {
@@ -37,14 +37,14 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--sl-row-gap, var(--sl-md));
+    gap: var(--sl-row-gap, var(--sl-gap, var(--sl-md)));
   }
 
   /* grid — auto-fill columns; --sl-grid-min is the column floor, and
      min() keeps a container narrower than the floor overflow-free */
   [sl-grid] {
     display: grid;
-    gap: var(--sl-grid-gap, var(--sl-md));
+    gap: var(--sl-grid-gap, var(--sl-gap, var(--sl-md)));
     grid-template-columns: repeat(
       auto-fill,
       minmax(min(var(--sl-grid-min, 14rem), 100%), 1fr)
@@ -62,14 +62,17 @@
   }
 
   /* topbar — sticky by default; ="fixed" pins it to the viewport, and
-     then the next region has to pad for its height itself */
+     then the next region has to pad for its height itself. A 1fr/auto/1fr
+     grid makes the center zone a true bar center regardless of side
+     widths — children fill zones in source order */
   [sl-topbar] {
     position: sticky;
     top: 0;
     z-index: 50;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap: var(--sl-topbar-gap, var(--sl-md));
+    gap: var(--sl-topbar-gap, var(--sl-gap, var(--sl-md)));
     min-height: var(--sl-topbar-h, 3.5rem);
     padding-inline: var(--sl-lg);
     background: var(--sl-bg);
@@ -87,7 +90,7 @@
   [sl-with-sidebar] {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--sl-sidebar-gap, var(--sl-lg));
+    gap: var(--sl-sidebar-gap, var(--sl-gap, var(--sl-lg)));
   }
 
   [sl-with-sidebar] > [sl-sidebar] {
@@ -101,11 +104,30 @@
     min-width: var(--sl-sidebar-min, 55%);
   }
 
-  /* footer — hairline + breathing room; contents compose freely */
+  /* footer — hairline + breathing room; same 1fr/auto/1fr zones as the
+     topbar so extra children flow to new rows */
   [sl-footer] {
     border-block-start: 1px solid var(--sl-border);
     padding-block: var(--sl-2xl);
     padding-inline: var(--sl-lg);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: var(--sl-footer-gap, var(--sl-gap, var(--sl-md)));
+  }
+
+  /* zone children — sl-center pins the true center column, sl-end pins
+     the far edge; unmarked children fill zones in source order */
+  [sl-topbar] > [sl-center],
+  [sl-footer] > [sl-center] {
+    grid-column: 2;
+    justify-self: center;
+  }
+
+  [sl-topbar] > [sl-end],
+  [sl-footer] > [sl-end] {
+    grid-column: 3;
+    justify-self: end;
   }
 
   /* toast — the fixed corner region that holds notices. Width and
@@ -115,7 +137,7 @@
     z-index: 60;
     display: flex;
     flex-direction: column;
-    gap: var(--sl-toast-gap, var(--sl-md));
+    gap: var(--sl-toast-gap, var(--sl-gap, var(--sl-md)));
     width: min(var(--sl-toast-w, 22rem), calc(100vw - 2 * var(--sl-lg)));
     inset-block-end: var(--sl-toast-b, var(--sl-lg));
     inset-inline-end: var(--sl-toast-e, var(--sl-lg));
@@ -126,9 +148,9 @@
     inset-inline-start: var(--sl-toast-e, var(--sl-lg));
   }
 
-  [sl-toast="top-end"] {
-    inset-block-end: auto;
-    inset-block-start: var(--sl-toast-b, var(--sl-lg));
+  [sl-toast="bottom-center"] {
+    inset-inline: 0;
+    margin-inline: auto;
   }
 
   [sl-toast="top-start"] {
@@ -136,6 +158,18 @@
     inset-block-start: var(--sl-toast-b, var(--sl-lg));
     inset-inline-end: auto;
     inset-inline-start: var(--sl-toast-e, var(--sl-lg));
+  }
+
+  [sl-toast="top-end"] {
+    inset-block-end: auto;
+    inset-block-start: var(--sl-toast-b, var(--sl-lg));
+  }
+
+  [sl-toast="top-center"] {
+    inset-block-end: auto;
+    inset-block-start: var(--sl-toast-b, var(--sl-lg));
+    inset-inline: 0;
+    margin-inline: auto;
   }
 }
 
@@ -180,4 +214,16 @@
   [sl-with-sidebar="3xl"] { --sl-sidebar-gap: var(--sl-3xl); }
   [sl-with-sidebar="4xl"] { --sl-sidebar-gap: var(--sl-4xl); }
   [sl-with-sidebar="5xl"] { --sl-sidebar-gap: var(--sl-5xl); }
+
+  /* generic sl-gap — one fallback slot every gap-reading rule honors;
+     a primitive's own attr value still wins over it */
+  [sl-gap="xs"]  { --sl-gap: var(--sl-xs); }
+  [sl-gap="sm"]  { --sl-gap: var(--sl-sm); }
+  [sl-gap="md"]  { --sl-gap: var(--sl-md); }
+  [sl-gap="lg"]  { --sl-gap: var(--sl-lg); }
+  [sl-gap="xl"]  { --sl-gap: var(--sl-xl); }
+  [sl-gap="2xl"] { --sl-gap: var(--sl-2xl); }
+  [sl-gap="3xl"] { --sl-gap: var(--sl-3xl); }
+  [sl-gap="4xl"] { --sl-gap: var(--sl-4xl); }
+  [sl-gap="5xl"] { --sl-gap: var(--sl-5xl); }
 }

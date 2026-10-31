@@ -45,3 +45,19 @@ export const Topbar: Demo = {
 export const Footer: Demo = {
   render: () => `<div sl-footer>${cell("頁尾內容")}</div>`,
 };
+
+// three zones in one bar — the 1fr/auto/1fr grid makes sl-center the
+// true bar center; sl-end pins the far edge regardless of source order
+export const TopbarZones: Demo = {
+  render: () =>
+    `<div sl-topbar style="position: static">` +
+    `${cell("Logo")}${cell("中間").replace('class="demo-cell"', 'class="demo-cell" sl-center')}${cell("右邊").replace('class="demo-cell"', 'class="demo-cell" sl-end')}` +
+    `</div>`,
+};
+
+// generic sl-gap works on any gap-reading element — here it beats the
+// bare sl-stack default
+export const GenericGap: Demo = {
+  render: () =>
+    `<div sl-stack sl-gap="3xl">${cell("甲")}${cell("乙")}${cell("丙")}</div>`,
+};
