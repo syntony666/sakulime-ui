@@ -46,12 +46,15 @@ export const StackMiddleEnd: Demo = {
     `</div>`,
 };
 
-// one value per child on the same line — "middle" centres its cell
-// vertically in the line box, "end" only pushes right and stays on top
-export const RowMiddleEnd: Demo = {
+// a row centres children vertically by default, so the block-axis marks
+// that actually move a cell are "top" and "bottom" — "middle" marks
+// nothing here. "end" pushes right and stays centred
+export const RowMarks: Demo = {
   render: () =>
-    `<div sl-row style="height: 8rem">` +
-    `<div class="demo-cell" sl-place="middle">sl-place="middle"</div>` +
+    `<div sl-row>` +
+    cell("撐列高的內容<br>第二行<br>第三行") +
+    `<div class="demo-cell" sl-place="top">sl-place="top"</div>` +
+    `<div class="demo-cell" sl-place="bottom">sl-place="bottom"</div>` +
     `<div class="demo-cell" sl-place="end">sl-place="end"</div>` +
     `</div>`,
 };
