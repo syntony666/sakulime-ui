@@ -61,7 +61,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### 動作 `sl-notice-action`
 
-要放結尾的控制項就標 `sl-notice-action`——自動推到最右邊，dismiss 鈕或動作連結都放這。關閉行為自己接：
+要放結尾的控制項就標 `sl-notice-action`——推到最右邊，`fit` 的時候就是內容尾端；前頭會空出一段固定距離，文字再長也不會貼上去。dismiss 鈕或動作連結都放這，關閉行為自己接：
 
 ```html
 <div sl-notice sl-tone="danger">

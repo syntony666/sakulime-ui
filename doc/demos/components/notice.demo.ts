@@ -105,15 +105,24 @@ export const Radius: Demo = {
     ),
 };
 
-// sl-notice-action pushes trailing controls to the far edge —
-// a dismiss button or a cta link; the dismiss itself is consumer code
+// sl-notice-action sits at the trailing edge in both widths — fill
+// pushes it to the container edge, fit keeps it at the content end;
+// a spacer slot guarantees air before it either way. the dismiss
+// itself is consumer code
 export const WithAction: Demo = {
   render: () =>
+    `<div class="demo-stack">` +
     `<div sl-notice sl-tone="danger">` +
     `<i sl-icon="lucide:octagon-alert"></i>` +
     `部署失敗：Build #423 在 migrate 階段逾時。` +
     `<a href="#">查看記錄</a>` +
     `<button sl-button="ghost" sl-size="sm" sl-notice-action aria-label="關閉"><i sl-icon="lucide:x"></i></button>` +
+    `</div>` +
+    `<div sl-notice="fit" sl-tone="success">` +
+    `<i sl-icon="lucide:check"></i>` +
+    `已儲存變更` +
+    `<button sl-button="ghost" sl-size="sm" sl-notice-action aria-label="關閉"><i sl-icon="lucide:x"></i></button>` +
+    `</div>` +
     `</div>`,
 };
 
