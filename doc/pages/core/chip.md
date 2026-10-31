@@ -29,17 +29,17 @@ import * as ChipDemos from "../../demos/components/chip.demo";
 
 ### 大小與對齊
 
-em 制，膠囊內的字是所在字級的 `0.875em`，跟著周圍字級一起縮放，不用寫尺寸屬性。
+尺寸用 em，膠囊內的字是所在字級的 `0.875em`，跟著周圍字級一起縮放，不用寫尺寸屬性。
 
 <Demo :render="ChipDemos.Sizes.render" />
 
-要固定字級就寫 `sl-size`：`sm`（12px）／`md`（16px）／`lg`（20px）。padding 和 gap 都是 em，整顆膠囊跟著字級等比縮放：
+固定字級用 `sl-size`：`sm`（12px）／`md`（16px）／`lg`（20px）。padding 和 gap 都是 em，整顆膠囊跟著字級等比縮放：
 
 <Demo :render="ChipDemos.SizeKinds.render" />
 
 ## 組合
 
-`<i sl-icon>` 放進去，gap 跟墨色自動對齊。
+`<i sl-icon>` 放進去，間距自動對、墨色跟著膠囊走。
 
 <Demo :render="ChipDemos.WithIcon.render" />
 

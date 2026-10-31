@@ -51,7 +51,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### 厚度 `sl-pad`
 
-沒寫值是 `md`。`sm`／`lg` 是整體內距的增減，`lg` 適合公告型的多行內容：
+不寫值是 `md`。`sm`／`lg` 是整體內距的增減，`lg` 適合公告型的多行內容：
 
 <Demo :render="NoticeDemos.Pads.render" />
 
@@ -59,7 +59,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### 對齊 `sl-notice-align`
 
-內容的對齊方向，`fit` 下元件跟內容同寬所以沒有差別：
+內容的對齊方向，`fit` 時元件跟內容同寬所以沒有差別：
 
 - 不寫值：靠左（預設）
 - `end`：靠右；換行後每一行都靠右
@@ -74,8 +74,8 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 - 寫在 `sl-notice` 的直接子層；放到更深層的只是普通內容，不會固定到邊緣
 - 不寫值靠右（尾端），`start` 靠左（開頭），兩個可以同時存在
-- 垂直置中，文字不會繞到它底下；要放更寬的控制項就調大 `--sl-action-w`
-- 裡面的 `<i>` 跟著按鈕字級，要大顆一點加 `sl-icon-size`
+- 垂直置中，文字不會繞到它底下；控制項更寬時調大 `--sl-action-w`
+- 裡面的 `<i>` 跟著按鈕字級，加大用 `sl-icon-size`
 
 <Playground :meta="NoticeDemos.ActionPlay" :render="NoticeDemos.ActionPlay.render" />
 
@@ -87,7 +87,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 <Playground :meta="NoticeDemos.BannerPlay" :render="NoticeDemos.BannerPlay.render" />
 
-內容切到「多行」看換行。膠囊會長高，`full` 圓角到一行高後中段變直；`end` 對齊時每一行都靠右。圖示寫在內容裡就是行內圖示，換行後照樣滿版排下去，不用另外包一層。
+內容切到「多行」看換行。膠囊會變高，`full` 圓角到一行高後中段變直；`end` 對齊時每一行都靠右。圖示寫在內容裡就是行內圖示，換行後還是滿版排下去，不用另外包一層。
 
 ### Toast *浮動通知*
 

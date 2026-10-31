@@ -17,7 +17,7 @@ import * as IconDemos from "../../demos/components/icon.demo";
 
 ### SVG
 
-從 icon 庫（lucide、Simple Icons、icones.js.org）複製一段 SVG 貼進 HTML，加上 `sl-icon` 就生效。這條路徑不需要任何 JS。
+從 icon 庫（lucide、Simple Icons、icones.js.org）複製一段 SVG 貼進 HTML，加上 `sl-icon` 就生效。這種用法不需要任何 JS。
 
 ```html
 <svg sl-icon viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -35,7 +35,7 @@ import * as IconDemos from "../../demos/components/icon.demo";
 <i sl-icon="si-github"></i>
 ```
 ::: info 語法細節
-名稱格式是 `package:name`。分隔符號用 `:` 最穩，`-` 只在 package 名是單字時安全。
+名稱格式是 `package:name`。分隔符號用 `:` 最穩，`-` 只在 package 名是單字時才不會有問題。
 
 佔位標籤慣用 `<i>`，`<span>`、`<icon>` 也行。
 
@@ -46,7 +46,7 @@ import * as IconDemos from "../../demos/components/icon.demo";
 
 ### `icon()` 產生 SVG 字串
 
-SSG 或模板場景用 `icon("package:name")` 產生 SVG 字串。同步執行、不依賴 DOM。
+SSG 或套模板時用 `icon("package:name")` 產生 SVG 字串。同步執行、不依賴 DOM。
 
 ```ts
 import { icon } from "sakulime-ui";
@@ -57,7 +57,7 @@ import { icon } from "sakulime-ui";
 
 ## 安裝
 
-套件本體不含任何圖示包資料，要用哪一包就註冊哪一包。package 名自訂，會變成 `sl-icon` 值的前綴。JS 需求依環境分三種裝法。
+套件本體不含任何圖示包資料，用到哪一包才註冊哪一包。package 名自訂，會變成 `sl-icon` 值的前綴。JS 需求依環境分三種裝法。
 
 ### Bundler
 
@@ -74,7 +74,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ### CDN
 
-`<script type="module">` 從 CDN import 套件，圖示包給 URL 讓 `registerPack` 自己 fetch。fetch 完成後，頁面裡的佔位會自動補上。
+`<script type="module">` 從 CDN import 套件，把圖示包的 URL 傳給 `registerPack`，讓它自己抓。fetch 完成後，頁面裡的佔位會自動補上。
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakulime-ui/dist/sakulime.min.css">
@@ -99,7 +99,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 - `packNames()`：列出已註冊的圖示包
 - `iconNames(prefix)`：列出指定包的圖示名
 - `resolveIcons(root)`：手動解析 root 底下的佔位；Shadow DOM 內的元素要自己傳進來
-- `registerResolver(attr, fn)`：讓其他 `sl-*` 屬性接上同一套解析機器
+- `registerResolver(attr, fn)`：讓其他 `sl-*` 屬性接上同一套解析機制
 
 :::
 

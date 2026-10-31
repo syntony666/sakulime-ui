@@ -33,7 +33,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 ### 顏色 `sl-tone`
 
-`sl-tone` 不會改變卡片本體的底色，它決定標記邊條的顏色（預設 primary）：
+`sl-tone` 不會改變卡片本體的底色，它決定邊緣強調條的顏色（預設 primary）：
 
 <Demo :render="CardDemos.Indicated.render" />
 
@@ -117,7 +117,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 <i sl-card-corner="start" sl-icon="lucide:zap" sl-tone="warning"></i>
 ```
 
-角落 chip 要調字級就寫 `sl-size`（`sm`/`md`/`lg`），整顆膠囊等比縮放。
+角落 chip 調字級用 `sl-size`（`sm`/`md`/`lg`），整顆膠囊等比縮放。
 
 <Demo :render="CardDemos.CornerPositions.render" />
 <Demo :render="CardDemos.CornerKinds.render" />
@@ -162,7 +162,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 <div sl-card="hollow">
   <div sl-card-section="blank">
     <strong>上傳檔案</strong>
-    <p>拖拉檔案至此</p>
+    <p>拖曳檔案到這裡</p>
   </div>
 </div>
 ```
