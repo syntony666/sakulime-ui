@@ -9,7 +9,7 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 
 # Stack *堆疊*
 
-> 把子元素垂直疊起來，間距由容器統一給。子元素的上下 margin 會被清掉，寫下去的值就是最終間距。
+> 把子元素垂直疊起來，間距由容器統一給。子元素的上下 margin 會被清掉，給下去的值就是最終間距。
 
 ## 用法
 

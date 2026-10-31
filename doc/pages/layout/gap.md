@@ -9,7 +9,7 @@ import * as GapDemos from "../../demos/layout/gap.demo";
 
 # Gap *共用間距*
 
-> 排版屬性共用的間距值。寫在外層，裡面沒寫值的排版屬性會繼承這個值。
+> 排版屬性共用的間距值。標在外層，裡面沒給值的排版屬性會繼承這個值。
 
 ## 用法
 
@@ -17,19 +17,19 @@ import * as GapDemos from "../../demos/layout/gap.demo";
 <div sl-gap="2xl">
   <div sl-stack>...</div>      <!-- 間距 2xl -->
   <div sl-row>...</div>        <!-- 間距 2xl -->
-  <div sl-stack="xs">...</div> <!-- 寫了值，是 xs -->
+  <div sl-stack="xs">...</div> <!-- 給了值，是 xs -->
 </div>
 ```
 
-外層設 `sl-gap="2xl"`，沒寫值的 stack、row、grid 間距都是 2xl；自己寫了值的不受影響：
+外層設 `sl-gap="2xl"`，沒給值的 stack、row、grid 間距都是 2xl；自己給了值的不受影響：
 
 <Demo :render="GapDemos.Region.render" />
 
 讀 `sl-gap` 的屬性：`sl-stack`、`sl-row`、`sl-grid`、`sl-with-sidebar`、`sl-topbar`、`sl-footer`、`sl-toast`。
 
-- 寫在自己身上：`<div sl-stack sl-gap="xs">` 這個 stack 的間距就是 xs，跟 `sl-stack="xs"` 一樣
-- 寫在外層：值會繼承給裡面所有讀 `sl-gap` 的屬性
-- 元素自己寫了值（`sl-stack="xs"` 或 `--sl-stack-gap`）用自己的；沒寫值的才輪到 `sl-gap`
+- 標在自己身上：`<div sl-stack sl-gap="xs">` 這個 stack 的間距就是 xs，跟 `sl-stack="xs"` 一樣
+- 標在外層：值會繼承給裡面所有讀 `sl-gap` 的屬性
+- 元素自己給了值（`sl-stack="xs"` 或 `--sl-stack-gap`）用自己的；沒給值的才輪到 `sl-gap`
 
 ## 屬性
 
@@ -49,4 +49,4 @@ import * as GapDemos from "../../demos/layout/gap.demo";
 | `4xl` | 40px |
 | `5xl` | 48px |
 
-表列 px 以根字級 16px 換算，尺規本身是 rem。`sl-gap` 沒有預設值，不寫它就是各屬性用自己的預設。
+表列 px 以根字級 16px 換算，尺規本身是 rem。`sl-gap` 沒有預設值，不標，各屬性就用自己的預設。

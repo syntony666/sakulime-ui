@@ -60,4 +60,4 @@ import * as SidebarDemos from "../../demos/layout/sidebar.demo";
 | `4xl` | 40px         |
 | `5xl` | 48px         |
 
-表列 px 以根字級 16px 換算，尺規本身是 rem。只想改一個容器就寫 `--sl-sidebar-gap`；[`sl-gap`](/layout/gap) 寫在容器自己或外層都行，裡面沒寫間距值的排版屬性會繼承這個值。
+表列 px 以根字級 16px 換算，尺規本身是 rem。只想改一個容器就寫 `--sl-sidebar-gap`；[`sl-gap`](/layout/gap) 標在容器自己或外層都行，裡面沒給間距值的排版屬性會繼承這個值。

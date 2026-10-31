@@ -45,7 +45,7 @@ import * as RowDemos from "../../demos/layout/row.demo";
 | `4xl` | 40px         |
 | `5xl` | 48px         |
 
-表列 px 以根字級 16px 換算，尺規本身是 rem。水平間距跟換行後的行距是同一個值。只想改一個容器就寫 `--sl-row-gap`；[`sl-gap`](/layout/gap) 寫在容器自己或外層都行，裡面沒寫間距值的排版屬性會繼承這個值。
+表列 px 以根字級 16px 換算，尺規本身是 rem。水平間距跟換行後的行距是同一個值。只想改一個容器就寫 `--sl-row-gap`；[`sl-gap`](/layout/gap) 標在容器自己或外層都行，裡面沒給間距值的排版屬性會繼承這個值。
 
 ### 行為
 
@@ -56,7 +56,7 @@ import * as RowDemos from "../../demos/layout/row.demo";
 
 ### 窄屏直排 `sl-collapse`
 
-寫了 `sl-collapse`，視窗寬度小於 40rem（640px）時：
+標了 `sl-collapse`，視窗寬度小於 40rem（640px）時：
 
 - 變成垂直堆疊（`flex-direction: column`）
 - 子元素拉滿容器寬
@@ -69,4 +69,4 @@ import * as RowDemos from "../../demos/layout/row.demo";
 </div>
 ```
 
-斷點只看視窗寬度，跟容器寬度無關；不同數值的話，media query 自己寫。不寫 `sl-collapse` 的 `sl-row` 永遠橫排。標籤列在手機上通常還是要橫著排。
+斷點只看視窗寬度，跟容器寬度無關；不同數值的話，media query 自己寫。沒標 `sl-collapse` 的 `sl-row` 永遠橫排。標籤列在手機上通常還是要橫著排。
