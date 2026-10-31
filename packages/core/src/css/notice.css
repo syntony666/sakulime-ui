@@ -50,12 +50,13 @@
      when the capsule shrink-wraps (fit); its auto margin plus the
      action's own still push everything to the edge without :has.
      edge compensation: compact controls carry ~--sl-sm of inner
-     padding — pulling the box out puts the glyph at the same inset
-     as a leading icon instead of receding behind it */
+     padding, and the wider capsule pad adds another half slot —
+     pulling both out keeps the glyph at a plain 1×pad inset instead
+     of receding with the roomier content padding */
   [sl-notice-action] {
     order: 10;
     margin-inline-start: auto;
-    margin-inline-end: calc(-1 * var(--sl-sm));
+    margin-inline-end: calc(-1 * var(--sl-sm) - var(--sl-pad) * 0.5);
   }
 
   /* "start" pins it to the leading edge instead — and the same
@@ -63,7 +64,7 @@
      so the copy sits a plain gap away like a leading icon */
   [sl-notice-action="start"] {
     order: -10;
-    margin-inline-start: calc(-1 * var(--sl-sm));
+    margin-inline-start: calc(-1 * var(--sl-sm) - var(--sl-pad) * 0.5);
     margin-inline-end: calc(-1 * var(--sl-sm));
   }
 
