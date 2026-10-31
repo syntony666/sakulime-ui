@@ -12,12 +12,13 @@
     --sl-tone-text-invert: var(--sl-primary-fg);
     --sl-pad: var(--sl-md);
     /* block-level capsule — the chip's big sibling: wash, no frame.
-       "full" means a one-line capsule — the radius is half a single
-       row (text or the usual control height, whichever is taller),
-       so two lines still round off but taller copy runs straight
-       down the middle instead of stretching the ends */
+       "full" caps the radius at one line height (text or the usual
+       control height, whichever is taller) plus an edge share —
+       exactly half of a two-line box, so two lines still round off
+       completely but taller copy runs straight down the middle
+       instead of stretching the ends */
     --sl-radius-full: calc(
-      max(0.7em, var(--sl-2xl) * 0.5) + var(--sl-pad) * 0.75 + 3px
+      max(1.4em, var(--sl-2xl)) + var(--sl-pad) * 0.75 + 3px
     );
     --sl-radius: var(--sl-radius-full);
     display: flex;
