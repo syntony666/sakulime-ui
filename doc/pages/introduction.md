@@ -1,6 +1,6 @@
 ---
 title: 開始使用
-description: sl-* 屬性加在標籤上，--sl-* 變數管顏色跟尺寸，原本的 class 照樣能用。
+description: sl-* 屬性加在標籤上，--sl-* 變數管顏色跟尺寸，原本的 class 不用動。
 ---
 
 # Sakulime UI
@@ -9,7 +9,7 @@ description: sl-* 屬性加在標籤上，--sl-* 變數管顏色跟尺寸，原�
 
 `sl-*` 屬性加在標籤上，`--sl-*` 變數管顏色跟尺寸。
 
-元件和排版工具都用屬性，原本的 `class` 照樣能用。
+元件和排版工具都用屬性，原本的 `class` 不用動。
 
 ## 安裝
 
@@ -37,7 +37,7 @@ import "sakulime-ui/sakulime.min.css";
 
 ## 尺寸及大小
 
-一條通用 scale，間距、圓角、字級都從這裡挑。值是 rem，px 欄是基準 16px 時的換算：
+間距、圓角、字級共用一套 scale。值是 rem，px 欄是基準 16px 時的換算：
 
 | 變數               | rem     | px     |
 | ------------------ | ------- | ------ |
@@ -54,4 +54,6 @@ import "sakulime-ui/sakulime.min.css";
 | `--sl-container-md` | 60rem   | 960px  |
 | `--sl-container-lg` | 75rem   | 1200px |
 
+::: tip
 表上沒有的值，在自己的 CSS 裡直接寫數字，不用硬湊最近的階。
+:::

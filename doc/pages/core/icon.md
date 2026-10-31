@@ -1,6 +1,6 @@
 ---
 title: Icon 圖示
-description: sl-icon 圖示標記，大小跟字級走、用 sl-tone 上色；圖示包由消費者註冊，icon() 產生 SVG 字串。
+description: 讓圖示跟著文字走的標記，大小跟字級、顏色跟墨色。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as IconDemos from "../../demos/components/icon.demo";
 
 # Icon *圖示*
 
-`sl-icon` 是加在 SVG 上的屬性標記。它不是元素、不渲染內容，只控制 SVG 在行內的大小、顏色與對齊。加了之後大小固定 `1em`，顏色繼承 `currentColor`（或寫 `sl-tone`），垂直位置對齊文字底線。
+> 讓圖示跟著文字走的標記。大小跟著字級、顏色跟著墨色，垂直位置對齊底線。
 
 <Playground :meta="IconDemos.default" :render="IconDemos.Icon.render" />
 
@@ -17,7 +17,7 @@ import * as IconDemos from "../../demos/components/icon.demo";
 
 ### SVG
 
-從 icon 庫（lucide、Simple Icons、icones.js.org）複製一段 SVG 貼進 HTML，加上 `sl-icon` 就生效。這條路徑不需要任何 JS。
+從 icon 庫（lucide、Simple Icons、icones.js.org）複製一段 SVG 貼進 HTML，加上 `sl-icon` 就生效。這種用法不需要任何 JS。
 
 ```html
 <svg sl-icon viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -28,24 +28,25 @@ import * as IconDemos from "../../demos/components/icon.demo";
 
 ### 用圖示包 `<i sl-icon="...">`
 
-註冊圖示包之後（見[安裝](#安裝)），任何元素寫上名稱就會換成圖示：
+註冊圖示包之後（見[安裝](#安裝)），元素標上圖示名就會換成圖示：
 
 ```html
 <i sl-icon="lucide:zap"></i>
 <i sl-icon="si-github"></i>
 ```
-
-名稱格式是 `package:name`。分隔符號用 `:` 最穩，`-` 只在 package 名是單字時安全。
+::: info 語法細節
+名稱格式是 `package:name`。分隔符號用 `:` 最穩，`-` 只在 package 名是單字時才不會有問題。
 
 佔位標籤慣用 `<i>`，`<span>`、`<icon>` 也行。
 
 結束標籤**一定要寫**。JSX 或模板編譯的環境沒有此問題。
 
 第一次呼叫 `registerPack` 會自動啟動解析器，並監聽後來新增的元素。
+:::
 
 ### `icon()` 產生 SVG 字串
 
-SSG 或模板場景用 `icon("package:name")` 產生 SVG 字串。同步執行、不依賴 DOM。
+SSG 或套模板時用 `icon("package:name")` 產生 SVG 字串。同步執行、不依賴 DOM。
 
 ```ts
 import { icon } from "sakulime-ui";
@@ -56,11 +57,13 @@ import { icon } from "sakulime-ui";
 
 ## 安裝
 
-套件本體不含任何圖示包資料，要用什麼自己註冊。package 名自訂，會變成 `sl-icon` 值的前綴。JS 需求依環境分三種裝法。
+套件本體不含任何圖示包資料，用到哪一包才註冊哪一包。package 名自訂，會變成 `sl-icon` 值的前綴。JS 需求依環境分三種裝法。
 
 ### Bundler
 
+::: info @iconify-json/*
 `@iconify-json/*` 是永久開源授權的資料檔（lucide 是 ISC、Simple Icons 是 CC0），建議當 devDep 裝。產出的是 SVG 字串，JSON 不會進使用者的 bundle。
+:::
 
 ```ts
 import { registerPack } from "sakulime-ui";
@@ -71,7 +74,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ### CDN
 
-`<script type="module">` 從 CDN import 套件，圖示包給 URL 讓 `registerPack` 自己 fetch。fetch 完成後，頁面裡的佔位會自動補上。
+`<script type="module">` 從 CDN import 套件，把圖示包的 URL 傳給 `registerPack`，讓它自己抓。fetch 完成後，頁面裡的佔位會自動補上。
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakulime-ui/dist/sakulime.min.css">
@@ -85,14 +88,18 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ### 純 HTML+CSS
 
-零 JS 頁面用 `<link>` 載入 CSS 就好。「貼 SVG」不需要任何 JS；「套用圖示包」跟 `icon()` 都要 JS 在場。
+零 JS 頁面用 `<link>` 載入 CSS 即可。
 
-::: details 輔助API（JS 在場才用得到）
+::: info JS 需求
+「貼 SVG」不需要任何 JS；「套用圖示包」跟 `icon()` 都需要 JS。
+:::
+
+::: details 輔助 API（需要 JS）
 
 - `packNames()`：列出已註冊的圖示包
 - `iconNames(prefix)`：列出指定包的圖示名
 - `resolveIcons(root)`：手動解析 root 底下的佔位；Shadow DOM 內的元素要自己傳進來
-- `registerResolver(attr, fn)`：讓其他 `sl-*` 屬性接上同一套解析機器
+- `registerResolver(attr, fn)`：讓其他 `sl-*` 屬性接上同一套解析機制
 
 :::
 
@@ -100,7 +107,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ### 顏色 `sl-tone`
 
-`sl-icon` 在 `sl-tone` 的消費名單裡，寫在 icon 自己身上就染成對應色；不寫繼承文字墨色。
+`sl-icon` 是 `sl-tone` 的適用元素，`sl-tone` 標在圖示本身；不寫值繼承文字墨色。
 
 <Demo :render="IconDemos.Tones.render" />
 
@@ -116,7 +123,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ## 修飾詞
 
-修飾詞是 `sl-icon-` 名稱空間的獨立屬性，寫在名稱旁邊。手貼的 SVG 一樣能用，例如 `<svg sl-icon sl-icon-spin>`。
+修飾詞是 `sl-icon-` 名稱空間的獨立屬性，寫在名稱旁邊。直接貼進頁面的 SVG 也適用，例如 `<svg sl-icon sl-icon-spin>`。
 
 ### 尺寸 `sl-icon-size`
 
@@ -142,7 +149,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 讓圖示不停旋轉。系統設了 `prefers-reduced-motion` 時自動停用。
 
-跟 `sl-icon-rotate`、`sl-icon-flip` 同時寫也會疊加——靜態角度保留，動畫在之上轉整圈。
+跟 `sl-icon-rotate`、`sl-icon-flip` 同時寫也會疊加，靜態角度保留、動畫再疊上整圈旋轉。
 
 <Demo :render="IconDemos.Spin.render" />
 
@@ -166,10 +173,10 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ## 組合
 
-圖示繼承所在元件的墨色，按鈕裡直接放；疊上 `sl-card-corner` 就釘到卡片角落，`sl-tone` 寫在 icon 自己身上染色。
+圖示繼承所在元件的墨色，放進按鈕裡；疊上 `sl-card-corner` 就固定到卡片角落，`sl-tone` 寫在 icon 自己身上染色。
 
 <Demo :render="IconDemos.InContext.render" />
 
-組合起來看。角落的圖示自己帶 `sl-tone`；標題裡的圖示繼承文字墨色。
+組合之後：角落的圖示自己帶 `sl-tone`；標題裡的圖示繼承文字墨色。
 
 <Demo :render="IconDemos.InCard.render" />

@@ -5,7 +5,7 @@ description: sl-* 屬性語法總覽：元件標記、元件設定、子元素�
 
 # 屬性
 
-sakulime 的 API 全是 HTML 屬性，沒有 class。外觀全靠 CSS；圖示名稱解析這類功能才有選配的 JS。屬性分四種，看等號寫在哪裡就知道是哪一種。
+> sakulime 的 API 全是 HTML 屬性，沒有 class。外觀全靠 CSS；圖示名稱解析這類功能才有選配的 JS。屬性分四種，看等號寫在哪裡就知道是哪一種。
 
 ## 形式
 
@@ -29,7 +29,7 @@ sakulime 的 API 全是 HTML 屬性，沒有 class。外觀全靠 CSS；圖示�
 
 ### 子元素
 
-`sl-<元件>-<零件>` 是元件內部的零件，寫法跟元件設定同型：
+`sl-<元件>-<零件>` 是元件內部的零件，寫法跟元件設定一樣：
 
 ```html
 <div sl-card>
@@ -64,11 +64,11 @@ sakulime 的 API 全是 HTML 屬性，沒有 class。外觀全靠 CSS；圖示�
 <button sl-button sl-tone="danger">按鈕</button>
 ```
 
-子元素零件也一樣——它們只管自己的職責，不繼承元件的通用屬性。要染色就寫在會顯示顏色的那一個元素上：
+子元素零件也一樣，各自獨立，不繼承元件的通用屬性。染色的話，寫在會顯示顏色的那一個元素上：
 
 ```html
 <div sl-card>
-  <!-- sl-card-corner 只管位置；顏色寫在 sl-dot 自己身上 -->
+  <!-- sl-card-corner 決定位置；顏色寫在 sl-dot 自己身上 -->
   <i sl-card-corner sl-dot sl-tone="danger"></i>
 </div>
 ```

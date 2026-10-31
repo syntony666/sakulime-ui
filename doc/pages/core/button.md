@@ -1,6 +1,6 @@
 ---
 title: Button 按鈕
-description: sl-button 按鈕，值決定型態，再用 sl-tone、sl-size、sl-radius 調整外觀。
+description: 按鈕的樣式，寫在按鈕或連結的標記上就生效。
 ---
 
 <script setup>
@@ -9,13 +9,13 @@ import * as ButtonDemos from "../../demos/components/button.demo";
 
 # Button *按鈕*
 
-`sl-button` 寫在 `button` 或 `a` 上，值決定型態，通用屬性調外觀。
+> 按鈕的樣式，寫在按鈕或連結的標記上就生效。
 
 <Playground :meta="ButtonDemos.default" :render="ButtonDemos.Button.render" />
 
 ## 型態
 
-型態直接寫在 `sl-button` 的值裡，不寫值就是 `normal`：
+型態是 `sl-button` 的值，不寫值就是 `normal`：
 
 ```html
 <button sl-button="invert">按鈕</button>

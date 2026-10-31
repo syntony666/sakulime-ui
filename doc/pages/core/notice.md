@@ -1,6 +1,6 @@
 ---
 title: Notice 通知
-description: 通知膠囊。放進內容是頁面橫幅，包進固定定位的容器就是角落浮動通知。
+description: 通知膠囊。放進內容是頁面橫幅，包進固定在角落的容器就是浮動通知。
 ---
 
 <script setup>
@@ -9,15 +9,13 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 # Notice *通知*
 
-通知用的膠囊訊息，「部署失敗」「系統維護中」「已儲存變更」這類狀況都適用。`sl-tone` 決定底色、框線、墨色；關閉跟自動消失的行為留給消費者，這裡只管長相。
-
-直接放進內容，就是頁面頂端的滿版橫幅；包進 `fixed` 容器，就變成浮在角落的通知。同一個元件，位置你決定。
+> 通知用的膠囊訊息，「部署失敗」「系統維護中」「已儲存變更」這類狀況都適用。直接放進內容，就是頁面頂端的滿版橫幅；包進固定在角落的容器，就變成浮動通知。同一個元件，兩種用法。
 
 <Playground :meta="NoticeDemos.default" :render="NoticeDemos.Notice.render" />
 
 ## 型態
 
-寬度寫在 `sl-notice` 的值裡，不寫值就是滿版（填滿容器）：
+寬度是 `sl-notice` 的值，不寫值就是滿版（填滿容器）：
 
 - `fit`：縮成內容的寬度，浮動通知或配合訊息長度的場合
 
@@ -29,7 +27,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### 顏色 `sl-tone`
 
-`sl-notice` 是 `sl-tone` 的適用元素。不寫值是 primary 淡底，一般資訊通知用這個就好。
+`sl-notice` 是 `sl-tone` 的適用元素。不寫值是 primary 淡底，資訊通知的標準色。
 
 - `primary`：主題主色（預設值）
 - `secondary`：主題副色
@@ -53,7 +51,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### 厚度 `sl-pad`
 
-沒寫值是 `md`。`sm`／`lg` 是整體內距的增減，`lg` 適合公告型的多行內容：
+不寫值是 `md`。`sm`／`lg` 是整體內距的增減，`lg` 適合公告型的多行內容：
 
 <Demo :render="NoticeDemos.Pads.render" />
 
@@ -61,7 +59,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### 對齊 `sl-notice-align`
 
-內容的對齊方向，`fit` 下元件跟內容同寬所以沒有差別：
+內容的對齊方向，`fit` 時元件跟內容同寬所以沒有差別：
 
 - 不寫值：靠左（預設）
 - `end`：靠右；換行後每一行都靠右
@@ -72,12 +70,12 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### 動作 `sl-notice-action`
 
-釘在邊緣的控制項，例如關閉鈕或動作連結，點擊行為自己處理：
+固定在邊緣的控制項，例如關閉鈕或動作連結，點擊後的行為由頁面實作：
 
-- 寫在 `sl-notice` 的直接子層；放到更深層的只是普通內容，不會釘邊緣
+- 寫在 `sl-notice` 的直接子層；放到更深層的只是普通內容，不會固定到邊緣
 - 不寫值靠右（尾端），`start` 靠左（開頭），兩個可以同時存在
-- 垂直置中，文字不會繞到它底下；要放更寬的控制項就調大 `--sl-action-w`
-- 裡面的 `<i>` 跟著按鈕字級，要大顆一點加 `sl-icon-size`
+- 垂直置中，文字不會繞到它底下；控制項更寬時調大 `--sl-action-w`
+- 裡面的 `<i>` 跟著按鈕字級，加大用 `sl-icon-size`
 
 <Playground :meta="NoticeDemos.ActionPlay" :render="NoticeDemos.ActionPlay.render" />
 
@@ -89,10 +87,10 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 <Playground :meta="NoticeDemos.BannerPlay" :render="NoticeDemos.BannerPlay.render" />
 
-內容切到「多行」看換行。膠囊會長高，`full` 圓角到一行高後中段變直；`end` 對齊時每一行都靠右。圖示直接寫在內容裡就是行內圖示，換行後照樣滿版排下去，不用另外包一層。
+內容切到「多行」看換行。膠囊會變高，`full` 圓角到一行高後中段變直；`end` 對齊時每一行都靠右。圖示寫在內容裡就是行內圖示，換行後還是滿版排下去，不用另外包一層。
 
 ### Toast *浮動通知*
 
-放在哪個角落、怎麼疊、什麼時候消失，都是你的 CSS 跟狀態機的事，這個套件只管膠囊的樣子。要讓螢幕閱讀器報出新通知，容器自己加 `role="status"`（或 `aria-live="polite"`）：
+放在哪個角落、怎麼疊、什麼時候消失，由頁面決定：
 
 <Playground :meta="NoticeDemos.ToastPlay" :render="NoticeDemos.ToastPlay.render" />
