@@ -20,13 +20,14 @@ import * as SidebarDemos from "../../demos/layout/sidebar.demo";
 </div>
 ```
 
+<Demo :render="SidebarDemos.SidebarStart.render" />
+
 ## 屬性
 
 ### 位置
 
-沒標記的側欄看 HTML 順序：放前面在左、放後面在右：
+沒標記的側欄看 HTML 順序：上面那個是放前面在左；放後面就在右：
 
-<Demo :render="SidebarDemos.SidebarStart.render" />
 <Demo :render="SidebarDemos.SidebarEnd.render" />
 
 標 `sl-start` 固定排最前、`sl-end` 固定排最後，跟 DOM 順序無關。下面這個側欄寫在主欄前面，照樣排到右邊：

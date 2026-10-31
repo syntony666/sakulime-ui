@@ -3,6 +3,10 @@ title: Toast 通知角
 description: 裝 sl-notice 的固定角落容器，六個位置可選。
 ---
 
+<script setup>
+import * as ToastDemos from "../../demos/layout/toast.demo";
+</script>
+
 # Toast *通知角*
 
 > 裝 `sl-notice` 的固定角落容器。通知本身是 `sl-notice`，`sl-toast` 只負責把它們疊在角落。
@@ -15,6 +19,10 @@ description: 裝 sl-notice 的固定角落容器，六個位置可選。
   <div sl-notice>新版本可用</div>
 </div>
 ```
+
+容器寬 22rem、通知之間隔 `md`。下面用靜態定位示意（實際是 fixed 疊在角落）：
+
+<Demo :render="ToastDemos.Toast.render" />
 
 ## 屬性
 

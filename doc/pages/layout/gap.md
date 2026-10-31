@@ -1,5 +1,5 @@
 ---
-title: sl-gap 整區間距
+title: Gap 整區間距
 description: 寫在元素自己或外層，一次改整區的間距。
 ---
 
@@ -7,7 +7,7 @@ description: 寫在元素自己或外層，一次改整區的間距。
 import * as GapDemos from "../../demos/layout/gap.demo";
 </script>
 
-# sl-gap *整區間距*
+# Gap *整區間距*
 
 > 每個排版屬性都能各自寫間距，但常常一整區想同一個節奏。`sl-gap` 寫在元素自己或外層都行，裡面沒寫值的 `sl-stack`、`sl-row`、`sl-grid`、`sl-with-sidebar`、`sl-topbar`、`sl-footer`、`sl-toast` 全部吃到。
 
