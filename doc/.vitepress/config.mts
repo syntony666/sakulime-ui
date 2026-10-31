@@ -172,7 +172,7 @@ export default defineConfig({
         text: "排版 Layout",
         items: [
           { text: "說明", link: "/layout/" },
-          { text: `Gap ${zh("整區間距")}`, link: "/layout/gap" },
+          { text: `Gap ${zh("共用間距")}`, link: "/layout/gap" },
           {
             text: "格局設計",
             items: [
