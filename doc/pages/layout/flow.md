@@ -1,5 +1,5 @@
 ---
-title: Flow 內容節奏
+title: Flow 順排
 description: 直接子層之間自動補垂直節奏，子層排版不動。
 ---
 
@@ -7,7 +7,7 @@ description: 直接子層之間自動補垂直節奏，子層排版不動。
 import * as FlowDemos from "../../demos/layout/flow.demo";
 </script>
 
-# Flow *內容節奏*
+# Flow *順排*
 
 > 直接子層之間自動補上垂直節奏。不改成 flex、不清 margin，內文混排跟沒有容器語意的層都用它。
 
