@@ -27,9 +27,9 @@ import * as GapDemos from "../../demos/layout/gap.demo";
 
 ## 屬性
 
-### 值
+### 間距
 
-跟間距尺規同一套：
+`sl-gap` 的值就是間距，跟尺規同一套：
 
 | 值    | 間距 |
 | ----- | ---- |
@@ -45,7 +45,7 @@ import * as GapDemos from "../../demos/layout/gap.demo";
 
 表列 px 以根字級 16px 換算，尺規本身是 rem。`sl-gap` 沒有預設值，不寫它就是各屬性用自己的預設。
 
-### 誰會生效
+### 行為
 
 - **寫在自己身上**：`<div sl-stack sl-gap="xs">` 這個 stack 的間距就是 xs，跟寫 `sl-stack="xs"` 一樣
 - **寫在外層**：祖先元素寫一次，裡面排版屬性的間距全部生效
