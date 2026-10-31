@@ -1,6 +1,6 @@
 ---
 title: Interactive 互動
-description: hover 效果，四種。
+description: hover 效果，五種。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as InteractiveDemos from "../../demos/attrs/interactive.demo";
 
 # Interactive *互動*
 
-> hover 效果，四種。
+> hover 效果，五種。
 
 ## 用法
 
@@ -26,10 +26,11 @@ import * as InteractiveDemos from "../../demos/attrs/interactive.demo";
 
 | 選項 | 效果 |
 | --- | --- |
-| `grow`（預設） | 放大 1.05 |
+| `grow`（預設） | 放大 1.03 |
 | `lift` | 浮起 4px 加陰影 |
 | `raise` | 只有陰影 |
 | `press` | 壓下 0.97 |
+| `dim` | 變暗 |
 
 ## 適用元素
 

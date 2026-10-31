@@ -11,7 +11,7 @@ const frame = (caption: string, inner: string) =>
 
 export const Interactive: Demo = {
   render: () =>
-    axis(["grow", "lift", "raise", "press"], (v) =>
+    axis(["grow", "lift", "raise", "press", "dim"], (v) =>
       frame(
         `sl-interactive="${v}"`,
         `<div sl-row>` +

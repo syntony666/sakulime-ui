@@ -169,6 +169,7 @@
   [sl-card][sl-interactive]:hover {
     transform: var(--sl-i-transform);
     box-shadow: var(--sl-i-shadow);
+    filter: var(--sl-i-filter);
   }
 
   /* bg sections own the gap to the next divider — the fill runs
