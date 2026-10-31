@@ -15,7 +15,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 ## 型態
 
-型態直接寫在 `sl-card` 的值裡，不寫值就是一般卡片：
+型態寫在 `sl-card` 的值裡，不寫值就是一般卡片：
 
 ```html
 <div sl-card="hollow">…</div>
@@ -66,7 +66,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 <Demo :render="CardDemos.Interactive.render" />
 
-要讓點擊開啟頁面，把屬性直接寫在 `<a>` 上，卡片本身就是連結：
+要讓點擊開啟頁面，把屬性寫在 `<a>` 上，卡片本身就是連結：
 
 ```html
 <a sl-card sl-interactive href="/detail">…</a>
@@ -140,7 +140,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 #### 貼邊 `inset`
 
-`inset` 會把卡片內距抵銷掉，讓內容直接貼到卡片邊緣，放圖片、地圖或色塊都合適。放在第一個就貼上緣，放在最後一個就貼下緣，夾在中間只貼左右兩邊，位置照順序自動判斷：
+`inset` 會把卡片內距抵銷掉，讓內容貼到卡片邊緣，放圖片、地圖或色塊都合適。放在第一個就貼上緣，放在最後一個就貼下緣，夾在中間只貼左右兩邊，位置照順序自動判斷：
 
 ```html
 <div sl-card>
@@ -156,7 +156,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 #### 空白 `blank`
 
-沒有框線、內容完全置中的區塊，用來放空狀態、上傳區或查無結果。裡面直接用 `strong` 寫標題、`p` 寫說明，按鈕放 `sl-button`，不用另外加 class：
+沒有框線、內容完全置中的區塊，用來放空狀態、上傳區或查無結果。裡面用 `strong` 寫標題、`p` 寫說明，按鈕放 `sl-button`，不用另外加 class：
 
 ```html
 <div sl-card="hollow">

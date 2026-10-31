@@ -89,7 +89,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 <Playground :meta="NoticeDemos.BannerPlay" :render="NoticeDemos.BannerPlay.render" />
 
-內容切到「多行」看換行。膠囊會長高，`full` 圓角到一行高後中段變直；`end` 對齊時每一行都靠右。圖示直接寫在內容裡就是行內圖示，換行後照樣滿版排下去，不用另外包一層。
+內容切到「多行」看換行。膠囊會長高，`full` 圓角到一行高後中段變直；`end` 對齊時每一行都靠右。圖示寫在內容裡就是行內圖示，換行後照樣滿版排下去，不用另外包一層。
 
 ### Toast *浮動通知*
 

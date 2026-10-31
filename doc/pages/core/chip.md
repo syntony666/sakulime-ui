@@ -1,6 +1,6 @@
 ---
 title: Chip 膠囊
-description: 圖示配一行字的小膠囊，標籤列、資訊列這種一排小項目都合用。
+description: 圖示配一行字的小膠囊，用在標籤列、資訊列這種一排小項目。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as ChipDemos from "../../demos/components/chip.demo";
 
 # Chip *膠囊*
 
-圖示配一行字的小膠囊，標籤列、資訊列這種一排小項目都合用。
+圖示配一行字的小膠囊，用在標籤列、資訊列這種一排小項目。
 
 <Playground :meta="ChipDemos.default" :render="ChipDemos.Chip.render" />
 
@@ -39,7 +39,7 @@ em 制，膠囊內的字是所在字級的 `0.875em`，跟著周圍字級一起�
 
 ## 組合
 
-`<i sl-icon>` 直接放進去，gap 跟墨色自動對齊。
+`<i sl-icon>` 放進去，gap 跟墨色自動對齊。
 
 <Demo :render="ChipDemos.WithIcon.render" />
 
