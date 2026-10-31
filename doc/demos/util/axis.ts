@@ -23,8 +23,10 @@ export const label = (value: string) => NAMES[value] ?? value;
 const SEP =
   '<span class="axis-sep" data-demo title="左側是未寫入屬性的預設，右側是具名值"></span>';
 
-export const axis = <T>(values: T[], item: (v: T) => string) =>
-  `<div class="axis-row">` +
+// col stacks items vertically — for block-level components (banner)
+// where a horizontal wrap row would shrink-wrap them into pills
+export const axis = <T>(values: T[], item: (v: T) => string, col = false) =>
+  `<div class="axis-row${col ? " col" : ""}">` +
   values
     .map((v, i) => `${i === 1 && values[0] === "-" ? SEP : ""}${item(v)}`)
     .join("") +

@@ -44,10 +44,10 @@ sakulime 的 API 全是 HTML 屬性，沒有 class。外觀全靠 CSS；圖示�
 
 | 屬性 | 值 | 適用元素 | 說明 |
 |---|---|---|---|
-| `sl-tone` | `primary` `secondary` `success` `warning` `danger` | `sl-button`、`sl-card`、`sl-icon`、`sl-dot`、`sl-chip` | 主題色調，背景與文字色自動配好 |
+| `sl-tone` | `primary` `secondary` `success` `warning` `danger` | `sl-button`、`sl-card`、`sl-icon`、`sl-dot`、`sl-chip`、`sl-notice` | 主題色調，背景與文字色自動配好 |
 | `sl-size` | `sm` `md` `lg` | `sl-button`、`sl-chip` | 高度與字級（chip 只取字級，整顆等比縮放） |
-| `sl-radius` | `none` `sm` `md` `lg` `full` | `sl-button`、`sl-card` | 圓角 |
-| `sl-pad` | `sm` `md` `lg` | `sl-card` | 內距 |
+| `sl-radius` | `none` `sm` `md` `lg` `full` | `sl-button`、`sl-card`、`sl-notice` | 圓角 |
+| `sl-pad` | `sm` `md` `lg` | `sl-card`、`sl-notice` | 內距 |
 | `sl-interactive` | `grow` `lift` `raise` `press` | `sl-card` | 滑鼠移過去的效果，不寫值是 `grow` |
 
 ## 作用範圍

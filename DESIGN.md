@@ -193,6 +193,12 @@ components:
 - **Surface:** tone 20% + surface 的霧面底＋tone-text 墨 — 沒寫 tone 是中性墨色 wash；`9999px` 膠囊形（角落情境縮成 `--sl-xs`）
 - **Composition:** `inline-flex`＋`0.3em` gap — `<i sl-icon>` 直接放進去就對齊
 
+### Notices `sl-notice`
+- **Surface:** tone 12% wash 膠囊＋tone-text 墨 — 浮空框：`3px solid var(--sl-surface)` 環帶把 wash 跟外緣 `box-shadow` 2px tone/border 混色細線隔開
+- **Shape:** `999px` 預設膠囊端 — chip 的 block 級兄弟；`sl-radius` 可轉 `sm/md/lg/none`
+- **Width:** 預設填滿容器（橫幅）；`sl-notice="fit"` 縮內容寬 — 元件只管寬度，位置/堆疊/dismiss 全留消費端
+- **Composition:** flex row `0.6em` gap — icon、訊息、連結、`sl-notice-action`（auto margin 推尾端）；沒 icon 文字從 padding 邊起頭不留空槽
+
 ### Demo Chrome（文件站元件）
 - **Stage:** 圓點格紙背景＋`--sl-3xl` padding＋細框，內容在 Shadow DOM 裡渲染
 - **Playground:** demo 下方的控制面板 — 欄位 `10rem` 名稱欄＋控制項欄，mono 標籤、12px muted 說明
