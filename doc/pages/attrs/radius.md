@@ -22,13 +22,11 @@ import * as RadiusDemos from "../../demos/attrs/radius.demo";
 
 <Demo :render="RadiusDemos.Radius.render" />
 
-## 屬性
-
-### 選項
+## 選項
 
 `none`、`sm`、`md`、`lg`、`full`，預設 `md`。
 
-### 適用元素
+## 適用元素
 
 | 元素 | 預設 |
 | --- | --- |

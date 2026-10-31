@@ -14,12 +14,10 @@ description: 元件的整體內距，三階。
 <div sl-notice sl-pad="sm">通知</div>
 ```
 
-## 屬性
-
-### 選項
+## 選項
 
 `sm`、`md`、`lg`，預設 `md`。
 
-### 適用元素
+## 適用元素
 
 `sl-card`、`sl-notice`。整體內距的增減，`lg` 適合公告型的多行內容。

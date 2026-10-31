@@ -33,9 +33,7 @@ import * as GapDemos from "../../demos/attrs/gap.demo";
 
 <Demo :render="GapDemos.Alone.render" />
 
-## 屬性
-
-### 間距
+## 間距
 
 px 以根字級 16px 換算，尺規本身是 rem。`sl-gap` 沒有預設，未標示等同於未設定。
 

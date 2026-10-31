@@ -22,13 +22,11 @@ import * as ToneDemos from "../../demos/attrs/tone.demo";
 
 <Demo :render="ToneDemos.Tones.render" />
 
-## 屬性
-
-### 選項
+## 選項
 
 `primary`、`secondary`、`success`、`warning`、`danger`。
 
-### 適用元素
+## 適用元素
 
 沒給的話，各元件的預設不同：
 
