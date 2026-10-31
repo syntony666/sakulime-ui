@@ -21,8 +21,8 @@ import * as ShellDemos from "../../demos/layout/shell.demo";
 ```
 
 - 預設 **sticky**：內容滾到頂就停住，不佔版面外
-- `sl-topbar="fixed"`：固定在視窗頂部。後面的內容會被蓋住，要自己補 `padding-block-start: var(--sl-topbar-h)`
-- 高 `--sl-topbar-h`（預設 3.5rem = 56px），間距 `--sl-topbar-gap`（預設 `md`），或寫通用 `sl-gap`
+- `sl-topbar="fixed"`：固定在視窗頂部，body 自動補上 bar 高度的內距，下面的內容不會被蓋住
+- 高 `--sl-topbar-h`（預設 3.5rem = 56px），間距 `--sl-topbar-gap`（預設 `md`），或寫通用 `sl-gap`。要改高度寫在 `:root`，body 的自動補償才跟得到
 - 底色 `--sl-bg`＋底部 hairline，z-index 50
 
 <Demo :render="ShellDemos.Topbar.render" />
