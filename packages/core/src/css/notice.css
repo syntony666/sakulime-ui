@@ -75,4 +75,29 @@
     flex: none;
     width: var(--sl-md);
   }
+
+  /* content align — "end" parks the copy at the trailing edge: a
+     ::before pusher eats the free space on its start side (or the
+     start spacer grows the margin it already sits on), and the end
+     side's auto margins drop so the copy really hugs the edge */
+  [sl-notice-align="end"]::before {
+    content: "";
+    order: -9;
+    flex: none;
+    margin-inline-start: auto;
+  }
+
+  [sl-notice-align="end"]:has(> [sl-notice-action="start"])::before {
+    width: var(--sl-md);
+    margin-inline-start: 0;
+    margin-inline-end: auto;
+  }
+
+  [sl-notice-align="end"] [sl-notice-action]:not([sl-notice-action="start"]) {
+    margin-inline-start: 0;
+  }
+
+  [sl-notice-align="end"]:has(> [sl-notice-action]:not([sl-notice-action="start"]))::after {
+    margin-inline-start: 0;
+  }
 }
