@@ -1,6 +1,6 @@
 ---
 title: Gap 整區間距
-description: 寫在元素自己或外層，一次改整區的間距。
+description: 給整區排版屬性共用的間距值。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as GapDemos from "../../demos/layout/gap.demo";
 
 # Gap *整區間距*
 
-> 在外層寫一次，整區的間距一起改。
+> 整區共用的間距值。寫在外層，裡面沒寫值的排版屬性都生效。
 
 ## 用法
 
@@ -21,7 +21,7 @@ import * as GapDemos from "../../demos/layout/gap.demo";
 </div>
 ```
 
-外層寫一次，裡面三種排版屬性都生效；自己寫了值的不受影響：
+外層設 `sl-gap`，裡面三種排版屬性都生效；自己寫了值的不受影響：
 
 <Demo :render="GapDemos.Region.render" />
 
