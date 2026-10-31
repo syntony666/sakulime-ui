@@ -16,6 +16,7 @@ Working agreement for coding agents in this repo. Contributor-facing rules live 
 
 - `npm run build` must precede `npm run release` — publish consumes `dist/` bundles.
 - `doc/` is a VitePress site. Pages are `.md` under `doc/pages/`; demos come from `.demo.ts` under `doc/demos/` rendered through the theme's `Demo`/`Playground` components. `npm run site` outputs to `doc/site`, which `doc/wrangler.toml` serves as static assets.
+- Shared-attribute pages under `doc/pages/attrs/` share one skeleton — copy `tone.md`: blockquote intro → `## 用法` → `## 選項` (table, per-option data column) → `## 適用元素` (lead-in + table). Demo at `doc/demos/attrs/<name>.demo.ts`, sidebar entry in the 通用屬性 group.
 - Package exports resolve to **dist** — publish-truthful paths only (`files: ["dist"]` ships nothing else). `doc/.vitepress/config.mts` carries vite aliases pointing the same specifiers back at source for `doc/` live reload; keep both in sync when adding exports. `./package.json` is exported so `createRequire` in `scripts/build.mjs` can resolve package roots; keep it exported.
 - `@sakulime-ui/shared` is internal-only: private and changesets-ignored. Its vars get inlined into every published bundle at build time.
 - All four packages are `fixed` — any changeset bumps them together.
