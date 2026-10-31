@@ -3,6 +3,10 @@ title: 屬性
 description: sl-* 屬性語法總覽：元件標記、元件設定、子元素與通用屬性。
 ---
 
+<script setup>
+import * as AttrDemos from "../demos/attrs.demo";
+</script>
+
 # 屬性
 
 > sakulime 的 API 全是 HTML 屬性，沒有 class。外觀全靠 CSS；圖示名稱解析這類功能才有選配的 JS。屬性分四種，看等號寫在哪裡就知道是哪一種。
@@ -50,6 +54,55 @@ description: sl-* 屬性語法總覽：元件標記、元件設定、子元素�
 | `sl-pad` | `sm` `md` `lg` | `sl-card`、`sl-notice` | 內距 |
 | `sl-interactive` | `grow` `lift` `raise` `press` | `sl-card` | 滑鼠移過去的效果，不寫值是 `grow` |
 | `sl-gap` | `xs` `sm` `md` `lg` `xl` `2xl` `3xl` `4xl` `5xl` | `sl-stack`、`sl-row`、`sl-grid`、`sl-flow`、`sl-with-sidebar`、`sl-topbar`、`sl-footer`、`sl-toast` | 共用間距值，細節見 [Gap](/layout/gap) |
+
+#### `sl-tone` 色調
+
+五個值：`primary`、`secondary`、`success`、`warning`、`danger`。背景跟文字色自動配好。同一個值套在不同元件上的樣子：
+
+<Demo :render="AttrDemos.Tones.render" />
+
+沒給值的預設每個元件不同：
+
+| 元素 | 沒給值 |
+|---|---|
+| `sl-button` | `primary` |
+| `sl-card` | `primary`，只染邊緣強調條，不動卡片底色 |
+| `sl-icon` | 繼承文字墨色 |
+| `sl-dot` | 繼承文字墨色 |
+| `sl-chip` | 文字墨色調出的中性底 |
+| `sl-notice` | `primary` 淡底 |
+
+#### `sl-size` 尺寸
+
+三個值：`sm`、`md`、`lg`，預設 `md`。適用 `sl-button`、`sl-chip`。
+
+控制高度跟字級；`sl-chip` 只取字級，整顆等比縮放。
+
+#### `sl-radius` 圓角
+
+五個值：`none`、`sm`、`md`、`lg`、`full`。適用 `sl-button`、`sl-card`、`sl-notice`。
+
+預設 `md`；`sl-notice` 預設 `full`，是膠囊形。
+
+<Demo :render="AttrDemos.Radius.render" />
+
+#### `sl-pad` 內距
+
+三個值：`sm`、`md`、`lg`，預設 `md`。適用 `sl-card`、`sl-notice`。
+
+整體內距的增減，`lg` 適合公告型的多行內容。
+
+#### `sl-interactive` 互動
+
+四個值：`grow`、`lift`、`raise`、`press`，沒給值是 `grow`。適用 `sl-card`。
+
+滑鼠移過去的反應：
+
+<Demo :render="AttrDemos.Interactive.render" />
+
+#### `sl-gap` 共用間距
+
+跨排版屬性的間距值。跟其他通用屬性不同，它標示在外層也會生效，值會繼承給裡面的排版屬性。細節見 [Gap](/layout/gap)。
 
 ## 作用範圍
 
