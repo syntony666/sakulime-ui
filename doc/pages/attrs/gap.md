@@ -1,6 +1,6 @@
 ---
 title: Gap 共用間距
-description: 給排版屬性共用的間距。
+description: 排版屬性共用的間距。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as GapDemos from "../../demos/attrs/gap.demo";
 
 # Gap *共用間距*
 
-> 排版屬性共用的間距，不是排版工具。單獨標示什麼都不會發生；標示在外層，裡面沒給的排版屬性會繼承這個間距。
+> 排版屬性共用的間距，不是排版工具。
 
 ## 用法
 

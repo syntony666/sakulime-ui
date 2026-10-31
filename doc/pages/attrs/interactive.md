@@ -1,6 +1,6 @@
 ---
 title: Interactive 互動
-description: 滑鼠移過去的反應，四種。
+description: hover 效果，四種。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as InteractiveDemos from "../../demos/attrs/interactive.demo";
 
 # Interactive *互動*
 
-> 滑鼠移過去的反應，四種。
+> hover 效果，四種。
 
 ## 用法
 

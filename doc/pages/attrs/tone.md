@@ -1,6 +1,6 @@
 ---
 title: Tone 色調
-description: 五個主題色調，標在適用元素上，背景跟文字色自動配好。
+description: 五個主題色調。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as ToneDemos from "../../demos/attrs/tone.demo";
 
 # Tone *色調*
 
-> 五個主題色調。標在適用元素上，背景跟文字色自動配好。
+> 五個主題色調，背景跟文字色自動配好。
 
 ## 用法
 

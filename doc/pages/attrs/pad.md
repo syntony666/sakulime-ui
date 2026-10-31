@@ -1,6 +1,6 @@
 ---
 title: Pad 內距
-description: 元件的整體內距，三階。
+description: 整體內距，三階。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as PadDemos from "../../demos/attrs/pad.demo";
 
 # Pad *內距*
 
-> 元件的整體內距，三階。
+> 整體內距，三階。
 
 ## 用法
 
