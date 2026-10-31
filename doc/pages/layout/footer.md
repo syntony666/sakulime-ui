@@ -27,7 +27,7 @@ import * as FooterDemos from "../../demos/layout/footer.demo";
 
 ### 三區排列
 
-跟頂列同一套 `1fr auto 1fr` 格網：子層依序佔左、中、右，標 `sl-center` 固定中間、`sl-end` 固定尾端，多出的子層會換到新行：
+跟頂列同一套 `1fr auto 1fr` 格網：子層依序佔左、中、右，標示 `sl-center` 固定中間、`sl-end` 固定尾端，多出的子層會換到新行：
 
 <Demo :render="FooterDemos.FooterZones.render" />
 
@@ -37,4 +37,4 @@ import * as FooterDemos from "../../demos/layout/footer.demo";
 
 - 頂端 hairline
 - 上下內距 `2xl`（32px），左右內距 `--sl-lg`（16px）
-- 間距預設 `md`（12px）。只想改一個就寫 `--sl-footer-gap`；[`sl-gap`](/layout/gap) 標在頁尾自己或外層都行。
+- 間距預設 `md`（12px）。只想改一個就寫 `--sl-footer-gap`；[`sl-gap`](/layout/gap) 標示在頁尾自己或外層都行。

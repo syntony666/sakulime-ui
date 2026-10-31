@@ -31,6 +31,8 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 
 ### 間距
 
+px 以根字級 16px 換算，尺規本身是 rem。
+
 `sl-stack` 的值就是間距，預設 `md`：
 
 | 值    | 間距         |
@@ -45,7 +47,7 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 | `4xl` | 40px         |
 | `5xl` | 48px         |
 
-表列 px 以根字級 16px 換算，尺規本身是 rem。只想改一個容器就寫 `--sl-stack-gap`（例如 `style="--sl-stack-gap: 6px"`）；想一整區一起改就用 [`sl-gap`](/layout/gap)。
+只想改一個容器就寫 `--sl-stack-gap`（例如 `style="--sl-stack-gap: 6px"`）；想一整區一起改就用 [`sl-gap`](/layout/gap)。
 
 ### 行為
 

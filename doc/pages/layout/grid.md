@@ -31,6 +31,8 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 
 ### 間距
 
+px 以根字級 16px 換算，尺規本身是 rem。欄距跟行距是同一個值。
+
 `sl-grid` 的值就是間距，預設 `md`：
 
 | 值    | 間距         |
@@ -45,7 +47,7 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 | `4xl` | 40px         |
 | `5xl` | 48px         |
 
-表列 px 以根字級 16px 換算，尺規本身是 rem。欄距跟行距是同一個值。只想改一個容器就寫 `--sl-grid-gap`；[`sl-gap`](/layout/gap) 標在容器自己或外層都行，裡面沒給間距值的排版屬性會繼承這個值。
+只想改一個容器就寫 `--sl-grid-gap`；[`sl-gap`](/layout/gap) 標示在容器自己或外層都行，裡面沒給間距值的排版屬性會繼承這個值。
 
 ### 欄寬
 

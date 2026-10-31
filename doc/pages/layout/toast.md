@@ -44,5 +44,5 @@ import * as ToastDemos from "../../demos/layout/toast.demo";
 - fixed，z-index 60，會蓋在 `sl-topbar` 上面
 - 寬度是 `--sl-toast-w`，預設 22rem（352px）；視窗放不下自動縮，不會凸出
 - 離邊距離是 `--sl-toast-b`／`--sl-toast-e`，預設都是 `lg`（16px）
-- 通知之間的間距預設 `md`（12px）。只想改一個就寫 `--sl-toast-gap`；[`sl-gap`](/layout/gap) 標在容器自己或外層都行。
+- 通知之間的間距預設 `md`（12px）。只想改一個就寫 `--sl-toast-gap`；[`sl-gap`](/layout/gap) 標示在容器自己或外層都行。
 - 順序跟堆疊由 DOM 決定，多一個 `sl-notice` 就多一張

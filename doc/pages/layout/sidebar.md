@@ -9,7 +9,7 @@ import * as SidebarDemos from "../../demos/layout/sidebar.demo";
 
 # Sidebar *側欄*
 
-> 側欄加主欄的版面。側欄標 `sl-sidebar`，其他子層是主欄。主欄被擠到下限以下時整組換行，不用 media query，看的是容器寬度。
+> 側欄加主欄的版面。側欄標示 `sl-sidebar`，其他子層是主欄。主欄被擠到下限以下時整組換行，不用 media query，看的是容器寬度。
 
 ## 用法
 
@@ -26,15 +26,15 @@ import * as SidebarDemos from "../../demos/layout/sidebar.demo";
 
 ### 位置
 
-沒標記的側欄看 HTML 順序：上面那個是放前面在左；放後面就在右：
+未標示的側欄看 HTML 順序：上面那個是放前面在左；放後面就在右：
 
 <Demo :render="SidebarDemos.SidebarEnd.render" />
 
-標 `sl-start` 固定排最前、`sl-end` 固定排最後，跟 DOM 順序無關。下面這個側欄寫在主欄前面，照樣排到右邊：
+標示 `sl-start` 固定排最前、`sl-end` 固定排最後，跟 DOM 順序無關。下面這個側欄寫在主欄前面，照樣排到右邊：
 
 <Demo :render="SidebarDemos.SidebarMark.render" />
 
-標兩個 `sl-sidebar` 就左右各一條：
+標示兩個 `sl-sidebar` 就左右各一條：
 
 <Demo :render="SidebarDemos.SidebarBoth.render" />
 
@@ -45,6 +45,8 @@ import * as SidebarDemos from "../../demos/layout/sidebar.demo";
 - 換行看容器可用寬度，不是視窗斷點，塞進窄容器照樣會掉
 
 ### 間距
+
+px 以根字級 16px 換算，尺規本身是 rem。
 
 `sl-with-sidebar` 的值就是間距，預設 `lg`（16px）：
 
@@ -60,4 +62,4 @@ import * as SidebarDemos from "../../demos/layout/sidebar.demo";
 | `4xl` | 40px         |
 | `5xl` | 48px         |
 
-表列 px 以根字級 16px 換算，尺規本身是 rem。只想改一個容器就寫 `--sl-sidebar-gap`；[`sl-gap`](/layout/gap) 標在容器自己或外層都行，裡面沒給間距值的排版屬性會繼承這個值。
+只想改一個容器就寫 `--sl-sidebar-gap`；[`sl-gap`](/layout/gap) 標示在容器自己或外層都行，裡面沒給間距值的排版屬性會繼承這個值。

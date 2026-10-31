@@ -38,7 +38,7 @@ export const SidebarBoth: Demo = {
 export const SidebarMark: Demo = {
   render: () =>
     `<div sl-with-sidebar>` +
-    `<aside sl-sidebar sl-end>${cell("標 sl-end 的側欄")}</aside>` +
+    `<aside sl-sidebar sl-end>${cell("標示 sl-end 的側欄")}</aside>` +
     `<div>${cell("主欄")}</div>` +
     `</div>`,
 };
