@@ -72,12 +72,6 @@
 }
 
 @layer attrs {
-  /* the generic sl-radius="full" hands out 9999px — for a notice it
-     means the same one-line cap as the self-default */
-  [sl-notice][sl-radius="full"] {
-    --sl-radius: var(--sl-radius-full);
-  }
-
   /* fit — shrink-wrap to content instead of filling the row; the
      toast-friendly width inside a consumer wrapper */
   [sl-notice="fit"] {

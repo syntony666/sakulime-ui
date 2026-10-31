@@ -77,8 +77,11 @@
     --sl-radius: var(--sl-md);
   }
 
+  /* full = capsule; components that cap it at one line height define
+     their own --sl-radius-full (notice, card) and it wins by inherit —
+     everyone else keeps the plain pill sentinel */
   :--sl-generic-radius[sl-radius="full"] {
-    --sl-radius: 9999px;
+    --sl-radius: var(--sl-radius-full, 9999px);
   }
 
   :--sl-generic-radius[sl-radius="none"] {
