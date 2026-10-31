@@ -25,15 +25,13 @@ import * as GapDemos from "../../demos/attrs/gap.demo";
 
 <Demo :render="GapDemos.Region.render" />
 
-讀 `sl-gap` 的屬性：`sl-stack`、`sl-row`、`sl-grid`、`sl-flow`、`sl-with-sidebar`、`sl-topbar`、`sl-footer`、`sl-toast`。
-
 標示在元素自己身上等於直接給，`<div sl-stack sl-gap="xs">` 跟 `sl-stack="xs"` 一樣；標示在外層，會繼承給裡面所有讀它的屬性。元素自己給了（`sl-stack="xs"` 或 `--sl-stack-gap`）用自己的，`sl-gap` 只補沒給的。
 
 `sl-gap` 只存放間距，自己不排版。裡面沒有讀它的屬性時，標了跟沒標一樣：
 
 <Demo :render="GapDemos.Alone.render" />
 
-## 間距
+## 選項
 
 px 以根字級 16px 換算，尺規本身是 rem。`sl-gap` 沒有預設，未標示等同於未設定。
 
@@ -50,3 +48,12 @@ px 以根字級 16px 換算，尺規本身是 rem。`sl-gap` 沒有預設，未�
 | `3xl` | 32px |
 | `4xl` | 40px |
 | `5xl` | 48px |
+
+## 適用元素
+
+讀 `sl-gap` 的排版屬性，照 sidebar 分兩群：
+
+| 分類 | 屬性 |
+| --- | --- |
+| 格局設計 | `sl-stack`、`sl-row`、`sl-grid`、`sl-flow`、`sl-with-sidebar` |
+| 頁面區塊 | `sl-topbar`、`sl-footer`、`sl-toast` |

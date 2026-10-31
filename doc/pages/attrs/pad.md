@@ -32,4 +32,9 @@ import * as PadDemos from "../../demos/attrs/pad.demo";
 
 ## 適用元素
 
-`sl-card`、`sl-notice`。整體內距的增減，`lg` 適合公告型的多行內容。
+整體內距的增減：
+
+| 元素 | 備註 |
+| --- | --- |
+| `sl-card` | `lg` 讓卡片內容呼吸 |
+| `sl-notice` | `lg` 適合公告型的多行內容 |

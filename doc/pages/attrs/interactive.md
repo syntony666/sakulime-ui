@@ -28,4 +28,9 @@ import * as InteractiveDemos from "../../demos/attrs/interactive.demo";
 
 ## 適用元素
 
-`sl-card`、`sl-button`。`sl-button` 沒標示時 hover 本來就是 `grow` 放大，標了 `sl-interactive` 換成指定的效果。
+`sl-button` 是特例，沒標示時 hover 本來就是 `grow`：
+
+| 元素 | 沒標示時 |
+| --- | --- |
+| `sl-card` | 沒有 hover 效果 |
+| `sl-button` | hover 就是 `grow` 放大 |

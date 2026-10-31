@@ -28,6 +28,8 @@ import * as RadiusDemos from "../../demos/attrs/radius.demo";
 
 ## 適用元素
 
+沒給的話都是 `md`，`sl-notice` 例外：
+
 | 元素 | 預設 |
 | --- | --- |
 | `sl-button` | `md` |

@@ -28,6 +28,8 @@ import * as SizeDemos from "../../demos/attrs/size.demo";
 
 ## 適用元素
 
+各元素的作用不同：
+
 | 元素 | 作用 |
 | --- | --- |
 | `sl-button` | 高度跟字級 |
