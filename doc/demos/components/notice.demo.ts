@@ -123,6 +123,11 @@ export const WithAction: Demo = {
     `已儲存變更` +
     `<button sl-button="ghost" sl-size="sm" sl-notice-action aria-label="關閉"><i sl-icon="lucide:x"></i></button>` +
     `</div>` +
+    `<div sl-notice sl-tone="warning">` +
+    `<button sl-button="ghost" sl-size="sm" sl-notice-action="start" aria-label="靜音"><i sl-icon="lucide:bell-off"></i></button>` +
+    `排程維護將於 30 分鐘後開始` +
+    `<button sl-button="ghost" sl-size="sm" sl-notice-action aria-label="關閉"><i sl-icon="lucide:x"></i></button>` +
+    `</div>` +
     `</div>`,
 };
 
