@@ -132,17 +132,17 @@ export const WithAction: Demo = {
     `<i sl-icon="lucide:octagon-alert"></i>` +
     `部署失敗：Build #423 在 migrate 階段逾時。` +
     `<a href="#">查看記錄</a>` +
-    `<button sl-button="ghost" sl-size="sm" sl-notice-action aria-label="關閉"><i sl-icon="lucide:x"></i></button>` +
+    `<button sl-button="ghost" sl-size="sm" sl-notice-action aria-label="關閉"><i sl-icon="lucide:x" sl-icon-size="lg"></i></button>` +
     `</div>` +
     `<div sl-notice="fit" sl-tone="success">` +
     `<i sl-icon="lucide:check"></i>` +
     `已儲存變更` +
-    `<button sl-button="ghost" sl-size="sm" sl-notice-action aria-label="關閉"><i sl-icon="lucide:x"></i></button>` +
+    `<button sl-button="ghost" sl-size="sm" sl-notice-action aria-label="關閉"><i sl-icon="lucide:x" sl-icon-size="lg"></i></button>` +
     `</div>` +
     `<div sl-notice sl-tone="warning">` +
-    `<button sl-button="ghost" sl-size="sm" sl-notice-action="start" aria-label="靜音"><i sl-icon="lucide:bell-off"></i></button>` +
+    `<button sl-button="ghost" sl-size="sm" sl-notice-action="start" aria-label="靜音"><i sl-icon="lucide:bell-off" sl-icon-size="lg"></i></button>` +
     `排程維護將於 30 分鐘後開始` +
-    `<button sl-button="ghost" sl-size="sm" sl-notice-action aria-label="關閉"><i sl-icon="lucide:x"></i></button>` +
+    `<button sl-button="ghost" sl-size="sm" sl-notice-action aria-label="關閉"><i sl-icon="lucide:x" sl-icon-size="lg"></i></button>` +
     `</div>` +
     `</div>`,
 };
@@ -158,7 +158,7 @@ export const Multiline: Demo = {
     `<div class="demo-stack">` +
     `<div sl-notice sl-tone="primary"><i sl-icon="lucide:info"></i> ${LONG}</div>` +
     `<div sl-notice sl-tone="warning"><i sl-icon="lucide:triangle-alert"></i> ${LONG}` +
-    `<button sl-button="ghost" sl-size="sm" sl-notice-action aria-label="關閉"><i sl-icon="lucide:x"></i></button>` +
+    `<button sl-button="ghost" sl-size="sm" sl-notice-action aria-label="關閉"><i sl-icon="lucide:x" sl-icon-size="lg"></i></button>` +
     `</div>` +
     `<div sl-notice sl-notice-align="end" sl-tone="secondary"><i sl-icon="lucide:info"></i> ${LONG}</div>` +
     `</div>`,

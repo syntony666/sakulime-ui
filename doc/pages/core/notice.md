@@ -72,10 +72,12 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### 動作 `sl-notice-action`
 
-要放邊緣的控制項就標 `sl-notice-action`——`fit` 的時候靠內容尾端，內側固定留一段距離，文字再長也不會貼上去。dismiss 鈕或動作連結都放這，關閉行為自己接：
+要放邊緣的控制項就標 `sl-notice-action`——`fit` 的時候靠內容尾端。dismiss 鈕或動作連結都放這，關閉行為自己接：
 
-- 不寫值：靠右（尾端）
-- `start`：靠左（開頭）
+- 不寫值：靠右（尾端）——內側固定留一段距離，文字再長也不會貼上去
+- `start`：靠左（開頭）——站在 icon 的位置，像 leading icon 一樣貼著內容
+
+action 裡的 icon 跟著按鈕字級走（`sl-size="sm"` 約 12px），要大一點就給 `<i>` 掛 `sl-icon-size`。
 
 兩個可以一起放——下面第三條就是左右各一個：
 
