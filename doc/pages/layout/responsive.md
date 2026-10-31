@@ -37,7 +37,7 @@ px 以根字級 16px 換算。三階跟 [container](/layout/container) 的頁面
   :render="RwdDemos.Cols.render"
 />
 
-跨欄自動收斂：當前欄數容不下的 `sl-span` 縮成滿列，不會溢出。
+佔欄的 `sl-span` 自動收斂：當前欄數容不下就縮成滿列，不會溢出。
 
 ## 隱藏跟顯示
 

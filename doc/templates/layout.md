@@ -15,7 +15,7 @@ feature, ordered by importance — `間距` always last:
 
 ## <feature>
 
-<one section per distinct feature — `## 欄數`, `## 跨欄`,
+<one section per distinct feature — `## 欄數`, `## 佔欄`,
 `## 窄屏直排 `sl-collapse``, `## 三區排列`>
 
 ## 間距

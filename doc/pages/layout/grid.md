@@ -43,7 +43,7 @@ import * as GridDemos from "../../demos/layout/grid.demo";
   :render="GridDemos.Cols.render"
 />
 
-## 跨欄
+## 佔欄
 
 `sl-span` 標在子層上，讓它佔好幾欄，2 到 12：
 
