@@ -180,7 +180,7 @@ export default defineConfig({
               { text: `Stack ${zh("堆疊")}`, link: "/layout/stack" },
               { text: `Row ${zh("橫列")}`, link: "/layout/row" },
               { text: `Grid ${zh("格網")}`, link: "/layout/grid" },
-              { text: `Flow ${zh("順排")}`, link: "/layout/flow" },
+              { text: `Flow ${zh("子層間距")}`, link: "/layout/flow" },
             ],
           },
           {
