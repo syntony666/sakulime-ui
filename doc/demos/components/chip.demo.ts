@@ -1,6 +1,6 @@
 import type { Meta, DemoObj } from "../util/types";
 import { showMarkup } from "../util/docs-source";
-import { axis, axisArg, attr, label } from "../util/axis";
+import { axis, axisArg, attr, label, TONES } from "../util/axis";
 import "../util/icons";
 
 type ChipArgs = {
@@ -8,7 +8,6 @@ type ChipArgs = {
   size: string;
 };
 
-const TONES = ["-", "primary", "secondary", "success", "warning", "danger"];
 const SIZES = ["-", "sm", "md", "lg"];
 
 const meta = {

@@ -1,7 +1,9 @@
 import type { Meta, DemoObj } from "../util/types";
 import { showMarkup } from "../util/docs-source";
-import { axis, axisArg, attr, boolArg, label } from "../util/axis";
+import { axis, axisArg, attr, boolArg, label, TONES, mark } from "../util/axis";
 import "../util/icons";
+
+const cardMarker = mark("sl-card");
 
 type CardArgs = {
   pad: string;
@@ -31,7 +33,6 @@ const VARIANTS = ["-", "hollow", "plain", "blank"];
 const INDICATES = ["-", "top", "bottom", "start", "end"];
 const CORNERS = ["-", "start", "end"];
 const CORNER_KINDS = ["chip", "dot", "icon"];
-const TONES = ["-", "primary", "secondary", "success", "warning", "danger"];
 const INTERACTIVES = ["-", "grow", "lift", "raise", "press"];
 const INSETS = ["-", "top", "middle", "bottom"];
 
@@ -74,8 +75,6 @@ type Demo = DemoObj<CardArgs>;
 const card = (attrs: string, content: string, w = 320) =>
   `<div sl-card${attrs} style="width: ${w}px">${content}</div>`;
 
-// the marker itself carries the variant value — bare = default frame
-const cardMarker = (v: string) => (v === "-" ? "sl-card" : `sl-card="${v}"`);
 
 const vcard = (v: string, content: string, w = 320) =>
   `<div ${cardMarker(v)} style="width: ${w}px">${content}</div>`;

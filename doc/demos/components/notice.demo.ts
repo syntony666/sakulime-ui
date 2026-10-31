@@ -1,6 +1,6 @@
 import type { Meta, DemoObj } from "../util/types";
 import { showMarkup } from "../util/docs-source";
-import { axis, axisArg, attr, label } from "../util/axis";
+import { axis, axisArg, attr, label, TONES, mark } from "../util/axis";
 import "../util/icons";
 
 type NoticeArgs = {
@@ -15,7 +15,6 @@ type NoticeArgs = {
   lines: string;
 };
 
-const TONES = ["-", "primary", "secondary", "success", "warning", "danger"];
 const VARIANTS = ["-", "fit"];
 const PADS = ["-", "sm", "md", "lg"];
 const RADII = ["-", "sm", "md", "lg", "full", "none"];
@@ -53,8 +52,8 @@ const meta = {
 export default meta;
 type Demo = DemoObj<NoticeArgs>;
 
-// marker values: "-" means the bare attribute, not an absent one
-const marker = (v: string) => (v === "-" ? "sl-notice" : `sl-notice="${v}"`);
+
+const marker = mark("sl-notice");
 
 const BODY = `<i sl-icon="lucide:info"></i> 系統將於 11/2 02:00–03:00 例行維護`;
 

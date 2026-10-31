@@ -1,6 +1,6 @@
 import type { Meta, DemoObj } from "../util/types";
 import { showMarkup } from "../util/docs-source";
-import { axis, axisArg, attr, boolArg, label } from "../util/axis";
+import { axis, axisArg, attr, boolArg, label, TONES } from "../util/axis";
 import "../util/icons";
 
 type IconArgs = {
@@ -15,7 +15,6 @@ type IconArgs = {
   space: string;
 };
 
-const TONES = ["-", "primary", "secondary", "success", "warning", "danger"];
 const NAMES = ["star", "zap", "heart", "rocket", "check", "arrow-right", "trash", "plus"];
 
 const meta = {

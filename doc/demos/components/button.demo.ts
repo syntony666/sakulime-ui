@@ -1,6 +1,8 @@
 import type { Meta, DemoObj } from "../util/types";
 import { showMarkup } from "../util/docs-source";
-import { axis, axisArg, attr, label } from "../util/axis";
+import { axis, axisArg, attr, label, TONES, mark } from "../util/axis";
+
+const marker = mark("sl-button");
 
 type ButtonArgs = {
   label: string;
@@ -11,7 +13,6 @@ type ButtonArgs = {
   disabled: boolean;
 };
 
-const TONES = ["-", "primary", "secondary", "success", "warning", "danger"];
 const VARIANTS = ["-", "normal", "invert", "underline", "ghost"];
 const SIZES = ["-", "sm", "md", "lg"];
 const RADII = ["-", "none", "sm", "md", "lg", "full"];
@@ -59,8 +60,6 @@ const meta = {
 export default meta;
 type Demo = DemoObj<ButtonArgs>;
 
-// the marker itself carries the variant value — bare = normal
-const marker = (v: string) => (v === "-" ? "sl-button" : `sl-button="${v}"`);
 
 // one button per axis value; a fixed variant rides the marker when given
 const btn =

@@ -18,6 +18,14 @@ const NAMES: Record<string, string> = {
 
 export const label = (value: string) => NAMES[value] ?? value;
 
+// the tone axis every component demos — shared so the list can't drift
+export const TONES = ["-", "primary", "secondary", "success", "warning", "danger"];
+
+// marker values: "-" writes the bare attribute, not an absent one —
+// mark("sl-notice") produces the per-component variant emitter
+export const mark = (name: string) => (v: string) =>
+  v === "-" ? name : `${name}="${v}"`;
+
 // data-demo marks this as demo chrome — the docs source transform
 // drops the whole element so it never reaches the shown code
 const SEP =
