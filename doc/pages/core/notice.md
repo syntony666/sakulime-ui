@@ -41,12 +41,12 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### 圓角 `sl-radius`
 
-`sl-notice` 在 `sl-radius` 的消費名單裡，預設 `full`——膠囊端：
+`sl-notice` 在 `sl-radius` 的消費名單裡，預設 `full`——膠囊端。這裡的 `full` 是「單行膠囊」：半徑封頂在單列高的一半，所以一、二行照樣全圓，三行起圓弧只爬一行、中段變直線，不會變成拉長的半圓：
 
 - `sm`：微圓
 - `md`：一般圓角
 - `lg`：很圓
-- `full`：膠囊（預設）
+- `full`：單行膠囊（預設）
 - `none`：直角
 
 <Demo :render="NoticeDemos.Radius.render" />

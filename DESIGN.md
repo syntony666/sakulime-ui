@@ -195,7 +195,7 @@ components:
 
 ### Notices `sl-notice`
 - **Surface:** tone 12% wash 膠囊＋tone-text 墨 — 浮空框：`3px solid var(--sl-surface)` 環帶把 wash 跟外緣 `box-shadow` 2px tone/border 混色細線隔開
-- **Shape:** `999px` 預設膠囊端 — chip 的 block 級兄弟；`sl-radius` 可轉 `sm/md/lg/none`
+- **Shape:** 預設膠囊端 — chip 的 block 級兄弟；`full` 是「單行膠囊」（半徑 = 單列高一半），兩行仍全圓、三行起中段跑直線；`sl-radius` 可轉 `sm/md/lg/none`
 - **Width:** 預設填滿容器（橫幅）；`sl-notice="fit"` 縮內容寬 — 元件只管寬度，位置/堆疊/dismiss 全留消費端
 - **Composition:** flex row `0.6em` gap — icon、訊息、連結、`sl-notice-action`（auto margin 推尾端）；沒 icon 文字從 padding 邊起頭不留空槽
 
