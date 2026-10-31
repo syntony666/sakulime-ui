@@ -104,7 +104,11 @@ action 裡的 icon 跟著按鈕字級走（`sl-size="sm"` 約 12px），要大�
 
 <Demo :render="NoticeDemos.NoIcon.render" />
 
-內容長了就直接折行——膠囊跟著長高，預設 `full` 圓角封頂一行高，三行起兩端之間的中段就變直線。把 `<i sl-icon>` 寫在文字元素（`<span>`）裡它就是行內圖示，折行滿寬流下去；直接放在 notice 下則是獨立一欄、文字不會繞到它底下。`sl-notice-align="end"` 的話每一行都靠右：
+內容長了就直接折行，膠囊跟著長高——預設 `full` 圓角封頂一行高，三行起兩端之間的中段變直線。
+
+icon 放哪決定它的角色：寫在文字元素（`<span>`）裡是行內圖示，折行滿寬流下去；直接放在 notice 下是獨立一欄，文字不會繞到它底下。
+
+`sl-notice-align="end"` 的話每一行都靠右：
 
 <Demo :render="NoticeDemos.Multiline.render" />
 
