@@ -72,7 +72,7 @@ export const Widths: Demo = {
     axis(
       ["-", "fit"],
       (v) =>
-        `<div ${marker(v)} sl-tone="success"><i sl-icon="lucide:check"></i> ${v === "-" ? "全寬" : "內容寬"}</div>`,
+        `<div ${marker(v)} sl-tone="success"><i sl-icon="lucide:check"></i> ${v === "-" ? "滿版" : "內容寬"}</div>`,
       true,
     ),
 };
@@ -149,7 +149,7 @@ export const BannerPlay: DemoObj<BannerArgs> = {
     },
     lines: {
       name: "內容",
-      description: "切多行看折行行為",
+      description: "切多行看換行行為",
       control: { type: "select" as const },
       options: ["單行", "多行"],
     },
