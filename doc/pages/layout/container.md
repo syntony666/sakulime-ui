@@ -30,4 +30,4 @@ import * as ContainerDemos from "../../demos/layout/container.demo";
 - `sl-container-md`：960px
 - `sl-container-lg`：1200px
 
-要更改數值可以覆寫 `--sl-container-sm/md/lg`。
+更改數值的話，覆寫 `--sl-container-sm/md/lg`。

@@ -66,7 +66,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 <Demo :render="CardDemos.Interactive.render" />
 
-要讓點擊開啟頁面，把屬性寫在 `<a>` 上，卡片本身就是連結：
+點擊要跳頁的話，屬性寫在 `<a>` 上，卡片本身就是連結：
 
 ```html
 <a sl-card sl-interactive href="/detail">…</a>
