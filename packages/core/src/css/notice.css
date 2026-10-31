@@ -17,8 +17,9 @@
     align-items: center;
     gap: 0.6em;
     line-height: 1.4;
-    /* strip proportions — vertical sits at 3/4 of the pad slot */
-    padding: calc(var(--sl-pad) * 0.75) var(--sl-pad);
+    /* strip proportions — vertical sits at 3/4 of the pad slot,
+       horizontal at 3/2 so the capsule ends breathe */
+    padding: calc(var(--sl-pad) * 0.75) calc(var(--sl-pad) * 1.5);
     color: var(--sl-tone-text);
     /* floating frame — the wash stops at the padding edge, a surface
        band fills the border gap, and a 2px ring sits on the outer
