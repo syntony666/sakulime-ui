@@ -35,11 +35,12 @@ export const StackMarks: Demo = {
     `</div>`,
 };
 
-// same marks on a grid item — the track keeps its size and the item
-// shrinks to content width, pinned inside its own cell
+// all three marks on grid items — the tracks keep their size and each
+// item shrinks to content width, pinned to its own cell's edge
 export const GridCell: Demo = {
   render: () =>
-    `<div sl-grid sl-cols="2">` +
+    `<div sl-grid sl-cols="3">` +
+    `<div class="demo-cell" sl-start>sl-start</div>` +
     `<div class="demo-cell" sl-center>sl-center</div>` +
     `<div class="demo-cell" sl-end>sl-end</div>` +
     `</div>`,
