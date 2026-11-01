@@ -170,7 +170,7 @@ components:
 **Flat by default。** 系統沒有常駐陰影，層次靠 hairline（`--sl-border`）＋色階 tint（surface vs bg vs soft-mix）表達。陰影出現在浮層與 `sl-interactive` 的 hover；notice 外緣那圈常駐 2px ring 是 hairline 語言（把膠囊描出來的框線），不計 elevation。
 
 ### Shadow Vocabulary
-`sl-interactive` 的五值配方走 `--sl-i-{transform,shadow,filter}` 三槽，card 與 button 共用同一條 hover 回放；`prefers-reduced-motion` 統一切除 transition：
+`sl-interactive` 的五值配方走 `--sl-interactive-{transform,shadow,filter}` 三槽，card 與 button 共用同一條 hover 回放；`prefers-reduced-motion` 統一切除 transition：
 - **Grow**（bare / `"grow"`，`scale(1.03)`）：彈起
 - **Lift**（`translateY(-4px)`＋`0 8px 20px text 24%` 影）：浮起帶影
 - **Raise**（`0 3px 10px text 20%` 影）：原地起影
