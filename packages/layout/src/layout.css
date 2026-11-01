@@ -140,26 +140,41 @@
   [sl-grid] > [sl-span="12"] { --sl-span-n: 12; }
 
   /* opt-in collapse — <div sl-row sl-collapse> turns into a vertical
-     stack on narrow viewports. Tag rows keep wrapping instead, so the
-     attribute is never implied. 45rem is the sm breakpoint — the same
-     number as --sl-container-sm */
+     stack on narrow viewports; -lg and -md collapse at wider cuts. Tag
+     rows keep wrapping instead, so the attribute is never implied.
+     Breakpoints are the hardcoded twins of the container scale */
+  @media (width < 75rem) {
+    [sl-row][sl-collapse-lg] {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    [sl-row][sl-collapse-lg]:has(> [sl-place~="center"]) {
+      grid-auto-flow: row;
+      grid-template-columns: 1fr;
+    }
+    [sl-row][sl-collapse-lg]:has(> [sl-place~="center"]) > [sl-place] { grid-column: auto; }
+  }
+  @media (width < 60rem) {
+    [sl-row][sl-collapse-md] {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    [sl-row][sl-collapse-md]:has(> [sl-place~="center"]) {
+      grid-auto-flow: row;
+      grid-template-columns: 1fr;
+    }
+    [sl-row][sl-collapse-md]:has(> [sl-place~="center"]) > [sl-place] { grid-column: auto; }
+  }
   @media (width < 45rem) {
     [sl-row][sl-collapse] {
       flex-direction: column;
       align-items: stretch;
     }
-
-    /* collapse also flattens a three-zone row — one column, zones
-       release their grid placement and stack in source order */
     [sl-row][sl-collapse]:has(> [sl-place~="center"]) {
       grid-auto-flow: row;
       grid-template-columns: 1fr;
     }
     [sl-row][sl-collapse]:has(> [sl-place~="center"]) > [sl-place] { grid-column: auto; }
-
-    /* collapsed rows stretch their children — place marks must not
-       keep their auto margins or the marked child stays content-width */
-    [sl-row][sl-collapse] > [sl-place] { margin-inline: 0; }
   }
 
   /* bar — a full-width band at either page edge. The value picks the
@@ -263,31 +278,21 @@
     inset-inline-end: var(--sl-toast-e, var(--sl-lg));
   }
 
-  [sl-toast="start"] {
+  /* the value is a corner: <edge>-<side>. top-* flips the vertical
+     anchor; *-start and *-end pick the inline edge; *-center centres
+     on that edge. Bare sl-toast sits bottom-end, and the legacy bare
+     "start" value still lands bottom-start through the suffix rule */
+  [sl-toast^="top"] {
+    inset-block-end: auto;
+    inset-block-start: var(--sl-toast-b, var(--sl-lg));
+  }
+
+  [sl-toast$="start"] {
     inset-inline-end: auto;
     inset-inline-start: var(--sl-toast-e, var(--sl-lg));
   }
 
-  [sl-toast="bottom-center"] {
-    inset-inline: 0;
-    margin-inline: auto;
-  }
-
-  [sl-toast="top-start"] {
-    inset-block-end: auto;
-    inset-block-start: var(--sl-toast-b, var(--sl-lg));
-    inset-inline-end: auto;
-    inset-inline-start: var(--sl-toast-e, var(--sl-lg));
-  }
-
-  [sl-toast="top-end"] {
-    inset-block-end: auto;
-    inset-block-start: var(--sl-toast-b, var(--sl-lg));
-  }
-
-  [sl-toast="top-center"] {
-    inset-block-end: auto;
-    inset-block-start: var(--sl-toast-b, var(--sl-lg));
+  [sl-toast$="center"] {
     inset-inline: 0;
     margin-inline: auto;
   }
@@ -382,6 +387,10 @@
     [sl-grid][sl-cols-lg="11"] { --sl-gc: 11; --sl-gf: auto; }
     [sl-grid][sl-cols-lg="12"] { --sl-gc: 12; --sl-gf: auto; }
 
+    /* collapsed rows stretch children — the mark's auto margin lives
+       in this layer, so the reset must too */
+    [sl-row][sl-collapse-lg] > [sl-place] { margin-inline: 0; }
+
     [sl-hide-lg] { display: none; }
   }
   @media (width < 60rem) {
@@ -397,6 +406,8 @@
     [sl-grid][sl-cols-md="10"] { --sl-gc: 10; --sl-gf: auto; }
     [sl-grid][sl-cols-md="11"] { --sl-gc: 11; --sl-gf: auto; }
     [sl-grid][sl-cols-md="12"] { --sl-gc: 12; --sl-gf: auto; }
+
+    [sl-row][sl-collapse-md] > [sl-place] { margin-inline: 0; }
 
     [sl-hide-md] { display: none; }
   }
@@ -417,6 +428,8 @@
     /* sl-collapse — the sm shorthand: one column; spans release through
        the same clamp since the count is now one */
     [sl-grid][sl-collapse] { --sl-gc: 1; --sl-gf: auto; }
+
+    [sl-row][sl-collapse] > [sl-place] { margin-inline: 0; }
 
     [sl-hide-sm] { display: none; }
   }
