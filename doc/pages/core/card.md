@@ -57,12 +57,13 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 ### 互動 `sl-interactive`
 
-整張卡片看起來可以點，游標變成手指，滑鼠移過去就有反應。沒給是 `grow`：
+整張卡片看起來可以點，游標變成手指，滑鼠移過去就有反應。`sl-interactive` 不給值是 `grow`：
 
-- `grow`：放大
-- `lift`：浮起＋陰影
-- `raise`：只有陰影浮現
-- `press`：下壓縮小
+- `grow`：放大 1.03
+- `lift`：浮起 4px 加陰影
+- `raise`：只有陰影
+- `press`：壓下 0.97
+- `dim`：變暗
 
 <Demo :render="CardDemos.Interactive.render" />
 

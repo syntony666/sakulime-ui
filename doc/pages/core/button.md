@@ -32,11 +32,11 @@ import * as ButtonDemos from "../../demos/components/button.demo";
 
 ### 顏色 `sl-tone`
 
-- `primary`：主題主色（預設）
-- `secondary`：主題副色
-- `success`：代表成功
-- `warning`：代表警告
-- `danger`：代表危險
+- `primary`：主色（預設）
+- `secondary`：次要色
+- `success`：成功、完成的回饋
+- `warning`：需要注意的提醒
+- `danger`：錯誤、危險操作
 
 #### 實心版本
 

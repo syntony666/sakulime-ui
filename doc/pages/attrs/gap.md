@@ -25,7 +25,7 @@ import * as GapDemos from "../../demos/attrs/gap.demo";
 
 <Demo :render="GapDemos.Region.render" />
 
-標示在元素自己身上等於直接給，`<div sl-stack sl-gap="xs">` 跟 `sl-stack="xs"` 一樣；標示在外層，會繼承給裡面所有讀它的屬性。元素自己給了（`sl-stack="xs"` 或 `--sl-stack-gap`）用自己的，`sl-gap` 只補沒給的。
+標示在元素自己身上等於直接給，`<div sl-stack sl-gap="xs">` 跟 `sl-stack="xs"` 一樣；標示在外層，會繼承給裡面所有讀它的屬性。元素自己給了（`sl-stack="xs"` 或 `--sl-stack-gap`）用自己的間距，`sl-gap` 只補沒設間距的元素。
 
 `sl-gap` 只存放間距，自己不排版。裡面沒有讀它的屬性時，標了跟沒標一樣：
 
@@ -51,7 +51,7 @@ px 以根字級 16px 換算，尺規本身是 rem。`sl-gap` 沒有預設，未�
 
 ## 適用元素
 
-讀 `sl-gap` 的排版屬性，照 sidebar 分兩群：
+讀 `sl-gap` 的都是排版屬性，在[排版](/layout/)一章介紹，這裡照側欄的分群列出：
 
 | 分類 | 屬性 |
 | --- | --- |
