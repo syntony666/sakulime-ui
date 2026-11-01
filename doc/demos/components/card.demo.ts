@@ -70,10 +70,6 @@ const media = `<div sl-card--section="inset" class="demo-media"><!-- 圖片 --><
 const TITLE = `<strong>卡片標題</strong><p>卡片內容文字，描述這張卡片在展示什麼。</p>`;
 const FOOT = `<small>底部資訊</small>`;
 
-// one card per axis value
-const byAxis = (name: string) => (v: string) =>
-  card(attr(name, v), `<strong>${label(v)}</strong><p>內容文字</p>`);
-
 export const Card: Demo = {
   render: (args) =>
     `<div ${cardMarker(args.variant)}` +
@@ -85,14 +81,6 @@ export const Card: Demo = {
     ` style="max-width: 360px">` +
     `<div>${TITLE}</div>` +
     `</div>`,
-};
-
-export const Pads: Demo = {
-  render: () => axis(PADS, byAxis("sl-pad")),
-};
-
-export const Radius: Demo = {
-  render: () => axis(RADII, byAxis("sl-radius")),
 };
 
 export const Variants: Demo = {
@@ -109,33 +97,6 @@ export const Indicates: Demo = {
         `<strong>${label(v)}</strong><p>內容文字</p>`,
       ),
     ),
-};
-
-export const Indicated: Demo = {
-  render: () =>
-    axis(TONES, (v) =>
-      card(
-        attr("sl-card-indicate", "start") + attr("sl-tone", v),
-        `<strong>${label(v)}</strong><p>內容文字</p>`,
-      ),
-    ),
-};
-
-// hover affordances — one card per axis value; "-" shows a static card
-export const Interactive: Demo = {
-  render: () =>
-    axis(INTERACTIVES, (v) =>
-      card(
-        attr("sl-interactive", v),
-        `<strong>${label(v)}</strong><p>滑鼠移過去看效果</p>`,
-      ),
-    ),
-};
-
-export const InteractiveLink: Demo = {
-  render: () =>
-    `<a sl-card sl-interactive href="#" style="width: 320px">` +
-    `<strong>可點卡片</strong><p>整張卡片是一個連結，滑鼠移過去會放大。</p></a>`,
 };
 
 // corner is position only — the look is a small attr on the same element

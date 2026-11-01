@@ -33,35 +33,25 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 ### 顏色 `sl-tone`
 
-`sl-tone` 不會改變卡片本體的底色，它決定邊緣強調條的顏色（預設 primary）：
-
-<Demo :render="CardDemos.Indicated.render" />
+`sl-tone` 不會改變卡片本體的底色，它決定邊緣強調條的顏色（預設 primary）。選項看 [Tone 色調](/attrs/tone)。
 
 ### 圓角 `sl-radius`
 
 `sl-card` 是 `sl-radius` 的適用元素，沒給是 `md`。卡片的 `full` 是一行膠囊：半徑最多一個行高，卡片一長高中段就變直線。其他選項看 [Radius 圓角](/attrs/radius)。
 
-<Demo :render="CardDemos.Radius.render" />
-
 ### 內距 `sl-pad`
 
 `sl-card` 是 `sl-pad` 的適用元素，沒給是 `md`。選項看 [Pad 內距](/attrs/pad)。
 
-<Demo :render="CardDemos.Pads.render" />
-
 ### 互動 `sl-interactive`
 
 整張卡片看起來可以點，游標變成手指，滑鼠移過去就有反應。`sl-interactive` 不給值是 `grow`，效果選項看 [Interactive 互動](/attrs/interactive)。
-
-<Demo :render="CardDemos.Interactive.render" />
 
 點擊要跳頁的話，屬性寫在 `<a>` 上，卡片本身就是連結：
 
 ```html
 <a sl-card sl-interactive href="/detail">…</a>
 ```
-
-<Demo :render="CardDemos.InteractiveLink.render" />
 
 ## 元件設定
 

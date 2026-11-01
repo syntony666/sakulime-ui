@@ -19,8 +19,6 @@ import * as ChipDemos from "../../demos/components/chip.demo";
 
 `sl-chip` 是 `sl-tone` 的適用元素。沒給是文字顏色調出的中性底色。選項看 [Tone 色調](/attrs/tone)。
 
-<Demo :render="ChipDemos.Tones.render" />
-
 ### 大小與對齊
 
 尺寸用 em，膠囊內的字是所在字級的 `0.875em`，跟著周圍字級一起縮放，不用寫尺寸屬性。
@@ -28,8 +26,6 @@ import * as ChipDemos from "../../demos/components/chip.demo";
 <Demo :render="ChipDemos.Sizes.render" />
 
 固定字級用 `sl-size`，chip 只取字級不看高度，選項看 [Size 尺寸](/attrs/size)。padding 和 gap 都是 em，整顆膠囊跟著字級等比縮放：
-
-<Demo :render="ChipDemos.SizeKinds.render" />
 
 ## 組合
 

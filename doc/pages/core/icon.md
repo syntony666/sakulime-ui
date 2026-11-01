@@ -111,8 +111,6 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 `sl-icon` 是 `sl-tone` 的適用元素，`sl-tone` 標示在圖示本身；沒給就繼承文字顏色。
 
-<Demo :render="IconDemos.Tones.render" />
-
 ### 大小與對齊
 
 大小固定 `1em`，跟著所在文字的字級縮放。插進句子、按鈕、標題，都是當下的文字大小。

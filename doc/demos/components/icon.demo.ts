@@ -58,11 +58,6 @@ export const Icon: Demo = {
     `></i>`,
 };
 
-export const Tones: Demo = {
-  render: () =>
-    axis(TONES, (v) => `<i sl-icon="lucide:star"${attr("sl-tone", v)}></i>`),
-};
-
 // 1em — the icon tracks the font-size of whatever it sits inside
 const SIZES = [14, 16, 20, 28];
 export const Sizes: Demo = {

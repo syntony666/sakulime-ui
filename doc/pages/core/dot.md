@@ -19,8 +19,6 @@ import * as DotDemos from "../../demos/components/dot.demo";
 
 `sl-dot` 是 `sl-tone` 的適用元素。沒給繼承文字顏色。選項看 [Tone 色調](/attrs/tone)。
 
-<Demo :render="DotDemos.Tones.render" />
-
 ### 大小與對齊
 
 大小固定 `0.5em`，跟著所在文字的字級縮放，不用寫尺寸屬性。

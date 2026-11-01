@@ -1,5 +1,5 @@
 import type { Meta, DemoObj } from "../util/types";
-import { axis, axisArg, attr, label, TONES, mark } from "../util/axis";
+import { axis, axisArg, attr, TONES, mark } from "../util/axis";
 import "../util/icons";
 
 type NoticeArgs = {
@@ -56,16 +56,6 @@ export const Notice: Demo = {
     `<div ${marker(a.variant)}${attr("sl-tone", a.tone)}${attr("sl-pad", a.pad)}${attr("sl-radius", a.radius)}${attr("sl-notice-align", a.align)}>${BODY}</div>`,
 };
 
-export const Tones: Demo = {
-  render: () =>
-    axis(
-      TONES,
-      (v) =>
-        `<div sl-notice${attr("sl-tone", v)}><i sl-icon="lucide:info"></i> ${label(v)} 通知訊息</div>`,
-      true,
-    ),
-};
-
 // fill (default) vs fit — the only width concern the component owns
 export const Widths: Demo = {
   render: () =>
@@ -73,26 +63,6 @@ export const Widths: Demo = {
       ["-", "fit"],
       (v) =>
         `<div ${marker(v)} sl-tone="success"><i sl-icon="lucide:check"></i> ${v === "-" ? "滿版" : "內容寬"}</div>`,
-      true,
-    ),
-};
-
-export const Pads: Demo = {
-  render: () =>
-    axis(
-      PADS,
-      (v) =>
-        `<div sl-notice sl-tone="warning"${attr("sl-pad", v)}>${label(v)} 厚度</div>`,
-      true,
-    ),
-};
-
-export const Radius: Demo = {
-  render: () =>
-    axis(
-      RADII,
-      (v) =>
-        `<div sl-notice sl-tone="secondary"${attr("sl-radius", v)}>${label(v)} 圓角</div>`,
       true,
     ),
 };

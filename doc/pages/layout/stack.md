@@ -3,10 +3,6 @@ title: Stack 堆疊
 description: 垂直疊放子元素，間距由 sl-gap 統一給。
 ---
 
-<script setup>
-import * as StackDemos from "../../demos/layout/stack.demo";
-</script>
-
 # Stack *堆疊*
 
 > 把子元素垂直疊起來。子元素的上下 margin 會被清掉、寬度拉滿，給下去的間距就是最終間距。
@@ -28,9 +24,3 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 ## 間距
 
 間距用 [`sl-gap`](/attrs/gap) 給，寫在 stack 自己身上或祖先上都行，預設 `md`。只想改一個容器就寫 `--sl-stack-gap`（例如 `style="--sl-stack-gap: 6px"`）。
-
-三種間距的實際樣子：
-
-<Demo
-  :render="StackDemos.Gaps.render"
-/>

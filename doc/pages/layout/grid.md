@@ -21,12 +21,6 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 </div>
 ```
 
-三種間距的實際樣子：
-
-<Demo
-  :render="GridDemos.Gaps.render"
-/>
-
 ## 欄數
 
 `sl-grid-cols` 把欄數寫死，1 到 12：
