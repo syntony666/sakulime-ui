@@ -33,12 +33,12 @@ export const SidebarBoth: Demo = {
     `</div>`,
 };
 
-// sl-end pins the rail last no matter where it sits in the markup —
-// here the rail is first in source order and still lands on the right
+// sl-place="end" pins the rail last no matter where it sits in the
+// markup — here the rail is first in source order and still lands right
 export const SidebarMark: Demo = {
   render: () =>
     `<div sl-with-sidebar>` +
-    `<aside sl-sidebar sl-end>${cell("標示 sl-end 的側邊欄")}</aside>` +
+    `<aside sl-sidebar sl-place="end">${cell("標示 sl-place=end 的側邊欄")}</aside>` +
     `<div>${cell("主欄")}</div>` +
     `</div>`,
 };

@@ -1,35 +1,86 @@
 /* layout primitives as sl-* attributes; scales come from shared vars */
 
 @layer base {
-  /* page container — <div sl-container-md>, works on any element */
-  [sl-container-sm],
-  [sl-container-md],
-  [sl-container-lg] {
+  /* page container — <div sl-container="md">, works on any element;
+     bare sl-container defaults to the md width */
+  [sl-container] {
     width: 100%;
+    max-width: var(--sl-container-md);
     margin-inline: auto;
     padding-inline: var(--sl-lg);
   }
 
-  [sl-container-sm] {
+  [sl-container="sm"] {
     max-width: var(--sl-container-sm);
   }
-  [sl-container-md] {
-    max-width: var(--sl-container-md);
-  }
-  [sl-container-lg] {
+
+  [sl-container="lg"] {
     max-width: var(--sl-container-lg);
   }
 
   /* stack — vertical rhythm. The parent owns spacing: direct children
-     lose their block margins so the gap value is the whole story */
+     lose their block margins so the gap value is the whole story.
+     sl-flow is the prose mode: children keep normal block layout and
+     their own margins, so the sibling rhythm rides on margins instead
+     of the flex gap. sl-cols splits the stack into balanced text
+     columns — both modes drop flex for block layout */
   [sl-stack] {
     display: flex;
     flex-direction: column;
     gap: var(--sl-stack-gap, var(--sl-gap, var(--sl-md)));
   }
 
-  [sl-stack] > * {
+  [sl-stack][sl-flow],
+  [sl-stack][sl-cols] {
+    display: block;
+  }
+
+  [sl-stack]:not([sl-flow]):not([sl-cols]) > * {
     margin-block: 0;
+  }
+
+  [sl-stack][sl-flow] > * + *,
+  [sl-stack][sl-cols] > * + * {
+    margin-block-start: var(--sl-stack-gap, var(--sl-gap, var(--sl-md)));
+  }
+
+  /* sibling margins stay, but the stack owns its edges — a heading's
+     own margin must not thicken the top of the stack */
+  [sl-stack][sl-flow] > :first-child,
+  [sl-stack][sl-cols] > :first-child {
+    margin-block-start: 0;
+  }
+  [sl-stack][sl-flow] > :last-child,
+  [sl-stack][sl-cols] > :last-child {
+    margin-block-end: 0;
+  }
+
+  [sl-stack][sl-cols] {
+    column-gap: var(--sl-stack-gap, var(--sl-gap, var(--sl-md)));
+  }
+
+  [sl-stack][sl-cols="2"]  { column-count: 2; }
+  [sl-stack][sl-cols="3"]  { column-count: 3; }
+  [sl-stack][sl-cols="4"]  { column-count: 4; }
+  [sl-stack][sl-cols="5"]  { column-count: 5; }
+  [sl-stack][sl-cols="6"]  { column-count: 6; }
+  [sl-stack][sl-cols="7"]  { column-count: 7; }
+  [sl-stack][sl-cols="8"]  { column-count: 8; }
+  [sl-stack][sl-cols="9"]  { column-count: 9; }
+  [sl-stack][sl-cols="10"] { column-count: 10; }
+  [sl-stack][sl-cols="11"] { column-count: 11; }
+  [sl-stack][sl-cols="12"] { column-count: 12; }
+
+  /* sl-span inside a multicol stack spans every column — a heading
+     across the flow. Its margin-end carries the gap to the row below;
+     the next child's own margin-start must not fire, or it would only
+     push down the first column and skew the column tops */
+  [sl-stack][sl-cols] > [sl-span] {
+    column-span: all;
+    margin-block-end: var(--sl-stack-gap, var(--sl-gap, var(--sl-md)));
+  }
+  [sl-stack][sl-cols] > [sl-span] + * {
+    margin-block-start: 0;
   }
 
   /* row — horizontal run that wraps; tag rows, button groups */
@@ -39,6 +90,17 @@
     align-items: center;
     gap: var(--sl-row-gap, var(--sl-gap, var(--sl-md)));
   }
+
+  /* "center" turns a row into three zones — the same trick sl-bar
+     uses. Auto margins only share space evenly, so an end sibling
+     would pull the marked cell off the row's true midpoint */
+  [sl-row]:has(> [sl-place~="center"]) {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr auto 1fr;
+  }
+  [sl-row]:has(> [sl-place~="center"]) > [sl-place~="center"] { grid-column: 2; }
+  [sl-row]:has(> [sl-place~="center"]) > [sl-place~="end"]    { grid-column: 3; }
 
   /* grid — auto-fill columns; --sl-grid-min is the column floor, and
      min() keeps a container narrower than the floor overflow-free */
@@ -65,13 +127,6 @@
   [sl-grid] > [sl-span="11"] { grid-column: span 11; }
   [sl-grid] > [sl-span="12"] { grid-column: span 12; }
 
-  /* flow — margin-based sibling rhythm for unwrapped content: articles,
-     forms, any element whose children should keep normal block layout
-     instead of becoming flex items */
-  [sl-flow] > * + * {
-    margin-block-start: var(--sl-flow-gap, var(--sl-gap, var(--sl-md)));
-  }
-
   /* opt-in collapse — <div sl-row sl-collapse> turns into a vertical
      stack on narrow viewports. Tag rows keep wrapping instead, so the
      attribute is never implied. 45rem is the sm breakpoint — the same
@@ -81,39 +136,79 @@
       flex-direction: column;
       align-items: stretch;
     }
+
+    /* collapse also flattens a three-zone row — one column, zones
+       release their grid placement and stack in source order */
+    [sl-row][sl-collapse]:has(> [sl-place~="center"]) {
+      grid-auto-flow: row;
+      grid-template-columns: 1fr;
+    }
+    [sl-row][sl-collapse]:has(> [sl-place~="center"]) > [sl-place] { grid-column: auto; }
   }
 
-  /* topbar — sticky by default; ="fixed" pins it to the viewport. A
-     1fr/auto/1fr grid makes the center zone a true bar center regardless
-     of side widths — children fill zones in source order */
-  [sl-topbar] {
-    position: sticky;
-    top: 0;
-    z-index: 50;
+  /* bar — a full-width band at either page edge. The value picks the
+     edge and sticks there by default; bare sl-bar is a plain in-flow
+     band. sl-fixed pins to the viewport edge, sl-static forces plain
+     flow on an edge value. A 1fr/auto/1fr grid makes the center zone a
+     true bar center — children fill zones in source order */
+  [sl-bar] {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap: var(--sl-topbar-gap, var(--sl-gap, var(--sl-md)));
-    min-height: var(--sl-topbar-h, 3.5rem);
+    gap: var(--sl-bar-gap, var(--sl-gap, var(--sl-md)));
+    min-height: var(--sl-bar-h, 3.5rem);
+    padding-block: var(--sl-bar-pad, var(--sl-pad, var(--sl-md)));
     padding-inline: var(--sl-lg);
     background: var(--sl-bg);
+  }
+
+  [sl-bar="top"] {
+    position: sticky;
+    top: 0;
+    z-index: 50;
     border-block-end: 1px solid var(--sl-border);
   }
 
-  [sl-topbar="static"] {
-    position: static;
+  [sl-bar="bottom"] {
+    position: sticky;
+    bottom: 0;
+    z-index: 50;
+    border-block-start: 1px solid var(--sl-border);
   }
 
-  [sl-topbar="fixed"] {
+  [sl-bar="top"][sl-fixed],
+  [sl-bar="bottom"][sl-fixed] {
     position: fixed;
     inset-inline: 0;
   }
 
-  /* a fixed topbar leaves the flow — body pads itself for the bar's
-     height so nothing underneath gets clipped. Set --sl-topbar-h on
-     :root when restyling the height so this offset follows */
-  body:has(> [sl-topbar="fixed"]) {
-    padding-block-start: var(--sl-topbar-h, 3.5rem);
+  [sl-bar][sl-static] {
+    position: static;
+  }
+
+  /* a fixed bar leaves the flow — body pads itself for the bar's height
+     on the matching edge so nothing underneath gets clipped. Set
+     --sl-bar-h on :root when restyling the height so this offset
+     follows */
+  body:has(> [sl-bar="top"][sl-fixed]) {
+    padding-block-start: var(--sl-bar-h, 3.5rem);
+  }
+
+  body:has(> [sl-bar="bottom"][sl-fixed]) {
+    padding-block-end: var(--sl-bar-h, 3.5rem);
+  }
+
+  /* zone children — sl-place="center" pins the true center column,
+     "end" pins the far edge; unmarked children fill zones in source
+     order */
+  [sl-bar] > [sl-place~="center"] {
+    grid-column: 2;
+    justify-self: center;
+  }
+
+  [sl-bar] > [sl-place~="end"] {
+    grid-column: 3;
+    justify-self: end;
   }
 
   /* sidebar shell — children marked sl-sidebar are the rails, anything
@@ -136,51 +231,15 @@
     min-width: var(--sl-sidebar-min, 55%);
   }
 
-  /* rail placement — unmarked rails keep source order; sl-start pins a
-     rail first, sl-end pins it last, regardless of where it sits in the
-     markup. Same marks as the topbar/footer zones */
-  [sl-with-sidebar] > [sl-start] {
+  /* rail placement — unmarked rails keep source order; sl-place="start"
+     pins a rail first, "end" pins it last, regardless of where it sits
+     in the markup */
+  [sl-with-sidebar] > [sl-place~="start"] {
     order: -1;
   }
 
-  [sl-with-sidebar] > [sl-end] {
+  [sl-with-sidebar] > [sl-place~="end"] {
     order: 1;
-  }
-
-  /* footer — hairline + breathing room; same 1fr/auto/1fr zones as the
-     topbar so extra children flow to new rows */
-  [sl-footer] {
-    border-block-start: 1px solid var(--sl-border);
-    padding-block: var(--sl-2xl);
-    padding-inline: var(--sl-lg);
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    gap: var(--sl-footer-gap, var(--sl-gap, var(--sl-md)));
-  }
-
-  /* zone children — sl-center pins the true center column, sl-end pins
-     the far edge; unmarked children fill zones in source order */
-  [sl-topbar] > [sl-center],
-  [sl-footer] > [sl-center] {
-    grid-column: 2;
-    justify-self: center;
-  }
-
-  [sl-topbar] > [sl-end],
-  [sl-footer] > [sl-end] {
-    grid-column: 3;
-    justify-self: end;
-  }
-
-  /* the same marks inside a plain row — sl-end pushes the child to the
-     line's end, sl-center centers it between its siblings */
-  [sl-row] > [sl-center] {
-    margin-inline: auto;
-  }
-
-  [sl-row] > [sl-end] {
-    margin-inline-start: auto;
   }
 
   /* toast — the fixed corner region that holds notices. Width and
@@ -257,16 +316,6 @@
   [sl-grid="3xl"] { --sl-grid-gap: var(--sl-3xl); }
   [sl-grid="4xl"] { --sl-grid-gap: var(--sl-4xl); }
   [sl-grid="5xl"] { --sl-grid-gap: var(--sl-5xl); }
-
-  [sl-flow="xs"]  { --sl-flow-gap: var(--sl-xs); }
-  [sl-flow="sm"]  { --sl-flow-gap: var(--sl-sm); }
-  [sl-flow="md"]  { --sl-flow-gap: var(--sl-md); }
-  [sl-flow="lg"]  { --sl-flow-gap: var(--sl-lg); }
-  [sl-flow="xl"]  { --sl-flow-gap: var(--sl-xl); }
-  [sl-flow="2xl"] { --sl-flow-gap: var(--sl-2xl); }
-  [sl-flow="3xl"] { --sl-flow-gap: var(--sl-3xl); }
-  [sl-flow="4xl"] { --sl-flow-gap: var(--sl-4xl); }
-  [sl-flow="5xl"] { --sl-flow-gap: var(--sl-5xl); }
 
   [sl-with-sidebar="xs"]  { --sl-sidebar-gap: var(--sl-xs); }
   [sl-with-sidebar="sm"]  { --sl-sidebar-gap: var(--sl-sm); }
@@ -410,5 +459,50 @@
   }
   @media (width >= 45rem) {
     [sl-show-sm] { display: none; }
+  }
+
+  /* placement marks — sl-place takes one value per axis: start/center/
+     end move the inline edge, top/middle/bottom the block edge, and two
+     words compose (sl-place="middle end" pins right-centre). Auto
+     margins absorb free space, so the same marks work on block boxes,
+     flex items, and grid items without a scoped rule per parent. In a
+     stretch context (sl-stack children) they also shrink the item back
+     to its content width. Structural marks like the bar zones keep
+     their scoped rules on top of these */
+  [sl-place~="start"] {
+    margin-inline-end: auto;
+  }
+
+  [sl-place~="center"] {
+    margin-inline: auto;
+  }
+
+  [sl-place~="end"] {
+    margin-inline-start: auto;
+  }
+
+  /* block-axis values — they pin vertically wherever a flex line or
+     grid cell hands out free space; in plain block flow auto margins
+     resolve to zero and stay inert */
+  [sl-place~="top"] {
+    margin-block-end: auto;
+  }
+
+  [sl-place~="middle"] {
+    margin-block: auto;
+  }
+
+  [sl-place~="bottom"] {
+    margin-block-start: auto;
+  }
+
+  /* the sidebar marks pin order, not margins — the generic margin would
+     only open dead space between the rail and the content column */
+  [sl-with-sidebar] > [sl-place~="start"] {
+    margin-inline-end: 0;
+  }
+
+  [sl-with-sidebar] > [sl-place~="end"] {
+    margin-inline-start: 0;
   }
 }

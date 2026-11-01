@@ -28,7 +28,7 @@ import * as SidebarDemos from "../../demos/layout/sidebar.demo";
 
 <Demo :render="SidebarDemos.SidebarEnd.render" />
 
-標示 `sl-start` 固定排最前、`sl-end` 固定排最後，跟 DOM 順序無關。下面這個側邊欄寫在主欄前面，照樣排到右邊：
+標示 `sl-place="start"` 固定排最前、`sl-place="end"` 固定排最後，跟 DOM 順序無關。下面這個側邊欄寫在主欄前面，照樣排到右邊：
 
 <Demo :render="SidebarDemos.SidebarMark.render" />
 
