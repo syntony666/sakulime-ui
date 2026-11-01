@@ -32,6 +32,9 @@ site
 plan.md
 *.plan.md
 
+# Visual test output
+tests/shots/
+
 # impeccable-ignore-start
 .impeccable/
 # impeccable-ignore-end

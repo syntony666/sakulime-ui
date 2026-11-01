@@ -33,7 +33,9 @@
     "preview": "npm run preview -w sakulime-doc",
     "site": "npm run site -w sakulime-doc",
     "deploy": "npm run deploy -w sakulime-doc",
-    "release": "changeset publish"
+    "release": "changeset publish",
+    "test": "node tests/run.mjs",
+    "test:shots": "node tests/run.mjs --shots"
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.3",

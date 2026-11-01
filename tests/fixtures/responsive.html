@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>sl responsive fixture</title>
+<link rel="stylesheet" href="../../packages/theme/dist/sakulime.min.css">
+<link rel="stylesheet" href="../../packages/core/dist/index.min.css">
+<link rel="stylesheet" href="../../packages/layout/dist/index.min.css">
+<style>body { font-family: system-ui, sans-serif; overflow-y: hidden; } #probe { position: absolute; visibility: hidden; }</style>
+</head>
+<body>
+
+<!-- breakpoint sanity + grid suffixes (all three breakpoints fire at 420px) -->
+<div sl-grid sl-cols="4" sl-cols-sm="1" id="rg-sm"><div>a</div><div>b</div><div>c</div><div>d</div></div>
+<div sl-grid sl-cols="4" sl-cols-md="2" id="rg-md"><div>a</div><div>b</div><div>c</div><div>d</div></div>
+<div sl-grid sl-cols="4" sl-cols-lg="3" id="rg-lg"><div>a</div><div>b</div><div>c</div><div>d</div></div>
+<div sl-grid sl-cols="4" sl-cols-lg="3" sl-cols-md="2" sl-cols-sm="1" id="rg-all"><div>a</div><div>b</div><div>c</div><div>d</div></div>
+<div sl-grid sl-cols="4" sl-collapse id="rg-col"><div>a</div><div>b</div></div>
+<div sl-grid sl-cols="4" sl-cols-md="2" id="rg-span"><div sl-span="4" id="rsp">x</div><div>y</div></div>
+
+<!-- row collapse -->
+<div sl-row sl-collapse id="rr-sm"><div sl-place="end" id="rr-p">x</div><div>y</div></div>
+<div sl-row sl-collapse-md id="rr-md"><div>x</div><div>y</div></div>
+<div sl-row sl-collapse-lg id="rr-lg"><div>x</div><div>y</div></div>
+
+<!-- hide/show -->
+<div sl-hide-sm id="rh-sm">x</div>
+<div sl-hide-md id="rh-md">x</div>
+<div sl-hide-lg id="rh-lg">x</div>
+<div sl-show-sm id="rs-sm">x</div>
+<div sl-show-md id="rs-md">x</div>
+<div sl-show-lg id="rs-lg">x</div>
+<div id="rs-none">x</div>
+
+<div id="probe"></div>
+<pre id="results"></pre>
+<script>
+const R = [];
+const $ = id => document.getElementById(id);
+const cs = (el, p) => getComputedStyle($(el)).getPropertyValue(p);
+const px = v => parseFloat(v);
+const rect = id => $(id).getBoundingClientRect();
+const rec = (name, got, want, ok) => R.push({ name, got: String(got), want: String(want), ok });
+const eq = (name, got, want) => rec(name, got, want, got === want);
+const near = (name, got, want, tol = 1.5) => rec(name, got, want + '±' + tol, Math.abs(px(got) - px(want)) <= tol);
+const tracks = el => cs(el, 'grid-template-columns').split(' ').filter(s => s.endsWith('px')).length;
+
+function main() {
+  /* headless clamps --window-size to a ~500px minimum; what the suite
+     actually needs is "below the 45rem sm breakpoint" */
+  rec('viewport below sm breakpoint', window.innerWidth + 'px', '<720px', window.innerWidth < 720);
+
+  /* cols-<bp> release — below 45rem every breakpoint block hits; the
+     narrowest suffix wins at equal specificity */
+  eq('cols-sm=1 → 1 track', tracks('rg-sm'), 1);
+  eq('cols-md=2 → 2 tracks', tracks('rg-md'), 2);
+  eq('cols-lg=3 → 3 tracks', tracks('rg-lg'), 3);
+  eq('smallest suffix wins', tracks('rg-all'), 1);
+  eq('sl-collapse → 1 track', tracks('rg-col'), 1);
+  near('span clamps to released count', rect('rsp').width, rect('rg-span').width, 2);
+
+  /* row collapse — bare = sm, all three fire below 45rem */
+  eq('row collapse column', cs('rr-sm', 'flex-direction'), 'column');
+  eq('row collapse stretch', cs('rr-sm', 'align-items'), 'stretch');
+  eq('row collapse-md column', cs('rr-md', 'flex-direction'), 'column');
+  eq('row collapse-lg column', cs('rr-lg', 'flex-direction'), 'column');
+  eq('collapsed row place margin reset', cs('rr-p', 'margin-left'), '0px');
+
+  /* hide = gone below the breakpoint; show = gone above it (420px is
+     below all three, so every show stays visible) */
+  eq('hide-sm gone', cs('rh-sm', 'display'), 'none');
+  eq('hide-md gone', cs('rh-md', 'display'), 'none');
+  eq('hide-lg gone', cs('rh-lg', 'display'), 'none');
+  eq('show-sm visible <45rem', cs('rs-sm', 'display'), 'block');
+  eq('show-md visible <60rem', cs('rs-md', 'display'), 'block');
+  eq('show-lg visible <75rem', cs('rs-lg', 'display'), 'block');
+  eq('unmarked control visible', cs('rs-none', 'display'), 'block');
+}
+
+/* rAF is flaky under --virtual-time-budget (no frames without rendering),
+   so a plain timer drives the run; both paths converge on go(). */
+function go() {
+  R.length = 0;
+  try { main(); } catch (e) { R.push({ name: 'fixture threw', got: String(e && e.stack || e), want: 'no throw', ok: false }); }
+  $('results').textContent = JSON.stringify(R);
+  document.documentElement.setAttribute('data-done', '');
+}
+setTimeout(go, 0);
+requestAnimationFrame(() => setTimeout(go, 0));
+</script>
+</body>
+</html>
