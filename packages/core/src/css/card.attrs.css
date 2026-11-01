@@ -74,7 +74,7 @@
   /* sections — the box bleeds past the pad frame so divider hairlines
      run edge to edge; inner padding puts the content back in line */
   [sl-card] > [sl-card-section] {
-    margin-inline: calc(var(--sl-pad) * -1);
+    margin-inline: var(--_pbn);
     padding-inline: var(--sl-pad);
   }
 
@@ -101,13 +101,13 @@
 
   [sl-card] > :is([sl-card-section="inset"]:first-child,
                  [sl-card-corner]:first-child + [sl-card-section="inset"]) {
-    margin-top: calc(var(--sl-pad) * -1);
+    margin-top: var(--_pbn);
     border-top: 0;
   }
 
   [sl-card] > :is([sl-card-section="inset"]:last-child,
                  [sl-card-section="inset"]:has(+ [sl-card-corner]:last-child)) {
-    margin-bottom: calc(var(--sl-pad) * -1);
+    margin-bottom: var(--_pbn);
   }
 
   /* followers own the gap — a section's divider hugs the image edge,
@@ -189,7 +189,7 @@
                   [sl-card-section="active"]:first-child,
                   [sl-card-corner]:first-child + [sl-card-section="secondary"],
                   [sl-card-corner]:first-child + [sl-card-section="active"]) {
-    margin-top: calc(var(--sl-pad) * -1);
+    margin-top: var(--_pbn);
     padding-top: var(--sl-pad);
   }
 
@@ -197,7 +197,7 @@
                   [sl-card-section="active"]:last-child,
                   [sl-card-section="secondary"]:has(+ [sl-card-corner]:last-child),
                   [sl-card-section="active"]:has(+ [sl-card-corner]:last-child)) {
-    margin-bottom: calc(var(--sl-pad) * -1);
+    margin-bottom: var(--_pbn);
   }
 
   /* center — horizontally centered text */

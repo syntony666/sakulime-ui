@@ -14,6 +14,9 @@
        instead of ballooning into 9999px curves */
     --sl-radius-full: calc(max(1lh, var(--sl-2xl)) + var(--sl-pad) + 1px);
     --sl-pad: var(--sl-lg);
+    /* negative pad for section bleed — resolved once here; sections
+       inherit it, so it still tracks the card's own --sl-pad */
+    --_pbn: calc(var(--sl-pad) * -1);
     --sl-i-transform: none;
     --sl-i-shadow: none;
     --sl-i-filter: none;
