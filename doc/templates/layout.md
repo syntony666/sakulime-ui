@@ -20,14 +20,15 @@ feature, ordered by importance, `間距` always last:
 
 ## 間距
 
-<px note + nine-step scale table + var/sl-gap line — only on
-gap-reading primitives>
+<sl-gap line: written on self or an ancestor + the primitive's own
+default — only on gap-reading primitives>
 ```
 
 - Mechanics that aren't a feature get written into the `用法` prose:
   no `行為` grab-bag section, no `屬性` wrapper level.
-- `間距` opens with the px note, then the scale table with the
-  primitive's own default marked `（預設）` (`md` for most,
-  `lg` for `sl-sidebar`);
+- `間距` states the primitive's own default (`md` for most, `lg` for
+  `sl-sidebar`), the per-primitive `--sl-<x>-gap` override, and links to
+  [`sl-gap`](/attrs/gap); the nine-step scale table lives only in
+  `attrs/gap.md`, never re-listed here;
   primitives without a gap knob (`container`) skip the section entirely.
 - Demo file at `doc/demos/layout/<name>.demo.ts`.

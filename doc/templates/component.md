@@ -56,7 +56,7 @@ import * as XDemos from "../../demos/components/x.demo";
 | 使用 | How to write the markup — paste, placeholder, helper | component needs JS or has usage forms |
 | 安裝 | Install per environment (bundler / CDN / pure CSS) | component needs JS |
 | 型態 | Marker values — `sl-x="hollow"` | marker takes values |
-| 屬性 | Generic attrs — `sl-tone`, `sl-size`, `sl-radius`, `sl-pad`, `sl-interactive` | any generic attr applies |
+| 屬性 | Generic attrs — applicability, component-specific effect and default, plus a link to the attr page (never the option list) | any generic attr applies |
 | 元件設定 | Component settings `sl-<x>-<setting>` written on the component itself | component has settings |
 | 子元素 | Parts `sl-<x>--<part>` written on inner elements | component has parts |
 | 用法 | The component's own usage forms — same component, different roles (e.g. notice in-flow = banner, inside a fixed wrapper = toast) | component plays distinct roles |
@@ -79,6 +79,11 @@ one `###` (e.g. button's `#### 實心版本` / `#### 框線版本`) or lists a
 part's value variants (e.g. card-section's `#### 貼邊 `inset``).
 
 ## Value lists
+
+Value lists are for component-owned vocab only — marker types, settings
+and part variants. Generic attr sections (`## 屬性`) never re-list
+options; state what the component reads, the effect and the default,
+then link to `/attrs/<name>`.
 
 One bullet per value, default annotated:
 

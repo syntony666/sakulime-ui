@@ -39,31 +39,19 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 ### 圓角 `sl-radius`
 
-- `none`：直角
-- `sm`：微圓
-- `md`：一般圓角（預設）
-- `lg`：很圓
-- `full`：一行膠囊，半徑最多一個行高，卡片一長高中段就變直線
+`sl-card` 是 `sl-radius` 的適用元素，沒給是 `md`。卡片的 `full` 是一行膠囊：半徑最多一個行高，卡片一長高中段就變直線。其他選項看 [Radius 圓角](/attrs/radius)。
 
 <Demo :render="CardDemos.Radius.render" />
 
 ### 內距 `sl-pad`
 
-- `sm`：小
-- `md`：一般（預設）
-- `lg`：大
+`sl-card` 是 `sl-pad` 的適用元素，沒給是 `md`。選項看 [Pad 內距](/attrs/pad)。
 
 <Demo :render="CardDemos.Pads.render" />
 
 ### 互動 `sl-interactive`
 
-整張卡片看起來可以點，游標變成手指，滑鼠移過去就有反應。`sl-interactive` 不給值是 `grow`：
-
-- `grow`：放大 1.03
-- `lift`：浮起 4px 加陰影
-- `raise`：只有陰影
-- `press`：壓下 0.97
-- `dim`：變暗
+整張卡片看起來可以點，游標變成手指，滑鼠移過去就有反應。`sl-interactive` 不給值是 `grow`，效果選項看 [Interactive 互動](/attrs/interactive)。
 
 <Demo :render="CardDemos.Interactive.render" />
 

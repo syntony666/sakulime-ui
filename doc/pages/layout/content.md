@@ -30,4 +30,4 @@ import * as ContentDemos from "../../demos/layout/content.demo";
 
 ## 間距
 
-跟 `sl-stack` 同套刻度：[`sl-gap`](/attrs/gap) 寫在自己或祖先上，預設 `md`；單點覆寫用 `--sl-content-gap`。
+間距用 [`sl-gap`](/attrs/gap) 給，寫在自己或祖先上，預設 `md`；單點覆寫用 `--sl-content-gap`。
