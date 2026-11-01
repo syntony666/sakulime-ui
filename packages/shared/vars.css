@@ -16,6 +16,10 @@
     --sl-4xl: 2.5rem;
     --sl-5xl: 3rem;
 
+    /* fully rounded — the capsule radius shared by chip, dot and the
+       circular icon frame; notice computes its own per-height radius */
+    --sl-radius-pill: 9999px;
+
     /* container max width — the same three numbers double as the
        sl-*-sm/md/lg breakpoint scale; media queries cannot read vars,
        so the copies in layout.css are hardcoded and kept in sync */
