@@ -9,6 +9,7 @@
     justify-content: space-between;
     align-items: center;
     gap: var(--sl-bar-gap, var(--sl-gap, var(--sl-md)));
+    /* 3.5rem default — the standard band height */
     min-block-size: var(--sl-bar-h, 3.5rem);
     /* self-default --sl-pad so an ancestor's sl-pad can't leak in —
        the attr on the bar itself still wins by specificity */

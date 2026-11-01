@@ -54,7 +54,8 @@
     color: var(--sl-tone-text);
     /* floating frame — the wash stops at the padding edge, a surface
        band fills the border gap, and a 2px ring sits on the outer
-       edge like a detached frame line */
+       edge like a detached frame line. sl-float reserves room for
+       this ring in its padding — keep the two in sync */
     background-color: color-mix(in srgb, var(--sl-tone-bg) 12%, var(--sl-surface));
     background-clip: padding-box;
     border: 3px solid var(--sl-surface);

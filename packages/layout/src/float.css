@@ -9,7 +9,8 @@
     flex-direction: column;
     gap: var(--sl-float-gap, var(--sl-gap, var(--sl-md)));
     /* resolved once here — the corner rules and the viewport clamps
-       all read the same offsets and width */
+       all read the same offsets and width. The 22rem default is the
+       toast column width, ~352px at a 16px root */
     --_tb: var(--sl-float-b, var(--sl-lg));
     --_te: var(--sl-float-e, var(--sl-lg));
     --_tw: var(--sl-float-w, 22rem);
