@@ -78,6 +78,7 @@
 <div sl-float="top-start" id="t-ts"><div sl-notice="fit">a</div></div>
 <div sl-float="top-center" id="t-tc"><div sl-notice="fit">a</div></div>
 <div sl-float="top-end" id="t-te"><div sl-notice="fit">a</div></div>
+<div sl-float="start" id="t-legacy"><div sl-notice="fit">a</div></div>
 
 <!-- sidebar: rail position follows DOM order -->
 <div sl-sidebar id="sb" style="width:800px">
@@ -203,6 +204,8 @@ function main() {
   near('float top-center top', rect('t-tc').top, varPx('--sl-lg'), 2);
   near('float top-end right', rect('t-te').right, vw() - varPx('--sl-lg'), 2);
   near('float top-end top', rect('t-te').top, varPx('--sl-lg'), 2);
+  near('float legacy "start" falls back to bottom-end right', rect('t-legacy').right, vw() - varPx('--sl-lg'), 2);
+  near('float legacy "start" falls back to bottom-end bottom', rect('t-legacy').bottom, vh() - varPx('--sl-lg'), 2);
 
   /* ---- sidebar ---- */
   eq('sidebar flex', cs('sb', 'display'), 'flex');
