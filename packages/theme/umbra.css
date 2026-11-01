@@ -8,9 +8,11 @@
   :root[data-theme="umbra"] {
     color-scheme: dark;
 
-    /* seeds — the only authored colors; every other token derives */
+    /* seeds — the only authored colors; every other token derives.
+       secondary inverts to pale stone: the seed IS the tone face, so
+       a dark value would sink into the dark surface and its washes */
     --sl-seed-primary: #8fbcb4;
-    --sl-seed-secondary: #44403c;
+    --sl-seed-secondary: #a8a29e;
     --sl-seed-accent: #93c4bd;
   }
 }
