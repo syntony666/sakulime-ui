@@ -44,7 +44,7 @@ import * as RowDemos from "../../demos/layout/row.demo";
 </div>
 ```
 
-斷點只看視窗寬度，跟容器寬度無關；要別的斷點的話，media query 自己寫。未標示 `sl-collapse` 的 `sl-row` 永遠橫排。標籤列在手機上通常還是要橫著排。
+要平板、窄筆電就收合的話有後綴版：`sl-collapse-md`（<60rem）、`sl-collapse-lg`（<75rem）。斷點只看視窗寬度，跟容器寬度無關；要別的斷點的話，media query 自己寫。未標示的 `sl-row` 永遠橫排，標籤列在手機上通常還是要橫著排。收合後 `sl-place` 標記的 auto margin 會清掉，子層照樣拉滿寬。
 
 ## 間距
 

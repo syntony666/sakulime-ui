@@ -37,7 +37,7 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 </div>
 ```
 
-子層照順序填，滿一列自動換下一列。欄數是固定的，不會因為容器變窄掉欄；要分斷點掉欄就掛 `sl-cols-md`、`sl-cols-sm`，只要手機單欄的話標 `sl-collapse` 就好，見[響應式設計](/layout/responsive)。
+子層照順序填，滿一列自動換下一列。欄數是固定的，不會因為容器變窄掉欄；要分斷點掉欄就掛 `sl-cols-lg`、`sl-cols-md`、`sl-cols-sm`，只要手機單欄的話標 `sl-collapse` 就好，見[響應式設計](/layout/responsive)。
 
 <Demo
   :render="GridDemos.Cols.render"
@@ -45,16 +45,17 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 
 ## 佔欄
 
-`sl-span` 標在子層上，讓它佔好幾欄，2 到 12：
+`sl-span` 標在子層上，讓它佔好幾欄，2 到 12；`sl-span="full"` 不管欄數直接跨滿整列：
 
 ```html
 <div sl-grid sl-cols="4">
   <div sl-card sl-span="2">橫跨兩欄</div>
+  <div sl-card sl-span="full">跨滿整列</div>
   <div sl-card>...</div>
 </div>
 ```
 
-超過當列剩餘欄位就自動掉下一列。auto-fill 的網格也能用，只是欄數會變，跨幾欄的效果跟著容器寬度浮動。斷點掉欄時 `sl-span` 自動收斂成滿列，不會溢出。
+超過當列剩餘欄位就自動掉下一列。固定欄數下，`sl-span` 大於當前欄數會自動收斂成滿列，不會溢出、也不會憑空生出軌道。auto-fill 的網格也能用，欄數跟著容器浮動，要保險的跨列用 `sl-span="full"`（永遠跨滿）。
 ## 欄寬
 
 欄數是算出來的，公式是 `repeat(auto-fill, minmax(min(--sl-grid-min, 100%), 1fr))`：
