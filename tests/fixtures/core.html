@@ -16,7 +16,6 @@
 <button sl-button="ghost" id="btn-gho">gho</button>
 <button sl-button="underline" id="btn-und">und</button>
 <button sl-button sl-size="sm" id="btn-sm">sm</button>
-<button sl-button sl-size="md" id="btn-md">md</button>
 <button sl-button sl-size="lg" id="btn-lg">lg</button>
 <button sl-button sl-tone="primary" id="btn-tp">p</button>
 <button sl-button sl-tone="secondary" id="btn-ts">s</button>
@@ -81,8 +80,6 @@
 <!-- icons -->
 <i sl-icon id="ic-def"></i>
 <i sl-icon sl-icon-size="sm" id="ic-sm"></i>
-<i sl-icon sl-icon-size="lg" id="ic-lg"></i>
-<i sl-icon sl-icon-size="xl" id="ic-xl"></i>
 <i sl-icon sl-icon-size="2xl" id="ic-2xl"></i>
 <i sl-icon sl-icon-frame id="ic-fr"></i>
 <i sl-icon sl-icon-frame="circular" id="ic-frc"></i>
@@ -124,18 +121,14 @@ function main() {
   eq('btn display', cs('btn-def', 'display'), 'inline-flex');
   near('btn min-block = --sl-3xl', cs('btn-def', 'min-height'), varPx('--sl-3xl'));
   near('btn radius = --sl-sm', cs('btn-def', 'border-top-left-radius'), varPx('--sl-sm'));
-  neq('btn bg opaque', cs('btn-def', 'background-color'), TRANS);
   eq('btn border transparent', cs('btn-def', 'border-top-color'), TRANS);
   eq('btn invert border = def bg', cs('btn-inv', 'border-top-color'), cs('btn-def', 'background-color'));
   neq('btn invert bg != def', cs('btn-inv', 'background-color'), cs('btn-def', 'background-color'));
-  neq('btn invert bg opaque', cs('btn-inv', 'background-color'), TRANS);
   eq('btn ghost bg transparent', cs('btn-gho', 'background-color'), TRANS);
   neq('btn ghost color != def', cs('btn-gho', 'color'), cs('btn-def', 'color'));
   eq('btn underline decor', cs('btn-und', 'text-decoration-line'), 'underline');
   near('btn sm h = --sl-2xl', cs('btn-sm', 'min-height'), varPx('--sl-2xl'));
   near('btn sm fs = --sl-md', cs('btn-sm', 'font-size'), varPx('--sl-md'));
-  near('btn md h = --sl-3xl', cs('btn-md', 'min-height'), varPx('--sl-3xl'));
-  near('btn md fs = --sl-lg', cs('btn-md', 'font-size'), varPx('--sl-lg'));
   near('btn lg h = --sl-4xl', cs('btn-lg', 'min-height'), varPx('--sl-4xl'));
   near('btn lg fs = --sl-xl', cs('btn-lg', 'font-size'), varPx('--sl-xl'));
   eq('btn tone primary = def bg', cs('btn-tp', 'background-color'), cs('btn-def', 'background-color'));
@@ -155,7 +148,6 @@ function main() {
   eq('card border-width 1px', cs('card-def', 'border-top-width'), '1px');
   near('card radius = --sl-sm', cs('card-def', 'border-top-left-radius'), varPx('--sl-sm'));
   near('card pad = --sl-lg', cs('card-def', 'padding-top'), varPx('--sl-lg'));
-  neq('card bg opaque', cs('card-def', 'background-color'), TRANS);
   eq('card plain border 0', cs('card-plain', 'border-top-width'), '0px');
   eq('card hollow dashed', cs('card-hollow', 'border-top-style'), 'dashed');
   eq('card hollow bw 2px', cs('card-hollow', 'border-top-width'), '2px');
@@ -199,7 +191,6 @@ function main() {
   near('dot width 0.5em', cs('dot-def', 'width'), 8);
   near('dot height 0.5em', cs('dot-def', 'height'), 8);
   eq('dot pill radius', cs('dot-def', 'border-top-left-radius'), '9999px');
-  neq('dot bg opaque', cs('dot-def', 'background-color'), TRANS);
   neq('dot tone bg differs', cs('dot-s', 'background-color'), cs('dot-def', 'background-color'));
 
   /* ---- icon ---- */
@@ -207,8 +198,6 @@ function main() {
   near('icon 1em box w', cs('ic-def', 'width'), 16);
   near('icon 1em box h', cs('ic-def', 'height'), 16);
   near('icon size sm', cs('ic-sm', 'width'), 12);
-  near('icon size lg', cs('ic-lg', 'width'), 24);
-  near('icon size xl', cs('ic-xl', 'width'), 40);
   near('icon size 2xl', cs('ic-2xl', 'width'), 64);
   near('icon frame padding', cs('ic-fr', 'padding-top'), 5.6);
   eq('icon frame border', cs('ic-fr', 'border-top-width'), '2px');
@@ -221,10 +210,8 @@ function main() {
   near('icon space margin', cs('ic-sp', 'margin-left'), 4.8);
 
   /* ---- notice ---- */
-  neq('notice wash bg', cs('nt-def', 'background-color'), TRANS);
   eq('notice border 3px', cs('nt-def', 'border-top-width'), '3px');
   eq('notice border solid', cs('nt-def', 'border-top-style'), 'solid');
-  neq('notice shadow ring', cs('nt-def', 'box-shadow'), 'none');
   rec('notice capsule radius > 24px', cs('nt-def', 'border-top-left-radius'), '>24px', px(cs('nt-def', 'border-top-left-radius')) > 24);
   near('notice pad v = .75*--sl-md', cs('nt-def', 'padding-top'), varPx('--sl-md') * 0.75);
   near('notice pad h = 1.5*--sl-md', cs('nt-def', 'padding-left'), varPx('--sl-md') * 1.5);

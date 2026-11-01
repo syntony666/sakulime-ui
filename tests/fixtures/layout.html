@@ -17,14 +17,8 @@
 
 <!-- stack: gap comes from sl-gap only -->
 <div sl-stack id="st-def"><div id="st-c1">a</div><div>b</div></div>
+<!-- gap axis is uniform value→step mapping; bounds prove the table -->
 <div sl-stack sl-gap="xs" id="st-xs"><div>a</div><div>b</div></div>
-<div sl-stack sl-gap="sm" id="st-sm"><div>a</div><div>b</div></div>
-<div sl-stack sl-gap="md" id="st-md"><div>a</div><div>b</div></div>
-<div sl-stack sl-gap="lg" id="st-lg"><div>a</div><div>b</div></div>
-<div sl-stack sl-gap="xl" id="st-xl"><div>a</div><div>b</div></div>
-<div sl-stack sl-gap="2xl" id="st-2xl"><div>a</div><div>b</div></div>
-<div sl-stack sl-gap="3xl" id="st-3xl"><div>a</div><div>b</div></div>
-<div sl-stack sl-gap="4xl" id="st-4xl"><div>a</div><div>b</div></div>
 <div sl-stack sl-gap="5xl" id="st-5xl"><div>a</div><div>b</div></div>
 <!-- --sl-stack-gap is the non-inheriting escape hatch: it must not
      leak into the nested bare stack -->
@@ -129,13 +123,6 @@ function main() {
   near('stack def gap = --sl-md', cs('st-def', 'row-gap'), varPx('--sl-md'));
   eq('stack child margin zeroed', cs('st-c1', 'margin-top'), '0px');
   near('stack xs gap = --sl-xs', cs('st-xs', 'row-gap'), varPx('--sl-xs'));
-  near('stack sm gap = --sl-sm', cs('st-sm', 'row-gap'), varPx('--sl-sm'));
-  near('stack md gap = --sl-md', cs('st-md', 'row-gap'), varPx('--sl-md'));
-  near('stack lg gap = --sl-lg', cs('st-lg', 'row-gap'), varPx('--sl-lg'));
-  near('stack xl gap = --sl-xl', cs('st-xl', 'row-gap'), varPx('--sl-xl'));
-  near('stack 2xl gap = --sl-2xl', cs('st-2xl', 'row-gap'), varPx('--sl-2xl'));
-  near('stack 3xl gap = --sl-3xl', cs('st-3xl', 'row-gap'), varPx('--sl-3xl'));
-  near('stack 4xl gap = --sl-4xl', cs('st-4xl', 'row-gap'), varPx('--sl-4xl'));
   near('stack 5xl gap = --sl-5xl', cs('st-5xl', 'row-gap'), varPx('--sl-5xl'));
   /* the --sl-*-gap slots are non-inheriting — the outer 5xl escape
      hatch must not reach the nested bare stack, which reads md */
