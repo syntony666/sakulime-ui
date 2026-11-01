@@ -24,14 +24,14 @@
   [sl-bar="top"] {
     position: sticky;
     inset-block-start: 0;
-    z-index: var(--sl-bar-z, 50);
+    z-index: var(--sl-bar-z, var(--sl-z-bar));
     border-block-end: 1px solid var(--sl-border, #e5e7eb);
   }
 
   [sl-bar="bottom"] {
     position: sticky;
     inset-block-end: 0;
-    z-index: var(--sl-bar-z, 50);
+    z-index: var(--sl-bar-z, var(--sl-z-bar));
     border-block-start: 1px solid var(--sl-border, #e5e7eb);
     /* home-indicator clearance on phones; env() is 0 elsewhere */
     padding-block-end: calc(var(--_bp) + env(safe-area-inset-bottom, 0px));
