@@ -25,7 +25,7 @@
      context — a dot lands at 8px, an icon at 16px, a chip at 14px.
      z-index keeps it above any pinned or out-of-flow child regardless
      of DOM order */
-  [sl-card-corner] {
+  [sl-card] > [sl-card-corner] {
     position: absolute;
     z-index: 1;
     top: 0;
@@ -34,9 +34,16 @@
     font-variant-numeric: tabular-nums;
   }
 
-  [sl-card-corner~="start"] {
+  [sl-card] > [sl-card-corner~="start"] {
     inset-inline-end: auto;
     inset-inline-start: 0;
+  }
+
+  /* "bottom" pins the block-end edge — the words compose with
+     start/end, so "bottom start" is the lower leading corner */
+  [sl-card] > [sl-card-corner~="bottom"] {
+    top: auto;
+    bottom: 0;
   }
 
   /* corner tab — a chip hugs the top + side edges with a small
@@ -44,31 +51,42 @@
      corner-facing corner to its own curve. font-size re-asserts the
      chip's own slot — the corner's 16px context would otherwise
      win the attrs layer over it */
-  [sl-card-corner][sl-chip] {
+  [sl-card] > [sl-card-corner][sl-chip] {
     font-size: var(--sl-size-fs);
     border-radius: var(--sl-xs);
   }
 
   /* a dot or icon floats — it needs air so it doesn't straddle
      the border */
-  [sl-card-corner][sl-dot] {
+  [sl-card] > [sl-card-corner][sl-dot] {
     top: var(--sl-sm);
     inset-inline-end: var(--sl-sm);
   }
 
-  [sl-card-corner][sl-icon] {
+  [sl-card] > [sl-card-corner][sl-icon] {
     top: var(--sl-xs);
     inset-inline-end: var(--sl-xs);
   }
 
-  [sl-card-corner~="start"][sl-dot] {
+  [sl-card] > [sl-card-corner~="start"][sl-dot] {
     inset-inline-end: auto;
     inset-inline-start: var(--sl-sm);
   }
 
-  [sl-card-corner~="start"][sl-icon] {
+  [sl-card] > [sl-card-corner~="start"][sl-icon] {
     inset-inline-end: auto;
     inset-inline-start: var(--sl-xs);
+  }
+
+  /* bottom float offsets — the air moves to the block-end edge */
+  [sl-card] > [sl-card-corner~="bottom"][sl-dot] {
+    top: auto;
+    bottom: var(--sl-sm);
+  }
+
+  [sl-card] > [sl-card-corner~="bottom"][sl-icon] {
+    top: auto;
+    bottom: var(--sl-xs);
   }
 
   /* sections — the box bleeds past the pad frame so divider hairlines
