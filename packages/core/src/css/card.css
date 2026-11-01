@@ -6,6 +6,8 @@
        inheritance; self-defaulting seals generic attributes set on
        ancestors from leaking in */
     --sl-tone-bg: var(--sl-primary);
+    /* ambient slot — no component reads it; it completes the seal
+       manifest and stays as a hook for consumer CSS inside a card */
     --sl-tone-text: color-mix(in srgb, var(--sl-primary) 55%, var(--sl-text));
     --sl-radius: var(--sl-sm);
     /* "full" caps at one line height plus the pad/border edge share —
