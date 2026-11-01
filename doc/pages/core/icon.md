@@ -109,7 +109,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ### 顏色 `sl-tone`
 
-`sl-icon` 是 `sl-tone` 的適用元素，`sl-tone` 標示在圖示本身；沒給就繼承文字顏色。
+`sl-icon` 是 `sl-tone` 的適用元件，`sl-tone` 標示在圖示本身；沒給就繼承文字顏色。
 
 ### 大小與對齊
 

@@ -17,7 +17,7 @@ import * as DotDemos from "../../demos/components/dot.demo";
 
 ### 顏色 `sl-tone`
 
-`sl-dot` 是 `sl-tone` 的適用元素。沒給繼承文字顏色。選項看 [Tone 色調](/attrs/tone)。
+`sl-dot` 是 `sl-tone` 的適用元件。沒給繼承文字顏色。選項看 [Tone 色調](/attrs/tone)。
 
 ### 大小與對齊
 

@@ -18,11 +18,11 @@ shape — smaller than the component skeleton:
 <one row per option; the second column holds whatever fits — px, 效果,
 用途; add the rem→16px note when px appears>
 
-## 適用元素
+## 適用元件
 
 <lead-in sentence>
 
-| 元素 | <behavior column> |
+| 元件 | <behavior column> |
 <one row per applicable element; the column is named for what it
 describes — 預設, 作用, 沒標示時, 備註>
 ```

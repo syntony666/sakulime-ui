@@ -27,11 +27,11 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### 顏色 `sl-tone`
 
-`sl-notice` 是 `sl-tone` 的適用元素。沒給是 `primary` 淺底色，資訊通知的標準色。選項看 [Tone 色調](/attrs/tone)。
+`sl-notice` 是 `sl-tone` 的適用元件。沒給是 `primary` 淺底色，資訊通知的標準色。選項看 [Tone 色調](/attrs/tone)。
 
 ### 圓角 `sl-radius`
 
-`sl-notice` 是 `sl-radius` 的適用元素，預設 `full`，膠囊形。這裡的 `full` 半徑最多一個行高，一、二行是全圓膠囊，三行以上兩端保留一行的圓弧、中段變成直線，不會拉長成半圓。其他選項看 [Radius 圓角](/attrs/radius)。
+`sl-notice` 是 `sl-radius` 的適用元件，預設 `full`，膠囊形。這裡的 `full` 半徑最多一個行高，一、二行是全圓膠囊，三行以上兩端保留一行的圓弧、中段變成直線，不會拉長成半圓。其他選項看 [Radius 圓角](/attrs/radius)。
 
 ### 厚度 `sl-pad`
 

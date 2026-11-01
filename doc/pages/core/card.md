@@ -37,11 +37,11 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 ### 圓角 `sl-radius`
 
-`sl-card` 是 `sl-radius` 的適用元素，沒給是 `md`。卡片的 `full` 是一行膠囊：半徑最多一個行高，卡片一長高中段就變直線。其他選項看 [Radius 圓角](/attrs/radius)。
+`sl-card` 是 `sl-radius` 的適用元件，沒給是 `md`。卡片的 `full` 是一行膠囊：半徑最多一個行高，卡片一長高中段就變直線。其他選項看 [Radius 圓角](/attrs/radius)。
 
 ### 內距 `sl-pad`
 
-`sl-card` 是 `sl-pad` 的適用元素，沒給是 `md`。選項看 [Pad 內距](/attrs/pad)。
+`sl-card` 是 `sl-pad` 的適用元件，沒給是 `md`。選項看 [Pad 內距](/attrs/pad)。
 
 ### 互動 `sl-interactive`
 
