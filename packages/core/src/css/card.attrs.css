@@ -160,16 +160,10 @@
     background: color-mix(in srgb, var(--sl-primary) 8%, var(--sl-surface));
   }
 
-  /* interactive — shared generic: the whole card is clickable, and
-     hover plays back whatever the attribute put in the --sl-i-* slots */
+  /* interactive — shared generic: the whole card is clickable; the
+     hover playback is shared in generic.css */
   [sl-card][sl-interactive] {
     cursor: pointer;
-  }
-
-  [sl-card][sl-interactive]:hover {
-    transform: var(--sl-i-transform);
-    box-shadow: var(--sl-i-shadow);
-    filter: var(--sl-i-filter);
   }
 
   /* bg sections own the gap to the next divider — the fill runs

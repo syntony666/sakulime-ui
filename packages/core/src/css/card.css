@@ -17,9 +17,6 @@
     /* negative pad for section bleed — resolved once here; sections
        inherit it, so it still tracks the card's own --sl-pad */
     --_pbn: calc(var(--sl-pad) * -1);
-    --sl-i-transform: none;
-    --sl-i-shadow: none;
-    --sl-i-filter: none;
     display: block;
     position: relative;
     overflow: hidden;
@@ -34,12 +31,6 @@
   /* a card that is itself a link drops the anchor underline */
   a[sl-card] {
     text-decoration: none;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    [sl-card] {
-      transition: none;
-    }
   }
 }
 

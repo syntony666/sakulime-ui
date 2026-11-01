@@ -11,9 +11,6 @@
     --sl-size-h: var(--sl-3xl);
     --sl-size-px: var(--sl-md);
     --sl-radius: var(--sl-sm);
-    --sl-i-transform: none;
-    --sl-i-shadow: none;
-    --sl-i-filter: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -43,12 +40,6 @@
     opacity: 0.6;
     cursor: not-allowed;
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    [sl-button] {
-      transition: none;
-    }
-  }
 }
 
 /* variants — the marker's value picks the look; bare sl-button ("" )
@@ -76,13 +67,5 @@
     text-decoration-thickness: 2px;
     text-decoration-color: var(--sl-tone-bg);
     text-underline-offset: 0.3em;
-  }
-
-  /* sl-interactive picks the hover effect — attrs layer wins over the
-     base grow; the slots self-default so unset reads none */
-  [sl-button][sl-interactive]:hover:not(:disabled) {
-    transform: var(--sl-i-transform);
-    box-shadow: var(--sl-i-shadow);
-    filter: var(--sl-i-filter);
   }
 }
