@@ -9,7 +9,7 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 
 # Stack *堆疊*
 
-> 把子元素垂直疊起來，間距由容器統一給。子元素的上下 margin 會被吃掉，寫下去的值就是最終間距。
+> 把子元素垂直疊起來，間距由容器統一給。子元素的上下 margin 會被清掉，給下去的值就是最終間距。
 
 ## 用法
 
@@ -31,7 +31,9 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 
 ### 間距
 
-`sl-stack` 的值就是間距，裸寫是 `md`：
+px 以根字級 16px 換算，尺規本身是 rem。
+
+`sl-stack` 的值就是間距，預設 `md`：
 
 | 值    | 間距         |
 | ----- | ------------ |
@@ -45,7 +47,7 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 | `4xl` | 40px         |
 | `5xl` | 48px         |
 
-改單一容器寫 `--sl-stack-gap`，例如 `style="--sl-stack-gap: 6px"`，或寫通用的 `sl-gap`，原語自己的值優先。
+只想改一個容器就寫 `--sl-stack-gap`（例如 `style="--sl-stack-gap: 6px"`）；想一整區一起改就用 [`sl-gap`](/layout/gap)。
 
 ### 行為
 

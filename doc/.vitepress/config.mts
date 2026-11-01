@@ -169,18 +169,32 @@ export default defineConfig({
       { text: "屬性", link: "/attrs" },
       { text: "主題", link: "/theme" },
       {
-        text: "Layout",
+        text: "排版 Layout",
         items: [
           { text: "說明", link: "/layout/" },
-          { text: `Container ${zh("容器")}`, link: "/layout/container" },
-          { text: `Stack ${zh("堆疊")}`, link: "/layout/stack" },
-          { text: `Row ${zh("橫列")}`, link: "/layout/row" },
-          { text: `Grid ${zh("格網")}`, link: "/layout/grid" },
-          { text: "頁面區塊", link: "/layout/shell" },
+          { text: `Gap ${zh("共用間距")}`, link: "/layout/gap" },
+          {
+            text: "格局設計",
+            items: [
+              { text: `Container ${zh("頁面容器")}`, link: "/layout/container" },
+              { text: `Stack ${zh("堆疊")}`, link: "/layout/stack" },
+              { text: `Row ${zh("橫列")}`, link: "/layout/row" },
+              { text: `Grid ${zh("格網")}`, link: "/layout/grid" },
+            ],
+          },
+          {
+            text: "頁面區塊",
+            items: [
+              { text: `Topbar ${zh("頂列")}`, link: "/layout/topbar" },
+              { text: `Sidebar ${zh("側欄")}`, link: "/layout/sidebar" },
+              { text: `Footer ${zh("頁尾")}`, link: "/layout/footer" },
+              { text: `Toast ${zh("通知角")}`, link: "/layout/toast" },
+            ],
+          },
         ],
       },
       {
-        text: "Core",
+        text: "元件 Core",
         items: [
           { text: "說明", link: "/core/" },
           {

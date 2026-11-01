@@ -18,3 +18,4 @@ export const Gaps: Demo = {
       frame(`sl-stack="${v}"`, `<div sl-stack="${v}">${cells()}</div>`)
     ),
 };
+
