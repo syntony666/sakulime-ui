@@ -200,7 +200,10 @@
     /* self-default --sl-pad so an ancestor's sl-pad can't leak in —
        the attr on the bar itself still wins by specificity */
     --sl-pad: var(--sl-md);
-    padding-block: var(--sl-bar-pad, var(--sl-pad));
+    /* resolved once — the bottom bar's safe-area padding reads the
+       same value through the private var */
+    --_bp: var(--sl-bar-pad, var(--sl-pad));
+    padding-block: var(--_bp);
     padding-inline: var(--sl-bar-pad-inline, var(--sl-lg));
     background: var(--sl-bg, #ffffff);
   }
@@ -218,7 +221,7 @@
     z-index: var(--sl-bar-z, 50);
     border-block-start: 1px solid var(--sl-border, #e5e7eb);
     /* home-indicator clearance on phones; env() is 0 elsewhere */
-    padding-block-end: calc(var(--sl-bar-pad, var(--sl-pad)) + env(safe-area-inset-bottom, 0px));
+    padding-block-end: calc(var(--_bp) + env(safe-area-inset-bottom, 0px));
   }
 
   [sl-bar="top"][sl-fixed],
@@ -283,17 +286,22 @@
     display: flex;
     flex-direction: column;
     gap: var(--sl-toast-gap, var(--sl-gap, var(--sl-md)));
+    /* resolved once here — the corner rules and the viewport clamps
+       all read the same offsets and width */
+    --_tb: var(--sl-toast-b, var(--sl-lg));
+    --_te: var(--sl-toast-e, var(--sl-lg));
+    --_tw: var(--sl-toast-w, 22rem);
     /* the clamp follows the configured edge offset so a wider offset
        can't push the region off the far edge; dvw/vh units refresh the
        same declarations where supported */
-    inline-size: min(var(--sl-toast-w, 22rem), calc(100vw - 2 * var(--sl-toast-e, var(--sl-lg))));
-    inline-size: min(var(--sl-toast-w, 22rem), calc(100dvw - 2 * var(--sl-toast-e, var(--sl-lg))));
-    max-block-size: calc(100vh - 2 * var(--sl-toast-b, var(--sl-lg)));
-    max-block-size: calc(100dvh - 2 * var(--sl-toast-b, var(--sl-lg)));
+    inline-size: min(var(--_tw), calc(100vw - 2 * var(--_te)));
+    inline-size: min(var(--_tw), calc(100dvw - 2 * var(--_te)));
+    max-block-size: calc(100vh - 2 * var(--_tb));
+    max-block-size: calc(100dvh - 2 * var(--_tb));
     overflow-block: auto;
     /* safe-area keeps the region off the home indicator */
-    inset-block-end: calc(var(--sl-toast-b, var(--sl-lg)) + env(safe-area-inset-bottom, 0px));
-    inset-inline-end: var(--sl-toast-e, var(--sl-lg));
+    inset-block-end: calc(var(--_tb) + env(safe-area-inset-bottom, 0px));
+    inset-inline-end: var(--_te);
   }
 
   /* the value is a corner: <edge>-<side>. top-* flips the vertical
@@ -302,12 +310,12 @@
      "start" value still lands bottom-start through the suffix rule */
   [sl-toast^="top"] {
     inset-block-end: auto;
-    inset-block-start: calc(var(--sl-toast-b, var(--sl-lg)) + env(safe-area-inset-top, 0px));
+    inset-block-start: calc(var(--_tb) + env(safe-area-inset-top, 0px));
   }
 
   [sl-toast$="start"] {
     inset-inline-end: auto;
-    inset-inline-start: var(--sl-toast-e, var(--sl-lg));
+    inset-inline-start: var(--_te);
   }
 
   [sl-toast$="center"] {
