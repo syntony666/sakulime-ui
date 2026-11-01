@@ -7,16 +7,16 @@
 @custom-selector :--sl-generic-tone [sl-button], [sl-card], [sl-icon], [sl-dot], [sl-chip], [sl-notice];
 @custom-selector :--sl-generic-size [sl-button], [sl-chip];
 @custom-selector :--sl-generic-radius [sl-button], [sl-card], [sl-notice];
-@custom-selector :--sl-generic-pad [sl-card], [sl-notice], [sl-bar];
+@custom-selector :--sl-generic-pad [sl-card], [sl-notice];
 @custom-selector :--sl-generic-interactive [sl-card], [sl-button];
 
 @layer base {
   /* interactive's shared seal — replaces the per-component
      self-defaults so every consumer reads the same slots */
   :--sl-generic-interactive {
-    --sl-i-transform: none;
-    --sl-i-shadow: none;
-    --sl-i-filter: none;
+    --sl-interactive-transform: none;
+    --sl-interactive-shadow: none;
+    --sl-interactive-filter: none;
   }
 }
 
@@ -113,37 +113,37 @@
     --sl-pad: var(--sl-2xl);
   }
 
-  /* interactive — --sl-i-{transform,shadow,filter} slots, played
+  /* interactive — --sl-interactive-{transform,shadow,filter} slots, played
      back by the shared hover rule below. Bare sl-interactive ("")
      means grow */
   :--sl-generic-interactive[sl-interactive=""],
   :--sl-generic-interactive[sl-interactive="grow"] {
-    --sl-i-transform: scale(1.03);
+    --sl-interactive-transform: scale(1.03);
   }
 
   :--sl-generic-interactive[sl-interactive="lift"] {
-    --sl-i-transform: translateY(-4px);
-    --sl-i-shadow: 0 8px 20px color-mix(in srgb, var(--sl-text) 24%, transparent);
+    --sl-interactive-transform: translateY(-4px);
+    --sl-interactive-shadow: 0 8px 20px color-mix(in srgb, var(--sl-text) 24%, transparent);
   }
 
   :--sl-generic-interactive[sl-interactive="raise"] {
-    --sl-i-shadow: 0 3px 10px color-mix(in srgb, var(--sl-text) 20%, transparent);
+    --sl-interactive-shadow: 0 3px 10px color-mix(in srgb, var(--sl-text) 20%, transparent);
   }
 
   :--sl-generic-interactive[sl-interactive="press"] {
-    --sl-i-transform: scale(0.97);
+    --sl-interactive-transform: scale(0.97);
   }
 
   :--sl-generic-interactive[sl-interactive="dim"] {
-    --sl-i-filter: brightness(0.92);
+    --sl-interactive-filter: brightness(0.92);
   }
 
   /* the shared hover playback — one rule for every consumer;
      :not(:disabled) keeps button semantics and is a no-op on cards */
   :--sl-generic-interactive[sl-interactive]:hover:not(:disabled) {
-    transform: var(--sl-i-transform);
-    box-shadow: var(--sl-i-shadow);
-    filter: var(--sl-i-filter);
+    transform: var(--sl-interactive-transform);
+    box-shadow: var(--sl-interactive-shadow);
+    filter: var(--sl-interactive-filter);
   }
 
   /* the motion cut sits in attrs on purpose — this file imports

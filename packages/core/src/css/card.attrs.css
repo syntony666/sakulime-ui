@@ -25,7 +25,7 @@
      context — a dot lands at 8px, an icon at 16px, a chip at 14px.
      z-index keeps it above any pinned or out-of-flow child regardless
      of DOM order */
-  [sl-card] > [sl-card-corner] {
+  [sl-card] > [sl-card--corner] {
     position: absolute;
     z-index: 1;
     top: 0;
@@ -34,14 +34,14 @@
     font-variant-numeric: tabular-nums;
   }
 
-  [sl-card] > [sl-card-corner~="start"] {
+  [sl-card] > [sl-card--corner~="start"] {
     inset-inline-end: auto;
     inset-inline-start: 0;
   }
 
   /* "bottom" pins the block-end edge — the words compose with
      start/end, so "bottom start" is the lower leading corner */
-  [sl-card] > [sl-card-corner~="bottom"] {
+  [sl-card] > [sl-card--corner~="bottom"] {
     top: auto;
     bottom: 0;
   }
@@ -51,52 +51,52 @@
      corner-facing corner to its own curve. font-size re-asserts the
      chip's own slot — the corner's 16px context would otherwise
      win the attrs layer over it */
-  [sl-card] > [sl-card-corner][sl-chip] {
+  [sl-card] > [sl-card--corner][sl-chip] {
     font-size: var(--sl-size-fs);
     border-radius: var(--sl-xs);
   }
 
   /* a dot or icon floats — it needs air so it doesn't straddle
      the border */
-  [sl-card] > [sl-card-corner][sl-dot] {
+  [sl-card] > [sl-card--corner][sl-dot] {
     top: var(--sl-sm);
     inset-inline-end: var(--sl-sm);
   }
 
-  [sl-card] > [sl-card-corner][sl-icon] {
+  [sl-card] > [sl-card--corner][sl-icon] {
     top: var(--sl-xs);
     inset-inline-end: var(--sl-xs);
   }
 
-  [sl-card] > [sl-card-corner~="start"][sl-dot] {
+  [sl-card] > [sl-card--corner~="start"][sl-dot] {
     inset-inline-end: auto;
     inset-inline-start: var(--sl-sm);
   }
 
-  [sl-card] > [sl-card-corner~="start"][sl-icon] {
+  [sl-card] > [sl-card--corner~="start"][sl-icon] {
     inset-inline-end: auto;
     inset-inline-start: var(--sl-xs);
   }
 
   /* bottom float offsets — the air moves to the block-end edge */
-  [sl-card] > [sl-card-corner~="bottom"][sl-dot] {
+  [sl-card] > [sl-card--corner~="bottom"][sl-dot] {
     top: auto;
     bottom: var(--sl-sm);
   }
 
-  [sl-card] > [sl-card-corner~="bottom"][sl-icon] {
+  [sl-card] > [sl-card--corner~="bottom"][sl-icon] {
     top: auto;
     bottom: var(--sl-xs);
   }
 
   /* sections — the box bleeds past the pad frame so divider hairlines
      run edge to edge; inner padding puts the content back in line */
-  [sl-card] > [sl-card-section] {
+  [sl-card] > [sl-card--section] {
     margin-inline: var(--_pbn);
     padding-inline: var(--sl-pad);
   }
 
-  [sl-card] > * + [sl-card-section] {
+  [sl-card] > * + [sl-card--section] {
     margin-block-start: var(--sl-pad);
     border-block-start: 1px solid var(--sl-border);
     padding-block-start: var(--sl-pad);
@@ -104,7 +104,7 @@
 
   /* a leading corner doesn't count as content — the section after it
      is still the first block, so no divider or gap above it */
-  [sl-card] > [sl-card-corner]:first-child + [sl-card-section] {
+  [sl-card] > [sl-card--corner]:first-child + [sl-card--section] {
     margin-block-start: 0;
     border-block-start: 0;
     padding-block-start: 0;
@@ -113,38 +113,38 @@
   /* inset — a padding-cancelled region for edge-to-edge content (img/
      svg/iframe/block). DOM order picks the bleeding edges; a leading or
      trailing corner doesn't count as content */
-  [sl-card] > [sl-card-section="inset"] {
+  [sl-card] > [sl-card--section="inset"] {
     padding: 0;
   }
 
-  [sl-card] > :is([sl-card-section="inset"]:first-child,
-                 [sl-card-corner]:first-child + [sl-card-section="inset"]) {
+  [sl-card] > :is([sl-card--section="inset"]:first-child,
+                 [sl-card--corner]:first-child + [sl-card--section="inset"]) {
     margin-block-start: var(--_pbn);
     border-block-start: 0;
   }
 
-  [sl-card] > :is([sl-card-section="inset"]:last-child,
-                 [sl-card-section="inset"]:has(+ [sl-card-corner]:last-child)) {
+  [sl-card] > :is([sl-card--section="inset"]:last-child,
+                 [sl-card--section="inset"]:has(+ [sl-card--corner]:last-child)) {
     margin-block-end: var(--_pbn);
   }
 
   /* followers own the gap — a section's divider hugs the image edge,
      anything else gets the pad spacing itself */
-  [sl-card-section="inset"] + * {
+  [sl-card--section="inset"] + * {
     margin-block-start: var(--sl-pad);
   }
 
-  [sl-card-section="inset"] + [sl-card-section] {
+  [sl-card--section="inset"] + [sl-card--section] {
     margin-block-start: 0;
   }
 
-  [sl-card-section="inset"] > :is(img, svg, video, iframe) {
+  [sl-card--section="inset"] > :is(img, svg, video, iframe) {
     display: block;
     inline-size: 100%;
   }
 
   /* blank — borderless, fully centered empty-state block */
-  [sl-card] > [sl-card-section="blank"] {
+  [sl-card] > [sl-card--section="blank"] {
     display: grid;
     justify-items: center;
     align-content: center;
@@ -153,28 +153,28 @@
     text-align: center;
   }
 
-  [sl-card-section="blank"] :is(h1, h2, h3, h4, p) {
+  [sl-card--section="blank"] :is(h1, h2, h3, h4, p) {
     margin: 0;
   }
 
-  [sl-card-section="blank"] :is(strong, h1, h2, h3, h4) {
+  [sl-card--section="blank"] :is(strong, h1, h2, h3, h4) {
     font-size: var(--sl-lg);
     font-weight: 600;
     color: var(--sl-text-strong);
   }
 
-  [sl-card-section="blank"] p {
+  [sl-card--section="blank"] p {
     color: var(--sl-text-secondary);
     font-size: var(--sl-md);
   }
 
   /* secondary — quieter section for supporting content */
-  [sl-card] > [sl-card-section="secondary"] {
+  [sl-card] > [sl-card--section="secondary"] {
     background: var(--sl-secondary-bg);
   }
 
   /* active — selected state on the primary family */
-  [sl-card] > [sl-card-section="active"] {
+  [sl-card] > [sl-card--section="active"] {
     background: color-mix(in srgb, var(--sl-primary) 8%, var(--sl-surface));
   }
 
@@ -187,33 +187,33 @@
   /* bg sections own the gap to the next divider — the fill runs
      edge to edge instead of leaving a bare strip; at the extremes
      they bleed to the card edges like inset */
-  [sl-card] > :is([sl-card-section="secondary"],
-                  [sl-card-section="active"]) {
+  [sl-card] > :is([sl-card--section="secondary"],
+                  [sl-card--section="active"]) {
     padding-block-end: var(--sl-pad);
   }
 
-  :is([sl-card-section="secondary"],
-      [sl-card-section="active"]) + [sl-card-section] {
+  :is([sl-card--section="secondary"],
+      [sl-card--section="active"]) + [sl-card--section] {
     margin-block-start: 0;
   }
 
-  [sl-card] > :is([sl-card-section="secondary"]:first-child,
-                  [sl-card-section="active"]:first-child,
-                  [sl-card-corner]:first-child + [sl-card-section="secondary"],
-                  [sl-card-corner]:first-child + [sl-card-section="active"]) {
+  [sl-card] > :is([sl-card--section="secondary"]:first-child,
+                  [sl-card--section="active"]:first-child,
+                  [sl-card--corner]:first-child + [sl-card--section="secondary"],
+                  [sl-card--corner]:first-child + [sl-card--section="active"]) {
     margin-block-start: var(--_pbn);
     padding-block-start: var(--sl-pad);
   }
 
-  [sl-card] > :is([sl-card-section="secondary"]:last-child,
-                  [sl-card-section="active"]:last-child,
-                  [sl-card-section="secondary"]:has(+ [sl-card-corner]:last-child),
-                  [sl-card-section="active"]:has(+ [sl-card-corner]:last-child)) {
+  [sl-card] > :is([sl-card--section="secondary"]:last-child,
+                  [sl-card--section="active"]:last-child,
+                  [sl-card--section="secondary"]:has(+ [sl-card--corner]:last-child),
+                  [sl-card--section="active"]:has(+ [sl-card--corner]:last-child)) {
     margin-block-end: var(--_pbn);
   }
 
   /* center — horizontally centered text */
-  [sl-card] > [sl-card-section="center"] {
+  [sl-card] > [sl-card--section="center"] {
     text-align: center;
   }
 }
