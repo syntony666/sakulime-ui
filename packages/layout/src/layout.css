@@ -115,32 +115,37 @@
 
   /* grid — auto-fill columns by default; --sl-grid-min is the column
      floor and min() keeps a narrower container overflow-free. sl-cols
-     swaps the auto-fill count for an explicit count through --sl-gc */
+     swaps the auto-fill count for an explicit count. The private vars
+     self-default here: self-defaulting seals an ancestor's sl-cols or
+     sl-span from leaking into a nested grid */
   [sl-grid] {
+    --_cols: auto-fill;
+    --_cap: 12;
+    --_gf: min(var(--sl-grid-min, 14rem), 100%);
     display: grid;
     gap: var(--sl-grid-gap, var(--sl-gap, var(--sl-md)));
-    grid-template-columns: repeat(
-      var(--sl-gc, auto-fill),
-      minmax(var(--sl-gf, min(var(--sl-grid-min, 14rem), 100%)), 1fr)
-    );
+    grid-template-columns: repeat(var(--_cols), minmax(var(--_gf), 1fr));
   }
 
   /* sl-span — a grid child takes N tracks, clamped to the active count
      so an oversized span can't spawn implicit tracks and blow the grid
      out; "full" spans every track in either mode */
-  [sl-grid] > [sl-span] { grid-column: span min(var(--sl-span-n, 1), var(--sl-gc, 12)); }
+  [sl-grid] > [sl-span] {
+    --_span-n: 1;
+    grid-column: span min(var(--_span-n), var(--_cap));
+  }
   [sl-grid] > [sl-span="full"] { grid-column: 1 / -1; }
-  [sl-grid] > [sl-span="2"]  { --sl-span-n: 2; }
-  [sl-grid] > [sl-span="3"]  { --sl-span-n: 3; }
-  [sl-grid] > [sl-span="4"]  { --sl-span-n: 4; }
-  [sl-grid] > [sl-span="5"]  { --sl-span-n: 5; }
-  [sl-grid] > [sl-span="6"]  { --sl-span-n: 6; }
-  [sl-grid] > [sl-span="7"]  { --sl-span-n: 7; }
-  [sl-grid] > [sl-span="8"]  { --sl-span-n: 8; }
-  [sl-grid] > [sl-span="9"]  { --sl-span-n: 9; }
-  [sl-grid] > [sl-span="10"] { --sl-span-n: 10; }
-  [sl-grid] > [sl-span="11"] { --sl-span-n: 11; }
-  [sl-grid] > [sl-span="12"] { --sl-span-n: 12; }
+  [sl-grid] > [sl-span="2"]  { --_span-n: 2; }
+  [sl-grid] > [sl-span="3"]  { --_span-n: 3; }
+  [sl-grid] > [sl-span="4"]  { --_span-n: 4; }
+  [sl-grid] > [sl-span="5"]  { --_span-n: 5; }
+  [sl-grid] > [sl-span="6"]  { --_span-n: 6; }
+  [sl-grid] > [sl-span="7"]  { --_span-n: 7; }
+  [sl-grid] > [sl-span="8"]  { --_span-n: 8; }
+  [sl-grid] > [sl-span="9"]  { --_span-n: 9; }
+  [sl-grid] > [sl-span="10"] { --_span-n: 10; }
+  [sl-grid] > [sl-span="11"] { --_span-n: 11; }
+  [sl-grid] > [sl-span="12"] { --_span-n: 12; }
 
   /* opt-in collapse — <div sl-row sl-collapse> turns into a vertical
      stack on narrow viewports; -lg and -md collapse at wider cuts. Tag
@@ -374,40 +379,40 @@
   [sl-gap="4xl"] { --sl-gap: var(--sl-4xl); }
   [sl-gap="5xl"] { --sl-gap: var(--sl-5xl); }
 
-  /* sl-cols — explicit track count. It only sets the private --sl-gc
-     that the base template repeats; --sl-gf drops the auto-fill floor
-     so tracks size to share, not to a fixed minimum */
-  [sl-grid][sl-cols="1"]  { --sl-gc: 1;  --sl-gf: auto; }
-  [sl-grid][sl-cols="2"]  { --sl-gc: 2;  --sl-gf: auto; }
-  [sl-grid][sl-cols="3"]  { --sl-gc: 3;  --sl-gf: auto; }
-  [sl-grid][sl-cols="4"]  { --sl-gc: 4;  --sl-gf: auto; }
-  [sl-grid][sl-cols="5"]  { --sl-gc: 5;  --sl-gf: auto; }
-  [sl-grid][sl-cols="6"]  { --sl-gc: 6;  --sl-gf: auto; }
-  [sl-grid][sl-cols="7"]  { --sl-gc: 7;  --sl-gf: auto; }
-  [sl-grid][sl-cols="8"]  { --sl-gc: 8;  --sl-gf: auto; }
-  [sl-grid][sl-cols="9"]  { --sl-gc: 9;  --sl-gf: auto; }
-  [sl-grid][sl-cols="10"] { --sl-gc: 10; --sl-gf: auto; }
-  [sl-grid][sl-cols="11"] { --sl-gc: 11; --sl-gf: auto; }
-  [sl-grid][sl-cols="12"] { --sl-gc: 12; --sl-gf: auto; }
+  /* sl-cols — explicit track count. It only sets the private vars the
+     base template repeats and spans clamp against; --_gf drops the
+     auto-fill floor so tracks size to share, not to a fixed minimum */
+  [sl-grid][sl-cols="1"]  { --_cols: 1;  --_cap: 1;  --_gf: auto; }
+  [sl-grid][sl-cols="2"]  { --_cols: 2;  --_cap: 2;  --_gf: auto; }
+  [sl-grid][sl-cols="3"]  { --_cols: 3;  --_cap: 3;  --_gf: auto; }
+  [sl-grid][sl-cols="4"]  { --_cols: 4;  --_cap: 4;  --_gf: auto; }
+  [sl-grid][sl-cols="5"]  { --_cols: 5;  --_cap: 5;  --_gf: auto; }
+  [sl-grid][sl-cols="6"]  { --_cols: 6;  --_cap: 6;  --_gf: auto; }
+  [sl-grid][sl-cols="7"]  { --_cols: 7;  --_cap: 7;  --_gf: auto; }
+  [sl-grid][sl-cols="8"]  { --_cols: 8;  --_cap: 8;  --_gf: auto; }
+  [sl-grid][sl-cols="9"]  { --_cols: 9;  --_cap: 9;  --_gf: auto; }
+  [sl-grid][sl-cols="10"] { --_cols: 10; --_cap: 10; --_gf: auto; }
+  [sl-grid][sl-cols="11"] { --_cols: 11; --_cap: 11; --_gf: auto; }
+  [sl-grid][sl-cols="12"] { --_cols: 12; --_cap: 12; --_gf: auto; }
 
   /* sl-cols-<bp> — the track count at narrower widths; breakpoints
      mirror the container scale (lg <75rem, md <60rem, sm <45rem — the
      hardcoded twins of --sl-container-*). Blocks run wide to narrow so
      the smallest hit wins at equal specificity. Span clamping rides on
-     the same --sl-gc, so a one-column hit releases spans for free */
+     the same private count, so a one-column hit releases spans for free */
   @media (width < 75rem) {
-    [sl-grid][sl-cols-lg="1"]  { --sl-gc: 1;  --sl-gf: auto; }
-    [sl-grid][sl-cols-lg="2"]  { --sl-gc: 2;  --sl-gf: auto; }
-    [sl-grid][sl-cols-lg="3"]  { --sl-gc: 3;  --sl-gf: auto; }
-    [sl-grid][sl-cols-lg="4"]  { --sl-gc: 4;  --sl-gf: auto; }
-    [sl-grid][sl-cols-lg="5"]  { --sl-gc: 5;  --sl-gf: auto; }
-    [sl-grid][sl-cols-lg="6"]  { --sl-gc: 6;  --sl-gf: auto; }
-    [sl-grid][sl-cols-lg="7"]  { --sl-gc: 7;  --sl-gf: auto; }
-    [sl-grid][sl-cols-lg="8"]  { --sl-gc: 8;  --sl-gf: auto; }
-    [sl-grid][sl-cols-lg="9"]  { --sl-gc: 9;  --sl-gf: auto; }
-    [sl-grid][sl-cols-lg="10"] { --sl-gc: 10; --sl-gf: auto; }
-    [sl-grid][sl-cols-lg="11"] { --sl-gc: 11; --sl-gf: auto; }
-    [sl-grid][sl-cols-lg="12"] { --sl-gc: 12; --sl-gf: auto; }
+    [sl-grid][sl-cols-lg="1"]  { --_cols: 1;  --_cap: 1;  --_gf: auto; }
+    [sl-grid][sl-cols-lg="2"]  { --_cols: 2;  --_cap: 2;  --_gf: auto; }
+    [sl-grid][sl-cols-lg="3"]  { --_cols: 3;  --_cap: 3;  --_gf: auto; }
+    [sl-grid][sl-cols-lg="4"]  { --_cols: 4;  --_cap: 4;  --_gf: auto; }
+    [sl-grid][sl-cols-lg="5"]  { --_cols: 5;  --_cap: 5;  --_gf: auto; }
+    [sl-grid][sl-cols-lg="6"]  { --_cols: 6;  --_cap: 6;  --_gf: auto; }
+    [sl-grid][sl-cols-lg="7"]  { --_cols: 7;  --_cap: 7;  --_gf: auto; }
+    [sl-grid][sl-cols-lg="8"]  { --_cols: 8;  --_cap: 8;  --_gf: auto; }
+    [sl-grid][sl-cols-lg="9"]  { --_cols: 9;  --_cap: 9;  --_gf: auto; }
+    [sl-grid][sl-cols-lg="10"] { --_cols: 10; --_cap: 10; --_gf: auto; }
+    [sl-grid][sl-cols-lg="11"] { --_cols: 11; --_cap: 11; --_gf: auto; }
+    [sl-grid][sl-cols-lg="12"] { --_cols: 12; --_cap: 12; --_gf: auto; }
 
     /* collapsed rows stretch children — the mark's auto margin lives
        in this layer, so the reset must too */
@@ -416,40 +421,40 @@
     [sl-hide-lg] { display: none; }
   }
   @media (width < 60rem) {
-    [sl-grid][sl-cols-md="1"]  { --sl-gc: 1;  --sl-gf: auto; }
-    [sl-grid][sl-cols-md="2"]  { --sl-gc: 2;  --sl-gf: auto; }
-    [sl-grid][sl-cols-md="3"]  { --sl-gc: 3;  --sl-gf: auto; }
-    [sl-grid][sl-cols-md="4"]  { --sl-gc: 4;  --sl-gf: auto; }
-    [sl-grid][sl-cols-md="5"]  { --sl-gc: 5;  --sl-gf: auto; }
-    [sl-grid][sl-cols-md="6"]  { --sl-gc: 6;  --sl-gf: auto; }
-    [sl-grid][sl-cols-md="7"]  { --sl-gc: 7;  --sl-gf: auto; }
-    [sl-grid][sl-cols-md="8"]  { --sl-gc: 8;  --sl-gf: auto; }
-    [sl-grid][sl-cols-md="9"]  { --sl-gc: 9;  --sl-gf: auto; }
-    [sl-grid][sl-cols-md="10"] { --sl-gc: 10; --sl-gf: auto; }
-    [sl-grid][sl-cols-md="11"] { --sl-gc: 11; --sl-gf: auto; }
-    [sl-grid][sl-cols-md="12"] { --sl-gc: 12; --sl-gf: auto; }
+    [sl-grid][sl-cols-md="1"]  { --_cols: 1;  --_cap: 1;  --_gf: auto; }
+    [sl-grid][sl-cols-md="2"]  { --_cols: 2;  --_cap: 2;  --_gf: auto; }
+    [sl-grid][sl-cols-md="3"]  { --_cols: 3;  --_cap: 3;  --_gf: auto; }
+    [sl-grid][sl-cols-md="4"]  { --_cols: 4;  --_cap: 4;  --_gf: auto; }
+    [sl-grid][sl-cols-md="5"]  { --_cols: 5;  --_cap: 5;  --_gf: auto; }
+    [sl-grid][sl-cols-md="6"]  { --_cols: 6;  --_cap: 6;  --_gf: auto; }
+    [sl-grid][sl-cols-md="7"]  { --_cols: 7;  --_cap: 7;  --_gf: auto; }
+    [sl-grid][sl-cols-md="8"]  { --_cols: 8;  --_cap: 8;  --_gf: auto; }
+    [sl-grid][sl-cols-md="9"]  { --_cols: 9;  --_cap: 9;  --_gf: auto; }
+    [sl-grid][sl-cols-md="10"] { --_cols: 10; --_cap: 10; --_gf: auto; }
+    [sl-grid][sl-cols-md="11"] { --_cols: 11; --_cap: 11; --_gf: auto; }
+    [sl-grid][sl-cols-md="12"] { --_cols: 12; --_cap: 12; --_gf: auto; }
 
     [sl-row][sl-collapse-md] > [sl-place] { margin-inline: 0; }
 
     [sl-hide-md] { display: none; }
   }
   @media (width < 45rem) {
-    [sl-grid][sl-cols-sm="1"]  { --sl-gc: 1;  --sl-gf: auto; }
-    [sl-grid][sl-cols-sm="2"]  { --sl-gc: 2;  --sl-gf: auto; }
-    [sl-grid][sl-cols-sm="3"]  { --sl-gc: 3;  --sl-gf: auto; }
-    [sl-grid][sl-cols-sm="4"]  { --sl-gc: 4;  --sl-gf: auto; }
-    [sl-grid][sl-cols-sm="5"]  { --sl-gc: 5;  --sl-gf: auto; }
-    [sl-grid][sl-cols-sm="6"]  { --sl-gc: 6;  --sl-gf: auto; }
-    [sl-grid][sl-cols-sm="7"]  { --sl-gc: 7;  --sl-gf: auto; }
-    [sl-grid][sl-cols-sm="8"]  { --sl-gc: 8;  --sl-gf: auto; }
-    [sl-grid][sl-cols-sm="9"]  { --sl-gc: 9;  --sl-gf: auto; }
-    [sl-grid][sl-cols-sm="10"] { --sl-gc: 10; --sl-gf: auto; }
-    [sl-grid][sl-cols-sm="11"] { --sl-gc: 11; --sl-gf: auto; }
-    [sl-grid][sl-cols-sm="12"] { --sl-gc: 12; --sl-gf: auto; }
+    [sl-grid][sl-cols-sm="1"]  { --_cols: 1;  --_cap: 1;  --_gf: auto; }
+    [sl-grid][sl-cols-sm="2"]  { --_cols: 2;  --_cap: 2;  --_gf: auto; }
+    [sl-grid][sl-cols-sm="3"]  { --_cols: 3;  --_cap: 3;  --_gf: auto; }
+    [sl-grid][sl-cols-sm="4"]  { --_cols: 4;  --_cap: 4;  --_gf: auto; }
+    [sl-grid][sl-cols-sm="5"]  { --_cols: 5;  --_cap: 5;  --_gf: auto; }
+    [sl-grid][sl-cols-sm="6"]  { --_cols: 6;  --_cap: 6;  --_gf: auto; }
+    [sl-grid][sl-cols-sm="7"]  { --_cols: 7;  --_cap: 7;  --_gf: auto; }
+    [sl-grid][sl-cols-sm="8"]  { --_cols: 8;  --_cap: 8;  --_gf: auto; }
+    [sl-grid][sl-cols-sm="9"]  { --_cols: 9;  --_cap: 9;  --_gf: auto; }
+    [sl-grid][sl-cols-sm="10"] { --_cols: 10; --_cap: 10; --_gf: auto; }
+    [sl-grid][sl-cols-sm="11"] { --_cols: 11; --_cap: 11; --_gf: auto; }
+    [sl-grid][sl-cols-sm="12"] { --_cols: 12; --_cap: 12; --_gf: auto; }
 
     /* sl-collapse — the sm shorthand: one column; spans release through
        the same clamp since the count is now one */
-    [sl-grid][sl-collapse] { --sl-gc: 1; --sl-gf: auto; }
+    [sl-grid][sl-collapse] { --_cols: 1; --_cap: 1; --_gf: auto; }
 
     [sl-row][sl-collapse] > [sl-place] { margin-inline: 0; }
 
