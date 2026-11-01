@@ -41,3 +41,7 @@ import * as ButtonDemos from "../../demos/components/button.demo";
 ### 圓角 `sl-radius`
 
 `sl-button` 是 `sl-radius` 的適用元件，沒給是 `md`。選項看 [Radius 圓角](/attrs/radius)。
+
+### 互動 `sl-interactive`
+
+`sl-button` 是 `sl-interactive` 的適用元件。沒標時 hover 本來就是 `grow` 放大；標了換成指定效果。選項看 [Interactive 互動](/attrs/interactive)。

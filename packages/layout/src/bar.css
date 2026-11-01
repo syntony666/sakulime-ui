@@ -66,7 +66,8 @@
 
 @layer attrs {
   /* sl-pad on bar — thicker bands; the attr wiring lives here now that
-     generic pad consumers are core components */
+     generic pad consumers are core components. Keep the value→slot
+     mapping identical to generic.css's pad rules. */
   [sl-bar][sl-pad="sm"] { --sl-pad: var(--sl-md); }
   [sl-bar][sl-pad="md"] { --sl-pad: var(--sl-lg); }
   [sl-bar][sl-pad="lg"] { --sl-pad: var(--sl-2xl); }
