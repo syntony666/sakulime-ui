@@ -30,6 +30,6 @@ export const Region: Demo = {
     frame("sl-stack 沒給 → 用 2xl", `<div sl-stack>${cells()}</div>`) +
     frame("sl-row 沒給 → 用 2xl", `<div sl-row>${cells()}</div>`) +
     frame("sl-grid 沒給 → 用 2xl", `<div sl-grid style="--sl-grid-min: 6rem">${cells()}</div>`) +
-    frame("sl-stack=\"xs\" 自己給了 → 還是 xs", `<div sl-stack="xs">${cells()}</div>`) +
+    frame("sl-stack 自己給 sl-gap=\"xs\" → 還是 xs", `<div sl-stack sl-gap="xs">${cells()}</div>`) +
     `</div>`,
 };

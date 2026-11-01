@@ -96,7 +96,7 @@ const onFocusOut = (e: FocusEvent) => {
 
 // the page TOC flattens heading markup to plain text — a usage-form h3
 // like "Banner *橫幅*" loses its gloss styling, and an attr h3 like
-// "動作 `sl-notice-action`" loses the code look. wrap the trailing CJK
+// "動作 `sl-notice--action`" loses the code look. wrap the trailing CJK
 // or sl-* run in a span so css can restore the sub-label/code
 // hierarchy. the childElementCount guard keeps the observer from
 // re-entering on its own writes

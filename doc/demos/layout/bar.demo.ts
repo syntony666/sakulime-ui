@@ -16,12 +16,12 @@ export const BarTop: Demo = {
     `</div>`,
 };
 
-// three zones in one bar — the 1fr/auto/1fr grid makes sl-place="center"
-// the true bar center; "end" pins the far edge regardless of source order
-export const BarZones: Demo = {
+// space-between spreads children across the band — the first hugs the
+// leading edge, the last the trailing edge, the middle floats between
+export const BarSpread: Demo = {
   render: () =>
     `<div sl-bar="top" style="position: static">` +
-    `${cell("Logo")}${cell("中間").replace('class="demo-cell"', 'class="demo-cell" sl-place="center"')}${cell("右邊").replace('class="demo-cell"', 'class="demo-cell" sl-place="end"')}` +
+    `${cell("Logo")}${cell("中間")}${cell("右邊")}` +
     `</div>`,
 };
 
@@ -32,12 +32,13 @@ export const BarBottom: Demo = {
     `<div sl-bar="bottom" sl-pad="lg" style="position: static">${cell("頁尾內容")}</div>`,
 };
 
-// positioning mods — a live fixed bar would pin to the real viewport,
-// so the stage overrides position; the attrs shown are the real API
+// positioning — an edge bar is sticky by default; sl-bar-fixed pins it
+// to the viewport. A live fixed bar would pin to the real viewport, so
+// the stage overrides position; the attrs shown are the real API
 export const Positions: Demo = {
   render: () =>
     axis(
-      ["-", "sl-static", "sl-fixed"],
+      ["-", "sl-bar-fixed"],
       (v) =>
         `<div sl-bar="top"${v === "-" ? "" : ` ${v}`} style="position: static">` +
         `${cell(v === "-" ? "sticky（預設）" : v)}</div>`,

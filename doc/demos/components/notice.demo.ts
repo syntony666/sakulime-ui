@@ -110,15 +110,15 @@ export const Aligns: Demo = {
 };
 
 // action playground for the 子元素 section — placement × width
-const X_BTN = `<button sl-button="ghost" sl-size="sm" sl-notice-action aria-label="關閉"><i sl-icon="lucide:x" sl-icon-size="lg"></i></button>`;
-const BELL_BTN = `<button sl-button="ghost" sl-size="sm" sl-notice-action="start" aria-label="靜音"><i sl-icon="lucide:bell-off" sl-icon-size="lg"></i></button>`;
+const X_BTN = `<button sl-button="ghost" sl-size="sm" sl-notice--action aria-label="關閉"><i sl-icon="lucide:x" sl-icon-size="lg"></i></button>`;
+const BELL_BTN = `<button sl-button="ghost" sl-size="sm" sl-notice--action="start" aria-label="靜音"><i sl-icon="lucide:bell-off" sl-icon-size="lg"></i></button>`;
 const startBtn = (a: string) => (a === "start" || a === "both" ? BELL_BTN : "");
 const endBtn = (a: string) => (a === "end" || a === "both" ? X_BTN : "");
 
 export const ActionPlay: DemoObj<ActionArgs> = {
   args: { action: "both", variant: "-" },
   argTypes: {
-    action: axisArg("sl-notice-action", "位置（both＝兩邊的 demo 便利選項）", ACTIONS),
+    action: axisArg("sl-notice--action", "位置（both＝兩邊的 demo 便利選項）", ACTIONS),
     variant: axisArg("sl-notice", "寬度", VARIANTS),
   },
   render: (a) =>
@@ -154,7 +154,7 @@ export const BannerPlay: DemoObj<BannerArgs> = {
       options: ["單行", "多行"],
     },
     align: axisArg("sl-notice-align", "對齊", ALIGNS),
-    action: axisArg("sl-notice-action", "動作位置（both＝兩邊的 demo 便利選項）", ACTIONS),
+    action: axisArg("sl-notice--action", "動作位置（both＝兩邊的 demo 便利選項）", ACTIONS),
   },
   render: (a) => {
     const text = a.lines === "多行" ? LONG : "排程維護將於 30 分鐘後開始";
@@ -170,7 +170,7 @@ export const BannerPlay: DemoObj<BannerArgs> = {
   },
 };
 
-// toast playground — sl-toast is the real consumer container; the
+// toast playground — sl-float is the real consumer container; the
 // position: static override only undoes fixed so it renders inside
 // the stage. Stacking N notices, per-notice width is the sl-side knob
 const TOASTS = [
@@ -191,7 +191,7 @@ export const ToastPlay: DemoObj<ToastArgs> = {
     variant: axisArg("sl-notice", "寬度", VARIANTS),
   },
   render: (a) =>
-    `<div sl-toast style="position: static">` +
+    `<div sl-float style="position: static">` +
     TOASTS.slice(0, Number(a.count))
       .map(
         ([tone, icon, body]) =>

@@ -1,6 +1,6 @@
 ---
 title: Grid 網格系統
-description: 網格系統。預設欄數自適應，要固定欄數配 sl-cols。
+description: 網格系統。預設欄數自適應，要固定欄數配 sl-grid-cols。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 
 # Grid *網格系統*
 
-> 網格系統。預設欄數自適應，欄寬不夠就自己換行；要固定欄數配 `sl-cols`。卡片列表、圖片牆這種重複單元都適用。
+> 網格系統。預設欄數自適應，欄寬不夠就自己換行；要固定欄數配 `sl-grid-cols`。卡片列表、圖片牆這種重複單元都適用。
 
 ## 用法
 
@@ -29,15 +29,15 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 
 ## 欄數
 
-`sl-cols` 把欄數寫死，1 到 12：
+`sl-grid-cols` 把欄數寫死，1 到 12：
 
 ```html
-<div sl-grid sl-cols="4">
+<div sl-grid sl-grid-cols="4">
   <div sl-card>...</div>
 </div>
 ```
 
-子層照順序填，滿一列自動換下一列。欄數固定，不會因為容器變窄掉欄；要分斷點掉欄就掛 `sl-cols-lg`、`sl-cols-md`、`sl-cols-sm`，只要手機單欄的話標 `sl-collapse` 就好，見[響應式設計](/layout/responsive)。
+子層照順序填，滿一列自動換下一列。欄數固定，不會因為容器變窄掉欄；要分斷點掉欄就掛 `sl-grid-cols-lg`、`sl-grid-cols-md`、`sl-grid-cols-sm`，見[響應式設計](/layout/responsive)。
 
 <Demo
   :render="GridDemos.Cols.render"
@@ -45,17 +45,17 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 
 ## 佔欄
 
-`sl-span` 標在子層上，讓它佔好幾欄，2 到 12；`sl-span="full"` 不管欄數直接跨滿整列：
+`sl-grid--span` 標在子層上，讓它佔好幾欄，2 到 12；裸標或 `sl-grid--span="full"` 不管欄數直接跨滿整列：
 
 ```html
-<div sl-grid sl-cols="4">
-  <div sl-card sl-span="2">橫跨兩欄</div>
-  <div sl-card sl-span="full">跨滿整列</div>
+<div sl-grid sl-grid-cols="4">
+  <div sl-card sl-grid--span="2">橫跨兩欄</div>
+  <div sl-card sl-grid--span="full">跨滿整列</div>
   <div sl-card>...</div>
 </div>
 ```
 
-超過當列剩餘欄位就自動掉下一列。固定欄數下，`sl-span` 大於當前欄數會自動變滿列，不會溢出、也不會憑空生出軌道。auto-fill 的網格也能用，欄數跟著容器浮動，要保險的跨列用 `sl-span="full"`（永遠跨滿）。
+超過當列剩餘欄位就自動掉下一列。固定欄數下，`sl-grid--span` 大於當前欄數會自動變滿列，不會溢出、也不會憑空生出軌道。auto-fill 的網格也能用，欄數跟著容器浮動，要保險的跨列用 `sl-grid--span="full"`（永遠跨滿）。
 ## 欄寬
 
 欄數由公式算出，`repeat(auto-fill, minmax(min(--sl-grid-min, 100%), 1fr))`：
@@ -76,7 +76,7 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 
 px 以根字級 16px 換算，尺規本身是 rem。欄距跟行距是同一個。
 
-`sl-grid` 的選項就是間距，預設 `md`：
+間距用 [`sl-gap`](/attrs/gap) 給，寫在 grid 自己身上或祖先上都行，預設 `md`：
 
 | 選項  | 間距         |
 | ----- | ------------ |

@@ -6,9 +6,9 @@ type Demo = DemoObj;
 
 // position overridden to static — a live fixed container would pin to the
 // real viewport; what matters here is the width and the stacking gap
-export const Toast: Demo = {
+export const Float: Demo = {
   render: () =>
-    `<div sl-toast style="position: static">` +
+    `<div sl-float style="position: static">` +
     `<div sl-notice sl-tone="success">已儲存變更</div>` +
     `<div sl-notice>新版本可用</div>` +
     `</div>`,

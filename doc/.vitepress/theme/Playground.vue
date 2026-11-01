@@ -36,7 +36,7 @@ const fields = computed<Field[]>(() =>
 );
 
 // attr names in descriptions render as nowrap code spans — keeps tokens
-// like sl-card-corner from splitting across lines in the narrow column
+// like sl-card--corner from splitting across lines in the narrow column
 const descHtml = (desc?: string) =>
   desc?.replace(/`?(sl-[\w-]+)`?/g, (_, m) => `<code>${m}</code>`) ?? "";
 

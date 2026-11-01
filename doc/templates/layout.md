@@ -16,7 +16,7 @@ feature, ordered by importance, `間距` always last:
 ## <feature>
 
 <one section per distinct feature — `## 欄數`, `## 佔欄`,
-`## 窄屏直排 `sl-collapse``, `## 三區排列`>
+`## 位置`, `## 內容排列`>
 
 ## 間距
 
@@ -28,6 +28,6 @@ gap-reading primitives>
   no `行為` grab-bag section, no `屬性` wrapper level.
 - `間距` opens with the px note, then the scale table with the
   primitive's own default marked `（預設）` (`md` for most,
-  `lg` for `sl-with-sidebar`);
+  `lg` for `sl-sidebar`);
   primitives without a gap knob (`container`) skip the section entirely.
 - Demo file at `doc/demos/layout/<name>.demo.ts`.

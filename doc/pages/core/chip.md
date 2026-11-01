@@ -47,10 +47,10 @@ meta 列實際長這樣：
 
 <Demo :render="ChipDemos.MetaRow.render" />
 
-疊上 `sl-card-corner` 就固定到卡片角落，適合當數值或版本標籤：
+疊上 `sl-card--corner` 就固定到卡片角落，適合當數值或版本標籤：
 
 ```html
-<span sl-card-corner sl-chip sl-tone="primary">200ms</span>
+<span sl-card--corner sl-chip sl-tone="primary">200ms</span>
 ```
 
 <Demo :render="ChipDemos.InCorner.render" />

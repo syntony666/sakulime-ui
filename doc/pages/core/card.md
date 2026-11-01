@@ -92,20 +92,20 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 放進卡片裡的零件。
 
-### 角落標記 `sl-card-corner`
+### 角落標記 `sl-card--corner`
 
-把元素固定在卡片角落，適合時間、狀態、數字這類補充資訊。`sl-card-corner` 定位置，外觀由同一個元素上的小元件屬性決定：
+把元素固定在卡片角落，適合時間、狀態、數字這類補充資訊。`sl-card--corner` 定位置，外觀由同一個元素上的小元件屬性決定：
 
 ```html
 <div sl-card>
-  <span sl-card-corner sl-chip>100ms</span>
+  <span sl-card--corner sl-chip>100ms</span>
   ...
 </div>
 ```
 
 <Playground :meta="CardDemos.Corner" :render="CardDemos.Corner.render" />
 
-位置，詞的組合跟 [`sl-place`](/layout/placement) 同規則，`start`／`end` 選左右、`bottom` 換到下緣：
+位置用詞的組合，`start`／`end` 選左右、`bottom` 換到下緣：
 
 - 沒給／`end`：右上
 - `start`：左上
@@ -116,9 +116,9 @@ import * as CardDemos from "../../demos/components/card.demo";
 內容組合，`sl-chip` 文字膠囊、`sl-dot` 狀態點、`sl-icon` 圖示都可以放；`sl-tone` 寫在同一個元素上染色：
 
 ```html
-<span sl-card-corner sl-chip sl-tone="primary">200ms</span>
-<i sl-card-corner sl-dot sl-tone="danger"></i>
-<i sl-card-corner="start" sl-icon="lucide:zap" sl-tone="warning"></i>
+<span sl-card--corner sl-chip sl-tone="primary">200ms</span>
+<i sl-card--corner sl-dot sl-tone="danger"></i>
+<i sl-card--corner="start" sl-icon="lucide:zap" sl-tone="warning"></i>
 ```
 
 角落 chip 調字級用 `sl-size`（`sm`/`md`/`lg`），整顆膠囊等比縮放。
@@ -126,15 +126,15 @@ import * as CardDemos from "../../demos/components/card.demo";
 <Demo :render="CardDemos.CornerPositions.render" />
 <Demo :render="CardDemos.CornerKinds.render" />
 
-### 分區 `sl-card-section`
+### 分區 `sl-card--section`
 
 把卡片切成幾個區塊，區塊之間會自動出現一條分隔線。第一個區塊不畫線，可以當標題區：
 
 ```html
 <div sl-card>
-  <div sl-card-section>標題</div>
-  <div sl-card-section>內容</div>
-  <div sl-card-section>底部</div>
+  <div sl-card--section>標題</div>
+  <div sl-card--section>內容</div>
+  <div sl-card--section>底部</div>
 </div>
 ```
 
@@ -148,12 +148,12 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 ```html
 <div sl-card>
-  <div sl-card-section="inset"><img src="…"></div>
-  <div sl-card-section>內容</div>
+  <div sl-card--section="inset"><img src="…"></div>
+  <div sl-card--section>內容</div>
 </div>
 ```
 
-角落標記疊在貼邊內容上也行。`sl-card-corner` 不算一般內容，不會影響 inset 的位置判斷：
+角落標記疊在貼邊內容上也行。`sl-card--corner` 不算一般內容，不會影響 inset 的位置判斷：
 
 <Demo :render="CardDemos.Sections.render" :args="CardDemos.Sections.args" />
 <Demo :render="CardDemos.Insets.render" />
@@ -164,7 +164,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 ```html
 <div sl-card="hollow">
-  <div sl-card-section="blank">
+  <div sl-card--section="blank">
     <strong>上傳檔案</strong>
     <p>拖曳檔案到這裡</p>
   </div>

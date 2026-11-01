@@ -159,7 +159,7 @@ export const Spaced: Demo = {
 export const InCard: Demo = {
   render: () =>
     `<div sl-card style="width: 300px">` +
-    `<i sl-card-corner sl-icon="lucide:star" sl-tone="success"></i>` +
+    `<i sl-card--corner sl-icon="lucide:star" sl-tone="success"></i>` +
     `<strong><i sl-icon="lucide:rocket" sl-icon-space="end"></i> 學了一些俄語，我想對大家說</strong>` +
     `<p>noʎ ʇɹnɥ puɐ ǝı̣ן ɐ ןןǝʇ ɐuuoƃ ɹǝʌǝN
 ǝʎqpooƃ ʎɐs ɐuuoƃ ɹǝʌǝN

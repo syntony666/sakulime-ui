@@ -207,7 +207,7 @@ export default defineConfig({
         ],
       },
       {
-        text: "排版 Layout",
+        text: "格局 Layout",
         items: [
           { text: "安裝", link: "/layout/" },
           {
@@ -215,10 +215,10 @@ export default defineConfig({
             items: [
               { text: `Container ${zh("頁面容器")}`, link: "/layout/container" },
               { text: `Stack ${zh("堆疊")}`, link: "/layout/stack" },
+              { text: `Content ${zh("文流")}`, link: "/layout/content" },
               { text: `Row ${zh("橫列")}`, link: "/layout/row" },
               { text: `Grid ${zh("網格系統")}`, link: "/layout/grid" },
               { text: `RWD ${zh("響應式設計")}`, link: "/layout/responsive" },
-              { text: `Placement ${zh("對齊")}`, link: "/layout/placement" },
             ],
           },
           {
@@ -226,7 +226,7 @@ export default defineConfig({
             items: [
               { text: `Bar ${zh("頁緣區塊")}`, link: "/layout/bar" },
               { text: `Sidebar ${zh("側邊欄")}`, link: "/layout/sidebar" },
-              { text: `Toast ${zh("通知角")}`, link: "/layout/toast" },
+              { text: `Float ${zh("角落區")}`, link: "/layout/float" },
             ],
           },
         ],

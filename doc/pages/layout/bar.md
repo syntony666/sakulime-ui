@@ -1,6 +1,6 @@
 ---
 title: Bar 頁緣區塊
-description: 滿寬的頁緣區塊，黏頂或黏底，也能固定在視窗邊，內部左中右三區排列。
+description: 滿寬的頁緣區塊，黏頂或黏底，也能固定在視窗邊，內容往兩端排開。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as BarDemos from "../../demos/layout/bar.demo";
 
 # Bar *頁緣區塊*
 
-> 頂端或底端的滿寬頁緣區塊。值選邊緣，預設捲到邊就黏住，要固定在視窗邊加 `sl-fixed`。內部左中右三區，放什麼都可以。
+> 頂端或底端的滿寬頁緣區塊。值選邊緣，預設捲到邊就黏住，要固定在視窗邊加 `sl-bar-fixed`。內容是 `space-between`：第一個靠左、最後一個靠右。
 
 ## 用法
 
@@ -22,43 +22,44 @@ import * as BarDemos from "../../demos/layout/bar.demo";
 
 <Demo :render="BarDemos.BarTop.render" />
 
-`sl-bar` 不給值就是一條普通的[文流](/layout/stack)區塊，沒有邊緣語意，當區塊分隔帶用。
+`sl-bar` 不給值就是一條普通的文流區塊，沒有邊緣語意，當區塊分隔帶用。
 
 ## 邊緣跟定位
 
 `sl-bar="top"` 黏頂、`sl-bar="bottom"` 黏底，預設都是 sticky：內容捲到邊就停住，不佔版面外。`sl-bar="bottom"` 還有個額外好處：頁面比視窗短時會吸在視窗底部（sticky footer）；父層要拉滿視窗高才黏得住。
 
-要固定在視窗邊加 `sl-fixed`；有邊緣值但要退回文流標 `sl-static`：
+要固定在視窗邊加 `sl-bar-fixed`，需配邊緣值：
 
 ```html
-<div sl-bar="top" sl-fixed>固定在視窗頂</div>
-<div sl-bar="bottom" sl-fixed>固定在視窗底，手機底部 tab bar</div>
-<div sl-bar="top" sl-static>有上緣髮線但不黏</div>
+<div sl-bar="top" sl-bar-fixed>固定在視窗頂</div>
+<div sl-bar="bottom" sl-bar-fixed>固定在視窗底，手機底部 tab bar</div>
 ```
 
 <Demo :render="BarDemos.Positions.render" />
 
-`sl-fixed` 跟 `sl-static` 互斥，同標時 static 贏（bar 留在文流，body 也不補償）。裸 `sl-bar` 不給邊緣值時 `sl-fixed` 沒有意義。
+裸 `sl-bar` 不給邊緣值時 `sl-bar-fixed` 沒有意義。
 
-fixed 的 bar 脫離文流，body 會在對應邊自動補上 bar 高度的內距，下面的內容不會被蓋住；包在什麼容器裡都有效，不用是 body 直接子層。補償讀 `--sl-bar-h`，所以 bar 的實際高度要等於它：改 `sl-pad`、換行成兩列、或加了 safe-area inset，都要在 `:root` 同步改 `--sl-bar-h` 才跟得到。
+fixed 的 bar 脫離文流，body 會在對應邊自動補上 bar 高度的內距，下面的內容不會被蓋住；包在什麼容器裡都有效，不用是 body 直接子層。補償讀 `--sl-bar-h`，所以 bar 的實際高度要等於它：改 `sl-pad`、換行成兩列、或加了 safe-area inset，都要在 `:root` 同步改 `--sl-bar-h` 才跟得到。列印時 fixed bar 自動退回文流。
 
 兩個祖先陷阱：sticky 的祖先不能設 `overflow`（會換成黏祖先）或 `transform`／`filter`／`perspective`（fixed 的參考框會變成那個祖先，bar 黏在卡片裡不黏視窗）。
 
-## 三區排列
+## 內容排列
 
-內部是 `1fr auto 1fr` 的網格：子層依序佔左、中、右三區，置中是整條 bar 的中點，不是剩餘空間的中點。標示 `sl-place="center"` 固定在中間、`sl-place="end"` 固定在行尾。兩個子層時第二個預設落在中間，推到右邊標示 `sl-place="end"`。三區對應至多三個子層，第四個起會換到第二列，左邊要放多個東西就包一個 `sl-row` 當一個子層：
+內部是 flex 加 `justify-content: space-between`：子層依序往兩端排開，第一個貼左、最後一個貼右，中間的共享剩餘空間。一側要塞多個東西就包一個 `sl-row` 當一個子層：
 
 ```html
 <div sl-bar="top">
   <div>Logo</div>
-  <div sl-place="center">中間</div>
-  <div sl-place="end">右邊</div>
+  <div sl-row>
+    <a href="#">連結</a>
+    <a href="#">連結</a>
+  </div>
 </div>
 ```
 
-<Demo :render="BarDemos.BarZones.render" />
+<Demo :render="BarDemos.BarSpread.render" />
 
-同樣的標記在任何排版父層都通用，見[對齊](/layout/placement)。要直排多段內容，子層裡包一個 `sl-stack`。
+要直排多段內容，子層裡包一個 `sl-stack`。
 
 ## 尺寸與外觀
 

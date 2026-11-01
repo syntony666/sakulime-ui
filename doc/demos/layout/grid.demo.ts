@@ -13,8 +13,8 @@ export const Gaps: Demo = {
     axis(
       ["xs", "md", "3xl"],
       (v) =>
-        `<div class="demo-cell"><span class="demo-w" data-demo>sl-grid="${v}"</span>` +
-        `<div sl-grid="${v}" style="margin-top: var(--sl-sm)">${cells()}</div></div>`,
+        `<div class="demo-cell"><span class="demo-w" data-demo>sl-grid sl-gap="${v}"</span>` +
+        `<div sl-grid sl-gap="${v}" style="margin-top: var(--sl-sm)">${cells()}</div></div>`,
       true
     ),
 };
@@ -23,16 +23,16 @@ export const Gaps: Demo = {
 // reader sees them take two and three tracks respectively
 export const Cols: Demo = {
   render: () =>
-    `<div class="demo-cell"><span class="demo-w" data-demo>sl-cols="4"</span>` +
-    `<div sl-grid sl-cols="4" style="margin-top: var(--sl-sm)">` +
-    `<div class="demo-cell" sl-span="2">跨兩欄 sl-span="2"</div>` +
+    `<div class="demo-cell"><span class="demo-w" data-demo>sl-grid-cols="4"</span>` +
+    `<div sl-grid sl-grid-cols="4" style="margin-top: var(--sl-sm)">` +
+    `<div class="demo-cell" sl-grid--span="2">跨兩欄 sl-grid--span="2"</div>` +
     `<div class="demo-cell">1</div>` +
     `<div class="demo-cell">2</div>` +
     `<div class="demo-cell">3</div>` +
-    `<div class="demo-cell" sl-span="3">跨三欄 sl-span="3"</div>` +
+    `<div class="demo-cell" sl-grid--span="3">跨三欄 sl-grid--span="3"</div>` +
     `<div class="demo-cell">4</div>` +
     `<div class="demo-cell">5</div>` +
-    `<div class="demo-cell" sl-span="full">跨滿整列 sl-span="full"</div>` +
+    `<div class="demo-cell" sl-grid--span>跨滿整列 sl-grid--span</div>` +
     `<div class="demo-cell">6</div>` +
     `</div></div>`,
 };

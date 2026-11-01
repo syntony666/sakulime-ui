@@ -74,11 +74,11 @@ export const MetaRow: Demo = {
     `</div>`,
 };
 
-// sl-card-corner pins the chip to a card corner — metric labels,
+// sl-card--corner pins the chip to a card corner — metric labels,
 // badges; same element carries both attrs
 export const InCorner: Demo = {
   render: () =>
     `<div sl-card style="width: 240px">` +
-    `<span sl-card-corner sl-chip sl-tone="primary">200ms</span>` +
+    `<span sl-card--corner sl-chip sl-tone="primary">200ms</span>` +
     `<strong>回應時間</strong><p>過去一小時的 p95。</p></div>`,
 };

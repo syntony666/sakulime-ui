@@ -1,6 +1,6 @@
 ---
 title: Gap 共用間距
-description: 排版屬性共用的間距。
+description: 唯一的間距屬性，寫在排版原語自己或祖先上，最近的設定贏。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as GapDemos from "../../demos/attrs/gap.demo";
 
 # Gap *共用間距*
 
-> 排版屬性共用的間距，不是排版工具。
+> 唯一的間距屬性。排版原語的值槽不裝間距，間距全部經 `sl-gap` 給——寫在原語自己身上，或寫在任何一層祖先上。
 
 ## 用法
 
@@ -17,15 +17,15 @@ import * as GapDemos from "../../demos/attrs/gap.demo";
 <div sl-gap="2xl">
   <div sl-stack>...</div>      <!-- 間距 2xl -->
   <div sl-row>...</div>        <!-- 間距 2xl -->
-  <div sl-stack="xs">...</div> <!-- 給了 xs -->
+  <div sl-stack sl-gap="xs">...</div> <!-- 給了 xs -->
 </div>
 ```
 
-外層設 `sl-gap="2xl"`，沒給的 stack、row、grid 間距都是 2xl；自己給了的不受影響：
+`sl-gap` 設的是會繼承的 `--sl-gap` 槽——寫在祖先上，裡面所有吃間距的原語都讀得到，這是刻意的設計：一整區的節奏一次給齊。最近的設定贏：外層 `2xl`、原語自己給 `xs`，生效的是 `xs`：
 
 <Demo :render="GapDemos.Region.render" />
 
-標示在元素自己身上等於直接給，`<div sl-stack sl-gap="xs">` 跟 `sl-stack="xs"` 一樣；標示在外層，會繼承給裡面所有讀它的屬性。元素自己給了（`sl-stack="xs"` 或 `--sl-stack-gap`）用自己的間距，`sl-gap` 只補沒設間距的元素。
+只想改一個原語、又不想動屬性，就寫它自己的逃脫槽 `--sl-<原語>-gap`：`--sl-stack-gap`、`--sl-content-gap`、`--sl-row-gap`、`--sl-grid-gap`、`--sl-sidebar-gap`、`--sl-float-gap`、`--sl-bar-gap`，優先於繼承下來的 `sl-gap`。尺規以外的值（例如 `6px`）也走這條 inline 變數路。
 
 `sl-gap` 只存放間距，自己不排版。裡面沒有讀它的屬性時，標了跟沒標一樣：
 
@@ -33,9 +33,7 @@ import * as GapDemos from "../../demos/attrs/gap.demo";
 
 ## 選項
 
-px 以根字級 16px 換算，尺規本身是 rem。`sl-gap` 沒有預設，未標示等同於未設定。
-
-`sl-gap` 的選項就是間距，跟尺規同一套：
+px 以根字級 16px 換算，尺規本身是 rem。`sl-gap` 沒有預設，未標示等同於未設定；各原語有自己的預設間距（`md`，sidebar 是 `lg`）：
 
 | 選項  | 間距 |
 | ----- | ---- |
@@ -51,9 +49,9 @@ px 以根字級 16px 換算，尺規本身是 rem。`sl-gap` 沒有預設，未�
 
 ## 適用元素
 
-讀 `sl-gap` 的都是排版屬性，在[排版](/layout/)一章介紹，這裡照側欄的分群列出：
+讀 `sl-gap` 的都是排版屬性，在[格局](/layout/)一章介紹：
 
-| 分類 | 屬性 |
-| --- | --- |
-| 格局設計 | `sl-stack`、`sl-row`、`sl-grid` |
-| 頁面區塊 | `sl-bar`、`sl-with-sidebar`、`sl-toast` |
+| 分類     | 屬性                                  |
+| -------- | ------------------------------------- |
+| 格局設計 | `sl-stack`、`sl-content`、`sl-row`、`sl-grid` |
+| 頁面區塊 | `sl-bar`、`sl-sidebar`、`sl-float`    |
