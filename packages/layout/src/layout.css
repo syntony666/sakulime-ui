@@ -1,5 +1,14 @@
 /* layout primitives as sl-* attributes; scales come from shared vars */
 
+/* per-primitive gap slots are element-scoped — an outer sl-stack="lg"
+   must not leak its gap into a nested bare stack. syntax:"*" with no
+   initial-value leaves an unset slot guaranteed-invalid, so the var()
+   fallbacks in the gap chains still fire */
+@property --sl-stack-gap   { syntax: "*"; inherits: false; }
+@property --sl-row-gap     { syntax: "*"; inherits: false; }
+@property --sl-grid-gap    { syntax: "*"; inherits: false; }
+@property --sl-sidebar-gap { syntax: "*"; inherits: false; }
+
 @layer base {
   /* page container — <div sl-container="md">, works on any element;
      bare sl-container defaults to the md width */
@@ -334,46 +343,46 @@
 }
 
 @layer attrs {
-  /* the attr value is the gap — every primitive takes the full scale */
-  [sl-stack="xs"]  { --sl-stack-gap: var(--sl-xs); }
-  [sl-stack="sm"]  { --sl-stack-gap: var(--sl-sm); }
-  [sl-stack="md"]  { --sl-stack-gap: var(--sl-md); }
-  [sl-stack="lg"]  { --sl-stack-gap: var(--sl-lg); }
-  [sl-stack="xl"]  { --sl-stack-gap: var(--sl-xl); }
-  [sl-stack="2xl"] { --sl-stack-gap: var(--sl-2xl); }
-  [sl-stack="3xl"] { --sl-stack-gap: var(--sl-3xl); }
-  [sl-stack="4xl"] { --sl-stack-gap: var(--sl-4xl); }
-  [sl-stack="5xl"] { --sl-stack-gap: var(--sl-5xl); }
-
-  [sl-row="xs"]  { --sl-row-gap: var(--sl-xs); }
-  [sl-row="sm"]  { --sl-row-gap: var(--sl-sm); }
-  [sl-row="md"]  { --sl-row-gap: var(--sl-md); }
-  [sl-row="lg"]  { --sl-row-gap: var(--sl-lg); }
-  [sl-row="xl"]  { --sl-row-gap: var(--sl-xl); }
-  [sl-row="2xl"] { --sl-row-gap: var(--sl-2xl); }
-  [sl-row="3xl"] { --sl-row-gap: var(--sl-3xl); }
-  [sl-row="4xl"] { --sl-row-gap: var(--sl-4xl); }
-  [sl-row="5xl"] { --sl-row-gap: var(--sl-5xl); }
-
-  [sl-grid="xs"]  { --sl-grid-gap: var(--sl-xs); }
-  [sl-grid="sm"]  { --sl-grid-gap: var(--sl-sm); }
-  [sl-grid="md"]  { --sl-grid-gap: var(--sl-md); }
-  [sl-grid="lg"]  { --sl-grid-gap: var(--sl-lg); }
-  [sl-grid="xl"]  { --sl-grid-gap: var(--sl-xl); }
-  [sl-grid="2xl"] { --sl-grid-gap: var(--sl-2xl); }
-  [sl-grid="3xl"] { --sl-grid-gap: var(--sl-3xl); }
-  [sl-grid="4xl"] { --sl-grid-gap: var(--sl-4xl); }
-  [sl-grid="5xl"] { --sl-grid-gap: var(--sl-5xl); }
-
-  [sl-with-sidebar="xs"]  { --sl-sidebar-gap: var(--sl-xs); }
-  [sl-with-sidebar="sm"]  { --sl-sidebar-gap: var(--sl-sm); }
-  [sl-with-sidebar="md"]  { --sl-sidebar-gap: var(--sl-md); }
-  [sl-with-sidebar="lg"]  { --sl-sidebar-gap: var(--sl-lg); }
-  [sl-with-sidebar="xl"]  { --sl-sidebar-gap: var(--sl-xl); }
-  [sl-with-sidebar="2xl"] { --sl-sidebar-gap: var(--sl-2xl); }
-  [sl-with-sidebar="3xl"] { --sl-sidebar-gap: var(--sl-3xl); }
-  [sl-with-sidebar="4xl"] { --sl-sidebar-gap: var(--sl-4xl); }
-  [sl-with-sidebar="5xl"] { --sl-sidebar-gap: var(--sl-5xl); }
+  /* the attr value is the gap — every primitive takes the full scale.
+     Each step sets all four slots at once; the extras sit inert since
+     the slots are registered non-inheriting and unread off their own
+     primitive */
+  :is([sl-stack="xs"], [sl-row="xs"], [sl-grid="xs"], [sl-with-sidebar="xs"]) {
+    --sl-stack-gap: var(--sl-xs); --sl-row-gap: var(--sl-xs);
+    --sl-grid-gap: var(--sl-xs); --sl-sidebar-gap: var(--sl-xs);
+  }
+  :is([sl-stack="sm"], [sl-row="sm"], [sl-grid="sm"], [sl-with-sidebar="sm"]) {
+    --sl-stack-gap: var(--sl-sm); --sl-row-gap: var(--sl-sm);
+    --sl-grid-gap: var(--sl-sm); --sl-sidebar-gap: var(--sl-sm);
+  }
+  :is([sl-stack="md"], [sl-row="md"], [sl-grid="md"], [sl-with-sidebar="md"]) {
+    --sl-stack-gap: var(--sl-md); --sl-row-gap: var(--sl-md);
+    --sl-grid-gap: var(--sl-md); --sl-sidebar-gap: var(--sl-md);
+  }
+  :is([sl-stack="lg"], [sl-row="lg"], [sl-grid="lg"], [sl-with-sidebar="lg"]) {
+    --sl-stack-gap: var(--sl-lg); --sl-row-gap: var(--sl-lg);
+    --sl-grid-gap: var(--sl-lg); --sl-sidebar-gap: var(--sl-lg);
+  }
+  :is([sl-stack="xl"], [sl-row="xl"], [sl-grid="xl"], [sl-with-sidebar="xl"]) {
+    --sl-stack-gap: var(--sl-xl); --sl-row-gap: var(--sl-xl);
+    --sl-grid-gap: var(--sl-xl); --sl-sidebar-gap: var(--sl-xl);
+  }
+  :is([sl-stack="2xl"], [sl-row="2xl"], [sl-grid="2xl"], [sl-with-sidebar="2xl"]) {
+    --sl-stack-gap: var(--sl-2xl); --sl-row-gap: var(--sl-2xl);
+    --sl-grid-gap: var(--sl-2xl); --sl-sidebar-gap: var(--sl-2xl);
+  }
+  :is([sl-stack="3xl"], [sl-row="3xl"], [sl-grid="3xl"], [sl-with-sidebar="3xl"]) {
+    --sl-stack-gap: var(--sl-3xl); --sl-row-gap: var(--sl-3xl);
+    --sl-grid-gap: var(--sl-3xl); --sl-sidebar-gap: var(--sl-3xl);
+  }
+  :is([sl-stack="4xl"], [sl-row="4xl"], [sl-grid="4xl"], [sl-with-sidebar="4xl"]) {
+    --sl-stack-gap: var(--sl-4xl); --sl-row-gap: var(--sl-4xl);
+    --sl-grid-gap: var(--sl-4xl); --sl-sidebar-gap: var(--sl-4xl);
+  }
+  :is([sl-stack="5xl"], [sl-row="5xl"], [sl-grid="5xl"], [sl-with-sidebar="5xl"]) {
+    --sl-stack-gap: var(--sl-5xl); --sl-row-gap: var(--sl-5xl);
+    --sl-grid-gap: var(--sl-5xl); --sl-sidebar-gap: var(--sl-5xl);
+  }
 
   /* generic sl-gap — one fallback slot every gap-reading rule honors;
      a primitive's own attr value still wins over it */
