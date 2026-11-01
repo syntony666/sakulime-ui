@@ -51,7 +51,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### 厚度 `sl-pad`
 
-沒給是 `md`。`sm`／`lg` 是整體內距的增減，`lg` 適合公告型的多行內容：
+沒給是 `sm`。`md`／`lg` 是整體內距的增減，`lg` 適合公告型的多行內容：
 
 <Demo :render="NoticeDemos.Pads.render" />
 

@@ -36,7 +36,7 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 </article>
 ```
 
-文流模式不改 flex、不拉寬，子層自己的 margin 留下來，間距自動補在相鄰子層之間。間距是下限，子層原本的 margin 比它大就聽子層的：卡片通知這種沒 margin 的元件隔得開，標題段落保留自己的節奏。頭尾例外：最前面跟最後面的 margin 照樣清掉，文章的上緣下緣才不會一邊厚一邊薄：
+文流模式退回 block 排版、不拉寬，子層自己的 margin 留下來，間距自動補在相鄰子層之間。間距寫在後一個子層的上緣，取代它自己的上 margin；前一個子層的下 margin 不動，跟間距合併取大，比間距大就聽它的：卡片通知這種沒 margin 的元件隔得開，標題段落靠自己的下 margin 保留節奏。頭尾例外：最前面跟最後面的 margin 照樣清掉，文章的上緣下緣才不會一邊厚一邊薄：
 
 <Demo :render="StackDemos.Flow.render" />
 

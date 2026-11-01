@@ -83,7 +83,7 @@ components:
 
 奶油色紙面打底、櫻花粉做邊框與次色、覆盆紅當可讀的強調墨色 — 像和菓子店裡攤開的手冊：柔軟、甜，但每一條 hairline 都對齊得精準。系統有兩種品牌個性：`sakulime` 走活潑（奶油×琥珀×櫻花），`terra` 走沉穩（整體暖 stone，只留一個青墨色給 accent 與 CTA）；骨架完全相同，只有調色盤換人。
 
-互動感是刻意的性格：按鈕 hover 會彈起（`scale(1.05)`），控制項 hover 有邊框回饋 — 元件碰了要有反應，但反應一律走 transform/color，不走陰影。
+互動感是刻意的性格：按鈕 hover 會彈起（`scale(1.03)`），控制項 hover 有邊框回饋 — 元件碰了要有反應，但反應一律走 transform/color，不走陰影。
 
 **Key Characteristics:**
 - 屬性即 API：`sl-*` attribute 寫元件/狀態/modifier，`--sl-*` 變數管顏色尺度，`class` 永遠留給使用者
@@ -146,7 +146,7 @@ components:
 **Flat by default。** 系統沒有常駐陰影 — 層次靠 hairline（`--sl-border`）＋色階 tint（surface vs bg vs soft-mix）表達。陰影只出現在浮層與互動 hover：theme 下拉選單、以及宣告 `sl-interactive` 的卡片。
 
 ### Shadow Vocabulary
-- **Raise** (`0 2px 8px color-mix(in srgb, var(--sl-text) 12%, transparent)`): `sl-interactive="raise"` 的 hover 浮起影
+- **Raise** (`0 3px 10px color-mix(in srgb, var(--sl-text) 20%, transparent)`): `sl-interactive="raise"` 的 hover 浮起影
 - **Overlay** (`0 4px 6px -1px / 0 2px 4px -2px rgb(0 0 0 / .07)`): 下拉選單等浮層
 - **Demo frame** (`0 1px 2px text 6%`): demo 外框極淡的定界影
 
@@ -163,7 +163,7 @@ components:
 ## Components
 
 ### Buttons `sl-button`
-- **Character:** 碰了會彈 — `hover: scale(1.05)` 是刻意的活潑回饋
+- **Character:** 碰了會彈 — `hover: scale(1.03)` 是刻意的活潑回饋
 - **Shape:** `sl-radius` 屬性（預設 md=8px），2px transparent border 撐住箱型
 - **Variants:** `normal`（實心=預設）/ `invert`（描邊）/ `ghost`（無框）/ `underline`（2px 底線，0.3em offset）
 - **Tones:** `sl-tone` primary/secondary/success/warning/danger — bg/text/invert 三 slot 自動配色
