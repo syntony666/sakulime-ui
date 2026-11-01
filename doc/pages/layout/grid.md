@@ -43,7 +43,7 @@ import * as GridDemos from "../../demos/layout/grid.demo";
   :render="GridDemos.Cols.render"
 />
 
-## 佔欄
+## 跨欄
 
 `sl-grid--span` 標在子層上，讓它佔好幾欄，2 到 12；裸標或 `sl-grid--span="full"` 不管欄數直接跨滿整列：
 
@@ -74,7 +74,7 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 
 ## 間距
 
-px 以根字級 16px 換算，尺規本身是 rem。欄距跟行距是同一個。
+px 以根字級 16px 換算，刻度本身是 rem。欄距跟行距是同一個。
 
 間距用 [`sl-gap`](/attrs/gap) 給，寫在 grid 自己身上或祖先上都行，預設 `md`：
 

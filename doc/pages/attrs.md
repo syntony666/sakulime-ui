@@ -22,7 +22,7 @@ description: sl-* 屬性語法總覽：元件標記、元件設定、子元素�
 
 ### 元件設定
 
-`sl-<元件>-<設定>[="<選項>"]` 同樣寫在元件自己身上，是元件的開關與配置，彼此獨立、可以疊加：
+`sl-<元件>-<設定>[="<選項>"]` 同樣寫在元件自己身上，是元件的開關與設定，彼此獨立、可以疊加：
 
 ```html
 <div sl-card sl-card-indicate="start">…</div>
@@ -73,4 +73,4 @@ description: sl-* 屬性語法總覽：元件標記、元件設定、子元素�
 </div>
 ```
 
-各元件頁只記錄自己的標記、設定跟子元素；通用屬性的細節看各自頁面：[Tone 色調](/attrs/tone)、[Size 尺寸](/attrs/size)、[Radius 圓角](/attrs/radius)、[Pad 內距](/attrs/pad)、[Interactive 互動](/attrs/interactive)、[Gap 共用間距](/attrs/gap)。
+各元件頁只記錄自己的標記、設定跟子元素；通用屬性的細節看各自頁面：[Tone 色調](/attrs/tone)、[Size 尺寸](/attrs/size)、[Radius 圓角](/attrs/radius)、[Pad 內距](/attrs/pad)、[Interactive 互動](/attrs/interactive)、[Gap 間距](/attrs/gap)。

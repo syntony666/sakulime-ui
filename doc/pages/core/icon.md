@@ -123,9 +123,9 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 <Demo :render="IconDemos.Inline.render" />
 
-## 修飾詞
+## 元件設定
 
-修飾詞是 `sl-icon-` 名稱空間的獨立屬性，寫在名稱旁邊。直接貼進頁面的 SVG 也適用，例如 `<svg sl-icon sl-icon-spin>`。
+元件設定是 `sl-icon-` 名稱空間的獨立屬性，寫在名稱旁邊。直接貼進頁面的 SVG 也適用，例如 `<svg sl-icon sl-icon-spin>`。
 
 ### 尺寸 `sl-icon-size`
 

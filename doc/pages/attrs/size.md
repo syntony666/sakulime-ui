@@ -24,7 +24,7 @@ import * as SizeDemos from "../../demos/attrs/size.demo";
 
 ## 選項
 
-px 以根字級 16px 換算，尺規本身是 rem。高度是 `sl-button` 的，`sl-chip` 只取字級：
+px 以根字級 16px 換算，刻度本身是 rem。高度是 `sl-button` 的，`sl-chip` 只取字級：
 
 | 選項 | 字級 | 高度 |
 | --- | --- | --- |
@@ -32,7 +32,7 @@ px 以根字級 16px 換算，尺規本身是 rem。高度是 `sl-button` 的，
 | `md`（預設） | 16px | 32px |
 | `lg` | 20px | 40px |
 
-預設是 `sl-button` 的：沒標 `sl-size` 的按鈕就是 `md`。`sl-chip` 沒標是 `0.875em`，em 制、跟著所在字級縮放，不在尺規上；標了 `sl-size` 才換成表中的絕對字級。
+預設是 `sl-button` 的：沒標 `sl-size` 的按鈕就是 `md`。`sl-chip` 沒標是 `0.875em`，em 制、跟著所在字級縮放，不在刻度上；標了 `sl-size` 才換成表中的絕對字級。
 
 ## 適用元素
 

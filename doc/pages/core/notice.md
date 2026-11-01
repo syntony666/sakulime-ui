@@ -55,7 +55,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 <Demo :render="NoticeDemos.Pads.render" />
 
-## 修飾詞
+## 元件設定
 
 ### 對齊 `sl-notice-align`
 

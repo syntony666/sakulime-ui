@@ -106,7 +106,7 @@ components:
 - 單一尺度：xs→5xl 九階，間距/圓角/字級共用同一套台階
 - Flat by default：結構靠 hairline + 色階 tint，陰影不常駐，`sl-interactive` 的 hover 才給浮起、壓下或一道影
 - 頁面 signature：頂端 2px 漸層 hairline（primary→accent）＋ hero 名稱漸層字（文件站）
-- Demo canvas：圓點格紙（1rem 格）當尺規，元件邊緣落在格點上（文件站）
+- Demo canvas：圓點格紙（1rem 格）當刻度，元件邊緣落在格點上（文件站）
 
 ## Colors
 
@@ -149,21 +149,21 @@ components:
 
 ## Layout
 
-佈局原語自成一個套件（`@sakulime-ui/layout`），一個原語一個檔案：`packages/layout/src/` 下 container、stack、content、row、grid、sidebar、bar、float、gap、responsive，由 `layout.css` 依序 import，各檔的 `@layer` 區塊依名併入共享的 theme/base/attrs 三層。文法四種形式：元件標記 `sl-<元件>[="型態"]`、元件設定 `sl-<元件>-<設定>`、子元素 `sl-<元件>--<零件>`（雙 dash 寫在子層）、通用屬性 `sl-<屬性>`；型態槽只裝種類跟位置語意，間距不進值槽。
+排版元件自成一個套件（`@sakulime-ui/layout`），一個元件一個檔案：`packages/layout/src/` 下 container、stack、content、row、grid、sidebar、bar、float、gap、responsive，由 `layout.css` 依序 import，各檔的 `@layer` 區塊依名併入共享的 theme/base/attrs 三層。文法四種形式：元件標記 `sl-<元件>[="型態"]`、元件設定 `sl-<元件>-<設定>`、子元素 `sl-<元件>--<零件>`（雙 dash 寫在子層）、通用屬性 `sl-<屬性>`；型態槽只裝種類跟位置語意，間距不進值槽。
 
-- **容器 `sl-container`**：值語法 `"sm"|"md"|"lg"`（bare = md），45/60/75rem 尺規，水平 auto＋`--sl-container-pad`（預設 `--sl-lg`）內距；文件站內文欄吃 md
+- **容器 `sl-container`**：值語法 `"sm"|"md"|"lg"`（bare = md），45/60/75rem 刻度，水平 auto＋`--sl-container-pad`（預設 `--sl-lg`）內距；文件站內容欄吃 md
 - **直排 `sl-stack`**：flex column 垂直群組，父層擁有節奏，直接子層 block margin 歸零、寬度拉滿
-- **文流 `sl-content`**：block 內容欄，子層保留自己的 margin，相鄰補 `> * + *` margin 節奏，首末子層對外 margin 清零
-- **橫排 `sl-row`**：flex-wrap 水平流（tag 列、按鈕群），子層內容寬換行、`min-inline-size:0`
-- **格網 `sl-grid`**：預設 auto-fill 欄，`--sl-grid-min`（14rem）是欄寬地板；設定 `sl-grid-cols="1..12"` 換明確欄數、`sl-grid-cols-lg/md/sm` 各斷點重述；子層 `sl-grid--span="N|full"` 跨欄並 clamp 到當前欄數（bare = full），不炸出隱含軌
-- **頁緣 `sl-bar`**：flex＋`space-between`，值選邊（`"top"/"bottom"`/bare 文流帶），edge 值預設 sticky＋同側髮線；設定 `sl-bar-fixed` 固定到視窗脫離文流，body `:has()` 在同側自動補 `--sl-bar-h` 內距，列印回 static
-- **側欄 `sl-sidebar`＋`sl-sidebar--rail`**：flex-wrap 版面，rail 由子層標記認領（`--sl-sidebar-w` 16rem），位置跟 DOM 序；主欄 `min-inline-size: var(--sl-sidebar-min,55%)` 就是換行扳機，不用 media query
+- **內文 `sl-content`**：block 內文欄，子層保留自己的 margin，相鄰補 `> * + *` margin 節奏，首末子層對外 margin 清零
+- **橫列 `sl-row`**：flex-wrap 水平流（tag 列、按鈕群），子層內容寬換行、`min-inline-size:0`
+- **網格系統 `sl-grid`**：預設 auto-fill 欄，`--sl-grid-min`（14rem）是欄寬地板；設定 `sl-grid-cols="1..12"` 換明確欄數、`sl-grid-cols-lg/md/sm` 各斷點重述；子層 `sl-grid--span="N|full"` 跨欄並 clamp 到當前欄數（bare = full），不炸出隱含軌
+- **頁面橫條 `sl-bar`**：flex＋`space-between`，值選邊（`"top"/"bottom"`/bare 版內橫條），edge 值預設 sticky＋同側細線；設定 `sl-bar-fixed` 固定到視窗不佔版面，body `:has()` 在同側自動補 `--sl-bar-h` 內距，列印回 static
+- **側欄 `sl-sidebar`＋`sl-sidebar--rail`**：flex-wrap 排版，rail 由子層標記認領（`--sl-sidebar-w` 16rem），位置跟 DOM 序；主欄 `min-inline-size: var(--sl-sidebar-min,55%)` 就是換行觸發點，不用 media query
 - **角落 `sl-float`**：fixed 角落容器，值是六角落 `<邊>-<側>`（top/bottom × start/center/end，bare = bottom-end）；寬高 clamp 進 viewport，`env()` 讓開 home indicator，列印回 static
-- **間距 `sl-gap`**：唯一的間距屬性，設 `--sl-gap` 會繼承——寫在原語自己或祖先上，最近的贏；各原語的 `--sl-<原語>-gap` 是逃脫槽（七個都 `@property` non-inheriting 註冊，外層的逃脫值滲不進巢狀同名原語），預設 stack/content/row/grid/float/bar = `md`、sidebar = `lg`
+- **間距 `sl-gap`**：唯一的間距屬性，設 `--sl-gap` 會繼承——寫在排版元件自己或祖先上，最近的贏；各元件的 `--sl-<元件>-gap` 是自己的間距槽（七個都 `@property` non-inheriting 註冊，外層的間距值滲不進巢狀同名元件），預設 stack/content/row/grid/float/bar = `md`、sidebar = `lg`
 - **Slot 封印**：generic 屬性只在列名的消費者上展開 `--sl-*` slot，消費端在 base 把讀取的 slot 自我 default 成 manifest，祖先的同名牌漏不進來
 - **響應式族**：`sl-hide-*`/`sl-show-*` 在斷點兩側互為鏡像，一對 hide/show 跨線換內容；斷點 45/60/75rem 是 `--sl-container-*` 的 hardcode 孿生（media query 讀不到 var，手動同步）
 - **間距節奏**：一律走 xs→5xl 台階；demo stage padding 兩格（`--sl-3xl`）、axis 列 gap 12px（文件站）
-- **Demo canvas**：stage 圓點格紙 1rem 一格，視覺上同時是裝飾和尺規（md 按鈕高 = 2 格）；文件站 playground 欄位 `minmax(16rem, 1fr)` auto-fill、間距 `var(--sl-lg)`
+- **Demo canvas**：stage 圓點格紙 1rem 一格，視覺上同時是裝飾和刻度（md 按鈕高 = 2 格）；文件站 playground 欄位 `minmax(16rem, 1fr)` auto-fill、間距 `var(--sl-lg)`
 
 ## Elevation & Depth
 
@@ -226,7 +226,7 @@ components:
 ### Notices `sl-notice`
 - **Surface:** tone 12% wash 膠囊＋tone-text 墨，浮空框：`3px solid var(--sl-surface)` 環帶把 wash 跟外緣 `box-shadow` 2px tone/border 混色細線隔開
 - **Shape:** 預設膠囊端，chip 的 block 級兄弟；`full` 是「一行膠囊」（半徑 = 一行高），一、二行全圓、三行起中段跑直線；`sl-radius` 可轉 `sm/md/lg/none`
-- **Width:** 預設填滿容器（橫幅）；`sl-notice="fit"` 縮內容寬。進 `sl-float` 角落容器就讀成 toast：位置/堆疊由佈局層接管，剩 dismiss/timeout 留消費端
+- **Width:** 預設填滿容器（橫幅）；`sl-notice="fit"` 縮內容寬。進 `sl-float` 角落容器就讀成 toast：位置/堆疊由排版層接管，剩 dismiss/timeout 留消費端
 - **Composition:** `display: block` 行內流，icon、訊息、連結同一串文字流；`sl-notice--action` 直接子層 absolute 置中貼邊（預設 end，`="start"` 換左緣），`:has()` 在 padding 預留專用欄（`--sl-notice-action-w` 槽位）；`sl-notice-align="end"` 寫在 notice 自己身上，整串文字對齊右緣
 
 ### Demo Chrome（文件站元件）
@@ -238,11 +238,11 @@ components:
 ## Do's and Don'ts
 
 ### Do:
-- **Do** 只用 `sl-*` attribute 與 `--sl-*` token，行為、狀態、配置全走 CSS selector
+- **Do** 只用 `sl-*` attribute 與 `--sl-*` token，行為、狀態、設定全走 CSS selector
 - **Do** 守住 slot 封印：generic 屬性只展開在列名的消費者上，消費端在 base 自我 default 成 manifest，間距 slot 經 `@property` 註冊 non-inheriting
 - **Do** 淺色 tone（primary/secondary）的文字色走 `--sl-tone-text` 混入文字色，維持可讀
 - **Do** 讓分隔線貼著 inset 邊緣，間距由後繼元素自己帶，不在圖片側留白
-- **Do** 用 demo 圓點格紙當尺規，元件尺寸對齊台階（md 按鈕 = 2 格）
+- **Do** 用 demo 圓點格紙當刻度，元件尺寸對齊台階（md 按鈕 = 2 格）
 
 ### Don't:
 - **Don't** 用 `class` 做系統樣式，`class` 是消費者的命名空間

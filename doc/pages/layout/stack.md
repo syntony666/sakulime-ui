@@ -27,7 +27,7 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 
 ## 間距
 
-間距用 [`sl-gap`](/attrs/gap) 給，寫在 stack 自己身上或祖先上都行。px 以根字級 16px 換算，尺規本身是 rem，預設 `md`：
+間距用 [`sl-gap`](/attrs/gap) 給，寫在 stack 自己身上或祖先上都行。px 以根字級 16px 換算，刻度本身是 rem，預設 `md`：
 
 | 選項  | 間距         |
 | ----- | ------------ |
