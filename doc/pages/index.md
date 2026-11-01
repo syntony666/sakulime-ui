@@ -20,5 +20,5 @@ features:
   - title: 自由度高
     details: 顏色、間距、字級都放在變數裡，想改哪一個就改哪一個，原本的 class 不用動。
   - title: 速度快
-    details: 整包 CSS 不到 10 KB 就有全部元件。JS 只做選配功能，不載也不缺東西。
+    details: 整包 CSS gzip 後不到 10 KB 就有全部元件。JS 只做選配功能，不載也不缺東西。
 ---

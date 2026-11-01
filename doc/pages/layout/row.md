@@ -46,6 +46,10 @@ import * as RowDemos from "../../demos/layout/row.demo";
 
 要平板、窄筆電就收合的話有後綴版：`sl-collapse-md`（<60rem）、`sl-collapse-lg`（<75rem）。斷點只看視窗寬度，跟容器寬度無關；要別的斷點的話，media query 自己寫。未標示的 `sl-row` 永遠橫排，標籤列在手機上通常還是要橫著排。收合後 `sl-place` 標記的 auto margin 會清掉，子層照樣拉滿寬。
 
+視窗拉到 45rem 以下看收合的效果：
+
+<Demo :render="RowDemos.Collapses.render" />
+
 ## 間距
 
 px 以根字級 16px 換算，尺規本身是 rem。水平間距跟換行後的行距是同一個。`sl-row` 的選項就是間距，預設 `md`：

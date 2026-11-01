@@ -36,6 +36,8 @@ import * as BarDemos from "../../demos/layout/bar.demo";
 <div sl-bar="top" sl-static>有上緣髮線但不黏</div>
 ```
 
+<Demo :render="BarDemos.Positions.render" />
+
 `sl-fixed` 跟 `sl-static` 互斥，同標時 static 贏（bar 留在文流，body 也不補償）。裸 `sl-bar` 不給邊緣值時 `sl-fixed` 沒有意義。
 
 fixed 的 bar 脫離文流，body 會在對應邊自動補上 bar 高度的內距，下面的內容不會被蓋住；包在什麼容器裡都有效，不用是 body 直接子層。補償讀 `--sl-bar-h`，所以 bar 的實際高度要等於它：改 `sl-pad`、換行成兩列、或加了 safe-area inset，都要在 `:root` 同步改 `--sl-bar-h` 才跟得到。
