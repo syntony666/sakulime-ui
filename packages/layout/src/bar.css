@@ -1,13 +1,12 @@
 @layer base {
   /* bar — a full-width band at either page edge. The value picks the
      edge and sticks there by default; bare sl-bar is a plain in-flow
-     band. sl-fixed pins to the viewport edge, sl-static forces plain
-     flow on an edge value. A 1fr/auto/1fr grid makes the center zone a
-     true bar center — children fill zones in source order */
+     band. sl-bar-fixed pins to the viewport edge. space-between
+     spreads children across the band */
   [sl-bar] {
     box-sizing: border-box;
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     gap: var(--sl-bar-gap, var(--sl-gap, var(--sl-md)));
     min-block-size: var(--sl-bar-h, 3.5rem);
@@ -38,25 +37,37 @@
     padding-block-end: calc(var(--_bp) + env(safe-area-inset-bottom, 0px));
   }
 
-  [sl-bar="top"][sl-fixed],
-  [sl-bar="bottom"][sl-fixed] {
+  [sl-bar="top"][sl-bar-fixed],
+  [sl-bar="bottom"][sl-bar-fixed] {
     position: fixed;
     inset-inline: 0;
-  }
-
-  [sl-bar][sl-static] {
-    position: static;
   }
 
   /* a fixed bar leaves the flow — body pads itself for the bar's height
      on the matching edge so nothing underneath gets clipped. Set
      --sl-bar-h on :root when restyling the height so this offset
      follows */
-  body:has([sl-bar="top"][sl-fixed]:not([sl-static])) {
+  body:has([sl-bar="top"][sl-bar-fixed]) {
     padding-block-start: var(--sl-bar-h, 3.5rem);
   }
 
-  body:has([sl-bar="bottom"][sl-fixed]:not([sl-static])) {
+  body:has([sl-bar="bottom"][sl-bar-fixed]) {
     padding-block-end: var(--sl-bar-h, 3.5rem);
   }
+
+  /* a fixed bar is screen furniture — in print it would repeat on
+     every page and cover the sheet */
+  @media print {
+    [sl-bar][sl-bar-fixed] {
+      position: static;
+    }
+  }
+}
+
+@layer attrs {
+  /* sl-pad on bar — thicker bands; the attr wiring lives here now that
+     generic pad consumers are core components */
+  [sl-bar][sl-pad="sm"] { --sl-pad: var(--sl-md); }
+  [sl-bar][sl-pad="md"] { --sl-pad: var(--sl-lg); }
+  [sl-bar][sl-pad="lg"] { --sl-pad: var(--sl-2xl); }
 }

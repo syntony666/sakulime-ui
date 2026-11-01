@@ -52,7 +52,7 @@
   }
 
   /* blank — invisible shell: no border, no fill; pairs with
-     sl-card-section="blank" for a pure blankslate block */
+     sl-card--section="blank" for a pure blankslate block */
   [sl-card="blank"] {
     background: transparent;
     border: 0;

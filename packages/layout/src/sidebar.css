@@ -1,41 +1,22 @@
 @layer base {
-  /* sidebar shell — children marked sl-sidebar are the rails, anything
-     else is content. Side follows source order; two marked children
-     give both rails. The content min-width is the wrap trigger */
-  [sl-with-sidebar] {
+  /* sidebar — a rail next to a main column. Children marked
+     sl-sidebar--rail are the rails, anything else is content. Side
+     follows source order; two marked children give both rails. The
+     content min-width is the wrap trigger */
+  [sl-sidebar] {
     display: flex;
     flex-wrap: wrap;
     gap: var(--sl-sidebar-gap, var(--sl-gap, var(--sl-lg)));
   }
 
-  [sl-with-sidebar] > [sl-sidebar] {
+  [sl-sidebar] > [sl-sidebar--rail] {
     flex-basis: var(--sl-sidebar-w, 16rem);
     flex-grow: 1;
   }
 
-  [sl-with-sidebar] > :not([sl-sidebar]) {
+  [sl-sidebar] > :not([sl-sidebar--rail]) {
     flex-basis: 0;
     flex-grow: 999;
     min-inline-size: var(--sl-sidebar-min, 55%);
-  }
-
-  /* rail placement — unmarked rails keep source order; sl-place="start"
-     pins a rail first, "end" pins it last, regardless of where it sits
-     in the markup */
-  [sl-with-sidebar] > [sl-place~="start"] {
-    order: -1;
-  }
-
-  [sl-with-sidebar] > [sl-place~="end"] {
-    order: 1;
-  }
-}
-
-@layer attrs {
-  /* place marks are structural inside the sidebar shell — any auto
-     margin would only open dead space between the rail and the content
-     column, so every marked direct child keeps zero margins */
-  [sl-with-sidebar] > [sl-place] {
-    margin: 0;
   }
 }

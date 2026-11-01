@@ -4,10 +4,10 @@
 @import "./gap.css";
 @import "./container.css";
 @import "./stack.css";
+@import "./content.css";
 @import "./row.css";
 @import "./grid.css";
-@import "./bar.css";
 @import "./sidebar.css";
-@import "./toast.css";
-@import "./place.css";
+@import "./bar.css";
+@import "./float.css";
 @import "./responsive.css";

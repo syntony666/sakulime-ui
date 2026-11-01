@@ -1,0 +1,23 @@
+@layer base {
+  /* content — prose column. Children keep normal block layout and
+     their own margins; the rhythm rides on sibling margins instead
+     of a flex gap. The column owns its edges — a heading's own margin
+     must not thicken the top or the bottom of the column */
+  [sl-content] {
+    display: block;
+    /* resolved once here — children read the inherited private var
+       instead of re-walking the fallback chain */
+    --_g: var(--sl-content-gap, var(--sl-gap, var(--sl-md)));
+  }
+
+  [sl-content] > * + * {
+    margin-block-start: var(--_g);
+  }
+
+  [sl-content] > :first-child {
+    margin-block-start: 0;
+  }
+  [sl-content] > :last-child {
+    margin-block-end: 0;
+  }
+}
