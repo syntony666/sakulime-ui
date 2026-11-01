@@ -4,6 +4,7 @@
    attributes only take effect when set on the element itself. */
 @layer base {
   [sl-button] {
+    /* keep the tone triple in sync with generic.css sl-tone="primary" — this seals the unmarked default, not a copy of the option */
     --sl-tone-bg: var(--sl-primary);
     --sl-tone-text: color-mix(in srgb, var(--sl-primary) 12%, var(--sl-text));
     --sl-tone-text-invert: var(--sl-primary-fg);
@@ -32,6 +33,7 @@
     color: var(--sl-tone-text-invert);
   }
 
+  /* matches generic.css sl-interactive="grow" — the unmarked hover */
   [sl-button]:hover:not(:disabled) {
     transform: scale(1.03);
   }
