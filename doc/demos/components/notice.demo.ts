@@ -109,7 +109,7 @@ export const Aligns: Demo = {
     ),
 };
 
-// action playground for the 子元素 section — placement × width
+// action playground for the 子元素 section — position × width
 const X_BTN = `<button sl-button="ghost" sl-size="sm" sl-notice--action aria-label="關閉"><i sl-icon="lucide:x" sl-icon-size="lg"></i></button>`;
 const BELL_BTN = `<button sl-button="ghost" sl-size="sm" sl-notice--action="start" aria-label="靜音"><i sl-icon="lucide:bell-off" sl-icon-size="lg"></i></button>`;
 const startBtn = (a: string) => (a === "start" || a === "both" ? BELL_BTN : "");
@@ -172,7 +172,7 @@ export const BannerPlay: DemoObj<BannerArgs> = {
 
 // toast playground — sl-float is the real consumer container; the
 // position: static override only undoes fixed so it renders inside
-// the stage. Stacking N notices, per-notice width is the sl-side knob
+// the stage. Stacking N notices, per-notice width is the sl-notice variant knob
 const TOASTS = [
   ["success", "check", "已儲存變更"],
   ["warning", "triangle-alert", "部署已排入佇列，前方還有 2 個 build"],
