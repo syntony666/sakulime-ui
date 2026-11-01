@@ -1,5 +1,5 @@
 import type { Meta, DemoObj } from "../util/types";
-import { axis, axisArg, attr, label, TONES } from "../util/axis";
+import { axis, axisArg, attr, TONES } from "../util/axis";
 import "../util/icons";
 
 type ChipArgs = {
@@ -28,26 +28,12 @@ export const Chip: Demo = {
     `<span sl-chip${attr("sl-tone", a.tone)}${attr("sl-size", a.size)}>標籤</span>`,
 };
 
-export const Tones: Demo = {
-  render: () =>
-    axis(TONES, (v) => `<span sl-chip${attr("sl-tone", v)}>標籤</span>`),
-};
-
 // the chip is em-based — it tracks the font-size of whatever it sits inside
 const FONT_SIZES = [14, 16, 20, 28];
 export const Sizes: Demo = {
   render: () =>
     axis(FONT_SIZES, (v) =>
       `<span style="font-size: ${v}px"><span sl-chip>${v}px 標籤</span></span>`,
-    ),
-};
-
-// sl-size swaps the em default for absolute steps — padding and gap
-// are em so the whole capsule scales with the font-size
-export const SizeKinds: Demo = {
-  render: () =>
-    axis(SIZES, (v) =>
-      `<span sl-chip${attr("sl-size", v)}>${label(v)} 標籤</span>`,
     ),
 };
 

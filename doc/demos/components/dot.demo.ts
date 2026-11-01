@@ -22,10 +22,6 @@ export const Dot: Demo = {
   render: (a) => `<i sl-dot${attr("sl-tone", a.tone)}></i>`,
 };
 
-export const Tones: Demo = {
-  render: () => axis(TONES, (v) => `<i sl-dot${attr("sl-tone", v)}></i>`),
-};
-
 // the dot is 0.5em — it tracks the font-size of whatever it sits inside
 const SIZES = [14, 16, 20, 28];
 export const Sizes: Demo = {

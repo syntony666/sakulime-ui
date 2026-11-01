@@ -3,10 +3,6 @@ title: Row 橫列
 description: 水平排列子元素，放不下就換行，間距由 sl-gap 統一給。
 ---
 
-<script setup>
-import * as RowDemos from "../../demos/layout/row.demo";
-</script>
-
 # Row *橫列*
 
 > 把子元素水平排開，放不下就換行。按鈕群、標籤列這種一排小東西都適用。
@@ -24,12 +20,6 @@ import * as RowDemos from "../../demos/layout/row.demo";
 子元素垂直置中、寬度不動，總寬超過容器就整個換到下一行；換行時機看內容實際寬度，沒有固定斷點。
 
 跟 `sl-grid` 的分工：子層寬度看內容、夠放幾個放幾個用 `sl-row`；每欄要等寬、欄數要固定的用 `sl-grid`。
-
-三種間距的實際樣子：
-
-<Demo
-  :render="RowDemos.Gaps.render"
-/>
 
 ## 間距
 

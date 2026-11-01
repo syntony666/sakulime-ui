@@ -41,12 +41,6 @@ export default meta;
 type Demo = DemoObj<ButtonArgs>;
 
 
-// one button per axis value; a fixed variant rides the marker when given
-const btn =
-  (name: string, variant = "") =>
-  (v: string) =>
-    `<button ${variant ? `sl-button="${variant}"` : "sl-button"}${attr(name, v)}>${label(v)}</button>`;
-
 function slAttrs({
   tone,
   variant,
@@ -67,23 +61,7 @@ export const Button: Demo = {
   render: (args) => `<button ${slAttrs(args)}>${args.label}</button>`,
 };
 
-export const Tones: Demo = {
-  render: () => axis(TONES, btn("sl-tone")),
-};
-
-export const TonesInvert: Demo = {
-  render: () => axis(TONES, btn("sl-tone", "invert")),
-};
-
 export const Variants: Demo = {
   render: () =>
     axis(VARIANTS, (v) => `<button ${marker(v)}>${label(v)}</button>`),
-};
-
-export const Sizes: Demo = {
-  render: () => axis(SIZES, btn("sl-size")),
-};
-
-export const Radius: Demo = {
-  render: () => axis(RADII, btn("sl-radius")),
 };

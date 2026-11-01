@@ -32,24 +32,16 @@ import * as ButtonDemos from "../../demos/components/button.demo";
 
 ### 顏色 `sl-tone`
 
-`sl-button` 是 `sl-tone` 的適用元素，沒給是 `primary`。填滿的 `normal` 染整顆，`invert`/`ghost`/`underline` 染框線跟字色。選項看 [Tone 色調](/attrs/tone)。
-
-#### 實心版本
-
-<Demo :render="ButtonDemos.Tones.render" />
-
-#### 框線版本
-
-<Demo :render="ButtonDemos.TonesInvert.render" />
+`sl-button` 是 `sl-tone` 的適用元件，沒給是 `primary`。填滿的 `normal` 染整顆，`invert`/`ghost`/`underline` 染框線跟字色。選項看 [Tone 色調](/attrs/tone)。
 
 ### 尺寸 `sl-size`
 
-`sl-button` 是 `sl-size` 的適用元素，沒給是 `md`：高度跟字級一起換。選項看 [Size 尺寸](/attrs/size)。
-
-<Demo :render="ButtonDemos.Sizes.render" />
+`sl-button` 是 `sl-size` 的適用元件，沒給是 `md`：高度跟字級一起換。選項看 [Size 尺寸](/attrs/size)。
 
 ### 圓角 `sl-radius`
 
-`sl-button` 是 `sl-radius` 的適用元素，沒給是 `md`。選項看 [Radius 圓角](/attrs/radius)。
+`sl-button` 是 `sl-radius` 的適用元件，沒給是 `md`。選項看 [Radius 圓角](/attrs/radius)。
 
-<Demo :render="ButtonDemos.Radius.render" />
+### 互動 `sl-interactive`
+
+`sl-button` 是 `sl-interactive` 的適用元件。沒標時 hover 本來就是 `grow` 放大；標了換成指定效果。選項看 [Interactive 互動](/attrs/interactive)。

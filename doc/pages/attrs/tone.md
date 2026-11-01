@@ -32,11 +32,11 @@ import * as ToneDemos from "../../demos/attrs/tone.demo";
 | `warning` | 需要注意的提醒 |
 | `danger` | 錯誤、危險操作 |
 
-## 適用元素
+## 適用元件
 
 沒給的話，各元件的預設不同：
 
-| 元素 | 預設 |
+| 元件 | 預設 |
 | --- | --- |
 | `sl-button` | `primary` |
 | `sl-card` | `primary`，只染邊緣強調條，不動卡片底色 |
