@@ -1,5 +1,5 @@
 ---
-title: Responsive 響應式
+title: RWD 響應式設計
 description: 三階斷點對應 container 尺度，需要響應式的屬性掛斷點後綴。
 ---
 
@@ -7,7 +7,7 @@ description: 三階斷點對應 container 尺度，需要響應式的屬性掛�
 import * as RwdDemos from "../../demos/layout/responsive.demo";
 </script>
 
-# Responsive *響應式*
+# RWD *響應式設計*
 
 > 三階斷點，對應 container 尺度。需要響應式的屬性掛 `sl-<屬性>-<斷點>` 後綴。
 
@@ -37,7 +37,7 @@ px 以根字級 16px 換算。三階跟 [container](/layout/container) 的頁面
   :render="RwdDemos.Cols.render"
 />
 
-跨欄自動收斂：當前欄數容不下的 `sl-span` 縮成滿列，不會溢出。
+佔欄的 `sl-span` 自動收斂：當前欄數容不下就縮成滿列，不會溢出。
 
 ## 隱藏跟顯示
 

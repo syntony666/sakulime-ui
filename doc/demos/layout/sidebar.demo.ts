@@ -11,7 +11,7 @@ const cell = (t: string) => `<div class="demo-cell">${t}</div>`;
 export const SidebarStart: Demo = {
   render: () =>
     `<div sl-with-sidebar>` +
-    `<aside sl-sidebar>${cell("側欄")}</aside>` +
+    `<aside sl-sidebar>${cell("側邊欄")}</aside>` +
     `<div>${cell("主欄")}</div>` +
     `</div>`,
 };
@@ -20,7 +20,7 @@ export const SidebarEnd: Demo = {
   render: () =>
     `<div sl-with-sidebar>` +
     `<div>${cell("主欄")}</div>` +
-    `<aside sl-sidebar>${cell("側欄")}</aside>` +
+    `<aside sl-sidebar>${cell("側邊欄")}</aside>` +
     `</div>`,
 };
 
@@ -38,7 +38,7 @@ export const SidebarBoth: Demo = {
 export const SidebarMark: Demo = {
   render: () =>
     `<div sl-with-sidebar>` +
-    `<aside sl-sidebar sl-end>${cell("標示 sl-end 的側欄")}</aside>` +
+    `<aside sl-sidebar sl-end>${cell("標示 sl-end 的側邊欄")}</aside>` +
     `<div>${cell("主欄")}</div>` +
     `</div>`,
 };

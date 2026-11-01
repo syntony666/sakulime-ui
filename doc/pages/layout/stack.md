@@ -21,19 +21,17 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 </div>
 ```
 
+間距只加在相鄰子層之間，第一個上面、最後一個下面都不多留。子元素寬度會拉滿容器，要收窄自己寫寬度；沒有斷點行為，要窄屏換向的話用 `sl-row` 配 `sl-collapse`。
+
 三種間距的實際樣子：
 
 <Demo
   :render="StackDemos.Gaps.render"
 />
 
-## 屬性
+## 間距
 
-### 間距
-
-px 以根字級 16px 換算，尺規本身是 rem。
-
-`sl-stack` 的選項就是間距，預設 `md`：
+px 以根字級 16px 換算，尺規本身是 rem。`sl-stack` 的選項就是間距，預設 `md`：
 
 | 選項  | 間距         |
 | ----- | ------------ |
@@ -48,11 +46,3 @@ px 以根字級 16px 換算，尺規本身是 rem。
 | `5xl` | 48px         |
 
 只想改一個容器就寫 `--sl-stack-gap`（例如 `style="--sl-stack-gap: 6px"`）；想一整區一起改就用 [`sl-gap`](/attrs/gap)。
-
-### 行為
-
-- 永遠垂直排列，沒有斷點變化
-- 相鄰子層的垂直距離 = 間距，第一個上面跟最後一個下面不加距離
-- 子元素的上下 margin 清成 0，左右 margin 不動
-- 子元素寬度拉滿容器（flex 預設 stretch），要收窄自己寫寬度
-- 間距是容器的事，子元素不用寫 margin

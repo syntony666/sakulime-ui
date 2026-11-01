@@ -34,9 +34,7 @@ import * as ContainerDemos from "../../demos/layout/container.demo";
 
 巢狀沒有額外效果，塞進窄父層的話裡層只跟父層一樣寬。
 
-## 屬性
-
-### 尺寸
+## 尺寸
 
 - `sl-container-sm`：45rem（720px）
 - `sl-container-md`：60rem（960px）
@@ -46,6 +44,6 @@ import * as ContainerDemos from "../../demos/layout/container.demo";
 
 要改寬度的話，覆寫 `--sl-container-sm/md/lg`。
 
-### 內距
+## 內距
 
 左右內距是 `--sl-lg`（16px）。改單一容器就自己寫 `padding-inline`；覆寫 `--sl-lg` 的話，所有用到它的元素都會跟著變。

@@ -22,13 +22,13 @@ import * as FlowDemos from "../../demos/layout/flow.demo";
 </article>
 ```
 
-子層不用標任何東西，間距自動補在兄弟之間。卡片通知這種沒 margin 的元件隔得開，標題段落保留自己的間距：
+子層不用標任何東西，間距自動補在相鄰子層之間，第一個上面不加。卡片通知這種沒 margin 的元件隔得開，標題段落保留自己的間距：
 
 <Demo :render="FlowDemos.Basic.render" />
 
-## 屬性
+子層本身不動：不變 flex item、寬度不變、自己的 margin 保留，間距是下限，子層原本的 margin 比它大就聽子層的。要精準等距、子層拉滿寬的話用 `sl-stack`。
 
-### 間距
+## 間距
 
 px 以根字級 16px 換算，尺規本身是 rem。
 
@@ -51,9 +51,3 @@ px 以根字級 16px 換算，尺規本身是 rem。
 三種間距的實際樣子：
 
 <Demo :render="FlowDemos.Gaps.render" />
-
-### 行為
-
-- 每個子層跟前一個之間補 `margin-block-start`，第一個上面不加
-- 子層完全不改：不變 flex item、寬度不動、自己的 margin 保留，間距是下限，子層原本的 margin 比它大就聽子層的
-- 要精準等距、子層拉滿寬的話用 `sl-stack`；`sl-flow` 適合內文混排，或不想另外包一層排版元素的地方
