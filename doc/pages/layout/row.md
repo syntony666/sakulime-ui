@@ -45,13 +45,14 @@ import * as RowDemos from "../../demos/layout/row.demo";
 | `4xl` | 40px         |
 | `5xl` | 48px         |
 
-水平間距跟換行後的行距吃同一個值。改單一容器寫 `--sl-row-gap`。
+水平間距跟換行後的行距吃同一個值。改單一容器寫 `--sl-row-gap`，或寫通用的 `sl-gap`，原語自己的值優先。
 
 ### 行為
 
 - 水平排列、子元素垂直置中（`align-items: center`）
 - 項目總寬超過容器寬度就整個換到下一行；換行時機看內容實際寬度，沒有固定斷點
 - 子元素寬度不動，不會被拉寬或壓縮
+- 子層標 `sl-end` 推到行尾、標 `sl-center` 在兄弟之間置中
 
 ### 窄屏直排 `sl-collapse`
 

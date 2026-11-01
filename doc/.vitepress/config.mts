@@ -176,6 +176,7 @@ export default defineConfig({
           { text: `Stack ${zh("堆疊")}`, link: "/layout/stack" },
           { text: `Row ${zh("橫列")}`, link: "/layout/row" },
           { text: `Grid ${zh("格網")}`, link: "/layout/grid" },
+          { text: "頁面區塊", link: "/layout/shell" },
         ],
       },
       {
