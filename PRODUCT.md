@@ -30,7 +30,7 @@ sakulime-ui 是一套 CSS-first 設計系統：只有兩件事 — `sl-*` 屬性
 
 ## Capabilities and Constraints
 
-- 元件層：`sl-card`、`sl-button` 等（屬性值即型態，如 `sl-card="hollow"`）；元件設定：`sl-card-indicate` 等；子元素層：`sl-card-corner`、`sl-card-section` 等；通用屬性：`sl-pad`、`sl-radius`、`sl-tone`、`sl-interactive`；版面：`sl-*` layout 屬性
+- 元件層：`sl-card`、`sl-button`、`sl-chip`、`sl-dot`、`sl-notice`、`sl-icon`（屬性值即型態，如 `sl-card="hollow"`）；元件設定：`sl-card-indicate` 等；子元素層：`sl-card-corner`、`sl-card-section` 等；通用屬性：`sl-pad`、`sl-radius`、`sl-tone`、`sl-size`、`sl-interactive`、`sl-gap`；版面（`@sakulime-ui/layout`）：`sl-container`、`sl-stack`、`sl-row`、`sl-grid`、`sl-bar`、`sl-with-sidebar`＋`sl-sidebar`、`sl-toast`、`sl-place`、`sl-gap`、`sl-span`、`sl-cols`、`sl-hide-*`/`sl-show-*`、`sl-collapse`、`sl-flow`
 - 顏色用 CSS Color 4/5：`oklch()`、`color-mix()`，目標 WCAG AA
 - Google Fonts 走 `<link>`/`preconnect`，Cloudflare Fonts rewrite 成 same-origin `/cf-fonts`
 - 所有外觀行為純 CSS selector 實作；資料驅動的功能（如圖示名稱解析）走共用 resolver，屬於選配增強
@@ -38,13 +38,13 @@ sakulime-ui 是一套 CSS-first 設計系統：只有兩件事 — `sl-*` 屬性
 
 ## Brand Commitments
 
-- 名稱 Sakulime UI；兩種品牌主題為同產品的兩種個性：`sakulime`（預設，活潑）與 `terra`（沉穩），`<html data-theme="…">` 切換
+- 名稱 Sakulime UI；三種品牌主題為同產品的三種個性：`sakulime`（預設，活潑）、`terra`（沉穩）與 `umbra`（暗色夜間版），`<html data-theme="…">` 切換
 - 文件語言 zh-TW（繁體中文）
 
 ## Evidence on Hand
 
 - 文件站本身即最完整的 demo：每個元件頁有 Playground（demo args/argTypes 驅動）＋靜態 demo 列＋自動縮排的即時 markup
-- `doc/demos/components/*.demo.ts` 是 demo 資料來源（button、card）
+- `doc/demos/**/*.demo.ts` 是 demo 資料來源 — `components/` 六支（button、card、chip、dot、icon、notice）、`attrs/` 六支（tone、size、radius、pad、gap、interactive）、`layout/` 九支（container、stack、row、grid、bar、sidebar、placement、responsive、toast）
 - 無使用者見證、案例、下載數據 — 對外證據目前只有產品本身
 
 ## Product Principles

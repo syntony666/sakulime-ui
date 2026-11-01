@@ -13,7 +13,7 @@ A CSS-first design system with no framework runtime — React, Vue, Svelte, or p
 import "sakulime-ui/sakulime.min.css";
 ```
 
-Variables, both themes, components, and layout ship in that single file. Switch themes with `<html data-theme="terra">` — no reload needed.
+Variables, all three themes (`sakulime`, `terra`, `umbra`), components, and layout ship in that single file. Switch themes with `<html data-theme="terra">` — no reload needed.
 
 ```html
 <button sl-button>Save</button>
@@ -35,10 +35,14 @@ Variables, both themes, components, and layout ship in that single file. Switch 
 npm install
 npm run dev          # VitePress doc site (doc/) on :5173
 npm run build        # tsc typecheck + core lib build + per-package min.css + dist/
+npm test             # headless-chromium fixture assertions against dist/ (build first)
+npm run test:shots   # same + screenshots → tests/shots/
 npm run site         # static VitePress site → doc/site/
 npm run deploy       # site build + wrangler deploy → Cloudflare Workers
 npm run lint
 ```
+
+Tests run the fixture pages under headless chromium — `tests/run.mjs` looks for `~/.local/bin/chromium` by default; set `SL_CHROMIUM` to point elsewhere.
 
 ## Releases (changesets)
 
@@ -48,7 +52,7 @@ Write a changeset for every change heading into a release:
 npx changeset        # pick packages, patch/minor/major, describe → .changeset/*.md
 ```
 
-Day-to-day work lives on `release/x.y.z` (x.y.z is the target version — feature branches fork off it and merge back with `--no-ff`). Merging into `master` makes CI open a release PR (version bump + CHANGELOG); merging that PR publishes the four packages and deploys the doc site. Afterwards merge `master` back into the next `release/x.y.z`. All four packages bump together (`fixed`). Details in CONTRIBUTING.md.
+Day-to-day work lives on `release/x.y.z` (x.y.z is the target version — feature branches fork off it and merge back with `--no-ff`). Merging into `master` makes CI open a release PR (version bump + CHANGELOG); merging that PR publishes the four packages to npm. The doc site deploys independently — Cloudflare Workers Builds rebuilds `doc/` on every `master` push, not via the release PR. Afterwards merge `master` back into the next `release/x.y.z`. All four packages bump together (`fixed`). Details in CONTRIBUTING.md.
 
 ## Repository layout (npm workspaces monorepo)
 

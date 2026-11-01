@@ -25,7 +25,7 @@ px 以根字級 16px 換算。三階跟 [container](/layout/container) 的頁面
 
 ## 斷點後綴
 
-屬性加上 `-<斷點>` 就在該斷點以下生效，窄的蓋過寬的。支援的有 `sl-cols` 跟 `sl-collapse`：
+屬性加上 `-<斷點>` 就在該斷點以下生效，窄斷點蓋過寬斷點。支援的有 `sl-cols` 跟 `sl-collapse`：
 
 ```html
 <div sl-grid sl-cols="4" sl-cols-md="2" sl-cols-sm="1">
@@ -38,7 +38,7 @@ px 以根字級 16px 換算。三階跟 [container](/layout/container) 的頁面
   :render="RwdDemos.Cols.render"
 />
 
-佔欄的 `sl-span` 自動收斂：當前欄數容不下就縮成滿列，不會溢出。
+佔欄的 `sl-span` 會自動調整：當前欄數容不下就變滿列，不會溢出。
 
 ## 隱藏跟顯示
 

@@ -37,9 +37,15 @@ import * as ToastDemos from "../../demos/layout/toast.demo";
 | `top-start`      | 左上 |
 | `top-center`     | 中上 |
 | `top-end`        | 右上 |
+| `bottom-left`    | 左下（物理方向） |
+| `bottom-right`   | 右下（物理方向） |
+| `top-left`       | 左上（物理方向） |
+| `top-right`      | 右上（物理方向） |
 | `start`          | 左下（舊寫法，等同 `bottom-start`） |
 
-值槽是角落，不是間距：`sl-toast="lg"` 沒有效果，要調間距用 `sl-gap`。
+`start`／`end` 是邏輯方向，跟著文字方向走；`left`／`right` 是物理方向，RTL 下也是畫面的左／右。單寫 `left`／`right` 在下緣，等同 `bottom-left`／`bottom-right`。
+
+選項是角落位置，不是間距：`sl-toast="lg"` 沒有效果，要調間距用 `sl-gap`。
 
 ## 尺寸與間距
 

@@ -6,7 +6,7 @@ export default meta;
 type Demo = DemoObj;
 
 const frame = (caption: string, inner: string) =>
-  `<div class="demo-cell"><span class="demo-w">${caption}</span>` +
+  `<div class="demo-cell"><span class="demo-w" data-demo>${caption}</span>` +
   `<div style="margin-top: var(--sl-sm)">${inner}</div></div>`;
 
 // button takes height + font-size; chip takes font-size only but scales

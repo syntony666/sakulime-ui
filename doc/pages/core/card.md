@@ -57,12 +57,13 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 ### 互動 `sl-interactive`
 
-整張卡片看起來可以點，游標變成手指，滑鼠移過去就有反應。沒給是 `grow`：
+整張卡片看起來可以點，游標變成手指，滑鼠移過去就有反應。`sl-interactive` 不給值是 `grow`：
 
-- `grow`：放大
-- `lift`：浮起＋陰影
-- `raise`：只有陰影浮現
-- `press`：下壓縮小
+- `grow`：放大 1.03
+- `lift`：浮起 4px 加陰影
+- `raise`：只有陰影
+- `press`：壓下 0.97
+- `dim`：變暗
 
 <Demo :render="CardDemos.Interactive.render" />
 
@@ -93,7 +94,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 ### 角落標記 `sl-card-corner`
 
-把元素固定在卡片頂端角落，適合時間、狀態、數字這類補充資訊。`sl-card-corner` 定位置，外觀由同一個元素上的小元件屬性決定：
+把元素固定在卡片角落，適合時間、狀態、數字這類補充資訊。`sl-card-corner` 定位置，外觀由同一個元素上的小元件屬性決定：
 
 ```html
 <div sl-card>
@@ -104,10 +105,13 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 <Playground :meta="CardDemos.Corner" :render="CardDemos.Corner.render" />
 
-位置：
+位置，詞的組合跟 [`sl-place`](/layout/placement) 同規則，`start`／`end` 選左右、`bottom` 換到下緣：
 
 - 沒給／`end`：右上
 - `start`：左上
+- `bottom`：右下
+- `bottom start`：左下
+- `bottom end`：右下（同 `bottom`）
 
 內容組合，`sl-chip` 文字膠囊、`sl-dot` 狀態點、`sl-icon` 圖示都可以放；`sl-tone` 寫在同一個元素上染色：
 

@@ -45,9 +45,10 @@
   :--sl-generic-tone[sl-tone="warning"] {
     --sl-tone-bg: var(--sl-warn);
     --sl-tone-text: color-mix(in srgb, var(--sl-warn) 30%, var(--sl-text-strong));
-    /* warn sits opposite the strong ink in every theme — light gold
-       in light themes, deep amber in dark */
-    --sl-tone-text-invert: var(--sl-text-strong);
+    /* warn pairs with the dark ink in every theme — strong ink on the
+       light gold, inverted ink on the dark amber; a pale ink would
+       sink into the mid-lightness gold */
+    --sl-tone-text-invert: light-dark(var(--sl-text-strong), var(--sl-text-invert));
   }
 
   :--sl-generic-tone[sl-tone="danger"] {

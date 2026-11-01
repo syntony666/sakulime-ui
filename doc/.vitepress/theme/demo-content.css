@@ -35,16 +35,6 @@
   height: 1px;
 }
 
-/* demo-only toast wrapper — stands in for the consumer's own fixed
-   container (a demo- class, so shown markup drops it). A narrow column:
-   notices fill their container; the width is the consumer's choice */
-.demo-toast {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  max-width: var(--sl-toast-w, 22rem);
-}
-
 /* demo placeholder for edge-to-edge inset content — stands in for a
    real image so demos don't depend on external assets */
 .demo-media {

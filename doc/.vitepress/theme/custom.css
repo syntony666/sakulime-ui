@@ -29,11 +29,11 @@
   /* interactive accent = the palette's readable-accent role: primary is
      the decorative face (buttons, hero, hairline) where its lightness
      is intended; text-accent is its readable sibling for links, code,
-     and selected states. raw text-accent sits at 4.0 on sakulime, so
-     -1 takes one 0.06 oklch step down to AA, -2 another for hover */
-  --vp-c-brand-1: oklch(from var(--sl-text-accent) calc(l - 0.06) c h);
-  --vp-c-brand-2: oklch(from var(--sl-text-accent) calc(l - 0.14) c h);
-  --vp-c-brand-3: oklch(from var(--sl-text-accent) calc(l - 0.06) c h);
+     and selected states — already AA by derivation, so -2 only steps
+     one notch darker for hover */
+  --vp-c-brand-1: var(--sl-text-accent);
+  --vp-c-brand-2: oklch(from var(--sl-text-accent) calc(l - 0.08) c h);
+  --vp-c-brand-3: var(--sl-text-accent);
   --vp-c-brand-soft: color-mix(in oklab, var(--sl-text-accent) 10%, transparent);
 
   --vp-c-border: var(--sl-border);

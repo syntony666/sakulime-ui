@@ -37,7 +37,7 @@ const meta = {
     spin: boolArg("sl-icon-spin", "旋轉動畫"),
     frame: axisArg("sl-icon-frame", "外框", ["-", "circular", "rounded"]),
     disabled: boolArg("sl-icon-disabled", "淡化"),
-    space: axisArg("sl-icon-space", "間距", ["-", "start", "end", "both"]),
+    space: axisArg("sl-icon-space", "間距（both＝裸寫屬性，兩側都加）", ["-", "start", "end", "both"]),
   },
 } satisfies Meta<IconArgs>;
 
@@ -70,6 +70,15 @@ export const Sizes: Demo = {
     axis(SIZES, (v) =>
       `<span style="font-size: ${v}px"><i sl-icon="lucide:star"></i> ${v}px</span>`,
     ),
+};
+
+// pasted SVG — no JS at all: sl-icon on the svg itself makes it ride
+// the text baseline at 1em like the <i> placeholders do
+export const Svg: Demo = {
+  render: () =>
+    `<p>圖示庫複製的 SVG ` +
+    `<svg sl-icon viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>` +
+    ` 貼進來就生效</p>`,
 };
 
 // mid-sentence — the icon rides the text baseline

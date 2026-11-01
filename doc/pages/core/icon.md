@@ -26,6 +26,8 @@ import * as IconDemos from "../../demos/components/icon.demo";
 </svg>
 ```
 
+<Demo :render="IconDemos.Svg.render" />
+
 ### 用圖示包 `<i sl-icon="...">`
 
 註冊圖示包之後（見[安裝](#安裝)），元素標上圖示名就會換成圖示：

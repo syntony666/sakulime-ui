@@ -37,7 +37,7 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 </div>
 ```
 
-子層照順序填，滿一列自動換下一列。欄數是固定的，不會因為容器變窄掉欄；要分斷點掉欄就掛 `sl-cols-lg`、`sl-cols-md`、`sl-cols-sm`，只要手機單欄的話標 `sl-collapse` 就好，見[響應式設計](/layout/responsive)。
+子層照順序填，滿一列自動換下一列。欄數固定，不會因為容器變窄掉欄；要分斷點掉欄就掛 `sl-cols-lg`、`sl-cols-md`、`sl-cols-sm`，只要手機單欄的話標 `sl-collapse` 就好，見[響應式設計](/layout/responsive)。
 
 <Demo
   :render="GridDemos.Cols.render"
@@ -55,10 +55,10 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 </div>
 ```
 
-超過當列剩餘欄位就自動掉下一列。固定欄數下，`sl-span` 大於當前欄數會自動收斂成滿列，不會溢出、也不會憑空生出軌道。auto-fill 的網格也能用，欄數跟著容器浮動，要保險的跨列用 `sl-span="full"`（永遠跨滿）。
+超過當列剩餘欄位就自動掉下一列。固定欄數下，`sl-span` 大於當前欄數會自動變滿列，不會溢出、也不會憑空生出軌道。auto-fill 的網格也能用，欄數跟著容器浮動，要保險的跨列用 `sl-span="full"`（永遠跨滿）。
 ## 欄寬
 
-欄數是算出來的，公式是 `repeat(auto-fill, minmax(min(--sl-grid-min, 100%), 1fr))`：
+欄數由公式算出，`repeat(auto-fill, minmax(min(--sl-grid-min, 100%), 1fr))`：
 
 - 每欄最窄 `--sl-grid-min`（預設 14rem = 224px）
 - 容器能再放下一欄就多一欄，放不下就掉欄，最少一欄

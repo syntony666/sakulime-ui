@@ -2,12 +2,17 @@
 // should read like real usage, not the render implementation:
 //   1. strip anonymous wrapper divs (row/stage shells) — stop at any
 //      element carrying an sl-* attribute, that's the real markup
-//   2. strip demo-only elements — before the >< split inserts newlines
-//   3. strip demo inline styles — they aren't part of the API
-//   4. one element per line, indented by nesting depth
+//   2. drop demo-only elements (data-demo) — demo chrome never reaches
+//      the shown code, its children go with it
+//   3. strip demo-* classes — they aren't part of the API
+//   4. filter inline styles — declarations that carry the mechanism
+//      stay, layout furniture goes
+//   5. collapse anonymous divs around a single element — caption
+//      frames and spacer divs fold to the markup inside
+//   6. one element per line, indented by nesting depth
 const stripShells = (code: string): string => {
   let c = code.trim();
-  while (/^<div(?![^>]*\s+sl-)[^>]*>/.test(c)) {
+  while (/^<div(?![^>]*\s+sl-)(?![^>]*\sdata-demo[\s=>])[^>]*>/.test(c)) {
     /* strip the pair only when the trailing </div> really closes the
        leading <div> — sibling divs aren't a shell and must survive */
     const divs = c.match(/<\/?div[^>]*>/g) ?? [];
@@ -26,9 +31,7 @@ const stripShells = (code: string): string => {
       .replace(/<\/div>\s*$/, "")
       .trim();
   }
-  /* demo-only elements carry data-demo — drop the whole element; the
-     shown code should never carry demo chrome */
-  return c.replace(/<([a-z]+)[^>]*\sdata-demo(\s|>)[^>]*>.*?<\/\1>/g, "");
+  return c;
 };
 
 const VOID = new Set([
@@ -46,6 +49,91 @@ const VOID = new Set([
   "track",
   "wbr",
 ]);
+
+/* style declarations that carry the mechanism stay in shown code:
+   --* custom props are the var API (--sl-grid-min is grid's public
+   knob), font-size is the em context chip/dot/icon track, box
+   dimensions are the room placement marks push against, list-style
+   decides whether a list renders bullets. Position overrides,
+   margins, padding and text-align are stage furniture — they strip */
+const KEEP_DECL =
+  /^--|^font-size$|^list-style$|^(?:(?:min|max)-)?(?:width|height|inline-size|block-size)$/;
+
+const filterStyle = (decls: string): string =>
+  decls
+    .split(";")
+    .map((d) => d.trim())
+    .filter((d) => KEEP_DECL.test(d.slice(0, d.indexOf(":")).trim()))
+    .join("; ");
+
+// attr-level cleanup on a single tag — demo-* classes go, the style
+// filter keeps load-bearing declarations only, and removal residue
+// collapses back to single spaces so `<div  sl-span>` doesn't leak
+const cleanTag = (open: string): string =>
+  open
+    .replace(/\s+class="([^"]*)"/g, (_, list: string) => {
+      const kept = list.split(/\s+/).filter((c) => c && !c.startsWith("demo-"));
+      return kept.length ? ` class="${kept.join(" ")}"` : "";
+    })
+    .replace(/\s+style="([^"]*)"/g, (_, decls: string) => {
+      const kept = filterStyle(decls);
+      return kept ? ` style="${kept}"` : "";
+    })
+    .replace(/\s{2,}/g, " ")
+    .replace(/\s+(\/?>)$/, "$1");
+
+// demo-only elements carry data-demo — the whole subtree drops
+const DATA_DEMO = /\sdata-demo(?:[\s=/>]|$)/;
+
+type El = { tag: string; open: string; kids: (El | string)[]; leaf: boolean };
+
+// shallow tree fold — the transforms above all need parent/child
+// context a flat regex can't see (data-demo subtrees, single-child
+// wrappers). Mismatched closes fall through as text so a malformed
+// demo can't take the transform down with it
+const fold = (code: string): string => {
+  const toks = code.match(/<[^>]*>|[^<]+/g) ?? [];
+  const root: El = { tag: "", open: "", kids: [], leaf: true };
+  const stack: El[] = [root];
+  for (const t of toks) {
+    const close = /^<\/([a-z][\w-]*)>$/i.exec(t)?.[1];
+    if (close) {
+      if (stack[stack.length - 1].tag === close) stack.pop();
+      else stack[stack.length - 1].kids.push(t);
+      continue;
+    }
+    const open = /^<([a-z][\w-]*)/i.exec(t)?.[1];
+    if (open) {
+      const leaf = /\/>$/.test(t) || VOID.has(open.toLowerCase());
+      const el: El = { tag: open, open: t, kids: [], leaf };
+      stack[stack.length - 1].kids.push(el);
+      if (!leaf) stack.push(el);
+      continue;
+    }
+    // text run or comment — kept verbatim, the indenter folds it
+    stack[stack.length - 1].kids.push(t);
+  }
+
+  const emit = (el: El): string => {
+    if (DATA_DEMO.test(el.open)) return "";
+    const open = cleanTag(el.open);
+    if (el.leaf) return open;
+    const inner = el.kids.map((k) => (typeof k === "string" ? k : emit(k))).join("");
+    /* an anonymous div wrapping exactly one element was furniture —
+       unwraps repeat outward until something real stops them; wrappers
+       carrying text or several children group real content */
+    const sig = el.kids.filter(
+      (k) =>
+        (typeof k === "string" && k.trim()) ||
+        (typeof k !== "string" && !DATA_DEMO.test(k.open)),
+    );
+    if (el.tag === "div" && open === "<div>" && sig.length === 1 && typeof sig[0] !== "string") {
+      return inner;
+    }
+    return `${open}${inner}</${el.tag}>`;
+  };
+  return root.kids.map((k) => (typeof k === "string" ? k : emit(k))).join("");
+};
 
 // indent by nesting depth — tag and text tokens are split cleanly, so
 // `<i></i> 14px` keeps its close tag on the same line and `<x>text</x>`
@@ -91,20 +179,8 @@ const indentMarkup = (code: string): string => {
   return lines.join("\n");
 };
 
-// demo-only classes (demo-media etc.) aren't part of the API — strip
-// them from shown markup so the snippet pastes clean
-const stripDemoClasses = (code: string): string =>
-  code
-    .replace(/class="([^"]*)"/g, (_, list: string) => {
-      const kept = list.split(/\s+/).filter((c) => !c.startsWith("demo-"));
-      return kept.length ? `class="${kept.join(" ")}"` : "";
-    })
-    .replace(/\s+(?=>)/g, "");
-
 export const showMarkup = (code: string): string =>
-  indentMarkup(
-    stripDemoClasses(stripShells(code).replace(/\s+style="[^"]*"/g, "")),
-  );
+  indentMarkup(fold(stripShells(code)));
 
 // markup display — the demo's code panel runs the shown source through
 // a tiny tokenizer instead of a full highlighter: sl-* attribute names

@@ -23,8 +23,11 @@ npm run dev          # VitePress doc site on :5173
 ```bash
 npm run lint         # eslint
 npm run build        # tsc typecheck + core bundle + per-package dist
+npm test             # headless-chromium fixture assertions — needs dist/, run after build
 npm run site         # also verify the static site when touching doc/
 ```
+
+`npm test` needs a chromium binary — `tests/run.mjs` defaults to `~/.local/bin/chromium`; set `SL_CHROMIUM` to override.
 
 ## Conventions
 
@@ -35,7 +38,7 @@ npm run site         # also verify the static site when touching doc/
 - Code comments in English only, and only where they add information
 - Commit messages in English, under 50 words, conventional prefixes (`feat:`, `fix:`, `docs:`, `chore:`, `refactor:`)
 - Doc pages: `.md` for prose, `.demo.ts` for demos; demos render through the theme's `<Demo>` and `<Playground>` components. Page structure — fixed section order, heading format, playground placement — is defined in [`doc/templates/`](doc/templates/index.md) — shared conventions in `index.md`, one skeleton file per page type (`component.md`, `attrs.md`, `layout.md`)
-- New themes: drop a `.css` in `packages/theme` (three seeds + `color-scheme`; see `_internal/derived.css`), then import it once in `packages/core/src/index.ts` to bundle it into core, and add a `./<name>.css` line to `packages/theme/package.json` exports so the path is importable
+- New themes: drop a `.css` in `packages/theme` (three seeds + `color-scheme`; see `_internal/derived.css`), then import it once in `packages/core/src/index.ts` to bundle it into core, and add a `./<name>.css` line to `packages/theme/package.json` exports so the path is importable — plus a matching per-theme alias in both `packages/core/vite.config.ts` and `doc/.vitepress/config.mts`, which hardcode one alias entry per theme and fail to resolve without it
 - Doc pages need frontmatter `title` and `description` — canonical, OG and JSON-LD metadata is generated from them
 
 ## Component CSS rules
