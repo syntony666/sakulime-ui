@@ -5,18 +5,18 @@
      bare sl-container defaults to the md width */
   [sl-container] {
     box-sizing: border-box;
-    width: 100%;
-    max-width: var(--sl-container-md);
+    inline-size: 100%;
+    max-inline-size: var(--sl-container-md);
     margin-inline: auto;
-    padding-inline: var(--sl-lg);
+    padding-inline: var(--sl-container-pad, var(--sl-lg));
   }
 
   [sl-container="sm"] {
-    max-width: var(--sl-container-sm);
+    max-inline-size: var(--sl-container-sm);
   }
 
   [sl-container="lg"] {
-    max-width: var(--sl-container-lg);
+    max-inline-size: var(--sl-container-lg);
   }
 
   /* stack — vertical rhythm. The parent owns spacing: direct children
@@ -34,6 +34,9 @@
   [sl-stack][sl-flow],
   [sl-stack][sl-cols] {
     display: block;
+    /* resolved once here — flow-mode children read the inherited
+       private var instead of re-walking the fallback chain */
+    --_g: var(--sl-stack-gap, var(--sl-gap, var(--sl-md)));
   }
 
   [sl-stack]:not([sl-flow]):not([sl-cols]) > * {
@@ -42,7 +45,7 @@
 
   [sl-stack][sl-flow] > * + *,
   [sl-stack][sl-cols] > * + * {
-    margin-block-start: var(--sl-stack-gap, var(--sl-gap, var(--sl-md)));
+    margin-block-start: var(--_g);
   }
 
   /* sibling margins stay, but the stack owns its edges — a heading's
@@ -74,7 +77,7 @@
      push down the first column and skew the column tops */
   [sl-stack][sl-cols] > [sl-span] {
     column-span: all;
-    margin-block-end: var(--sl-stack-gap, var(--sl-gap, var(--sl-md)));
+    margin-block-end: var(--_g);
   }
   [sl-stack][sl-cols] > [sl-span] + * {
     margin-block-start: 0;
@@ -188,27 +191,29 @@
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
     gap: var(--sl-bar-gap, var(--sl-gap, var(--sl-md)));
-    min-height: var(--sl-bar-h, 3.5rem);
+    min-block-size: var(--sl-bar-h, 3.5rem);
     /* self-default --sl-pad so an ancestor's sl-pad can't leak in —
        the attr on the bar itself still wins by specificity */
     --sl-pad: var(--sl-md);
     padding-block: var(--sl-bar-pad, var(--sl-pad));
-    padding-inline: var(--sl-lg);
+    padding-inline: var(--sl-bar-pad-inline, var(--sl-lg));
     background: var(--sl-bg, #ffffff);
   }
 
   [sl-bar="top"] {
     position: sticky;
-    top: 0;
-    z-index: 50;
+    inset-block-start: 0;
+    z-index: var(--sl-bar-z, 50);
     border-block-end: 1px solid var(--sl-border, #e5e7eb);
   }
 
   [sl-bar="bottom"] {
     position: sticky;
-    bottom: 0;
-    z-index: 50;
+    inset-block-end: 0;
+    z-index: var(--sl-bar-z, 50);
     border-block-start: 1px solid var(--sl-border, #e5e7eb);
+    /* home-indicator clearance on phones; env() is 0 elsewhere */
+    padding-block-end: calc(var(--sl-bar-pad, var(--sl-pad)) + env(safe-area-inset-bottom, 0px));
   }
 
   [sl-bar="top"][sl-fixed],
@@ -250,7 +255,7 @@
   [sl-with-sidebar] > :not([sl-sidebar]) {
     flex-basis: 0;
     flex-grow: 999;
-    min-width: var(--sl-sidebar-min, 55%);
+    min-inline-size: var(--sl-sidebar-min, 55%);
   }
 
   /* rail placement — unmarked rails keep source order; sl-place="start"
@@ -269,12 +274,20 @@
   [sl-toast] {
     box-sizing: border-box;
     position: fixed;
-    z-index: 60;
+    z-index: var(--sl-toast-z, 60);
     display: flex;
     flex-direction: column;
     gap: var(--sl-toast-gap, var(--sl-gap, var(--sl-md)));
-    width: min(var(--sl-toast-w, 22rem), calc(100vw - 2 * var(--sl-lg)));
-    inset-block-end: var(--sl-toast-b, var(--sl-lg));
+    /* the clamp follows the configured edge offset so a wider offset
+       can't push the region off the far edge; dvw/vh units refresh the
+       same declarations where supported */
+    inline-size: min(var(--sl-toast-w, 22rem), calc(100vw - 2 * var(--sl-toast-e, var(--sl-lg))));
+    inline-size: min(var(--sl-toast-w, 22rem), calc(100dvw - 2 * var(--sl-toast-e, var(--sl-lg))));
+    max-block-size: calc(100vh - 2 * var(--sl-toast-b, var(--sl-lg)));
+    max-block-size: calc(100dvh - 2 * var(--sl-toast-b, var(--sl-lg)));
+    overflow-block: auto;
+    /* safe-area keeps the region off the home indicator */
+    inset-block-end: calc(var(--sl-toast-b, var(--sl-lg)) + env(safe-area-inset-bottom, 0px));
     inset-inline-end: var(--sl-toast-e, var(--sl-lg));
   }
 
@@ -284,7 +297,7 @@
      "start" value still lands bottom-start through the suffix rule */
   [sl-toast^="top"] {
     inset-block-end: auto;
-    inset-block-start: var(--sl-toast-b, var(--sl-lg));
+    inset-block-start: calc(var(--sl-toast-b, var(--sl-lg)) + env(safe-area-inset-top, 0px));
   }
 
   [sl-toast$="start"] {
@@ -295,6 +308,15 @@
   [sl-toast$="center"] {
     inset-inline: 0;
     margin-inline: auto;
+  }
+
+  /* fixed bands and toasts are screen furniture — in print they'd
+     repeat on every page and cover the sheet */
+  @media print {
+    [sl-bar][sl-fixed],
+    [sl-toast] {
+      position: static;
+    }
   }
 }
 
