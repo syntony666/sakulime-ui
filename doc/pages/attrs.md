@@ -49,11 +49,11 @@ description: sl-* 屬性語法總覽：元件標記、元件設定、子元素�
 | `sl-radius` | `none` `sm` `md` `lg` `full` | `sl-button`、`sl-card`、`sl-notice` | 圓角 |
 | `sl-pad` | `sm` `md` `lg` | `sl-card`、`sl-notice` | 內距 |
 | `sl-interactive` | `grow` `lift` `raise` `press` | `sl-card` | 滑鼠移過去的效果，不寫值是 `grow` |
-| `sl-gap` | `xs` `sm` `md` `lg` `xl` `2xl` `3xl` `4xl` `5xl` | `sl-stack`、`sl-row`、`sl-grid`、`sl-with-sidebar`、`sl-topbar`、`sl-footer`、`sl-toast` | 一次改整區間距，自己寫了值的不受影響 |
+| `sl-gap` | `xs` `sm` `md` `lg` `xl` `2xl` `3xl` `4xl` `5xl` | `sl-stack`、`sl-row`、`sl-grid`、`sl-flow`、`sl-with-sidebar`、`sl-topbar`、`sl-footer`、`sl-toast` | 共用間距值，細節見 [Gap](/layout/gap) |
 
 ## 作用範圍
 
-通用屬性只對「適用元素」欄列出的元素有效。寫在外層元素上不會影響裡面的元件：
+通用屬性只對「適用元素」欄列出的元素有效，`sl-gap` 例外，它標示在外層，值會繼承給裡面的排版屬性。其他通用屬性標示在外層元素上，不會影響裡面的元件：
 
 ```html
 <!-- 無效：div 不是適用元素，按鈕不受影響 -->

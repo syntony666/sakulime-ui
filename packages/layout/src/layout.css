@@ -51,6 +51,13 @@
     );
   }
 
+  /* flow — margin-based sibling rhythm for unwrapped content: articles,
+     forms, any element whose children should keep normal block layout
+     instead of becoming flex items */
+  [sl-flow] > * + * {
+    margin-block-start: var(--sl-flow-gap, var(--sl-gap, var(--sl-md)));
+  }
+
   /* opt-in collapse — <div sl-row sl-collapse> turns into a vertical
      stack on narrow viewports. Tag rows keep wrapping instead, so the
      attribute is never implied */
@@ -235,6 +242,16 @@
   [sl-grid="3xl"] { --sl-grid-gap: var(--sl-3xl); }
   [sl-grid="4xl"] { --sl-grid-gap: var(--sl-4xl); }
   [sl-grid="5xl"] { --sl-grid-gap: var(--sl-5xl); }
+
+  [sl-flow="xs"]  { --sl-flow-gap: var(--sl-xs); }
+  [sl-flow="sm"]  { --sl-flow-gap: var(--sl-sm); }
+  [sl-flow="md"]  { --sl-flow-gap: var(--sl-md); }
+  [sl-flow="lg"]  { --sl-flow-gap: var(--sl-lg); }
+  [sl-flow="xl"]  { --sl-flow-gap: var(--sl-xl); }
+  [sl-flow="2xl"] { --sl-flow-gap: var(--sl-2xl); }
+  [sl-flow="3xl"] { --sl-flow-gap: var(--sl-3xl); }
+  [sl-flow="4xl"] { --sl-flow-gap: var(--sl-4xl); }
+  [sl-flow="5xl"] { --sl-flow-gap: var(--sl-5xl); }
 
   [sl-with-sidebar="xs"]  { --sl-sidebar-gap: var(--sl-xs); }
   [sl-with-sidebar="sm"]  { --sl-sidebar-gap: var(--sl-sm); }
