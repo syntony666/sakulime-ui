@@ -23,6 +23,25 @@ const themeFiles = readdirSync(themeDir).filter((f) => f.endsWith(".css"));
    resolves to the dist artifact this script produces */
 const layout = read(`${layoutDir}/src/layout.css`);
 
+/* media queries can't read vars — layout.css hardcodes the container
+   breakpoints as literals; fail the build if the twins drift */
+const declared = new Set(
+  [...tokens.matchAll(/--sl-container-(?:sm|md|lg):\s*([^;]+);/g)].map((m) => m[1].trim())
+);
+const literals = new Set(
+  [...layout.matchAll(/@media \(width\s*[<>]=?\s*([0-9.]+rem)\)/g)].map((m) => m[1])
+);
+const missing = [...declared].filter((v) => !literals.has(v));
+const stray = [...literals].filter((v) => !declared.has(v));
+if (missing.length || stray.length) {
+  throw new Error(
+    `breakpoint drift: vars.css declares ${[...declared].join(", ")}; ` +
+      `layout.css media literals found ${[...literals].join(", ")}` +
+      (missing.length ? ` — missing ${missing.join(", ")}` : "") +
+      (stray.length ? ` — unexpected ${stray.join(", ")}` : "")
+  );
+}
+
 // @sakulime-ui/theme — one minified palette per file; bundle so each
 // theme's @import of the shared derived layer inlines into dist
 out(`${themeDir}/dist`);

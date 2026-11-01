@@ -1,13 +1,24 @@
 /* generic attributes — the cross-component attribute vocabulary. Each
    one expands through its own consumer list: the attribute only
    produces --sl-* slots on elements in that list. Consumers
-   self-default the slots they read in their own base rules, so an
-   attribute on an ancestor can never leak in. */
+   self-default the slots they read so an attribute on an ancestor
+   can never leak in — except interactive, whose slot defaults,
+   hover playback, and reduced-motion cut are shared in this file. */
 @custom-selector :--sl-generic-tone [sl-button], [sl-card], [sl-icon], [sl-dot], [sl-chip], [sl-notice];
 @custom-selector :--sl-generic-size [sl-button], [sl-chip];
 @custom-selector :--sl-generic-radius [sl-button], [sl-card], [sl-notice];
 @custom-selector :--sl-generic-pad [sl-card], [sl-notice], [sl-bar];
 @custom-selector :--sl-generic-interactive [sl-card], [sl-button];
+
+@layer base {
+  /* interactive's shared seal — replaces the per-component
+     self-defaults so every consumer reads the same slots */
+  :--sl-generic-interactive {
+    --sl-i-transform: none;
+    --sl-i-shadow: none;
+    --sl-i-filter: none;
+  }
+}
 
 @layer attrs {
   /* tone — --sl-tone-{bg,text,text-invert}; text is the tone's readable ink */
@@ -101,8 +112,9 @@
     --sl-pad: var(--sl-2xl);
   }
 
-  /* interactive — --sl-i-{transform,shadow,filter} slots; consumers
-     read them on :hover. Bare sl-interactive ("") means grow */
+  /* interactive — --sl-i-{transform,shadow,filter} slots, played
+     back by the shared hover rule below. Bare sl-interactive ("")
+     means grow */
   :--sl-generic-interactive[sl-interactive=""],
   :--sl-generic-interactive[sl-interactive="grow"] {
     --sl-i-transform: scale(1.03);
@@ -123,5 +135,22 @@
 
   :--sl-generic-interactive[sl-interactive="dim"] {
     --sl-i-filter: brightness(0.92);
+  }
+
+  /* the shared hover playback — one rule for every consumer;
+     :not(:disabled) keeps button semantics and is a no-op on cards */
+  :--sl-generic-interactive[sl-interactive]:hover:not(:disabled) {
+    transform: var(--sl-i-transform);
+    box-shadow: var(--sl-i-shadow);
+    filter: var(--sl-i-filter);
+  }
+
+  /* the motion cut sits in attrs on purpose — this file imports
+     before its consumers, so a same-specificity cut in base would
+     lose to their transition shorthands on source order */
+  @media (prefers-reduced-motion: reduce) {
+    :--sl-generic-interactive {
+      transition: none;
+    }
   }
 }

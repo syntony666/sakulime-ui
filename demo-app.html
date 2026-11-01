@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-Hant">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>App — Sakulime layout</title>
+<link rel="stylesheet" href="packages/theme/dist/sakulime.min.css">
+<link rel="stylesheet" href="packages/core/dist/index.min.css">
+<link rel="stylesheet" href="packages/layout/dist/index.min.css">
+<style>
+  body { margin: 0; font-family: system-ui, sans-serif; background: var(--sl-bg); color: var(--sl-text); }
+  a { color: inherit; text-decoration: none; }
+</style>
+
+<div sl-bar="top" sl-fixed>
+  <strong>Console</strong>
+  <nav sl-row="sm"><a href="#">專案</a><a href="#">用量</a><a href="#">帳單</a></nav>
+  <div sl-place="end" sl-row="xs"><span sl-chip>pro</span><button sl-button="ghost">設定</button></div>
+</div>
+
+<div sl-container="lg">
+<div sl-with-sidebar="2xl">
+  <aside sl-sidebar sl-stack="xs" style="padding: var(--sl-lg); border-inline-end: 1px solid var(--sl-border)">
+    <a href="#" sl-tone="primary"><strong>總覽</strong></a>
+    <a href="#">部署</a>
+    <a href="#">資料庫</a>
+    <a href="#">儲存</a>
+    <a href="#">網域</a>
+    <a href="#">日誌</a>
+  </aside>
+
+  <main sl-stack="xl" style="padding: var(--sl-xl)">
+    <div sl-row>
+      <h1 style="margin:0; font-size:1.25rem">總覽</h1>
+      <span sl-chip sl-tone="success" sl-place="end">運作中</span>
+    </div>
+
+    <div sl-grid style="--sl-grid-min: 12rem">
+      <div sl-card><p style="margin:0; color:var(--sl-text-muted)">請求數</p><strong style="font-size:1.5rem">1.2M</strong></div>
+      <div sl-card><p style="margin:0; color:var(--sl-text-muted)">錯誤率</p><strong style="font-size:1.5rem">0.02%</strong></div>
+      <div sl-card><p style="margin:0; color:var(--sl-text-muted)">P95 延遲</p><strong style="font-size:1.5rem">87ms</strong></div>
+      <div sl-card><p style="margin:0; color:var(--sl-text-muted)">頻寬</p><strong style="font-size:1.5rem">48GB</strong></div>
+    </div>
+
+    <div sl-card>
+      <strong>最近部署</strong>
+      <div sl-stack="sm" style="margin-block-start: var(--sl-md)">
+        <div sl-row><span sl-dot sl-tone="success"></span><span>prod — 4f2a1c</span><span sl-place="end" style="color:var(--sl-text-muted)">3 分鐘前</span></div>
+        <div sl-row><span sl-dot sl-tone="success"></span><span>prod — 9e77bd</span><span sl-place="end" style="color:var(--sl-text-muted)">2 小時前</span></div>
+        <div sl-row><span sl-dot sl-tone="warning"></span><span>preview — b31d02</span><span sl-place="end" style="color:var(--sl-text-muted)">昨天</span></div>
+      </div>
+    </div>
+  </main>
+</div>
+</div>
+
+<div sl-toast="top-center">
+  <div sl-notice sl-tone="warning">使用量已達方案的 80%</div>
+</div>

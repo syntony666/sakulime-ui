@@ -55,5 +55,5 @@ px 以根字級 16px 換算，尺規本身是 rem。`sl-gap` 沒有預設，未�
 
 | 分類 | 屬性 |
 | --- | --- |
-| 格局設計 | `sl-stack`、`sl-row`、`sl-grid`、`sl-with-sidebar` |
-| 頁面區塊 | `sl-bar`、`sl-toast` |
+| 格局設計 | `sl-stack`、`sl-row`、`sl-grid` |
+| 頁面區塊 | `sl-bar`、`sl-with-sidebar`、`sl-toast` |

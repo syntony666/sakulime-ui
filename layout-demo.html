@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="zh-Hant">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>sl-layout primitives demo</title>
+<link rel="stylesheet" href="packages/layout/dist/index.min.css">
+<style>
+  body {
+    font-family: system-ui, sans-serif;
+    margin: 0;
+    padding: 2rem;
+    background: #fafaf9;
+    color: #1c1917;
+  }
+  h1 { font-size: 1.25rem; margin: 0; }
+  h2 { font-size: 0.95rem; color: #57534e; margin: 2.5rem 0 0.75rem; }
+  code { font-size: 12px; color: #78716c; }
+  .cell {
+    background: #e7e5e4;
+    border: 1px dashed #a8a29e;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 13px;
+  }
+</style>
+
+<h1>layout primitives</h1>
+<p><code>packages/layout/dist/index.min.css</code></p>
+
+<h2><code>sl-stack</code> — 垂直堆疊，值是間距（子層 margin 會被清掉）</h2>
+<div sl-row="3xl">
+  <div>
+    <code>sl-stack="xs"</code>
+    <div sl-stack="xs">
+      <div class="cell">甲</div><div class="cell">乙</div><div class="cell">丙</div>
+    </div>
+  </div>
+  <div>
+    <code>sl-stack="md"</code>
+    <div sl-stack="md">
+      <div class="cell">甲</div><div class="cell">乙</div><div class="cell">丙</div>
+    </div>
+  </div>
+  <div>
+    <code>sl-stack="3xl"</code>
+    <div sl-stack="3xl">
+      <div class="cell">甲</div><div class="cell">乙</div><div class="cell">丙</div>
+    </div>
+  </div>
+</div>
+
+<h2><code>sl-stack sl-flow</code> — 子層之間自動補節奏，子層排版不動（混排內容）</h2>
+<div sl-row="3xl">
+  <div>
+    <code>&lt;article sl-stack="lg" sl-flow&gt; — 標題跟段落保留自己的 margin，卡片跟通知沒有 → 距離就是 lg</code>
+    <article sl-stack="lg" sl-flow style="max-width: 30rem">
+      <h3>文件標題</h3>
+      <p>內文段落，保留原本的上下 margin，跟 flow 的間距取大的。</p>
+      <div class="cell">卡片</div>
+      <div class="cell">通知</div>
+    </article>
+  </div>
+  <div>
+    <code>沒標 — 全部貼在一起（或各自 margin）</code>
+    <article style="max-width: 30rem">
+      <h3>文件標題</h3>
+      <p>內文段落，保留原本的上下 margin。</p>
+      <div class="cell">卡片</div>
+      <div class="cell">通知</div>
+    </article>
+  </div>
+</div>
+
+<h2><code>sl-row</code> — 水平排列，放不下就換行</h2>
+<div sl-row>
+  <div class="cell">一</div><div class="cell">二</div><div class="cell">三</div>
+  <div class="cell">四</div><div class="cell">五</div><div class="cell">六</div>
+  <div class="cell">七</div><div class="cell">八</div><div class="cell">九</div>
+  <div class="cell">十</div><div class="cell">十一</div><div class="cell">十二</div>
+</div>
+
+<h2><code>sl-row sl-collapse</code> — 視窗拉窄到 720px（45rem）以下會變直排</h2>
+<div sl-row sl-collapse>
+  <div class="cell">欄一</div><div class="cell">欄二</div><div class="cell">欄三</div>
+</div>
+
+<h2><code>sl-grid</code> — auto-fill，欄寬不夠自動掉欄</h2>
+<div sl-grid>
+  <div class="cell">1</div><div class="cell">2</div><div class="cell">3</div>
+  <div class="cell">4</div><div class="cell">5</div><div class="cell">6</div>
+</div>
+
+<h2><code>sl-grid</code>＋<code>--sl-grid-min</code> — 調欄寬下限</h2>
+<div sl-grid style="--sl-grid-min: 8rem">
+  <div class="cell">8rem</div><div class="cell">8rem</div><div class="cell">8rem</div>
+  <div class="cell">8rem</div><div class="cell">8rem</div><div class="cell">8rem</div>
+</div>
+<br>
+<div sl-grid style="--sl-grid-min: 24rem">
+  <div class="cell">24rem</div><div class="cell">24rem</div><div class="cell">24rem</div>
+  <div class="cell">24rem</div><div class="cell">24rem</div><div class="cell">24rem</div>
+</div>
+
+<h2><code>sl-container="md"</code> — 順便看容器</h2>
+<div sl-container="md" style="outline: 1px dashed #a8a29e">
+  <div class="cell">被 container md（60rem）限寬置中，左右留 --sl-lg 內距</div>
+</div>
+
+<h2><code>sl-bar="top"</code> — sticky 頂列＋三區（往下滾會停在頂端）</h2>
+<div sl-bar="top">
+  <div class="cell">Logo</div>
+  <div class="cell" sl-place="center">中間</div>
+  <div class="cell" sl-place="end">右邊</div>
+</div>
+
+<h2><code>sl-with-sidebar</code> — 側欄＋主欄（拉窄看主欄掉到下面）</h2>
+<div sl-with-sidebar>
+  <aside sl-sidebar><div class="cell">側欄 16rem</div></aside>
+  <div><div class="cell">主欄，下限 55%</div></div>
+</div>
+<br>
+<div sl-with-sidebar>
+  <aside sl-sidebar><div class="cell">左欄</div></aside>
+  <div><div class="cell">主欄</div></div>
+  <aside sl-sidebar><div class="cell">右欄</div></aside>
+</div>
+
+<h2><code>sl-bar="bottom"</code> — hairline＋內距＋三區</h2>
+<div sl-bar="bottom">
+  <div class="cell">© 2026</div>
+  <div class="cell" sl-place="center">中間</div>
+  <div class="cell" sl-place="end">右邊</div>
+</div>
+
+<h2><code>sl-toast</code> — 右下＋中上各一個（這頁就有）</h2>
+<div sl-toast>
+  <div class="cell">右下通知</div>
+</div>
+<div sl-toast="top-center">
+  <div class="cell">中上通知</div>
+</div>
