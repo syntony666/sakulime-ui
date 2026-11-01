@@ -42,7 +42,7 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 
 ## 多欄 `sl-cols`
 
-`sl-cols="2..12"` 把 stack 切成平衡多欄：內容由上到下排滿一欄再接下一欄，不用設高度。跟文流模式一樣是 block 排版、保留 margin，`sl-span` 標在子層上跨滿全部欄：
+`sl-cols="2..12"` 把 stack 切成平衡多欄：內容由上到下排滿一欄再接下一欄，不用設高度。跟文流模式一樣是 block 排版、保留 margin，`sl-span` 標在子層上跨滿全部欄（裸標或 `"full"` 都行）：
 
 ```html
 <div sl-stack sl-cols="2">
@@ -52,6 +52,8 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 ```
 
 <Demo :render="StackDemos.Cols.render" />
+
+裸 `sl-cols` 不給值等同 `sl-flow` 的文流排版（行為保留給舊用法，新寫的標 `sl-flow` 就好）。多欄沒有斷點版本：`sl-cols-sm`、`sl-collapse` 都吃不到，手機要退回單欄的話改用 `sl-grid` 或自己寫 media query。
 
 ## 間距
 

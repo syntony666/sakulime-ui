@@ -21,6 +21,8 @@ import * as PlacementDemos from "../../demos/layout/placement.demo";
 
 機制是 auto margin：值把某一側的 margin 設成 `auto`，那一側的多餘空間被吸走，元素就被推向對面。所以標記不綁特定父層，block、flex、grid 的子層都適用，元素比容器窄就有效。
 
+注意全域 reset：`* { margin: 0 }` 這種沒包 `@layer` 的規則優先權高過所有 `sl-*` 規則，會把標記的 margin 打掉。自己的 reset 包進 `@layer` 就能共存。
+
 | 值 | 效果 |
 |---|---|
 | `sl-place="start"` | 靠行首，右邊空間被吸走 |
@@ -56,7 +58,7 @@ import * as PlacementDemos from "../../demos/layout/placement.demo";
 
 <Demo :render="PlacementDemos.StackMiddleEnd.render" />
 
-標了 `sl-place="center"` 的 row 會切成三區：中間格定在列中線（真中間，不被 `end` 分走空間）、`end` 格進右區，沒標的子層依序填進左區：
+標了 `sl-place="center"` 的 row 會切成三區：中間格定在列中線（真中間，不被 `end` 分走空間）、`end` 格進右區，沒標的子層依序填進左區。三區模式至多三格，第四個會掉出軌道，多個靠左的東西要包一個巢狀 `sl-row`；center 格被 `sl-hide-*` 藏掉時模式照樣成立，下一格會掉進中區，要隱藏整組標記就藏整列：
 
 <Demo :render="PlacementDemos.RowCenterEnd.render" />
 

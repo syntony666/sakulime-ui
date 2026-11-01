@@ -26,21 +26,26 @@ import * as ToastDemos from "../../demos/layout/toast.demo";
 
 ## 位置
 
-標示換角落，預設右下：
+標示換角落，值是「邊－側」的組合，預設右下：
 
 | 選項             | 位置 |
 | ---------------- | ---- |
-| 預設              | 右下 |
-| `start`          | 左下 |
+| 預設             | 右下 |
+| `bottom-start`   | 左下 |
 | `bottom-center`  | 中下 |
+| `bottom-end`     | 右下（同預設） |
 | `top-start`      | 左上 |
-| `top-end`        | 右上 |
 | `top-center`     | 中上 |
+| `top-end`        | 右上 |
+| `start`          | 左下（舊寫法，等同 `bottom-start`） |
+
+值槽是角落，不是間距：`sl-toast="lg"` 沒有效果，要調間距用 `sl-gap`。
 
 ## 尺寸與間距
 
-- fixed，z-index 60，會蓋在 `sl-bar` 上面
-- 寬度是 `--sl-toast-w`，預設 22rem（352px）；視窗放不下自動縮，不會凸出
-- 離邊距離是 `--sl-toast-b`／`--sl-toast-e`，預設都是 `lg`（16px）
+- fixed，z-index 讀 `--sl-toast-z`（預設 60），會蓋在 `sl-bar`（`--sl-bar-z` 50）上面
+- 寬度是 `--sl-toast-w`，預設 22rem（352px）；視窗放不下自動縮，縮放幅度跟著 `--sl-toast-e` 走
+- 高度上限是視窗高扣掉上下離邊距離，通知太多會在區塊內捲動，不會頂出視窗
+- 離邊距離是 `--sl-toast-b`／`--sl-toast-e`，預設都是 `lg`（16px）；底部錨點會自動避開手機 home indicator（safe-area inset）
 - 通知之間的間距預設 `md`（12px）。只想改一個就寫 `--sl-toast-gap`；[`sl-gap`](/attrs/gap) 標示在容器自己或外層都行。
 - 順序跟堆疊由 DOM 決定，多一個 `sl-notice` 就多一張

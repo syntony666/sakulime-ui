@@ -36,6 +36,8 @@ import * as SidebarDemos from "../../demos/layout/sidebar.demo";
 
 <Demo :render="SidebarDemos.SidebarBoth.render" />
 
+結構是一條 rail 配一個主欄（或左右各一條 rail）；rail 上的標記只有順序語意，`center`、`middle` 這些值在這裡沒有對齊意義，標了只會清掉 margin。另外標記動的是視覺順序：Tab 跟朗讀順序還是看 DOM，rail 裡互動元件多的話 DOM 序跟視覺序盡量保持一致。
+
 ## 尺寸
 
 - 側邊欄寬是 `--sl-sidebar-w`，預設 16rem（256px），可以各別覆寫
