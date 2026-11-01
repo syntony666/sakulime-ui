@@ -45,6 +45,18 @@
     margin-inline: auto;
   }
 
+  /* physical aliases — left/right keep their physical meaning in RTL
+     too; the logical insets clear first so neither direction leaks */
+  [sl-toast$="left"] {
+    inset-inline: auto;
+    left: var(--_te);
+  }
+
+  [sl-toast$="right"] {
+    inset-inline: auto;
+    right: var(--_te);
+  }
+
   /* fixed bands and toasts are screen furniture — in print they'd
      repeat on every page and cover the sheet */
   @media print {

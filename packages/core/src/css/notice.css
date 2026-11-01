@@ -117,7 +117,7 @@
 
   /* content align — "end" right-aligns every line; copy stops at the
      reserved action lane, which reads as hugging the action */
-  [sl-notice-align="end"] {
+  [sl-notice][sl-notice-align="end"] {
     text-align: end;
   }
 }
