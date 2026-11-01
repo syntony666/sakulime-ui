@@ -15,7 +15,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ## 型態
 
-寬度是 `sl-notice` 的值，不寫值就是滿版（填滿容器）：
+寬度是 `sl-notice` 的選項，沒給就是滿版（填滿容器）：
 
 - `fit`：縮成內容的寬度，浮動通知或配合訊息長度的場合
 
@@ -27,9 +27,9 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### 顏色 `sl-tone`
 
-`sl-notice` 是 `sl-tone` 的適用元素。不寫值是 primary 淡底，資訊通知的標準色。
+`sl-notice` 是 `sl-tone` 的適用元素。沒給是 primary 淺底色，資訊通知的標準色。
 
-- `primary`：主題主色（預設值）
+- `primary`：主題主色（預設）
 - `secondary`：主題副色
 - `success`：代表成功
 - `warning`：代表警告
@@ -51,7 +51,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### 厚度 `sl-pad`
 
-不寫值是 `md`。`sm`／`lg` 是整體內距的增減，`lg` 適合公告型的多行內容：
+沒給是 `md`。`sm`／`lg` 是整體內距的增減，`lg` 適合公告型的多行內容：
 
 <Demo :render="NoticeDemos.Pads.render" />
 
@@ -61,7 +61,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 內容的對齊方向，`fit` 時元件跟內容同寬所以沒有差別：
 
-- 不寫值：靠左（預設）
+- 沒給：靠左（預設）
 - `end`：靠右；換行後每一行都靠右
 
 <Demo :render="NoticeDemos.Aligns.render" />
@@ -73,7 +73,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 固定在邊緣的控制項，例如關閉鈕或動作連結，點擊後的行為由頁面實作：
 
 - 寫在 `sl-notice` 的直接子層；放到更深層的只是普通內容，不會固定到邊緣
-- 不寫值靠右（尾端），`start` 靠左（開頭），兩個可以同時存在
+- 沒給靠右（尾端），`start` 靠左（開頭），兩個可以同時存在
 - 垂直置中，文字不會繞到它底下；控制項更寬時調大 `--sl-action-w`
 - 裡面的 `<i>` 跟著按鈕字級，加大用 `sl-icon-size`
 
@@ -83,7 +83,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### Banner *橫幅*
 
-滿版一條，圖示、訊息、連結照順序排，連結沿用通知的墨色：
+滿版一條，圖示、訊息、連結照順序排，連結沿用通知的文字顏色：
 
 <Playground :meta="NoticeDemos.BannerPlay" :render="NoticeDemos.BannerPlay.render" />
 

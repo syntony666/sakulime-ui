@@ -15,13 +15,13 @@ import * as ButtonDemos from "../../demos/components/button.demo";
 
 ## 型態
 
-型態是 `sl-button` 的值，不寫值就是 `normal`：
+型態是 `sl-button` 的選項，沒給就是 `normal`：
 
 ```html
 <button sl-button="invert">按鈕</button>
 ```
 
-- `normal`：整顆填滿（預設值）
+- `normal`：整顆填滿（預設）
 - `invert`：只剩框線跟字
 - `underline`：只有底線
 - `ghost`：沒底沒框，只有字
@@ -32,7 +32,7 @@ import * as ButtonDemos from "../../demos/components/button.demo";
 
 ### 顏色 `sl-tone`
 
-- `primary`：主題主色（預設值）
+- `primary`：主題主色（預設）
 - `secondary`：主題副色
 - `success`：代表成功
 - `warning`：代表警告
@@ -49,7 +49,7 @@ import * as ButtonDemos from "../../demos/components/button.demo";
 ### 尺寸 `sl-size`
 
 - `sm`：小
-- `md`：一般（預設值）
+- `md`：一般（預設）
 - `lg`：大
 
 <Demo :render="ButtonDemos.Sizes.render" />
@@ -58,7 +58,7 @@ import * as ButtonDemos from "../../demos/components/button.demo";
 
 - `none`：直角
 - `sm`：微圓
-- `md`：一般圓角（預設值）
+- `md`：一般圓角（預設）
 - `lg`：很圓
 - `full`：膠囊形，全圓到底
 

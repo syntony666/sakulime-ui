@@ -11,7 +11,7 @@ description: sl-* 屬性語法總覽：元件標記、元件設定、子元素�
 
 ### 元件標記
 
-`sl-<元件>[="<型態>"]` 等號前是「這是什麼」，等號後是「哪一型」。不寫值就是預設型態：
+`sl-<元件>[="<型態>"]` 等號前是「這是什麼」，等號後是「哪一型」。等號不寫就是預設型態：
 
 ```html
 <button sl-button>按鈕</button>
@@ -40,20 +40,7 @@ description: sl-* 屬性語法總覽：元件標記、元件設定、子元素�
 
 ### 通用屬性
 
-`sl-<屬性>="<值>"` 是跨元件共用的值：
-
-| 屬性 | 值 | 適用元素 | 說明 |
-|---|---|---|---|
-| `sl-tone` | `primary` `secondary` `success` `warning` `danger` | `sl-button`、`sl-card`、`sl-icon`、`sl-dot`、`sl-chip`、`sl-notice` | 主題色調，背景與文字色自動配好 |
-| `sl-size` | `sm` `md` `lg` | `sl-button`、`sl-chip` | 高度與字級（chip 只取字級，整顆等比縮放） |
-| `sl-radius` | `none` `sm` `md` `lg` `full` | `sl-button`、`sl-card`、`sl-notice` | 圓角 |
-| `sl-pad` | `sm` `md` `lg` | `sl-card`、`sl-notice` | 內距 |
-| `sl-interactive` | `grow` `lift` `raise` `press` | `sl-card` | 滑鼠移過去的效果，不寫值是 `grow` |
-| `sl-gap` | `xs` `sm` `md` `lg` `xl` `2xl` `3xl` `4xl` `5xl` | `sl-stack`、`sl-row`、`sl-grid`、`sl-flow`、`sl-with-sidebar`、`sl-topbar`、`sl-footer`、`sl-toast` | 共用間距值，細節見 [Gap](/layout/gap) |
-
-## 作用範圍
-
-通用屬性只對「適用元素」欄列出的元素有效，`sl-gap` 例外，它標示在外層，值會繼承給裡面的排版屬性。其他通用屬性標示在外層元素上，不會影響裡面的元件：
+`sl-<屬性>="<選項>"` 是跨元件共用的標示，只對各自適用的元素有效；標示在外層元素上不會影響裡面的元件。`sl-gap` 是例外，給的間距會繼承給裡面的排版屬性：
 
 ```html
 <!-- 無效：div 不是適用元素，按鈕不受影響 -->
@@ -74,4 +61,4 @@ description: sl-* 屬性語法總覽：元件標記、元件設定、子元素�
 </div>
 ```
 
-各元件頁只記錄元件自己的標記值與設定；通用屬性的完整細節以本頁為準。
+各元件頁只記錄自己的標記跟設定；通用屬性的細節看各自頁面：[Tone 色調](/attrs/tone)、[Size 尺寸](/attrs/size)、[Radius 圓角](/attrs/radius)、[Pad 內距](/attrs/pad)、[Interactive 互動](/attrs/interactive)、[Gap 共用間距](/attrs/gap)。

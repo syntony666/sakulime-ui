@@ -1,5 +1,5 @@
 ---
-title: Flow 順排
+title: Flow 子層間距
 description: 直接子層之間自動補垂直節奏，子層排版不動。
 ---
 
@@ -7,9 +7,9 @@ description: 直接子層之間自動補垂直節奏，子層排版不動。
 import * as FlowDemos from "../../demos/layout/flow.demo";
 </script>
 
-# Flow *順排*
+# Flow *子層間距*
 
-> 直接子層之間自動補上垂直節奏。不改成 flex、不清 margin，內文混排跟沒有容器語意的層都用它。
+> 直接子層之間自動補上垂直節奏。不改成 flex、不清 margin，內文混排或沒另外包一層的地方都用它。
 
 ## 用法
 
@@ -32,9 +32,9 @@ import * as FlowDemos from "../../demos/layout/flow.demo";
 
 px 以根字級 16px 換算，尺規本身是 rem。
 
-`sl-flow` 的值就是間距，預設 `md`：
+`sl-flow` 的選項就是間距，預設 `md`：
 
-| 值    | 間距         |
+| 選項  | 間距         |
 | ----- | ------------ |
 | `xs`  | 4px          |
 | `sm`  | 8px          |
@@ -46,7 +46,7 @@ px 以根字級 16px 換算，尺規本身是 rem。
 | `4xl` | 40px         |
 | `5xl` | 48px         |
 
-只想改一個容器就寫 `--sl-flow-gap`；[`sl-gap`](/layout/gap) 標示在容器自己或外層都行，裡面沒給間距值的排版屬性會繼承這個值。
+只想改一個容器就寫 `--sl-flow-gap`；[`sl-gap`](/attrs/gap) 標示在容器自己或外層都行，裡面沒給間距的排版屬性會繼承這個間距。
 
 三種間距的實際樣子：
 
@@ -55,5 +55,5 @@ px 以根字級 16px 換算，尺規本身是 rem。
 ### 行為
 
 - 每個子層跟前一個之間補 `margin-block-start`，第一個上面不加
-- 子層完全不改：不變 flex item、寬度不動、自己的 margin 保留，間距值是下限，子層原本的 margin 比它大就聽子層的
-- 要精準等距、子層拉滿寬的話用 `sl-stack`；`sl-flow` 適合內文混排跟懶得包的層
+- 子層完全不改：不變 flex item、寬度不動、自己的 margin 保留，間距是下限，子層原本的 margin 比它大就聽子層的
+- 要精準等距、子層拉滿寬的話用 `sl-stack`；`sl-flow` 適合內文混排，或不想另外包一層排版元素的地方
