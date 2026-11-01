@@ -1,4 +1,5 @@
 import type { Meta, DemoObj } from "../util/types";
+import { axis } from "../util/axis";
 
 const meta = {} satisfies Meta;
 export default meta;
@@ -29,4 +30,17 @@ export const BarZones: Demo = {
 export const BarBottom: Demo = {
   render: () =>
     `<div sl-bar="bottom" sl-pad="lg" style="position: static">${cell("頁尾內容")}</div>`,
+};
+
+// positioning mods — a live fixed bar would pin to the real viewport,
+// so the stage overrides position; the attrs shown are the real API
+export const Positions: Demo = {
+  render: () =>
+    axis(
+      ["-", "sl-static", "sl-fixed"],
+      (v) =>
+        `<div sl-bar="top"${v === "-" ? "" : ` ${v}`} style="position: static">` +
+        `${cell(v === "-" ? "sticky（預設）" : v)}</div>`,
+      true
+    ),
 };

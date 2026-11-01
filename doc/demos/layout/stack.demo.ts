@@ -9,7 +9,7 @@ const cells = (n = 3) =>
   Array.from({ length: n }, (_, i) => `<div class="demo-cell">項目 ${i + 1}</div>`).join("");
 
 const frame = (caption: string, inner: string) =>
-  `<div class="demo-cell"><span class="demo-w">${caption}</span>` +
+  `<div class="demo-cell"><span class="demo-w" data-demo>${caption}</span>` +
   `<div style="margin-top: var(--sl-sm)">${inner}</div></div>`;
 
 export const Gaps: Demo = {

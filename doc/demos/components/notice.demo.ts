@@ -170,8 +170,9 @@ export const BannerPlay: DemoObj<BannerArgs> = {
   },
 };
 
-// toast playground — the consumer owns the container (.demo-toast);
-// stacking N notices in it, per-notice width is the only sl-side knob
+// toast playground — sl-toast is the real consumer container; the
+// position: static override only undoes fixed so it renders inside
+// the stage. Stacking N notices, per-notice width is the sl-side knob
 const TOASTS = [
   ["success", "check", "已儲存變更"],
   ["warning", "triangle-alert", "部署已排入佇列，前方還有 2 個 build"],
@@ -190,7 +191,7 @@ export const ToastPlay: DemoObj<ToastArgs> = {
     variant: axisArg("sl-notice", "寬度", VARIANTS),
   },
   render: (a) =>
-    `<div class="demo-toast">` +
+    `<div sl-toast style="position: static">` +
     TOASTS.slice(0, Number(a.count))
       .map(
         ([tone, icon, body]) =>

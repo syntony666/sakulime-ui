@@ -13,7 +13,7 @@ export const Gaps: Demo = {
     axis(
       ["xs", "md", "3xl"],
       (v) =>
-        `<div class="demo-cell"><span class="demo-w">sl-grid="${v}"</span>` +
+        `<div class="demo-cell"><span class="demo-w" data-demo>sl-grid="${v}"</span>` +
         `<div sl-grid="${v}" style="margin-top: var(--sl-sm)">${cells()}</div></div>`,
       true
     ),
@@ -23,7 +23,7 @@ export const Gaps: Demo = {
 // reader sees them take two and three tracks respectively
 export const Cols: Demo = {
   render: () =>
-    `<div class="demo-cell"><span class="demo-w">sl-cols="4"</span>` +
+    `<div class="demo-cell"><span class="demo-w" data-demo>sl-cols="4"</span>` +
     `<div sl-grid sl-cols="4" style="margin-top: var(--sl-sm)">` +
     `<div class="demo-cell" sl-span="2">跨兩欄 sl-span="2"</div>` +
     `<div class="demo-cell">1</div>` +
@@ -32,6 +32,8 @@ export const Cols: Demo = {
     `<div class="demo-cell" sl-span="3">跨三欄 sl-span="3"</div>` +
     `<div class="demo-cell">4</div>` +
     `<div class="demo-cell">5</div>` +
+    `<div class="demo-cell" sl-span="full">跨滿整列 sl-span="full"</div>` +
+    `<div class="demo-cell">6</div>` +
     `</div></div>`,
 };
 
@@ -40,7 +42,7 @@ export const MinWidth: Demo = {
     ["8rem", "20rem"]
       .map(
         (min) =>
-          `<div class="demo-cell"><span class="demo-w">--sl-grid-min: ${min}</span>` +
+          `<div class="demo-cell"><span class="demo-w" data-demo>--sl-grid-min: ${min}</span>` +
           `<div sl-grid style="--sl-grid-min: ${min}; margin-top: var(--sl-sm)">${cells()}</div></div>`
       )
       .join(""),

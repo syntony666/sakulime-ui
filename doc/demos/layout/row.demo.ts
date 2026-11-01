@@ -13,8 +13,22 @@ export const Gaps: Demo = {
     axis(
       ["xs", "md", "3xl"],
       (v) =>
-        `<div class="demo-cell"><span class="demo-w">sl-row="${v}"</span>` +
+        `<div class="demo-cell"><span class="demo-w" data-demo>sl-row="${v}"</span>` +
         `<div sl-row="${v}" style="margin-top: var(--sl-sm)">${cells()}</div></div>`,
+      true
+    ),
+};
+
+// collapse — the viewport decides, not the container: under 45rem the
+// row folds into a column, -md folds earlier (<60rem). Narrow the
+// window to see them flip
+export const Collapses: Demo = {
+  render: () =>
+    axis(
+      ["sl-collapse", "sl-collapse-md"],
+      (v) =>
+        `<div class="demo-cell"><span class="demo-w" data-demo>${v}</span>` +
+        `<div sl-row ${v} style="margin-top: var(--sl-sm)">${cells()}</div></div>`,
       true
     ),
 };

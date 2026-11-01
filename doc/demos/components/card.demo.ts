@@ -30,7 +30,7 @@ const PADS = ["-", "sm", "md", "lg"];
 const RADII = ["-", "none", "sm", "md", "lg", "full"];
 const VARIANTS = ["-", "hollow", "plain", "blank"];
 const INDICATES = ["-", "top", "bottom", "start", "end"];
-const CORNERS = ["-", "start", "end"];
+const CORNERS = ["-", "start", "end", "bottom", "bottom start"];
 const CORNER_KINDS = ["chip", "dot", "icon"];
 const INTERACTIVES = ["-", "grow", "lift", "raise", "press"];
 const INSETS = ["-", "top", "middle", "bottom"];
@@ -66,7 +66,7 @@ const vcard = (v: string, content: string, w = 320) =>
 
 // shared content parts — playground cards and section demos
 const sec = (inner: string) => `<div sl-card-section>${inner}</div>`;
-const media = `<div sl-card-section="inset" class="demo-media"></div>`;
+const media = `<div sl-card-section="inset" class="demo-media"><!-- 圖片 --></div>`;
 const TITLE = `<strong>卡片標題</strong><p>卡片內容文字，描述這張卡片在展示什麼。</p>`;
 const FOOT = `<small>底部資訊</small>`;
 
@@ -140,7 +140,8 @@ export const InteractiveLink: Demo = {
 
 // corner is position only — the look is a small attr on the same element
 const cornerEl = (position: string, kind: string, tone: string, size = "-") => {
-  const pos = position === "start" ? `="start"` : "";
+  // "end" is the default corner — only start/bottom words get written
+  const pos = position === "-" || position === "end" ? "" : `="${position}"`;
   const t = attr("sl-tone", tone);
   const s = kind === "chip" ? attr("sl-size", size) : "";
   if (kind === "dot") return `<i sl-card-corner${pos} sl-dot${t}></i>`;
@@ -151,7 +152,7 @@ const cornerEl = (position: string, kind: string, tone: string, size = "-") => {
 export const Corner: DemoObj<CornerArgs> = {
   args: { position: "-", kind: "chip", tone: "-", size: "-" },
   argTypes: {
-    position: axisArg("sl-card-corner", "位置", ["-", "start", "end"]),
+    position: axisArg("sl-card-corner", "位置", CORNERS),
     kind: axisArg("組合", "角落內容：同元素疊加的 attr", CORNER_KINDS),
     tone: axisArg("sl-tone", "顏色", TONES),
     size: axisArg("sl-size", "大小（chip 限定）", ["-", "sm", "md", "lg"]),
