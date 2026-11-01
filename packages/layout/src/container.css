@@ -1,0 +1,19 @@
+@layer base {
+  /* page container — <div sl-container="md">, works on any element;
+     bare sl-container defaults to the md width */
+  [sl-container] {
+    box-sizing: border-box;
+    inline-size: 100%;
+    max-inline-size: var(--sl-container-md);
+    margin-inline: auto;
+    padding-inline: var(--sl-container-pad, var(--sl-lg));
+  }
+
+  [sl-container="sm"] {
+    max-inline-size: var(--sl-container-sm);
+  }
+
+  [sl-container="lg"] {
+    max-inline-size: var(--sl-container-lg);
+  }
+}

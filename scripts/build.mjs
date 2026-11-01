@@ -1,5 +1,5 @@
 import { cpSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
-import { dirname } from "node:path";
+import { dirname, join as pjoin } from "node:path";
 import { createRequire } from "node:module";
 import { buildSync, transformSync } from "esbuild";
 
@@ -20,8 +20,13 @@ const coreDir = pkgDir("@sakulime-ui/core");
 const tokens = read(req.resolve("@sakulime-ui/shared/vars.css"));
 const themeFiles = readdirSync(themeDir).filter((f) => f.endsWith(".css"));
 /* read the source file, not the ./index.css export — that subpath now
-   resolves to the dist artifact this script produces */
-const layout = read(`${layoutDir}/src/layout.css`);
+   resolves to the dist artifact this script produces. src/layout.css
+   is an @import index over per-primitive files; inline them here so
+   the published bundle stays a single concatenated sheet */
+const bundle = (path) =>
+  read(path).replace(/@import\s+"([^"]+)"\s*;/g, (_, rel) =>
+    bundle(pjoin(dirname(path), rel)));
+const layout = bundle(`${layoutDir}/src/layout.css`);
 
 /* media queries can't read vars — layout.css hardcodes the container
    breakpoints as literals; fail the build if the twins drift */
