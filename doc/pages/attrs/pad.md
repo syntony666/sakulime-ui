@@ -1,6 +1,6 @@
 ---
 title: Pad 內距
-description: 元件的整體內距，三階。
+description: 整體內距，三階。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as PadDemos from "../../demos/attrs/pad.demo";
 
 # Pad *內距*
 
-> 元件的整體內距，三階。
+> 整體內距，三階。
 
 ## 用法
 
@@ -28,8 +28,19 @@ import * as PadDemos from "../../demos/attrs/pad.demo";
 
 ## 選項
 
-`sm`、`md`、`lg`，預設 `md`。
+px 以根字級 16px 換算，尺規本身是 rem：
+
+| 選項 | 內距 |
+| --- | --- |
+| `sm` | 12px |
+| `md`（預設） | 16px |
+| `lg` | 24px |
 
 ## 適用元素
 
-`sl-card`、`sl-notice`。整體內距的增減，`lg` 適合公告型的多行內容。
+整體內距的增減：
+
+| 元素 | 備註 |
+| --- | --- |
+| `sl-card` | `lg` 讓卡片內容呼吸 |
+| `sl-notice` | `lg` 適合公告型的多行內容 |

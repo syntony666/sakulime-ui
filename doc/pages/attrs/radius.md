@@ -24,9 +24,19 @@ import * as RadiusDemos from "../../demos/attrs/radius.demo";
 
 ## 選項
 
-`none`、`sm`、`md`、`lg`、`full`，預設 `md`。
+px 以根字級 16px 換算，尺規本身是 rem：
+
+| 選項 | 圓角 |
+| --- | --- |
+| `none` | 0 |
+| `sm` | 4px |
+| `md`（預設） | 8px |
+| `lg` | 12px |
+| `full` | 膠囊 |
 
 ## 適用元素
+
+沒給的話都是 `md`，`sl-notice` 例外：
 
 | 元素 | 預設 |
 | --- | --- |

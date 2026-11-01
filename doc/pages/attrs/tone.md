@@ -1,6 +1,6 @@
 ---
 title: Tone 色調
-description: 五個主題色調，標在適用元素上，背景跟文字色自動配好。
+description: 五個主題色調。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as ToneDemos from "../../demos/attrs/tone.demo";
 
 # Tone *色調*
 
-> 五個主題色調。標在適用元素上，背景跟文字色自動配好。
+> 五個主題色調，背景跟文字色自動配好。
 
 ## 用法
 
@@ -24,7 +24,13 @@ import * as ToneDemos from "../../demos/attrs/tone.demo";
 
 ## 選項
 
-`primary`、`secondary`、`success`、`warning`、`danger`。
+| 選項 | 用途 |
+| --- | --- |
+| `primary` | 主色 |
+| `secondary` | 次要色 |
+| `success` | 成功、完成的回饋 |
+| `warning` | 需要注意的提醒 |
+| `danger` | 錯誤、危險操作 |
 
 ## 適用元素
 
