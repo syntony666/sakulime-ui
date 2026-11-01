@@ -17,7 +17,7 @@
     gap: 0.4em;
     border-radius: var(--sl-radius);
     border: 2px solid transparent;
-    min-height: var(--sl-size-h);
+    min-block-size: var(--sl-size-h);
     padding: 0 var(--sl-size-px);
     font-size: var(--sl-size-fs);
     transition:

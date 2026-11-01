@@ -81,8 +81,8 @@
   /* fit — shrink-wrap to content instead of filling the row; the
      toast-friendly width inside a consumer wrapper */
   [sl-notice="fit"] {
-    width: fit-content;
-    max-width: 100%;
+    inline-size: fit-content;
+    max-inline-size: 100%;
   }
 
   /* action — absolutely pinned to its edge and vertically centered;
@@ -105,7 +105,7 @@
   [sl-notice] > [sl-notice-action] {
     position: absolute;
     inset-inline-end: var(--sl-action-inset);
-    top: 50%;
+    inset-block-start: 50%;
     translate: 0 -50%;
   }
 

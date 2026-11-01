@@ -79,17 +79,17 @@
   }
 
   [sl-card] > * + [sl-card-section] {
-    margin-top: var(--sl-pad);
-    border-top: 1px solid var(--sl-border);
-    padding-top: var(--sl-pad);
+    margin-block-start: var(--sl-pad);
+    border-block-start: 1px solid var(--sl-border);
+    padding-block-start: var(--sl-pad);
   }
 
   /* a leading corner doesn't count as content — the section after it
      is still the first block, so no divider or gap above it */
   [sl-card] > [sl-card-corner]:first-child + [sl-card-section] {
-    margin-top: 0;
-    border-top: 0;
-    padding-top: 0;
+    margin-block-start: 0;
+    border-block-start: 0;
+    padding-block-start: 0;
   }
 
   /* inset — a padding-cancelled region for edge-to-edge content (img/
@@ -101,28 +101,28 @@
 
   [sl-card] > :is([sl-card-section="inset"]:first-child,
                  [sl-card-corner]:first-child + [sl-card-section="inset"]) {
-    margin-top: var(--_pbn);
-    border-top: 0;
+    margin-block-start: var(--_pbn);
+    border-block-start: 0;
   }
 
   [sl-card] > :is([sl-card-section="inset"]:last-child,
                  [sl-card-section="inset"]:has(+ [sl-card-corner]:last-child)) {
-    margin-bottom: var(--_pbn);
+    margin-block-end: var(--_pbn);
   }
 
   /* followers own the gap — a section's divider hugs the image edge,
      anything else gets the pad spacing itself */
   [sl-card-section="inset"] + * {
-    margin-top: var(--sl-pad);
+    margin-block-start: var(--sl-pad);
   }
 
   [sl-card-section="inset"] + [sl-card-section] {
-    margin-top: 0;
+    margin-block-start: 0;
   }
 
   [sl-card-section="inset"] > :is(img, svg, video, iframe) {
     display: block;
-    width: 100%;
+    inline-size: 100%;
   }
 
   /* blank — borderless, fully centered empty-state block */
@@ -171,27 +171,27 @@
      they bleed to the card edges like inset */
   [sl-card] > :is([sl-card-section="secondary"],
                   [sl-card-section="active"]) {
-    padding-bottom: var(--sl-pad);
+    padding-block-end: var(--sl-pad);
   }
 
   :is([sl-card-section="secondary"],
       [sl-card-section="active"]) + [sl-card-section] {
-    margin-top: 0;
+    margin-block-start: 0;
   }
 
   [sl-card] > :is([sl-card-section="secondary"]:first-child,
                   [sl-card-section="active"]:first-child,
                   [sl-card-corner]:first-child + [sl-card-section="secondary"],
                   [sl-card-corner]:first-child + [sl-card-section="active"]) {
-    margin-top: var(--_pbn);
-    padding-top: var(--sl-pad);
+    margin-block-start: var(--_pbn);
+    padding-block-start: var(--sl-pad);
   }
 
   [sl-card] > :is([sl-card-section="secondary"]:last-child,
                   [sl-card-section="active"]:last-child,
                   [sl-card-section="secondary"]:has(+ [sl-card-corner]:last-child),
                   [sl-card-section="active"]:has(+ [sl-card-corner]:last-child)) {
-    margin-bottom: var(--_pbn);
+    margin-block-end: var(--_pbn);
   }
 
   /* center — horizontally centered text */
