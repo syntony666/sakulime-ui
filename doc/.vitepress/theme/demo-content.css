@@ -70,3 +70,12 @@
   color: var(--sl-text-muted);
   font-variant-numeric: tabular-nums;
 }
+
+/* generic content cell — a visible block for stack/row/grid demos */
+.demo-cell {
+  background: var(--sl-surface);
+  border: 1px dashed var(--sl-border);
+  border-radius: var(--sl-sm);
+  padding: var(--sl-sm) var(--sl-md);
+  font-size: 13px;
+}
