@@ -37,7 +37,7 @@ import * as XDemos from "../../demos/components/x.demo";
 ### <name> `sl-x-<setting>`
 
 ## 子元素
-### <name> `sl-x-<part>`
+### <name> `sl-x--<part>`
 <Playground :meta="XDemos.<Part>" :render="XDemos.<Part>.render" />
 #### <value variant> `<value>`
 
@@ -58,7 +58,7 @@ import * as XDemos from "../../demos/components/x.demo";
 | 型態 | Marker values — `sl-x="hollow"` | marker takes values |
 | 屬性 | Generic attrs — `sl-tone`, `sl-size`, `sl-radius`, `sl-pad`, `sl-interactive` | any generic attr applies |
 | 修飾詞 | Component settings `sl-<x>-<setting>` written on the component itself | component has settings |
-| 子元素 | Parts `sl-<x>-<part>` written on inner elements | component has parts |
+| 子元素 | Parts `sl-<x>--<part>` written on inner elements | component has parts |
 | 用法 | The component's own usage forms — same component, different roles (e.g. notice in-flow = banner, inside a fixed wrapper = toast) | component plays distinct roles |
 | 組合 | Use inside/with other components | meaningful combos exist |
 

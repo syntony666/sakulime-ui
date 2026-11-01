@@ -53,7 +53,7 @@ const VOID = new Set([
 /* style declarations that carry the mechanism stay in shown code:
    --* custom props are the var API (--sl-grid-min is grid's public
    knob), font-size is the em context chip/dot/icon track, box
-   dimensions are the room placement marks push against, list-style
+   dimensions are the room pinned/spanning parts size against, list-style
    decides whether a list renders bullets. Position overrides,
    margins, padding and text-align are stage furniture — they strip */
 const KEEP_DECL =
