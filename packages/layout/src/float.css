@@ -1,18 +1,18 @@
 @layer base {
-  /* toast — the fixed corner region that holds notices. Width and
+  /* float — the fixed corner region that holds notices. Width and
      corner offsets are vars; the value moves the corner */
-  [sl-toast] {
+  [sl-float] {
     box-sizing: border-box;
     position: fixed;
-    z-index: var(--sl-toast-z, 60);
+    z-index: var(--sl-float-z, 60);
     display: flex;
     flex-direction: column;
-    gap: var(--sl-toast-gap, var(--sl-gap, var(--sl-md)));
+    gap: var(--sl-float-gap, var(--sl-gap, var(--sl-md)));
     /* resolved once here — the corner rules and the viewport clamps
        all read the same offsets and width */
-    --_tb: var(--sl-toast-b, var(--sl-lg));
-    --_te: var(--sl-toast-e, var(--sl-lg));
-    --_tw: var(--sl-toast-w, 22rem);
+    --_tb: var(--sl-float-b, var(--sl-lg));
+    --_te: var(--sl-float-e, var(--sl-lg));
+    --_tw: var(--sl-float-w, 22rem);
     /* the clamp follows the configured edge offset so a wider offset
        can't push the region off the far edge; dvw/vh units refresh the
        same declarations where supported */
@@ -28,40 +28,26 @@
 
   /* the value is a corner: <edge>-<side>. top-* flips the vertical
      anchor; *-start and *-end pick the inline edge; *-center centres
-     on that edge. Bare sl-toast sits bottom-end, and the legacy bare
-     "start" value still lands bottom-start through the suffix rule */
-  [sl-toast^="top"] {
+     on that edge. Bare sl-float sits bottom-end */
+  [sl-float^="top"] {
     inset-block-end: auto;
     inset-block-start: calc(var(--_tb) + env(safe-area-inset-top, 0px));
   }
 
-  [sl-toast$="start"] {
+  [sl-float$="start"] {
     inset-inline-end: auto;
     inset-inline-start: var(--_te);
   }
 
-  [sl-toast$="center"] {
+  [sl-float$="center"] {
     inset-inline: 0;
     margin-inline: auto;
   }
 
-  /* physical aliases — left/right keep their physical meaning in RTL
-     too; the logical insets clear first so neither direction leaks */
-  [sl-toast$="left"] {
-    inset-inline: auto;
-    left: var(--_te);
-  }
-
-  [sl-toast$="right"] {
-    inset-inline: auto;
-    right: var(--_te);
-  }
-
-  /* fixed bands and toasts are screen furniture — in print they'd
+  /* a fixed corner region is screen furniture — in print it would
      repeat on every page and cover the sheet */
   @media print {
-    [sl-bar][sl-fixed],
-    [sl-toast] {
+    [sl-float] {
       position: static;
     }
   }

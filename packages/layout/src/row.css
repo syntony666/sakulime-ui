@@ -1,5 +1,7 @@
 @layer base {
-  /* row — horizontal run that wraps; tag rows, button groups */
+  /* row — horizontal run that wraps; tag rows, button groups. Children
+     keep content width and wrap; min-inline-size keeps a squishy child
+     from blowing the line out */
   [sl-row] {
     display: flex;
     flex-wrap: wrap;
@@ -7,65 +9,7 @@
     gap: var(--sl-row-gap, var(--sl-gap, var(--sl-md)));
   }
 
-  /* "center" turns a row into three zones — the same trick sl-bar
-     uses. Auto margins only share space evenly, so an end sibling
-     would pull the marked cell off the row's true midpoint.
-     The zone pinning itself lives in place.css — sl-bar shares it */
-  [sl-row]:has(> [sl-place~="center"]) {
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-columns: 1fr auto 1fr;
-  }
-
-  /* opt-in collapse — <div sl-row sl-collapse> turns into a vertical
-     stack on narrow viewports; -lg and -md collapse at wider cuts. Tag
-     rows keep wrapping instead, so the attribute is never implied.
-     Breakpoints are the hardcoded twins of the container scale */
-  @media (width < 75rem) {
-    [sl-row][sl-collapse-lg] {
-      flex-direction: column;
-      align-items: stretch;
-    }
-    [sl-row][sl-collapse-lg]:has(> [sl-place~="center"]) {
-      grid-auto-flow: row;
-      grid-template-columns: 1fr;
-    }
-    [sl-row][sl-collapse-lg]:has(> [sl-place~="center"]) > [sl-place] { grid-column: auto; }
-  }
-  @media (width < 60rem) {
-    [sl-row][sl-collapse-md] {
-      flex-direction: column;
-      align-items: stretch;
-    }
-    [sl-row][sl-collapse-md]:has(> [sl-place~="center"]) {
-      grid-auto-flow: row;
-      grid-template-columns: 1fr;
-    }
-    [sl-row][sl-collapse-md]:has(> [sl-place~="center"]) > [sl-place] { grid-column: auto; }
-  }
-  @media (width < 45rem) {
-    [sl-row][sl-collapse] {
-      flex-direction: column;
-      align-items: stretch;
-    }
-    [sl-row][sl-collapse]:has(> [sl-place~="center"]) {
-      grid-auto-flow: row;
-      grid-template-columns: 1fr;
-    }
-    [sl-row][sl-collapse]:has(> [sl-place~="center"]) > [sl-place] { grid-column: auto; }
-  }
-}
-
-@layer attrs {
-  /* collapsed rows stretch children — the mark's auto margin lives
-     in this layer, so the reset must too */
-  @media (width < 75rem) {
-    [sl-row][sl-collapse-lg] > [sl-place] { margin-inline: 0; }
-  }
-  @media (width < 60rem) {
-    [sl-row][sl-collapse-md] > [sl-place] { margin-inline: 0; }
-  }
-  @media (width < 45rem) {
-    [sl-row][sl-collapse] > [sl-place] { margin-inline: 0; }
+  [sl-row] > * {
+    min-inline-size: 0;
   }
 }

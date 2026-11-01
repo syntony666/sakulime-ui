@@ -1,65 +1,13 @@
 @layer base {
-  /* stack — vertical rhythm. The parent owns spacing: direct children
-     lose their block margins so the gap value is the whole story.
-     sl-flow is the prose mode: children keep normal block layout and
-     their own margins, so the sibling rhythm rides on margins instead
-     of the flex gap. sl-cols splits the stack into balanced text
-     columns — both modes drop flex for block layout */
+  /* stack — vertical run. The parent owns spacing: direct children
+     lose their block margins so the gap is the whole story */
   [sl-stack] {
     display: flex;
     flex-direction: column;
     gap: var(--sl-stack-gap, var(--sl-gap, var(--sl-md)));
   }
 
-  [sl-stack][sl-flow],
-  [sl-stack][sl-cols] {
-    display: block;
-    /* resolved once here — flow-mode children read the inherited
-       private var instead of re-walking the fallback chain */
-    --_g: var(--sl-stack-gap, var(--sl-gap, var(--sl-md)));
-  }
-
-  [sl-stack]:not([sl-flow]):not([sl-cols]) > * {
+  [sl-stack] > * {
     margin-block: 0;
-  }
-
-  [sl-stack][sl-flow] > * + *,
-  [sl-stack][sl-cols] > * + * {
-    margin-block-start: var(--_g);
-  }
-
-  /* sibling margins stay, but the stack owns its edges — a heading's
-     own margin must not thicken the top of the stack */
-  [sl-stack][sl-flow] > :first-child,
-  [sl-stack][sl-cols] > :first-child {
-    margin-block-start: 0;
-  }
-  [sl-stack][sl-flow] > :last-child,
-  [sl-stack][sl-cols] > :last-child {
-    margin-block-end: 0;
-  }
-
-  [sl-stack][sl-cols="2"]  { column-count: 2; }
-  [sl-stack][sl-cols="3"]  { column-count: 3; }
-  [sl-stack][sl-cols="4"]  { column-count: 4; }
-  [sl-stack][sl-cols="5"]  { column-count: 5; }
-  [sl-stack][sl-cols="6"]  { column-count: 6; }
-  [sl-stack][sl-cols="7"]  { column-count: 7; }
-  [sl-stack][sl-cols="8"]  { column-count: 8; }
-  [sl-stack][sl-cols="9"]  { column-count: 9; }
-  [sl-stack][sl-cols="10"] { column-count: 10; }
-  [sl-stack][sl-cols="11"] { column-count: 11; }
-  [sl-stack][sl-cols="12"] { column-count: 12; }
-
-  /* sl-span inside a multicol stack spans every column — a heading
-     across the flow. Its margin-end carries the gap to the row below;
-     the next child's own margin-start must not fire, or it would only
-     push down the first column and skew the column tops */
-  [sl-stack][sl-cols] > [sl-span] {
-    column-span: all;
-    margin-block-end: var(--_g);
-  }
-  [sl-stack][sl-cols] > [sl-span] + * {
-    margin-block-start: 0;
   }
 }
