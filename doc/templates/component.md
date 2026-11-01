@@ -33,7 +33,7 @@ import * as XDemos from "../../demos/components/x.demo";
 #### <demo group>
 ### 尺寸 `sl-size`
 
-## 修飾詞
+## 元件設定
 ### <name> `sl-x-<setting>`
 
 ## 子元素
@@ -57,7 +57,7 @@ import * as XDemos from "../../demos/components/x.demo";
 | 安裝 | Install per environment (bundler / CDN / pure CSS) | component needs JS |
 | 型態 | Marker values — `sl-x="hollow"` | marker takes values |
 | 屬性 | Generic attrs — `sl-tone`, `sl-size`, `sl-radius`, `sl-pad`, `sl-interactive` | any generic attr applies |
-| 修飾詞 | Component settings `sl-<x>-<setting>` written on the component itself | component has settings |
+| 元件設定 | Component settings `sl-<x>-<setting>` written on the component itself | component has settings |
 | 子元素 | Parts `sl-<x>--<part>` written on inner elements | component has parts |
 | 用法 | The component's own usage forms — same component, different roles (e.g. notice in-flow = banner, inside a fixed wrapper = toast) | component plays distinct roles |
 | 組合 | Use inside/with other components | meaningful combos exist |
@@ -95,7 +95,7 @@ One bullet per value, default annotated:
 | Page top | `<Playground>` | main component; controls cover marker values, generic attrs and component settings |
 | `子元素` each `###` | `<Playground>` | every part gets its own playground with its own args/argTypes (`CardDemos.Corner`, `CardDemos.Sections`) |
 | `####` value variants | `<Demo>` | part already adjustable above; variants show a static axis |
-| `型態`/`屬性`/`修飾詞` sections | `<Demo>` | already covered by the main playground; sections show static axes |
+| `型態`/`屬性`/`元件設定` sections | `<Demo>` | already covered by the main playground; sections show static axes |
 
 Bind a standalone demo with args (no playground chrome) via
 `<Demo :render="X.<Name>.render" :args="X.<Name>.args" />`.

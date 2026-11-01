@@ -15,7 +15,7 @@ feature, ordered by importance, `間距` always last:
 
 ## <feature>
 
-<one section per distinct feature — `## 欄數`, `## 佔欄`,
+<one section per distinct feature — `## 欄數`, `## 跨欄`,
 `## 位置`, `## 內容排列`>
 
 ## 間距

@@ -75,7 +75,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 <Demo :render="CardDemos.InteractiveLink.render" />
 
-## 修飾詞
+## 元件設定
 
 ### 標記 `sl-card-indicate`
 

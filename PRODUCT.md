@@ -12,7 +12,7 @@ web
 
 ## Product Purpose
 
-sakulime-ui 是一套 CSS-first 設計系統：只有兩件事 — `sl-*` 屬性管元件、狀態、modifier、版面，`--sl-*` 變數管顏色與尺度。沒有 framework adapter、沒有 custom elements — `class` 完全留給使用者，永不跟系統衝突。JS 只做選配增強（如圖示名稱解析），CSS 永遠是本體。
+sakulime-ui 是一套 CSS-first 設計系統：只有兩件事 — `sl-*` 屬性管元件、狀態、modifier、排版，`--sl-*` 變數管顏色與尺度。沒有 framework adapter、沒有 custom elements — `class` 完全留給使用者，永不跟系統衝突。JS 只做選配增強（如圖示名稱解析），CSS 永遠是本體。
 
 成功 = 開發者在任何框架（或不寫框架）都能直接採用，且單一 CSS 檔就能帶走整套系統。
 
@@ -30,7 +30,7 @@ sakulime-ui 是一套 CSS-first 設計系統：只有兩件事 — `sl-*` 屬性
 
 ## Capabilities and Constraints
 
-- 元件層：`sl-card`、`sl-button`、`sl-chip`、`sl-dot`、`sl-notice`、`sl-icon`（屬性值即型態，如 `sl-card="hollow"`）；元件設定：`sl-card-indicate` 等；子元素層：`sl-card--corner`、`sl-card--section` 等；通用屬性：`sl-pad`、`sl-radius`、`sl-tone`、`sl-size`、`sl-interactive`、`sl-gap`；版面（`@sakulime-ui/layout`）：`sl-container`、`sl-stack`、`sl-content`、`sl-row`、`sl-grid`、`sl-sidebar`＋`sl-sidebar--rail`、`sl-bar`＋`sl-bar-fixed`、`sl-float`、`sl-gap`、`sl-grid-cols(-*)`、`sl-grid--span`、`sl-hide-*`/`sl-show-*`
+- 元件層：`sl-card`、`sl-button`、`sl-chip`、`sl-dot`、`sl-notice`、`sl-icon`（屬性值即型態，如 `sl-card="hollow"`）；元件設定：`sl-card-indicate` 等；子元素層：`sl-card--corner`、`sl-card--section` 等；通用屬性：`sl-pad`、`sl-radius`、`sl-tone`、`sl-size`、`sl-interactive`、`sl-gap`；排版（`@sakulime-ui/layout`）：`sl-container`、`sl-stack`、`sl-content`、`sl-row`、`sl-grid`、`sl-sidebar`＋`sl-sidebar--rail`、`sl-bar`＋`sl-bar-fixed`、`sl-float`、`sl-gap`、`sl-grid-cols(-*)`、`sl-grid--span`、`sl-hide-*`/`sl-show-*`
 - 顏色用 CSS Color 4/5：`oklch()`、`color-mix()`，目標 WCAG AA
 - Google Fonts 走 `<link>`/`preconnect`，Cloudflare Fonts rewrite 成 same-origin `/cf-fonts`
 - 所有外觀行為純 CSS selector 實作；資料驅動的功能（如圖示名稱解析）走共用 resolver，屬於選配增強
@@ -44,12 +44,12 @@ sakulime-ui 是一套 CSS-first 設計系統：只有兩件事 — `sl-*` 屬性
 ## Evidence on Hand
 
 - 文件站本身即最完整的 demo：每個元件頁有 Playground（demo args/argTypes 驅動）＋靜態 demo 列＋自動縮排的即時 markup
-- `doc/demos/**/*.demo.ts` 是 demo 資料來源 — `components/` 六支（button、card、chip、dot、icon、notice）、`attrs/` 六支（tone、size、radius、pad、gap、interactive）、`layout/` 九支（container、stack、row、grid、bar、sidebar、placement、responsive、toast）
-- 無使用者見證、案例、下載數據 — 對外證據目前只有產品本身
+- `doc/demos/**/*.demo.ts` 是 demo 資料來源 — `components/` 六支（button、card、chip、dot、icon、notice）、`attrs/` 六支（tone、size、radius、pad、gap、interactive）、`layout/` 九支（container、stack、content、row、grid、bar、sidebar、float、responsive）
+- 無使用者見證、案例、下載量 — 對外證據目前只有產品本身
 
 ## Product Principles
 
-1. **CSS 就是全部外觀** — 行為、狀態、配置全走 selector + custom property；JS 只存在於選配的增強層
+1. **CSS 就是全部外觀** — 行為、狀態、設定全走 selector + custom property；JS 只存在於選配的增強層
 2. **`class` 是使用者的** — 系統只用 `sl-*`，永不與消費端命名衝突
 3. **一份檔案帶走** — 單一 CSS 即完整系統；分包（core/layout/theme）是取用彈性，不是依賴層級
 4. **文件即證據** — 文件站的 demo 要真實可互動（Playground），markup 要能直接抄走

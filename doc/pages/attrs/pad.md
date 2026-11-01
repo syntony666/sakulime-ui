@@ -28,7 +28,7 @@ import * as PadDemos from "../../demos/attrs/pad.demo";
 
 ## 選項
 
-px 以根字級 16px 換算，尺規本身是 rem：
+px 以根字級 16px 換算，刻度本身是 rem：
 
 | 選項 | 內距 |
 | --- | --- |

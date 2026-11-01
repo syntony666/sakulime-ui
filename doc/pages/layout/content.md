@@ -1,13 +1,13 @@
 ---
-title: Content 文流
-description: 文流內容欄。子層保留自己的 margin，相鄰之間由容器補節奏。
+title: Content 內文
+description: 內文欄。子層保留自己的 margin，相鄰之間由容器補節奏。
 ---
 
 <script setup>
 import * as ContentDemos from "../../demos/layout/content.demo";
 </script>
 
-# Content *文流*
+# Content *內文*
 
 > 給文章、混排內容用的垂直欄。跟 `sl-stack` 相反：子層保留自己的 margin 跟自然寬度，容器只在相鄰子層之間補上間距節奏。
 
@@ -30,4 +30,4 @@ import * as ContentDemos from "../../demos/layout/content.demo";
 
 ## 間距
 
-跟 `sl-stack` 同套尺規：[`sl-gap`](/attrs/gap) 寫在自己或祖先上，預設 `md`；單點覆寫用 `--sl-content-gap`。
+跟 `sl-stack` 同套刻度：[`sl-gap`](/attrs/gap) 寫在自己或祖先上，預設 `md`；單點覆寫用 `--sl-content-gap`。
