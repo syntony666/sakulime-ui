@@ -179,7 +179,7 @@ export default defineConfig({
               { text: `Radius ${zh("圓角")}`, link: "/attrs/radius" },
               { text: `Pad ${zh("內距")}`, link: "/attrs/pad" },
               { text: `Interactive ${zh("互動")}`, link: "/attrs/interactive" },
-              { text: `Gap ${zh("共用間距")}`, link: "/attrs/gap" },
+              { text: `Gap ${zh("間距")}`, link: "/attrs/gap" },
             ],
           },
         ],
@@ -207,28 +207,28 @@ export default defineConfig({
         ],
       },
       {
-        text: "格局 Layout",
+        text: "排版 Layout",
         items: [
           { text: "安裝", link: "/layout/" },
           {
-            text: "格局設計",
+            text: "排列",
             items: [
-              { text: `Container ${zh("頁面容器")}`, link: "/layout/container" },
               { text: `Stack ${zh("堆疊")}`, link: "/layout/stack" },
-              { text: `Content ${zh("文流")}`, link: "/layout/content" },
+              { text: `Content ${zh("內文")}`, link: "/layout/content" },
               { text: `Row ${zh("橫列")}`, link: "/layout/row" },
               { text: `Grid ${zh("網格系統")}`, link: "/layout/grid" },
-              { text: `RWD ${zh("響應式設計")}`, link: "/layout/responsive" },
             ],
           },
           {
             text: "頁面區塊",
             items: [
-              { text: `Bar ${zh("頁緣區塊")}`, link: "/layout/bar" },
+              { text: `Container ${zh("頁面容器")}`, link: "/layout/container" },
+              { text: `Bar ${zh("頁面橫條")}`, link: "/layout/bar" },
               { text: `Sidebar ${zh("側邊欄")}`, link: "/layout/sidebar" },
               { text: `Float ${zh("角落區")}`, link: "/layout/float" },
             ],
           },
+          { text: `RWD ${zh("響應式設計")}`, link: "/layout/responsive" },
         ],
       },
     ],
