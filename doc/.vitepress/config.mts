@@ -218,6 +218,7 @@ export default defineConfig({
               { text: `Row ${zh("橫列")}`, link: "/layout/row" },
               { text: `Grid ${zh("格網")}`, link: "/layout/grid" },
               { text: `Flow ${zh("子層間距")}`, link: "/layout/flow" },
+              { text: `Responsive ${zh("響應式")}`, link: "/layout/responsive" },
             ],
           },
           {

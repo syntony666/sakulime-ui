@@ -1,6 +1,6 @@
 ---
 title: Flow 子層間距
-description: 直接子層之間自動補垂直節奏，子層排版不動。
+description: 直接子層之間自動補垂直間距，子層排版不動。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as FlowDemos from "../../demos/layout/flow.demo";
 
 # Flow *子層間距*
 
-> 直接子層之間自動補上垂直節奏。不改成 flex、不清 margin，內文混排或沒另外包一層的地方都用它。
+> 直接子層之間自動補上垂直間距。不改成 flex、不清 margin，內文混排或沒另外包一層的地方都用它。
 
 ## 用法
 
@@ -22,7 +22,7 @@ import * as FlowDemos from "../../demos/layout/flow.demo";
 </article>
 ```
 
-子層不用標任何東西，間距自動補在兄弟之間。卡片通知這種沒 margin 的元件隔得開，標題段落保留自己的節奏：
+子層不用標任何東西，間距自動補在兄弟之間。卡片通知這種沒 margin 的元件隔得開，標題段落保留自己的間距：
 
 <Demo :render="FlowDemos.Basic.render" />
 

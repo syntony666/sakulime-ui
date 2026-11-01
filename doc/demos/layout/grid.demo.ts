@@ -19,6 +19,22 @@ export const Gaps: Demo = {
     ),
 };
 
+// explicit columns + spans — the spanning cells carry real text so the
+// reader sees them take two and three tracks respectively
+export const Cols: Demo = {
+  render: () =>
+    `<div class="demo-cell"><span class="demo-w">sl-cols="4"</span>` +
+    `<div sl-grid sl-cols="4" style="margin-top: var(--sl-sm)">` +
+    `<div class="demo-cell" sl-span="2">跨兩欄 sl-span="2"</div>` +
+    `<div class="demo-cell">1</div>` +
+    `<div class="demo-cell">2</div>` +
+    `<div class="demo-cell">3</div>` +
+    `<div class="demo-cell" sl-span="3">跨三欄 sl-span="3"</div>` +
+    `<div class="demo-cell">4</div>` +
+    `<div class="demo-cell">5</div>` +
+    `</div></div>`,
+};
+
 export const MinWidth: Demo = {
   render: () =>
     ["8rem", "20rem"]

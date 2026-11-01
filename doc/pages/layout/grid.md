@@ -1,6 +1,6 @@
 ---
 title: Grid 格網
-description: 欄數自適應的格網，欄寬不夠就自己換行，不用寫 media query。
+description: 格網。預設欄數自適應，要固定欄數配 sl-cols。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 
 # Grid *格網*
 
-> 欄數自適應的格網。欄寬不夠就自己換行，不用寫 media query。卡片列表、圖片牆這種重複單元都適用。
+> 格網。預設欄數自適應，欄寬不夠就自己換行；要固定欄數配 `sl-cols`。卡片列表、圖片牆這種重複單元都適用。
 
 ## 用法
 
@@ -64,3 +64,32 @@ px 以根字級 16px 換算，尺規本身是 rem。欄距跟行距是同一個�
 <Demo
   :render="GridDemos.MinWidth.render"
 />
+
+### 欄數
+
+`sl-cols` 把欄數寫死，2 到 12：
+
+```html
+<div sl-grid sl-cols="4">
+  <div sl-card>...</div>
+</div>
+```
+
+子層照順序填，滿一列自動換下一列。欄數是固定的，不會因為容器變窄掉欄；要分斷點掉欄就掛 `sl-cols-md`、`sl-cols-sm`，只要手機單欄的話標 `sl-collapse` 就好，見[響應式](/layout/responsive)。
+
+<Demo
+  :render="GridDemos.Cols.render"
+/>
+
+### 跨欄
+
+`sl-span` 標在子層上，讓它佔好幾欄，2 到 12：
+
+```html
+<div sl-grid sl-cols="4">
+  <div sl-card sl-span="2">橫跨兩欄</div>
+  <div sl-card>...</div>
+</div>
+```
+
+超過當列剩餘欄位就自動掉下一列。auto-fill 的格網也能用，只是欄數會變，跨幾欄的效果跟著容器寬度浮動。斷點掉欄時 `sl-span` 自動收斂成滿列，不會溢出。

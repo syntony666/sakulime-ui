@@ -58,7 +58,7 @@ px 以根字級 16px 換算，尺規本身是 rem。水平間距跟換行後的�
 
 ### 窄屏直排 `sl-collapse`
 
-標示 `sl-collapse` 後，視窗寬度小於 40rem（640px）時：
+標示 `sl-collapse` 後，視窗寬度小於 45rem（720px，即 `sm` [斷點](/layout/responsive)）時：
 
 - 變成垂直堆疊（`flex-direction: column`）
 - 子元素拉滿容器寬
