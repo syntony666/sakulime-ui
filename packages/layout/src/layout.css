@@ -96,33 +96,48 @@
     grid-auto-flow: column;
     grid-template-columns: 1fr auto 1fr;
   }
-  [sl-row]:has(> [sl-place~="center"]) > [sl-place~="center"] { grid-column: 2; }
-  [sl-row]:has(> [sl-place~="center"]) > [sl-place~="end"]    { grid-column: 3; }
+  /* shared with sl-bar — the marks pin the same three zones. justify-
+     self does the pinning: auto margins resolve to zero under grid's
+     default stretch alignment, so marks alone can't hold an edge */
+  :is([sl-bar], [sl-row]) > [sl-place~="start"]  { justify-self: start; }
+  :is([sl-bar], [sl-row]) > [sl-place~="center"] { grid-column: 2; justify-self: center; }
+  :is([sl-bar], [sl-row]) > [sl-place~="end"]    { grid-column: 3; justify-self: end; }
 
-  /* grid — auto-fill columns; --sl-grid-min is the column floor, and
-     min() keeps a container narrower than the floor overflow-free */
+  /* children of all three track primitives get a zero inline minimum —
+     the flex/grid auto minimum would otherwise let wide content inflate
+     a track past its share and push a zone's centre off-line */
+  :is([sl-row], [sl-grid], [sl-bar]) > * {
+    min-inline-size: 0;
+  }
+
+  /* grid — auto-fill columns by default; --sl-grid-min is the column
+     floor and min() keeps a narrower container overflow-free. sl-cols
+     swaps the auto-fill count for an explicit count through --sl-gc */
   [sl-grid] {
     display: grid;
     gap: var(--sl-grid-gap, var(--sl-gap, var(--sl-md)));
     grid-template-columns: repeat(
-      auto-fill,
-      minmax(min(var(--sl-grid-min, 14rem), 100%), 1fr)
+      var(--sl-gc, auto-fill),
+      minmax(var(--sl-gf, min(var(--sl-grid-min, 14rem), 100%)), 1fr)
     );
   }
 
-  /* sl-span — a grid child takes N tracks; over the remaining run it
-     just wraps to the next row like any other item */
-  [sl-grid] > [sl-span="2"]  { grid-column: span 2; }
-  [sl-grid] > [sl-span="3"]  { grid-column: span 3; }
-  [sl-grid] > [sl-span="4"]  { grid-column: span 4; }
-  [sl-grid] > [sl-span="5"]  { grid-column: span 5; }
-  [sl-grid] > [sl-span="6"]  { grid-column: span 6; }
-  [sl-grid] > [sl-span="7"]  { grid-column: span 7; }
-  [sl-grid] > [sl-span="8"]  { grid-column: span 8; }
-  [sl-grid] > [sl-span="9"]  { grid-column: span 9; }
-  [sl-grid] > [sl-span="10"] { grid-column: span 10; }
-  [sl-grid] > [sl-span="11"] { grid-column: span 11; }
-  [sl-grid] > [sl-span="12"] { grid-column: span 12; }
+  /* sl-span — a grid child takes N tracks, clamped to the active count
+     so an oversized span can't spawn implicit tracks and blow the grid
+     out; "full" spans every track in either mode */
+  [sl-grid] > [sl-span] { grid-column: span min(var(--sl-span-n, 1), var(--sl-gc, 12)); }
+  [sl-grid] > [sl-span="full"] { grid-column: 1 / -1; }
+  [sl-grid] > [sl-span="2"]  { --sl-span-n: 2; }
+  [sl-grid] > [sl-span="3"]  { --sl-span-n: 3; }
+  [sl-grid] > [sl-span="4"]  { --sl-span-n: 4; }
+  [sl-grid] > [sl-span="5"]  { --sl-span-n: 5; }
+  [sl-grid] > [sl-span="6"]  { --sl-span-n: 6; }
+  [sl-grid] > [sl-span="7"]  { --sl-span-n: 7; }
+  [sl-grid] > [sl-span="8"]  { --sl-span-n: 8; }
+  [sl-grid] > [sl-span="9"]  { --sl-span-n: 9; }
+  [sl-grid] > [sl-span="10"] { --sl-span-n: 10; }
+  [sl-grid] > [sl-span="11"] { --sl-span-n: 11; }
+  [sl-grid] > [sl-span="12"] { --sl-span-n: 12; }
 
   /* opt-in collapse — <div sl-row sl-collapse> turns into a vertical
      stack on narrow viewports. Tag rows keep wrapping instead, so the
@@ -201,19 +216,6 @@
 
   body:has([sl-bar="bottom"][sl-fixed]:not([sl-static])) {
     padding-block-end: var(--sl-bar-h, 3.5rem);
-  }
-
-  /* zone children — sl-place="center" pins the true center column,
-     "end" pins the far edge; unmarked children fill zones in source
-     order */
-  [sl-bar] > [sl-place~="center"] {
-    grid-column: 2;
-    justify-self: center;
-  }
-
-  [sl-bar] > [sl-place~="end"] {
-    grid-column: 3;
-    justify-self: end;
   }
 
   /* sidebar shell — children marked sl-sidebar are the rails, anything
@@ -345,112 +347,76 @@
   [sl-gap="4xl"] { --sl-gap: var(--sl-4xl); }
   [sl-gap="5xl"] { --sl-gap: var(--sl-5xl); }
 
-  /* sl-cols — explicit track count, replaces the auto-fill template.
-     Attrs layer because it must win over that base rule */
-  [sl-grid][sl-cols="1"]  { grid-template-columns: repeat(1, 1fr); }
-  [sl-grid][sl-cols="2"]  { grid-template-columns: repeat(2, 1fr); }
-  [sl-grid][sl-cols="3"]  { grid-template-columns: repeat(3, 1fr); }
-  [sl-grid][sl-cols="4"]  { grid-template-columns: repeat(4, 1fr); }
-  [sl-grid][sl-cols="5"]  { grid-template-columns: repeat(5, 1fr); }
-  [sl-grid][sl-cols="6"]  { grid-template-columns: repeat(6, 1fr); }
-  [sl-grid][sl-cols="7"]  { grid-template-columns: repeat(7, 1fr); }
-  [sl-grid][sl-cols="8"]  { grid-template-columns: repeat(8, 1fr); }
-  [sl-grid][sl-cols="9"]  { grid-template-columns: repeat(9, 1fr); }
-  [sl-grid][sl-cols="10"] { grid-template-columns: repeat(10, 1fr); }
-  [sl-grid][sl-cols="11"] { grid-template-columns: repeat(11, 1fr); }
-  [sl-grid][sl-cols="12"] { grid-template-columns: repeat(12, 1fr); }
+  /* sl-cols — explicit track count. It only sets the private --sl-gc
+     that the base template repeats; --sl-gf drops the auto-fill floor
+     so tracks size to share, not to a fixed minimum */
+  [sl-grid][sl-cols="1"]  { --sl-gc: 1;  --sl-gf: auto; }
+  [sl-grid][sl-cols="2"]  { --sl-gc: 2;  --sl-gf: auto; }
+  [sl-grid][sl-cols="3"]  { --sl-gc: 3;  --sl-gf: auto; }
+  [sl-grid][sl-cols="4"]  { --sl-gc: 4;  --sl-gf: auto; }
+  [sl-grid][sl-cols="5"]  { --sl-gc: 5;  --sl-gf: auto; }
+  [sl-grid][sl-cols="6"]  { --sl-gc: 6;  --sl-gf: auto; }
+  [sl-grid][sl-cols="7"]  { --sl-gc: 7;  --sl-gf: auto; }
+  [sl-grid][sl-cols="8"]  { --sl-gc: 8;  --sl-gf: auto; }
+  [sl-grid][sl-cols="9"]  { --sl-gc: 9;  --sl-gf: auto; }
+  [sl-grid][sl-cols="10"] { --sl-gc: 10; --sl-gf: auto; }
+  [sl-grid][sl-cols="11"] { --sl-gc: 11; --sl-gf: auto; }
+  [sl-grid][sl-cols="12"] { --sl-gc: 12; --sl-gf: auto; }
 
   /* sl-cols-<bp> — the track count at narrower widths; breakpoints
      mirror the container scale (lg <75rem, md <60rem, sm <45rem — the
      hardcoded twins of --sl-container-*). Blocks run wide to narrow so
-     the smallest hit wins at equal specificity. A span wider than the
-     active count clamps to a full row instead of spawning implicit
-     tracks, and a one-column hit releases spans entirely */
+     the smallest hit wins at equal specificity. Span clamping rides on
+     the same --sl-gc, so a one-column hit releases spans for free */
   @media (width < 75rem) {
-    [sl-grid][sl-cols-lg="1"]  { grid-template-columns: repeat(1, 1fr); }
-    [sl-grid][sl-cols-lg="2"]  { grid-template-columns: repeat(2, 1fr); }
-    [sl-grid][sl-cols-lg="3"]  { grid-template-columns: repeat(3, 1fr); }
-    [sl-grid][sl-cols-lg="4"]  { grid-template-columns: repeat(4, 1fr); }
-    [sl-grid][sl-cols-lg="5"]  { grid-template-columns: repeat(5, 1fr); }
-    [sl-grid][sl-cols-lg="6"]  { grid-template-columns: repeat(6, 1fr); }
-    [sl-grid][sl-cols-lg="7"]  { grid-template-columns: repeat(7, 1fr); }
-    [sl-grid][sl-cols-lg="8"]  { grid-template-columns: repeat(8, 1fr); }
-    [sl-grid][sl-cols-lg="9"]  { grid-template-columns: repeat(9, 1fr); }
-    [sl-grid][sl-cols-lg="10"] { grid-template-columns: repeat(10, 1fr); }
-    [sl-grid][sl-cols-lg="11"] { grid-template-columns: repeat(11, 1fr); }
-    [sl-grid][sl-cols-lg="12"] { grid-template-columns: repeat(12, 1fr); }
-
-    [sl-grid][sl-cols-lg="1"]  > [sl-span] { grid-column: auto; }
-    [sl-grid][sl-cols-lg="2"]  > :is([sl-span="3"],[sl-span="4"],[sl-span="5"],[sl-span="6"],[sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 2; }
-    [sl-grid][sl-cols-lg="3"]  > :is([sl-span="4"],[sl-span="5"],[sl-span="6"],[sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 3; }
-    [sl-grid][sl-cols-lg="4"]  > :is([sl-span="5"],[sl-span="6"],[sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 4; }
-    [sl-grid][sl-cols-lg="5"]  > :is([sl-span="6"],[sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 5; }
-    [sl-grid][sl-cols-lg="6"]  > :is([sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 6; }
-    [sl-grid][sl-cols-lg="7"]  > :is([sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 7; }
-    [sl-grid][sl-cols-lg="8"]  > :is([sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 8; }
-    [sl-grid][sl-cols-lg="9"]  > :is([sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 9; }
-    [sl-grid][sl-cols-lg="10"] > :is([sl-span="11"],[sl-span="12"]) { grid-column: span 10; }
-    [sl-grid][sl-cols-lg="11"] > :is([sl-span="12"]) { grid-column: span 11; }
+    [sl-grid][sl-cols-lg="1"]  { --sl-gc: 1;  --sl-gf: auto; }
+    [sl-grid][sl-cols-lg="2"]  { --sl-gc: 2;  --sl-gf: auto; }
+    [sl-grid][sl-cols-lg="3"]  { --sl-gc: 3;  --sl-gf: auto; }
+    [sl-grid][sl-cols-lg="4"]  { --sl-gc: 4;  --sl-gf: auto; }
+    [sl-grid][sl-cols-lg="5"]  { --sl-gc: 5;  --sl-gf: auto; }
+    [sl-grid][sl-cols-lg="6"]  { --sl-gc: 6;  --sl-gf: auto; }
+    [sl-grid][sl-cols-lg="7"]  { --sl-gc: 7;  --sl-gf: auto; }
+    [sl-grid][sl-cols-lg="8"]  { --sl-gc: 8;  --sl-gf: auto; }
+    [sl-grid][sl-cols-lg="9"]  { --sl-gc: 9;  --sl-gf: auto; }
+    [sl-grid][sl-cols-lg="10"] { --sl-gc: 10; --sl-gf: auto; }
+    [sl-grid][sl-cols-lg="11"] { --sl-gc: 11; --sl-gf: auto; }
+    [sl-grid][sl-cols-lg="12"] { --sl-gc: 12; --sl-gf: auto; }
 
     [sl-hide-lg] { display: none; }
   }
   @media (width < 60rem) {
-    [sl-grid][sl-cols-md="1"]  { grid-template-columns: repeat(1, 1fr); }
-    [sl-grid][sl-cols-md="2"]  { grid-template-columns: repeat(2, 1fr); }
-    [sl-grid][sl-cols-md="3"]  { grid-template-columns: repeat(3, 1fr); }
-    [sl-grid][sl-cols-md="4"]  { grid-template-columns: repeat(4, 1fr); }
-    [sl-grid][sl-cols-md="5"]  { grid-template-columns: repeat(5, 1fr); }
-    [sl-grid][sl-cols-md="6"]  { grid-template-columns: repeat(6, 1fr); }
-    [sl-grid][sl-cols-md="7"]  { grid-template-columns: repeat(7, 1fr); }
-    [sl-grid][sl-cols-md="8"]  { grid-template-columns: repeat(8, 1fr); }
-    [sl-grid][sl-cols-md="9"]  { grid-template-columns: repeat(9, 1fr); }
-    [sl-grid][sl-cols-md="10"] { grid-template-columns: repeat(10, 1fr); }
-    [sl-grid][sl-cols-md="11"] { grid-template-columns: repeat(11, 1fr); }
-    [sl-grid][sl-cols-md="12"] { grid-template-columns: repeat(12, 1fr); }
-
-    [sl-grid][sl-cols-md="1"]  > [sl-span] { grid-column: auto; }
-    [sl-grid][sl-cols-md="2"]  > :is([sl-span="3"],[sl-span="4"],[sl-span="5"],[sl-span="6"],[sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 2; }
-    [sl-grid][sl-cols-md="3"]  > :is([sl-span="4"],[sl-span="5"],[sl-span="6"],[sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 3; }
-    [sl-grid][sl-cols-md="4"]  > :is([sl-span="5"],[sl-span="6"],[sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 4; }
-    [sl-grid][sl-cols-md="5"]  > :is([sl-span="6"],[sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 5; }
-    [sl-grid][sl-cols-md="6"]  > :is([sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 6; }
-    [sl-grid][sl-cols-md="7"]  > :is([sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 7; }
-    [sl-grid][sl-cols-md="8"]  > :is([sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 8; }
-    [sl-grid][sl-cols-md="9"]  > :is([sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 9; }
-    [sl-grid][sl-cols-md="10"] > :is([sl-span="11"],[sl-span="12"]) { grid-column: span 10; }
-    [sl-grid][sl-cols-md="11"] > :is([sl-span="12"]) { grid-column: span 11; }
+    [sl-grid][sl-cols-md="1"]  { --sl-gc: 1;  --sl-gf: auto; }
+    [sl-grid][sl-cols-md="2"]  { --sl-gc: 2;  --sl-gf: auto; }
+    [sl-grid][sl-cols-md="3"]  { --sl-gc: 3;  --sl-gf: auto; }
+    [sl-grid][sl-cols-md="4"]  { --sl-gc: 4;  --sl-gf: auto; }
+    [sl-grid][sl-cols-md="5"]  { --sl-gc: 5;  --sl-gf: auto; }
+    [sl-grid][sl-cols-md="6"]  { --sl-gc: 6;  --sl-gf: auto; }
+    [sl-grid][sl-cols-md="7"]  { --sl-gc: 7;  --sl-gf: auto; }
+    [sl-grid][sl-cols-md="8"]  { --sl-gc: 8;  --sl-gf: auto; }
+    [sl-grid][sl-cols-md="9"]  { --sl-gc: 9;  --sl-gf: auto; }
+    [sl-grid][sl-cols-md="10"] { --sl-gc: 10; --sl-gf: auto; }
+    [sl-grid][sl-cols-md="11"] { --sl-gc: 11; --sl-gf: auto; }
+    [sl-grid][sl-cols-md="12"] { --sl-gc: 12; --sl-gf: auto; }
 
     [sl-hide-md] { display: none; }
   }
   @media (width < 45rem) {
-    [sl-grid][sl-cols-sm="1"]  { grid-template-columns: repeat(1, 1fr); }
-    [sl-grid][sl-cols-sm="2"]  { grid-template-columns: repeat(2, 1fr); }
-    [sl-grid][sl-cols-sm="3"]  { grid-template-columns: repeat(3, 1fr); }
-    [sl-grid][sl-cols-sm="4"]  { grid-template-columns: repeat(4, 1fr); }
-    [sl-grid][sl-cols-sm="5"]  { grid-template-columns: repeat(5, 1fr); }
-    [sl-grid][sl-cols-sm="6"]  { grid-template-columns: repeat(6, 1fr); }
-    [sl-grid][sl-cols-sm="7"]  { grid-template-columns: repeat(7, 1fr); }
-    [sl-grid][sl-cols-sm="8"]  { grid-template-columns: repeat(8, 1fr); }
-    [sl-grid][sl-cols-sm="9"]  { grid-template-columns: repeat(9, 1fr); }
-    [sl-grid][sl-cols-sm="10"] { grid-template-columns: repeat(10, 1fr); }
-    [sl-grid][sl-cols-sm="11"] { grid-template-columns: repeat(11, 1fr); }
-    [sl-grid][sl-cols-sm="12"] { grid-template-columns: repeat(12, 1fr); }
+    [sl-grid][sl-cols-sm="1"]  { --sl-gc: 1;  --sl-gf: auto; }
+    [sl-grid][sl-cols-sm="2"]  { --sl-gc: 2;  --sl-gf: auto; }
+    [sl-grid][sl-cols-sm="3"]  { --sl-gc: 3;  --sl-gf: auto; }
+    [sl-grid][sl-cols-sm="4"]  { --sl-gc: 4;  --sl-gf: auto; }
+    [sl-grid][sl-cols-sm="5"]  { --sl-gc: 5;  --sl-gf: auto; }
+    [sl-grid][sl-cols-sm="6"]  { --sl-gc: 6;  --sl-gf: auto; }
+    [sl-grid][sl-cols-sm="7"]  { --sl-gc: 7;  --sl-gf: auto; }
+    [sl-grid][sl-cols-sm="8"]  { --sl-gc: 8;  --sl-gf: auto; }
+    [sl-grid][sl-cols-sm="9"]  { --sl-gc: 9;  --sl-gf: auto; }
+    [sl-grid][sl-cols-sm="10"] { --sl-gc: 10; --sl-gf: auto; }
+    [sl-grid][sl-cols-sm="11"] { --sl-gc: 11; --sl-gf: auto; }
+    [sl-grid][sl-cols-sm="12"] { --sl-gc: 12; --sl-gf: auto; }
 
-    [sl-grid][sl-cols-sm="1"]  > [sl-span] { grid-column: auto; }
-    [sl-grid][sl-cols-sm="2"]  > :is([sl-span="3"],[sl-span="4"],[sl-span="5"],[sl-span="6"],[sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 2; }
-    [sl-grid][sl-cols-sm="3"]  > :is([sl-span="4"],[sl-span="5"],[sl-span="6"],[sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 3; }
-    [sl-grid][sl-cols-sm="4"]  > :is([sl-span="5"],[sl-span="6"],[sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 4; }
-    [sl-grid][sl-cols-sm="5"]  > :is([sl-span="6"],[sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 5; }
-    [sl-grid][sl-cols-sm="6"]  > :is([sl-span="7"],[sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 6; }
-    [sl-grid][sl-cols-sm="7"]  > :is([sl-span="8"],[sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 7; }
-    [sl-grid][sl-cols-sm="8"]  > :is([sl-span="9"],[sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 8; }
-    [sl-grid][sl-cols-sm="9"]  > :is([sl-span="10"],[sl-span="11"],[sl-span="12"]) { grid-column: span 9; }
-    [sl-grid][sl-cols-sm="10"] > :is([sl-span="11"],[sl-span="12"]) { grid-column: span 10; }
-    [sl-grid][sl-cols-sm="11"] > :is([sl-span="12"]) { grid-column: span 11; }
-
-    /* sl-collapse — the sm shorthand: one column, spans release */
-    [sl-grid][sl-collapse] { grid-template-columns: 1fr; }
-    [sl-grid][sl-collapse] > [sl-span] { grid-column: auto; }
+    /* sl-collapse — the sm shorthand: one column; spans release through
+       the same clamp since the count is now one */
+    [sl-grid][sl-collapse] { --sl-gc: 1; --sl-gf: auto; }
 
     [sl-hide-sm] { display: none; }
   }
