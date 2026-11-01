@@ -10,6 +10,11 @@
     --sl-tone-bg: currentColor;
     --sl-tone-text: currentColor;
     --sl-size-fs: 0.875em;
+    /* h/px get self-defaults too — nothing in the capsule reads them;
+       the md defaults just keep an ancestor's sl-size from leaking
+       the slots through the chip to deeper descendants */
+    --sl-size-h: var(--sl-3xl);
+    --sl-size-px: var(--sl-md);
     display: inline-flex;
     align-items: center;
     gap: 0.3em;
