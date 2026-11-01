@@ -46,25 +46,25 @@
 <div sl-card sl-card-indicate="start" id="card-is">card</div>
 <div sl-card sl-card-indicate="end" id="card-ie">card</div>
 <div sl-card id="card-sect">
-  <div sl-card-section id="sect-1">a</div>
-  <div sl-card-section id="sect-2">b</div>
+  <div sl-card--section id="sect-1">a</div>
+  <div sl-card--section id="sect-2">b</div>
 </div>
 <div sl-card id="card-sect2">
-  <div sl-card-section="inset" id="sect-inset"><span>c</span></div>
+  <div sl-card--section="inset" id="sect-inset"><span>c</span></div>
 </div>
 <div sl-card id="card-sect3">
-  <div sl-card-section="blank" id="sect-blank"><strong>e</strong><p>f</p></div>
+  <div sl-card--section="blank" id="sect-blank"><strong>e</strong><p>f</p></div>
 </div>
 <div sl-card id="card-sect4">
-  <div sl-card-section="secondary" id="sect-sec">g</div>
+  <div sl-card--section="secondary" id="sect-sec">g</div>
 </div>
 <div sl-card id="card-sect5">
-  <div sl-card-section="center" id="sect-ctr">h</div>
+  <div sl-card--section="center" id="sect-ctr">h</div>
 </div>
 <div sl-card id="card-sect6">
-  <div sl-card-section="active" id="sect-act">i</div>
+  <div sl-card--section="active" id="sect-act">i</div>
 </div>
-<div sl-card id="card-corner"><span sl-card-corner sl-dot id="corner-dot"></span></div>
+<div sl-card id="card-corner"><span sl-card--corner sl-dot id="corner-dot"></span></div>
 <div sl-card sl-interactive id="card-i">card</div>
 
 <!-- chips -->
@@ -96,7 +96,7 @@
 <!-- notices -->
 <div sl-notice id="nt-def">hello notice</div>
 <div sl-notice="fit" id="nt-fit">short</div>
-<div sl-notice id="nt-act">copy <button sl-notice-action id="nt-btn">x</button></div>
+<div sl-notice id="nt-act">copy <button sl-notice--action id="nt-btn">x</button></div>
 <div sl-notice sl-notice-align="end" id="nt-al">aligned</div>
 <div sl-notice sl-tone="danger" id="nt-d">danger</div>
 <div sl-notice sl-pad="lg" id="nt-pl">pad</div>
@@ -145,10 +145,10 @@ function main() {
   neq('btn tone danger bg', cs('btn-td', 'background-color'), cs('btn-def', 'background-color'));
   neq('btn tones distinct (ok!=warn)', cs('btn-tok', 'background-color'), cs('btn-tw', 'background-color'));
   neq('btn tones distinct (warn!=danger)', cs('btn-tw', 'background-color'), cs('btn-td', 'background-color'));
-  has('btn interactive grow slot', cs('btn-i', '--sl-i-transform'), 'scale(1.03)');
-  has('btn interactive lift slot', cs('btn-i2', '--sl-i-transform'), 'translateY(-4px)');
-  match('btn interactive press slot', cs('btn-i3', '--sl-i-transform'), /scale\((0)?\.97\)/);
-  has('btn interactive dim slot', cs('btn-i4', '--sl-i-filter'), 'brightness');
+  has('btn interactive grow slot', cs('btn-i', '--sl-interactive-transform'), 'scale(1.03)');
+  has('btn interactive lift slot', cs('btn-i2', '--sl-interactive-transform'), 'translateY(-4px)');
+  match('btn interactive press slot', cs('btn-i3', '--sl-interactive-transform'), /scale\((0)?\.97\)/);
+  has('btn interactive dim slot', cs('btn-i4', '--sl-interactive-filter'), 'brightness');
   eq('btn radius full pill', cs('btn-rf', 'border-top-left-radius'), '9999px');
 
   /* ---- card ---- */
@@ -183,7 +183,7 @@ function main() {
   eq('card section center align', cs('sect-ctr', 'text-align'), 'center');
   neq('card section active bg', cs('sect-act', 'background-color'), TRANS);
   eq('card corner absolute', cs('corner-dot', 'position'), 'absolute');
-  has('card interactive grow slot', cs('card-i', '--sl-i-transform'), 'scale(1.03)');
+  has('card interactive grow slot', cs('card-i', '--sl-interactive-transform'), 'scale(1.03)');
 
   /* ---- chip ---- */
   eq('chip display', cs('chip-def', 'display'), 'inline-flex');

@@ -68,7 +68,7 @@ const filterStyle = (decls: string): string =>
 
 // attr-level cleanup on a single tag — demo-* classes go, the style
 // filter keeps load-bearing declarations only, and removal residue
-// collapses back to single spaces so `<div  sl-span>` doesn't leak
+// collapses back to single spaces so `<div  sl-grid--span>` doesn't leak
 const cleanTag = (open: string): string =>
   open
     .replace(/\s+class="([^"]*)"/g, (_, list: string) => {

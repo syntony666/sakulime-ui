@@ -15,43 +15,45 @@
 <div sl-container="sm" id="cont-sm"><span>c</span></div>
 <div sl-container="lg" id="cont-lg"><span>c</span></div>
 
-<!-- stack scale + seal + flow + cols -->
+<!-- stack: gap comes from sl-gap only -->
 <div sl-stack id="st-def"><div id="st-c1">a</div><div>b</div></div>
-<div sl-stack="xs" id="st-xs"><div>a</div><div>b</div></div>
-<div sl-stack="sm" id="st-sm"><div>a</div><div>b</div></div>
-<div sl-stack="md" id="st-md"><div>a</div><div>b</div></div>
-<div sl-stack="lg" id="st-lg"><div>a</div><div>b</div></div>
-<div sl-stack="xl" id="st-xl"><div>a</div><div>b</div></div>
-<div sl-stack="2xl" id="st-2xl"><div>a</div><div>b</div></div>
-<div sl-stack="3xl" id="st-3xl"><div>a</div><div>b</div></div>
-<div sl-stack="4xl" id="st-4xl"><div>a</div><div>b</div></div>
-<div sl-stack="5xl" id="st-5xl"><div>a</div><div>b</div></div>
-<div sl-stack sl-gap="2xl" id="st-gap"><div>a</div><div>b</div></div>
-<div sl-stack="lg"><div sl-stack id="st-inner"><div>a</div><div>b</div></div></div>
+<div sl-stack sl-gap="xs" id="st-xs"><div>a</div><div>b</div></div>
+<div sl-stack sl-gap="sm" id="st-sm"><div>a</div><div>b</div></div>
+<div sl-stack sl-gap="md" id="st-md"><div>a</div><div>b</div></div>
+<div sl-stack sl-gap="lg" id="st-lg"><div>a</div><div>b</div></div>
+<div sl-stack sl-gap="xl" id="st-xl"><div>a</div><div>b</div></div>
+<div sl-stack sl-gap="2xl" id="st-2xl"><div>a</div><div>b</div></div>
+<div sl-stack sl-gap="3xl" id="st-3xl"><div>a</div><div>b</div></div>
+<div sl-stack sl-gap="4xl" id="st-4xl"><div>a</div><div>b</div></div>
+<div sl-stack sl-gap="5xl" id="st-5xl"><div>a</div><div>b</div></div>
+<!-- --sl-stack-gap is the non-inheriting escape hatch: it must not
+     leak into the nested bare stack -->
+<div sl-stack style="--sl-stack-gap: var(--sl-5xl)"><div sl-stack id="st-inner"><div>a</div><div>b</div></div></div>
+<!-- sl-gap IS meant to inherit -->
 <div sl-gap="xl"><div sl-stack id="st-inherit"><div>a</div><div>b</div></div></div>
-<div sl-stack sl-flow id="st-flow"><div id="fl-1">a</div><div id="fl-2">b</div></div>
-<div sl-stack sl-cols="3" id="st-cols"><div>a</div><div>b</div><div>c</div><div>d</div></div>
+<div sl-stack sl-gap="lg"><div sl-stack id="st-inherit2"><div>a</div><div>b</div></div></div>
+
+<!-- content: prose column keeps child margins, adds sibling rhythm -->
+<div sl-content id="ct-def"><h3 id="ct-h">t</h3><div id="ct-1">a</div><div id="ct-2">b</div></div>
+<div sl-content sl-gap="2xl" id="ct-gap"><div id="ct-g1">a</div><div id="ct-g2">b</div></div>
 
 <!-- row -->
 <div sl-row id="row-def"><div>a</div><div>b</div></div>
-<div sl-row="lg" id="row-lg"><div>a</div><div>b</div></div>
-<div sl-row id="row-z" style="width:600px">
-  <div sl-place="start" id="rz-s">s</div>
-  <div sl-place="center" id="rz-c">c</div>
-  <div sl-place="end" id="rz-e">e</div>
-</div>
+<div sl-row sl-gap="lg" id="row-lg"><div>a</div><div>b</div></div>
+<div sl-row id="row-min"><div id="row-mc">a</div></div>
 
 <!-- grid (640px track width makes counts deterministic) -->
 <div style="width:640px">
   <div sl-grid id="gr-auto"><div>a</div><div>b</div><div>c</div><div>d</div></div>
-  <div sl-grid sl-cols="4" id="gr-4"><div>a</div><div>b</div><div>c</div><div>d</div></div>
-  <div sl-grid sl-cols="4" id="gr-span">
-    <div sl-span="8" id="sp8">over</div>
-    <div sl-span="full" id="spf">full</div>
-    <div sl-span="2" id="sp2">two</div>
+  <div sl-grid sl-grid-cols="4" id="gr-4"><div>a</div><div>b</div><div>c</div><div>d</div></div>
+  <div sl-grid sl-grid-cols="4" id="gr-span">
+    <div sl-grid--span="8" id="sp8">over</div>
+    <div sl-grid--span="full" id="spf">full</div>
+    <div sl-grid--span="2" id="sp2">two</div>
+    <div sl-grid--span id="spb">bare</div>
     <div>x</div>
   </div>
-  <div sl-grid sl-cols="2" id="gr-outer">
+  <div sl-grid sl-grid-cols="2" id="gr-outer">
     <div sl-grid id="gr-inner"><div>i</div><div>j</div></div>
     <div>sib</div>
   </div>
@@ -60,47 +62,36 @@
 <!-- bar -->
 <div sl-bar id="bar-plain">band</div>
 <div sl-bar="top" id="bar-top">
-  <div sl-place="start" id="bz-s">s</div>
-  <div sl-place="center" id="bz-c">c</div>
-  <div sl-place="end" id="bz-e">e</div>
+  <div id="bz-s">s</div>
+  <div id="bz-c">c</div>
+  <div id="bz-e">e</div>
 </div>
-<div sl-bar="top" sl-fixed id="bar-fix">fixed</div>
-<div sl-bar="top" sl-static id="bar-stat">static</div>
+<div sl-bar="top" sl-bar-fixed id="bar-fix">fixed</div>
 <div sl-bar="bottom" id="bar-bot">bottom</div>
+<div sl-bar="top" sl-pad="lg" id="bar-pad">padded</div>
 
-<!-- toasts -->
-<div sl-toast id="t-def"><div sl-notice="fit">a</div></div>
-<div sl-toast="bottom-start" id="t-bs"><div sl-notice="fit">a</div></div>
-<div sl-toast="bottom-center" id="t-bc"><div sl-notice="fit">a</div></div>
-<div sl-toast="bottom-end" id="t-be"><div sl-notice="fit">a</div></div>
-<div sl-toast="top-start" id="t-ts"><div sl-notice="fit">a</div></div>
-<div sl-toast="top-center" id="t-tc"><div sl-notice="fit">a</div></div>
-<div sl-toast="top-end" id="t-te"><div sl-notice="fit">a</div></div>
-<div sl-toast="start" id="t-legacy"><div sl-notice="fit">a</div></div>
+<!-- floats -->
+<div sl-float id="t-def"><div sl-notice="fit">a</div></div>
+<div sl-float="bottom-start" id="t-bs"><div sl-notice="fit">a</div></div>
+<div sl-float="bottom-center" id="t-bc"><div sl-notice="fit">a</div></div>
+<div sl-float="bottom-end" id="t-be"><div sl-notice="fit">a</div></div>
+<div sl-float="top-start" id="t-ts"><div sl-notice="fit">a</div></div>
+<div sl-float="top-center" id="t-tc"><div sl-notice="fit">a</div></div>
+<div sl-float="top-end" id="t-te"><div sl-notice="fit">a</div></div>
 
-<!-- place -->
-<div id="pl-wrap" style="width:500px">
-  <div sl-place="end" id="pl-end" style="width:80px;height:10px">e</div>
-  <div sl-place="start" id="pl-start" style="width:80px;height:10px">s</div>
-  <div sl-place="center" id="pl-center" style="width:80px;height:10px">c</div>
-</div>
-<div sl-stack id="pl-stack" style="height:200px">
-  <div sl-place="middle end" id="pl-me" style="width:80px;height:40px">me</div>
-</div>
-<div sl-stack id="pl-stack2" style="height:200px">
-  <div style="height:40px">top item</div>
-  <div sl-place="bottom" id="pl-bot" style="height:40px">b</div>
-</div>
-
-<!-- sidebar -->
-<div sl-with-sidebar id="sb" style="width:800px">
-  <div sl-sidebar id="sb-rail">rail</div>
+<!-- sidebar: rail position follows DOM order -->
+<div sl-sidebar id="sb" style="width:800px">
+  <div sl-sidebar--rail id="sb-rail">rail</div>
   <div id="sb-main">main</div>
 </div>
-<div sl-with-sidebar id="sb2" style="width:800px">
-  <div sl-sidebar sl-place="end" id="sb-r2">r2</div>
-  <div sl-sidebar sl-place="start" id="sb-r1">r1</div>
-  <div>m</div>
+<div sl-sidebar id="sb2" style="width:800px">
+  <div id="sb2-main">m</div>
+  <div sl-sidebar--rail id="sb2-rail">r</div>
+</div>
+<div sl-sidebar id="sb3" style="width:1400px">
+  <div sl-sidebar--rail id="sb3-l">l</div>
+  <div id="sb3-main">m</div>
+  <div sl-sidebar--rail id="sb3-r">r</div>
 </div>
 
 <div id="probe"></div>
@@ -145,28 +136,27 @@ function main() {
   near('stack 3xl gap = --sl-3xl', cs('st-3xl', 'row-gap'), varPx('--sl-3xl'));
   near('stack 4xl gap = --sl-4xl', cs('st-4xl', 'row-gap'), varPx('--sl-4xl'));
   near('stack 5xl gap = --sl-5xl', cs('st-5xl', 'row-gap'), varPx('--sl-5xl'));
-  near('stack sl-gap=2xl slot', cs('st-gap', 'row-gap'), varPx('--sl-2xl'));
-  /* @property seal — nested bare stack falls back to md, not the lg it would inherit */
+  /* the --sl-*-gap slots are non-inheriting — the outer 5xl escape
+     hatch must not reach the nested bare stack, which reads md */
   near('nested stack sealed to md', cs('st-inner', 'row-gap'), varPx('--sl-md'));
-  neq('nested stack not lg', cs('st-inner', 'row-gap'), cs('st-lg', 'row-gap'));
-  /* generic --sl-gap is a plain var: it IS meant to inherit in */
+  neq('nested stack not 5xl', cs('st-inner', 'row-gap'), varPx('--sl-5xl') + 'px');
+  /* --sl-gap is a plain var: it IS meant to inherit */
   near('ancestor sl-gap inherits in', cs('st-inherit', 'row-gap'), varPx('--sl-xl'));
-  eq('flow display block', cs('st-flow', 'display'), 'block');
-  near('flow sibling gap', cs('fl-2', 'margin-top'), varPx('--sl-md'));
-  eq('flow first no margin', cs('fl-1', 'margin-top'), '0px');
-  eq('stack cols display block', cs('st-cols', 'display'), 'block');
-  eq('stack cols count', cs('st-cols', 'column-count'), '3');
+  near('sl-gap=lg inherits in', cs('st-inherit2', 'row-gap'), varPx('--sl-lg'));
+
+  /* ---- content ---- */
+  eq('content display block', cs('ct-def', 'display'), 'block');
+  eq('content first margin cleared', cs('ct-h', 'margin-top'), '0px');
+  near('content sibling rhythm', cs('ct-2', 'margin-top'), varPx('--sl-md'));
+  near('content sl-gap=2xl rhythm', cs('ct-g2', 'margin-top'), varPx('--sl-2xl'));
 
   /* ---- row ---- */
   eq('row display', cs('row-def', 'display'), 'flex');
   eq('row wrap', cs('row-def', 'flex-wrap'), 'wrap');
   eq('row align center', cs('row-def', 'align-items'), 'center');
   near('row def gap = --sl-md', cs('row-def', 'column-gap'), varPx('--sl-md'));
-  near('row lg gap = --sl-lg', cs('row-lg', 'column-gap'), varPx('--sl-lg'));
-  eq('row zones switch to grid', cs('row-z', 'display'), 'grid');
-  near('row center zone pinned', rect('rz-c').left + rect('rz-c').width / 2, rect('row-z').left + rect('row-z').width / 2, 2);
-  near('row end zone at right', rect('rz-e').right, rect('row-z').right, 2);
-  near('row start zone at left', rect('rz-s').left, rect('row-z').left, 2);
+  near('row sl-gap=lg', cs('row-lg', 'column-gap'), varPx('--sl-lg'));
+  eq('row child min-inline 0', cs('row-mc', 'min-width'), '0px');
 
   /* ---- grid ---- */
   eq('grid display', cs('gr-auto', 'display'), 'grid');
@@ -174,6 +164,7 @@ function main() {
   eq('grid cols=4 tracks', tracks('gr-4'), 4);
   near('span 8 clamps to 4 tracks', rect('sp8').width, rect('gr-span').width, 2);
   near('span full covers grid', rect('spf').width, rect('gr-span').width, 2);
+  near('bare span = full row', rect('spb').width, rect('gr-span').width, 2);
   rec('span 2 = 2 tracks + 1 gap', rect('sp2').width + 'px', '~(640-3*12)/4*2+12',
     Math.abs(rect('sp2').width - (2 * ((640 - 3 * varPx('--sl-md')) / 4) + varPx('--sl-md'))) < 2);
   /* self-default seal — inner bare grid must not inherit the parent's cols */
@@ -182,57 +173,47 @@ function main() {
   eq('outer grid tracks = 2', tracks('gr-outer'), 2);
 
   /* ---- bar ---- */
-  eq('bar display grid', cs('bar-plain', 'display'), 'grid');
+  eq('bar display flex', cs('bar-plain', 'display'), 'flex');
+  eq('bar space-between', cs('bar-plain', 'justify-content'), 'space-between');
   near('bar min-block = 3.5rem', cs('bar-plain', 'min-height'), 56);
   near('bar pad = --sl-md block', cs('bar-plain', 'padding-top'), varPx('--sl-md'));
   eq('bar top sticky', cs('bar-top', 'position'), 'sticky');
   eq('bar top border-bottom', cs('bar-top', 'border-bottom-width'), '1px');
-  near('bar center zone pinned', rect('bz-c').left + rect('bz-c').width / 2, rect('bar-top').left + rect('bar-top').width / 2, 2);
-  near('bar end zone at right-pad', rect('bz-e').right, rect('bar-top').right - varPx('--sl-lg'), 2);
-  near('bar start zone at left+pad', rect('bz-s').left, rect('bar-top').left + varPx('--sl-lg'), 2);
+  /* space-between: first hugs left, last hugs right, middle floats */
+  near('bar first at left+pad', rect('bz-s').left, rect('bar-top').left + varPx('--sl-lg'), 2);
+  near('bar last at right-pad', rect('bz-e').right, rect('bar-top').right - varPx('--sl-lg'), 2);
   eq('bar fixed', cs('bar-fix', 'position'), 'fixed');
-  eq('bar static override', cs('bar-stat', 'position'), 'static');
   eq('bar bottom sticky', cs('bar-bot', 'position'), 'sticky');
   eq('bar bottom border-top', cs('bar-bot', 'border-top-width'), '1px');
+  near('bar sl-pad=lg block pad', cs('bar-pad', 'padding-top'), varPx('--sl-2xl'));
 
-  /* ---- toast ---- */
-  eq('toast fixed', cs('t-def', 'position'), 'fixed');
-  near('toast width 22rem', rect('t-def').width, Math.min(352, vw() - 32), 2);
-  near('toast def bottom-end right', rect('t-def').right, vw() - varPx('--sl-lg'), 2);
-  near('toast def bottom-end bottom', rect('t-def').bottom, vh() - varPx('--sl-lg'), 2);
-  near('toast bottom-start left', rect('t-bs').left, varPx('--sl-lg'), 2);
-  near('toast bottom-start bottom', rect('t-bs').bottom, vh() - varPx('--sl-lg'), 2);
-  near('toast bottom-center x', rect('t-bc').left + rect('t-bc').width / 2, vw() / 2, 2);
-  near('toast bottom-center bottom', rect('t-bc').bottom, vh() - varPx('--sl-lg'), 2);
-  near('toast bottom-end right', rect('t-be').right, vw() - varPx('--sl-lg'), 2);
-  near('toast top-start left', rect('t-ts').left, varPx('--sl-lg'), 2);
-  near('toast top-start top', rect('t-ts').top, varPx('--sl-lg'), 2);
-  near('toast top-center x', rect('t-tc').left + rect('t-tc').width / 2, vw() / 2, 2);
-  near('toast top-center top', rect('t-tc').top, varPx('--sl-lg'), 2);
-  near('toast top-end right', rect('t-te').right, vw() - varPx('--sl-lg'), 2);
-  near('toast top-end top', rect('t-te').top, varPx('--sl-lg'), 2);
-  near('toast legacy start = bottom-start', rect('t-legacy').left, varPx('--sl-lg'), 2);
-  near('toast legacy bottom', rect('t-legacy').bottom, vh() - varPx('--sl-lg'), 2);
-
-  /* ---- place ---- */
-  near('place end margin-left auto', cs('pl-end', 'margin-left'), 420);
-  near('place end pins right', rect('pl-end').right, rect('pl-wrap').right, 1);
-  near('place start margin-right auto', cs('pl-start', 'margin-right'), 420);
-  near('place start pins left', rect('pl-start').left, rect('pl-wrap').left, 1);
-  near('place center margin-left', cs('pl-center', 'margin-left'), 210);
-  near('place center pins middle', rect('pl-center').left + 40, rect('pl-wrap').left + 250, 1);
-  near('place middle-end vcentered', rect('pl-me').top + 20, rect('pl-stack').top + 100, 2);
-  near('place middle-end right', rect('pl-me').right, rect('pl-stack').right, 1);
-  near('place bottom pushed down', rect('pl-bot').bottom, rect('pl-stack2').bottom, 1);
+  /* ---- float ---- */
+  eq('float fixed', cs('t-def', 'position'), 'fixed');
+  near('float width 22rem', rect('t-def').width, Math.min(352, vw() - 32), 2);
+  near('float def bottom-end right', rect('t-def').right, vw() - varPx('--sl-lg'), 2);
+  near('float def bottom-end bottom', rect('t-def').bottom, vh() - varPx('--sl-lg'), 2);
+  near('float bottom-start left', rect('t-bs').left, varPx('--sl-lg'), 2);
+  near('float bottom-start bottom', rect('t-bs').bottom, vh() - varPx('--sl-lg'), 2);
+  near('float bottom-center x', rect('t-bc').left + rect('t-bc').width / 2, vw() / 2, 2);
+  near('float bottom-center bottom', rect('t-bc').bottom, vh() - varPx('--sl-lg'), 2);
+  near('float bottom-end right', rect('t-be').right, vw() - varPx('--sl-lg'), 2);
+  near('float top-start left', rect('t-ts').left, varPx('--sl-lg'), 2);
+  near('float top-start top', rect('t-ts').top, varPx('--sl-lg'), 2);
+  near('float top-center x', rect('t-tc').left + rect('t-tc').width / 2, vw() / 2, 2);
+  near('float top-center top', rect('t-tc').top, varPx('--sl-lg'), 2);
+  near('float top-end right', rect('t-te').right, vw() - varPx('--sl-lg'), 2);
+  near('float top-end top', rect('t-te').top, varPx('--sl-lg'), 2);
 
   /* ---- sidebar ---- */
-  eq('with-sidebar flex', cs('sb', 'display'), 'flex');
-  eq('with-sidebar wrap', cs('sb', 'flex-wrap'), 'wrap');
+  eq('sidebar flex', cs('sb', 'display'), 'flex');
+  eq('sidebar wrap', cs('sb', 'flex-wrap'), 'wrap');
   near('sidebar rail 16rem', rect('sb-rail').width, 256, 4);
   near('sidebar def gap = --sl-lg', cs('sb', 'column-gap'), varPx('--sl-lg'));
-  eq('place start order -1', cs('sb-r1', 'order'), '-1');
-  eq('place end order 1', cs('sb-r2', 'order'), '1');
-  eq('sidebar place margin zeroed', cs('sb-r1', 'margin-left'), '0px');
+  /* DOM order: rail first = leading edge, rail last = trailing edge */
+  rec('rail first sits left', rect('sb-rail').left + 'px', '< main', rect('sb-rail').left < rect('sb-main').left);
+  rec('rail last sits right', rect('sb2-rail').left + 'px', '> main', rect('sb2-rail').left > rect('sb2-main').left);
+  rec('two rails flank main', rect('sb3-l').left + '<' + rect('sb3-main').left + '<' + rect('sb3-r').left,
+    'l<main<r', rect('sb3-l').left < rect('sb3-main').left && rect('sb3-r').left > rect('sb3-main').left);
 }
 
 /* rAF is flaky under --virtual-time-budget (no frames without rendering),

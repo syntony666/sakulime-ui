@@ -68,13 +68,13 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ## 子元素
 
-### 動作 `sl-notice-action`
+### 動作 `sl-notice--action`
 
 固定在邊緣的控制項，例如關閉鈕或動作連結，點擊後的行為由頁面實作：
 
 - 寫在 `sl-notice` 的直接子層；放到更深層的只是普通內容，不會固定到邊緣
 - 沒給靠右（行尾），`start` 靠左（行首），兩個可以同時存在
-- 垂直置中，文字不會繞到它底下；控制項更寬時調大 `--sl-action-w`
+- 垂直置中，文字不會繞到它底下；控制項更寬時調大 `--sl-notice-action-w`
 - 裡面的 `<i>` 跟著按鈕字級，加大用 `sl-icon-size`
 
 <Playground :meta="NoticeDemos.ActionPlay" :render="NoticeDemos.ActionPlay.render" />

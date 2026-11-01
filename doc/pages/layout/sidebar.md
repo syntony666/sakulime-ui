@@ -1,6 +1,6 @@
 ---
 title: Sidebar 側邊欄
-description: 側邊欄加主欄的版面，位置用標記決定，主欄太窄就自己換行。
+description: 側邊欄加主欄的版面，位置跟 DOM 順序走，主欄太窄就自己換行。
 ---
 
 <script setup>
@@ -9,13 +9,13 @@ import * as SidebarDemos from "../../demos/layout/sidebar.demo";
 
 # Sidebar *側邊欄*
 
-> 側邊欄加主欄的版面。側邊欄標示 `sl-sidebar`，其他子層是主欄。主欄被擠到下限以下時整組換行，不用 media query，看的是容器寬度。
+> 側邊欄加主欄的版面。容器標 `sl-sidebar`，側邊欄子層標 `sl-sidebar--rail`，其他子層是主欄。主欄被擠到下限以下時整組換行，不用 media query，看的是容器寬度。
 
 ## 用法
 
 ```html
-<div sl-with-sidebar>
-  <aside sl-sidebar>側邊欄</aside>
+<div sl-sidebar>
+  <aside sl-sidebar--rail>側邊欄</aside>
   <main>主欄</main>
 </div>
 ```
@@ -24,19 +24,15 @@ import * as SidebarDemos from "../../demos/layout/sidebar.demo";
 
 ## 位置
 
-未標示的側邊欄看 HTML 順序：上面那個是放前面在左；放後面就在右：
+側邊欄在哪一側跟著 DOM 順序走：寫在主欄前面就在左，寫在後面就在右：
 
 <Demo :render="SidebarDemos.SidebarEnd.render" />
 
-標示 `sl-place="start"` 固定排最前、`sl-place="end"` 固定排最後，跟 DOM 順序無關。下面這個側邊欄寫在主欄前面，照樣排到右邊：
-
-<Demo :render="SidebarDemos.SidebarMark.render" />
-
-標示兩個 `sl-sidebar` 就左右各一條：
+標示兩個 `sl-sidebar--rail` 就左右各一條：
 
 <Demo :render="SidebarDemos.SidebarBoth.render" />
 
-結構是一條 rail 配一個主欄（或左右各一條 rail）；rail 上的標記只有順序語意，`center`、`middle` 這些值在這裡沒有對齊意義，標了只會清掉 margin。另外標記動的是視覺順序：Tab 跟朗讀順序還是看 DOM，rail 裡互動元件多的話 DOM 序跟視覺序盡量保持一致。
+結構是一條 rail 配一個主欄（或左右各一條 rail）。位置就是 DOM 序，要換邊就調整 HTML 順序。
 
 ## 尺寸
 
@@ -46,9 +42,7 @@ import * as SidebarDemos from "../../demos/layout/sidebar.demo";
 
 ## 間距
 
-px 以根字級 16px 換算，尺規本身是 rem。
-
-`sl-with-sidebar` 的選項就是間距，預設 `lg`（16px）：
+間距用 [`sl-gap`](/attrs/gap) 給，寫在容器自己或外層都行，預設 `lg`（16px）：
 
 | 選項  | 間距         |
 | ----- | ------------ |

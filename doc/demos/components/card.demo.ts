@@ -65,8 +65,8 @@ const vcard = (v: string, content: string, w = 320) =>
   `<div ${cardMarker(v)} style="width: ${w}px">${content}</div>`;
 
 // shared content parts — playground cards and section demos
-const sec = (inner: string) => `<div sl-card-section>${inner}</div>`;
-const media = `<div sl-card-section="inset" class="demo-media"><!-- 圖片 --></div>`;
+const sec = (inner: string) => `<div sl-card--section>${inner}</div>`;
+const media = `<div sl-card--section="inset" class="demo-media"><!-- 圖片 --></div>`;
 const TITLE = `<strong>卡片標題</strong><p>卡片內容文字，描述這張卡片在展示什麼。</p>`;
 const FOOT = `<small>底部資訊</small>`;
 
@@ -144,15 +144,15 @@ const cornerEl = (position: string, kind: string, tone: string, size = "-") => {
   const pos = position === "-" || position === "end" ? "" : `="${position}"`;
   const t = attr("sl-tone", tone);
   const s = kind === "chip" ? attr("sl-size", size) : "";
-  if (kind === "dot") return `<i sl-card-corner${pos} sl-dot${t}></i>`;
-  if (kind === "icon") return `<i sl-card-corner${pos} sl-icon="lucide:zap"${t}></i>`;
-  return `<span sl-card-corner${pos} sl-chip${t}${s}>100ms</span>`;
+  if (kind === "dot") return `<i sl-card--corner${pos} sl-dot${t}></i>`;
+  if (kind === "icon") return `<i sl-card--corner${pos} sl-icon="lucide:zap"${t}></i>`;
+  return `<span sl-card--corner${pos} sl-chip${t}${s}>100ms</span>`;
 };
 
 export const Corner: DemoObj<CornerArgs> = {
   args: { position: "-", kind: "chip", tone: "-", size: "-" },
   argTypes: {
-    position: axisArg("sl-card-corner", "位置", CORNERS),
+    position: axisArg("sl-card--corner", "位置", CORNERS),
     kind: axisArg("組合", "角落內容：同元素疊加的 attr", CORNER_KINDS),
     tone: axisArg("sl-tone", "顏色", TONES),
     size: axisArg("sl-size", "大小（chip 限定）", ["-", "sm", "md", "lg"]),
@@ -168,7 +168,7 @@ export const CornerPositions: Demo = {
     axis(CORNERS, (v) =>
       card(
         "",
-        (v !== "-" ? `<span sl-card-corner="${v}" sl-chip>NEW</span>` : "") +
+        (v !== "-" ? `<span sl-card--corner="${v}" sl-chip>NEW</span>` : "") +
           `<strong>${label(v)}</strong><p>內容文字</p>`,
       ),
     ),
@@ -199,8 +199,8 @@ export const BasicSections: Demo = {
 export const Sections: DemoObj<SectionArgs> = {
   args: { inset: "top", corner: false, pad: "-" },
   argTypes: {
-    inset: axisArg('sl-card-section="inset"', "貼邊區塊位置", INSETS),
-    corner: boolArg("sl-card-corner", "角落標記（疊在貼邊內容上）"),
+    inset: axisArg('sl-card--section="inset"', "貼邊區塊位置", INSETS),
+    corner: boolArg("sl-card--corner", "角落標記（疊在貼邊內容上）"),
     pad: axisArg("sl-pad", "內距", PADS),
   },
   render: (args) => {
@@ -214,7 +214,7 @@ export const Sections: DemoObj<SectionArgs> = {
             : [sec(TITLE), sec(FOOT)];
     return card(
       attr("sl-pad", args.pad),
-      (args.corner ? `<span sl-card-corner sl-chip>200ms</span>` : "") +
+      (args.corner ? `<span sl-card--corner sl-chip>200ms</span>` : "") +
         parts.join(""),
       360,
     );
@@ -224,7 +224,7 @@ export const Sections: DemoObj<SectionArgs> = {
 export const Insets: Demo = {
   render: () =>
     axis(["top", "middle", "bottom"], (v) => {
-      const text = `<div sl-card-section><strong>${label(v)}</strong><p>內容</p></div>`;
+      const text = `<div sl-card--section><strong>${label(v)}</strong><p>內容</p></div>`;
       const parts =
         v === "top" ? [media, text] : v === "bottom" ? [text, media] : [text, media, text];
       return card("", parts.join(""), 240);
@@ -237,7 +237,7 @@ export const Blank: Demo = {
     axis(["-", "hollow", "blank"], (v) =>
       vcard(
         v,
-        `<div sl-card-section="blank">` +
+        `<div sl-card--section="blank">` +
           `<strong>${v === "hollow" ? "上傳檔案" : v === "blank" ? "查無結果" : "沒有內容"}</strong>` +
           `<p>${v === "hollow" ? "拖拉檔案至此" : "說明文字"}</p>` +
           (v === "-" ? `<button sl-button>建立</button>` : "") +
@@ -254,9 +254,9 @@ export const SectionKinds: Demo = {
       "",
       [
         sec(`預設區塊`),
-        `<div sl-card-section="secondary">secondary：次要內容</div>`,
-        `<div sl-card-section="active">active：目前選取</div>`,
-        `<div sl-card-section="center">center：文字置中</div>`,
+        `<div sl-card--section="secondary">secondary：次要內容</div>`,
+        `<div sl-card--section="active">active：目前選取</div>`,
+        `<div sl-card--section="center">center：文字置中</div>`,
       ].join(""),
       320,
     ),

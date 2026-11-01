@@ -30,7 +30,7 @@ sakulime-ui 是一套 CSS-first 設計系統：只有兩件事 — `sl-*` 屬性
 
 ## Capabilities and Constraints
 
-- 元件層：`sl-card`、`sl-button`、`sl-chip`、`sl-dot`、`sl-notice`、`sl-icon`（屬性值即型態，如 `sl-card="hollow"`）；元件設定：`sl-card-indicate` 等；子元素層：`sl-card-corner`、`sl-card-section` 等；通用屬性：`sl-pad`、`sl-radius`、`sl-tone`、`sl-size`、`sl-interactive`、`sl-gap`；版面（`@sakulime-ui/layout`）：`sl-container`、`sl-stack`、`sl-row`、`sl-grid`、`sl-bar`、`sl-with-sidebar`＋`sl-sidebar`、`sl-toast`、`sl-place`、`sl-gap`、`sl-span`、`sl-cols`、`sl-hide-*`/`sl-show-*`、`sl-collapse`、`sl-flow`
+- 元件層：`sl-card`、`sl-button`、`sl-chip`、`sl-dot`、`sl-notice`、`sl-icon`（屬性值即型態，如 `sl-card="hollow"`）；元件設定：`sl-card-indicate` 等；子元素層：`sl-card--corner`、`sl-card--section` 等；通用屬性：`sl-pad`、`sl-radius`、`sl-tone`、`sl-size`、`sl-interactive`、`sl-gap`；版面（`@sakulime-ui/layout`）：`sl-container`、`sl-stack`、`sl-content`、`sl-row`、`sl-grid`、`sl-sidebar`＋`sl-sidebar--rail`、`sl-bar`＋`sl-bar-fixed`、`sl-float`、`sl-gap`、`sl-grid-cols(-*)`、`sl-grid--span`、`sl-hide-*`/`sl-show-*`
 - 顏色用 CSS Color 4/5：`oklch()`、`color-mix()`，目標 WCAG AA
 - Google Fonts 走 `<link>`/`preconnect`，Cloudflare Fonts rewrite 成 same-origin `/cf-fonts`
 - 所有外觀行為純 CSS selector 實作；資料驅動的功能（如圖示名稱解析）走共用 resolver，屬於選配增強

@@ -38,7 +38,7 @@ pageClass: <name>   # extra class on the page wrapper
 |---|---|---|
 | `#` | `Name *中文名*` | `# Card *卡片*` |
 | `##` | fixed section name, plain | `## 屬性` |
-| `###` | ``中文名 `attr` `` | ``### 角落標記 `sl-card-corner` `` |
+| `###` | ``中文名 `attr` `` | ``### 角落標記 `sl-card--corner` `` |
 | `####` | `名稱` or ``名稱 `value` `` | ``#### 貼邊 `inset` `` |
 
 A `###` documenting behavior rather than an attribute drops the attr chip
@@ -48,7 +48,7 @@ A `###` documenting behavior rather than an attribute drops the attr chip
 
 - Values use `"-"` for "attribute not written" — `attr()` drops it, `axis()`
   inserts a separator after it, `axisArg()` shows it as the default option.
-- `axisArg(name, desc, def, options)` — select control; `boolArg(name, desc)`
+- `axisArg(name, desc, options)` — select control; `boolArg(name, desc)`
   — checkbox for bare flag attrs.
 - `axis(values, item)` renders one element per value in a row;
   `label(v)` maps `-/sm/md/lg` to natural-language labels.

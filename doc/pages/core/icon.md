@@ -175,7 +175,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ## 組合
 
-圖示繼承所在元件的文字顏色，放進按鈕裡；疊上 `sl-card-corner` 就固定到卡片角落，`sl-tone` 標示在 icon 自己身上染色。
+圖示繼承所在元件的文字顏色，放進按鈕裡；疊上 `sl-card--corner` 就固定到卡片角落，`sl-tone` 標示在 icon 自己身上染色。
 
 <Demo :render="IconDemos.InContext.render" />
 

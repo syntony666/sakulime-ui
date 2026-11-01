@@ -254,7 +254,7 @@ body::before {
 }
 
 /* nowrap keeps attribute tokens whole — a break at the hyphen of
-   sl-card-corner reads as two words, not one API name. ligatures off:
+   sl-card--corner reads as two words, not one API name. ligatures off:
    the mono font fuses ="< sequences in tokens like sl-<元件>[=...] */
 .vp-doc :not(pre) > code {
   border: 1px solid var(--sl-border);
@@ -409,7 +409,7 @@ body::before {
   display: grid;
   /* fixed left lane holds name over desc; the control lane takes the
      rest and centers against both — same geometry in every field.
-     11rem + 12px names keep sl-card-section="inset" on one line.
+     11rem + 12px names keep sl-card--section="inset" on one line.
      align-content:start pins row 1 (name+control) to the top rail —
      without it, a taller sibling's stretch feeds the auto rows and
      sinks fields with shorter descs */

@@ -10,18 +10,12 @@
 </head>
 <body>
 
-<!-- breakpoint sanity + grid suffixes (all three breakpoints fire at 420px) -->
-<div sl-grid sl-cols="4" sl-cols-sm="1" id="rg-sm"><div>a</div><div>b</div><div>c</div><div>d</div></div>
-<div sl-grid sl-cols="4" sl-cols-md="2" id="rg-md"><div>a</div><div>b</div><div>c</div><div>d</div></div>
-<div sl-grid sl-cols="4" sl-cols-lg="3" id="rg-lg"><div>a</div><div>b</div><div>c</div><div>d</div></div>
-<div sl-grid sl-cols="4" sl-cols-lg="3" sl-cols-md="2" sl-cols-sm="1" id="rg-all"><div>a</div><div>b</div><div>c</div><div>d</div></div>
-<div sl-grid sl-cols="4" sl-collapse id="rg-col"><div>a</div><div>b</div></div>
-<div sl-grid sl-cols="4" sl-cols-md="2" id="rg-span"><div sl-span="4" id="rsp">x</div><div>y</div></div>
-
-<!-- row collapse -->
-<div sl-row sl-collapse id="rr-sm"><div sl-place="end" id="rr-p">x</div><div>y</div></div>
-<div sl-row sl-collapse-md id="rr-md"><div>x</div><div>y</div></div>
-<div sl-row sl-collapse-lg id="rr-lg"><div>x</div><div>y</div></div>
+<!-- breakpoint sanity + grid-cols suffixes (all three breakpoints fire at 420px) -->
+<div sl-grid sl-grid-cols="4" sl-grid-cols-sm="1" id="rg-sm"><div>a</div><div>b</div><div>c</div><div>d</div></div>
+<div sl-grid sl-grid-cols="4" sl-grid-cols-md="2" id="rg-md"><div>a</div><div>b</div><div>c</div><div>d</div></div>
+<div sl-grid sl-grid-cols="4" sl-grid-cols-lg="3" id="rg-lg"><div>a</div><div>b</div><div>c</div><div>d</div></div>
+<div sl-grid sl-grid-cols="4" sl-grid-cols-lg="3" sl-grid-cols-md="2" sl-grid-cols-sm="1" id="rg-all"><div>a</div><div>b</div><div>c</div><div>d</div></div>
+<div sl-grid sl-grid-cols="4" sl-grid-cols-md="2" id="rg-span"><div sl-grid--span="4" id="rsp">x</div><div>y</div></div>
 
 <!-- hide/show -->
 <div sl-hide-sm id="rh-sm">x</div>
@@ -56,15 +50,7 @@ function main() {
   eq('cols-md=2 → 2 tracks', tracks('rg-md'), 2);
   eq('cols-lg=3 → 3 tracks', tracks('rg-lg'), 3);
   eq('smallest suffix wins', tracks('rg-all'), 1);
-  eq('sl-collapse → 1 track', tracks('rg-col'), 1);
   near('span clamps to released count', rect('rsp').width, rect('rg-span').width, 2);
-
-  /* row collapse — bare = sm, all three fire below 45rem */
-  eq('row collapse column', cs('rr-sm', 'flex-direction'), 'column');
-  eq('row collapse stretch', cs('rr-sm', 'align-items'), 'stretch');
-  eq('row collapse-md column', cs('rr-md', 'flex-direction'), 'column');
-  eq('row collapse-lg column', cs('rr-lg', 'flex-direction'), 'column');
-  eq('collapsed row place margin reset', cs('rr-p', 'margin-left'), '0px');
 
   /* hide = gone below the breakpoint; show = gone above it (420px is
      below all three, so every show stays visible) */

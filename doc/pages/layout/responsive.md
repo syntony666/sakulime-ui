@@ -21,24 +21,23 @@ px 以根字級 16px 換算。三階跟 [container](/layout/container) 的頁面
 | `md` | < 60rem（960px）  | 平板、小視窗 |
 | `lg` | < 75rem（1200px） | 窄筆電       |
 
-只有「以下」一個方向，不設範圍跟上限修飾，跟主流框架「以上生效」的方向相反。`sl-collapse` 裸標用的就是 `sm` 斷點。
+只有「以下」一個方向，不設範圍跟上限修飾，跟主流框架「以上生效」的方向相反。
 
 ## 斷點後綴
 
-屬性加上 `-<斷點>` 就在該斷點以下生效，窄斷點蓋過寬斷點。支援的有 `sl-cols` 跟 `sl-collapse`：
+屬性加上 `-<斷點>` 就在該斷點以下生效，窄斷點蓋過寬斷點。目前支援的是 `sl-grid-cols`：
 
 ```html
-<div sl-grid sl-cols="4" sl-cols-md="2" sl-cols-sm="1">
-<div sl-row sl-collapse-md>
+<div sl-grid sl-grid-cols="4" sl-grid-cols-md="2" sl-grid-cols-sm="1">
 ```
 
-四欄起步、平板掉成兩欄、手機單欄；`sl-collapse-md` 讓橫列在平板就收成直排（`sl-collapse-lg` 是 <75rem、裸 `sl-collapse` 是 <45rem）。縮小瀏覽器視窗就看得到變化：
+四欄起步、平板掉成兩欄、手機單欄。縮小瀏覽器視窗就看得到變化：
 
 <Demo
   :render="RwdDemos.Cols.render"
 />
 
-佔欄的 `sl-span` 會自動調整：當前欄數容不下就變滿列，不會溢出。
+佔欄的 `sl-grid--span` 會自動調整：當前欄數容不下就變滿列，不會溢出。
 
 ## 隱藏跟顯示
 
@@ -74,7 +73,7 @@ px 以根字級 16px 換算。三階跟 [container](/layout/container) 的頁面
 
 ```css
 @media (width < 30rem) {
-  [sl-grid][sl-cols] {
+  [sl-grid][sl-grid-cols] {
     grid-template-columns: 1fr;
   }
 }
