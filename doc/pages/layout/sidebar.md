@@ -42,18 +42,6 @@ import * as SidebarDemos from "../../demos/layout/sidebar.demo";
 
 ## 間距
 
-間距用 [`sl-gap`](/attrs/gap) 給，寫在容器自己或外層都行，預設 `lg`（16px）：
+間距用 [`sl-gap`](/attrs/gap) 給，寫在容器自己或外層都行，預設 `lg`。
 
-| 選項  | 間距         |
-| ----- | ------------ |
-| `xs`  | 4px          |
-| `sm`  | 8px          |
-| `md`  | 12px         |
-| `lg`  | 16px（預設） |
-| `xl`  | 20px         |
-| `2xl` | 24px         |
-| `3xl` | 32px         |
-| `4xl` | 40px         |
-| `5xl` | 48px         |
-
-只想改一個容器就寫 `--sl-sidebar-gap`；[`sl-gap`](/attrs/gap) 標示在容器自己或外層都行，裡面沒給間距的排版屬性會繼承這個間距。
+只想改一個容器就寫 `--sl-sidebar-gap`；`sl-gap` 標示在容器自己或外層都行，裡面沒給間距的排版元件會繼承這個間距。

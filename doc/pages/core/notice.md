@@ -27,31 +27,19 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### 顏色 `sl-tone`
 
-`sl-notice` 是 `sl-tone` 的適用元素。沒給是 primary 淺底色，資訊通知的標準色。
-
-- `primary`：主色（預設）
-- `secondary`：次要色
-- `success`：成功、完成的回饋
-- `warning`：需要注意的提醒
-- `danger`：錯誤、危險操作
+`sl-notice` 是 `sl-tone` 的適用元素。沒給是 `primary` 淺底色，資訊通知的標準色。選項看 [Tone 色調](/attrs/tone)。
 
 <Demo :render="NoticeDemos.Tones.render" />
 
 ### 圓角 `sl-radius`
 
-`sl-notice` 是 `sl-radius` 的適用元素，預設 `full`，膠囊形。這裡的 `full` 半徑最多一個行高，一、二行是全圓膠囊，三行以上兩端保留一行的圓弧、中段變成直線，不會拉長成半圓：
-
-- `sm`：微圓
-- `md`：一般圓角
-- `lg`：很圓
-- `full`：單行膠囊（預設）
-- `none`：直角
+`sl-notice` 是 `sl-radius` 的適用元素，預設 `full`，膠囊形。這裡的 `full` 半徑最多一個行高，一、二行是全圓膠囊，三行以上兩端保留一行的圓弧、中段變成直線，不會拉長成半圓。其他選項看 [Radius 圓角](/attrs/radius)。
 
 <Demo :render="NoticeDemos.Radius.render" />
 
 ### 厚度 `sl-pad`
 
-沒給是 `sm`。`md`／`lg` 是整體內距的增減，`lg` 適合公告型的多行內容：
+沒給是 `sm`。`md`／`lg` 是整體內距的增減，`lg` 適合公告型的多行內容。選項看 [Pad 內距](/attrs/pad)。
 
 <Demo :render="NoticeDemos.Pads.render" />
 

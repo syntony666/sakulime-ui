@@ -27,21 +27,7 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 
 ## 間距
 
-間距用 [`sl-gap`](/attrs/gap) 給，寫在 stack 自己身上或祖先上都行。px 以根字級 16px 換算，刻度本身是 rem，預設 `md`：
-
-| 選項  | 間距         |
-| ----- | ------------ |
-| `xs`  | 4px          |
-| `sm`  | 8px          |
-| `md`  | 12px（預設） |
-| `lg`  | 16px         |
-| `xl`  | 20px         |
-| `2xl` | 24px         |
-| `3xl` | 32px         |
-| `4xl` | 40px         |
-| `5xl` | 48px         |
-
-只想改一個容器就寫 `--sl-stack-gap`（例如 `style="--sl-stack-gap: 6px"`）。
+間距用 [`sl-gap`](/attrs/gap) 給，寫在 stack 自己身上或祖先上都行，預設 `md`。只想改一個容器就寫 `--sl-stack-gap`（例如 `style="--sl-stack-gap: 6px"`）。
 
 三種間距的實際樣子：
 

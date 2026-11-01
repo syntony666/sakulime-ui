@@ -17,13 +17,7 @@ import * as DotDemos from "../../demos/components/dot.demo";
 
 ### 顏色 `sl-tone`
 
-`sl-dot` 是 `sl-tone` 的適用元素。沒給繼承文字顏色。
-
-- `primary`：主色
-- `secondary`：次要色
-- `success`：成功、完成的回饋
-- `warning`：需要注意的提醒
-- `danger`：錯誤、危險操作
+`sl-dot` 是 `sl-tone` 的適用元素。沒給繼承文字顏色。選項看 [Tone 色調](/attrs/tone)。
 
 <Demo :render="DotDemos.Tones.render" />
 
