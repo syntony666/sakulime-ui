@@ -47,6 +47,84 @@ if (missing.length || stray.length) {
   );
 }
 
+/* generic.css maps each generic slot to the components allowed to read
+   it via :--sl-generic-* custom selectors; the lists and the actual slot
+   reads in component css must agree — a listed component that never
+   reads the slot is as wrong as a reader that is not listed */
+const SLOTS = {
+  tone: /--sl-tone-(bg|text(-invert)?)(?=\s*[:),])/,
+  size: /--sl-size-(fs|h|px)(?=\s*[:),])/,
+  radius: /--sl-radius(?=\s*[:),])/,
+  pad: /--sl-pad(?=\s*[:),])/,
+};
+const strip = (css) => css.replace(/\/\*[\s\S]*?\*\//g, "");
+const generic = strip(read(`${coreDir}/src/css/generic.css`));
+const consumers = {};
+for (const m of generic.matchAll(
+  /@custom-selector\s+:--sl-generic-(\w+)\s+([^;]+);/g
+)) {
+  consumers[m[1]] = new Set([...m[2].matchAll(/sl-[a-z]+/g)].map((x) => x[0]));
+}
+/* a selector's component marks are the sl-<name> heads of its attrs —
+   [sl-card--section] and [sl-card-indicate] both count as sl-card */
+const rules = [];
+for (const f of readdirSync(`${coreDir}/src/css`)) {
+  if (!f.endsWith(".css") || f === "generic.css") continue;
+  for (const m of strip(read(`${coreDir}/src/css/${f}`)).matchAll(
+    /([^{}]+)\{([^{}]*)\}/g
+  )) {
+    rules.push({
+      f,
+      sel: m[1].trim().replace(/\s+/g, " "),
+      body: m[2],
+      marks: new Set([...m[1].matchAll(/\[(sl-[a-z]+)/g)].map((x) => x[1])),
+    });
+  }
+}
+const drift = [];
+for (const attr of [...Object.keys(SLOTS), "interactive"]) {
+  if (!consumers[attr]) {
+    drift.push(`${attr}: :--sl-generic-${attr} list missing`);
+  }
+}
+for (const [attr, pat] of Object.entries(SLOTS)) {
+  for (const x of consumers[attr] ?? []) {
+    if (!rules.some((r) => r.marks.has(x) && pat.test(r.body))) {
+      drift.push(`${attr}: ${x} listed but no rule reads the slot`);
+    }
+  }
+}
+for (const r of rules) {
+  for (const [attr, pat] of Object.entries(SLOTS)) {
+    if (
+      pat.test(r.body) &&
+      ![...r.marks].some((x) => consumers[attr]?.has(x))
+    ) {
+      drift.push(`${attr}: ${r.f} "${r.sel}" reads the slot but is not listed`);
+    }
+  }
+  if (
+    r.marks.has("sl-interactive") &&
+    ![...r.marks].some(
+      (x) => x !== "sl-interactive" && consumers.interactive?.has(x)
+    )
+  ) {
+    drift.push(
+      `interactive: ${r.f} "${r.sel}" uses sl-interactive but is not listed`
+    );
+  }
+}
+for (const [attr, list] of Object.entries(consumers)) {
+  for (const x of list) {
+    if (!rules.some((r) => r.marks.has(x))) {
+      drift.push(`${attr}: ${x} listed but [${x}] appears in no component css`);
+    }
+  }
+}
+if (drift.length) {
+  throw new Error(`generic drift:\n  - ${drift.join("\n  - ")}`);
+}
+
 // @sakulime-ui/theme — one minified palette per file; bundle so each
 // theme's @import of the shared derived layer inlines into dist
 out(`${themeDir}/dist`);
