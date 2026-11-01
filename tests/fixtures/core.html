@@ -1,0 +1,278 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>sl core fixture</title>
+<link rel="stylesheet" href="../../packages/theme/dist/sakulime.min.css">
+<link rel="stylesheet" href="../../packages/core/dist/index.min.css">
+<link rel="stylesheet" href="../../packages/layout/dist/index.min.css">
+<style>body { font-family: system-ui, sans-serif; } #probe { position: absolute; visibility: hidden; }</style>
+</head>
+<body>
+
+<!-- buttons -->
+<button sl-button id="btn-def">def</button>
+<button sl-button="invert" id="btn-inv">inv</button>
+<button sl-button="ghost" id="btn-gho">gho</button>
+<button sl-button="underline" id="btn-und">und</button>
+<button sl-button sl-size="sm" id="btn-sm">sm</button>
+<button sl-button sl-size="md" id="btn-md">md</button>
+<button sl-button sl-size="lg" id="btn-lg">lg</button>
+<button sl-button sl-tone="primary" id="btn-tp">p</button>
+<button sl-button sl-tone="secondary" id="btn-ts">s</button>
+<button sl-button sl-tone="success" id="btn-tok">ok</button>
+<button sl-button sl-tone="warning" id="btn-tw">w</button>
+<button sl-button sl-tone="danger" id="btn-td">d</button>
+<button sl-button sl-interactive id="btn-i">i</button>
+<button sl-button sl-interactive="lift" id="btn-i2">i2</button>
+<button sl-button sl-interactive="press" id="btn-i3">i3</button>
+<button sl-button sl-interactive="dim" id="btn-i4">i4</button>
+<button sl-button sl-radius="full" id="btn-rf">rf</button>
+
+<!-- cards -->
+<div sl-card id="card-def">card</div>
+<div sl-card="plain" id="card-plain">card</div>
+<div sl-card="hollow" id="card-hollow">card</div>
+<div sl-card="blank" id="card-blank">card</div>
+<div sl-card sl-pad="sm" id="card-ps">card</div>
+<div sl-card sl-pad="md" id="card-pm">card</div>
+<div sl-card sl-pad="lg" id="card-pl">card</div>
+<div sl-card sl-radius="sm" id="card-rs">card</div>
+<div sl-card sl-radius="lg" id="card-rl">card</div>
+<div sl-card sl-radius="full" id="card-rf">card</div>
+<div sl-card sl-radius="none" id="card-rn">card</div>
+<div sl-card sl-card-indicate="top" id="card-it">card</div>
+<div sl-card sl-card-indicate="bottom" id="card-ib">card</div>
+<div sl-card sl-card-indicate="start" id="card-is">card</div>
+<div sl-card sl-card-indicate="end" id="card-ie">card</div>
+<div sl-card id="card-sect">
+  <div sl-card-section id="sect-1">a</div>
+  <div sl-card-section id="sect-2">b</div>
+</div>
+<div sl-card id="card-sect2">
+  <div sl-card-section="inset" id="sect-inset"><span>c</span></div>
+</div>
+<div sl-card id="card-sect3">
+  <div sl-card-section="blank" id="sect-blank"><strong>e</strong><p>f</p></div>
+</div>
+<div sl-card id="card-sect4">
+  <div sl-card-section="secondary" id="sect-sec">g</div>
+</div>
+<div sl-card id="card-sect5">
+  <div sl-card-section="center" id="sect-ctr">h</div>
+</div>
+<div sl-card id="card-sect6">
+  <div sl-card-section="active" id="sect-act">i</div>
+</div>
+<div sl-card id="card-corner"><span sl-card-corner sl-dot id="corner-dot"></span></div>
+<div sl-card sl-interactive id="card-i">card</div>
+
+<!-- chips -->
+<span sl-chip id="chip-def">tag</span>
+<span sl-chip sl-tone="danger" id="chip-d">tag</span>
+<span sl-chip sl-tone="success" id="chip-s">tag</span>
+<span sl-chip sl-size="sm" id="chip-sm">tag</span>
+<span sl-chip sl-size="lg" id="chip-lg">tag</span>
+
+<!-- dots -->
+<span sl-dot id="dot-def"></span>
+<span sl-dot sl-tone="success" id="dot-s"></span>
+
+<!-- icons -->
+<i sl-icon id="ic-def"></i>
+<i sl-icon sl-icon-size="sm" id="ic-sm"></i>
+<i sl-icon sl-icon-size="lg" id="ic-lg"></i>
+<i sl-icon sl-icon-size="xl" id="ic-xl"></i>
+<i sl-icon sl-icon-size="2xl" id="ic-2xl"></i>
+<i sl-icon sl-icon-frame id="ic-fr"></i>
+<i sl-icon sl-icon-frame="circular" id="ic-frc"></i>
+<i sl-icon sl-icon-frame="rounded" id="ic-frr"></i>
+<i sl-icon sl-icon-spin id="ic-spin"></i>
+<i sl-icon sl-icon-flip="h" id="ic-fh"></i>
+<i sl-icon sl-icon-rotate="90" id="ic-r90"></i>
+<i sl-icon sl-icon-disabled id="ic-dis"></i>
+<i sl-icon sl-icon-space id="ic-sp"></i>
+
+<!-- notices -->
+<div sl-notice id="nt-def">hello notice</div>
+<div sl-notice="fit" id="nt-fit">short</div>
+<div sl-notice id="nt-act">copy <button sl-notice-action id="nt-btn">x</button></div>
+<div sl-notice sl-notice-align="end" id="nt-al">aligned</div>
+<div sl-notice sl-tone="danger" id="nt-d">danger</div>
+<div sl-notice sl-pad="lg" id="nt-pl">pad</div>
+<div sl-notice sl-radius="none" id="nt-rn">square</div>
+
+<div id="probe"></div>
+<pre id="results"></pre>
+<script>
+const R = [];
+const $ = id => document.getElementById(id);
+const cs = (el, p) => getComputedStyle($(el)).getPropertyValue(p);
+const px = v => parseFloat(v);
+const rec = (name, got, want, ok) => R.push({ name, got: String(got), want: String(want), ok });
+const eq = (name, got, want) => rec(name, got, want, got === want);
+const near = (name, got, want, tol = 1.5) => rec(name, got, want + '±' + tol, Math.abs(px(got) - px(want)) <= tol);
+const neq = (name, got, bad) => rec(name, got, 'not ' + bad, got !== bad);
+const has = (name, got, sub) => rec(name, got, '~' + sub, String(got).includes(sub));
+const match = (name, got, re) => rec(name, got, String(re), re.test(got));
+const probe = $('probe');
+const varPx = name => { probe.style.height = `var(${name},0px)`; return probe.getBoundingClientRect().height; };
+const TRANS = 'rgba(0, 0, 0, 0)';
+
+function main() {
+  /* ---- button ---- */
+  eq('btn display', cs('btn-def', 'display'), 'inline-flex');
+  near('btn min-block = --sl-3xl', cs('btn-def', 'min-height'), varPx('--sl-3xl'));
+  near('btn radius = --sl-sm', cs('btn-def', 'border-top-left-radius'), varPx('--sl-sm'));
+  neq('btn bg opaque', cs('btn-def', 'background-color'), TRANS);
+  eq('btn border transparent', cs('btn-def', 'border-top-color'), TRANS);
+  eq('btn invert border = def bg', cs('btn-inv', 'border-top-color'), cs('btn-def', 'background-color'));
+  neq('btn invert bg != def', cs('btn-inv', 'background-color'), cs('btn-def', 'background-color'));
+  neq('btn invert bg opaque', cs('btn-inv', 'background-color'), TRANS);
+  eq('btn ghost bg transparent', cs('btn-gho', 'background-color'), TRANS);
+  neq('btn ghost color != def', cs('btn-gho', 'color'), cs('btn-def', 'color'));
+  eq('btn underline decor', cs('btn-und', 'text-decoration-line'), 'underline');
+  near('btn sm h = --sl-2xl', cs('btn-sm', 'min-height'), varPx('--sl-2xl'));
+  near('btn sm fs = --sl-md', cs('btn-sm', 'font-size'), varPx('--sl-md'));
+  near('btn md h = --sl-3xl', cs('btn-md', 'min-height'), varPx('--sl-3xl'));
+  near('btn md fs = --sl-lg', cs('btn-md', 'font-size'), varPx('--sl-lg'));
+  near('btn lg h = --sl-4xl', cs('btn-lg', 'min-height'), varPx('--sl-4xl'));
+  near('btn lg fs = --sl-xl', cs('btn-lg', 'font-size'), varPx('--sl-xl'));
+  eq('btn tone primary = def bg', cs('btn-tp', 'background-color'), cs('btn-def', 'background-color'));
+  neq('btn tone secondary bg', cs('btn-ts', 'background-color'), cs('btn-def', 'background-color'));
+  neq('btn tone success bg', cs('btn-tok', 'background-color'), cs('btn-def', 'background-color'));
+  neq('btn tone warning bg', cs('btn-tw', 'background-color'), cs('btn-def', 'background-color'));
+  neq('btn tone danger bg', cs('btn-td', 'background-color'), cs('btn-def', 'background-color'));
+  neq('btn tones distinct (ok!=warn)', cs('btn-tok', 'background-color'), cs('btn-tw', 'background-color'));
+  neq('btn tones distinct (warn!=danger)', cs('btn-tw', 'background-color'), cs('btn-td', 'background-color'));
+  has('btn interactive grow slot', cs('btn-i', '--sl-i-transform'), 'scale(1.03)');
+  has('btn interactive lift slot', cs('btn-i2', '--sl-i-transform'), 'translateY(-4px)');
+  match('btn interactive press slot', cs('btn-i3', '--sl-i-transform'), /scale\((0)?\.97\)/);
+  has('btn interactive dim slot', cs('btn-i4', '--sl-i-filter'), 'brightness');
+  eq('btn radius full pill', cs('btn-rf', 'border-top-left-radius'), '9999px');
+
+  /* ---- card ---- */
+  eq('card border-width 1px', cs('card-def', 'border-top-width'), '1px');
+  near('card radius = --sl-sm', cs('card-def', 'border-top-left-radius'), varPx('--sl-sm'));
+  near('card pad = --sl-lg', cs('card-def', 'padding-top'), varPx('--sl-lg'));
+  neq('card bg opaque', cs('card-def', 'background-color'), TRANS);
+  eq('card plain border 0', cs('card-plain', 'border-top-width'), '0px');
+  eq('card hollow dashed', cs('card-hollow', 'border-top-style'), 'dashed');
+  eq('card hollow bw 2px', cs('card-hollow', 'border-top-width'), '2px');
+  eq('card hollow bg transparent', cs('card-hollow', 'background-color'), TRANS);
+  eq('card blank border 0', cs('card-blank', 'border-top-width'), '0px');
+  eq('card blank bg transparent', cs('card-blank', 'background-color'), TRANS);
+  near('card pad sm = --sl-md', cs('card-ps', 'padding-top'), varPx('--sl-md'));
+  near('card pad md = --sl-lg', cs('card-pm', 'padding-top'), varPx('--sl-lg'));
+  near('card pad lg = --sl-2xl', cs('card-pl', 'padding-top'), varPx('--sl-2xl'));
+  near('card radius sm = --sl-xs', cs('card-rs', 'border-top-left-radius'), varPx('--sl-xs'));
+  near('card radius lg = --sl-md', cs('card-rl', 'border-top-left-radius'), varPx('--sl-md'));
+  eq('card radius none = 0', cs('card-rn', 'border-top-left-radius'), '0px');
+  rec('card radius full capped > 24px', cs('card-rf', 'border-top-left-radius'), '>24px', px(cs('card-rf', 'border-top-left-radius')) > 24);
+  eq('card indicate top bw', cs('card-it', 'border-top-width'), '3px');
+  neq('card indicate top color', cs('card-it', 'border-top-color'), cs('card-def', 'border-top-color'));
+  eq('card indicate bottom bw', cs('card-ib', 'border-bottom-width'), '3px');
+  eq('card indicate start bw', cs('card-is', 'border-left-width'), '3px');
+  eq('card indicate end bw', cs('card-ie', 'border-right-width'), '3px');
+  near('card section bleed margin', cs('sect-1', 'margin-left'), -varPx('--sl-lg'));
+  eq('card section 2 divider', cs('sect-2', 'border-top-width'), '1px');
+  near('card section 2 gap', cs('sect-2', 'margin-top'), varPx('--sl-lg'));
+  eq('card section inset pad 0', cs('sect-inset', 'padding-left'), '0px');
+  eq('card section blank grid', cs('sect-blank', 'display'), 'grid');
+  neq('card section secondary bg', cs('sect-sec', 'background-color'), cs('card-def', 'background-color'));
+  eq('card section center align', cs('sect-ctr', 'text-align'), 'center');
+  neq('card section active bg', cs('sect-act', 'background-color'), TRANS);
+  eq('card corner absolute', cs('corner-dot', 'position'), 'absolute');
+  has('card interactive grow slot', cs('card-i', '--sl-i-transform'), 'scale(1.03)');
+
+  /* ---- chip ---- */
+  eq('chip display', cs('chip-def', 'display'), 'inline-flex');
+  eq('chip pill radius', cs('chip-def', 'border-top-left-radius'), '9999px');
+  near('chip font-size 0.875em', cs('chip-def', 'font-size'), 14);
+  neq('chip tone danger color', cs('chip-d', 'color'), cs('chip-def', 'color'));
+  neq('chip tone success color', cs('chip-s', 'color'), cs('chip-def', 'color'));
+  neq('chip tones distinct', cs('chip-s', 'color'), cs('chip-d', 'color'));
+  near('chip size sm fs = --sl-md', cs('chip-sm', 'font-size'), varPx('--sl-md'));
+  near('chip size lg fs = --sl-xl', cs('chip-lg', 'font-size'), varPx('--sl-xl'));
+
+  /* ---- dot ---- */
+  near('dot width 0.5em', cs('dot-def', 'width'), 8);
+  near('dot height 0.5em', cs('dot-def', 'height'), 8);
+  eq('dot pill radius', cs('dot-def', 'border-top-left-radius'), '9999px');
+  neq('dot bg opaque', cs('dot-def', 'background-color'), TRANS);
+  neq('dot tone bg differs', cs('dot-s', 'background-color'), cs('dot-def', 'background-color'));
+
+  /* ---- icon ---- */
+  eq('icon display', cs('ic-def', 'display'), 'inline-flex');
+  near('icon 1em box w', cs('ic-def', 'width'), 16);
+  near('icon 1em box h', cs('ic-def', 'height'), 16);
+  near('icon size sm', cs('ic-sm', 'width'), 12);
+  near('icon size lg', cs('ic-lg', 'width'), 24);
+  near('icon size xl', cs('ic-xl', 'width'), 40);
+  near('icon size 2xl', cs('ic-2xl', 'width'), 64);
+  near('icon frame padding', cs('ic-fr', 'padding-top'), 5.6);
+  eq('icon frame border', cs('ic-fr', 'border-top-width'), '2px');
+  eq('icon frame circular', cs('ic-frc', 'border-top-left-radius'), '9999px');
+  near('icon frame rounded', cs('ic-frr', 'border-top-left-radius'), varPx('--sl-sm'));
+  eq('icon spin animation', cs('ic-spin', 'animation-name'), 'sl-icon-spin');
+  eq('icon flip h', cs('ic-fh', 'scale'), '-1 1');
+  eq('icon rotate 90', cs('ic-r90', 'rotate'), '90deg');
+  eq('icon disabled opacity', cs('ic-dis', 'opacity'), '0.4');
+  near('icon space margin', cs('ic-sp', 'margin-left'), 4.8);
+
+  /* ---- notice ---- */
+  neq('notice wash bg', cs('nt-def', 'background-color'), TRANS);
+  eq('notice border 3px', cs('nt-def', 'border-top-width'), '3px');
+  eq('notice border solid', cs('nt-def', 'border-top-style'), 'solid');
+  neq('notice shadow ring', cs('nt-def', 'box-shadow'), 'none');
+  rec('notice capsule radius > 24px', cs('nt-def', 'border-top-left-radius'), '>24px', px(cs('nt-def', 'border-top-left-radius')) > 24);
+  near('notice pad v = .75*--sl-md', cs('nt-def', 'padding-top'), varPx('--sl-md') * 0.75);
+  near('notice pad h = 1.5*--sl-md', cs('nt-def', 'padding-left'), varPx('--sl-md') * 1.5);
+  rec('notice fit shrinks', $('nt-fit').getBoundingClientRect().width + 'px', '< def-50', $('nt-fit').getBoundingClientRect().width < $('nt-def').getBoundingClientRect().width - 50);
+  rec('notice action lane', cs('nt-act', 'padding-right'), '>50px', px(cs('nt-act', 'padding-right')) > 50);
+  eq('notice action absolute', cs('nt-btn', 'position'), 'absolute');
+  rec('notice align end', cs('nt-al', 'text-align'), 'end|right', ['end', 'right'].includes(cs('nt-al', 'text-align')));
+  neq('notice tone danger bg', cs('nt-d', 'background-color'), cs('nt-def', 'background-color'));
+  near('notice pad lg v', cs('nt-pl', 'padding-top'), varPx('--sl-2xl') * 0.75);
+  eq('notice radius none', cs('nt-rn', 'border-top-left-radius'), '0px');
+}
+
+/* rAF is flaky under --virtual-time-budget (no frames without rendering),
+   so a plain timer drives the run; both paths converge on go(). */
+function go() {
+  R.length = 0;
+  try { main(); } catch (e) { R.push({ name: 'fixture threw', got: String(e && e.stack || e), want: 'no throw', ok: false }); }
+  $('results').textContent = JSON.stringify(R);
+  document.documentElement.setAttribute('data-done', '');
+  labelize();
+}
+/* post-assertion pass: floating id chips at each element's rect so
+   --screenshot output reads as a labeled contact sheet. Absolute
+   positioning keeps layout — and every assertion — untouched. */
+function labelize() {
+  document.querySelectorAll('.tl').forEach(n => n.remove());
+  if (!document.getElementById('tl-style')) {
+    const st = document.createElement('style');
+    st.id = 'tl-style';
+    st.textContent = '.tl{position:absolute;z-index:2147483647;font:600 10px/1.5 ui-monospace,monospace;color:#fff;background:rgba(15,15,20,.62);padding:0 4px;border-radius:3px;pointer-events:none;white-space:nowrap}';
+    document.head.append(st);
+  }
+  for (const el of document.querySelectorAll('[id]')) {
+    if (el.id === 'results' || el.id === 'probe' || el.id === 'tl-style') continue;
+    const r = el.getBoundingClientRect();
+    if (!r.width && !r.height) continue;
+    const tag = document.createElement('i');
+    tag.className = 'tl';
+    tag.textContent = el.id;
+    tag.style.left = Math.max(0, r.left + scrollX) + 'px';
+    tag.style.top = Math.max(0, r.top + scrollY) + 'px';
+    document.body.append(tag);
+  }
+  $('results').style.display = 'none';
+  document.documentElement.setAttribute('data-h', Math.ceil(document.documentElement.scrollHeight));
+}
+setTimeout(go, 0);
+requestAnimationFrame(() => setTimeout(go, 0));
+</script>
+</body>
+</html>
