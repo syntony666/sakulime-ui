@@ -1,0 +1,52 @@
+@layer base {
+  /* zone pinning shared by sl-bar and zoned sl-row — justify-self does
+     the pinning: auto margins resolve to zero under grid's default
+     stretch alignment, so marks alone can't hold an edge */
+  :is([sl-bar], [sl-row]) > [sl-place~="start"]  { justify-self: start; }
+  :is([sl-bar], [sl-row]) > [sl-place~="center"] { grid-column: 2; justify-self: center; }
+  :is([sl-bar], [sl-row]) > [sl-place~="end"]    { grid-column: 3; justify-self: end; }
+
+  /* children of all three track primitives get a zero inline minimum —
+     the flex/grid auto minimum would otherwise let wide content inflate
+     a track past its share and push a zone's centre off-line */
+  :is([sl-row], [sl-grid], [sl-bar]) > * {
+    min-inline-size: 0;
+  }
+}
+
+@layer attrs {
+  /* placement marks — sl-place takes one value per axis: start/center/
+     end move the inline edge, top/middle/bottom the block edge, and two
+     words compose (sl-place="middle end" pins right-centre). Auto
+     margins absorb free space, so the same marks work on block boxes,
+     flex items, and grid items without a scoped rule per parent. In a
+     stretch context (sl-stack children) they also shrink the item back
+     to its content width. Structural marks like the bar zones keep
+     their scoped rules on top of these */
+  [sl-place~="start"] {
+    margin-inline-end: auto;
+  }
+
+  [sl-place~="center"] {
+    margin-inline: auto;
+  }
+
+  [sl-place~="end"] {
+    margin-inline-start: auto;
+  }
+
+  /* block-axis values — they pin vertically wherever a flex line or
+     grid cell hands out free space; in plain block flow auto margins
+     resolve to zero and stay inert */
+  [sl-place~="top"] {
+    margin-block-end: auto;
+  }
+
+  [sl-place~="middle"] {
+    margin-block: auto;
+  }
+
+  [sl-place~="bottom"] {
+    margin-block-start: auto;
+  }
+}
