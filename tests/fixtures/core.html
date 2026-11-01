@@ -244,6 +244,32 @@ function go() {
   try { main(); } catch (e) { R.push({ name: 'fixture threw', got: String(e && e.stack || e), want: 'no throw', ok: false }); }
   $('results').textContent = JSON.stringify(R);
   document.documentElement.setAttribute('data-done', '');
+  labelize();
+}
+/* post-assertion pass: floating id chips at each element's rect so
+   --screenshot output reads as a labeled contact sheet. Absolute
+   positioning keeps layout — and every assertion — untouched. */
+function labelize() {
+  document.querySelectorAll('.tl').forEach(n => n.remove());
+  if (!document.getElementById('tl-style')) {
+    const st = document.createElement('style');
+    st.id = 'tl-style';
+    st.textContent = '.tl{position:absolute;z-index:2147483647;font:600 10px/1.5 ui-monospace,monospace;color:#fff;background:rgba(15,15,20,.62);padding:0 4px;border-radius:3px;pointer-events:none;white-space:nowrap}';
+    document.head.append(st);
+  }
+  for (const el of document.querySelectorAll('[id]')) {
+    if (el.id === 'results' || el.id === 'probe' || el.id === 'tl-style') continue;
+    const r = el.getBoundingClientRect();
+    if (!r.width && !r.height) continue;
+    const tag = document.createElement('i');
+    tag.className = 'tl';
+    tag.textContent = el.id;
+    tag.style.left = Math.max(0, r.left + scrollX) + 'px';
+    tag.style.top = Math.max(0, r.top + scrollY) + 'px';
+    document.body.append(tag);
+  }
+  $('results').style.display = 'none';
+  document.documentElement.setAttribute('data-h', Math.ceil(document.documentElement.scrollHeight));
 }
 setTimeout(go, 0);
 requestAnimationFrame(() => setTimeout(go, 0));

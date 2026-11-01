@@ -74,7 +74,7 @@ for (const { name, size } of FIXTURES) {
     failed++;
     continue;
   }
-  const m = dom.match(/<pre id="results">([\s\S]*?)<\/pre>/);
+  const m = dom.match(/<pre id="results"[^>]*>([\s\S]*?)<\/pre>/);
   if (!m) {
     console.log(`# ${name}: no <pre id="results"> in dumped DOM — fixture did not finish`);
     failed++;
@@ -102,9 +102,14 @@ for (const { name, size } of FIXTURES) {
   }
   if (shots) {
     try {
+      const hm = dom.match(/data-h="(\d+)"/);
+      const shotSize = hm
+        ? size.replace(/,\d+$/, ',' + Math.min(+hm[1] + 16, 16384))
+        : size;
       await launch([
         '--virtual-time-budget=3000',
-        `--window-size=${size}`,
+        '--hide-scrollbars',
+        `--window-size=${shotSize}`,
         `--screenshot=${join(root, 'tests/shots', `${name}.png`)}`,
         url,
       ]);
