@@ -130,7 +130,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 角落標記疊在貼邊內容上也行。`sl-card--corner` 不算一般內容，不會影響 edge 的位置判斷：
 
-<Demo :render="CardDemos.Sections.render" :args="CardDemos.Sections.args" />
+<Demo :render="CardDemos.Sections.render" :args="{ ...CardDemos.Sections.args, edge: 'middle' }" />
 <Demo :render="CardDemos.Edges.render" />
 
 #### 空白 `blank`

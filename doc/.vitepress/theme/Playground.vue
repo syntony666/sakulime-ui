@@ -60,7 +60,7 @@ const hasDashOption = computed(() =>
         <span v-if="f.desc" class="sl-play-desc" v-html="descHtml(f.desc)" />
       </label>
       <p v-if="hasDashOption" class="sl-play-note">
-        <code>-</code> 表示不寫這個屬性，用預設值
+        <code>-</code> 表示不寫這個屬性，用預設值；元件標記欄位的 <code>-</code> 是寫裸屬性
       </p>
     </div>
   </div>
