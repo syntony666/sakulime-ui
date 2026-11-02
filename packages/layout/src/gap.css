@@ -14,6 +14,7 @@
   /* sl-gap — the only spacing attribute. It sets the inherited --sl-gap
      slot, so writing it on a primitive or any ancestor reaches every
      gap-reading chain inside; the nearest write wins */
+  [sl-gap="none"] { --sl-gap: 0; }
   [sl-gap="xs"]  { --sl-gap: var(--sl-xs); }
   [sl-gap="sm"]  { --sl-gap: var(--sl-sm); }
   [sl-gap="md"]  { --sl-gap: var(--sl-md); }

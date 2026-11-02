@@ -33,6 +33,7 @@
 
 <!-- row -->
 <div sl-wrap id="wrap-def"><div>a</div><div>b</div></div>
+<div sl-wrap sl-gap="none" id="wrap-gn"><div>a</div><div>b</div></div>
 <div sl-wrap sl-gap="lg" id="wrap-lg"><div>a</div><div>b</div></div>
 <div sl-wrap id="wrap-min"><div id="wrap-mc">a</div></div>
 <div sl-wrap sl-justify="end" id="wrap-end"><div>a</div><div>b</div></div>
@@ -235,6 +236,7 @@ function main() {
   eq('stack child align-self start', cs('st-aself', 'align-self'), 'start');
   eq('stack sealed from ancestor align', cs('st-aseal', 'align-items'), 'stretch');
   near('row sl-gap=lg', cs('wrap-lg', 'column-gap'), varPx('--sl-lg'));
+  eq('wrap sl-gap=none', cs('wrap-gn', 'column-gap'), '0px');
   eq('row child min-inline 0', cs('wrap-mc', 'min-width'), '0px');
 
   /* ---- grid ---- */

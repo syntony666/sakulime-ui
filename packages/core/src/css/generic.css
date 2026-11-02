@@ -101,6 +101,10 @@
   }
 
   /* pad — --sl-pad slot */
+  :--sl-generic-pad[sl-pad="none"] {
+    --sl-pad: 0;
+  }
+
   :--sl-generic-pad[sl-pad="sm"] {
     --sl-pad: var(--sl-md);
   }

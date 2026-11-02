@@ -34,6 +34,7 @@
 <div sl-card="flat" id="card-flat">card</div>
 <div sl-card="hollow" id="card-hollow">card</div>
 <div sl-card="blank" id="card-blank">card</div>
+<div sl-card sl-pad="none" id="card-pn">card</div>
 <div sl-card sl-pad="sm" id="card-ps">card</div>
 <div sl-card sl-pad="md" id="card-pm">card</div>
 <div sl-card sl-pad="lg" id="card-pl">card</div>
@@ -172,6 +173,7 @@ function main() {
   eq('card hollow bg transparent', cs('card-hollow', 'background-color'), TRANS);
   eq('card blank border 0', cs('card-blank', 'border-top-width'), '0px');
   eq('card blank bg transparent', cs('card-blank', 'background-color'), TRANS);
+  eq('card pad none = 0', cs('card-pn', 'padding-top'), '0px');
   near('card pad sm = --sl-md', cs('card-ps', 'padding-top'), varPx('--sl-md'));
   near('card pad md = --sl-lg', cs('card-pm', 'padding-top'), varPx('--sl-lg'));
   near('card pad lg = --sl-2xl', cs('card-pl', 'padding-top'), varPx('--sl-2xl'));

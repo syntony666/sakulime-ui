@@ -11,7 +11,7 @@ const frame = (caption: string, inner: string) =>
 
 export const Cards: Demo = {
   render: () =>
-    axis(["sm", "md", "lg"], (v) =>
+    axis(["none", "sm", "md", "lg"], (v) =>
       frame(
         `sl-pad="${v}"`,
         `<div sl-card${attr("sl-pad", v)} style="width: 9rem">卡片內容</div>`
@@ -23,7 +23,7 @@ export const Cards: Demo = {
 export const Notices: Demo = {
   render: () =>
     axis(
-      ["sm", "md", "lg"],
+      ["none", "sm", "md", "lg"],
       (v) =>
         frame(
           `sl-pad="${v}"`,

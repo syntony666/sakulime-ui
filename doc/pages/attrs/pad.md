@@ -1,6 +1,6 @@
 ---
 title: Pad 內距
-description: 整體內距，三階。
+description: 整體內距，三階加歸零。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as PadDemos from "../../demos/attrs/pad.demo";
 
 # Pad *內距*
 
-> 整體內距，三階。
+> 整體內距，三階加歸零。
 
 ## 用法
 
@@ -32,6 +32,7 @@ px 以根字級 16px 換算，刻度本身是 rem：
 
 | 選項 | 內距 |
 | --- | --- |
+| `none` | 0 |
 | `sm` | 12px |
 | `md` | 16px |
 | `lg` | 24px |
