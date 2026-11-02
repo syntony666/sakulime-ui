@@ -3,9 +3,8 @@
      consumer self-defaults --sl-align in base, so the attr counts
      only when written on the primitive itself or on one of its
      direct children — an ancestor's write can't leak past that
-     default. Wrap and stack read it as align-items, grid as
-     align-items per cell; on a child it becomes align-self /
-     place-self overrides */
+     default. Wrap, stack, and float read it as align-items; on a
+     wrap or stack child it becomes an align-self override */
   [sl-align="start"]   { --sl-align: start; }
   [sl-align="center"]  { --sl-align: center; }
   [sl-align="end"]     { --sl-align: end; }

@@ -17,6 +17,8 @@
 
   [sl-sidebar] > :not([sl-sidebar--rail]) {
     flex-basis: 0;
+    /* wins the free-space race against the rail's grow:1 — any large
+       number works; the rail only ever claims its own basis */
     flex-grow: 999;
     /* 55% default — the content keeps the majority lane before the
        rail is allowed to shrink-wrap past it */

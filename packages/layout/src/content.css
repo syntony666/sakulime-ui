@@ -1,8 +1,8 @@
 @layer base {
-  /* content — prose column. Children keep normal block layout and
-     their own margins; the rhythm rides on sibling margins instead
-     of a flex gap. The column owns its edges — a heading's own margin
-     must not thicken the top or the bottom of the column */
+  /* content — prose column. Children keep normal block layout, but
+     the column rewrites their margins: sibling gaps come from the
+     rhythm below, and edge children lose their outer margin so a
+     heading's own margin can't thicken the top or the bottom */
   [sl-content] {
     display: block;
     /* resolved once here — children read the inherited private var

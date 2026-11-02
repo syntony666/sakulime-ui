@@ -20,6 +20,8 @@
        but taller copy runs straight down the middle instead of
        stretching the ends */
     --sl-radius-full: calc(
+      /* the 3px share reaches past the 3px frame below so the
+         capsule reads rounded from its outer edge, not its fill */
       max(1lh, var(--sl-2xl)) + var(--sl-pad) * 0.75 + 3px
     );
     --sl-radius: var(--sl-radius-full);
