@@ -13,7 +13,10 @@
     grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
     gap: var(--sl-bar-gap, var(--sl-gap, var(--sl-md)));
-    /* 3.5rem default — the standard band height */
+    /* 3.5rem default — the standard band height. The literal repeats
+       in the body compensation below: the two rules live on unrelated
+       elements (no shared var), and @property initial-value can't hold
+       a rem — spec requires a computationally independent value */
     min-block-size: var(--sl-bar-h, 3.5rem);
     /* self-default --sl-pad so an ancestor's sl-pad can't leak in —
        the attr on the bar itself still wins by specificity */
@@ -23,6 +26,9 @@
     --_bp: var(--sl-bar-pad-block, var(--sl-pad));
     padding-block: var(--_bp);
     padding-inline: var(--sl-bar-pad-inline, var(--sl-lg));
+    /* hex fallbacks keep the package usable without the theme — the
+       same convention as --sl-border below; tune via the token, not
+       the literal */
     background: var(--sl-bg, #ffffff);
   }
 
@@ -91,7 +97,9 @@
 @layer attrs {
   /* sl-pad on bar — thicker bands; the attr wiring lives here now that
      generic pad consumers are core components. Keep the value→slot
-     mapping identical to generic.css's pad rules. */
+     mapping identical to generic.css's pad rules. "sm" deliberately
+     re-states the base default — all five scale steps stay on the map
+     so the vocabulary reads complete */
   [sl-bar][sl-pad="none"] { --sl-pad: 0; }
   [sl-bar][sl-pad="sm"] { --sl-pad: var(--sl-md); }
   [sl-bar][sl-pad="md"] { --sl-pad: var(--sl-lg); }

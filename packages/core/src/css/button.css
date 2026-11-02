@@ -53,7 +53,8 @@
 
   /* keyboard focus ring — the accent ink is AA-readable on the
      surface the ring lands on; pointer focus keeps the native
-     suppression through :focus-visible */
+     suppression through :focus-visible. The hex fallback is the
+     theme's accent seed — usable without the theme package */
   [sl-button]:focus-visible {
     outline: 2px solid var(--sl-text-accent, #d43d5e);
     outline-offset: 2px;

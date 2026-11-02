@@ -58,7 +58,9 @@
      explicit count) is the safe full row there. "1" is one track;
      bare, "full", and any out-of-vocabulary value span every track
      in either mode — the presence rule comes first so a known
-     value wins the tie */
+     value wins the tie. The explicit "full" rule below repeats
+     1 / -1 on purpose: it keeps the word documented vocabulary
+     rather than an out-of-vocabulary fallback */
   [sl-grid] > [sl-grid--span] { grid-column: 1 / -1; }
   [sl-grid] > [sl-grid--span="1"]  { grid-column: span 1; }
   [sl-grid] > [sl-grid--span="2"]  { grid-column: span min(2, var(--_cap)); }
