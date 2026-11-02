@@ -1,6 +1,6 @@
 ---
 title: Size 尺寸
-description: 高度、字級跟水平內距，三階。
+description: 三階尺寸，同時調整字級、高度與水平內距。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as SizeDemos from "../../demos/attrs/size.demo";
 
 # Size *尺寸*
 
-> 高度、字級跟水平內距，三階。
+> 三階尺寸，同時調整字級、高度與水平內距。
 
 ## 用法
 
@@ -18,13 +18,13 @@ import * as SizeDemos from "../../demos/attrs/size.demo";
 <span sl-chip sl-size="lg">大膠囊</span>
 ```
 
-按鈕是高度、字級跟水平內距，膠囊是整顆等比縮放：
+按鈕改的是高度、字級與水平內距。`sl-chip` 只取字級，整顆膠囊等比縮放：
 
 <Demo :render="SizeDemos.Sizes.render" />
 
 ## 選項
 
-px 以根字級 16px 換算，刻度本身是 rem。高度是 `sl-button` 的，`sl-chip` 只取字級：
+px 以根字級 16px 換算，刻度本身為 rem。高度適用於 `sl-button`，`sl-chip` 只取字級：
 
 | 選項 | 字級 | 高度 |
 | --- | --- | --- |
@@ -32,13 +32,11 @@ px 以根字級 16px 換算，刻度本身是 rem。高度是 `sl-button` 的，
 | `md`（預設） | 16px | 32px |
 | `lg` | 20px | 40px |
 
-預設是 `sl-button` 的：未標示 `sl-size` 的按鈕就是 `md`。`sl-chip` 未標示是 `0.875em`，em 制、跟著所在字級縮放，不在刻度上；標了 `sl-size` 才換成表中的絕對字級。
+未標示 `sl-size` 的按鈕為 `md`。`sl-chip` 未標示時為 `0.875em`，跟著所在字級縮放，不在刻度上；標示之後才改用表中的絕對字級。
 
 ## 適用元件
 
-各元件的作用不同：
-
 | 元件 | 作用 |
 | --- | --- |
-| [`sl-button`](/core/button) | 高度跟字級 |
+| [`sl-button`](/core/button) | 高度、字級與水平內距 |
 | [`sl-chip`](/core/chip) | 只取字級，整顆等比縮放 |
