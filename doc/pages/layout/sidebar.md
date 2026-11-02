@@ -24,7 +24,7 @@ import * as SidebarDemos from "../../demos/layout/sidebar.demo";
 
 ## 位置
 
-側邊欄在哪一側跟著 DOM 順序走：寫在主欄前面就在左，寫在後面就在右：
+側邊欄在哪一側跟著先後順序走：寫在主欄前面就在左，寫在後面就在右：
 
 <Demo :render="SidebarDemos.SidebarEnd.render" />
 
@@ -32,12 +32,12 @@ import * as SidebarDemos from "../../demos/layout/sidebar.demo";
 
 <Demo :render="SidebarDemos.SidebarBoth.render" />
 
-結構是一條 rail 配一個主欄（或左右各一條 rail）。位置就是 DOM 序，要換邊就調整 HTML 順序。
+結構是一條 rail 配一個主欄（或左右各一條 rail）。位置就是先後順序，要換邊就調整 HTML 順序。
 
 ## 尺寸
 
 - 側邊欄寬是 `--sl-sidebar-w`，預設 16rem（256px），可以各別覆寫
-- 主欄下限是 `--sl-sidebar-min`，預設 55%：主欄被擠到下限以下時整組換行，側邊欄變滿寬排在上面
+- 主欄下限是 `--sl-sidebar-min`，預設 55%：主欄被擠到下限以下時整組換行，rail 寫在主欄前面換行後排在上面，寫在後面排在下面
 - 換行看容器可用寬度，不是視窗斷點，塞進窄容器照樣會掉
 
 ## 間距
