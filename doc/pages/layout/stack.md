@@ -3,6 +3,10 @@ title: Stack 堆疊
 description: 垂直疊放子元素，間距由 sl-gap 統一給。
 ---
 
+<script setup>
+import * as StackDemos from "../../demos/layout/stack.demo";
+</script>
+
 # Stack *堆疊*
 
 > 把子元素垂直疊起來。子元素的上下 margin 會被清掉、寬度拉滿，給下去的間距就是最終間距。
@@ -16,6 +20,8 @@ description: 垂直疊放子元素，間距由 sl-gap 統一給。
   <p>第三段</p>
 </div>
 ```
+
+<Demo :render="StackDemos.Rhythm.render" />
 
 間距只加在相鄰子層之間，第一個上面、最後一個下面都不多留。子元素寬度會拉滿容器，要收窄自己寫寬度，或用下面對齊一節的 `sl-align`。
 

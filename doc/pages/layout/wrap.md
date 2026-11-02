@@ -3,6 +3,10 @@ title: Wrap 橫列
 description: 水平排列子元素，放不下就換行，間距由 sl-gap 統一給。
 ---
 
+<script setup>
+import * as WrapDemos from "../../demos/layout/wrap.demo";
+</script>
+
 # Wrap *橫列*
 
 > 把子元素水平排開，放不下就換行。按鈕群、標籤列這種一排小東西都適用。
@@ -16,6 +20,8 @@ description: 水平排列子元素，放不下就換行，間距由 sl-gap 統�
   <span sl-chip>標籤</span>
 </div>
 ```
+
+<Demo :render="WrapDemos.Flow.render" />
 
 子元素垂直置中、寬度不動，總寬超過容器就整個換到下一行；換行時機看內容實際寬度，沒有固定斷點。
 

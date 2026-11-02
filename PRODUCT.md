@@ -44,7 +44,7 @@ sakulime-ui 是一套 CSS-first 設計系統：只有兩件事 — `sl-*` 屬性
 ## Evidence on Hand
 
 - 文件站本身即最完整的 demo：每個元件頁有 Playground（demo args/argTypes 驅動）＋靜態 demo 列＋自動縮排的即時 markup
-- `doc/demos/**/*.demo.ts` 是 demo 資料來源 — `components/` 六支（button、card、chip、dot、icon、notice）、`attrs/` 八支（tone、size、radius、pad、interactive、gap、justify、align）、`layout/` 七支（container、content、grid、bar、sidebar、float、responsive）
+- `doc/demos/**/*.demo.ts` 是 demo 資料來源 — `components/` 六支（button、card、chip、dot、icon、notice）、`attrs/` 八支（tone、size、radius、pad、interactive、gap、justify、align）、`layout/` 九支（container、stack、content、wrap、grid、bar、sidebar、float、responsive）
 - 無使用者見證、案例、下載量 — 對外證據目前只有產品本身
 
 ## Product Principles
