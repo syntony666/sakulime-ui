@@ -6,7 +6,8 @@
      default. Wrap and stack read it as align-items, grid as
      align-items per cell; on a child it becomes align-self /
      place-self overrides */
-  [sl-align="start"]  { --sl-align: start; }
-  [sl-align="center"] { --sl-align: center; }
-  [sl-align="end"]    { --sl-align: end; }
+  [sl-align="start"]   { --sl-align: start; }
+  [sl-align="center"]  { --sl-align: center; }
+  [sl-align="end"]     { --sl-align: end; }
+  [sl-align="stretch"] { --sl-align: stretch; }
 }

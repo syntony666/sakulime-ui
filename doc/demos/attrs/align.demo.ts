@@ -18,7 +18,7 @@ const frame = (caption: string, inner: string) =>
 // container-level: cross-axis on a wrap is vertical line alignment
 export const AlignWrap: Demo = {
   render: () =>
-    axis(["start", "center", "end"], (v) =>
+    axis(["start", "center", "end", "stretch"], (v) =>
       frame(`sl-align="${v}"`, `<div sl-wrap sl-align="${v}">${cells()}</div>`)
     ),
 };
