@@ -38,6 +38,9 @@
     inset-block-start: 0;
     z-index: var(--sl-bar-z, var(--sl-z-bar));
     border-block-end: 1px solid var(--sl-border, #e5e7eb);
+    /* notch clearance — mirrors the bottom bar's home-indicator
+       padding; env() is 0 on non-notched viewports */
+    padding-block-start: calc(var(--_bp) + env(safe-area-inset-top, 0px));
   }
 
   [sl-bar="bottom"] {
@@ -62,11 +65,15 @@
      body padding would read as a blank band on the first page */
   @media screen {
     body:has([sl-bar="top"][sl-bar-fixed]) {
-      padding-block-start: var(--sl-bar-h, 3.5rem);
+      padding-block-start: calc(
+        var(--sl-bar-h, 3.5rem) + env(safe-area-inset-top, 0px)
+      );
     }
 
     body:has([sl-bar="bottom"][sl-bar-fixed]) {
-      padding-block-end: var(--sl-bar-h, 3.5rem);
+      padding-block-end: calc(
+        var(--sl-bar-h, 3.5rem) + env(safe-area-inset-bottom, 0px)
+      );
     }
   }
 

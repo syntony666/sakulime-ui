@@ -142,6 +142,23 @@ const mediaOf = sel => {
   while (p && p.type !== CSSRule.MEDIA_RULE) p = p.parentRule;
   return p ? p.media.mediaText : 'top-level';
 };
+/* last declaration value of prop on the rule whose selectorText
+   equals sel — for asserting declarations env() can't prove in
+   computed style (it resolves to 0 in headless) */
+const declOf = (sel, prop) => {
+  let val = null;
+  const walk = rules => {
+    for (const r of rules) {
+      if (r.selectorText === sel && r.style) {
+        const v = r.style.getPropertyValue(prop);
+        if (v) val = v;
+      }
+      if (r.cssRules) walk(r.cssRules);
+    }
+  };
+  for (const s of document.styleSheets) { try { walk(s.cssRules); } catch (e) {} }
+  return val;
+};
 /* fixed-position anchors resolve against the layout viewport, which
    excludes the scrollbar — documentElement.client* matches it */
 const vw = () => document.documentElement.clientWidth;
@@ -232,6 +249,12 @@ function main() {
   near('fixed top bar pads body', getComputedStyle(document.body).paddingTop, 56, 1);
   eq('body comp gated to screen', mediaOf('body:has([sl-bar="top"][sl-bar-fixed])'), 'screen');
   eq('body comp bottom gated to screen', mediaOf('body:has([sl-bar="bottom"][sl-bar-fixed])'), 'screen');
+  rec('bar top pad carries safe-area', declOf('[sl-bar="top"]', 'padding-block-start'),
+    'contains safe-area-inset-top', (declOf('[sl-bar="top"]', 'padding-block-start') || '').includes('safe-area-inset-top'));
+  rec('body comp carries safe-area', declOf('body:has([sl-bar="top"][sl-bar-fixed])', 'padding-block-start'),
+    'contains safe-area-inset-top', (declOf('body:has([sl-bar="top"][sl-bar-fixed])', 'padding-block-start') || '').includes('safe-area-inset-top'));
+  rec('body comp bottom carries safe-area', declOf('body:has([sl-bar="bottom"][sl-bar-fixed])', 'padding-block-end'),
+    'contains safe-area-inset-bottom', (declOf('body:has([sl-bar="bottom"][sl-bar-fixed])', 'padding-block-end') || '').includes('safe-area-inset-bottom'));
   eq('bar bottom sticky', cs('bar-bot', 'position'), 'sticky');
   eq('bar bottom border-top', cs('bar-bot', 'border-top-width'), '1px');
   near('bar sl-pad=lg block pad', cs('bar-pad', 'padding-top'), varPx('--sl-2xl'));
