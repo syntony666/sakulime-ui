@@ -25,6 +25,7 @@
     min-block-size: var(--sl-size-h);
     padding: 0 var(--sl-size-px);
     font-size: var(--sl-size-fs);
+    cursor: pointer;
     transition:
       transform 0.2s ease,
       box-shadow 0.2s ease,

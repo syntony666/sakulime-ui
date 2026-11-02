@@ -167,6 +167,7 @@ function main() {
   near('btn min-block = --sl-3xl', cs('btn-def', 'min-height'), varPx('--sl-3xl'));
   near('btn radius = --sl-sm', cs('btn-def', 'border-top-left-radius'), varPx('--sl-sm'));
   eq('btn border transparent', cs('btn-def', 'border-top-color'), TRANS);
+  eq('btn cursor pointer', cs('btn-def', 'cursor'), 'pointer');
   eq('btn outline border = def bg', cs('btn-out', 'border-top-color'), cs('btn-def', 'background-color'));
   neq('btn outline bg != def', cs('btn-out', 'background-color'), cs('btn-def', 'background-color'));
   eq('btn ghost bg transparent', cs('btn-gho', 'background-color'), TRANS);
