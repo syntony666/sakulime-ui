@@ -188,7 +188,53 @@ export default defineConfig({
   },
   themeConfig: {
     outline: { level: [2, 4], label: "本頁目錄" },
-    search: { provider: "local" },
+    search: {
+      provider: "local",
+      options: {
+        locales: {
+          root: {
+            translations: {
+              button: { buttonText: "搜尋", buttonAriaLabel: "搜尋" },
+              modal: {
+                displayDetails: "顯示詳細清單",
+                resetButtonTitle: "清除搜尋",
+                backButtonTitle: "返回",
+                noResultsText: "找不到相關結果",
+                footer: {
+                  selectText: "選擇",
+                  selectKeyAriaLabel: "Enter 鍵",
+                  navigateText: "切換",
+                  navigateUpKeyAriaLabel: "上方向鍵",
+                  navigateDownKeyAriaLabel: "下方向鍵",
+                  closeText: "關閉",
+                  closeKeyAriaLabel: "Esc 鍵",
+                },
+              },
+            },
+          },
+        },
+        miniSearch: {
+          options: {
+            // CJK has no spaces — index whole words plus each CJK char
+            // so mid-word queries still hit something.
+            tokenize: (text: string) => {
+              const out: string[] = [];
+              const segments = new Intl.Segmenter("zh", {
+                granularity: "word",
+              }).segment(text);
+              for (const { segment, isWordLike } of segments) {
+                if (!isWordLike) continue;
+                out.push(segment);
+                if (segment.length > 1 && /[㐀-鿿]/.test(segment)) {
+                  for (const ch of segment) out.push(ch);
+                }
+              }
+              return out;
+            },
+          },
+        },
+      },
+    },
     logo: "/favicon.svg",
     docFooter: { prev: "上一頁", next: "下一頁" },
     sidebarMenuLabel: "選單",

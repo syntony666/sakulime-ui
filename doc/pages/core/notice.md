@@ -31,17 +31,21 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### 圓角 `sl-radius`
 
-`sl-notice` 是 `sl-radius` 的適用元件，預設 `full`，膠囊形。這裡的 `full` 半徑最多一個行高，一、二行是全圓膠囊，三行以上兩端保留一行的圓弧、中段變成直線，不會拉長成半圓。其他選項看 [Radius 圓角](/attrs/radius)。
+`sl-notice` 是 `sl-radius` 的適用元件，預設 `full`，膠囊形。這裡的 `full` 半徑約一行高加內距份額，一、二行是全圓膠囊，三行以上兩端保留一行的圓弧、中段變成直線，不會拉長成半圓。其他選項看 [Radius 圓角](/attrs/radius)。
 
-### 厚度 `sl-pad`
+### 內距 `sl-pad`
 
 未標示是 `sm`。`md`／`lg` 是整體內距的增減，`lg` 適合公告型的多行內容。選項看 [Pad 內距](/attrs/pad)。
+
+### 互動 `sl-interactive`
+
+整則通知看起來可以點，游標變成手指，滑鼠移過去就有反應。`sl-interactive` 未標示是 `grow`，`shadow`／`lift` 的陰影疊在浮框外，不會蓋掉框線。效果選項看 [Interactive 互動](/attrs/interactive)。
 
 ## 元件設定
 
 ### 對齊 `sl-notice-align`
 
-內容的對齊方向，`fit` 時元件跟內容同寬所以沒有差別：
+內容的對齊方向，`fit` 且內容不換行時元件跟內容同寬所以沒有差別：
 
 - 未標示／`start`：靠左（預設）
 - `center`：置中；換行後每一行都置中
@@ -57,8 +61,8 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 - 寫在 `sl-notice` 的直接子層；放到更深層的只是普通內容，不會固定到邊緣
 - 未標示靠右（行尾），`start` 靠左（行首），兩個可以同時存在
-- 垂直置中，文字不會繞到它底下；控制項更寬時調大 `--sl-notice-action-w`
-- 裡面的 `<i>` 跟著按鈕字級，加大用 `sl-icon-size`
+- 垂直置中，文字不會繞到它底下；控制項更寬時調大 `--sl-notice-action-w`，距邊距離跟字距分別是 `--sl-notice-action-inset` 跟 `--sl-notice-action-gap`
+- 裡面的 `<i>` 跟著按鈕字級，加大用 [`sl-icon-size`](/core/icon)
 
 <Playground :meta="NoticeDemos.ActionPlay" :render="NoticeDemos.ActionPlay.render" />
 
@@ -70,7 +74,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 <Playground :meta="NoticeDemos.BannerPlay" :render="NoticeDemos.BannerPlay.render" />
 
-內容切到「多行」看換行。膠囊會變高，`full` 圓角到一行高後中段變直；`end` 對齊時每一行都靠右。圖示寫在內容裡就是行內圖示，換行後還是滿版排下去，不用另外包一層。
+內容切到「多行」看換行。膠囊會變高，`full` 圓角到一行高加內距份額後中段變直；`end` 對齊時每一行都靠右。圖示寫在內容裡就是行內圖示，換行後還是滿版排下去，不用另外包一層。
 
 ### Toast *浮動通知*
 

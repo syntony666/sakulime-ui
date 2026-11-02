@@ -22,7 +22,7 @@ import * as ContainerDemos from "../../demos/layout/container.demo";
 </div>
 ```
 
-標示在任何元素上都生效。這是純容器，不適用 [`sl-tone`](/attrs/tone) 那些通用屬性，要底色跟圓角的話配 [`sl-card`](/core/card)。
+標示在任何元素上都生效。這是純容器，不適用[通用屬性](/attrs)，要底色跟圓角的話配 [`sl-card`](/core/card)。
 
 下面是三個真的容器，數字標籤顯示當下實際的寬度，拉視窗寬度會跟著變。夠寬時 `lg` 就是 `75rem`（1200px），變窄就貼邊。
 
@@ -32,7 +32,7 @@ import * as ContainerDemos from "../../demos/layout/container.demo";
   measure="[sl-container]"
 />
 
-巢狀沒有額外效果，塞進窄父層的話裡層只跟父層一樣寬。
+巢狀時寬度上限照樣生效，塞進窄外層的話內層只跟外層一樣寬；但各層會各疊一次左右內距，內容比預期再窄一點。
 
 ## 尺寸
 
@@ -42,8 +42,8 @@ import * as ContainerDemos from "../../demos/layout/container.demo";
 
 寬度是 rem，px 是以根字級 16px 換算的參考。
 
-要改寬度的話，覆寫 `--sl-container-sm/md/lg`。
+要改寬度的話，覆寫 `--sl-container-sm`／`--sl-container-md`／`--sl-container-lg`。
 
 ## 內距
 
-左右內距讀 [`sl-pad`](/attrs/pad) 標示（`none`／`sm`／`md`／`lg`），預設等同 `lg`（16px）；改單一容器就覆寫 `--sl-container-pad`，或自己寫 `padding-inline`。覆寫 `--sl-lg` 的話，所有用到它的元素都會跟著變。
+左右內距讀 [`sl-pad`](/attrs/pad) 標示（`none`／`sm`／`md`／`lg`），預設等同 `md`（16px）；改單一容器就覆寫 `--sl-container-pad`，或自己寫 `padding-inline`。覆寫 `--sl-lg` 的話，所有用到它的元素都會跟著變。

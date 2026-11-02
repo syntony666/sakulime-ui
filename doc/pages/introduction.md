@@ -86,7 +86,7 @@ import "sakulime-ui/sakulime.min.css";
 
 ## 瀏覽器需求
 
-只支援現代瀏覽器。樣式用到 `:has()`（Firefox 121+）、`@property`（Firefox 128+），顏色走 `light-dark()`、`color-mix()` 和相對顏色 `oklch(from)`，全數到位大約是 2024 年中的版本。舊瀏覽器沒有降級方案。
+只支援現代瀏覽器，下限是 Safari 18、Chrome 119、Firefox 128（2024 下半年）。樣式用到 `:has()`、`@property`，顏色走 `light-dark()`、`color-mix()` 和相對顏色 `oklch(from)`。舊瀏覽器沒有降級方案。
 
 ## 尺寸
 
@@ -111,6 +111,8 @@ import "sakulime-ui/sakulime.min.css";
 | `--sl-container-sm` | 45rem | 720px  |
 | `--sl-container-md` | 60rem | 960px  |
 | `--sl-container-lg` | 75rem | 1200px |
+
+另外三個不屬於階梯的共用值：`--sl-radius-pill`（膠囊圓角 `9999px`）、`--sl-z-bar`（`sl-bar` 的 z-index `50`）、`--sl-z-float`（`sl-float` 的 `60`）。
 
 ::: tip
 表上沒有的值，在自己的 CSS 裡直接寫數字，不用硬湊最近的階。

@@ -17,7 +17,7 @@ import * as IconDemos from "../../demos/components/icon.demo";
 
 ### SVG
 
-從 圖示包（lucide、Simple Icons、icones.js.org）複製一段 SVG 貼進 HTML，加上 `sl-icon` 就生效。這種用法不需要任何 JS。
+從圖示包（lucide、Simple Icons、icones.js.org）複製一段 SVG 貼進 HTML，加上 `sl-icon` 就生效。這種用法不需要任何 JS。
 
 ```html
 <svg sl-icon viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -155,11 +155,13 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ### 外框 `sl-icon-frame`
 
-`circular` 是圓框，`rounded` 是圓角框，框線顏色與圖示顏色相同。
+`circular` 是圓框，`rounded` 是圓角框，框線顏色與圖示顏色相同。寫 `sl-icon-frame` 不帶值（或帶未識別值）是方框。
 
 <Demo :render="IconDemos.Frames.render" />
 
 ### 淡化 `sl-icon-disabled`
+
+圖示降到 40% 不透明。透明度是共用 hook `--sl-disabled-opacity`（這裡預設 `0.4`）。
 
 <Demo :render="IconDemos.Disabled.render" />
 
@@ -173,7 +175,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ## 組合
 
-圖示繼承所在元件的文字顏色，放進按鈕裡；疊上 `sl-card--corner` 就固定到卡片角落，`sl-tone` 標示在 icon 自己身上染色。
+圖示繼承所在元件的文字顏色，放進按鈕裡；疊上 [`sl-card--corner`](/core/card) 就固定到卡片角落，`sl-tone` 標示在 icon 自己身上染色。
 
 <Demo :render="IconDemos.InContext.render" />
 

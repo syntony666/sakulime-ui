@@ -38,17 +38,22 @@ import * as FloatDemos from "../../demos/layout/float.demo";
 | `top center`    | 中上           |
 | `top end`       | 右上           |
 
-詞序不拘，`"start bottom"` 也通；只寫一邊也行（`"start"` = 下緣左側）。`start` 是開始那側、`end` 是結束那側，中文書寫就是左、右；阿拉伯文那類右到左的書寫會反過來。
+詞序不拘，`"start bottom"` 也通；只寫一邊也行（`"start"` = 下緣左側）。`start` 是開始那側、`end` 是結束那側，中文書寫就是左、右；阿拉伯文那類右到左的書寫會反過來。`top`／`bottom` 走的是區塊軸，直排書寫（`writing-mode: vertical-*`）時貼的是區塊邊，不是視覺上的上下。
 
 <Demo :render="FloatDemos.Corners.render" />
 
 ## 尺寸與間距
 
-- fixed，z-index 讀 `--sl-float-z`（預設 60），會蓋在 `sl-bar`（`--sl-bar-z` 50）上面
+- fixed，z-index 讀 `--sl-float-z`（預設 60），會蓋在 [`sl-bar`](/layout/bar)（`--sl-bar-z` 50）上面
 - 寬度是 `--sl-float-width`，預設 22rem（352px）；視窗放不下自動縮，縮放幅度跟著 `--sl-float-inline` 走
 - 高度上限是視窗高扣掉上下離邊距離，通知太多會在區塊內捲動，不會頂出視窗
 - 離邊距離是 `--sl-float-block`／`--sl-float-inline`，預設都是 `lg`（16px）；底部錨點會自動避開手機 home indicator（safe-area inset）
-- 通知之間的間隔為 `md`。只想改一個就寫 `--sl-float-gap`；[`sl-gap`](/attrs/gap) 標示在容器自己或外層都行
 - 內容的水平對齊讀 [`sl-align`](/attrs/align)，預設 `stretch`（撐滿寬度）；`sl-notice="fit"` 縮到內容寬之後，`sl-align="start"`／`center`／`end` 決定它靠哪邊
 - 列印時自動回到一般排版，不會每頁重複印出
 - 順序跟堆疊照寫進頁面的先後，多一個 `sl-notice` 就多一張
+
+## 間距
+
+通知之間的間隔用 [`sl-gap`](/attrs/gap) 給，預設 `md`，寫在容器自己身上或外層上都行。
+
+只想改一個容器就寫 `--sl-float-gap`。

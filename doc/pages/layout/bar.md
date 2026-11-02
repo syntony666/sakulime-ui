@@ -31,7 +31,7 @@ import * as BarDemos from "../../demos/layout/bar.demo";
 
 ## 邊緣跟定位
 
-`sl-bar="top"` 黏頂、`sl-bar="bottom"` 黏底，預設都是 sticky：內容捲到邊就停住，不額外佔版面。`sl-bar="bottom"` 還有個額外好處：父層撐滿視窗高時，頁面再短也會黏在視窗底部（sticky footer）。
+`sl-bar="top"` 黏頂、`sl-bar="bottom"` 黏底，預設都是 sticky：內容捲到邊就停住，不額外佔版面。`top`／`bottom` 走的是區塊軸，直排書寫（`writing-mode: vertical-*`）時黏的是區塊邊，不是視覺上的上下。`sl-bar="bottom"` 還有個額外好處：外層撐滿視窗高時，頁面再短也會黏在視窗底部（sticky footer）。
 
 要固定在視窗邊加 `sl-bar-fixed`，需配邊緣值：
 
@@ -72,8 +72,13 @@ fixed 的 bar 不佔版面，body 會在對應邊自動補上 bar 高度的內�
 - 高度是 `--sl-bar-h`，預設 3.5rem（56px），內容高就撐高
 - 上下內距讀 `--sl-bar-pad-block`，未設定就看 `sl-pad` 標示，再沒有就 `sm`（12px）。頁尾那種厚區塊：`sl-bar="bottom" sl-pad="lg"`
 - 左右內距讀 `--sl-bar-pad-inline`，預設 `lg`（16px），跟上下內距分開調
-- 內部間距預設 `md`。只想改一條就寫 `--sl-bar-gap`；[`sl-gap`](/attrs/gap) 標示在 bar 自己或外層都行
 - 底色 `--sl-bg`、邊緣那側細線（頂→下線、底→上線）、z-index 讀 `--sl-bar-z`（預設 50）
 - 底部 bar 會自動讓出手機 home indicator 的空間（safe-area inset）
 
 <Demo :render="BarDemos.BarBottom.render" />
+
+## 間距
+
+內部間距用 [`sl-gap`](/attrs/gap) 給，預設 `md`，寫在 bar 自己身上或外層上都行。
+
+只想改一條 bar 就寫 `--sl-bar-gap`。

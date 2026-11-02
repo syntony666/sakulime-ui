@@ -49,7 +49,7 @@ type Demo = DemoObj<NoticeArgs>;
 
 const marker = mark("sl-notice");
 
-const BODY = `<i sl-icon="lucide:info"></i> 系統將於 11/2 02:00–03:00 例行維護`;
+const BODY = `<i sl-icon="lucide:info"></i> 系統將於 11月2日 02:00–03:00 例行維護`;
 
 export const Notice: Demo = {
   render: (a) =>
@@ -108,7 +108,7 @@ export const ActionPlay: DemoObj<ActionArgs> = {
 // long copy wraps inside the capsule — the icon is inline content,
 // so wrapped lines flow full width under it
 const LONG =
-  "系統將於 11/2 02:00–03:00 進行例行維護，期間 API 回應可能延遲，寫入操作會排入佇列，並於維護結束後自動重放，若有長時間執行中的工作請提前儲存。維護完成後會以浮動通知確認，期間如有異常請回報值班工程師。";
+  "系統將於 11月2日 02:00–03:00 進行例行維護，期間 API 回應可能延遲，寫入操作會排入佇列，並於維護結束後自動重放，若有長時間執行中的工作請提前儲存。維護完成後會以浮動通知確認，期間如有異常請回報值班工程師。";
 
 // banner playground — a bare notice in document flow; controls cover
 // width, icon on/off, single vs wrapped lines, and end alignment.
@@ -151,7 +151,7 @@ export const BannerPlay: DemoObj<BannerArgs> = {
 // the stage. Stacking N notices, per-notice width is the sl-notice variant knob
 const TOASTS = [
   ["success", "check", "已儲存變更"],
-  ["warning", "triangle-alert", "部署已排入佇列，前方還有 2 個 build"],
+  ["warning", "triangle-alert", "部署已排入佇列，前方還有 2 個建置"],
   ["-", "bell", `功能更新已上線 <a href="#">查看詳情</a>`],
 ];
 
