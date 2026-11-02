@@ -140,8 +140,28 @@ const match = (name, got, re) => rec(name, got, String(re), re.test(got));
 const probe = $('probe');
 const varPx = name => { probe.style.height = `var(${name},0px)`; return probe.getBoundingClientRect().height; };
 const TRANS = 'rgba(0, 0, 0, 0)';
+/* collect @property registrations from the loaded sheets — plumbing
+   slots are registered element-scoped, theme hooks stay inheriting */
+const propRules = () => {
+  const out = {};
+  const walk = rules => {
+    for (const r of rules) {
+      if (r.name && typeof r.inherits === 'boolean') out[r.name] = r;
+      if (r.cssRules) walk(r.cssRules);
+    }
+  };
+  for (const s of document.styleSheets) { try { walk(s.cssRules); } catch (e) {} }
+  return out;
+};
 
 function main() {
+  /* ---- @property plumbing ---- */
+  const props = propRules();
+  rec('--sl-size-fs registered sealed', String(!!props['--sl-size-fs'] && props['--sl-size-fs'].inherits), 'true&&false', !!props['--sl-size-fs'] && props['--sl-size-fs'].inherits === false);
+  rec('--sl-size-h registered sealed', String(!!props['--sl-size-h'] && props['--sl-size-h'].inherits), 'true&&false', !!props['--sl-size-h'] && props['--sl-size-h'].inherits === false);
+  rec('--sl-size-px registered sealed', String(!!props['--sl-size-px'] && props['--sl-size-px'].inherits), 'true&&false', !!props['--sl-size-px'] && props['--sl-size-px'].inherits === false);
+  rec('--sl-bar-h stays a theme hook', String(!!props['--sl-bar-h']), 'unregistered', !props['--sl-bar-h']);
+
   /* ---- button ---- */
   eq('btn display', cs('btn-def', 'display'), 'inline-flex');
   near('btn min-block = --sl-3xl', cs('btn-def', 'min-height'), varPx('--sl-3xl'));

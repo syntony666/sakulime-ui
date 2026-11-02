@@ -10,6 +10,16 @@
 @custom-selector :--sl-generic-pad [sl-card], [sl-notice];
 @custom-selector :--sl-generic-interactive [sl-card], [sl-button], [sl-chip], [sl-notice];
 
+/* size slots are element-scoped plumbing — the attr writes them on
+   the consumer itself, so a marked element's slots must not inherit
+   into a nested consumer. syntax:"*" with no initial-value leaves
+   an unset slot guaranteed-invalid, so var() fallbacks still fire.
+   (Theme hooks like --sl-bar-h stay unregistered on purpose — they
+   are meant to be set on :root and inherit.) */
+@property --sl-size-fs { syntax: "*"; inherits: false; }
+@property --sl-size-h  { syntax: "*"; inherits: false; }
+@property --sl-size-px { syntax: "*"; inherits: false; }
+
 @layer base {
   /* interactive's shared seal — replaces the per-component
      self-defaults so every consumer reads the same slots */
