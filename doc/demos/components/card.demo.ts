@@ -30,7 +30,7 @@ const PADS = ["-", "sm", "md", "lg"];
 const RADII = ["-", "none", "sm", "md", "lg", "full"];
 const VARIANTS = ["-", "hollow", "plain", "blank"];
 const INDICATES = ["-", "top", "bottom", "start", "end"];
-const CORNERS = ["-", "start", "end", "bottom", "bottom start"];
+const CORNERS = ["-", "start", "end"];
 const CORNER_KINDS = ["chip", "dot", "icon"];
 const INTERACTIVES = ["-", "grow", "lift", "raise", "press"];
 const INSETS = ["-", "top", "middle", "bottom"];
@@ -101,7 +101,7 @@ export const Indicates: Demo = {
 
 // corner is position only — the look is a small attr on the same element
 const cornerEl = (position: string, kind: string, tone: string, size = "-") => {
-  // "end" is the default corner — only start/bottom words get written
+  // "end" is the default corner — only "start" ever gets written
   const pos = position === "-" || position === "end" ? "" : `="${position}"`;
   const t = attr("sl-tone", tone);
   const s = kind === "chip" ? attr("sl-size", size) : "";

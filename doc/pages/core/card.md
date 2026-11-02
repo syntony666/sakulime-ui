@@ -83,13 +83,10 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 <Playground :meta="CardDemos.Corner" :render="CardDemos.Corner.render" />
 
-位置用詞的組合，`start`／`end` 選左右、`bottom` 換到下緣：
+位置只有上緣兩側：
 
 - 沒給／`end`：右上
 - `start`：左上
-- `bottom`：右下
-- `bottom start`：左下
-- `bottom end`：右下（同 `bottom`）
 
 內容組合，`sl-chip` 文字膠囊、`sl-dot` 狀態點、`sl-icon` 圖示都可以放；`sl-tone` 寫在同一個元素上染色：
 

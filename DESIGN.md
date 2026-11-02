@@ -203,7 +203,7 @@ components:
 
 ### Cards `sl-card`
 - **Surface:** `--sl-surface` 底＋1px `--sl-border`＋`sl-radius`＋`--sl-pad`（預設 16px）；attribute 的值選外框：bare 描邊面、`hollow` 虛線空態、`plain` 去框留面、`blank` 連面一起去掉（配 `sl-card--section="blank"` 做純空態）
-- **子元素，角落標記 `sl-card--corner`:** 純位置件（scope 到卡片直接子層），`end`（右上，預設）/`start`（左上），`bottom` 換下緣、兩軸組合（`"bottom start"` 是左下）；`font-size: var(--sl-lg)` 當 em context，長相由同元素疊加的小元件決定：`sl-chip` 貼邊角落標籤（四角 `--sl-xs` 小圓角，朝卡角那角由卡片 `overflow` 裁出同色曲線）、`sl-dot` 8px 點、`sl-icon` 16px 圖示，後兩者各退 `--sl-sm`/`--sl-xs` 內縮浮起
+- **子元素，角落標記 `sl-card--corner`:** 純位置件（scope 到卡片直接子層，絕對定位在整張卡上），只有上緣兩側——`end`（右上，預設）/`start`（左上）；`font-size: var(--sl-lg)` 當 em context，長相由同元素疊加的小元件決定：`sl-chip` 貼邊角落標籤（四角 `--sl-xs` 小圓角，朝卡角那角由卡片 `overflow` 裁出同色曲線）、`sl-dot` 8px 點、`sl-icon` 16px 圖示，後兩者各退 `--sl-sm`/`--sl-xs` 內縮浮起
 - **子元素，分區 `sl-card--section`:** 滿版 hairline 分隔的內容列；第一節不畫線（=header）；值選分區性格：`inset` 抵銷內距做滿版區塊（圖/地圖/色塊，位置由 DOM 序決定）、`blank` 置中空態、`secondary`/`active` 上色區（貼邊出血）、`center` 文字置中；leading/trailing corner 不算內容
 - **Options:** `sl-card-indicate="top|bottom|start|end"`（3px tone 邊緣強調條）、`sl-interactive`（hover 互動）、`sl-pad`（sm/md/lg）
 

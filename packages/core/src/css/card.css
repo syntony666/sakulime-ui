@@ -76,8 +76,9 @@
     border-inline-end: 3px solid var(--sl-tone-bg);
   }
 
-  /* corner — pure positional part: `end` (default) / `start` pins the
-     element to a card corner; the look comes from a small attr on the
+  /* corner — pure positional part pinned to a top corner: `end`
+     (default) is the trailing edge, `start` the leading one; the
+     look comes from a small attr on the
      same element (sl-chip, sl-dot, sl-icon). font-size is the em
      context — a dot lands at 8px, an icon at 16px, a chip at 14px.
      z-index keeps it above any pinned or out-of-flow child regardless
@@ -94,13 +95,6 @@
   [sl-card] > [sl-card--corner~="start"] {
     inset-inline-end: auto;
     inset-inline-start: 0;
-  }
-
-  /* "bottom" pins the block-end edge — the words compose with
-     start/end, so "bottom start" is the lower leading corner */
-  [sl-card] > [sl-card--corner~="bottom"] {
-    top: auto;
-    bottom: 0;
   }
 
   /* corner tab — a chip hugs the top + side edges with a small
@@ -133,17 +127,6 @@
   [sl-card] > [sl-card--corner~="start"][sl-icon] {
     inset-inline-end: auto;
     inset-inline-start: var(--sl-xs);
-  }
-
-  /* bottom float offsets — the air moves to the block-end edge */
-  [sl-card] > [sl-card--corner~="bottom"][sl-dot] {
-    top: auto;
-    bottom: var(--sl-sm);
-  }
-
-  [sl-card] > [sl-card--corner~="bottom"][sl-icon] {
-    top: auto;
-    bottom: var(--sl-xs);
   }
 
   /* sections — the box bleeds past the pad frame so divider hairlines
