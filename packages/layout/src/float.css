@@ -8,6 +8,12 @@
     display: flex;
     flex-direction: column;
     gap: var(--sl-float-gap, var(--sl-gap, var(--sl-md)));
+    /* self-default the align slot so an ancestor's sl-align can't
+       leak in — float reads it as align-items, the cross-axis
+       placement of notices inside the region (visible once a
+       notice shrinks to fit width) */
+    --sl-align: stretch;
+    align-items: var(--sl-align);
     /* resolved once here — the corner rules and the viewport clamps
        all read the same offsets and width. The 22rem default is the
        toast column width, ~352px at a 16px root */

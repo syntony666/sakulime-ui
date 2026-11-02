@@ -47,5 +47,6 @@ import * as FloatDemos from "../../demos/layout/float.demo";
 - 高度上限是視窗高扣掉上下離邊距離，通知太多會在區塊內捲動，不會頂出視窗
 - 離邊距離是 `--sl-float-block`／`--sl-float-inline`，預設都是 `lg`（16px）；底部錨點會自動避開手機 home indicator（safe-area inset）
 - 通知之間的間距預設 `md`。只想改一個就寫 `--sl-float-gap`；[`sl-gap`](/attrs/gap) 標示在容器自己或外層都行
+- 內容的水平對齊讀 [`sl-align`](/attrs/align)，預設 `stretch`（撐滿寬度）；`sl-notice="fit"` 縮到內容寬之後，`sl-align="start"`／`center`／`end` 決定它靠哪邊
 - 列印時自動回到一般排版，不會每頁重複印出
 - 順序跟堆疊由 DOM 決定，多一個 `sl-notice` 就多一張

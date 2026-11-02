@@ -160,7 +160,7 @@ components:
 - **側欄 `sl-sidebar`＋`sl-sidebar--rail`**：flex-wrap 排版，rail 由子層標記認領（`--sl-sidebar-w` 16rem），位置跟 DOM 序；主欄 `min-inline-size: var(--sl-sidebar-min,55%)` 就是換行觸發點，不用 media query
 - **角落 `sl-float`**：fixed 角落容器，值是空白分隔的 `<邊> <側>` token（top/bottom × start/center/end 六角落，詞序不拘、只寫一邊也行，bare = 右下）；寬高 clamp 進 viewport，`env()` 讓開 home indicator，列印回 static
 - **間距 `sl-gap`**：唯一的間距屬性，設 `--sl-gap` 會繼承——寫在排版元件自己或祖先上，最近的贏；各元件的 `--sl-<元件>-gap` 是自己的間距槽（七個都 `@property` non-inheriting 註冊，外層的間距值滲不進巢狀同名元件），預設 stack/content/wrap/grid/float/bar = `md`、sidebar = `lg`
-- **對齊雙軸 `sl-justify`＋`sl-align`**：主軸分佈（`start|center|end|between|around|evenly`）跟交叉軸對齊（`start|center|end|stretch`）兩個通用屬性，寫在消費者自己身上、不繼承；wrap/stack 讀成 `justify-content`/`align-items`、grid 讀成 `-items`；寫在消費者子層上變 `*-self` 單獨覆寫。消費者：wrap（預設 justify start、align center）、stack（start、stretch）、grid（stretch、stretch）
+- **對齊雙軸 `sl-justify`＋`sl-align`**：主軸分佈（`start|center|end|between|around|evenly`）跟交叉軸對齊（`start|center|end|stretch`）兩個通用屬性，寫在消費者自己身上、不繼承；wrap/stack 讀成 `justify-content`/`align-items`、grid 讀成 `-items`；寫在消費者子層上變 `*-self` 單獨覆寫。消費者：wrap（預設 justify start、align center）、stack（start、stretch）、grid（stretch、stretch）、float（只吃 align，stretch）
 - **Slot 封印**：generic 屬性只在列名的消費者上展開 `--sl-*` slot，消費端在 base 把讀取的 slot 自我 default 成 manifest，祖先的同名牌漏不進來
 - **響應式族**：`sl-hide-*`/`sl-show-*` 在斷點兩側互為鏡像，一對 hide/show 跨線換內容；斷點 45/60/75rem 是 `--sl-container-*` 的 hardcode 孿生（media query 讀不到 var，手動同步）
 - **間距節奏**：一律走 xs→5xl 台階；demo stage padding 兩格（`--sl-3xl`）、axis 列 gap 12px（文件站）
