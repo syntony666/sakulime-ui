@@ -1,6 +1,8 @@
 {
   "name": "@sakulime-ui/core",
   "version": "0.3.0",
+  "description": "CSS-first UI components via sl-* HTML attributes — buttons, cards, notices, icons, and themes",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/syntony666/sakulime-ui.git",
