@@ -60,14 +60,17 @@
 <!-- bar -->
 <div sl-bar id="bar-plain">band</div>
 <div sl-bar="top" id="bar-top">
-  <div id="bz-s">s</div>
-  <div id="bz-c">c</div>
-  <div id="bz-e">e</div>
+  <div sl-bar--start id="bz-s">s</div>
+  <div sl-bar--center id="bz-c">center</div>
+  <div sl-bar--end id="bz-e">e</div>
+</div>
+<div sl-bar id="bar-sparse">
+  <div sl-bar--center id="bs-c">center</div>
+  <div sl-bar--end id="bs-e">e</div>
 </div>
 <div sl-bar="top" sl-bar-fixed id="bar-fix">fixed</div>
 <div sl-bar="bottom" id="bar-bot">bottom</div>
 <div sl-bar="top" sl-pad="lg" id="bar-pad">padded</div>
-<div sl-bar sl-place="center" id="bar-ctr">band</div>
 
 <!-- floats -->
 <div sl-float id="t-def"><div sl-notice="fit">a</div></div>
@@ -152,8 +155,6 @@ function main() {
   eq('row place center', cs('wrap-ctr', 'justify-content'), 'center');
   eq('row place between', cs('wrap-btw', 'justify-content'), 'space-between');
   eq('row sealed from ancestor place', cs('wrap-seal', 'justify-content'), cs('wrap-def', 'justify-content'));
-  eq('bar default between', cs('bar-plain', 'justify-content'), 'space-between');
-  eq('bar place center', cs('bar-ctr', 'justify-content'), 'center');
   near('row sl-gap=lg', cs('wrap-lg', 'column-gap'), varPx('--sl-lg'));
   eq('row child min-inline 0', cs('wrap-mc', 'min-width'), '0px');
 
@@ -172,15 +173,22 @@ function main() {
   eq('outer grid tracks = 2', tracks('gr-outer'), 2);
 
   /* ---- bar ---- */
-  eq('bar display flex', cs('bar-plain', 'display'), 'flex');
-  eq('bar space-between', cs('bar-plain', 'justify-content'), 'space-between');
+  eq('bar display grid', cs('bar-plain', 'display'), 'grid');
   near('bar min-block = 3.5rem', cs('bar-plain', 'min-height'), 56);
   near('bar pad = --sl-md block', cs('bar-plain', 'padding-top'), varPx('--sl-md'));
   eq('bar top sticky', cs('bar-top', 'position'), 'sticky');
   eq('bar top border-bottom', cs('bar-top', 'border-bottom-width'), '1px');
-  /* space-between: first hugs left, last hugs right, middle floats */
-  near('bar first at left+pad', rect('bz-s').left, rect('bar-top').left + varPx('--sl-lg'), 2);
-  near('bar last at right-pad', rect('bz-e').right, rect('bar-top').right - varPx('--sl-lg'), 2);
+  /* the middle column is auto-width, so --center lands dead-center
+     even when the sides are unequal */
+  near('bar start at left+pad', rect('bz-s').left, rect('bar-top').left + varPx('--sl-lg'), 2);
+  near('bar end at right-pad', rect('bz-e').right, rect('bar-top').right - varPx('--sl-lg'), 2);
+  near('bar center dead-center',
+    rect('bz-c').left + rect('bz-c').width / 2,
+    rect('bar-top').left + rect('bar-top').width / 2, 2);
+  near('bar center dead-center (sparse zones)',
+    rect('bs-c').left + rect('bs-c').width / 2,
+    rect('bar-sparse').left + rect('bar-sparse').width / 2, 2);
+  near('bar sparse end at right-pad', rect('bs-e').right, rect('bar-sparse').right - varPx('--sl-lg'), 2);
   eq('bar fixed', cs('bar-fix', 'position'), 'fixed');
   eq('bar bottom sticky', cs('bar-bot', 'position'), 'sticky');
   eq('bar bottom border-top', cs('bar-bot', 'border-top-width'), '1px');
