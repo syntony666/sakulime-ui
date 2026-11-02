@@ -68,7 +68,10 @@
 </div>
 <a href="#" sl-card id="card-link">link card</a>
 <div sl-card id="card-corner"><span sl-card--corner sl-dot id="corner-dot"></span></div>
-<div sl-card id="card-ce"><i sl-card--corner="end" sl-dot id="corner-end"></i></div>
+<div sl-card id="card-ce"><i sl-card--corner="end" sl-dot id="corner-end"></i><i sl-card--corner="start" sl-dot id="corner-start"></i></div>
+<div sl-card sl-interactive id="card-int">ci</div>
+<div sl-card sl-interactive aria-disabled="true" id="card-int-ad">ca</div>
+<i sl-icon="t:box" id="ic-t"></i>
 <div sl-card id="card-2c">
   <i sl-card--corner="start" sl-dot></i>
   <i sl-card--corner sl-dot></i>
@@ -141,6 +144,20 @@
 <div id="probe"></div>
 <pre id="results"></pre>
 <script src="helpers.js"></script>
+<script type="module">
+  /* shipped-bundle execution: module scripts finish before
+     DOMContentLoaded, which helpers.js now waits on — the stashed
+     values below are read by main() assertions */
+  import { registerPack, icon, resolveIcons, packNames } from "../../packages/core/dist/index.min.js";
+  await registerPack("t", { icons: { box: { body: "<path d='M0 0h10v10z'/>" } } });
+  resolveIcons(document);
+  window.__slBundle = {
+    svg: icon("t:box"),
+    missing: icon("t:nope"),
+    pack: packNames().includes("t"),
+    filled: !!document.querySelector("#ic-t svg"),
+  };
+</script>
 <script>
 function main() {
   /* ---- @property plumbing ---- */
@@ -297,7 +314,7 @@ function main() {
   rec('notice capsule radius > 24px', cs('nt-def', 'border-top-left-radius'), '>24px', px(cs('nt-def', 'border-top-left-radius')) > 24);
   near('notice pad v = .75*--sl-md', cs('nt-def', 'padding-top'), varPx('--sl-md') * 0.75);
   near('notice pad h = 1.5*--sl-md', cs('nt-def', 'padding-left'), varPx('--sl-md') * 1.5);
-  rec('notice fit shrinks', $('nt-fit').getBoundingClientRect().width + 'px', '< def-50', $('nt-fit').getBoundingClientRect().width < $('nt-def').getBoundingClientRect().width - 50);
+  rec('notice fit shrinks', rect('nt-fit').width + 'px', '< def-50', rect('nt-fit').width < rect('nt-def').width - 50);
   rec('notice action lane', cs('nt-act', 'padding-right'), '>50px', px(cs('nt-act', 'padding-right')) > 50);
   eq('notice action absolute', cs('nt-btn', 'position'), 'absolute');
   eq('action start also absolute', cs('nt-bts', 'position'), 'absolute');
@@ -323,6 +340,49 @@ function main() {
   neq('notice tone danger bg', cs('nt-d', 'background-color'), cs('nt-def', 'background-color'));
   near('notice pad lg v', cs('nt-pl', 'padding-top'), varPx('--sl-2xl') * 0.75);
   eq('notice radius none', cs('nt-rn', 'border-top-left-radius'), '0px');
+
+  /* ---- audit2 coverage ---- */
+  eq('card interactive cursor', cs('card-int', 'cursor'), 'pointer');
+  eq('chip interactive cursor', cs('chip-i', 'cursor'), 'pointer');
+  neq('card aria-disabled cursor', cs('card-int-ad', 'cursor'), 'pointer');
+  eq('btn aria-disabled cursor', cs('btn-aria', 'cursor'), 'not-allowed');
+  rec('notice start lane', cs('nt-acts', 'padding-left'), '>50px', px(cs('nt-acts', 'padding-left')) > 50);
+  rec('corner start left of end', rect('corner-start').right + 'px', '<=' + rect('corner-end').left,
+    rect('corner-start').right <= rect('corner-end').left);
+  rec('notice interactive hover rule', ruleCount('[sl-notice][sl-interactive]:hover'), '>=1',
+    ruleCount('[sl-notice][sl-interactive]:hover') >= 1);
+  rec('card edge scoped rules', ruleCount('[sl-card--section="edge"]'), '>=3',
+    ruleCount('[sl-card--section="edge"]') >= 3);
+  rec('--sl-grid-gap registered sealed', String(!!props['--sl-grid-gap'] && props['--sl-grid-gap'].inherits), 'true&&false',
+    !!props['--sl-grid-gap'] && props['--sl-grid-gap'].inherits === false);
+
+  /* T6 anchors — semantic eq/neq pairs pass vacuously when both sides
+     collapse to the same broken value; pin every compared element's
+     checked prop to a real (non-transparent) computed value */
+  for (const id of ['btn-def', 'btn-out', 'btn-tp', 'btn-ts', 'btn-tok', 'btn-tw', 'btn-td'])
+    neq(`${id} bg solid`, cs(id, 'background-color'), TRANS);
+  for (const id of ['btn-def', 'btn-gho'])
+    neq(`${id} color solid`, cs(id, 'color'), TRANS);
+  neq('card-def bg solid', cs('card-def', 'background-color'), TRANS);
+  for (const id of ['card-def', 'card-it'])
+    neq(`${id} border solid`, cs(id, 'border-top-color'), TRANS);
+  neq('sect-sec bg solid', cs('sect-sec', 'background-color'), TRANS);
+  for (const id of ['chip-def', 'chip-d', 'chip-s'])
+    neq(`${id} color solid`, cs(id, 'color'), TRANS);
+  for (const id of ['dot-def', 'dot-s'])
+    neq(`${id} bg solid`, cs(id, 'background-color'), TRANS);
+  for (const id of ['nt-def', 'nt-d'])
+    neq(`${id} bg solid`, cs(id, 'background-color'), TRANS);
+
+  /* ---- shipped bundle executes ---- */
+  const t3 = window.__slBundle;
+  rec('bundle module ran', String(!!t3), 'true', !!t3);
+  if (t3) {
+    has('bundle icon() emits svg', t3.svg, '<svg sl-icon');
+    eq('bundle icon() unknown empty', t3.missing, '');
+    eq('bundle pack registered', String(t3.pack), 'true');
+    rec('bundle placeholder filled', String(t3.filled), 'true', t3.filled);
+  }
 }
 </script>
 </body>
