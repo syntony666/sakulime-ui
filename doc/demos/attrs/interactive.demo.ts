@@ -21,7 +21,7 @@ export const Interactive: Demo = {
           `<button sl-button${attr("sl-interactive", v)}>按鈕</button>` +
           `<span sl-chip${attr("sl-interactive", v)}>標籤</span>` +
         `</div>` +
-        `<div sl-notice sl-tone="secondary"${attr("sl-interactive", v)} style="margin-top: var(--sl-md)">通知也吃，浮框不會被 hover 蓋掉</div>`
+        `<div sl-notice sl-tone="secondary"${attr("sl-interactive", v)} style="margin-top: var(--sl-md)">通知也吃，浮框不會被滑鼠懸停效果蓋掉</div>`
       )
     ),
 };

@@ -18,7 +18,7 @@ const RADII = ["-", "none", "sm", "md", "lg", "full"];
 
 const meta = {
   args: {
-    label: "Button",
+    label: "按鈕",
     tone: "-",
     variant: "-",
     size: "-",

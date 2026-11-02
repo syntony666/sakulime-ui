@@ -33,7 +33,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 `sl-notice` 是 `sl-radius` 的適用元件，預設 `full`，膠囊形。這裡的 `full` 半徑約一行高加內距份額，一、二行是全圓膠囊，三行以上兩端保留一行的圓弧、中段變成直線，不會拉長成半圓。其他選項看 [Radius 圓角](/attrs/radius)。
 
-### 厚度 `sl-pad`
+### 內距 `sl-pad`
 
 未標示是 `sm`。`md`／`lg` 是整體內距的增減，`lg` 適合公告型的多行內容。選項看 [Pad 內距](/attrs/pad)。
 

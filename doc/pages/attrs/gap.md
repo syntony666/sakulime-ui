@@ -54,7 +54,7 @@ px 以根字級 16px 換算，刻度本身是 rem。`sl-gap` 沒有預設，未�
 
 讀 `sl-gap` 的都是排版元件，在[排版](/layout/)一章介紹：
 
-| 分類     | 屬性                                  |
+| 分類     | 元件                                  |
 | -------- | ------------------------------------- |
 | 排列 | [`sl-stack`](/layout/stack)、[`sl-content`](/layout/content)、[`sl-wrap`](/layout/wrap)、[`sl-grid`](/layout/grid) |
 | 頁面區塊 | [`sl-bar`](/layout/bar)、[`sl-sidebar`](/layout/sidebar)、[`sl-float`](/layout/float)    |

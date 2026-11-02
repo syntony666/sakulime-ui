@@ -31,7 +31,7 @@ import * as BarDemos from "../../demos/layout/bar.demo";
 
 ## 邊緣跟定位
 
-`sl-bar="top"` 黏頂、`sl-bar="bottom"` 黏底，預設都是 sticky：內容捲到邊就停住，不額外佔版面。`sl-bar="bottom"` 還有個額外好處：父層撐滿視窗高時，頁面再短也會黏在視窗底部（sticky footer）。
+`sl-bar="top"` 黏頂、`sl-bar="bottom"` 黏底，預設都是 sticky：內容捲到邊就停住，不額外佔版面。`sl-bar="bottom"` 還有個額外好處：外層撐滿視窗高時，頁面再短也會黏在視窗底部（sticky footer）。
 
 要固定在視窗邊加 `sl-bar-fixed`，需配邊緣值：
 

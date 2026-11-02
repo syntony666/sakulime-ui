@@ -17,7 +17,7 @@ import * as IconDemos from "../../demos/components/icon.demo";
 
 ### SVG
 
-從 圖示包（lucide、Simple Icons、icones.js.org）複製一段 SVG 貼進 HTML，加上 `sl-icon` 就生效。這種用法不需要任何 JS。
+從圖示包（lucide、Simple Icons、icones.js.org）複製一段 SVG 貼進 HTML，加上 `sl-icon` 就生效。這種用法不需要任何 JS。
 
 ```html
 <svg sl-icon viewBox="0 0 24 24" fill="none" stroke="currentColor"

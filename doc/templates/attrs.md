@@ -24,7 +24,7 @@ shape — smaller than the component skeleton:
 
 | 元件 | <behavior column> |
 <one row per applicable element; the column is named for what it
-describes — 預設, 作用, 沒標示時, 備註>
+describes — 預設, 作用, 未標示時, 備註>
 ```
 
 - Frontmatter `description` and the intro stay a single short sentence.

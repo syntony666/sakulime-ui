@@ -151,7 +151,7 @@ export const BannerPlay: DemoObj<BannerArgs> = {
 // the stage. Stacking N notices, per-notice width is the sl-notice variant knob
 const TOASTS = [
   ["success", "check", "已儲存變更"],
-  ["warning", "triangle-alert", "部署已排入佇列，前方還有 2 個 build"],
+  ["warning", "triangle-alert", "部署已排入佇列，前方還有 2 個建置"],
   ["-", "bell", `功能更新已上線 <a href="#">查看詳情</a>`],
 ];
 
