@@ -564,7 +564,7 @@ body::before {
   color: var(--sl-text-accent);
 }
 .VPDocFooter .pager-link:hover {
-  background-color: var(--vp-c-brand-soft);
+  background-color: color-mix(in oklab, var(--sl-text-accent) 3%, transparent);
 }
 
 /* sidebar + pager sub-label — opacity dims the subtitle inside the
