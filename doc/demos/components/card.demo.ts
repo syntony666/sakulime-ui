@@ -21,7 +21,7 @@ type CornerArgs = {
 };
 
 type SectionArgs = {
-  inset: string;
+  edge: string;
   corner: boolean;
   pad: string;
 };
@@ -33,7 +33,7 @@ const INDICATES = ["-", "top", "bottom", "start", "end"];
 const CORNERS = ["-", "start", "end"];
 const CORNER_KINDS = ["chip", "dot", "icon"];
 const INTERACTIVES = ["-", "grow", "lift", "shadow", "press"];
-const INSETS = ["-", "top", "middle", "bottom"];
+const EDGES = ["-", "top", "middle", "bottom"];
 
 const meta = {
   args: {
@@ -66,7 +66,7 @@ const vcard = (v: string, content: string, w = 320) =>
 
 // shared content parts — playground cards and section demos
 const sec = (inner: string) => `<div sl-card--section>${inner}</div>`;
-const media = `<div sl-card--section="inset" class="demo-media"><!-- 圖片 --></div>`;
+const media = `<div sl-card--section="edge" class="demo-media"><!-- 圖片 --></div>`;
 const TITLE = `<strong>卡片標題</strong><p>卡片內容文字，描述這張卡片在展示什麼。</p>`;
 const FOOT = `<small>底部資訊</small>`;
 
@@ -147,7 +147,7 @@ export const CornerKinds: Demo = {
     ),
 };
 
-// bare sections — header/content/footer hairlines without inset media;
+// bare sections — header/content/footer hairlines without edge media;
 // content stays inline like the fence example (a lone <p> would carry
 // browser margins and sit visibly low in the section)
 export const BasicSections: Demo = {
@@ -158,19 +158,19 @@ export const BasicSections: Demo = {
 // carries its own args/argTypes so the md can bind it as a standalone
 // playground (demo object doubles as the Playground meta prop)
 export const Sections: DemoObj<SectionArgs> = {
-  args: { inset: "top", corner: false, pad: "-" },
+  args: { edge: "top", corner: false, pad: "-" },
   argTypes: {
-    inset: axisArg('sl-card--section="inset"', "貼邊區塊位置", INSETS),
+    edge: axisArg('sl-card--section="edge"', "貼邊區塊位置", EDGES),
     corner: boolArg("sl-card--corner", "角落標記（疊在貼邊內容上）"),
     pad: axisArg("sl-pad", "內距", PADS),
   },
   render: (args) => {
     const parts =
-      args.inset === "top"
+      args.edge === "top"
         ? [media, sec(TITLE), sec(FOOT)]
-        : args.inset === "middle"
+        : args.edge === "middle"
           ? [sec(TITLE), media, sec(FOOT)]
-          : args.inset === "bottom"
+          : args.edge === "bottom"
             ? [sec(TITLE), sec(FOOT), media]
             : [sec(TITLE), sec(FOOT)];
     return card(
@@ -182,7 +182,7 @@ export const Sections: DemoObj<SectionArgs> = {
   },
 };
 
-export const Insets: Demo = {
+export const Edges: Demo = {
   render: () =>
     axis(["top", "middle", "bottom"], (v) => {
       const text = `<div sl-card--section><strong>${label(v)}</strong><p>內容</p></div>`;

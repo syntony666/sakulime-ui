@@ -117,21 +117,21 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 <Playground :meta="CardDemos.Sections" :render="CardDemos.Sections.render" />
 
-#### 貼邊 `inset`
+#### 貼邊 `edge`
 
-`inset` 會把卡片內距抵銷掉，讓內容貼到卡片邊緣，放圖片、地圖或色塊都合適。放在第一個就貼上緣，放在最後一個就貼下緣，夾在中間只貼左右兩邊，位置照順序自動判斷：
+`edge` 會把卡片內距抵銷掉，讓內容貼到卡片邊緣，放圖片、地圖或色塊都合適。放在第一個就貼上緣，放在最後一個就貼下緣，夾在中間只貼左右兩邊，位置照順序自動判斷：
 
 ```html
 <div sl-card>
-  <div sl-card--section="inset"><img src="…"></div>
+  <div sl-card--section="edge"><img src="…"></div>
   <div sl-card--section>內容</div>
 </div>
 ```
 
-角落標記疊在貼邊內容上也行。`sl-card--corner` 不算一般內容，不會影響 inset 的位置判斷：
+角落標記疊在貼邊內容上也行。`sl-card--corner` 不算一般內容，不會影響 edge 的位置判斷：
 
 <Demo :render="CardDemos.Sections.render" :args="CardDemos.Sections.args" />
-<Demo :render="CardDemos.Insets.render" />
+<Demo :render="CardDemos.Edges.render" />
 
 #### 空白 `blank`
 

@@ -145,33 +145,33 @@
     padding-block-start: var(--sl-pad);
   }
 
-  /* inset — a padding-cancelled region for edge-to-edge content (img/
+  /* edge — a padding-cancelled region for edge-to-edge content (img/
      svg/iframe/block). DOM order picks the bleeding edges; "first"
      means no non-corner sibling precedes, "last" none follows */
-  [sl-card] > [sl-card--section="inset"] {
+  [sl-card] > [sl-card--section="edge"] {
     padding: 0;
   }
 
-  [sl-card] > [sl-card--section="inset"]:not(:not([sl-card--corner]) ~ *) {
+  [sl-card] > [sl-card--section="edge"]:not(:not([sl-card--corner]) ~ *) {
     margin-block-start: var(--_pbn);
     border-block-start: 0;
   }
 
-  [sl-card] > [sl-card--section="inset"]:not(:has(~ :not([sl-card--corner]))) {
+  [sl-card] > [sl-card--section="edge"]:not(:has(~ :not([sl-card--corner]))) {
     margin-block-end: var(--_pbn);
   }
 
   /* followers own the gap — a section's divider hugs the image edge,
      anything else gets the pad spacing itself */
-  [sl-card--section="inset"] + * {
+  [sl-card--section="edge"] + * {
     margin-block-start: var(--sl-pad);
   }
 
-  [sl-card--section="inset"] + [sl-card--section] {
+  [sl-card--section="edge"] + [sl-card--section] {
     margin-block-start: 0;
   }
 
-  [sl-card--section="inset"] > :is(img, svg, video, iframe) {
+  [sl-card--section="edge"] > :is(img, svg, video, iframe) {
     display: block;
     inline-size: 100%;
   }

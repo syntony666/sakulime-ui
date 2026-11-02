@@ -50,7 +50,7 @@
   <div sl-card--section id="sect-2">b</div>
 </div>
 <div sl-card id="card-sect2">
-  <div sl-card--section="inset" id="sect-inset"><span>c</span></div>
+  <div sl-card--section="edge" id="sect-edge"><span>c</span></div>
 </div>
 <div sl-card id="card-sect3">
   <div sl-card--section="blank" id="sect-blank"><strong>e</strong><p>f</p></div>
@@ -187,7 +187,7 @@ function main() {
   near('card section bleed margin', cs('sect-1', 'margin-left'), -varPx('--sl-lg'));
   eq('card section 2 divider', cs('sect-2', 'border-top-width'), '1px');
   near('card section 2 gap', cs('sect-2', 'margin-top'), varPx('--sl-lg'));
-  eq('card section inset pad 0', cs('sect-inset', 'padding-left'), '0px');
+  eq('card section edge pad 0', cs('sect-edge', 'padding-left'), '0px');
   eq('card section blank grid', cs('sect-blank', 'display'), 'grid');
   neq('card section secondary bg', cs('sect-sec', 'background-color'), cs('card-def', 'background-color'));
   eq('card section center align', cs('sect-ctr', 'text-align'), 'center');

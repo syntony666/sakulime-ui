@@ -187,7 +187,7 @@ components:
 ## Shapes
 
 - **圓角屬性**：`sl-radius` none/sm(4)/md(8，預設)/lg(12)/full，映射到通用尺度台階；`full` 在卡片/通知上是「一行膠囊」封頂（半徑 = 一行高），其他元件仍是大值膠囊
-- **卡片裁切**：`overflow:hidden` 讓 inset 出血內容自動吃卡片圓角，貼邊內容不用自己圓角
+- **卡片裁切**：`overflow:hidden` 讓 edge 出血內容自動吃卡片圓角，貼邊內容不用自己圓角
 - **Hairline 語言**：1px `--sl-border` 無所不在，卡片邊、section 分隔線（滿版）、h1 漸層底線、sidebar 選中條 2px accent bar（文件站）
 - **Signature 形狀**：頂端 2px 漸層 hairline；corner chip 方形小圓角（`--sl-xs`）貼卡片頂角
 
@@ -204,7 +204,7 @@ components:
 ### Cards `sl-card`
 - **Surface:** `--sl-surface` 底＋1px `--sl-border`＋`sl-radius`＋`--sl-pad`（預設 16px）；attribute 的值選外框：bare 描邊面、`hollow` 虛線空態、`flat` 去框留面、`blank` 連面一起去掉（配 `sl-card--section="blank"` 做純空態）
 - **子元素，角落標記 `sl-card--corner`:** 純位置件（scope 到卡片直接子層，絕對定位在整張卡上），只有上緣兩側——`end`（右上，預設）/`start`（左上）；`font-size: var(--sl-lg)` 當 em context，長相由同元素疊加的小元件決定：`sl-chip` 貼邊角落標籤（四角 `--sl-xs` 小圓角，朝卡角那角由卡片 `overflow` 裁出同色曲線）、`sl-dot` 8px 點、`sl-icon` 16px 圖示，後兩者各退 `--sl-sm`/`--sl-xs` 內縮浮起
-- **子元素，分區 `sl-card--section`:** 滿版 hairline 分隔的內容列；第一節不畫線（=header）；值選分區性格：`inset` 抵銷內距做滿版區塊（圖/地圖/色塊，位置由 DOM 序決定）、`blank` 置中空態、`secondary`/`active` 上色區（貼邊出血）、`center` 文字置中；leading/trailing corner 不算內容
+- **子元素，分區 `sl-card--section`:** 滿版 hairline 分隔的內容列；第一節不畫線（=header）；值選分區性格：`edge` 抵銷內距做滿版區塊（圖/地圖/色塊，位置由 DOM 序決定）、`blank` 置中空態、`secondary`/`active` 上色區（貼邊出血）、`center` 文字置中；leading/trailing corner 不算內容
 - **Options:** `sl-card-indicate="top|bottom|start|end"`（3px tone 邊緣強調條）、`sl-interactive`（hover 互動）、`sl-pad`（sm/md/lg）
 
 ### Icons `sl-icon`
@@ -242,7 +242,7 @@ components:
 - **Do** 只用 `sl-*` attribute 與 `--sl-*` token，行為、狀態、設定全走 CSS selector
 - **Do** 守住 slot 封印：generic 屬性只展開在列名的消費者上，消費端在 base 自我 default 成 manifest，間距 slot 經 `@property` 註冊 non-inheriting
 - **Do** 淺色 tone（primary/secondary）的文字色走 `--sl-tone-text` 混入文字色，維持可讀
-- **Do** 讓分隔線貼著 inset 邊緣，間距由後繼元素自己帶，不在圖片側留白
+- **Do** 讓分隔線貼著 edge 邊緣，間距由後繼元素自己帶，不在圖片側留白
 - **Do** 用 demo 圓點格紙當刻度，元件尺寸對齊台階（md 按鈕 = 2 格）
 
 ### Don't:
