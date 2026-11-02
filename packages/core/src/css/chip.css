@@ -1,18 +1,13 @@
-/* chip — a small capsule tag: icon + a line of text in a quiet tone
-   wash. em-based so it scales with the surrounding font-size; the
-   inner gap pairs with <i sl-icon> directly */
+/* chip — small capsule tag; em-based so it scales with the
+   surrounding font-size */
 @layer base {
   [sl-chip] {
-    /* self-default seals ancestor tone slots — no tone reads as a
-       neutral text-ink wash; sl-tone on the chip recolors it.
-       --sl-size-fs defaults to the em-based 0.875em; sl-size swaps
-       in absolute steps and the whole capsule scales with it */
+    /* seal — no tone reads as a neutral text-ink wash */
     --sl-tone-bg: currentColor;
     --sl-tone-text: currentColor;
     --sl-size-fs: 0.875em;
-    /* h/px get self-defaults too — nothing in the capsule reads them;
-       the md defaults just keep an ancestor's sl-size from leaking
-       the slots through the chip to deeper descendants */
+    /* h/px are unused here — the defaults just keep an ancestor's
+       sl-size slots from leaking through to deeper descendants */
     --sl-size-h: var(--sl-3xl);
     --sl-size-px: var(--sl-md);
     display: inline-flex;
@@ -20,8 +15,8 @@
     gap: 0.3em;
     padding: 0.2em 0.6em;
     font-size: var(--sl-size-fs);
-    /* the compact-copy measure — same 1.4 as notice body text,
-       intentionally un-tokenized: two consumers don't make a scale */
+    /* same compact-copy measure as notice — kept literal on both
+       until a third consumer argues for a token */
     line-height: 1.4;
     color: var(--sl-tone-text);
     background: color-mix(in srgb, var(--sl-tone-bg) 20%, var(--sl-surface));
@@ -29,13 +24,10 @@
     vertical-align: -0.05em;
   }
 
-  /* cursor only while the hover playback can still fire — same
-     opt-out as the shared rule and sl-card */
   [sl-chip][sl-interactive]:not([aria-disabled="true"]) {
     cursor: pointer;
   }
 
-  /* shared hook — button uses the same slot at .6 */
   [sl-chip][aria-disabled="true"] {
     opacity: var(--sl-disabled-opacity, 0.6);
     cursor: not-allowed;
