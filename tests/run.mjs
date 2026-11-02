@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-/* Visual/computed-style harness: each fixture page runs its own assertions
-   under headless chromium and emits a JSON array into <pre id="results">;
-   this runner extracts it and prints TAP-ish lines. No dependencies. */
 import { execFile } from 'node:child_process';
 import { existsSync, mkdirSync } from 'node:fs';
 import { homedir } from 'node:os';
