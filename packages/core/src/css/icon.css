@@ -87,8 +87,10 @@
     border-radius: var(--sl-sm);
   }
 
-  /* states + spacing — bare sl-icon-space means both sides */
-  [sl-icon][sl-icon-disabled] {
+  /* states + spacing — bare sl-icon-space means both sides;
+     aria-disabled reads the same as the attr */
+  [sl-icon][sl-icon-disabled],
+  [sl-icon][aria-disabled="true"] {
     opacity: 0.4;
   }
   [sl-icon][sl-icon-space] {

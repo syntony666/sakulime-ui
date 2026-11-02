@@ -26,6 +26,7 @@
 <button sl-button sl-interactive="lift" id="btn-i2">i2</button>
 <button sl-button sl-interactive="press" id="btn-i3">i3</button>
 <button sl-button sl-interactive="dim" id="btn-i4">i4</button>
+<button sl-button aria-disabled="true" id="btn-aria">aria</button>
 <button sl-button sl-radius="full" id="btn-rf">rf</button>
 <div sl-card id="btn-rf-host"><button sl-button sl-radius="full" id="btn-rfc">rfc</button></div>
 
@@ -104,6 +105,7 @@
 <i sl-icon sl-icon-flip="horizontal" id="ic-fh"></i>
 <i sl-icon sl-icon-rotate="90" id="ic-r90"></i>
 <i sl-icon sl-icon-disabled id="ic-dis"></i>
+<i sl-icon aria-disabled="true" id="ic-aria"></i>
 <i sl-icon sl-icon-space id="ic-sp"></i>
 
 <!-- notices -->
@@ -165,6 +167,7 @@ function main() {
   has('btn interactive lift slot', cs('btn-i2', '--sl-interactive-transform'), 'translateY(-4px)');
   match('btn interactive press slot', cs('btn-i3', '--sl-interactive-transform'), /scale\((0)?\.97\)/);
   has('btn interactive dim slot', cs('btn-i4', '--sl-interactive-filter'), 'brightness');
+  eq('btn aria-disabled opacity', cs('btn-aria', 'opacity'), '0.6');
   eq('btn radius full pill', cs('btn-rf', 'border-top-left-radius'), '9999px');
   eq('btn radius full inside card stays pill', cs('btn-rfc', 'border-top-left-radius'), '9999px');
 
@@ -239,6 +242,7 @@ function main() {
   eq('icon flip horizontal', cs('ic-fh', 'scale'), '-1 1');
   eq('icon rotate 90', cs('ic-r90', 'rotate'), '90deg');
   eq('icon disabled opacity', cs('ic-dis', 'opacity'), '0.4');
+  eq('icon aria-disabled opacity', cs('ic-aria', 'opacity'), '0.4');
   near('icon space margin', cs('ic-sp', 'margin-left'), 4.8);
 
   /* ---- notice ---- */

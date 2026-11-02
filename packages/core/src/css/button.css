@@ -38,11 +38,14 @@
   }
 
   /* matches generic.css sl-interactive="grow" — the unmarked hover */
-  [sl-button]:hover:not(:disabled) {
+  [sl-button]:hover:not(:disabled):not([aria-disabled="true"]) {
     transform: scale(1.03);
   }
 
-  [sl-button]:disabled {
+  /* aria-disabled keeps the control focusable for screen readers —
+     it reads the same as :disabled but still takes pointer events */
+  [sl-button]:disabled,
+  [sl-button][aria-disabled="true"] {
     opacity: 0.6;
     cursor: not-allowed;
   }

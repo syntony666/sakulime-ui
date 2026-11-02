@@ -144,8 +144,9 @@
   }
 
   /* the shared hover playback — one rule for every consumer;
-     :not(:disabled) keeps button semantics and is a no-op on cards */
-  :--sl-generic-interactive[sl-interactive]:hover:not(:disabled) {
+     :not(:disabled) keeps button semantics and is a no-op on cards;
+     aria-disabled opts out the same way */
+  :--sl-generic-interactive[sl-interactive]:hover:not(:disabled):not([aria-disabled="true"]) {
     transform: var(--sl-interactive-transform);
     box-shadow: var(--sl-interactive-shadow);
     filter: var(--sl-interactive-filter);
