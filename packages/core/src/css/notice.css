@@ -44,6 +44,10 @@
     --sl-notice-action-inset: calc(max(var(--sl-pad) - var(--sl-sm), 0px));
     /* breathing room the copy keeps from the action lane */
     --sl-notice-action-gap: 0.6em;
+    /* the floating ring's own width — sl-float reserves this much
+       padding so edge toasts' frames aren't sliced; one hook keeps
+       the two files in sync */
+    --sl-notice-ring-w: 2px;
     /* the lane an edge-pinned action reserves — resolved once so
        each :has() rule just reads it for its own edge */
     --_lane: calc(
@@ -58,13 +62,13 @@
     padding: calc(var(--sl-pad) * 0.75) calc(var(--sl-pad) * 1.5);
     color: var(--sl-tone-text);
     /* floating frame — the wash stops at the padding edge, a surface
-       band fills the border gap, and a 2px ring sits on the outer
-       edge like a detached frame line. sl-float reserves room for
-       this ring in its padding — keep the two in sync */
+       band fills the border gap, and a ring sits on the outer edge
+       like a detached frame line. sl-float reserves room for this
+       ring in its padding through --sl-notice-ring-w */
     background-color: color-mix(in srgb, var(--sl-tone-bg) 12%, var(--sl-surface));
     background-clip: padding-box;
     border: 3px solid var(--sl-surface);
-    box-shadow: 0 0 0 2px color-mix(in srgb, var(--sl-tone-bg) 28%, var(--sl-border));
+    box-shadow: 0 0 0 var(--sl-notice-ring-w) color-mix(in srgb, var(--sl-tone-bg) 28%, var(--sl-border));
     border-radius: var(--sl-radius);
   }
 
@@ -170,6 +174,6 @@
   [sl-notice][sl-interactive]:hover:not(:disabled):not([aria-disabled="true"]) {
     box-shadow:
       var(--sl-interactive-shadow),
-      0 0 0 2px color-mix(in srgb, var(--sl-tone-bg) 28%, var(--sl-border));
+      0 0 0 var(--sl-notice-ring-w) color-mix(in srgb, var(--sl-tone-bg) 28%, var(--sl-border));
   }
 }
