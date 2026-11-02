@@ -84,15 +84,13 @@
     text-decoration-color: currentColor;
   }
 
-  /* the floating ring is the notice's frame — an interactive shadow
-     stacks outside it instead of replacing it. For effects that
-     leave the slot at none, "none, <ring>" is an invalid list so
-     this rule drops and the base ring stays — transform/filter
-     still apply through the shared playback */
-  [sl-notice][sl-interactive]:hover:not(:disabled) {
-    box-shadow:
-      var(--sl-interactive-shadow),
-      0 0 0 2px color-mix(in srgb, var(--sl-tone-bg) 28%, var(--sl-border));
+  /* seal the shared slot to a no-op shadow instead of generic's none —
+     the attrs-layer hover rule prepends it to the ring in a comma list,
+     and "none, <ring>" is an invalid box-shadow that unsets the whole
+     property. A zero-size transparent shadow keeps the list valid while
+     contributing nothing; lift/shadow still override it via attrs */
+  [sl-notice] {
+    --sl-interactive-shadow: 0 0 0 0px transparent;
   }
 }
 
@@ -150,5 +148,18 @@
 
   [sl-notice][sl-notice-align="end"] {
     text-align: end;
+  }
+
+  /* interactive hover stacks the effect shadow OUTSIDE the floating
+     ring instead of replacing it — this rule must live in attrs (the
+     shared playback in generic.css does too, and notice.css imports
+     after it, so equal (0,5,0) specificity wins here on source order).
+     The slot is sealed to a no-op shadow in base above, so the comma
+     list stays valid for grow/press/dim; lift/shadow inject real
+     shadows through the same slot */
+  [sl-notice][sl-interactive]:hover:not(:disabled):not([aria-disabled="true"]) {
+    box-shadow:
+      var(--sl-interactive-shadow),
+      0 0 0 2px color-mix(in srgb, var(--sl-tone-bg) 28%, var(--sl-border));
   }
 }
