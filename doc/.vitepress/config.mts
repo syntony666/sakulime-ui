@@ -180,6 +180,7 @@ export default defineConfig({
   },
   themeConfig: {
     outline: { level: [2, 4], label: "本頁目錄" },
+    search: { provider: "local" },
     logo: "/favicon.svg",
     docFooter: { prev: "上一頁", next: "下一頁" },
     sidebarMenuLabel: "選單",
@@ -198,7 +199,7 @@ export default defineConfig({
       { text: "開始使用", link: "/introduction" },
       { text: "主題", link: "/theme" },
       {
-        text: "屬性",
+        text: "屬性 Attributes",
         items: [
           { text: "總覽", link: "/attrs" },
           {
