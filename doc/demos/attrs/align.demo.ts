@@ -13,7 +13,7 @@ const cells = () =>
 
 const frame = (caption: string, inner: string) =>
   `<div class="demo-cell"><span class="demo-w" data-demo>${caption}</span>` +
-  `<div style="margin-top: var(--sl-sm)">${inner}</div>`;
+  `<div style="margin-top: var(--sl-sm)">${inner}</div></div>`;
 
 // container-level: cross-axis on a wrap is vertical line alignment
 export const AlignWrap: Demo = {
