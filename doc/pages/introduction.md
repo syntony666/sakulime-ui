@@ -1,13 +1,13 @@
 ---
 title: 開始使用
-description: sl-* 屬性加在標籤上，--sl-* 變數管顏色跟尺寸，原本的 class 不用動。
+description: 元件與排版以 sl-* 屬性設定，顏色和尺寸以 --sl-* 變數調整，原有的 class 不需改動。
 ---
 
 # 開始使用
 
-> 用最簡單的方式，讓你的介面變得不再單調
+> 用最少的改動，讓介面不再單調
 
-元件和排版都靠 `sl-*` 屬性，顏色尺寸走 `--sl-*` 變數，原本的 `class` 不用動。
+元件與排版以 `sl-*` 屬性設定，顏色和尺寸以 `--sl-*` 變數調整；原有的 `class` 不需改動。
 
 ## 安裝
 
@@ -15,29 +15,33 @@ description: sl-* 屬性加在標籤上，--sl-* 變數管顏色跟尺寸，原�
 npm install sakulime-ui
 ```
 
+在應用程式入口載入樣式：
+
 ```ts
 import "sakulime-ui/sakulime.min.css";
 ```
 
-## CDN
-
-把下面這行放進 `<head>...</head>`：
-
-```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakulime-ui/dist/sakulime.min.css" />
-```
-
-`import` 和 `<link>` 的寫法不同。`import` 走套件 `exports` 公布的子路徑，寫 `sakulime-ui/sakulime.min.css`；CDN 網址是發布檔的實際位置，路徑帶 `dist/`。檔案路徑不能拿去 `import`，`exports` 子路徑貼進瀏覽器也找不到檔案。
-
-個別套件的說明：
+`sakulime-ui` 由三個套件組成：
 
 - 元件，含主題色系：[`@sakulime-ui/core`](/core/)
 - 排版工具：[`@sakulime-ui/layout`](/layout/)
 - 主題色系：[`@sakulime-ui/theme`](/theme)
 
+## CDN
+
+若未使用建置流程，將 `<link>` 加入 `<head>`：
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakulime-ui/dist/sakulime.min.css" />
+```
+
+:::tip
+`import` 填的是套件公布的子路徑 `sakulime-ui/sakulime.min.css`；`<link>` 填的是含 `dist/` 的 CDN 網址。兩者不可互換。
+:::
+
 ## 第一個頁面
 
-整段貼上就能跑。存成 `.html` 用瀏覽器打開，會看到一顆主題色按鈕：
+將整段程式碼存成 `.html`，以瀏覽器開啟，即可看到一個主題色按鈕：
 
 ```html
 <!DOCTYPE html>
@@ -53,26 +57,34 @@ import "sakulime-ui/sakulime.min.css";
 </html>
 ```
 
-主題由 `<html>` 上的 `data-theme` 決定，未標示就是 `sakulime`。其他主題和切換方式看[主題](/theme)。
+`data-theme` 須設定於 `<html>`；未設定時預設為 `sakulime`。主題切換方式見[主題](/theme)。
 
-屬性有四種形式，規則跟文法細節看[屬性總覽](/attrs)。要讓版面跟著螢幕寬度變化（斷點後綴、`sl-hide`/`sl-show`），看 [RWD 響應式設計](/layout/responsive)——行動裝置需要 viewport meta 斷點才準，上面的範例已經含了。
+屬性有四種形式，寫法與細節見[屬性總覽](/attrs)。
+
+若版面需隨螢幕寬度調整，可使用斷點後綴與 `sl-hide`、`sl-show`，做法見 [RWD 響應式設計](/layout/responsive)。
 
 ## 全域基底樣式
 
-載入時會順帶設定頁面基底，對象是整份文件，不只 `sl-*` 元素：
+載入時會一併套用基底樣式至整份文件，不只 `sl-*` 元素：
 
-- `*`、`::before`、`::after` 設 `box-sizing: border-box`
-- `<html>`：字體 `Inter, ui-sans-serif, system-ui, sans-serif`、行高 `1.5`，開啟 `-webkit-font-smoothing`
-- `<body>`：`margin` 歸零，文字色 `--sl-text`、底色 `--sl-bg`
-- `button`、`input`、`textarea`、`select` 設 `font: inherit`
+| 選擇器 | 設定 |
+| --- | --- |
+| 所有元素，含 `::before`、`::after` | `box-sizing: border-box` |
+| `<html>` | 字體 `Inter`（後備系統字體），行高 `1.5`，開啟 `-webkit-font-smoothing` |
+| `<body>` | `margin` 歸零，文字色 `--sl-text`，底色 `--sl-bg` |
+| `button`、`input`、`textarea`、`select` | `font: inherit` |
 
-頁面已經有自己的基底樣式時，未分層的規則權重比較高，蓋得過這裡的設定。
+上述規則皆位於 `@layer base`，覆寫方式見下一節。
 
 ## 自訂樣式
 
-`sl-*` 規則全部寫在 cascade layer 裡，順序是 `@layer theme, base, attrs`。未分層樣式的優先權高於任何分層樣式——全域 reset 例如 `* { margin: 0 }` 或 Tailwind 的 preflight，會整組壓過 `sl-*` 規則。
+`sl-*` 的規則皆位於 `@layer` 內，順序為 `theme`、`base`、`attrs`。
 
-自己的 reset 要共存，包進 layer 並宣告在框架之前：
+:::tip
+未納入任何 `@layer` 的樣式優先於所有分層樣式。以全域 reset `* { margin: 0 }` 為例，覆蓋範圍涵蓋基底設定與 `attrs` 層的元件規則。
+:::
+
+若要補充框架未處理的部分，須自行建立一層，宣告在 `theme` 之前：
 
 ```css
 @layer reset, theme, base, attrs;
@@ -82,46 +94,44 @@ import "sakulime-ui/sakulime.min.css";
 }
 ```
 
-`reset` 排在最前，權重最低，框架的三層照舊蓋過它。顏色跟尺寸的細調不用動 layer，覆寫 `--sl-*` 變數就好——見[主題](/theme)和下面的尺度表。
+`reset` 宣告在最前，優先順序最低，框架的三層仍會覆蓋它。
+
+顏色與尺寸的微調不需更動 layer，改寫 `--sl-*` 變數即可，見[主題](/theme)與下方的變數表。
 
 ## 瀏覽器需求
 
-- Safari 18+
-- Chrome 119+
-- Firefox 128+
-
-不在這個範圍內的瀏覽器不保證能用。
+支援 `Safari 18+`、`Chrome 119+`、`Firefox 128+`。低於上述版本的瀏覽器未經驗證，不保證正常運作。
 
 ## 尺寸
 
-間距、圓角、字級共用一套 scale。值是 rem，px 欄是基準 16px 時的換算：
+間距、圓角、字級共用同一組級距。單位為 rem，px 欄為根字級 16px 時的換算值：
 
-| 變數      | rem     | px   |
-| --------- | ------- | ---- |
-| `--sl-xs` | 0.25rem | 4px  |
-| `--sl-sm` | 0.5rem  | 8px  |
+| 變數 | rem | px |
+| --- | --- | --- |
+| `--sl-xs` | 0.25rem | 4px |
+| `--sl-sm` | 0.5rem | 8px |
 | `--sl-md` | 0.75rem | 12px |
-| `--sl-lg` | 1rem    | 16px |
+| `--sl-lg` | 1rem | 16px |
 | `--sl-xl` | 1.25rem | 20px |
-| `--sl-2xl`| 1.5rem  | 24px |
-| `--sl-3xl`| 2rem    | 32px |
-| `--sl-4xl`| 2.5rem  | 40px |
-| `--sl-5xl`| 3rem    | 48px |
+| `--sl-2xl` | 1.5rem | 24px |
+| `--sl-3xl` | 2rem | 32px |
+| `--sl-4xl` | 2.5rem | 40px |
+| `--sl-5xl` | 3rem | 48px |
 
-`--sl-container-*` 是 `sl-container` 的頁面寬度上限：
+`--sl-container-*` 指定 `sl-container` 的寬度上限：
 
-| 變數                | rem   | px     |
-| ------------------- | ----- | ------ |
-| `--sl-container-sm` | 45rem | 720px  |
-| `--sl-container-md` | 60rem | 960px  |
+| 變數 | rem | px |
+| --- | --- | --- |
+| `--sl-container-sm` | 45rem | 720px |
+| `--sl-container-md` | 60rem | 960px |
 | `--sl-container-lg` | 75rem | 1200px |
 
 其他共用變數：
 
-- `--sl-radius-pill`：膠囊圓角 `9999px`
-- `--sl-z-bar`：`sl-bar` 的 z-index `50`
-- `--sl-z-float`：`sl-float` 的 `60`
+- `--sl-radius-pill`：膠囊圓角，`9999px`
+- `--sl-z-bar`：`sl-bar` 的 z-index，`50`
+- `--sl-z-float`：`sl-float` 的 z-index，`60`
 
-::: tip
-表上沒有的值，在自己的 CSS 裡直接寫數字就好。
+:::tip
+表中未列出的值，可直接在自有 CSS 中寫入數值。
 :::
