@@ -142,8 +142,38 @@ export default defineConfig({
           replacement: src("packages/core/src/icons/index.ts"),
         },
         {
+          find: "@sakulime-ui/core/index.min.css",
+          replacement: src("packages/core/src/index.css"),
+        },
+        {
+          find: "@sakulime-ui/core/index.min.js",
+          replacement: src("packages/core/src/index.ts"),
+        },
+        {
           find: "@sakulime-ui/layout/index.css",
           replacement: src("packages/layout/src/layout.css"),
+        },
+        {
+          find: "@sakulime-ui/layout/index.min.css",
+          replacement: src("packages/layout/src/layout.css"),
+        },
+        {
+          find: "sakulime-ui/sakulime.min.css",
+          replacement: src("doc/.vitepress/alias-sakulime.css"),
+        },
+        /* bare package entries last — a string find also matches
+           subpath specifiers, so these must trail the specific ones */
+        {
+          find: "@sakulime-ui/core",
+          replacement: src("packages/core/src/index.ts"),
+        },
+        {
+          find: "@sakulime-ui/layout",
+          replacement: src("packages/layout/src/layout.css"),
+        },
+        {
+          find: "sakulime-ui",
+          replacement: src("packages/core/src/index.ts"),
         },
       ],
     },
