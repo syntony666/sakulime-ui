@@ -32,7 +32,7 @@ const VARIANTS = ["-", "hollow", "plain", "blank"];
 const INDICATES = ["-", "top", "bottom", "start", "end"];
 const CORNERS = ["-", "start", "end"];
 const CORNER_KINDS = ["chip", "dot", "icon"];
-const INTERACTIVES = ["-", "grow", "lift", "raise", "press"];
+const INTERACTIVES = ["-", "grow", "lift", "shadow", "press"];
 const INSETS = ["-", "top", "middle", "bottom"];
 
 const meta = {

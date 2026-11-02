@@ -28,7 +28,7 @@ import * as InteractiveDemos from "../../demos/attrs/interactive.demo";
 | --- | --- |
 | `grow`（預設） | 放大 1.03 |
 | `lift` | 浮起 4px 加陰影 |
-| `raise` | 只有陰影 |
+| `shadow` | 只有陰影 |
 | `press` | 壓下 0.97 |
 | `dim` | 變暗 |
 

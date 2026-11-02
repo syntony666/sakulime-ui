@@ -13,7 +13,7 @@ const frame = (caption: string, inner: string) =>
 // by itself while the card stays put; named values are the opt-ins
 export const Interactive: Demo = {
   render: () =>
-    axis(["-", "grow", "lift", "raise", "press", "dim"], (v) =>
+    axis(["-", "grow", "lift", "shadow", "press", "dim"], (v) =>
       frame(
         v === "-" ? "未標示" : `sl-interactive="${v}"`,
         `<div sl-wrap>` +

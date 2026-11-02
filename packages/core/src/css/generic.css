@@ -126,7 +126,7 @@
     --sl-interactive-shadow: 0 8px 20px color-mix(in srgb, var(--sl-text) 24%, transparent);
   }
 
-  :--sl-generic-interactive[sl-interactive="raise"] {
+  :--sl-generic-interactive[sl-interactive="shadow"] {
     --sl-interactive-shadow: 0 3px 10px color-mix(in srgb, var(--sl-text) 20%, transparent);
   }
 

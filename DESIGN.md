@@ -194,7 +194,7 @@ components:
 ## Components
 
 ### Buttons `sl-button`
-- **Character:** 碰了會彈，內建 `hover: scale(1.03)` 是刻意的活潑回饋；宣告 `sl-interactive` 的按鈕改跑指定配方（grow/lift/raise/press/dim）
+- **Character:** 碰了會彈，內建 `hover: scale(1.03)` 是刻意的活潑回饋；宣告 `sl-interactive` 的按鈕改跑指定配方（grow/lift/shadow/press/dim）
 - **Shape:** `sl-radius` 屬性（預設 md=8px），2px transparent border 撐住箱型
 - **Variants:** `normal`（實心=預設）/ `invert`（描邊）/ `ghost`（無框）/ `underline`（2px 底線，0.3em offset）
 - **Tones:** `sl-tone` primary/secondary/success/warning/danger，bg/text/invert 三 slot 自動配色
