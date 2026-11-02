@@ -16,7 +16,7 @@
     "doc"
   ],
   "sideEffects": [
-    "*.css"
+    "**/*.css"
   ],
   "files": [
     "dist"
