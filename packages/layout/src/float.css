@@ -39,6 +39,19 @@
     inset-inline-end: calc(var(--_te) + env(safe-area-inset-right, 0px));
   }
 
+  /* env() insets are physical but the anchors are logical — in RTL
+     inline-end is the left edge, so the end/start sides must swap
+     which env() they consume. :dir() is inside the browser floor */
+  [sl-float]:not([sl-float~="start"], [sl-float~="center"]):dir(rtl) {
+    inset-inline-end: calc(var(--_te) + env(safe-area-inset-left, 0px));
+  }
+
+  /* sl-align on a child is per-item horizontal placement — same
+     contract stack/wrap/grid give their children */
+  [sl-float] > [sl-align] {
+    align-self: var(--sl-align);
+  }
+
   /* the value is space-separated tokens <edge> <side>: "top" flips
      the vertical anchor, "start" flips the inline edge, "center"
      centres on that edge. Unmatched words (bottom/end) read the
@@ -52,6 +65,11 @@
   [sl-float~="start"] {
     inset-inline-end: auto;
     inset-inline-start: calc(var(--_te) + env(safe-area-inset-left, 0px));
+  }
+
+  /* RTL twin — inline-start is the right edge, take the right inset */
+  [sl-float~="start"]:dir(rtl) {
+    inset-inline-start: calc(var(--_te) + env(safe-area-inset-right, 0px));
   }
 
   [sl-float~="center"] {

@@ -25,11 +25,26 @@
        same value through the private var */
     --_bp: var(--sl-bar-pad-block, var(--sl-pad));
     padding-block: var(--_bp);
-    padding-inline: var(--sl-bar-pad-inline, var(--sl-lg));
+    /* physical padding sides, not inline — env() values are physical
+       too, so landscape notches clear the start/end zones in either
+       writing direction */
+    padding-left: calc(
+      var(--sl-bar-pad-inline, var(--sl-lg)) + env(safe-area-inset-left, 0px)
+    );
+    padding-right: calc(
+      var(--sl-bar-pad-inline, var(--sl-lg)) + env(safe-area-inset-right, 0px)
+    );
     /* hex fallbacks keep the package usable without the theme — the
        same convention as --sl-border below; tune via the token, not
        the literal */
     background: var(--sl-bg, #ffffff);
+  }
+
+  /* zone children squash below their content width — without this a
+     zone holding unbreakable content overflows its track and can
+     overlap the centered column */
+  [sl-bar] > * {
+    min-inline-size: 0;
   }
 
   /* zone parts — a marked child claims its column and alignment.
