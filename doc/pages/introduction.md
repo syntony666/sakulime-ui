@@ -55,24 +55,24 @@ import "sakulime-ui/sakulime.min.css";
 
 主題由 `<html>` 上的 `data-theme` 決定，未標示就是 `sakulime`。其他主題和切換方式看[主題](/theme)。
 
-屬性有四種形式，規則跟文法細節看[屬性總覽](/attrs)。
+屬性有四種形式，規則跟文法細節看[屬性總覽](/attrs)。要讓版面跟著螢幕寬度變化（斷點後綴、`sl-hide`/`sl-show`），看 [RWD 響應式設計](/layout/responsive)——行動裝置需要 viewport meta 斷點才準，上面的範例已經含了。
 
 ## 全域基底樣式
 
-載入這包 CSS，頁面基底會一起被接管：
+載入時會順帶設定頁面基底，對象是整份文件，不只 `sl-*` 元素：
 
-- `*`、`::before`、`::after` 全部設 `box-sizing: border-box`
-- `<html>` 設字體 `Inter, ui-sans-serif, system-ui, sans-serif`、行高 `1.5`，並開啟 `-webkit-font-smoothing`
-- `<body>` 的 `margin` 歸零，文字和底色套用 `--sl-text`、`--sl-bg`
-- `button`、`input`、`textarea`、`select` 設 `font: inherit`，跟著頁面字體走
+- `*`、`::before`、`::after` 設 `box-sizing: border-box`
+- `<html>`：字體 `Inter, ui-sans-serif, system-ui, sans-serif`、行高 `1.5`，開啟 `-webkit-font-smoothing`
+- `<body>`：`margin` 歸零，文字色 `--sl-text`、底色 `--sl-bg`
+- `button`、`input`、`textarea`、`select` 設 `font: inherit`
 
-這些規則對整份文件生效，不限 `sl-*` 元素。頁面已經有自己的基底設定時，先知道它們會進來。
+頁面已經有自己的基底樣式時，未分層的規則權重比較高，蓋得過這裡的設定。
 
-## 和自己的 Reset 共存
+## 自訂樣式
 
-所有 `sl-*` 規則都寫在 cascade layer 裡，順序是 `@layer theme, base, attrs`。未分層樣式的優先權高於任何分層樣式，全域 reset 例如 `* { margin: 0 }` 或 Tailwind 的 preflight，會整組壓過 `sl-*` 規則，元件整個走樣。
+`sl-*` 規則全部寫在 cascade layer 裡，順序是 `@layer theme, base, attrs`。未分層樣式的優先權高於任何分層樣式——全域 reset 例如 `* { margin: 0 }` 或 Tailwind 的 preflight，會整組壓過 `sl-*` 規則。
 
-自己的 reset 要共存的話，包進 layer 並宣告在框架之前：
+自己的 reset 要共存，包進 layer 並宣告在框架之前：
 
 ```css
 @layer reset, theme, base, attrs;
@@ -82,11 +82,15 @@ import "sakulime-ui/sakulime.min.css";
 }
 ```
 
-`reset` 排在最前，權重最低，框架的 `theme`、`base`、`attrs` 照舊蓋過它。
+`reset` 排在最前，權重最低，框架的三層照舊蓋過它。顏色跟尺寸的細調不用動 layer，覆寫 `--sl-*` 變數就好——見[主題](/theme)和下面的尺度表。
 
 ## 瀏覽器需求
 
-只支援現代瀏覽器，下限是 Safari 18、Chrome 119、Firefox 128（2024 下半年）。樣式用到 `:has()`、`@property`，顏色走 `light-dark()`、`color-mix()` 和相對顏色 `oklch(from)`。舊瀏覽器沒有降級方案。
+- Safari 18+
+- Chrome 119+
+- Firefox 128+
+
+不在這個範圍內的瀏覽器不保證能用。
 
 ## 尺寸
 
@@ -104,7 +108,7 @@ import "sakulime-ui/sakulime.min.css";
 | `--sl-4xl`| 2.5rem  | 40px |
 | `--sl-5xl`| 3rem    | 48px |
 
-`--sl-container-*` 是另一組，給 `sl-container` 用的頁面寬度上限，不屬於間距階：
+`--sl-container-*` 是 `sl-container` 的頁面寬度上限：
 
 | 變數                | rem   | px     |
 | ------------------- | ----- | ------ |
@@ -112,8 +116,12 @@ import "sakulime-ui/sakulime.min.css";
 | `--sl-container-md` | 60rem | 960px  |
 | `--sl-container-lg` | 75rem | 1200px |
 
-另外三個不屬於階梯的共用值：`--sl-radius-pill`（膠囊圓角 `9999px`）、`--sl-z-bar`（`sl-bar` 的 z-index `50`）、`--sl-z-float`（`sl-float` 的 `60`）。
+其他共用變數：
+
+- `--sl-radius-pill`：膠囊圓角 `9999px`
+- `--sl-z-bar`：`sl-bar` 的 z-index `50`
+- `--sl-z-float`：`sl-float` 的 `60`
 
 ::: tip
-表上沒有的值，在自己的 CSS 裡直接寫數字，不用硬湊最近的階。
+表上沒有的值，在自己的 CSS 裡直接寫數字就好。
 :::

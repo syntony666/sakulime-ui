@@ -23,6 +23,12 @@ px 以根字級 16px 換算。三階跟 [container](/layout/container) 的頁面
 
 只有「以下」一個方向，不設範圍或上限修飾，跟主流框架「以上生效」的方向相反。
 
+斷點吃的是 viewport 寬度——行動瀏覽器不設 viewport 的話會用版面寬度當視窗，斷點全部失真：
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+```
+
 ## 斷點後綴
 
 屬性加上 `-<斷點>` 就在該斷點以下生效，窄斷點蓋過寬斷點。目前支援的是 [`sl-grid-cols`](/layout/grid)：
