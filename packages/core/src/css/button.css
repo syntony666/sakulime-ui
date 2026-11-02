@@ -50,6 +50,14 @@
     opacity: 0.6;
     cursor: not-allowed;
   }
+
+  /* keyboard focus ring — the accent ink is AA-readable on the
+     surface the ring lands on; pointer focus keeps the native
+     suppression through :focus-visible */
+  [sl-button]:focus-visible {
+    outline: 2px solid var(--sl-text-accent, #d43d5e);
+    outline-offset: 2px;
+  }
 }
 
 /* variants — the marker's value picks the look; bare sl-button ("" )

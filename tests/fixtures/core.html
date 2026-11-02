@@ -168,6 +168,22 @@ function main() {
   near('btn radius = --sl-sm', cs('btn-def', 'border-top-left-radius'), varPx('--sl-sm'));
   eq('btn border transparent', cs('btn-def', 'border-top-color'), TRANS);
   eq('btn cursor pointer', cs('btn-def', 'cursor'), 'pointer');
+  rec('btn focus-visible ring exists', 'walk sheets', 'rule+solid outline', (() => {
+    const walk = rs => {
+      for (const r of rs) {
+        if (r.selectorText === '[sl-button]:focus-visible') return r;
+        if (r.cssRules) { const f = walk(r.cssRules); if (f) return f; }
+      }
+      return null;
+    };
+    for (const s of document.styleSheets) { try {
+      const f = walk(s.cssRules);
+      /* var() in the shorthand keeps longhands unexpanded — read the
+         shorthand itself */
+      if (f && f.style.outline.includes('solid')) return true;
+    } catch (e) {} }
+    return false;
+  })());
   eq('btn outline border = def bg', cs('btn-out', 'border-top-color'), cs('btn-def', 'background-color'));
   neq('btn outline bg != def', cs('btn-out', 'background-color'), cs('btn-def', 'background-color'));
   eq('btn ghost bg transparent', cs('btn-gho', 'background-color'), TRANS);
