@@ -159,6 +159,24 @@ const declOf = (sel, prop) => {
   for (const s of document.styleSheets) { try { walk(s.cssRules); } catch (e) {} }
   return val;
 };
+/* last declaration of prop on the rule whose selectorText equals
+   sel and lives inside a @media block whose condition is media */
+const mediaDecl = (sel, prop, media) => {
+  let val = null;
+  const walk = (rules, inside) => {
+    for (const r of rules) {
+      const hit = inside ||
+        (r.type === CSSRule.MEDIA_RULE && r.media.mediaText === media);
+      if (hit && r.selectorText === sel && r.style) {
+        const v = r.style.getPropertyValue(prop);
+        if (v) val = v;
+      }
+      if (r.cssRules) walk(r.cssRules, hit);
+    }
+  };
+  for (const s of document.styleSheets) { try { walk(s.cssRules, false); } catch (e) {} }
+  return val;
+};
 /* fixed-position anchors resolve against the layout viewport, which
    excludes the scrollbar — documentElement.client* matches it */
 const vw = () => document.documentElement.clientWidth;
@@ -277,6 +295,9 @@ function main() {
   near('float top-end top', rect('t-te').top, varPx('--sl-lg'), 2);
   near('float legacy "start" falls back to bottom-end right', rect('t-legacy').right, vw() - varPx('--sl-lg'), 2);
   near('float legacy "start" falls back to bottom-end bottom', rect('t-legacy').bottom, vh() - varPx('--sl-lg'), 2);
+  eq('float print is static', mediaDecl('[sl-float]', 'position', 'print'), 'static');
+  eq('float print releases clamp', mediaDecl('[sl-float]', 'max-block-size', 'print'), 'none');
+  eq('float print releases scroll', mediaDecl('[sl-float]', 'overflow-block', 'print'), 'visible');
 
   /* ---- sidebar ---- */
   eq('sidebar flex', cs('sb', 'display'), 'flex');

@@ -56,10 +56,15 @@
   }
 
   /* a fixed corner region is screen furniture — in print it would
-     repeat on every page and cover the sheet */
+     repeat on every page and cover the sheet. Going static alone
+     isn't enough: the height clamp plus scroll container would clip
+     notices at the viewport box, so both are released to let the
+     column flow to its full height */
   @media print {
     [sl-float] {
       position: static;
+      max-block-size: none;
+      overflow-block: visible;
     }
   }
 }
