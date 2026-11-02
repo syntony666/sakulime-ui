@@ -39,8 +39,9 @@
        --sl-2xl box); wider controls widen it */
     --sl-notice-action-w: calc(var(--sl-2xl) + var(--sl-sm) * 2);
     /* glyph distance from the capsule edge — the control's own ~sm
-       padding absorbs the rest of --sl-pad */
-    --sl-notice-action-inset: calc(var(--sl-pad) - var(--sl-sm));
+       padding absorbs the rest of --sl-pad; max() keeps sl-pad="none"
+       from pushing the pinned action outside the capsule */
+    --sl-notice-action-inset: calc(max(var(--sl-pad) - var(--sl-sm), 0px));
     /* breathing room the copy keeps from the action lane */
     --sl-notice-action-gap: 0.6em;
     /* the lane an edge-pinned action reserves — resolved once so
