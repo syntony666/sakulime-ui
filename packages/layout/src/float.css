@@ -46,6 +46,12 @@
     inset-inline-end: calc(var(--_te) + env(safe-area-inset-left, 0px));
   }
 
+  /* sl-align on a child is per-item horizontal placement — same
+     contract stack/wrap/grid give their children */
+  [sl-float] > [sl-align] {
+    align-self: var(--sl-align);
+  }
+
   /* the value is space-separated tokens <edge> <side>: "top" flips
      the vertical anchor, "start" flips the inline edge, "center"
      centres on that edge. Unmatched words (bottom/end) read the
