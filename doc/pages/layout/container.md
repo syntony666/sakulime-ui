@@ -42,7 +42,7 @@ import * as ContainerDemos from "../../demos/layout/container.demo";
 
 寬度是 rem，px 是以根字級 16px 換算的參考。
 
-要改寬度的話，覆寫 `--sl-container-sm/md/lg`。
+要改寬度的話，覆寫 `--sl-container-sm`／`--sl-container-md`／`--sl-container-lg`。
 
 ## 內距
 
