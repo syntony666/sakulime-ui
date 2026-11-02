@@ -38,7 +38,7 @@ import * as FloatDemos from "../../demos/layout/float.demo";
 | `top center`    | 中上           |
 | `top end`       | 右上           |
 
-詞序不拘，`"start bottom"` 也通；只寫一邊也行（`"start"` = 下緣左側）。`start`／`end` 是邏輯方向，跟著文字方向走。
+詞序不拘，`"start bottom"` 也通；只寫一邊也行（`"start"` = 下緣左側）。`start` 是開始那側、`end` 是結束那側，中文書寫就是左、右；阿拉伯文那類右到左的書寫會反過來。
 
 <Demo :render="FloatDemos.Corners.render" />
 
