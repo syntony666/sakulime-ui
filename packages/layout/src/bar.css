@@ -20,7 +20,7 @@
     --sl-pad: var(--sl-md);
     /* resolved once — the bottom bar's safe-area padding reads the
        same value through the private var */
-    --_bp: var(--sl-bar-pad, var(--sl-pad));
+    --_bp: var(--sl-bar-pad-block, var(--sl-pad));
     padding-block: var(--_bp);
     padding-inline: var(--sl-bar-pad-inline, var(--sl-lg));
     background: var(--sl-bg, #ffffff);
