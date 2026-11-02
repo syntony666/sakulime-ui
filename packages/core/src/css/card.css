@@ -3,7 +3,7 @@
    the card self-defaults the slots it consumes. */
 @layer base {
   [sl-card] {
-    /* consumed generics + defaults — tone feeds indicate/corner via
+    /* consumed generics + defaults — tone feeds indicator/corner via
        inheritance; self-defaulting seals generic attributes set on
        ancestors from leaking in */
     --sl-tone-bg: var(--sl-primary);
@@ -47,8 +47,8 @@
     border-width: 2px;
   }
 
-  /* plain — frameless shell: keeps the surface fill, drops the border */
-  [sl-card="plain"] {
+  /* flat — frameless shell: keeps the surface fill, drops the border */
+  [sl-card="flat"] {
     border: 0;
   }
 
@@ -59,25 +59,26 @@
     border: 0;
   }
 
-  /* indicate — accent edge, colored by the tone attribute */
-  [sl-card][sl-card-indicate="top"] {
+  /* indicator — accent edge, colored by the tone attribute */
+  [sl-card][sl-card-indicator="top"] {
     border-top: 3px solid var(--sl-tone-bg);
   }
 
-  [sl-card][sl-card-indicate="bottom"] {
+  [sl-card][sl-card-indicator="bottom"] {
     border-bottom: 3px solid var(--sl-tone-bg);
   }
 
-  [sl-card][sl-card-indicate="start"] {
+  [sl-card][sl-card-indicator="start"] {
     border-inline-start: 3px solid var(--sl-tone-bg);
   }
 
-  [sl-card][sl-card-indicate="end"] {
+  [sl-card][sl-card-indicator="end"] {
     border-inline-end: 3px solid var(--sl-tone-bg);
   }
 
-  /* corner — pure positional part: `end` (default) / `start` pins the
-     element to a card corner; the look comes from a small attr on the
+  /* corner — pure positional part pinned to a top corner: `end`
+     (default) is the trailing edge, `start` the leading one; the
+     look comes from a small attr on the
      same element (sl-chip, sl-dot, sl-icon). font-size is the em
      context — a dot lands at 8px, an icon at 16px, a chip at 14px.
      z-index keeps it above any pinned or out-of-flow child regardless
@@ -85,7 +86,7 @@
   [sl-card] > [sl-card--corner] {
     position: absolute;
     z-index: 1;
-    top: 0;
+    inset-block-start: 0;
     inset-inline-end: 0;
     font-size: var(--sl-lg);
     font-variant-numeric: tabular-nums;
@@ -94,13 +95,6 @@
   [sl-card] > [sl-card--corner~="start"] {
     inset-inline-end: auto;
     inset-inline-start: 0;
-  }
-
-  /* "bottom" pins the block-end edge — the words compose with
-     start/end, so "bottom start" is the lower leading corner */
-  [sl-card] > [sl-card--corner~="bottom"] {
-    top: auto;
-    bottom: 0;
   }
 
   /* corner tab — a chip hugs the top + side edges with a small
@@ -116,12 +110,12 @@
   /* a dot or icon floats — it needs air so it doesn't straddle
      the border */
   [sl-card] > [sl-card--corner][sl-dot] {
-    top: var(--sl-sm);
+    inset-block-start: var(--sl-sm);
     inset-inline-end: var(--sl-sm);
   }
 
   [sl-card] > [sl-card--corner][sl-icon] {
-    top: var(--sl-xs);
+    inset-block-start: var(--sl-xs);
     inset-inline-end: var(--sl-xs);
   }
 
@@ -135,17 +129,6 @@
     inset-inline-start: var(--sl-xs);
   }
 
-  /* bottom float offsets — the air moves to the block-end edge */
-  [sl-card] > [sl-card--corner~="bottom"][sl-dot] {
-    top: auto;
-    bottom: var(--sl-sm);
-  }
-
-  [sl-card] > [sl-card--corner~="bottom"][sl-icon] {
-    top: auto;
-    bottom: var(--sl-xs);
-  }
-
   /* sections — the box bleeds past the pad frame so divider hairlines
      run edge to edge; inner padding puts the content back in line */
   [sl-card] > [sl-card--section] {
@@ -153,49 +136,42 @@
     padding-inline: var(--sl-pad);
   }
 
-  [sl-card] > * + [sl-card--section] {
+  /* a section earns its divider from real content — a non-corner
+     sibling must come before it, so leading corners never count as
+     content however many the card pins on */
+  [sl-card] > :not([sl-card--corner]) ~ [sl-card--section] {
     margin-block-start: var(--sl-pad);
     border-block-start: 1px solid var(--sl-border);
     padding-block-start: var(--sl-pad);
   }
 
-  /* a leading corner doesn't count as content — the section after it
-     is still the first block, so no divider or gap above it */
-  [sl-card] > [sl-card--corner]:first-child + [sl-card--section] {
-    margin-block-start: 0;
-    border-block-start: 0;
-    padding-block-start: 0;
-  }
-
-  /* inset — a padding-cancelled region for edge-to-edge content (img/
-     svg/iframe/block). DOM order picks the bleeding edges; a leading or
-     trailing corner doesn't count as content */
-  [sl-card] > [sl-card--section="inset"] {
+  /* edge — a padding-cancelled region for edge-to-edge content (img/
+     svg/iframe/block). DOM order picks the bleeding edges; "first"
+     means no non-corner sibling precedes, "last" none follows */
+  [sl-card] > [sl-card--section="edge"] {
     padding: 0;
   }
 
-  [sl-card] > :is([sl-card--section="inset"]:first-child,
-                 [sl-card--corner]:first-child + [sl-card--section="inset"]) {
+  [sl-card] > [sl-card--section="edge"]:not(:not([sl-card--corner]) ~ *) {
     margin-block-start: var(--_pbn);
     border-block-start: 0;
   }
 
-  [sl-card] > :is([sl-card--section="inset"]:last-child,
-                 [sl-card--section="inset"]:has(+ [sl-card--corner]:last-child)) {
+  [sl-card] > [sl-card--section="edge"]:not(:has(~ :not([sl-card--corner]))) {
     margin-block-end: var(--_pbn);
   }
 
   /* followers own the gap — a section's divider hugs the image edge,
      anything else gets the pad spacing itself */
-  [sl-card--section="inset"] + * {
+  [sl-card--section="edge"] + * {
     margin-block-start: var(--sl-pad);
   }
 
-  [sl-card--section="inset"] + [sl-card--section] {
+  [sl-card--section="edge"] + [sl-card--section] {
     margin-block-start: 0;
   }
 
-  [sl-card--section="inset"] > :is(img, svg, video, iframe) {
+  [sl-card--section="edge"] > :is(img, svg, video, iframe) {
     display: block;
     inline-size: 100%;
   }

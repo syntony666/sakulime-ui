@@ -73,7 +73,7 @@ components:
     rounded: "{rounded.md}"
     padding: "0 12px"
     height: "32px"
-  button-invert:
+  button-outline:
     backgroundColor: "{colors.sakulime-bg}"
     textColor: "{colors.sakulime-text}"
     rounded: "{rounded.md}"
@@ -149,18 +149,18 @@ components:
 
 ## Layout
 
-排版元件自成一個套件（`@sakulime-ui/layout`），一個元件一個檔案：`packages/layout/src/` 下 container、stack、content、wrap、grid、sidebar、bar、float、gap、justify、align、responsive，由 `layout.css` 依序 import，各檔的 `@layer` 區塊依名併入共享的 theme/base/attrs 三層。文法四種形式：元件標記 `sl-<元件>[="型態"]`、元件設定 `sl-<元件>-<設定>`、子元素 `sl-<元件>--<零件>`（雙 dash 寫在子層）、通用屬性 `sl-<屬性>`；型態槽只裝種類跟位置語意，間距不進值槽。
+排版元件自成一個套件（`@sakulime-ui/layout`），一個元件一個檔案：`packages/layout/src/` 下 container、stack、content、wrap、grid、sidebar、bar、float、gap、justify、align、responsive，由 `layout.css` 依序 import，各檔的 `@layer` 區塊依名併入共享的 theme/base/attrs 三層。文法四種形式：元件標記 `sl-<元件>[="型態"]`、元件設定 `sl-<元件>-<設定>`、子元素 `sl-<元件>--<零件>`（雙 dash 寫在子層）、通用屬性 `sl-<屬性>`；型態槽只裝種類跟位置語意，間距不進值槽。命名深度上限三段（`sl-a-b`，兩個 dash），唯一例外是斷點後綴 `sl-<component>-<attr>-<viewport>`（目前只有 `sl-grid-cols-lg/md/sm`；未來其他 attr 的斷點版也走同格式）；`--sl-*` var 不受此限。
 
 - **容器 `sl-container`**：值語法 `"sm"|"md"|"lg"`（bare = md），45/60/75rem 刻度，水平 auto＋`--sl-container-pad`（預設 `--sl-lg`）內距；文件站內容欄吃 md
 - **直排 `sl-stack`**：flex column 垂直群組，父層擁有節奏，直接子層 block margin 歸零、寬度拉滿
 - **內文 `sl-content`**：block 內文欄，子層保留自己的 margin，相鄰補 `> * + *` margin 節奏，首末子層對外 margin 清零
 - **橫列 `sl-wrap`**：flex-wrap 水平流（tag 列、按鈕群），子層內容寬換行、`min-inline-size:0`
-- **網格系統 `sl-grid`**：預設 auto-fill 欄，`--sl-grid-min`（14rem）是欄寬地板；設定 `sl-grid-cols="1..12"` 換明確欄數、`sl-grid-cols-lg/md/sm` 各斷點重述；子層 `sl-grid--span="N|full"` 跨欄並 clamp 到當前欄數（bare = full），不炸出隱含軌
+- **網格系統 `sl-grid`**：預設 auto-fill 欄，`--sl-grid-min`（14rem）是欄寬地板；設定 `sl-grid-cols="1..12"` 換明確欄數、`sl-grid-cols-lg/md/sm` 各斷點重述——各層存獨立槽、實際欄數取所有已宣告層的 `min()`（越窄只能越少），`"auto"` 讓該層回到 auto-fill；子層 `sl-grid--span="N|full"` 跨欄——clamp 認 `--_cap`：明確欄數下是當前欄數，auto-fill 下仍是 12，span 大於實際欄數會撐出隱含軌，保險跨列用 `"full"`（bare = full）
 - **頁面橫條 `sl-bar`**：三欄 grid（`minmax(0,1fr) auto minmax(0,1fr)`）左中右固定區域，子層標 `sl-bar--start/--center/--end` 落位，中間欄 auto 寬所以 `--center` 永遠正中央；值選邊（`"top"/"bottom"`/bare 版內橫條），edge 值預設 sticky＋同側細線；設定 `sl-bar-fixed` 固定到視窗不佔版面，body `:has()` 在同側自動補 `--sl-bar-h` 內距，列印回 static
 - **側欄 `sl-sidebar`＋`sl-sidebar--rail`**：flex-wrap 排版，rail 由子層標記認領（`--sl-sidebar-w` 16rem），位置跟 DOM 序；主欄 `min-inline-size: var(--sl-sidebar-min,55%)` 就是換行觸發點，不用 media query
-- **角落 `sl-float`**：fixed 角落容器，值是六角落 `<邊>-<側>`（top/bottom × start/center/end，bare = bottom-end）；寬高 clamp 進 viewport，`env()` 讓開 home indicator，列印回 static
+- **角落 `sl-float`**：fixed 角落容器，值是空白分隔的 `<邊> <側>` token（top/bottom × start/center/end 六角落，詞序不拘、只寫一邊也行，bare = 右下）；寬高 clamp 進 viewport，`env()` 讓開 home indicator，列印回 static
 - **間距 `sl-gap`**：唯一的間距屬性，設 `--sl-gap` 會繼承——寫在排版元件自己或祖先上，最近的贏；各元件的 `--sl-<元件>-gap` 是自己的間距槽（七個都 `@property` non-inheriting 註冊，外層的間距值滲不進巢狀同名元件），預設 stack/content/wrap/grid/float/bar = `md`、sidebar = `lg`
-- **對齊雙軸 `sl-justify`＋`sl-align`**：主軸分佈（`start|center|end|between`）跟交叉軸對齊（`start|center|end`）兩個通用屬性，寫在消費者自己身上、不繼承；wrap/stack 讀成 `justify-content`/`align-items`、grid 讀成 `-items`；寫在消費者子層上變 `*-self` 單獨覆寫。消費者：wrap（預設 justify start、align center）、stack（start、stretch）、grid（stretch、stretch）
+- **對齊雙軸 `sl-justify`＋`sl-align`**：主軸分佈（`start|center|end|between|around|evenly`）跟交叉軸對齊（`start|center|end|stretch`）兩個通用屬性，寫在消費者自己身上、不繼承；wrap/stack 讀成 `justify-content`/`align-items`、grid 讀成 `-items`；寫在消費者子層上變 `*-self` 單獨覆寫。消費者：wrap（預設 justify start、align center）、stack（start、stretch）、grid（stretch、stretch）、float（只吃 align，stretch）
 - **Slot 封印**：generic 屬性只在列名的消費者上展開 `--sl-*` slot，消費端在 base 把讀取的 slot 自我 default 成 manifest，祖先的同名牌漏不進來
 - **響應式族**：`sl-hide-*`/`sl-show-*` 在斷點兩側互為鏡像，一對 hide/show 跨線換內容；斷點 45/60/75rem 是 `--sl-container-*` 的 hardcode 孿生（media query 讀不到 var，手動同步）
 - **間距節奏**：一律走 xs→5xl 台階；demo stage padding 兩格（`--sl-3xl`）、axis 列 gap 12px（文件站）
@@ -187,25 +187,25 @@ components:
 ## Shapes
 
 - **圓角屬性**：`sl-radius` none/sm(4)/md(8，預設)/lg(12)/full，映射到通用尺度台階；`full` 在卡片/通知上是「一行膠囊」封頂（半徑 = 一行高），其他元件仍是大值膠囊
-- **卡片裁切**：`overflow:hidden` 讓 inset 出血內容自動吃卡片圓角，貼邊內容不用自己圓角
+- **卡片裁切**：`overflow:hidden` 讓 edge 出血內容自動吃卡片圓角，貼邊內容不用自己圓角
 - **Hairline 語言**：1px `--sl-border` 無所不在，卡片邊、section 分隔線（滿版）、h1 漸層底線、sidebar 選中條 2px accent bar（文件站）
 - **Signature 形狀**：頂端 2px 漸層 hairline；corner chip 方形小圓角（`--sl-xs`）貼卡片頂角
 
 ## Components
 
 ### Buttons `sl-button`
-- **Character:** 碰了會彈，內建 `hover: scale(1.03)` 是刻意的活潑回饋；宣告 `sl-interactive` 的按鈕改跑指定配方（grow/lift/raise/press/dim）
+- **Character:** 碰了會彈，內建 `hover: scale(1.03)` 是刻意的活潑回饋；宣告 `sl-interactive` 的按鈕改跑指定配方（grow/lift/shadow/press/dim）
 - **Shape:** `sl-radius` 屬性（預設 md=8px），2px transparent border 撐住箱型
-- **Variants:** `normal`（實心=預設）/ `invert`（描邊）/ `ghost`（無框）/ `underline`（2px 底線，0.3em offset）
+- **Variants:** `normal`（實心=預設）/ `outline`（描邊）/ `ghost`（無框）/ `underline`（2px 底線，0.3em offset）
 - **Tones:** `sl-tone` primary/secondary/success/warning/danger，bg/text/invert 三 slot 自動配色
 - **Sizes:** `sl-size` sm/md/lg，高度吃尺度台階（24/32/40px），字級 12/16/20px
 - **States:** `:disabled` opacity .6；transition 走 transform/shadow/filter 加表面色（background/border/color）
 
 ### Cards `sl-card`
-- **Surface:** `--sl-surface` 底＋1px `--sl-border`＋`sl-radius`＋`--sl-pad`（預設 16px）；attribute 的值選外框：bare 描邊面、`hollow` 虛線空態、`plain` 去框留面、`blank` 連面一起去掉（配 `sl-card--section="blank"` 做純空態）
-- **子元素，角落標記 `sl-card--corner`:** 純位置件（scope 到卡片直接子層），`end`（右上，預設）/`start`（左上），`bottom` 換下緣、兩軸組合（`"bottom start"` 是左下）；`font-size: var(--sl-lg)` 當 em context，長相由同元素疊加的小元件決定：`sl-chip` 貼邊角落標籤（四角 `--sl-xs` 小圓角，朝卡角那角由卡片 `overflow` 裁出同色曲線）、`sl-dot` 8px 點、`sl-icon` 16px 圖示，後兩者各退 `--sl-sm`/`--sl-xs` 內縮浮起
-- **子元素，分區 `sl-card--section`:** 滿版 hairline 分隔的內容列；第一節不畫線（=header）；值選分區性格：`inset` 抵銷內距做滿版區塊（圖/地圖/色塊，位置由 DOM 序決定）、`blank` 置中空態、`secondary`/`active` 上色區（貼邊出血）、`center` 文字置中；leading/trailing corner 不算內容
-- **Options:** `sl-card-indicate="top|bottom|start|end"`（3px tone 邊緣強調條）、`sl-interactive`（hover 互動）、`sl-pad`（sm/md/lg）
+- **Surface:** `--sl-surface` 底＋1px `--sl-border`＋`sl-radius`＋`--sl-pad`（預設 16px）；attribute 的值選外框：bare 描邊面、`hollow` 虛線空態、`flat` 去框留面、`blank` 連面一起去掉（配 `sl-card--section="blank"` 做純空態）
+- **子元素，角落標記 `sl-card--corner`:** 純位置件（scope 到卡片直接子層，絕對定位在整張卡上），只有上緣兩側——`end`（右上，預設）/`start`（左上）；`font-size: var(--sl-lg)` 當 em context，長相由同元素疊加的小元件決定：`sl-chip` 貼邊角落標籤（四角 `--sl-xs` 小圓角，朝卡角那角由卡片 `overflow` 裁出同色曲線）、`sl-dot` 8px 點、`sl-icon` 16px 圖示，後兩者各退 `--sl-sm`/`--sl-xs` 內縮浮起
+- **子元素，分區 `sl-card--section`:** 滿版 hairline 分隔的內容列；第一節不畫線（=header）；值選分區性格：`edge` 抵銷內距做滿版區塊（圖/地圖/色塊，位置由 DOM 序決定）、`blank` 置中空態、`secondary`/`active` 上色區（貼邊出血）、`center` 文字置中；leading/trailing corner 不算內容
+- **Options:** `sl-card-indicator="top|bottom|start|end"`（3px tone 邊緣強調條）、`sl-interactive`（hover 互動）、`sl-pad`（sm/md/lg）
 
 ### Icons `sl-icon`
 - **Size:** 預設 `1em` 跟字級走，插在句子裡就是字高；`sl-icon-size` sm(0.75em)/lg(1.5em)/xl(2.5em)/2xl(4em) 以所在字級為基準縮放
@@ -228,7 +228,7 @@ components:
 - **Surface:** tone 12% wash 膠囊＋tone-text 墨，浮空框：`3px solid var(--sl-surface)` 環帶把 wash 跟外緣 `box-shadow` 2px tone/border 混色細線隔開
 - **Shape:** 預設膠囊端，chip 的 block 級兄弟；`full` 是「一行膠囊」（半徑 = 一行高），一、二行全圓、三行起中段跑直線；`sl-radius` 可轉 `sm/md/lg/none`
 - **Width:** 預設填滿容器（橫幅）；`sl-notice="fit"` 縮內容寬。進 `sl-float` 角落容器就讀成 toast：位置/堆疊由排版層接管，剩 dismiss/timeout 留消費端
-- **Composition:** `display: block` 行內流，icon、訊息、連結同一串文字流；`sl-notice--action` 直接子層 absolute 置中貼邊（預設 end，`="start"` 換左緣），`:has()` 在 padding 預留專用欄（`--sl-notice-action-w` 槽位）；`sl-notice-align="end"` 寫在 notice 自己身上，整串文字對齊右緣
+- **Composition:** `display: block` 行內流，icon、訊息、連結同一串文字流；`sl-notice--action` 直接子層 absolute 置中貼邊（預設 end，`="start"` 換左緣），`:has()` 在 padding 預留專用欄（`--sl-notice-action-w` 槽位）；`sl-notice-align="start|center|end"` 寫在 notice 自己身上，整串文字對齊（roadmap 註記：text-align 家族落地後接管這個 scoped 對齊）
 
 ### Demo Chrome（文件站元件）
 - **Stage:** 圓點格紙背景＋`--sl-3xl` padding＋細框，內容在 Shadow DOM 裡渲染
@@ -242,7 +242,7 @@ components:
 - **Do** 只用 `sl-*` attribute 與 `--sl-*` token，行為、狀態、設定全走 CSS selector
 - **Do** 守住 slot 封印：generic 屬性只展開在列名的消費者上，消費端在 base 自我 default 成 manifest，間距 slot 經 `@property` 註冊 non-inheriting
 - **Do** 淺色 tone（primary/secondary）的文字色走 `--sl-tone-text` 混入文字色，維持可讀
-- **Do** 讓分隔線貼著 inset 邊緣，間距由後繼元素自己帶，不在圖片側留白
+- **Do** 讓分隔線貼著 edge 邊緣，間距由後繼元素自己帶，不在圖片側留白
 - **Do** 用 demo 圓點格紙當刻度，元件尺寸對齊台階（md 按鈕 = 2 格）
 
 ### Don't:

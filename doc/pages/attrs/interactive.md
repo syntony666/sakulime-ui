@@ -26,9 +26,9 @@ import * as InteractiveDemos from "../../demos/attrs/interactive.demo";
 
 | 選項 | 效果 |
 | --- | --- |
-| `grow`（預設） | 放大 1.03 |
+| `grow`（預設） | 放大 1.03；空白標示或寫了不認識的值也是 grow |
 | `lift` | 浮起 4px 加陰影 |
-| `raise` | 只有陰影 |
+| `shadow` | 只有陰影 |
 | `press` | 壓下 0.97 |
 | `dim` | 變暗 |
 
@@ -40,3 +40,5 @@ import * as InteractiveDemos from "../../demos/attrs/interactive.demo";
 | --- | --- |
 | `sl-card` | 沒有 hover 效果 |
 | `sl-button` | hover 就是 `grow` 放大 |
+| `sl-chip` | 沒有 hover 效果 |
+| `sl-notice` | 沒有 hover 效果；`shadow`／`lift` 的陰影疊在浮框外，不會蓋掉框線 |

@@ -8,7 +8,17 @@
 @custom-selector :--sl-generic-size [sl-button], [sl-chip];
 @custom-selector :--sl-generic-radius [sl-button], [sl-card], [sl-notice];
 @custom-selector :--sl-generic-pad [sl-card], [sl-notice];
-@custom-selector :--sl-generic-interactive [sl-card], [sl-button];
+@custom-selector :--sl-generic-interactive [sl-card], [sl-button], [sl-chip], [sl-notice];
+
+/* size slots are element-scoped plumbing — the attr writes them on
+   the consumer itself, so a marked element's slots must not inherit
+   into a nested consumer. syntax:"*" with no initial-value leaves
+   an unset slot guaranteed-invalid, so var() fallbacks still fire.
+   (Theme hooks like --sl-bar-h stay unregistered on purpose — they
+   are meant to be set on :root and inherit.) */
+@property --sl-size-fs { syntax: "*"; inherits: false; }
+@property --sl-size-h  { syntax: "*"; inherits: false; }
+@property --sl-size-px { syntax: "*"; inherits: false; }
 
 @layer base {
   /* interactive's shared seal — replaces the per-component
@@ -101,6 +111,10 @@
   }
 
   /* pad — --sl-pad slot */
+  :--sl-generic-pad[sl-pad="none"] {
+    --sl-pad: 0;
+  }
+
   :--sl-generic-pad[sl-pad="sm"] {
     --sl-pad: var(--sl-md);
   }
@@ -114,10 +128,11 @@
   }
 
   /* interactive — --sl-interactive-{transform,shadow,filter} slots, played
-     back by the shared hover rule below. Bare sl-interactive ("")
-     means grow */
-  :--sl-generic-interactive[sl-interactive=""],
-  :--sl-generic-interactive[sl-interactive="grow"] {
+     back by the shared hover rule below. Grow is the catch-all:
+     bare sl-interactive, "grow", or any out-of-vocabulary value all
+     mean grow — a typo degrades to the default instead of silently
+     disabling the hover */
+  :--sl-generic-interactive[sl-interactive]:not([sl-interactive="lift"]):not([sl-interactive="shadow"]):not([sl-interactive="press"]):not([sl-interactive="dim"]) {
     --sl-interactive-transform: scale(1.03);
   }
 
@@ -126,7 +141,7 @@
     --sl-interactive-shadow: 0 8px 20px color-mix(in srgb, var(--sl-text) 24%, transparent);
   }
 
-  :--sl-generic-interactive[sl-interactive="raise"] {
+  :--sl-generic-interactive[sl-interactive="shadow"] {
     --sl-interactive-shadow: 0 3px 10px color-mix(in srgb, var(--sl-text) 20%, transparent);
   }
 
@@ -139,8 +154,9 @@
   }
 
   /* the shared hover playback — one rule for every consumer;
-     :not(:disabled) keeps button semantics and is a no-op on cards */
-  :--sl-generic-interactive[sl-interactive]:hover:not(:disabled) {
+     :not(:disabled) keeps button semantics and is a no-op on cards;
+     aria-disabled opts out the same way */
+  :--sl-generic-interactive[sl-interactive]:hover:not(:disabled):not([aria-disabled="true"]) {
     transform: var(--sl-interactive-transform);
     box-shadow: var(--sl-interactive-shadow);
     filter: var(--sl-interactive-filter);

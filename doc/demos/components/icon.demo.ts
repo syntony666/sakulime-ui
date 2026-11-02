@@ -32,7 +32,7 @@ const meta = {
     name: axisArg("sl-icon", "圖示名稱", NAMES),
     tone: axisArg("sl-tone", "顏色", TONES),
     size: axisArg("sl-icon-size", "尺寸", ["-", "sm", "lg", "xl", "2xl"]),
-    flip: axisArg("sl-icon-flip", "翻轉", ["-", "h", "v"]),
+    flip: axisArg("sl-icon-flip", "翻轉", ["-", "horizontal", "vertical"]),
     rotate: axisArg("sl-icon-rotate", "旋轉", ["-", "90", "180", "270"]),
     spin: boolArg("sl-icon-spin", "旋轉動畫"),
     frame: axisArg("sl-icon-frame", "外框", ["-", "circular", "rounded"]),
@@ -88,7 +88,7 @@ export const Inline: Demo = {
 export const InContext: Demo = {
   render: () =>
     axis(["plus", "trash"], (v) =>
-      `<button sl-button${v === "trash" ? '="invert" sl-tone="danger"' : ""}>` +
+      `<button sl-button${v === "trash" ? '="outline" sl-tone="danger"' : ""}>` +
       `<i sl-icon="lucide:${v}"></i> ${v === "trash" ? "刪除" : "新增"}` +
       `</button>`,
     ),
@@ -106,7 +106,7 @@ export const ModSizes: Demo = {
 export const Transforms: Demo = {
   render: () =>
     axis(
-      ["-", "flip-h", "flip-v", "rotate-90", "rotate-180", "rotate-270"],
+      ["-", "flip-horizontal", "flip-vertical", "rotate-90", "rotate-180", "rotate-270"],
       (v) => {
         const [kind, val] = v.split("-");
         const a =
@@ -143,9 +143,9 @@ export const Disabled: Demo = {
 // a word-leading icon only needs end
 export const Spaced: Demo = {
   render: () =>
-    `<p>喔愛<i sl-icon="lucide:heart" sl-icon-space="end"></i>` +
-    `蝦咪喜愛<i sl-icon="lucide:circle-question-mark"></i><br>` +
-    `你跨挖ㄟ<i sl-icon="lucide:eye"></i>眼神，` +
+    `<p>喔愛<i sl-icon="lucide:heart" sl-icon-space></i>` +
+    `蝦咪喜愛<i sl-icon="lucide:circle-question-mark" sl-icon-space></i><br>` +
+    `你跨挖ㄟ<i sl-icon="lucide:eye" sl-icon-space="end"></i>眼神，` +
     `那欸價逆<i sl-icon="lucide:heart" sl-icon-space="start"></i>可愛</p>`,
 };
 

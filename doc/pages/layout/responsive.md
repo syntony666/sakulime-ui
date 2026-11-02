@@ -37,6 +37,10 @@ px 以根字級 16px 換算。三階跟 [container](/layout/container) 的頁面
   :render="RwdDemos.Cols.render"
 />
 
+欄數只會越窄越少：窄斷點寫得比寬斷點大，生效的是所有已宣告欄數的最小值。`sl-grid-cols="8" sl-grid-cols-md="4" sl-grid-cols-sm="6"` 在 45rem 以下還是 4——sm 被 md 的上限夾住。
+
+某個斷點想回到自適應欄數就給 `"auto"`：`sl-grid-cols="4" sl-grid-cols-md="auto"` 是桌面四欄、60rem 以下回到自動填充。`auto` 不參與最小值計算，更窄的斷點還是可以再寫明確欄數。
+
 跨欄的 `sl-grid--span` 會自動調整：當前欄數容不下就變滿列，不會溢出。
 
 ## 隱藏跟顯示

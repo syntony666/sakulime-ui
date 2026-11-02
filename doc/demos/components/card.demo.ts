@@ -21,19 +21,19 @@ type CornerArgs = {
 };
 
 type SectionArgs = {
-  inset: string;
+  edge: string;
   corner: boolean;
   pad: string;
 };
 
 const PADS = ["-", "sm", "md", "lg"];
 const RADII = ["-", "none", "sm", "md", "lg", "full"];
-const VARIANTS = ["-", "hollow", "plain", "blank"];
+const VARIANTS = ["-", "hollow", "flat", "blank"];
 const INDICATES = ["-", "top", "bottom", "start", "end"];
-const CORNERS = ["-", "start", "end", "bottom", "bottom start"];
+const CORNERS = ["-", "start", "end"];
 const CORNER_KINDS = ["chip", "dot", "icon"];
-const INTERACTIVES = ["-", "grow", "lift", "raise", "press"];
-const INSETS = ["-", "top", "middle", "bottom"];
+const INTERACTIVES = ["-", "grow", "lift", "shadow", "press", "dim"];
+const EDGES = ["-", "top", "middle", "bottom"];
 
 const meta = {
   args: {
@@ -48,7 +48,7 @@ const meta = {
     pad: axisArg("sl-pad", "內距", PADS),
     radius: axisArg("sl-radius", "圓角", RADII),
     variant: axisArg("sl-card", "型態", VARIANTS),
-    indicate: axisArg("sl-card-indicate", "標記邊緣", INDICATES),
+    indicate: axisArg("sl-card-indicator", "標記邊緣", INDICATES),
     tone: axisArg("sl-tone", "顏色（搭配標記）", TONES),
     interactive: axisArg("sl-interactive", "互動（滑鼠移過去）", INTERACTIVES),
   },
@@ -66,7 +66,7 @@ const vcard = (v: string, content: string, w = 320) =>
 
 // shared content parts — playground cards and section demos
 const sec = (inner: string) => `<div sl-card--section>${inner}</div>`;
-const media = `<div sl-card--section="inset" class="demo-media"><!-- 圖片 --></div>`;
+const media = `<div sl-card--section="edge" class="demo-media"><!-- 圖片 --></div>`;
 const TITLE = `<strong>卡片標題</strong><p>卡片內容文字，描述這張卡片在展示什麼。</p>`;
 const FOOT = `<small>底部資訊</small>`;
 
@@ -75,7 +75,7 @@ export const Card: Demo = {
     `<div ${cardMarker(args.variant)}` +
     attr("sl-pad", args.pad) +
     attr("sl-radius", args.radius) +
-    attr("sl-card-indicate", args.indicate) +
+    attr("sl-card-indicator", args.indicate) +
     attr("sl-tone", args.tone) +
     attr("sl-interactive", args.interactive) +
     ` style="max-width: 360px">` +
@@ -93,7 +93,7 @@ export const Indicates: Demo = {
   render: () =>
     axis(["top", "bottom", "start", "end"], (v) =>
       card(
-        attr("sl-card-indicate", v) + attr("sl-tone", "secondary"),
+        attr("sl-card-indicator", v) + attr("sl-tone", "secondary"),
         `<strong>${label(v)}</strong><p>內容文字</p>`,
       ),
     ),
@@ -101,8 +101,9 @@ export const Indicates: Demo = {
 
 // corner is position only — the look is a small attr on the same element
 const cornerEl = (position: string, kind: string, tone: string, size = "-") => {
-  // "end" is the default corner — only start/bottom words get written
-  const pos = position === "-" || position === "end" ? "" : `="${position}"`;
+  // "-" leaves the value off (bare attr = default end); "end" writes
+  // it out so the vocabulary word is visible in the markup
+  const pos = position === "-" ? "" : `="${position}"`;
   const t = attr("sl-tone", tone);
   const s = kind === "chip" ? attr("sl-size", size) : "";
   if (kind === "dot") return `<i sl-card--corner${pos} sl-dot${t}></i>`;
@@ -147,7 +148,7 @@ export const CornerKinds: Demo = {
     ),
 };
 
-// bare sections — header/content/footer hairlines without inset media;
+// bare sections — header/content/footer hairlines without edge media;
 // content stays inline like the fence example (a lone <p> would carry
 // browser margins and sit visibly low in the section)
 export const BasicSections: Demo = {
@@ -158,19 +159,19 @@ export const BasicSections: Demo = {
 // carries its own args/argTypes so the md can bind it as a standalone
 // playground (demo object doubles as the Playground meta prop)
 export const Sections: DemoObj<SectionArgs> = {
-  args: { inset: "top", corner: false, pad: "-" },
+  args: { edge: "top", corner: true, pad: "-" },
   argTypes: {
-    inset: axisArg('sl-card--section="inset"', "貼邊區塊位置", INSETS),
+    edge: axisArg('sl-card--section="edge"', "貼邊區塊位置", EDGES),
     corner: boolArg("sl-card--corner", "角落標記（疊在貼邊內容上）"),
     pad: axisArg("sl-pad", "內距", PADS),
   },
   render: (args) => {
     const parts =
-      args.inset === "top"
+      args.edge === "top"
         ? [media, sec(TITLE), sec(FOOT)]
-        : args.inset === "middle"
+        : args.edge === "middle"
           ? [sec(TITLE), media, sec(FOOT)]
-          : args.inset === "bottom"
+          : args.edge === "bottom"
             ? [sec(TITLE), sec(FOOT), media]
             : [sec(TITLE), sec(FOOT)];
     return card(
@@ -182,7 +183,7 @@ export const Sections: DemoObj<SectionArgs> = {
   },
 };
 
-export const Insets: Demo = {
+export const Edges: Demo = {
   render: () =>
     axis(["top", "middle", "bottom"], (v) => {
       const text = `<div sl-card--section><strong>${label(v)}</strong><p>內容</p></div>`;

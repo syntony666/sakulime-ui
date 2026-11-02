@@ -13,12 +13,12 @@ const cells = () =>
 
 const frame = (caption: string, inner: string) =>
   `<div class="demo-cell"><span class="demo-w" data-demo>${caption}</span>` +
-  `<div style="margin-top: var(--sl-sm)">${inner}</div>`;
+  `<div style="margin-top: var(--sl-sm)">${inner}</div></div>`;
 
 // container-level: cross-axis on a wrap is vertical line alignment
 export const AlignWrap: Demo = {
   render: () =>
-    axis(["start", "center", "end"], (v) =>
+    axis(["start", "center", "end", "stretch"], (v) =>
       frame(`sl-align="${v}"`, `<div sl-wrap sl-align="${v}">${cells()}</div>`)
     ),
 };
@@ -39,8 +39,8 @@ export const AlignStack: Demo = {
 export const AlignChild: Demo = {
   render: () =>
     `<div sl-stack>` +
-    `<div class="demo-cell">大家一起靠左</div>` +
+    `<div class="demo-cell">滿寬（預設）</div>` +
     `<div class="demo-cell" sl-align="end">只有我靠右</div>` +
-    `<div class="demo-cell">大家一起靠左</div>` +
+    `<div class="demo-cell">滿寬（預設）</div>` +
     `</div>`,
 };

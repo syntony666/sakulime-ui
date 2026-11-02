@@ -1,6 +1,6 @@
 ---
 title: Align 對齊
-description: 垂直於排列方向的對齊，三個選項。寫在容器上一次管全部子層，寫在子層自己身上就單獨覆寫。
+description: 垂直於排列方向的對齊，四個選項。寫在容器上一次管全部子層，寫在子層自己身上就單獨覆寫。
 ---
 
 <script setup>
@@ -24,9 +24,9 @@ import * as AlignDemos from "../../demos/attrs/align.demo";
 
 ## 選項
 
-`start`、`center`、`end`——對應對齊方向的頭、中、尾。方向跟著排版走：`sl-wrap` 是垂直（上中下），`sl-stack` 是水平（左中右），`sl-grid` 是格子內的垂直位置。
+`start`、`center`、`end`——對應對齊方向的頭、中、尾；`stretch` 讓子層撐滿交叉軸（`sl-stack`／`sl-grid` 的預設本來就是它）。方向跟著排版走：`sl-wrap` 是垂直（上中下），`sl-stack` 是水平（左中右），`sl-grid` 是格子內的垂直位置。
 
-三個選項對 `sl-wrap` 子層的垂直位置：
+選項對 `sl-wrap` 子層的垂直位置：
 
 <Demo :render="AlignDemos.AlignWrap.render" />
 

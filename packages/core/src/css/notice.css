@@ -20,6 +20,8 @@
        but taller copy runs straight down the middle instead of
        stretching the ends */
     --sl-radius-full: calc(
+      /* the 3px share reaches past the 3px frame below so the
+         capsule reads rounded from its outer edge, not its fill */
       max(1lh, var(--sl-2xl)) + var(--sl-pad) * 0.75 + 3px
     );
     --sl-radius: var(--sl-radius-full);
@@ -40,13 +42,15 @@
        padding absorbs the rest of --sl-pad */
     --sl-notice-action-inset: calc(var(--sl-pad) - var(--sl-sm));
     /* breathing room the copy keeps from the action lane */
-    --sl-notice-gap: 0.6em;
+    --sl-notice-action-gap: 0.6em;
     /* the lane an edge-pinned action reserves — resolved once so
        each :has() rule just reads it for its own edge */
     --_lane: calc(
       var(--sl-notice-action-inset) + var(--sl-notice-action-w) + var(--sl-md) +
-        var(--sl-notice-gap)
+        var(--sl-notice-action-gap)
     );
+    /* same compact-copy measure as the chip — kept as a literal on
+       both sides until a third consumer argues for a token */
     line-height: 1.4;
     /* strip proportions — vertical sits at 3/4 of the pad slot,
        horizontal at 3/2 so the capsule ends breathe */
@@ -61,6 +65,9 @@
     border: 3px solid var(--sl-surface);
     box-shadow: 0 0 0 2px color-mix(in srgb, var(--sl-tone-bg) 28%, var(--sl-border));
     border-radius: var(--sl-radius);
+    /* playback timeline for sl-interactive — the shared hover rule
+       in generic.css writes the effect slots */
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
   }
 
   /* links keep the notice's ink — browser blue would fight the wash.
@@ -75,6 +82,17 @@
 
   [sl-notice] a:hover {
     text-decoration-color: currentColor;
+  }
+
+  /* the floating ring is the notice's frame — an interactive shadow
+     stacks outside it instead of replacing it. For effects that
+     leave the slot at none, "none, <ring>" is an invalid list so
+     this rule drops and the base ring stays — transform/filter
+     still apply through the shared playback */
+  [sl-notice][sl-interactive]:hover:not(:disabled) {
+    box-shadow:
+      var(--sl-interactive-shadow),
+      0 0 0 2px color-mix(in srgb, var(--sl-tone-bg) 28%, var(--sl-border));
   }
 }
 
@@ -102,12 +120,15 @@
   }
 
   /* direct-child only — the same contract :has() uses for the lane,
-     so a nested attr can never pin without a lane reserved for it */
+     so a nested attr can never pin without a lane reserved for it.
+     Block-axis centering is opposing insets + auto margins, which
+     stays correct in vertical writing modes where a physical
+     translateY would shift along the wrong axis */
   [sl-notice] > [sl-notice--action] {
     position: absolute;
     inset-inline-end: var(--sl-notice-action-inset);
-    inset-block-start: 50%;
-    translate: 0 -50%;
+    inset-block: 0;
+    margin-block: auto;
   }
 
   /* "start" pins it to the leading edge */
@@ -116,8 +137,17 @@
     inset-inline-start: var(--sl-notice-action-inset);
   }
 
-  /* content align — "end" right-aligns every line; copy stops at the
-     reserved action lane, which reads as hugging the action */
+  /* content align — start|center|end set text-align on every line;
+     copy stops at the reserved action lane, which reads as hugging
+     the action */
+  [sl-notice][sl-notice-align="start"] {
+    text-align: start;
+  }
+
+  [sl-notice][sl-notice-align="center"] {
+    text-align: center;
+  }
+
   [sl-notice][sl-notice-align="end"] {
     text-align: end;
   }

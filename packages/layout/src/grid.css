@@ -6,8 +6,18 @@
      private vars self-default here: self-defaulting seals an
      ancestor's sl-grid-cols from leaking into a nested grid */
   [sl-grid] {
+    /* per-level slots: undeclared levels sit at 12 so they can't raise
+       the resolved count. --_n is the min of every declared count —
+       a narrower breakpoint can only shrink tracks, never grow them.
+       --_cap rides --_n so spans clamp to the narrowest declared
+       count (12 in pure auto-fill, same as before) */
+    --_cb: 12;
+    --_cl: 12;
+    --_cm: 12;
+    --_cs: 12;
+    --_n: min(var(--_cb), var(--_cl), var(--_cm), var(--_cs));
     --_cols: auto-fill;
-    --_cap: 12;
+    --_cap: var(--_n);
     --_gf: min(var(--sl-grid-min, 14rem), 100%);
     /* self-default the justify slot so an ancestor's sl-justify
        can't leak in — grid reads it as justify-items (per-cell
@@ -41,11 +51,18 @@
     align-self: var(--sl-align);
   }
 
-  /* sl-grid--span — a grid child takes N tracks, clamped to the active
-     count so an oversized span can't spawn implicit tracks and blow
-     the grid out; bare and "full" span every track in either mode.
-     Presence rule first so a value always wins the tie */
+  /* sl-grid--span — a grid child takes N tracks, clamped to --_cap.
+     The cap is the resolved min of declared counts; in auto-fill
+     mode it stays 12 and a span wider than the container's
+     actual tracks still spawns implicit tracks — "full" (or an
+     explicit count) is the safe full row there. "1" is one track;
+     bare, "full", and any out-of-vocabulary value span every track
+     in either mode — the presence rule comes first so a known
+     value wins the tie. The explicit "full" rule below repeats
+     1 / -1 on purpose: it keeps the word documented vocabulary
+     rather than an out-of-vocabulary fallback */
   [sl-grid] > [sl-grid--span] { grid-column: 1 / -1; }
+  [sl-grid] > [sl-grid--span="1"]  { grid-column: span 1; }
   [sl-grid] > [sl-grid--span="2"]  { grid-column: span min(2, var(--_cap)); }
   [sl-grid] > [sl-grid--span="3"]  { grid-column: span min(3, var(--_cap)); }
   [sl-grid] > [sl-grid--span="4"]  { grid-column: span min(4, var(--_cap)); }
@@ -61,67 +78,74 @@
 }
 
 @layer attrs {
-  /* sl-grid-cols — explicit track count. It only sets the private vars
-     the base template repeats and spans clamp against; --_gf drops the
-     auto-fill floor so tracks size to share, not to a fixed minimum */
-  [sl-grid][sl-grid-cols="1"]  { --_cols: 1;  --_cap: 1;  --_gf: auto; }
-  [sl-grid][sl-grid-cols="2"]  { --_cols: 2;  --_cap: 2;  --_gf: auto; }
-  [sl-grid][sl-grid-cols="3"]  { --_cols: 3;  --_cap: 3;  --_gf: auto; }
-  [sl-grid][sl-grid-cols="4"]  { --_cols: 4;  --_cap: 4;  --_gf: auto; }
-  [sl-grid][sl-grid-cols="5"]  { --_cols: 5;  --_cap: 5;  --_gf: auto; }
-  [sl-grid][sl-grid-cols="6"]  { --_cols: 6;  --_cap: 6;  --_gf: auto; }
-  [sl-grid][sl-grid-cols="7"]  { --_cols: 7;  --_cap: 7;  --_gf: auto; }
-  [sl-grid][sl-grid-cols="8"]  { --_cols: 8;  --_cap: 8;  --_gf: auto; }
-  [sl-grid][sl-grid-cols="9"]  { --_cols: 9;  --_cap: 9;  --_gf: auto; }
-  [sl-grid][sl-grid-cols="10"] { --_cols: 10; --_cap: 10; --_gf: auto; }
-  [sl-grid][sl-grid-cols="11"] { --_cols: 11; --_cap: 11; --_gf: auto; }
-  [sl-grid][sl-grid-cols="12"] { --_cols: 12; --_cap: 12; --_gf: auto; }
+  /* sl-grid-cols — explicit track count. Each level only writes its
+     own private slot; --_n resolves the min so a narrower level can
+     never exceed a wider declaration (cols="8" md="4" sm="6" yields
+     4 below 45rem). --_gf drops the auto-fill floor so tracks size
+     to share. "auto" releases the level back to auto-fill — it
+     restores the column floor and leaves its slot at 12 so it
+     doesn't clamp; narrower levels can still declare counts */
+  [sl-grid][sl-grid-cols="auto"] { --_cols: auto-fill; --_gf: min(var(--sl-grid-min, 14rem), 100%); }
+  [sl-grid][sl-grid-cols="1"]  { --_cb: 1;  --_cols: var(--_n); --_gf: auto; }
+  [sl-grid][sl-grid-cols="2"]  { --_cb: 2;  --_cols: var(--_n); --_gf: auto; }
+  [sl-grid][sl-grid-cols="3"]  { --_cb: 3;  --_cols: var(--_n); --_gf: auto; }
+  [sl-grid][sl-grid-cols="4"]  { --_cb: 4;  --_cols: var(--_n); --_gf: auto; }
+  [sl-grid][sl-grid-cols="5"]  { --_cb: 5;  --_cols: var(--_n); --_gf: auto; }
+  [sl-grid][sl-grid-cols="6"]  { --_cb: 6;  --_cols: var(--_n); --_gf: auto; }
+  [sl-grid][sl-grid-cols="7"]  { --_cb: 7;  --_cols: var(--_n); --_gf: auto; }
+  [sl-grid][sl-grid-cols="8"]  { --_cb: 8;  --_cols: var(--_n); --_gf: auto; }
+  [sl-grid][sl-grid-cols="9"]  { --_cb: 9;  --_cols: var(--_n); --_gf: auto; }
+  [sl-grid][sl-grid-cols="10"] { --_cb: 10; --_cols: var(--_n); --_gf: auto; }
+  [sl-grid][sl-grid-cols="11"] { --_cb: 11; --_cols: var(--_n); --_gf: auto; }
+  [sl-grid][sl-grid-cols="12"] { --_cb: 12; --_cols: var(--_n); --_gf: auto; }
 
   /* sl-grid-cols-<bp> — the track count at narrower widths; breakpoints
      mirror the container scale (lg <75rem, md <60rem, sm <45rem — the
      hardcoded twins of --sl-container-*). Blocks run wide to narrow so
-     the smallest hit wins at equal specificity. Span clamping rides on
-     the same private count, so a one-column hit releases spans for free */
+     the smallest hit wins --_cols/--_gf at equal specificity */
   @media (width < 75rem) {
-    [sl-grid][sl-grid-cols-lg="1"]  { --_cols: 1;  --_cap: 1;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-lg="2"]  { --_cols: 2;  --_cap: 2;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-lg="3"]  { --_cols: 3;  --_cap: 3;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-lg="4"]  { --_cols: 4;  --_cap: 4;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-lg="5"]  { --_cols: 5;  --_cap: 5;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-lg="6"]  { --_cols: 6;  --_cap: 6;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-lg="7"]  { --_cols: 7;  --_cap: 7;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-lg="8"]  { --_cols: 8;  --_cap: 8;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-lg="9"]  { --_cols: 9;  --_cap: 9;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-lg="10"] { --_cols: 10; --_cap: 10; --_gf: auto; }
-    [sl-grid][sl-grid-cols-lg="11"] { --_cols: 11; --_cap: 11; --_gf: auto; }
-    [sl-grid][sl-grid-cols-lg="12"] { --_cols: 12; --_cap: 12; --_gf: auto; }
+    [sl-grid][sl-grid-cols-lg="auto"] { --_cols: auto-fill; --_gf: min(var(--sl-grid-min, 14rem), 100%); }
+    [sl-grid][sl-grid-cols-lg="1"]  { --_cl: 1;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-lg="2"]  { --_cl: 2;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-lg="3"]  { --_cl: 3;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-lg="4"]  { --_cl: 4;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-lg="5"]  { --_cl: 5;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-lg="6"]  { --_cl: 6;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-lg="7"]  { --_cl: 7;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-lg="8"]  { --_cl: 8;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-lg="9"]  { --_cl: 9;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-lg="10"] { --_cl: 10; --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-lg="11"] { --_cl: 11; --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-lg="12"] { --_cl: 12; --_cols: var(--_n); --_gf: auto; }
   }
   @media (width < 60rem) {
-    [sl-grid][sl-grid-cols-md="1"]  { --_cols: 1;  --_cap: 1;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-md="2"]  { --_cols: 2;  --_cap: 2;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-md="3"]  { --_cols: 3;  --_cap: 3;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-md="4"]  { --_cols: 4;  --_cap: 4;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-md="5"]  { --_cols: 5;  --_cap: 5;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-md="6"]  { --_cols: 6;  --_cap: 6;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-md="7"]  { --_cols: 7;  --_cap: 7;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-md="8"]  { --_cols: 8;  --_cap: 8;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-md="9"]  { --_cols: 9;  --_cap: 9;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-md="10"] { --_cols: 10; --_cap: 10; --_gf: auto; }
-    [sl-grid][sl-grid-cols-md="11"] { --_cols: 11; --_cap: 11; --_gf: auto; }
-    [sl-grid][sl-grid-cols-md="12"] { --_cols: 12; --_cap: 12; --_gf: auto; }
+    [sl-grid][sl-grid-cols-md="auto"] { --_cols: auto-fill; --_gf: min(var(--sl-grid-min, 14rem), 100%); }
+    [sl-grid][sl-grid-cols-md="1"]  { --_cm: 1;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-md="2"]  { --_cm: 2;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-md="3"]  { --_cm: 3;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-md="4"]  { --_cm: 4;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-md="5"]  { --_cm: 5;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-md="6"]  { --_cm: 6;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-md="7"]  { --_cm: 7;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-md="8"]  { --_cm: 8;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-md="9"]  { --_cm: 9;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-md="10"] { --_cm: 10; --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-md="11"] { --_cm: 11; --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-md="12"] { --_cm: 12; --_cols: var(--_n); --_gf: auto; }
   }
   @media (width < 45rem) {
-    [sl-grid][sl-grid-cols-sm="1"]  { --_cols: 1;  --_cap: 1;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-sm="2"]  { --_cols: 2;  --_cap: 2;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-sm="3"]  { --_cols: 3;  --_cap: 3;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-sm="4"]  { --_cols: 4;  --_cap: 4;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-sm="5"]  { --_cols: 5;  --_cap: 5;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-sm="6"]  { --_cols: 6;  --_cap: 6;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-sm="7"]  { --_cols: 7;  --_cap: 7;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-sm="8"]  { --_cols: 8;  --_cap: 8;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-sm="9"]  { --_cols: 9;  --_cap: 9;  --_gf: auto; }
-    [sl-grid][sl-grid-cols-sm="10"] { --_cols: 10; --_cap: 10; --_gf: auto; }
-    [sl-grid][sl-grid-cols-sm="11"] { --_cols: 11; --_cap: 11; --_gf: auto; }
-    [sl-grid][sl-grid-cols-sm="12"] { --_cols: 12; --_cap: 12; --_gf: auto; }
+    [sl-grid][sl-grid-cols-sm="auto"] { --_cols: auto-fill; --_gf: min(var(--sl-grid-min, 14rem), 100%); }
+    [sl-grid][sl-grid-cols-sm="1"]  { --_cs: 1;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-sm="2"]  { --_cs: 2;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-sm="3"]  { --_cs: 3;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-sm="4"]  { --_cs: 4;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-sm="5"]  { --_cs: 5;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-sm="6"]  { --_cs: 6;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-sm="7"]  { --_cs: 7;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-sm="8"]  { --_cs: 8;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-sm="9"]  { --_cs: 9;  --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-sm="10"] { --_cs: 10; --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-sm="11"] { --_cs: 11; --_cols: var(--_n); --_gf: auto; }
+    [sl-grid][sl-grid-cols-sm="12"] { --_cs: 12; --_cols: var(--_n); --_gf: auto; }
   }
 }

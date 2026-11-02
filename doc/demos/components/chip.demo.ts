@@ -39,7 +39,7 @@ export const Sizes: Demo = {
 
 const WITH_ICON = [
   ["star", "release"],
-  ["tag", "0.3.0"],
+  ["tag", "stable"],
   ["check", "docs"],
 ];
 export const WithIcon: Demo = {

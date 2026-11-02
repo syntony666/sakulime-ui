@@ -42,10 +42,10 @@
 
   /* orientation — flip/rotate use the independent transform properties
      while spin animates `transform`, so all three stack on one icon */
-  [sl-icon][sl-icon-flip="h"] {
+  [sl-icon][sl-icon-flip="horizontal"] {
     scale: -1 1;
   }
-  [sl-icon][sl-icon-flip="v"] {
+  [sl-icon][sl-icon-flip="vertical"] {
     scale: 1 -1;
   }
   [sl-icon][sl-icon-rotate="90"] {
@@ -87,9 +87,13 @@
     border-radius: var(--sl-sm);
   }
 
-  /* states + spacing — bare sl-icon-space means both sides */
-  [sl-icon][sl-icon-disabled] {
-    opacity: 0.4;
+  /* states + spacing — bare sl-icon-space means both sides;
+     aria-disabled reads the same as the attr. Shares the
+     --sl-disabled-opacity hook with a quieter default than
+     the button's .6 — an icon is decoration, a control is not */
+  [sl-icon][sl-icon-disabled],
+  [sl-icon][aria-disabled="true"] {
+    opacity: var(--sl-disabled-opacity, 0.4);
   }
   [sl-icon][sl-icon-space] {
     margin-inline: 0.3em;

@@ -25,7 +25,7 @@ description: sl-* 屬性語法總覽：元件標記、元件設定、子元素�
 `sl-<元件>-<設定>[="<選項>"]` 同樣寫在元件自己身上，是元件的開關與設定，彼此獨立、可以疊加：
 
 ```html
-<div sl-card sl-card-indicate="start">…</div>
+<div sl-card sl-card-indicator="start">…</div>
 <div sl-grid sl-grid-cols="4">…</div>
 <div sl-bar="top" sl-bar-fixed>…</div>
 ```

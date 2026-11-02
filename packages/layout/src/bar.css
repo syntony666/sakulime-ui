@@ -13,16 +13,22 @@
     grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
     gap: var(--sl-bar-gap, var(--sl-gap, var(--sl-md)));
-    /* 3.5rem default — the standard band height */
+    /* 3.5rem default — the standard band height. The literal repeats
+       in the body compensation below: the two rules live on unrelated
+       elements (no shared var), and @property initial-value can't hold
+       a rem — spec requires a computationally independent value */
     min-block-size: var(--sl-bar-h, 3.5rem);
     /* self-default --sl-pad so an ancestor's sl-pad can't leak in —
        the attr on the bar itself still wins by specificity */
     --sl-pad: var(--sl-md);
     /* resolved once — the bottom bar's safe-area padding reads the
        same value through the private var */
-    --_bp: var(--sl-bar-pad, var(--sl-pad));
+    --_bp: var(--sl-bar-pad-block, var(--sl-pad));
     padding-block: var(--_bp);
     padding-inline: var(--sl-bar-pad-inline, var(--sl-lg));
+    /* hex fallbacks keep the package usable without the theme — the
+       same convention as --sl-border below; tune via the token, not
+       the literal */
     background: var(--sl-bg, #ffffff);
   }
 
@@ -33,17 +39,22 @@
   [sl-bar] > [sl-bar--center] { grid-column: 2; justify-self: center; }
   [sl-bar] > [sl-bar--end]    { grid-column: 3; justify-self: end; }
 
-  [sl-bar="top"] {
+  [sl-bar="top"],
+  [sl-bar="bottom"] {
     position: sticky;
-    inset-block-start: 0;
     z-index: var(--sl-bar-z, var(--sl-z-bar));
+  }
+
+  [sl-bar="top"] {
+    inset-block-start: 0;
     border-block-end: 1px solid var(--sl-border, #e5e7eb);
+    /* notch clearance — mirrors the bottom bar's home-indicator
+       padding; env() is 0 on non-notched viewports */
+    padding-block-start: calc(var(--_bp) + env(safe-area-inset-top, 0px));
   }
 
   [sl-bar="bottom"] {
-    position: sticky;
     inset-block-end: 0;
-    z-index: var(--sl-bar-z, var(--sl-z-bar));
     border-block-start: 1px solid var(--sl-border, #e5e7eb);
     /* home-indicator clearance on phones; env() is 0 elsewhere */
     padding-block-end: calc(var(--_bp) + env(safe-area-inset-bottom, 0px));
@@ -58,13 +69,20 @@
   /* a fixed bar leaves the flow — body pads itself for the bar's height
      on the matching edge so nothing underneath gets clipped. Set
      --sl-bar-h on :root when restyling the height so this offset
-     follows */
-  body:has([sl-bar="top"][sl-bar-fixed]) {
-    padding-block-start: var(--sl-bar-h, 3.5rem);
-  }
+     follows. Screen only — in print the bar goes static and leftover
+     body padding would read as a blank band on the first page */
+  @media screen {
+    body:has([sl-bar="top"][sl-bar-fixed]) {
+      padding-block-start: calc(
+        var(--sl-bar-h, 3.5rem) + env(safe-area-inset-top, 0px)
+      );
+    }
 
-  body:has([sl-bar="bottom"][sl-bar-fixed]) {
-    padding-block-end: var(--sl-bar-h, 3.5rem);
+    body:has([sl-bar="bottom"][sl-bar-fixed]) {
+      padding-block-end: calc(
+        var(--sl-bar-h, 3.5rem) + env(safe-area-inset-bottom, 0px)
+      );
+    }
   }
 
   /* a fixed bar is screen furniture — in print it would repeat on
@@ -79,7 +97,10 @@
 @layer attrs {
   /* sl-pad on bar — thicker bands; the attr wiring lives here now that
      generic pad consumers are core components. Keep the value→slot
-     mapping identical to generic.css's pad rules. */
+     mapping identical to generic.css's pad rules. "sm" deliberately
+     re-states the base default — all five scale steps stay on the map
+     so the vocabulary reads complete */
+  [sl-bar][sl-pad="none"] { --sl-pad: 0; }
   [sl-bar][sl-pad="sm"] { --sl-pad: var(--sl-md); }
   [sl-bar][sl-pad="md"] { --sl-pad: var(--sl-lg); }
   [sl-bar][sl-pad="lg"] { --sl-pad: var(--sl-2xl); }

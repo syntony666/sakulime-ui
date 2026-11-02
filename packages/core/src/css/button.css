@@ -12,6 +12,10 @@
     --sl-size-h: var(--sl-3xl);
     --sl-size-px: var(--sl-md);
     --sl-radius: var(--sl-sm);
+    /* seal the full slot at the plain pill — without it, a card's
+       1lh-capped --sl-radius-full inherits in and a sl-radius="full"
+       button inside a card stops being a pill */
+    --sl-radius-full: var(--sl-radius-pill);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -21,35 +25,50 @@
     min-block-size: var(--sl-size-h);
     padding: 0 var(--sl-size-px);
     font-size: var(--sl-size-fs);
+    cursor: pointer;
     transition:
       transform 0.2s ease,
       box-shadow 0.2s ease,
       filter 0.2s ease,
-      background-color 160ms ease,
-      border-color 160ms ease,
-      color 160ms ease;
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease;
     /* normal — the filled default look */
     background: var(--sl-tone-bg);
     color: var(--sl-tone-text-invert);
   }
 
   /* matches generic.css sl-interactive="grow" — the unmarked hover */
-  [sl-button]:hover:not(:disabled) {
+  [sl-button]:hover:not(:disabled):not([aria-disabled="true"]) {
     transform: scale(1.03);
   }
 
-  [sl-button]:disabled {
-    opacity: 0.6;
+  /* aria-disabled keeps the control focusable for screen readers —
+     it reads the same as :disabled but still takes pointer events.
+     --sl-disabled-opacity is the shared hook: each component picks
+     its own default (icons go quieter at .4) */
+  [sl-button]:disabled,
+  [sl-button][aria-disabled="true"] {
+    opacity: var(--sl-disabled-opacity, 0.6);
     cursor: not-allowed;
+  }
+
+  /* keyboard focus ring — the accent ink is AA-readable on the
+     surface the ring lands on; pointer focus keeps the native
+     suppression through :focus-visible. The hex fallback is the
+     theme's accent seed — usable without the theme package */
+  [sl-button]:focus-visible {
+    outline: 2px solid var(--sl-text-accent, #d43d5e);
+    outline-offset: 2px;
   }
 }
 
 /* variants — the marker's value picks the look; bare sl-button ("" )
    is normal and needs no rule since base already paints it */
 @layer attrs {
-  /* invert carries the page base — the tone drops to ink + border, and
+  /* outline carries the page base — the tone drops to ink + border, and
      an opaque fill keeps it a button on patterned or tinted surfaces */
-  [sl-button="invert"] {
+  [sl-button="outline"] {
     background: var(--sl-bg);
     color: var(--sl-tone-text);
     border-color: var(--sl-tone-bg);
@@ -61,6 +80,9 @@
     color: var(--sl-tone-text);
   }
 
+  /* the house underline recipe — 2px at .3em offset, same as notice
+     links; the color differs (tone ink vs dimmed currentColor) since
+     a button's line is its accent, a link's line is secondary */
   [sl-button="underline"] {
     background: transparent;
     border-color: transparent;

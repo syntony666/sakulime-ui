@@ -18,11 +18,11 @@ import * as ButtonDemos from "../../demos/components/button.demo";
 型態是 `sl-button` 的選項，沒給就是 `normal`：
 
 ```html
-<button sl-button="invert">按鈕</button>
+<button sl-button="outline">按鈕</button>
 ```
 
 - `normal`：整顆填滿（預設）
-- `invert`：只剩框線跟字
+- `outline`：只剩框線跟字
 - `underline`：只有底線
 - `ghost`：沒底沒框，只有字
 
@@ -32,7 +32,7 @@ import * as ButtonDemos from "../../demos/components/button.demo";
 
 ### 顏色 `sl-tone`
 
-`sl-button` 是 `sl-tone` 的適用元件，沒給是 `primary`。填滿的 `normal` 染整顆，`invert`/`ghost`/`underline` 染框線跟字色。選項看 [Tone 色調](/attrs/tone)。
+`sl-button` 是 `sl-tone` 的適用元件，沒給是 `primary`。填滿的 `normal` 染整顆，`outline`/`ghost`/`underline` 染框線跟字色。選項看 [Tone 色調](/attrs/tone)。
 
 ### 尺寸 `sl-size`
 

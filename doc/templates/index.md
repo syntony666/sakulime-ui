@@ -39,7 +39,7 @@ pageClass: <name>   # extra class on the page wrapper
 | `#` | `Name *中文名*` | `# Card *卡片*` |
 | `##` | fixed section name, plain | `## 屬性` |
 | `###` | ``中文名 `attr` `` | ``### 角落標記 `sl-card--corner` `` |
-| `####` | `名稱` or ``名稱 `value` `` | ``#### 貼邊 `inset` `` |
+| `####` | `名稱` or ``名稱 `value` `` | ``#### 貼邊 `edge` `` |
 
 A `###` documenting behavior rather than an attribute drops the attr chip
 (e.g. icon's `### 大小與對齊`, notice's `### Banner`).

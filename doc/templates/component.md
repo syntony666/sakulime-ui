@@ -76,7 +76,7 @@ A `###` under `## 用法` names a usage form in both languages — English
 first, Chinese as the glossed sub-label, mirroring `# Name *中文名*` (e.g.
 `### Banner *橫幅*`, `### Toast *浮動通知*`). `####` groups demos under
 one `###` (e.g. button's `#### 實心版本` / `#### 框線版本`) or lists a
-part's value variants (e.g. card-section's `#### 貼邊 `inset``).
+part's value variants (e.g. card-section's `#### 貼邊 `edge``).
 
 ## Value lists
 

@@ -17,8 +17,14 @@ const CHROMIUM =
   process.env.SL_CHROMIUM || join(homedir(), '.local/bin/chromium');
 const DIST = [
   'packages/theme/dist/sakulime.min.css',
+  'packages/theme/dist/terra.min.css',
+  'packages/theme/dist/umbra.min.css',
+  'packages/theme/dist/derived.css',
   'packages/core/dist/index.min.css',
+  'packages/core/dist/index.min.js',
   'packages/layout/dist/index.min.css',
+  'dist/sakulime.min.css',
+  'dist/sakulime.min.js',
 ];
 const FIXTURES = [
   { name: 'core', size: '1280,1000' },
@@ -36,11 +42,18 @@ if (!existsSync(CHROMIUM)) {
   console.error(`chromium not found at ${CHROMIUM} (set SL_CHROMIUM)`);
   process.exit(2);
 }
+try {
+  await execFileP(CHROMIUM, ['--version'], { timeout: 10_000 });
+} catch (e) {
+  console.error(`chromium at ${CHROMIUM} exists but won't run — ${e.message}`);
+  process.exit(2);
+}
 
 function launch(args) {
   return execFileP(
     CHROMIUM,
-    ['--headless', '--disable-gpu', '--no-sandbox', ...args],
+    ['--headless', '--disable-gpu', '--no-sandbox',
+      '--allow-file-access-from-files', ...args],
     { maxBuffer: 64 * 1024 * 1024, timeout: 60_000 },
   );
 }
@@ -124,4 +137,4 @@ console.log(
   `# ${n} assertions: ${passed} passed, ${n - passed} failed` +
     (fixtures < FIXTURES.length ? `; ${FIXTURES.length - fixtures} fixture(s) gave no results` : ''),
 );
-if (fixtures < FIXTURES.length || failed) process.exit(1);
+if (fixtures < FIXTURES.length || failed || n === 0) process.exit(1);

@@ -27,11 +27,26 @@ export const Cols: Demo = {
 
 export const MinWidth: Demo = {
   render: () =>
+    `<div class="axis-row col">` +
     ["8rem", "20rem"]
       .map(
         (min) =>
           `<div class="demo-cell"><span class="demo-w" data-demo>--sl-grid-min: ${min}</span>` +
           `<div sl-grid style="--sl-grid-min: ${min}; margin-top: var(--sl-sm)">${cells()}</div></div>`
       )
-      .join(""),
+      .join("") +
+    `</div>`,
+};
+
+// container-level vs child-level alignment — sl-justify feeds
+// justify-items (here center shrinks each cell to its text); a marked
+// child leaves the common alignment through justify-self
+export const Aligns: Demo = {
+  render: () =>
+    `<div class="demo-cell"><span class="demo-w" data-demo>sl-grid sl-justify="center" + 一格 sl-justify="end"</span>` +
+    `<div sl-grid sl-grid-cols="3" sl-justify="center" style="margin-top: var(--sl-sm)">` +
+    `<div class="demo-cell">中</div>` +
+    `<div class="demo-cell" sl-justify="end">只有我靠右</div>` +
+    `<div class="demo-cell">中</div>` +
+    `</div></div>`,
 };

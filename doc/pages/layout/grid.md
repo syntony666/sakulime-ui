@@ -84,3 +84,5 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 
 兩個屬性也能標在單一個子層上（`justify-self`／`align-self`），只讓那一格離開共同對齊。`sl-justify` 的 `between` 在格子語意下沒有意義，會退回 `stretch`。
 
+<Demo :render="GridDemos.Aligns.render" />
+

@@ -22,7 +22,8 @@
 
     /* container max width — the same three numbers double as the
        sl-*-sm/md/lg breakpoint scale; media queries cannot read vars,
-       so the copies in layout.css are hardcoded and kept in sync */
+       so the copies in grid.css and responsive.css are hardcoded and
+       kept in sync */
     --sl-container-sm: 45rem;
     --sl-container-md: 60rem;
     --sl-container-lg: 75rem;

@@ -37,6 +37,7 @@ px 以根字級 16px 換算，刻度本身是 rem。`sl-gap` 沒有預設，未�
 
 | 選項  | 間距 |
 | ----- | ---- |
+| `none` | 0   |
 | `xs`  | 4px  |
 | `sm`  | 8px  |
 | `md`  | 12px |
@@ -46,6 +47,8 @@ px 以根字級 16px 換算，刻度本身是 rem。`sl-gap` 沒有預設，未�
 | `3xl` | 32px |
 | `4xl` | 40px |
 | `5xl` | 48px |
+
+<Demo :render="GapDemos.Scale.render" />
 
 ## 適用元件
 

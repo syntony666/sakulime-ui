@@ -138,7 +138,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ### 變形
 
-- `sl-icon-flip="h"`／`="v"`：水平／垂直翻轉
+- `sl-icon-flip="horizontal"`／`="vertical"`：水平／垂直翻轉
 - `sl-icon-rotate="90"`／`"180"`／`"270"`：旋轉角度
 
 兩者可以疊加。

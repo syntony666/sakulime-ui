@@ -8,12 +8,18 @@
     display: flex;
     flex-direction: column;
     gap: var(--sl-float-gap, var(--sl-gap, var(--sl-md)));
+    /* self-default the align slot so an ancestor's sl-align can't
+       leak in — float reads it as align-items, the cross-axis
+       placement of notices inside the region (visible once a
+       notice shrinks to fit width) */
+    --sl-align: stretch;
+    align-items: var(--sl-align);
     /* resolved once here — the corner rules and the viewport clamps
        all read the same offsets and width. The 22rem default is the
        toast column width, ~352px at a 16px root */
-    --_tb: var(--sl-float-b, var(--sl-lg));
-    --_te: var(--sl-float-e, var(--sl-lg));
-    --_tw: var(--sl-float-w, 22rem);
+    --_tb: var(--sl-float-block, var(--sl-lg));
+    --_te: var(--sl-float-inline, var(--sl-lg));
+    --_tw: var(--sl-float-width, 22rem);
     /* the clamp follows the configured edge offset so a wider offset
        can't push the region off the far edge; dvw/vh units refresh the
        same declarations where supported */
@@ -27,39 +33,42 @@
        room for the notice's 2px outer ring so the edge toasts'
        frame isn't sliced */
     padding: 2px;
-    /* safe-area keeps the region off the home indicator */
+    /* safe-area keeps the region off the home indicator — and off
+       curved edges/notches in landscape */
     inset-block-end: calc(var(--_tb) + env(safe-area-inset-bottom, 0px));
-    inset-inline-end: var(--_te);
+    inset-inline-end: calc(var(--_te) + env(safe-area-inset-right, 0px));
   }
 
-  /* the value is one of the six corners <edge>-<side>: top-* flips
-     the vertical anchor, *-start flips the inline edge, *-center
-     centres on that edge, *-end reads the base rule. Any value
-     outside the vocabulary falls back to the default bottom-end */
-  [sl-float="top-start"],
-  [sl-float="top-center"],
-  [sl-float="top-end"] {
+  /* the value is space-separated tokens <edge> <side>: "top" flips
+     the vertical anchor, "start" flips the inline edge, "center"
+     centres on that edge. Unmatched words (bottom/end) read the
+     base rule, so anything outside the vocabulary still lands on
+     the default bottom-end */
+  [sl-float~="top"] {
     inset-block-end: auto;
     inset-block-start: calc(var(--_tb) + env(safe-area-inset-top, 0px));
   }
 
-  [sl-float="bottom-start"],
-  [sl-float="top-start"] {
+  [sl-float~="start"] {
     inset-inline-end: auto;
-    inset-inline-start: var(--_te);
+    inset-inline-start: calc(var(--_te) + env(safe-area-inset-left, 0px));
   }
 
-  [sl-float="bottom-center"],
-  [sl-float="top-center"] {
+  [sl-float~="center"] {
     inset-inline: 0;
     margin-inline: auto;
   }
 
   /* a fixed corner region is screen furniture — in print it would
-     repeat on every page and cover the sheet */
+     repeat on every page and cover the sheet. Going static alone
+     isn't enough: the height clamp plus scroll container would clip
+     notices at the viewport box, so both are released to let the
+     column flow to its full height */
   @media print {
     [sl-float] {
       position: static;
+      max-block-size: none;
+      overflow-block: visible;
     }
   }
 }

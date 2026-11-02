@@ -17,6 +17,16 @@ export const BarTop: Demo = {
     `</div>`,
 };
 
+// bare sl-bar — an in-flow band with no edge: no hairline, no sticky,
+// just the three zones and the bar height
+export const BarBare: Demo = {
+  render: () =>
+    `<div sl-bar>` +
+    `<div sl-bar--start class="demo-cell">Logo</div>` +
+    `<div sl-bar--end class="demo-cell"><span>連結</span></div>` +
+    `</div>`,
+};
+
 // the three zones — --center lands dead-center regardless of what the
 // side zones hold, since the middle column is auto-width
 export const BarSpread: Demo = {

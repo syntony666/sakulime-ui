@@ -22,7 +22,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 ```
 
 - `hollow`：虛線描邊、透明底，常用在上傳或空白狀態
-- `plain`：拿掉框線，保留底色和圓角
+- `flat`：拿掉框線，保留底色和圓角
 - `blank`：拿掉框線和底色，只剩內距
 
 <Demo :render="CardDemos.Variants.render" />
@@ -55,7 +55,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 ## 元件設定
 
-### 標記 `sl-card-indicate`
+### 標記 `sl-card-indicator`
 
 在卡片邊緣加一條強調色，顏色跟著 `sl-tone` 走（預設 primary）：
 
@@ -83,13 +83,10 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 <Playground :meta="CardDemos.Corner" :render="CardDemos.Corner.render" />
 
-位置用詞的組合，`start`／`end` 選左右、`bottom` 換到下緣：
+位置只有上緣兩側：
 
 - 沒給／`end`：右上
 - `start`：左上
-- `bottom`：右下
-- `bottom start`：左下
-- `bottom end`：右下（同 `bottom`）
 
 內容組合，`sl-chip` 文字膠囊、`sl-dot` 狀態點、`sl-icon` 圖示都可以放；`sl-tone` 寫在同一個元素上染色：
 
@@ -120,21 +117,21 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 <Playground :meta="CardDemos.Sections" :render="CardDemos.Sections.render" />
 
-#### 貼邊 `inset`
+#### 貼邊 `edge`
 
-`inset` 會把卡片內距抵銷掉，讓內容貼到卡片邊緣，放圖片、地圖或色塊都合適。放在第一個就貼上緣，放在最後一個就貼下緣，夾在中間只貼左右兩邊，位置照順序自動判斷：
+`edge` 會把卡片內距抵銷掉，讓內容貼到卡片邊緣，放圖片、地圖或色塊都合適。放在第一個就貼上緣，放在最後一個就貼下緣，夾在中間只貼左右兩邊，位置照順序自動判斷：
 
 ```html
 <div sl-card>
-  <div sl-card--section="inset"><img src="…"></div>
+  <div sl-card--section="edge"><img src="…"></div>
   <div sl-card--section>內容</div>
 </div>
 ```
 
-角落標記疊在貼邊內容上也行。`sl-card--corner` 不算一般內容，不會影響 inset 的位置判斷：
+角落標記疊在貼邊內容上也行。`sl-card--corner` 不算一般內容，不會影響 edge 的位置判斷：
 
 <Demo :render="CardDemos.Sections.render" :args="CardDemos.Sections.args" />
-<Demo :render="CardDemos.Insets.render" />
+<Demo :render="CardDemos.Edges.render" />
 
 #### 空白 `blank`
 

@@ -15,7 +15,7 @@ export const Tones: Demo = {
   render: () =>
     axis(TONES, (v) =>
       frame(
-        `sl-tone="${v}"`,
+        v === "-" ? "未標示" : `sl-tone="${v}"`,
         `<div sl-wrap>` +
           `<button sl-button${attr("sl-tone", v)}>按鈕</button>` +
           `<span sl-chip${attr("sl-tone", v)}>膠囊</span>` +
