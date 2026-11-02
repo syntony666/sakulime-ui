@@ -87,8 +87,19 @@
   <div sl-bar--end id="bs-e">e</div>
 </div>
 <div sl-bar="top" sl-bar-fixed id="bar-fix">fixed</div>
+<div sl-bar="bottom" sl-bar-fixed id="bar-fixb">fixed bottom</div>
 <div sl-bar="bottom" id="bar-bot">bottom</div>
 <div sl-bar="top" sl-pad="lg" id="bar-pad">padded</div>
+
+<!-- above-breakpoint — this fixture runs at 1280px, past all three
+     breakpoints: every hide stays, every show is gone, cols-lg is inert -->
+<div sl-hide-sm id="ah-sm">x</div>
+<div sl-hide-md id="ah-md">x</div>
+<div sl-hide-lg id="ah-lg">x</div>
+<div sl-show-sm id="as-sm">x</div>
+<div sl-show-md id="as-md">x</div>
+<div sl-show-lg id="as-lg">x</div>
+<div sl-grid sl-grid-cols="4" sl-grid-cols-lg="2" id="ag-cols"><div>a</div><div>b</div><div>c</div><div>d</div></div>
 
 <!-- floats -->
 <div sl-float id="t-def"><div sl-notice="fit">a</div></div>
@@ -213,7 +224,9 @@ function main() {
     rect('bar-sparse').left + rect('bar-sparse').width / 2, 2);
   near('bar sparse end at right-pad', rect('bs-e').right, rect('bar-sparse').right - varPx('--sl-lg'), 2);
   eq('bar fixed', cs('bar-fix', 'position'), 'fixed');
+  eq('bar bottom fixed', cs('bar-fixb', 'position'), 'fixed');
   near('fixed top bar pads body', getComputedStyle(document.body).paddingTop, 56, 1);
+  near('fixed bottom bar pads body', getComputedStyle(document.body).paddingBottom, 56, 1);
   eq('body comp gated to screen', mediaOf('body:has([sl-bar="top"][sl-bar-fixed])'), 'screen');
   eq('body comp bottom gated to screen', mediaOf('body:has([sl-bar="bottom"][sl-bar-fixed])'), 'screen');
   rec('bar top pad carries safe-area', declOf('[sl-bar="top"]', 'padding-block-start'),
@@ -222,6 +235,16 @@ function main() {
     'contains safe-area-inset-top', (declOf('body:has([sl-bar="top"][sl-bar-fixed])', 'padding-block-start') || '').includes('safe-area-inset-top'));
   rec('body comp bottom carries safe-area', declOf('body:has([sl-bar="bottom"][sl-bar-fixed])', 'padding-block-end'),
     'contains safe-area-inset-bottom', (declOf('body:has([sl-bar="bottom"][sl-bar-fixed])', 'padding-block-end') || '').includes('safe-area-inset-bottom'));
+
+  /* above-breakpoint — at 1280px every breakpoint block is inert:
+     hide stays visible, show is gone, cols-lg doesn't apply */
+  eq('hide-sm visible above bp', cs('ah-sm', 'display'), 'block');
+  eq('hide-md visible above bp', cs('ah-md', 'display'), 'block');
+  eq('hide-lg visible above bp', cs('ah-lg', 'display'), 'block');
+  eq('show-sm gone above bp', cs('as-sm', 'display'), 'none');
+  eq('show-md gone above bp', cs('as-md', 'display'), 'none');
+  eq('show-lg gone above bp', cs('as-lg', 'display'), 'none');
+  eq('cols-lg inert above bp', tracks('ag-cols'), 4);
   eq('bar bottom sticky', cs('bar-bot', 'position'), 'sticky');
   eq('bar bottom border-top', cs('bar-bot', 'border-top-width'), '1px');
   near('bar sl-pad=lg block pad', cs('bar-pad', 'padding-top'), varPx('--sl-2xl'));
