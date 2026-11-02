@@ -6,10 +6,10 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    /* self-default the place slot so an ancestor's sl-place can't
-       leak in — the attr only counts on the row itself */
-    --sl-place: start;
-    justify-content: var(--sl-place);
+    /* self-default the justify slot so an ancestor's sl-justify
+       can't leak in — the attr only counts on the wrap itself */
+    --sl-justify: start;
+    justify-content: var(--sl-justify);
     gap: var(--sl-wrap-gap, var(--sl-gap, var(--sl-md)));
   }
 

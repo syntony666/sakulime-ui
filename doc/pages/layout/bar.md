@@ -45,12 +45,13 @@ fixed 的 bar 不佔版面，body 會在對應邊自動補上 bar 高度的內�
 
 ## 內容排列
 
-內部是 flex 加 `justify-content: space-between`：子層依序往兩端排開，第一個貼左、最後一個貼右，中間的共享剩餘空間。想換別的分佈，把 [`sl-place`](/attrs/place) 寫在 bar 自己身上，例如 `sl-bar sl-place="center"` 全部置中。一側要塞多個東西就包一個 `sl-wrap` 當一個子層：
+內部是三欄 grid：左、正中間、右三個固定區域。子層標 `sl-bar--start`、`sl-bar--center`、`sl-bar--end` 決定落在哪一區；沒標的子層照順序從左欄依序填入。中間欄寬度跟內容走，所以 `--center` 永遠在整條正中央，跟兩側放了什麼無關。只放想放的區域就行，空的欄不影響其他區：
 
 ```html
 <div sl-bar="top">
-  <div>Logo</div>
-  <div sl-wrap>
+  <div sl-bar--start>Logo</div>
+  <div sl-bar--center>標題</div>
+  <div sl-bar--end sl-wrap>
     <a href="#">連結</a>
     <a href="#">連結</a>
   </div>
@@ -59,7 +60,7 @@ fixed 的 bar 不佔版面，body 會在對應邊自動補上 bar 高度的內�
 
 <Demo :render="BarDemos.BarSpread.render" />
 
-要直排多段內容，子層裡包一個 `sl-stack`。
+一區要塞多個東西就包一個 `sl-wrap` 當一個子層——同一區標兩個子層會掉到下一行。要直排多段內容，子層裡包一個 `sl-stack`。
 
 ## 尺寸與外觀
 

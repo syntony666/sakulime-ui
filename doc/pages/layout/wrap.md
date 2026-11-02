@@ -29,10 +29,10 @@ description: 水平排列子元素，放不下就換行，間距由 sl-gap 統�
 
 ## 對齊
 
-子層預設從頭排起。置中、靠尾或攤開用 [`sl-place`](/attrs/place)，寫在 wrap 自己身上：
+子層預設從頭排起。置中、靠尾或攤開用 [`sl-justify`](/attrs/justify)，寫在 wrap 自己身上：
 
 ```html
-<div sl-wrap sl-place="end">
+<div sl-wrap sl-justify="end">
   <button sl-button>送出</button>
   <button sl-button>取消</button>
 </div>

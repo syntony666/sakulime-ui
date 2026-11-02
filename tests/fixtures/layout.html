@@ -35,15 +35,17 @@
 <div sl-wrap id="wrap-def"><div>a</div><div>b</div></div>
 <div sl-wrap sl-gap="lg" id="wrap-lg"><div>a</div><div>b</div></div>
 <div sl-wrap id="wrap-min"><div id="wrap-mc">a</div></div>
-<div sl-wrap sl-place="end" id="wrap-end"><div>a</div><div>b</div></div>
-<div sl-wrap sl-place="center" id="wrap-ctr"><div>a</div><div>b</div></div>
-<div sl-wrap sl-place="between" id="wrap-btw"><div>a</div><div>b</div></div>
-<div sl-place="end"><div sl-wrap id="wrap-seal"><div>a</div><div>b</div></div></div>
+<div sl-wrap sl-justify="end" id="wrap-end"><div>a</div><div>b</div></div>
+<div sl-wrap sl-justify="center" id="wrap-ctr"><div>a</div><div>b</div></div>
+<div sl-wrap sl-justify="between" id="wrap-btw"><div>a</div><div>b</div></div>
+<div sl-justify="end"><div sl-wrap id="wrap-seal"><div>a</div><div>b</div></div></div>
+<div sl-stack sl-justify="between" id="st-jbtw"><div>a</div><div>b</div></div>
 
 <!-- grid (640px track width makes counts deterministic) -->
 <div style="width:640px">
   <div sl-grid id="gr-auto"><div>a</div><div>b</div><div>c</div><div>d</div></div>
   <div sl-grid sl-grid-cols="4" id="gr-4"><div>a</div><div>b</div><div>c</div><div>d</div></div>
+  <div sl-grid sl-grid-cols="4" sl-justify="center" id="gr-jctr"><div>a</div></div>
   <div sl-grid sl-grid-cols="4" id="gr-span">
     <div sl-grid--span="8" id="sp8">over</div>
     <div sl-grid--span="full" id="spf">full</div>
@@ -151,10 +153,11 @@ function main() {
   eq('row wrap', cs('wrap-def', 'flex-wrap'), 'wrap');
   eq('row align center', cs('wrap-def', 'align-items'), 'center');
   near('row def gap = --sl-md', cs('wrap-def', 'column-gap'), varPx('--sl-md'));
-  eq('row place end', cs('wrap-end', 'justify-content'), 'end');
-  eq('row place center', cs('wrap-ctr', 'justify-content'), 'center');
-  eq('row place between', cs('wrap-btw', 'justify-content'), 'space-between');
-  eq('row sealed from ancestor place', cs('wrap-seal', 'justify-content'), cs('wrap-def', 'justify-content'));
+  eq('wrap justify end', cs('wrap-end', 'justify-content'), 'end');
+  eq('wrap justify center', cs('wrap-ctr', 'justify-content'), 'center');
+  eq('wrap justify between', cs('wrap-btw', 'justify-content'), 'space-between');
+  eq('wrap sealed from ancestor justify', cs('wrap-seal', 'justify-content'), cs('wrap-def', 'justify-content'));
+  eq('stack justify between', cs('st-jbtw', 'justify-content'), 'space-between');
   near('row sl-gap=lg', cs('wrap-lg', 'column-gap'), varPx('--sl-lg'));
   eq('row child min-inline 0', cs('wrap-mc', 'min-width'), '0px');
 
@@ -162,6 +165,7 @@ function main() {
   eq('grid display', cs('gr-auto', 'display'), 'grid');
   eq('grid auto-fill tracks = 2 @640px', tracks('gr-auto'), 2);
   eq('grid cols=4 tracks', tracks('gr-4'), 4);
+  eq('grid justify=items center', cs('gr-jctr', 'justify-items'), 'center');
   near('span 8 clamps to 4 tracks', rect('sp8').width, rect('gr-span').width, 2);
   near('span full covers grid', rect('spf').width, rect('gr-span').width, 2);
   near('bare span = full row', rect('spb').width, rect('gr-span').width, 2);

@@ -12,16 +12,19 @@ const cell = (t: string) => `<div class="demo-cell">${t}</div>`;
 export const BarTop: Demo = {
   render: () =>
     `<div sl-bar="top" style="position: static">` +
-    `${cell("Logo")}${cell("連結")}${cell("連結")}` +
+    `<div sl-bar--start class="demo-cell">Logo</div>` +
+    `<div sl-bar--end class="demo-cell"><div sl-wrap><span>連結</span><span>連結</span></div></div>` +
     `</div>`,
 };
 
-// space-between spreads children across the band — the first hugs the
-// leading edge, the last the trailing edge, the middle floats between
+// the three zones — --center lands dead-center regardless of what the
+// side zones hold, since the middle column is auto-width
 export const BarSpread: Demo = {
   render: () =>
     `<div sl-bar="top" style="position: static">` +
-    `${cell("Logo")}${cell("中間")}${cell("右邊")}` +
+    `<div sl-bar--start class="demo-cell">Logo</div>` +
+    `<div sl-bar--center class="demo-cell">中間</div>` +
+    `<div sl-bar--end class="demo-cell">右邊</div>` +
     `</div>`,
 };
 

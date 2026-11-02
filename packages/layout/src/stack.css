@@ -4,6 +4,11 @@
   [sl-stack] {
     display: flex;
     flex-direction: column;
+    /* self-default the justify slot so an ancestor's sl-justify
+       can't leak in — the attr only counts on the stack itself.
+       Only visible when the stack is taller than its content */
+    --sl-justify: start;
+    justify-content: var(--sl-justify);
     gap: var(--sl-stack-gap, var(--sl-gap, var(--sl-md)));
   }
 
