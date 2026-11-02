@@ -17,7 +17,7 @@ const rect = id => { const n = $(id); return n ? n.getBoundingClientRect() : NAR
 const rec = (name, got, want, ok) => R.push({ name, got: String(got), want: String(want), ok });
 const eq = (name, got, want) => rec(name, got, want, got === want);
 const near = (name, got, want, tol = 1.5) => rec(name, got, want + '±' + tol, Math.abs(px(got) - px(want)) <= tol);
-const neq = (name, got, bad) => rec(name, got, 'not ' + bad, got !== bad);
+const neq = (name, got, bad) => rec(name, got, 'not ' + bad, got !== bad && !String(got).startsWith('(missing'));
 const has = (name, got, sub) => rec(name, got, '~' + sub, String(got).includes(sub));
 const match = (name, got, re) => rec(name, got, String(re), re.test(got));
 const probe = $('probe');
@@ -74,6 +74,20 @@ const declOf = (sel, prop) => {
   for (const s of document.styleSheets) { try { walk(s.cssRules); } catch { /* opaque sheet — file:// origin may hide cssRules */ } }
   return val;
 };
+/* count of style rules whose selectorText contains frag — for
+   presence assertions on rules (hover, :has) that computed style
+   can't reach without input simulation */
+const ruleCount = frag => {
+  let n = 0;
+  const walk = rules => {
+    for (const r of rules) {
+      if (r.selectorText && r.selectorText.includes(frag)) n++;
+      if (r.cssRules) walk(r.cssRules);
+    }
+  };
+  for (const s of document.styleSheets) { try { walk(s.cssRules); } catch { /* opaque sheet */ } }
+  return n;
+};
 /* last declaration of prop on the rule whose selectorText equals
    sel and lives inside a @media block whose condition is media */
 const mediaDecl = (sel, prop, media) => {
@@ -115,7 +129,7 @@ const vh = () => document.documentElement.clientHeight;
    is real before any near() runs */
 function canary() {
   for (const t of [
-    '--sl-xs', '--sl-sm', '--sl-md', '--sl-lg',
+    '--sl-xs', '--sl-sm', '--sl-md', '--sl-lg', '--sl-xl',
     '--sl-2xl', '--sl-3xl', '--sl-4xl', '--sl-5xl',
     '--sl-container-sm', '--sl-container-md', '--sl-container-lg',
     '--sl-radius-pill',
@@ -123,6 +137,12 @@ function canary() {
     const v = varPx(t);
     rec(`token ${t} resolves`, v + 'px', '>0px', v > 0);
   }
+  /* theme-sheet canary: the scale above is inlined into every bundle,
+     so it still resolves when the theme css 404s — prove a theme color
+     made it through too */
+  probe.style.color = 'var(--sl-primary)';
+  const pc = getComputedStyle(probe).color;
+  rec('theme --sl-primary resolves', pc, 'non-default color', pc !== '' && pc !== 'rgb(0, 0, 0)' && !pc.startsWith('(missing'));
 }
 
 function go() {
@@ -159,6 +179,11 @@ function labelize() {
   document.documentElement.setAttribute('data-h', Math.ceil(document.documentElement.scrollHeight));
 }
 /* rAF is flaky under --virtual-time-budget (no frames without rendering),
-   so a plain timer drives the run; both paths converge on go(). */
+   so a plain timer drives the run; both paths converge on go().
+   module scripts (bundle-execution assertions) must finish before
+   go() — DOMContentLoaded waits for them, a bare timer does not */
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => setTimeout(go, 0), { once: true });
+}
 setTimeout(go, 0);
 requestAnimationFrame(() => setTimeout(go, 0));
