@@ -21,6 +21,11 @@
     max-block-size: calc(100vh - 2 * var(--_tb));
     max-block-size: calc(100dvh - 2 * var(--_tb));
     overflow-block: auto;
+    /* a scroll container clips children at its padding box on both
+       axes (overflow-inline computes to auto too); the padding buys
+       room for the notice's 2px outer ring so the edge toasts'
+       frame isn't sliced */
+    padding: 2px;
     /* safe-area keeps the region off the home indicator */
     inset-block-end: calc(var(--_tb) + env(safe-area-inset-bottom, 0px));
     inset-inline-end: var(--_te);
