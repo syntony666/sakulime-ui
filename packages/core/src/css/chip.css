@@ -27,9 +27,6 @@
     background: color-mix(in srgb, var(--sl-tone-bg) 20%, var(--sl-surface));
     border-radius: var(--sl-radius-pill);
     vertical-align: -0.05em;
-    /* playback timeline for sl-interactive — the shared hover rule
-       in generic.css writes the effect slots */
-    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
   }
 
   /* cursor only while the hover playback can still fire — same
