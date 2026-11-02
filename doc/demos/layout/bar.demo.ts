@@ -13,7 +13,7 @@ export const BarTop: Demo = {
   render: () =>
     `<div sl-bar="top" style="position: static">` +
     `<div sl-bar--start class="demo-cell">Logo</div>` +
-    `<div sl-bar--end class="demo-cell"><div sl-wrap><span>連結</span><span>連結</span></div></div>` +
+    `<div sl-bar--end sl-wrap class="demo-cell"><span>連結</span><span>連結</span></div>` +
     `</div>`,
 };
 
