@@ -27,6 +27,8 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 
 混排內容（標題接段落接卡片）要保留子層自己的 margin 跟寬度的話，改用 [`sl-content`](/layout/content)。
 
+底層是直排的 flexbox（`display: flex`＋`flex-direction: column`）。
+
 ## 對齊
 
 水平對齊用 [`sl-align`](/attrs/align)：`start` 靠左、`center` 置中、`end` 靠右，預設 `stretch` 撐滿。子層一旦對齊就縮回內容寬，不再撐滿：

@@ -25,7 +25,7 @@ import * as WrapDemos from "../../demos/layout/wrap.demo";
 
 子層垂直置中、寬度不動，總寬超過容器就整個換到下一行；換行時機看內容實際寬度，沒有固定斷點。
 
-跟 [`sl-grid`](/layout/grid) 的分工：子層寬度看內容、夠放幾個放幾個用 `sl-wrap`；每欄要等寬、欄數要固定的用 `sl-grid`。
+底層是開了 `flex-wrap` 的 flexbox。跟 [`sl-grid`](/layout/grid) 的分工：子層寬度看內容、夠放幾個放幾個用 `sl-wrap`；每欄要等寬、欄數要固定的用 `sl-grid`。
 
 ## 對齊
 

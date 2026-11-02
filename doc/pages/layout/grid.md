@@ -21,6 +21,8 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 </div>
 ```
 
+底層是 `display: grid`，欄數收放由視窗寬度的 media query 驅動。
+
 ## 欄數
 
 `sl-grid-cols` 把欄數寫死，1 到 12：
