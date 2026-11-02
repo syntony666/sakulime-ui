@@ -45,6 +45,6 @@ px 以根字級 16px 換算，刻度本身是 rem：
 
 | 元件 | 預設 | 備註 |
 | --- | --- | --- |
-| [[`sl-card`](/core/card)](/core/card) | `md` | `lg` 讓內容不擠 |
-| [[`sl-notice`](/core/notice)](/core/notice) | `sm` | `lg` 適合公告型的多行內容 |
-| [[`sl-bar`](/layout/bar)](/layout/bar) | `sm` | 只影響上下內距，`lg` 是厚頁尾 |
+| [`sl-card`](/core/card) | `md` | `lg` 讓內容不擠 |
+| [`sl-notice`](/core/notice) | `sm` | `lg` 適合公告型的多行內容 |
+| [`sl-bar`](/layout/bar) | `sm` | 只影響上下內距，`lg` 是厚頁尾 |

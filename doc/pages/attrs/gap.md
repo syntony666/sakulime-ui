@@ -56,5 +56,5 @@ px 以根字級 16px 換算，刻度本身是 rem。`sl-gap` 沒有預設，未�
 
 | 分類     | 屬性                                  |
 | -------- | ------------------------------------- |
-| 排列 | [[`sl-stack`](/layout/stack)](/layout/stack)、[[`sl-content`](/layout/content)](/layout/content)、[[`sl-wrap`](/layout/wrap)](/layout/wrap)、[[`sl-grid`](/layout/grid)](/layout/grid) |
-| 頁面區塊 | [[`sl-bar`](/layout/bar)](/layout/bar)、[[`sl-sidebar`](/layout/sidebar)](/layout/sidebar)、[[`sl-float`](/layout/float)](/layout/float)    |
+| 排列 | [`sl-stack`](/layout/stack)、[`sl-content`](/layout/content)、[`sl-wrap`](/layout/wrap)、[`sl-grid`](/layout/grid) |
+| 頁面區塊 | [`sl-bar`](/layout/bar)、[`sl-sidebar`](/layout/sidebar)、[`sl-float`](/layout/float)    |

@@ -40,5 +40,5 @@ px 以根字級 16px 換算，刻度本身是 rem。高度是 `sl-button` 的，
 
 | 元件 | 作用 |
 | --- | --- |
-| [[`sl-button`](/core/button)](/core/button) | 高度跟字級 |
-| [[`sl-chip`](/core/chip)](/core/chip) | 只取字級，整顆等比縮放 |
+| [`sl-button`](/core/button) | 高度跟字級 |
+| [`sl-chip`](/core/chip) | 只取字級，整顆等比縮放 |
