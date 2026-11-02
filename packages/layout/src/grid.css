@@ -41,11 +41,14 @@
     align-self: var(--sl-align);
   }
 
-  /* sl-grid--span — a grid child takes N tracks, clamped to the active
-     count so an oversized span can't spawn implicit tracks and blow
-     the grid out. "1" is one track; bare, "full", and any
-     out-of-vocabulary value span every track in either mode —
-     the presence rule comes first so a known value wins the tie */
+  /* sl-grid--span — a grid child takes N tracks, clamped to --_cap.
+     The cap is the real track count only under sl-grid-cols; in
+     auto-fill mode it stays 12 and a span wider than the container's
+     actual tracks still spawns implicit tracks — "full" (or an
+     explicit count) is the safe full row there. "1" is one track;
+     bare, "full", and any out-of-vocabulary value span every track
+     in either mode — the presence rule comes first so a known
+     value wins the tie */
   [sl-grid] > [sl-grid--span] { grid-column: 1 / -1; }
   [sl-grid] > [sl-grid--span="1"]  { grid-column: span 1; }
   [sl-grid] > [sl-grid--span="2"]  { grid-column: span min(2, var(--_cap)); }
