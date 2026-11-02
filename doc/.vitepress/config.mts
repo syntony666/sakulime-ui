@@ -180,6 +180,7 @@ export default defineConfig({
               { text: `Pad ${zh("內距")}`, link: "/attrs/pad" },
               { text: `Interactive ${zh("互動")}`, link: "/attrs/interactive" },
               { text: `Gap ${zh("間距")}`, link: "/attrs/gap" },
+              { text: `Place ${zh("對齊")}`, link: "/attrs/place" },
             ],
           },
         ],
