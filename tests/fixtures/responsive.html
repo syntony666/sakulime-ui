@@ -22,6 +22,7 @@
 <div sl-grid sl-grid-cols="8" sl-grid-cols-md="2" sl-grid-cols-sm="6" id="rg-mono"><div>a</div><div>b</div><div>c</div><div>d</div></div>
 <div sl-grid sl-grid-cols="2" sl-grid-cols-sm="8" id="rg-monob"><div>a</div><div>b</div><div>c</div><div>d</div></div>
 <div sl-grid sl-grid-cols="4" sl-grid-cols-sm="auto" id="rg-auto"><div>a</div><div>b</div><div>c</div><div>d</div></div>
+<div sl-grid sl-grid-cols="4" sl-grid-cols-lg="auto" id="rg-autolg"><div>a</div><div>b</div><div>c</div><div>d</div></div>
 <div sl-grid sl-grid-cols="4" sl-grid-cols-md="auto" id="rg-autom"><div>a</div><div>b</div><div>c</div><div>d</div></div>
 <div sl-grid sl-grid-cols-md="auto" sl-grid-cols-sm="2" id="rg-auton"><div>a</div><div>b</div><div>c</div><div>d</div></div>
 
@@ -60,6 +61,7 @@ function main() {
   eq('sm="auto" returns to auto-fill', tracks('rg-auto'), 2);
   eq('md="auto" releases cols=4', tracks('rg-autom'), 2);
   eq('narrower decl survives md="auto"', tracks('rg-auton'), 2);
+  eq('lg="auto" returns to auto-fill', tracks('rg-autolg'), 2);
 
   /* hide = gone below the breakpoint; show = gone above it (420px is
      below all three, so every show stays visible) */
