@@ -1,6 +1,6 @@
 ---
 title: Size 尺寸
-description: 高度跟字級，三階。
+description: 高度、字級跟水平內距，三階。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as SizeDemos from "../../demos/attrs/size.demo";
 
 # Size *尺寸*
 
-> 高度跟字級，三階。
+> 高度、字級跟水平內距，三階。
 
 ## 用法
 
@@ -18,7 +18,7 @@ import * as SizeDemos from "../../demos/attrs/size.demo";
 <span sl-chip sl-size="lg">大膠囊</span>
 ```
 
-按鈕是高度跟字級，膠囊是整顆等比縮放：
+按鈕是高度、字級跟水平內距，膠囊是整顆等比縮放：
 
 <Demo :render="SizeDemos.Sizes.render" />
 

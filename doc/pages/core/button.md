@@ -36,7 +36,7 @@ import * as ButtonDemos from "../../demos/components/button.demo";
 
 ### 尺寸 `sl-size`
 
-`sl-button` 是 `sl-size` 的適用元件，沒給是 `md`：高度跟字級一起換。選項看 [Size 尺寸](/attrs/size)。
+`sl-button` 是 `sl-size` 的適用元件，沒給是 `md`：高度、字級跟水平內距一起換。選項看 [Size 尺寸](/attrs/size)。
 
 ### 圓角 `sl-radius`
 
