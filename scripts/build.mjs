@@ -19,15 +19,11 @@ const coreDir = pkgDir("@sakulime-ui/core");
 
 const tokens = read(req.resolve("@sakulime-ui/shared/vars.css"));
 const themeFiles = readdirSync(themeDir).filter((f) => f.endsWith(".css"));
-/* read the source file, not the ./index.css export — that subpath now
-   resolves to the dist artifact this script produces. src/layout.css
-   is an @import index over per-primitive files; inline them here so
-   the published bundle stays a single concatenated sheet */
+/* src/layout.css is an @import index — inline it here so the
+   published bundle is one concatenated sheet; a leftover @import
+   would point at a path that doesn't exist in dist, so fail loudly */
 const bundle = (path) => {
   const css = read(path).replace(
-    /* accept url(), either quote style, and trailing modifiers like
-       layer() — a missed @import would survive into dist pointing at
-       a path that doesn't exist there, so fail loudly instead */
     /@import\s+(?:url\(\s*)?["']?([^"')\s]+)["']?\s*\)?[^;]*;/g,
     (_, rel) => bundle(pjoin(dirname(path), rel))
   );
@@ -39,14 +35,11 @@ const bundle = (path) => {
 const layout = bundle(`${layoutDir}/src/layout.css`);
 
 /* media queries can't read vars — layout.css hardcodes the container
-   breakpoints as literals; fail the build if the twins drift */
+   breakpoints; fail the build if the twins drift */
 const declared = new Set(
   [...tokens.matchAll(/--sl-container-(?:sm|md|lg):\s*([^;]+);/g)].map((m) => m[1].trim())
 );
 const literals = new Set(
-  /* range syntax (width < 60rem) and classic (max-width: 60rem) both
-     count — and px literals get caught as strays, not silently
-     skipped, so the container scale stays the only breakpoint unit */
   [
     ...layout.matchAll(
       /\(\s*(?:min-|max-)?width\s*(?::|[<>]=?)\s*([0-9.]+(?:rem|px))\s*\)/g
@@ -64,10 +57,9 @@ if (missing.length || stray.length) {
   );
 }
 
-/* generic.css maps each generic slot to the components allowed to read
-   it via :--sl-generic-* custom selectors; the lists and the actual slot
+/* generic.css's :--sl-generic-* consumer lists and the actual slot
    reads in component css must agree — a listed component that never
-   reads the slot is as wrong as a reader that is not listed */
+   reads the slot is as wrong as an unlisted reader */
 const SLOTS = {
   tone: /--sl-tone-(bg|text(-invert)?)(?=\s*[:),])/,
   size: /--sl-size-(fs|h|px)(?=\s*[:),])/,
@@ -82,8 +74,8 @@ for (const m of generic.matchAll(
 )) {
   consumers[m[1]] = new Set([...m[2].matchAll(/sl-[a-z]+/g)].map((x) => x[0]));
 }
-/* a selector's component marks are the sl-<name> heads of its attrs —
-   [sl-card--section] and [sl-card-indicator] both count as sl-card */
+/* a rule's component marks are the sl-<name> heads of its attrs —
+   [sl-card--section] counts as sl-card */
 const rules = [];
 for (const f of readdirSync(`${coreDir}/src/css`)) {
   if (!f.endsWith(".css") || f === "generic.css") continue;
@@ -142,8 +134,7 @@ if (drift.length) {
   throw new Error(`generic drift:\n  - ${drift.join("\n  - ")}`);
 }
 
-// @sakulime-ui/theme — one minified palette per file; bundle so each
-// theme's @import of the shared derived layer inlines into dist
+// @sakulime-ui/theme — one minified palette per file, derived inlined
 out(`${themeDir}/dist`);
 for (const f of themeFiles) {
   const name = f.replace(".css", ".min.css");
@@ -157,18 +148,14 @@ for (const f of themeFiles) {
   });
   writeFileSync(`${themeDir}/dist/${name}`, result.outputFiles[0].text);
 }
-// the shared derivation layer ships too — custom themes @import it and
-// author only seeds + color-scheme
 cpSync(`${themeDir}/_internal/derived.css`, `${themeDir}/dist/derived.css`);
 
 // @sakulime-ui/layout — tokens + layout
 out(`${layoutDir}/dist`);
 writeFileSync(`${layoutDir}/dist/index.min.css`, minify(join(tokens, layout)));
 
-// sakulime-ui — everything: core bundle already carries tokens, themes and
-// components; the meta package only adds layout on top. Layout's own
-// published css still prepends tokens above — here the bare layout
-// joins so the vars block lands once, not twice
+// sakulime-ui — the meta bundle: core's css already carries tokens so
+// here the bare layout joins without re-prepending them
 out("dist");
 const coreCss = read(`${coreDir}/dist/index.min.css`);
 writeFileSync("dist/sakulime.min.css", join(coreCss, minify(layout)));
