@@ -18,6 +18,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - run: npm run lint
       - run: npm run build
       - name: Install chrome-headless-shell
         run: npx -y @puppeteer/browsers install chrome-headless-shell@stable --path /tmp/chromium

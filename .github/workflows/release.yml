@@ -52,7 +52,7 @@ jobs:
             echo "no local tag — this push did not publish"
             exit 0
           fi
-          git push origin "$tag" || true
+          git push origin "$tag"
           notes=$(awk -v v="$version" '$0 == "## " v {f=1; next} /^## / {f=0} f' CHANGELOG.md)
           gh release create "$tag" --title "$tag" --notes "${notes:-Release $tag}" --verify-tag
         env:

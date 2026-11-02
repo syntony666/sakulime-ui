@@ -1,6 +1,8 @@
 {
   "name": "@sakulime-ui/layout",
   "version": "0.3.0",
+  "description": "CSS-first layout primitives via sl-* HTML attributes — stack, wrap, grid, sidebar, bar, float",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/syntony666/sakulime-ui.git",
@@ -13,6 +15,9 @@
   },
   "files": [
     "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
   ],
   "exports": {
     "./package.json": "./package.json",

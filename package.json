@@ -1,6 +1,8 @@
 {
   "name": "sakulime-ui",
   "version": "0.3.0",
+  "description": "CSS-first UI kit — sl-* HTML attributes for components, layout primitives, and themes",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/syntony666/sakulime-ui.git"
@@ -16,12 +18,13 @@
     "doc"
   ],
   "sideEffects": [
-    "*.css"
+    "**/*.css"
   ],
   "files": [
     "dist"
   ],
   "exports": {
+    "./package.json": "./package.json",
     ".": "./dist/sakulime.min.js",
     "./sakulime.min.css": "./dist/sakulime.min.css",
     "./sakulime.min.js": "./dist/sakulime.min.js"
@@ -34,6 +37,7 @@
     "site": "npm run site -w sakulime-doc",
     "deploy": "npm run deploy -w sakulime-doc",
     "release": "changeset publish",
+    "prepublishOnly": "npm run build",
     "test": "node tests/run.mjs",
     "test:shots": "node tests/run.mjs --shots"
   },

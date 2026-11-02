@@ -1,0 +1,9 @@
+/* source mirror of dist/sakulime.min.css — the vite alias for the
+   umbrella specifier resolves here so docs can import the published
+   bundle name and still live-reload from source */
+@import "../../packages/shared/vars.css";
+@import "../../packages/theme/sakulime.css";
+@import "../../packages/theme/terra.css";
+@import "../../packages/theme/umbra.css";
+@import "../../packages/core/src/index.css";
+@import "../../packages/layout/src/layout.css";
