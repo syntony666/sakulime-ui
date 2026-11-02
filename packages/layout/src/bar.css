@@ -58,13 +58,16 @@
   /* a fixed bar leaves the flow — body pads itself for the bar's height
      on the matching edge so nothing underneath gets clipped. Set
      --sl-bar-h on :root when restyling the height so this offset
-     follows */
-  body:has([sl-bar="top"][sl-bar-fixed]) {
-    padding-block-start: var(--sl-bar-h, 3.5rem);
-  }
+     follows. Screen only — in print the bar goes static and leftover
+     body padding would read as a blank band on the first page */
+  @media screen {
+    body:has([sl-bar="top"][sl-bar-fixed]) {
+      padding-block-start: var(--sl-bar-h, 3.5rem);
+    }
 
-  body:has([sl-bar="bottom"][sl-bar-fixed]) {
-    padding-block-end: var(--sl-bar-h, 3.5rem);
+    body:has([sl-bar="bottom"][sl-bar-fixed]) {
+      padding-block-end: var(--sl-bar-h, 3.5rem);
+    }
   }
 
   /* a fixed bar is screen furniture — in print it would repeat on

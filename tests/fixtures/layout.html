@@ -122,6 +122,26 @@ const neq = (name, got, bad) => rec(name, got, 'not ' + bad, got !== bad);
 const probe = $('probe');
 const varPx = name => { probe.style.height = `var(${name},0px)`; return probe.getBoundingClientRect().height; };
 const tracks = el => cs(el, 'grid-template-columns').split(' ').filter(s => s.endsWith('px')).length;
+/* walk the loaded sheets (through @layer/@media) — returns the media
+   text of the nearest enclosing @media for the first rule matching
+   sel, or 'top-level'/'missing' */
+const mediaOf = sel => {
+  let found = null;
+  /* CSSStyleRule.cssRules exists (nesting) and is truthy even when
+     empty — match the selector first, then keep walking group rules */
+  const walk = rules => {
+    for (const r of rules) {
+      if (found) return;
+      if (r.selectorText && r.selectorText.includes(sel)) found = r;
+      if (!found && r.cssRules) walk(r.cssRules);
+    }
+  };
+  for (const s of document.styleSheets) { try { walk(s.cssRules); } catch (e) {} }
+  if (!found) return 'missing';
+  let p = found.parentRule;
+  while (p && p.type !== CSSRule.MEDIA_RULE) p = p.parentRule;
+  return p ? p.media.mediaText : 'top-level';
+};
 /* fixed-position anchors resolve against the layout viewport, which
    excludes the scrollbar — documentElement.client* matches it */
 const vw = () => document.documentElement.clientWidth;
@@ -209,6 +229,9 @@ function main() {
     rect('bar-sparse').left + rect('bar-sparse').width / 2, 2);
   near('bar sparse end at right-pad', rect('bs-e').right, rect('bar-sparse').right - varPx('--sl-lg'), 2);
   eq('bar fixed', cs('bar-fix', 'position'), 'fixed');
+  near('fixed top bar pads body', getComputedStyle(document.body).paddingTop, 56, 1);
+  eq('body comp gated to screen', mediaOf('body:has([sl-bar="top"][sl-bar-fixed])'), 'screen');
+  eq('body comp bottom gated to screen', mediaOf('body:has([sl-bar="bottom"][sl-bar-fixed])'), 'screen');
   eq('bar bottom sticky', cs('bar-bot', 'position'), 'sticky');
   eq('bar bottom border-top', cs('bar-bot', 'border-top-width'), '1px');
   near('bar sl-pad=lg block pad', cs('bar-pad', 'padding-top'), varPx('--sl-2xl'));

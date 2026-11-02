@@ -40,7 +40,8 @@ if (!existsSync(CHROMIUM)) {
 function launch(args) {
   return execFileP(
     CHROMIUM,
-    ['--headless', '--disable-gpu', '--no-sandbox', ...args],
+    ['--headless', '--disable-gpu', '--no-sandbox',
+      '--allow-file-access-from-files', ...args],
     { maxBuffer: 64 * 1024 * 1024, timeout: 60_000 },
   );
 }
