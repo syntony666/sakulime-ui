@@ -9,14 +9,17 @@ import * as BarDemos from "../../demos/layout/bar.demo";
 
 # Bar *頁面橫條*
 
-> 頂端或底端的滿寬頁面橫條。值選邊緣，預設捲到邊就黏住，要固定在視窗邊加 `sl-bar-fixed`。內容是 `space-between`：第一個靠左、最後一個靠右。
+> 頂端或底端的滿寬頁面橫條。值選邊緣，預設捲到邊就黏住，要固定在視窗邊加 `sl-bar-fixed`。內容分左、正中間、右三個固定區域，子層標 `sl-bar--start`／`sl-bar--center`／`sl-bar--end` 落位。
 
 ## 用法
 
 ```html
 <div sl-bar="top">
-  <strong>Logo</strong>
-  <a href="#">連結</a>
+  <strong sl-bar--start>Logo</strong>
+  <div sl-bar--end sl-wrap>
+    <a href="#">連結</a>
+    <a href="#">連結</a>
+  </div>
 </div>
 ```
 

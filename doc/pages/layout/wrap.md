@@ -37,3 +37,5 @@ description: 水平排列子元素，放不下就換行，間距由 sl-gap 統�
   <button sl-button>取消</button>
 </div>
 ```
+
+垂直方向看 [`sl-align`](/attrs/align)：子層預設垂直置中，`start` 對齊列頂、`end` 對齊列底。`sl-align` 也能標在單一個子層上讓它離開共同對齊。
