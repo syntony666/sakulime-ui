@@ -47,5 +47,6 @@ import * as AlignDemos from "../../demos/attrs/align.demo";
 | [`sl-wrap`](/layout/wrap) | 子層在列內的垂直位置 | `center` |
 | [`sl-stack`](/layout/stack) | 子層的水平位置 | `stretch`（撐滿） |
 | [`sl-grid`](/layout/grid) | 格子內元素的垂直位置 | `stretch`（撐滿） |
+| [`sl-float`](/layout/float) | 區塊內元素的水平位置 | `stretch` |
 
 容器寫的 `sl-align` 不會傳進巢狀排版元件，每個元件有自己的預設，外層寫的擋不下來也滲不進去。沿著排列方向的分佈看 `sl-justify`。

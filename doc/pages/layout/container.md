@@ -32,7 +32,7 @@ import * as ContainerDemos from "../../demos/layout/container.demo";
   measure="[sl-container]"
 />
 
-巢狀沒有額外效果，塞進窄父層的話裡層只跟父層一樣寬。
+巢狀時寬度上限照樣生效，塞進窄外層的話內層只跟外層一樣寬；但各層會各疊一次左右內距，內容比預期再窄一點。
 
 ## 尺寸
 
@@ -46,4 +46,4 @@ import * as ContainerDemos from "../../demos/layout/container.demo";
 
 ## 內距
 
-左右內距讀 [`sl-pad`](/attrs/pad) 標示（`none`／`sm`／`md`／`lg`），預設等同 `lg`（16px）；改單一容器就覆寫 `--sl-container-pad`，或自己寫 `padding-inline`。覆寫 `--sl-lg` 的話，所有用到它的元素都會跟著變。
+左右內距讀 [`sl-pad`](/attrs/pad) 標示（`none`／`sm`／`md`／`lg`），預設等同 `md`（16px）；改單一容器就覆寫 `--sl-container-pad`，或自己寫 `padding-inline`。覆寫 `--sl-lg` 的話，所有用到它的元素都會跟著變。

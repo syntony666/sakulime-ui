@@ -155,7 +155,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ### 外框 `sl-icon-frame`
 
-`circular` 是圓框，`rounded` 是圓角框，框線顏色與圖示顏色相同。
+`circular` 是圓框，`rounded` 是圓角框，框線顏色與圖示顏色相同。寫 `sl-icon-frame` 不帶值（或帶未識別值）是方框。
 
 <Demo :render="IconDemos.Frames.render" />
 

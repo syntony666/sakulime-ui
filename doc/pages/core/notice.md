@@ -31,7 +31,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### 圓角 `sl-radius`
 
-`sl-notice` 是 `sl-radius` 的適用元件，預設 `full`，膠囊形。這裡的 `full` 半徑最多一個行高，一、二行是全圓膠囊，三行以上兩端保留一行的圓弧、中段變成直線，不會拉長成半圓。其他選項看 [Radius 圓角](/attrs/radius)。
+`sl-notice` 是 `sl-radius` 的適用元件，預設 `full`，膠囊形。這裡的 `full` 半徑約一行高加內距份額，一、二行是全圓膠囊，三行以上兩端保留一行的圓弧、中段變成直線，不會拉長成半圓。其他選項看 [Radius 圓角](/attrs/radius)。
 
 ### 厚度 `sl-pad`
 
@@ -41,7 +41,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### 對齊 `sl-notice-align`
 
-內容的對齊方向，`fit` 時元件跟內容同寬所以沒有差別：
+內容的對齊方向，`fit` 且內容不換行時元件跟內容同寬所以沒有差別：
 
 - 未標示／`start`：靠左（預設）
 - `center`：置中；換行後每一行都置中
@@ -70,7 +70,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 <Playground :meta="NoticeDemos.BannerPlay" :render="NoticeDemos.BannerPlay.render" />
 
-內容切到「多行」看換行。膠囊會變高，`full` 圓角到一行高後中段變直；`end` 對齊時每一行都靠右。圖示寫在內容裡就是行內圖示，換行後還是滿版排下去，不用另外包一層。
+內容切到「多行」看換行。膠囊會變高，`full` 圓角到一行高加內距份額後中段變直；`end` 對齊時每一行都靠右。圖示寫在內容裡就是行內圖示，換行後還是滿版排下去，不用另外包一層。
 
 ### Toast *浮動通知*
 

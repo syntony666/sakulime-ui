@@ -21,11 +21,11 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 </div>
 ```
 
-底層是 `display: grid`，欄數收放由視窗寬度的 media query 驅動。
+底層是 `display: grid`，未標示欄數時由容器寬度自動算出能放幾欄（auto-fill），不用 media query。
 
 ## 欄數
 
-`sl-grid-cols` 把欄數寫死，1 到 12：
+`sl-grid-cols` 把欄數寫死，1 到 12（`auto` 跟未標示一樣，回 auto-fill）：
 
 ```html
 <div sl-grid sl-grid-cols="4">
@@ -41,7 +41,7 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 
 ## 跨欄
 
-`sl-grid--span` 標在子層上，讓它佔好幾欄，2 到 12；未標示或 `sl-grid--span="full"` 不管欄數直接跨滿整列：
+`sl-grid--span` 標在子層上，讓它佔好幾欄，1 到 12；未標示或 `sl-grid--span="full"` 不管欄數直接跨滿整列：
 
 ```html
 <div sl-grid sl-grid-cols="4">

@@ -37,7 +37,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 ### 圓角 `sl-radius`
 
-`sl-card` 是 `sl-radius` 的適用元件，未標示是 `md`。卡片的 `full` 是一行膠囊：半徑最多一個行高，卡片一長高中段就變直線。其他選項看 [Radius 圓角](/attrs/radius)。
+`sl-card` 是 `sl-radius` 的適用元件，未標示是 `md`。卡片的 `full` 是一行膠囊：半徑約一行高加內距份額，卡片一長高中段就變直線。其他選項看 [Radius 圓角](/attrs/radius)。
 
 ### 內距 `sl-pad`
 
@@ -96,7 +96,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 <i sl-card--corner="start" sl-icon="lucide:zap" sl-tone="warning"></i>
 ```
 
-兩種掛法外觀不同：掛 `sl-chip` 是貼著邊的 tab，掛 `sl-dot`／`sl-icon` 是離邊浮起的圓點。角落 chip 調字級用 `sl-size`（`sm`／`md`／`lg`），整顆膠囊等比縮放。
+兩種掛法外觀不同：掛 `sl-chip` 是貼著邊的 tab，掛 `sl-dot`／`sl-icon` 是離邊浮起的圓點。角落 chip 調字級用 [`sl-size`](/attrs/size)，整顆膠囊等比縮放。
 
 <Demo :render="CardDemos.CornerPositions.render" />
 <Demo :render="CardDemos.CornerKinds.render" />
