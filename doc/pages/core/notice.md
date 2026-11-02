@@ -1,6 +1,6 @@
 ---
 title: Notice 通知
-description: 通知膠囊。放進內容是頁面橫幅，包進固定在角落的容器就是浮動通知。
+description: 通知膠囊，放進內容是頁面橫幅，包進固定在角落的容器就是浮動通知。
 ---
 
 <script setup>
@@ -15,7 +15,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ## 型態
 
-寬度是 `sl-notice` 的選項，沒給就是滿版（填滿容器）：
+型態是 `sl-notice` 的選項，未標示就是滿版（填滿容器）：
 
 - `fit`：縮成內容的寬度，浮動通知或配合訊息長度的場合
 
@@ -27,7 +27,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### 顏色 `sl-tone`
 
-`sl-notice` 是 `sl-tone` 的適用元件。沒給是 `primary` 淺底色，資訊通知的標準色。選項看 [Tone 色調](/attrs/tone)。
+`sl-notice` 是 `sl-tone` 的適用元件。未標示是 `primary` 淺底色，資訊通知的標準色。選項看 [Tone 色調](/attrs/tone)。
 
 ### 圓角 `sl-radius`
 
@@ -35,7 +35,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### 厚度 `sl-pad`
 
-沒給是 `sm`。`md`／`lg` 是整體內距的增減，`lg` 適合公告型的多行內容。選項看 [Pad 內距](/attrs/pad)。
+未標示是 `sm`。`md`／`lg` 是整體內距的增減，`lg` 適合公告型的多行內容。選項看 [Pad 內距](/attrs/pad)。
 
 ## 元件設定
 
@@ -43,7 +43,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 內容的對齊方向，`fit` 時元件跟內容同寬所以沒有差別：
 
-- 沒給／`start`：靠左（預設）
+- 未標示／`start`：靠左（預設）
 - `center`：置中；換行後每一行都置中
 - `end`：靠右；換行後每一行都靠右
 
@@ -56,7 +56,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 固定在邊緣的控制項，例如關閉鈕或動作連結，點擊後的行為由頁面實作：
 
 - 寫在 `sl-notice` 的直接子層；放到更深層的只是普通內容，不會固定到邊緣
-- 沒給靠右（行尾），`start` 靠左（行首），兩個可以同時存在
+- 未標示靠右（行尾），`start` 靠左（行首），兩個可以同時存在
 - 垂直置中，文字不會繞到它底下；控制項更寬時調大 `--sl-notice-action-w`
 - 裡面的 `<i>` 跟著按鈕字級，加大用 `sl-icon-size`
 
@@ -74,6 +74,6 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### Toast *浮動通知*
 
-放在哪個角落、怎麼疊、什麼時候消失，由頁面決定：
+放在哪個角落、怎麼疊、什麼時候消失，由頁面決定；角落容器看 [Float 角落區](/layout/float)：
 
 <Playground :meta="NoticeDemos.ToastPlay" :render="NoticeDemos.ToastPlay.render" />

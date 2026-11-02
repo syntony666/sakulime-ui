@@ -38,10 +38,10 @@ px 以根字級 16px 換算，刻度本身是 rem：
 
 ## 適用元件
 
-沒給的話都是 `md`，`sl-notice` 例外：
+未標示的話都是 `md`，`sl-notice` 例外：
 
 | 元件 | 預設 |
 | --- | --- |
-| `sl-button` | `md` |
-| `sl-card` | `md` |
-| `sl-notice` | `full`（膠囊形） |
+| [[`sl-button`](/core/button)](/core/button) | `md` |
+| [[`sl-card`](/core/card)](/core/card) | `md` |
+| [[`sl-notice`](/core/notice)](/core/notice) | `full`（膠囊形） |

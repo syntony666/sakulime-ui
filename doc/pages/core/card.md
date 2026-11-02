@@ -15,7 +15,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 ## 型態
 
-型態是 `sl-card` 的選項，沒給就是一般卡片：
+型態是 `sl-card` 的選項，未標示就是一般卡片：
 
 ```html
 <div sl-card="hollow">…</div>
@@ -37,15 +37,15 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 ### 圓角 `sl-radius`
 
-`sl-card` 是 `sl-radius` 的適用元件，沒給是 `md`。卡片的 `full` 是一行膠囊：半徑最多一個行高，卡片一長高中段就變直線。其他選項看 [Radius 圓角](/attrs/radius)。
+`sl-card` 是 `sl-radius` 的適用元件，未標示是 `md`。卡片的 `full` 是一行膠囊：半徑最多一個行高，卡片一長高中段就變直線。其他選項看 [Radius 圓角](/attrs/radius)。
 
 ### 內距 `sl-pad`
 
-`sl-card` 是 `sl-pad` 的適用元件，沒給是 `md`。選項看 [Pad 內距](/attrs/pad)。
+`sl-card` 是 `sl-pad` 的適用元件，未標示是 `md`。選項看 [Pad 內距](/attrs/pad)。
 
 ### 互動 `sl-interactive`
 
-整張卡片看起來可以點，游標變成手指，滑鼠移過去就有反應。`sl-interactive` 不給值是 `grow`，效果選項看 [Interactive 互動](/attrs/interactive)。
+整張卡片看起來可以點，游標變成手指，滑鼠移過去就有反應。`sl-interactive` 未標示是 `grow`，效果選項看 [Interactive 互動](/attrs/interactive)。
 
 點擊要跳頁的話，屬性寫在 `<a>` 上，卡片本身就是連結：
 
@@ -72,7 +72,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 ### 角落標記 `sl-card--corner`
 
-把元素固定在卡片角落，適合時間、狀態、數字這類補充資訊。`sl-card--corner` 定位置，外觀由同一個元素上的小元件屬性決定：
+把元素固定在卡片角落，適合時間、狀態、數字這類補充資訊。`sl-card--corner` 定位置：`start` 是開始那側、`end` 是結束那側，中文書寫就是左、右。外觀由同一個元素上的小元件屬性決定：
 
 ```html
 <div sl-card>
@@ -85,10 +85,10 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 位置只有上緣兩側：
 
-- 沒給／`end`：右上
+- 未標示／`end`：右上
 - `start`：左上
 
-內容組合，`sl-chip` 文字膠囊、`sl-dot` 狀態點、`sl-icon` 圖示都可以放；`sl-tone` 寫在同一個元素上染色：
+內容組合，[`sl-chip`](/core/chip) 文字膠囊、[`sl-dot`](/core/dot) 狀態點、[`sl-icon`](/core/icon) 圖示都可以放；`sl-tone` 寫在同一個元素上染色：
 
 ```html
 <span sl-card--corner sl-chip sl-tone="primary">200ms</span>
@@ -96,7 +96,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 <i sl-card--corner="start" sl-icon="lucide:zap" sl-tone="warning"></i>
 ```
 
-角落 chip 調字級用 `sl-size`（`sm`/`md`/`lg`），整顆膠囊等比縮放。
+兩種掛法外觀不同：掛 `sl-chip` 是貼著邊的 tab，掛 `sl-dot`／`sl-icon` 是離邊浮起的圓點。角落 chip 調字級用 `sl-size`（`sm`／`md`／`lg`），整顆膠囊等比縮放。
 
 <Demo :render="CardDemos.CornerPositions.render" />
 <Demo :render="CardDemos.CornerKinds.render" />
@@ -135,7 +135,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 #### 空白 `blank`
 
-沒有框線、內容完全置中的區塊，用來放空狀態、上傳區或查無結果。裡面用 `strong` 寫標題、`p` 寫說明，按鈕放 `sl-button`，不用另外加 class：
+內容完全置中的區塊，用來放空白狀態、上傳區或查無結果；作為第一個區塊時沒有框線。裡面用 `strong` 寫標題、`p` 寫說明，按鈕放 `sl-button`，不用另外加 class：
 
 ```html
 <div sl-card="hollow">

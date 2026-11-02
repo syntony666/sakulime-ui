@@ -34,11 +34,11 @@ import * as InteractiveDemos from "../../demos/attrs/interactive.demo";
 
 ## 適用元件
 
-`sl-button` 是特例，沒標示時 hover 本來就是 `grow`：
+`sl-button` 是特例，未標示時 hover 本來就是 `grow`：
 
-| 元件 | 沒標示時 |
+| 元件 | 未標示時 |
 | --- | --- |
-| `sl-card` | 沒有 hover 效果 |
-| `sl-button` | hover 就是 `grow` 放大 |
-| `sl-chip` | 沒有 hover 效果 |
-| `sl-notice` | 沒有 hover 效果；`shadow`／`lift` 的陰影疊在浮框外，不會蓋掉框線 |
+| [[`sl-card`](/core/card)](/core/card) | 沒有 hover 效果 |
+| [[`sl-button`](/core/button)](/core/button) | hover 就是 `grow` 放大 |
+| [[`sl-chip`](/core/chip)](/core/chip) | 沒有 hover 效果 |
+| [[`sl-notice`](/core/notice)](/core/notice) | 沒有 hover 效果；`shadow`／`lift` 的陰影疊在浮框外，不會蓋掉框線 |

@@ -3,7 +3,7 @@ title: 開始使用
 description: sl-* 屬性加在標籤上，--sl-* 變數管顏色跟尺寸，原本的 class 不用動。
 ---
 
-# Sakulime UI
+# 開始使用
 
 > 用最簡單的方式，讓你的介面變得不再單調
 
@@ -27,7 +27,7 @@ import "sakulime-ui/sakulime.min.css";
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakulime-ui/dist/sakulime.min.css" />
 ```
 
-`import` 和 `<link>` 的寫法不同。`import` 走套件 `exports` 公布的子路徑，寫 `sakulime-ui/sakulime.min.css`；CDN 網址是發布檔的實際位置，路徑帶 `dist/`。檔案路徑不能拿去 `import`，exports 子路徑貼進瀏覽器也找不到檔案。
+`import` 和 `<link>` 的寫法不同。`import` 走套件 `exports` 公布的子路徑，寫 `sakulime-ui/sakulime.min.css`；CDN 網址是發布檔的實際位置，路徑帶 `dist/`。檔案路徑不能拿去 `import`，`exports` 子路徑貼進瀏覽器也找不到檔案。
 
 個別套件的說明：
 
@@ -53,7 +53,9 @@ import "sakulime-ui/sakulime.min.css";
 </html>
 ```
 
-主題由 `<html>` 上的 `data-theme` 決定，沒給就是 `sakulime`。其他主題和切換方式看[主題](/theme)。
+主題由 `<html>` 上的 `data-theme` 決定，未標示就是 `sakulime`。其他主題和切換方式看[主題](/theme)。
+
+屬性有四種形式，規則跟文法細節看[屬性總覽](/attrs)。
 
 ## 全域基底樣式
 

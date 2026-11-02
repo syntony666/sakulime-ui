@@ -34,13 +34,13 @@ import * as ToneDemos from "../../demos/attrs/tone.demo";
 
 ## 適用元件
 
-沒給的話，各元件的預設不同：
+未標示的話，各元件的預設不同：
 
 | 元件 | 預設 |
 | --- | --- |
-| `sl-button` | `primary` |
-| `sl-card` | `primary`，只染邊緣強調條，不動卡片底色 |
-| `sl-icon` | 繼承文字顏色 |
-| `sl-dot` | 繼承文字顏色 |
-| `sl-chip` | 中性底色，由文字顏色調出 |
-| `sl-notice` | `primary` 淺底色 |
+| [[`sl-button`](/core/button)](/core/button) | `primary` |
+| [[`sl-card`](/core/card)](/core/card) | `primary`，只染邊緣強調條，不動卡片底色 |
+| [[`sl-icon`](/core/icon)](/core/icon) | 繼承文字顏色 |
+| [[`sl-dot`](/core/dot)](/core/dot) | 繼承文字顏色 |
+| [[`sl-chip`](/core/chip)](/core/chip) | 中性底色，由文字顏色調出 |
+| [[`sl-notice`](/core/notice)](/core/notice) | `primary` 淺底色 |
