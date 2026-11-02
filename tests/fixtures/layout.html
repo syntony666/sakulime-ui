@@ -14,6 +14,9 @@
 <div sl-container id="cont-def"><span>c</span></div>
 <div sl-container="sm" id="cont-sm"><span>c</span></div>
 <div sl-container="lg" id="cont-lg"><span>c</span></div>
+<div sl-container sl-pad="sm" id="cont-pad"><span>c</span></div>
+<div sl-container sl-pad="none" id="cont-padn"><span>c</span></div>
+<div sl-card sl-pad="sm"><div sl-container id="cont-seal"><span>c</span></div></div>
 
 <!-- stack: gap comes from sl-gap only -->
 <div sl-stack id="st-def"><div id="st-c1">a</div><div>b</div></div>
@@ -192,6 +195,10 @@ const vh = () => document.documentElement.clientHeight;
 
 function main() {
   /* ---- container ---- */
+  near('container def pad = --sl-lg', cs('cont-def', 'padding-left'), varPx('--sl-lg'));
+  near('container sl-pad=sm', cs('cont-pad', 'padding-left'), varPx('--sl-md'));
+  eq('container sl-pad=none', cs('cont-padn', 'padding-left'), '0px');
+  near('container sealed from card sl-pad', cs('cont-seal', 'padding-left'), varPx('--sl-lg'));
   near('container def max-w = --sl-container-md', cs('cont-def', 'max-width'), varPx('--sl-container-md'));
   near('container sm max-w = --sl-container-sm', cs('cont-sm', 'max-width'), varPx('--sl-container-sm'));
   near('container lg max-w = --sl-container-lg', cs('cont-lg', 'max-width'), varPx('--sl-container-lg'));

@@ -6,7 +6,10 @@
     inline-size: 100%;
     max-inline-size: var(--sl-container-md);
     margin-inline: auto;
-    padding-inline: var(--sl-container-pad, var(--sl-lg));
+    /* self-default --sl-pad so an ancestor's sl-pad can't leak in —
+       --sl-container-pad is the per-element override on top of it */
+    --sl-pad: var(--sl-lg);
+    padding-inline: var(--sl-container-pad, var(--sl-pad));
   }
 
   [sl-container="sm"] {
@@ -16,4 +19,13 @@
   [sl-container="lg"] {
     max-inline-size: var(--sl-container-lg);
   }
+}
+
+@layer attrs {
+  /* sl-pad on container — edge gutter; same value→slot mapping as
+     generic.css's pad rules */
+  [sl-container][sl-pad="none"] { --sl-pad: 0; }
+  [sl-container][sl-pad="sm"]   { --sl-pad: var(--sl-md); }
+  [sl-container][sl-pad="md"]   { --sl-pad: var(--sl-lg); }
+  [sl-container][sl-pad="lg"]   { --sl-pad: var(--sl-2xl); }
 }
