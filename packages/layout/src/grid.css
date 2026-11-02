@@ -1,22 +1,15 @@
 @layer theme {
-  /* column floor default — declared once on :root so every read site
-     uses a bare var(); write --sl-grid-min yourself to override */
+  /* column floor default — write --sl-grid-min to override */
   :root { --sl-grid-min: 14rem; }
 }
 
 @layer base {
-  /* grid — auto-fill columns by default; --sl-grid-min is the column
-     floor (14rem out of the box) and min() keeps a narrower container
-     overflow-free.
-     sl-grid-cols swaps the auto-fill count for an explicit count. The
-     private vars self-default here: self-defaulting seals an
-     ancestor's sl-grid-cols from leaking into a nested grid */
+  /* grid — auto-fill by default; min() keeps a narrower container
+     overflow-free. sl-grid-cols swaps the count for explicit tracks */
   [sl-grid] {
-    /* per-level slots: undeclared levels sit at 12 so they can't raise
-       the resolved count. --_n is the min of every declared count —
-       a narrower breakpoint can only shrink tracks, never grow them.
-       --_cap rides --_n so spans clamp to the narrowest declared
-       count (12 in pure auto-fill, same as before) */
+    /* per-level counts sit at 12 when undeclared — --_n is the min,
+       so a narrower breakpoint can only shrink tracks, never grow;
+       --_cap clamps spans to the same resolved count */
     --_cb: 12;
     --_cl: 12;
     --_cm: 12;
@@ -25,12 +18,9 @@
     --_cols: auto-fill;
     --_cap: var(--_n);
     --_gf: min(var(--sl-grid-min), 100%);
-    /* self-default the justify slot so an ancestor's sl-justify
-       can't leak in — grid reads it as justify-items (per-cell
-       inline placement), not distribution */
+    /* grid reads sl-justify as justify-items, sl-align as
+       align-items — self-defaults seal ancestor writes */
     --sl-justify: stretch;
-    /* same seal for the block-axis slot — grid reads sl-align as
-       align-items (per-cell block placement) */
     --sl-align: stretch;
     display: grid;
     gap: var(--sl-grid-gap, var(--sl-gap, var(--sl-md)));
@@ -43,30 +33,16 @@
     min-inline-size: 0;
   }
 
-  /* sl-justify on a cell child is per-cell inline placement —
-     justify-self. Only children carrying the attr get it, so the
-     container's own sl-justify can't double-apply through
-     inheritance */
   [sl-grid] > [sl-justify] {
     justify-self: var(--sl-justify);
   }
 
-  /* sl-align on a cell child is per-cell block placement —
-     align-self; same attr-scoped rule as justify-self */
   [sl-grid] > [sl-align] {
     align-self: var(--sl-align);
   }
 
-  /* sl-grid--span — a grid child takes N tracks, clamped to --_cap.
-     The cap is the resolved min of declared counts; in auto-fill
-     mode it stays 12 and a span wider than the container's
-     actual tracks still spawns implicit tracks — "full" (or an
-     explicit count) is the safe full row there. "1" is one track;
-     bare, "full", and any out-of-vocabulary value span every track
-     in either mode — the presence rule comes first so a known
-     value wins the tie. The explicit "full" rule below repeats
-     1 / -1 on purpose: it keeps the word documented vocabulary
-     rather than an out-of-vocabulary fallback */
+  /* span clamps to --_cap; bare or out-of-vocabulary spans every
+     track — the presence rule precedes so a known value wins */
   [sl-grid] > [sl-grid--span] { grid-column: 1 / -1; }
   [sl-grid] > [sl-grid--span="1"]  { grid-column: span 1; }
   [sl-grid] > [sl-grid--span="2"]  { grid-column: span min(2, var(--_cap)); }
@@ -84,16 +60,9 @@
 }
 
 @layer attrs {
-  /* sl-grid-cols — explicit track count. Each level only writes its
-     own private slot; --_n resolves the min so a narrower level can
-     never exceed a wider declaration (cols="8" md="4" sm="6" yields
-     4 below 45rem). --_gf drops to a zero floor so tracks size to
-     share — unbreakable cell content overflows its own cell instead
-     of the grid overflowing the container (the same squash contract
-     as the children's min-inline-size:0 above). "auto" releases the
-     level back to auto-fill — it
-     restores the column floor and leaves its slot at 12 so it
-     doesn't clamp; narrower levels can still declare counts */
+  /* sl-grid-cols — explicit count per level; "auto" releases it back
+     to auto-fill. --_gf drops to 0 so tracks size to share —
+     unbreakable content overflows its cell, not the grid */
   [sl-grid][sl-grid-cols="auto"] { --_cols: auto-fill; --_gf: min(var(--sl-grid-min), 100%); }
   [sl-grid][sl-grid-cols="1"]  { --_cb: 1;  --_cols: var(--_n); --_gf: 0; }
   [sl-grid][sl-grid-cols="2"]  { --_cb: 2;  --_cols: var(--_n); --_gf: 0; }
@@ -108,10 +77,8 @@
   [sl-grid][sl-grid-cols="11"] { --_cb: 11; --_cols: var(--_n); --_gf: 0; }
   [sl-grid][sl-grid-cols="12"] { --_cb: 12; --_cols: var(--_n); --_gf: 0; }
 
-  /* sl-grid-cols-<bp> — the track count at narrower widths; breakpoints
-     mirror the container scale (lg <75rem, md <60rem, sm <45rem — the
-     hardcoded twins of --sl-container-*). Blocks run wide to narrow so
-     the smallest hit wins --_cols/--_gf at equal specificity */
+  /* breakpoints mirror the container scale — media queries can't
+     read vars so the --sl-container-* twins stay hardcoded */
   @media (width < 75rem) {
     [sl-grid][sl-grid-cols-lg="auto"] { --_cols: auto-fill; --_gf: min(var(--sl-grid-min), 100%); }
     [sl-grid][sl-grid-cols-lg="1"]  { --_cl: 1;  --_cols: var(--_n); --_gf: 0; }

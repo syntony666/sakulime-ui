@@ -1,12 +1,9 @@
 @layer base {
-  /* content — prose column. Children keep normal block layout, but
-     the column rewrites their margins: sibling gaps come from the
-     rhythm below, and edge children lose their outer margin so a
-     heading's own margin can't thicken the top or the bottom */
+  /* content — prose column; the container rewrites child margins so
+     the rhythm is the only gap story and edge children can't thicken
+     the ends */
   [sl-content] {
     display: block;
-    /* resolved once here — children read the inherited private var
-       instead of re-walking the fallback chain */
     --_g: var(--sl-content-gap, var(--sl-gap, var(--sl-md)));
   }
 

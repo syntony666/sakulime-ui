@@ -1,7 +1,6 @@
-/* per-primitive gap slots are element-scoped — an outer sl-stack-gap
-   must not leak its value into a nested stack. syntax:"*" with no
-   initial-value leaves an unset slot guaranteed-invalid, so the var()
-   fallbacks in the gap chains still fire */
+/* per-primitive gap slots are element-scoped — an outer write must
+   not leak into a nested primitive. syntax:"*" with no initial-value
+   leaves unset slots guaranteed-invalid so var() fallbacks fire */
 @property --sl-stack-gap   { syntax: "*"; inherits: false; }
 @property --sl-content-gap { syntax: "*"; inherits: false; }
 @property --sl-wrap-gap    { syntax: "*"; inherits: false; }
@@ -11,9 +10,7 @@
 @property --sl-bar-gap     { syntax: "*"; inherits: false; }
 
 @layer attrs {
-  /* sl-gap — the only spacing attribute. It sets the inherited --sl-gap
-     slot, so writing it on a primitive or any ancestor reaches every
-     gap-reading chain inside; the nearest write wins */
+  /* sl-gap sets the inherited --sl-gap; the nearest write wins */
   [sl-gap="none"] { --sl-gap: 0; }
   [sl-gap="xs"]  { --sl-gap: var(--sl-xs); }
   [sl-gap="sm"]  { --sl-gap: var(--sl-sm); }

@@ -1,10 +1,7 @@
 @layer attrs {
-  /* sl-align — cross-axis placement for flow primitives. Each
-     consumer self-defaults --sl-align in base, so the attr counts
-     only when written on the primitive itself or on one of its
-     direct children — an ancestor's write can't leak past that
-     default. Wrap, stack, and float read it as align-items; on a
-     wrap or stack child it becomes an align-self override */
+  /* sl-align — cross-axis slot; wrap/stack/float read it as
+     align-items, on a grid cell or wrap/stack child it becomes a
+     self override */
   [sl-align="start"]   { --sl-align: start; }
   [sl-align="center"]  { --sl-align: center; }
   [sl-align="end"]     { --sl-align: end; }

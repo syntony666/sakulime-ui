@@ -1,58 +1,42 @@
 @layer theme {
-  /* band height default — declared once on :root; the body's
-     fixed-bar compensation below inherits the same value */
+  /* band height default — write --sl-bar-h to override */
   :root { --sl-bar-h: 3.5rem; }
 }
 
 @layer base {
-  /* bar — a full-width band at either page edge. Three fixed zones:
-     left / dead-center / right — children claim a zone with the
-     sl-bar--start|--center|--end parts; unmarked children auto-fill
-     the columns in source order. The middle column is auto-width so
-     center content is always dead-center no matter what the sides
-     hold. The value picks the edge and sticks there by default;
-     bare sl-bar is a plain in-flow band. sl-bar-fixed pins to the
-     viewport edge */
+  /* bar — full-width band with three fixed zones: start / dead-center
+     / end. Children claim a zone with the sl-bar--* parts, unmarked
+     children auto-fill in source order. The middle column is auto so
+     center content stays dead-center whatever the sides hold */
   [sl-bar] {
     box-sizing: border-box;
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
     gap: var(--sl-bar-gap, var(--sl-gap, var(--sl-md)));
-    /* 3.5rem default — the standard band height, declared on :root
-       above so the body's fixed-bar compensation reads the same value */
     min-block-size: var(--sl-bar-h);
-    /* self-default --sl-pad so an ancestor's sl-pad can't leak in —
-       the attr on the bar itself still wins by specificity */
     --sl-pad: var(--sl-md);
-    /* resolved once — the bottom bar's safe-area padding reads the
-       same value through the private var */
     --_bp: var(--sl-bar-pad-block, var(--sl-pad));
     padding-block: var(--_bp);
-    /* physical padding sides, not inline — env() values are physical
-       too, so landscape notches clear the start/end zones in either
-       writing direction */
+    /* physical sides, not inline — env() values are physical too, so
+       landscape notches clear the zones in either direction */
     padding-left: calc(
       var(--sl-bar-pad-inline, var(--sl-lg)) + env(safe-area-inset-left, 0px)
     );
     padding-right: calc(
       var(--sl-bar-pad-inline, var(--sl-lg)) + env(safe-area-inset-right, 0px)
     );
-    /* hex fallbacks keep the package usable without the theme — the
-       same convention as --sl-border below; tune via the token, not
-       the literal */
+    /* hex fallbacks keep the package usable without the theme */
     background: var(--sl-bg, #ffffff);
   }
 
-  /* zone children squash below their content width — without this a
-     zone holding unbreakable content overflows its track and can
-     overlap the centered column */
+  /* zones squash below content width — unbreakable content can't
+     push its track over the centered column */
   [sl-bar] > * {
     min-inline-size: 0;
   }
 
-  /* zone parts — a marked child claims its column and alignment.
-     Siblings landing in the same zone spill into a new row: wrap
+  /* siblings landing in the same zone spill into a new row — wrap
      them in one child (sl-wrap) instead */
   [sl-bar] > [sl-bar--start]  { grid-column: 1; justify-self: start; }
   [sl-bar] > [sl-bar--center] { grid-column: 2; justify-self: center; }
@@ -67,15 +51,12 @@
   [sl-bar="top"] {
     inset-block-start: 0;
     border-block-end: 1px solid var(--sl-border, #e5e7eb);
-    /* notch clearance — mirrors the bottom bar's home-indicator
-       padding; env() is 0 on non-notched viewports */
     padding-block-start: calc(var(--_bp) + env(safe-area-inset-top, 0px));
   }
 
   [sl-bar="bottom"] {
     inset-block-end: 0;
     border-block-start: 1px solid var(--sl-border, #e5e7eb);
-    /* home-indicator clearance on phones; env() is 0 elsewhere */
     padding-block-end: calc(var(--_bp) + env(safe-area-inset-bottom, 0px));
   }
 
@@ -85,11 +66,9 @@
     inset-inline: 0;
   }
 
-  /* a fixed bar leaves the flow — body pads itself for the bar's height
-     on the matching edge so nothing underneath gets clipped. Set
-     --sl-bar-h on :root when restyling the height so this offset
-     follows. Screen only — in print the bar goes static and leftover
-     body padding would read as a blank band on the first page */
+  /* a fixed bar leaves the flow — body pads itself for the bar's
+     height on the matching edge. Screen only: in print the bar goes
+     static and leftover padding would read as a blank band */
   @media screen {
     body:has([sl-bar="top"][sl-bar-fixed]) {
       padding-block-start: calc(
@@ -104,8 +83,6 @@
     }
   }
 
-  /* a fixed bar is screen furniture — in print it would repeat on
-     every page and cover the sheet */
   @media print {
     [sl-bar][sl-bar-fixed] {
       position: static;

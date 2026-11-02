@@ -1,13 +1,8 @@
 @layer base {
-  /* wrap — horizontal run that wraps; tag rows, button groups. Children
-     keep content width and wrap; min-inline-size keeps a squishy child
-     from blowing the line out */
+  /* wrap — horizontal run that wraps; tag rows, button groups */
   [sl-wrap] {
     display: flex;
     flex-wrap: wrap;
-    /* self-default the axis slots so an ancestor's sl-align or
-       sl-justify can't leak in — the attrs only count on the wrap
-       itself */
     --sl-align: center;
     align-items: var(--sl-align);
     --sl-justify: start;
@@ -19,8 +14,6 @@
     min-inline-size: 0;
   }
 
-  /* sl-align on a child is per-item cross-axis placement — only
-     children carrying the attr get the self override */
   [sl-wrap] > [sl-align] {
     align-self: var(--sl-align);
   }

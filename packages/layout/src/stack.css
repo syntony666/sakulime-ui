@@ -1,14 +1,10 @@
 @layer base {
-  /* stack — vertical run. The parent owns spacing: direct children
-     lose their block margins so the gap is the whole story */
+  /* stack — vertical run; the parent owns the spacing so children
+     lose their block margins */
   [sl-stack] {
     display: flex;
     flex-direction: column;
-    /* self-default the axis slots so an ancestor's sl-align or
-       sl-justify can't leak in — the attrs count on the stack itself,
-       and sl-align on a direct child overrides per item below.
-       justify is vertical distribution: only visible when the
-       stack is taller than its content */
+    /* self-defaults seal ancestor axis writes */
     --sl-align: stretch;
     align-items: var(--sl-align);
     --sl-justify: start;
@@ -20,8 +16,6 @@
     margin-block: 0;
   }
 
-  /* sl-align on a child is per-item horizontal placement — only
-     children carrying the attr get the self override */
   [sl-stack] > [sl-align] {
     align-self: var(--sl-align);
   }
