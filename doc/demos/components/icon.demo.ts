@@ -58,7 +58,6 @@ export const Icon: Demo = {
     `></i>`,
 };
 
-// 1em — the icon tracks the font-size of whatever it sits inside
 const SIZES = [14, 16, 20, 28];
 export const Sizes: Demo = {
   render: () =>
@@ -67,8 +66,6 @@ export const Sizes: Demo = {
     ),
 };
 
-// pasted SVG — no JS at all: sl-icon on the svg itself makes it ride
-// the text baseline at 1em like the <i> placeholders do
 export const Svg: Demo = {
   render: () =>
     `<p>圖示包複製的 SVG ` +
@@ -76,7 +73,6 @@ export const Svg: Demo = {
     ` 貼進來就生效</p>`,
 };
 
-// mid-sentence — the icon rides the text baseline
 export const Inline: Demo = {
   render: () =>
     `<p>他很壞 <i sl-icon="lucide:megaphone" sl-tone="danger"></i>` +
@@ -84,7 +80,6 @@ export const Inline: Demo = {
     ` 嘟<i sl-icon="lucide:arrow-up-right"></i> 嘟<i sl-icon="lucide:arrow-right"></i> 嘟<i sl-icon="lucide:arrow-down-right"></i></p>`,
 };
 
-// icons inside real components inherit their ink
 export const InContext: Demo = {
   render: () =>
     axis(["plus", "trash"], (v) =>
@@ -94,7 +89,6 @@ export const InContext: Demo = {
     ),
 };
 
-// modifiers — namespaced attrs alongside the marker; "-" is bare
 export const ModSizes: Demo = {
   render: () =>
     axis(["-", "sm", "lg", "xl", "2xl"], (v) =>
@@ -102,7 +96,6 @@ export const ModSizes: Demo = {
     ),
 };
 
-// trending-up reads clearly under flips and rotations
 export const Transforms: Demo = {
   render: () =>
     axis(
@@ -138,9 +131,6 @@ export const Disabled: Demo = {
     ),
 };
 
-// lyric line — each icon sits where its margin side reads naturally:
-// mid-phrase takes both sides, a line-end icon only needs start, and
-// a word-leading icon only needs end
 export const Spaced: Demo = {
   render: () =>
     `<p>喔愛<i sl-icon="lucide:heart" sl-icon-space></i>` +
@@ -149,8 +139,6 @@ export const Spaced: Demo = {
     `那欸價逆<i sl-icon="lucide:heart" sl-icon-space="start"></i>可愛</p>`,
 };
 
-// card + corner + icon — the icon pins itself to the corner and
-// sl-tone on it recolors; a plain icon in the title just rides the ink
 export const InCard: Demo = {
   render: () =>
     `<div sl-card style="width: 300px">` +

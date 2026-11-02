@@ -28,7 +28,6 @@ export const Chip: Demo = {
     `<span sl-chip${attr("sl-tone", a.tone)}${attr("sl-size", a.size)}>標籤</span>`,
 };
 
-// the chip is em-based — it tracks the font-size of whatever it sits inside
 const FONT_SIZES = [14, 16, 20, 28];
 export const Sizes: Demo = {
   render: () =>
@@ -60,8 +59,6 @@ export const MetaRow: Demo = {
     `</div>`,
 };
 
-// sl-card--corner pins the chip to a card corner — metric labels,
-// badges; same element carries both attrs
 export const InCorner: Demo = {
   render: () =>
     `<div sl-card style="width: 240px">` +

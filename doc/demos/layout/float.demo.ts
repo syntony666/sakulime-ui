@@ -4,8 +4,6 @@ const meta = {} satisfies Meta;
 export default meta;
 type Demo = DemoObj;
 
-// position overridden to static — a live fixed container would pin to the
-// real viewport; what matters here is the width and the stacking gap
 export const Float: Demo = {
   render: () =>
     `<div sl-float style="position: static">` +
@@ -14,9 +12,6 @@ export const Float: Demo = {
     `</div>`,
 };
 
-// the six corners in one stage — position: absolute stands in for
-// fixed so the boxes stay inside the demo; real usage pins to the
-// viewport edges
 export const Corners: Demo = {
   render: () =>
     `<div style="position: relative; height: 11rem; border: 1px dashed var(--sl-border); border-radius: var(--sl-sm)">` +

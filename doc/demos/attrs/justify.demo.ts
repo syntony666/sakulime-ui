@@ -12,8 +12,6 @@ const frame = (caption: string, inner: string) =>
   `<div class="demo-cell"><span class="demo-w" data-demo>${caption}</span>` +
   `<div style="margin-top: var(--sl-sm)">${inner}</div></div>`;
 
-// the same wrap distributed four ways — the fixed width makes the
-// placement visible inside the frame
 export const Justify: Demo = {
   render: () =>
     axis(["start", "center", "end", "between", "around", "evenly"], (v) =>

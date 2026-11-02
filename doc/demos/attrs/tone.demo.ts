@@ -10,7 +10,6 @@ const frame = (caption: string, inner: string) =>
   `<div class="demo-cell"><span class="demo-w" data-demo>${caption}</span>` +
   `<div style="margin-top: var(--sl-sm)">${inner}</div></div>`;
 
-// one value, five elements — the cross-element consistency is the point
 export const Tones: Demo = {
   render: () =>
     axis(TONES, (v) =>

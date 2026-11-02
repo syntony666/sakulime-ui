@@ -4,8 +4,6 @@ const meta = {} satisfies Meta;
 export default meta;
 type Demo = DemoObj;
 
-// the column owns the rhythm — children lose their margins and stretch
-// to full width, so the declared gap is the gap you get
 export const Rhythm: Demo = {
   render: () =>
     `<div sl-stack>` +

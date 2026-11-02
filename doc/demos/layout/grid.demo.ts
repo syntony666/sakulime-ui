@@ -7,8 +7,6 @@ type Demo = DemoObj;
 const cells = (n = 6) =>
   Array.from({ length: n }, (_, i) => `<div class="demo-cell">項目 ${i + 1}</div>`).join("");
 
-// explicit columns + spans — the spanning cells carry real text so the
-// reader sees them take two and three tracks respectively
 export const Cols: Demo = {
   render: () =>
     `<div class="demo-cell"><span class="demo-w" data-demo>sl-grid-cols="4"</span>` +
@@ -38,9 +36,6 @@ export const MinWidth: Demo = {
     `</div>`,
 };
 
-// container-level vs child-level alignment — sl-justify feeds
-// justify-items (here center shrinks each cell to its text); a marked
-// child leaves the common alignment through justify-self
 export const Aligns: Demo = {
   render: () =>
     `<div class="demo-cell"><span class="demo-w" data-demo>sl-grid sl-justify="center" + 一格 sl-justify="end"</span>` +

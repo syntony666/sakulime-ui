@@ -10,21 +10,16 @@ const props = withDefaults(
     args?: Record<string, unknown>;
     code?: boolean;
     pad?: boolean;
-    // selector for live elements to size-annotate — each match's .demo-w
-    // badge shows the element's rendered width in px
     measure?: string;
   }>(),
   { code: true, pad: true },
 );
 
 // args may be unbound for static demos — render({}) must not crash and
-// take the whole page down with it
 const html = computed(() => props.render(props.args ?? {}));
 const plain = computed(() => showMarkup(html.value));
 const source = computed(() => highlightMarkup(plain.value));
 
-// axis dumps run 25-40 lines for a one-token delta — collapse those;
-// short snippets (playground output) stay open as living evidence
 const COLLAPSE_LINES = 14;
 const lineCount = computed(() => plain.value.split("\n").length);
 const collapsible = computed(() => lineCount.value > COLLAPSE_LINES);
@@ -42,8 +37,6 @@ const copy = async () => {
 
 const host = ref<HTMLElement | null>(null);
 
-// one parsed sheet shared by every demo stage — a per-shadow <style>
-// node would re-parse the same css for each of ~40 demos on a page
 let sharedSheet: CSSStyleSheet | undefined;
 const stageSheet = () => {
   sharedSheet ??= (() => {
@@ -54,8 +47,6 @@ const stageSheet = () => {
   return sharedSheet;
 };
 
-// render inside a shadow root — the page's unlayered resets would
-// otherwise beat the whole sl layer system (theme < base < attrs)
 onMounted(() => {
   const root = host.value!.attachShadow({ mode: "open" });
   try {
@@ -79,7 +70,6 @@ onMounted(() => {
     async (v) => {
       stage.innerHTML = v;
       // the document observer can't see into shadow roots — demos
-      // resolve their own <i sl-icon="pack:name"> placeholders
       resolveIcons(stage);
       await nextTick();
       measure();

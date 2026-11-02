@@ -1,4 +1,3 @@
-/* these exports resolve to source files, not dist — edits go live */
 @import url(@sakulime-ui/shared/vars.css);
 @import url(@sakulime-ui/theme/sakulime.css);
 @import url(@sakulime-ui/theme/terra.css);
@@ -26,11 +25,6 @@
   --vp-c-text-2: var(--sl-text-secondary);
   --vp-c-text-3: var(--sl-text-muted);
 
-  /* interactive accent = the palette's readable-accent role: primary is
-     the decorative face (buttons, hero, hairline) where its lightness
-     is intended; text-accent is its readable sibling for links, code,
-     and selected states — already AA by derivation, so -2 only steps
-     one notch darker for hover */
   --vp-c-brand-1: var(--sl-text-accent);
   --vp-c-brand-2: oklch(from var(--sl-text-accent) calc(l - 0.08) c h);
   --vp-c-brand-3: var(--sl-text-accent);
@@ -42,9 +36,6 @@
 
   --vp-c-default-soft: var(--sl-surface);
 
-  /* admonitions → status tokens; decorative-scale hues (warn,
-     secondary) get an oklch-lowered -1 for the title text, same rule
-     as brand-2 */
   --vp-c-tip-1: var(--vp-c-brand-1);
   --vp-c-tip-2: var(--vp-c-brand-2);
   --vp-c-tip-3: var(--vp-c-brand-1);
@@ -82,7 +73,6 @@
   --vp-code-block-bg: var(--sl-surface);
   --vp-code-color: var(--vp-c-brand-1);
 
-  /* home hero — brand gradient name + themed action buttons */
   --vp-home-hero-name-color: transparent;
   --vp-home-hero-name-background: linear-gradient(
     120deg,
@@ -101,8 +91,6 @@
   --vp-button-alt-hover-bg: var(--sl-secondary);
 }
 
-/* hero buttons take the system's own control shape — the sl radius
-   scale and the hover-scale interaction the components speak */
 .VPHero .VPButton {
   transition:
     transform 0.18s ease,
@@ -111,8 +99,6 @@
     color 0.18s ease;
 }
 
-/* medium/big carry their own scoped radius — match that weight so the
-   sl step actually lands */
 .VPHero .VPButton.medium,
 .VPHero .VPButton.big {
   border-radius: var(--sl-sm);
@@ -122,9 +108,6 @@
   transform: scale(1.05);
 }
 
-/* the home page has no footer; without this the hero and cards stack at
-   the top and leave half the viewport blank. #app outranks the scoped
-   .VPHome[data-v-*] rule that sets the 128px bottom margin. */
 #app .VPHome {
   display: flex;
   flex-direction: column;
@@ -133,14 +116,10 @@
   margin-bottom: 0;
 }
 
-/* the markdown wrapper's auto block margin eats the free space before
-   justify-content can share it (home body is empty, so nothing moves) */
 #app .VPHome > .vp-doc {
   margin-block: 0;
 }
 
-/* the hero's 144px top padding clears the nav when it sits at the page
-   top; centered, it only pushes the text below the optical middle */
 @media (min-width: 960px) {
   #app .VPHome .VPHero {
     padding-top: var(--vp-nav-height);
@@ -153,12 +132,10 @@
   border-color: var(--sl-border);
 }
 
-/* 18px restores a real step above the 14px details text */
 .VPFeature .title {
   font-size: 18px;
 }
 
-/* brand hairline across the top — the page's signature */
 body::before {
   content: "";
   position: fixed;
@@ -212,8 +189,6 @@ body::before {
   }
 }
 
-/* the container page drops the TOC — inner paddings go to zero so the
-   demo column is the full 1240 and lg can show its real 1200 width */
 .container-wide .VPDoc {
   padding-left: 0;
   padding-right: 0;
@@ -226,7 +201,6 @@ body::before {
   max-width: calc(var(--sl-container-lg) + 8px);
 }
 
-/* version tag next to the theme switcher — rendered in Layout.vue */
 .sl-version {
   margin-left: var(--sl-md);
   font-family: var(--vp-font-family-mono);
@@ -235,9 +209,6 @@ body::before {
   white-space: nowrap;
 }
 
-/* doc typography follows the brand — accent headings, primary links.
-   h1/h2 are display-size so the decorative accent passes AA-large;
-   h3/h4 fall under normal-text size and take the readable -1 step */
 .vp-doc :is(h1, h2) {
   color: var(--sl-text-accent);
 }
@@ -246,16 +217,12 @@ body::before {
   color: var(--vp-c-brand-1);
 }
 
-/* page title gets a gradient underline that fades out */
 .vp-doc h1 {
   padding-bottom: var(--sl-xs);
   border-bottom: 2px solid;
   border-image: linear-gradient(90deg, var(--sl-primary), transparent) 1;
 }
 
-/* nowrap keeps attribute tokens whole — a break at the hyphen of
-   sl-card--corner reads as two words, not one API name. ligatures off:
-   the mono font fuses ="< sequences in tokens like sl-<元件>[=...] */
 .vp-doc :not(pre) > code {
   border: 1px solid var(--sl-border);
   border-radius: var(--sl-xs);
@@ -263,8 +230,6 @@ body::before {
   font-variant-ligatures: none;
 }
 
-/* long code lines scroll sideways; an overlay scrollbar stays hidden
-   until you have already scrolled, so the CDN urls just look cut off */
 .vp-doc pre {
   scrollbar-width: thin;
   scrollbar-color: var(--sl-border) transparent;
@@ -283,15 +248,11 @@ body::before {
   border-radius: var(--sl-xs);
 }
 
-/* table's second color — zebra rows and the header take the
-   secondary tint for a warmer accent against the page */
 .vp-doc tr:nth-child(2n),
 .vp-doc th {
   background-color: var(--sl-secondary-bg);
 }
 
-/* demo chrome — demo CONTENT styles live in demo-content.css, injected
-   into each demo's shadow root (isolation from the page's resets) */
 .sl-demo {
   border: 1px solid var(--sl-border);
   border-radius: var(--sl-md);
@@ -300,9 +261,6 @@ body::before {
   box-shadow: 0 1px 2px color-mix(in srgb, var(--sl-text) 6%, transparent);
 }
 
-/* dotted canvas doubling as a ruler — dots sit one --sl-lg (1rem)
-   apart: md button = 2 cells, sm/lg = 1.5/2.5 cells. Stage padding is
-   two cells, so content edges land on grid points */
 .sl-demo-stage {
   padding: var(--sl-3xl);
   background: var(--sl-surface)
@@ -310,17 +268,11 @@ body::before {
     0 / var(--sl-lg) var(--sl-lg);
 }
 
-/* Demo pad=false — the demo runs edge to edge inside its stage.
-   flow-root keeps frame margins inside the stage: with no padding or
-   border they would collapse through and leave page-bg bands at the
-   top and bottom of the demo box */
 .sl-demo-stage-flush {
   padding: 0;
   display: flow-root;
 }
 
-/* code panel — the summary bar carries a caret, the 原始碼 label and a
-   copy button; long dumps collapse behind it, short ones stay open */
 .sl-demo-src-wrap {
   border-top: 1px solid var(--sl-border);
 }
@@ -354,8 +306,6 @@ body::before {
   transform: rotate(45deg);
 }
 
-/* copy lives on the summary bar but only exists once the panel is
-   open — collapsed panels carry no actions */
 .sl-demo-copy {
   display: none;
   margin-left: auto;
@@ -385,15 +335,10 @@ body::before {
   overflow-x: auto;
 }
 
-/* markup highlight — sl-* attribute names take the accent color,
-   tags and values stay plain */
 .sl-demo-src .sl-hl-attr {
   color: var(--vp-c-brand-1);
 }
 
-/* playground controls — standalone panel below the demo card.
-   Fields share the row evenly (min 16rem: 11rem name lane leaves
-   ~5rem of usable control lane even in the narrowest field) */
 .sl-play-fields {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
@@ -407,12 +352,6 @@ body::before {
 
 .sl-play-field {
   display: grid;
-  /* fixed left lane holds name over desc; the control lane takes the
-     rest and centers against both — same geometry in every field.
-     11rem + 12px names keep sl-card--section="edge" on one line.
-     align-content:start pins row 1 (name+control) to the top rail —
-     without it, a taller sibling's stretch feeds the auto rows and
-     sinks fields with shorter descs */
   grid-template-columns: 11rem 1fr;
   gap: 2px var(--sl-sm);
   align-items: center;
@@ -432,12 +371,10 @@ body::before {
   min-width: 0;
 }
 
-/* sl tokens on form controls — the page reset leaves them bare white */
 .sl-play-field select,
 .sl-play-field input[type="text"] {
   appearance: auto;
   width: 100%;
-  /* fill the control lane — longer options stay readable */
   max-width: 16rem;
   background: var(--sl-surface);
   color: var(--sl-text);
@@ -500,8 +437,6 @@ body::before {
   display: none;
 }
 
-/* selected sidebar item — flat tinted row with an accent bar on its
-   inner left edge */
 .VPSidebarItem.is-active > .item > .link {
   background-color: var(--vp-c-brand-soft);
   box-shadow: inset 2px 0 0 var(--vp-c-brand-1);
@@ -518,19 +453,12 @@ body::before {
   padding-left: 10px;
 }
 
-/* rows under a group's .items guide line reach the line instead — the
-   tint grows 17px left (16px guide indent + 1px guide border) so the
-   accent bar lands on the guide, which then reads as one line that
-   goes accent at the selected row. Rows with no guide keep their own
-   left edge */
 .VPSidebarItem .items .items .VPSidebarItem.is-active > .item > .link,
 .VPSidebarItem .items .items .VPSidebarItem .link:hover {
   margin-left: -17px;
   padding-left: 17px;
 }
 
-/* sub-label next to a main title — h1 "Button *按鈕*" and usage-form
-   h3 "Banner *橫幅*": the gloss reads as dimmed ink, not emphasis */
 .vp-doc :is(h1, h3) em {
   color: var(--sl-text-muted);
   font-style: normal;
@@ -539,24 +467,16 @@ body::before {
   margin-left: 0.2em;
 }
 
-/* page-TOC gloss — the outline flattens heading markup to text, so
-   Layout wraps the trailing CJK run in .toc-gloss; dim it inside the
-   link's own ink, matching the sidebar subtitle treatment */
 .VPDocOutlineItem .toc-gloss {
   opacity: 65%;
 }
 
-/* trailing sl-* token — mono keeps the code identity, a light dim
-   keeps the Chinese label leading */
 .VPDocOutlineItem .toc-attr {
   font-family: var(--vp-font-family-mono);
   font-size: 0.95em;
   opacity: 80%;
 }
 
-/* pager title is a page name — same ink as the h1 it links to
-   (text-accent, not the darker brand-1 shift); hover lifts like
-   the sl-button affordance */
 .VPDocFooter .pager-link {
   transition: transform 0.2s ease;
 }
@@ -567,23 +487,17 @@ body::before {
   background-color: color-mix(in oklab, var(--sl-text-accent) 3%, transparent);
 }
 
-/* sidebar + pager sub-label — opacity dims the subtitle inside the
-   row's own ink, so it stays in the same color family */
 .VPSidebarItem em,
 .VPDocFooter em {
   font-style: normal;
   opacity: 65%;
 }
 
-/* active or hovered row's subtitle takes the link's accent too — one
-   color per row, the size step alone carries the hierarchy */
 .VPSidebarItem.is-active em,
 .VPSidebarItem .link:hover em {
   color: inherit;
 }
 
-/* theme swatch grid — chips read --sl-* vars live so the nav dots
-   recolor the whole table */
 .sl-sw-group {
   margin: 16px 0;
 }
@@ -630,8 +544,6 @@ body::before {
   display: none;
 }
 
-/* theme switcher — a divider, then a chip holding dot + name that opens
-   a dropdown where every row carries its own signature dot */
 .sl-theme-switch {
   position: relative;
   display: inline-flex;
@@ -661,7 +573,6 @@ body::before {
   border-color: var(--sl-text);
 }
 
-/* dot pins left, name pins right — caret stays at the edge with the name */
 .sl-theme-name {
   margin-left: auto;
 }
@@ -675,8 +586,6 @@ body::before {
   top: calc(100% + 6px);
   right: 0;
   z-index: 20;
-  /* the trigger shrinks to dot + caret on mobile — the menu still
-     needs its natural width, never narrower than the trigger */
   width: max-content;
   min-width: 100%;
   margin: 0;
@@ -721,10 +630,6 @@ body::before {
   color: var(--vp-c-brand-1);
 }
 
-/* theme dot — a diagonal split of primary over the material seed,
-   with an inner ring marking the scheme (white = light, black = dark)
-   and a hairline outer stroke so the disc keeps its silhouette on
-   any menu background */
 .sl-theme-dot {
   width: 16px;
   height: 16px;
@@ -745,8 +650,6 @@ body::before {
   margin-right: 0;
 }
 
-/* the "..." flyout only ever held the social links — with them shown
-   inline it opens an empty box */
 .VPNavBar .VPNavBarExtra {
   display: none;
 }
@@ -757,8 +660,6 @@ body::before {
   display: none;
 }
 
-/* mobile bar reads "github | version | dot picker" — the divider goes
-   with the name, the trigger shrinks to a compact dot + caret chip */
 @media (max-width: 767.9px) {
   .sl-theme-switch {
     margin-left: 0;
@@ -775,15 +676,12 @@ body::before {
   }
 }
 
-/* under ~480px the cluster still outgrows the bar — drop the wordmark
-   text, the logo mark alone carries the brand */
 @media (max-width: 479.9px) {
   .VPNavBarTitle .title {
     font-size: 0;
   }
 }
 
-/* motion is decorative — apply it instantly for reduced-motion users */
 @media (prefers-reduced-motion: reduce) {
   .VPHero .VPButton,
   .sl-demo-src-bar::before,

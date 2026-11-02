@@ -40,7 +40,6 @@ const meta = {
 export default meta;
 type Demo = DemoObj<ButtonArgs>;
 
-
 function slAttrs({
   tone,
   variant,

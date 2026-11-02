@@ -6,9 +6,6 @@ type Demo = DemoObj;
 
 const cell = (t: string) => `<div class="demo-cell">${t}</div>`;
 
-// the rails are dashed cells so the flex bounds stay visible; narrow the
-// stage (or the window) and the content child wraps below the rail.
-// Side follows source order — rail first sits on the leading edge
 export const SidebarStart: Demo = {
   render: () =>
     `<div sl-sidebar>` +

@@ -18,15 +18,11 @@ export default defineConfig({
   sitemap: { hostname: SITE },
   head: [
     ["link", { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" }],
-    // restore the saved theme before first paint — without this the page
-    // flashes sakulime for a frame before hydration sets data-theme
     [
       "script",
       {},
       "try{var t=localStorage.getItem('sl-theme');if(t){var d=document.documentElement;d.dataset.theme=t;d.classList.toggle('dark',localStorage.getItem('sl-dark')==='1')}}catch(e){}",
     ],
-    // zh-TW + code faces from Google Fonts — Cloudflare Fonts rewrites
-    // these to same-domain /cf-fonts at the edge, so there is no
     // third-party request in production (Inter is VP-bundled already)
     ["link", { rel: "preconnect", href: "https://fonts.googleapis.com" }],
     [
@@ -96,7 +92,6 @@ export default defineConfig({
     ];
   },
   // these labels are hardcoded in VitePress theme components and have no
-  // config option, so the built HTML gets patched instead
   transformHtml(code) {
     return code
       .replaceAll('aria-label="extra navigation"', 'aria-label="其他導覽"')
@@ -110,11 +105,7 @@ export default defineConfig({
   outDir: "site",
   vite: {
     publicDir: fileURLToPath(new URL("../public", import.meta.url)),
-    /* docs consume core's source css — expand :--sl-* selectors here too */
     css: { postcss: { plugins: [customSelectors()] } },
-    /* package exports point at dist for publishing; alias the specifiers
-       the docs import back to source so edits live-reload — keep this
-       list in sync with the workspaces' exports maps */
     resolve: {
       alias: [
         {
@@ -215,8 +206,6 @@ export default defineConfig({
         },
         miniSearch: {
           options: {
-            // CJK has no spaces — index whole words plus each CJK char
-            // so mid-word queries still hit something.
             tokenize: (text: string) => {
               const out: string[] = [];
               const segments = new Intl.Segmenter("zh", {
