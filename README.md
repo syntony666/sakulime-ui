@@ -18,7 +18,7 @@ Variables, all three themes (`sakulime`, `terra`, `umbra`), components, and layo
 ```html
 <button sl-button>Save</button>
 <button sl-button sl-tone="danger">Delete</button>
-<button sl-button="invert">Cancel</button>
+<button sl-button="outline">Cancel</button>
 ```
 
 ## Partial imports

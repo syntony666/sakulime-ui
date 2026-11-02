@@ -12,7 +12,7 @@ type ButtonArgs = {
   disabled: boolean;
 };
 
-const VARIANTS = ["-", "normal", "invert", "underline", "ghost"];
+const VARIANTS = ["-", "normal", "outline", "underline", "ghost"];
 const SIZES = ["-", "sm", "md", "lg"];
 const RADII = ["-", "none", "sm", "md", "lg", "full"];
 

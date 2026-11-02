@@ -88,7 +88,7 @@ export const Inline: Demo = {
 export const InContext: Demo = {
   render: () =>
     axis(["plus", "trash"], (v) =>
-      `<button sl-button${v === "trash" ? '="invert" sl-tone="danger"' : ""}>` +
+      `<button sl-button${v === "trash" ? '="outline" sl-tone="danger"' : ""}>` +
       `<i sl-icon="lucide:${v}"></i> ${v === "trash" ? "刪除" : "新增"}` +
       `</button>`,
     ),

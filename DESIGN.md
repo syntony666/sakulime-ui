@@ -73,7 +73,7 @@ components:
     rounded: "{rounded.md}"
     padding: "0 12px"
     height: "32px"
-  button-invert:
+  button-outline:
     backgroundColor: "{colors.sakulime-bg}"
     textColor: "{colors.sakulime-text}"
     rounded: "{rounded.md}"
@@ -196,7 +196,7 @@ components:
 ### Buttons `sl-button`
 - **Character:** 碰了會彈，內建 `hover: scale(1.03)` 是刻意的活潑回饋；宣告 `sl-interactive` 的按鈕改跑指定配方（grow/lift/shadow/press/dim）
 - **Shape:** `sl-radius` 屬性（預設 md=8px），2px transparent border 撐住箱型
-- **Variants:** `normal`（實心=預設）/ `invert`（描邊）/ `ghost`（無框）/ `underline`（2px 底線，0.3em offset）
+- **Variants:** `normal`（實心=預設）/ `outline`（描邊）/ `ghost`（無框）/ `underline`（2px 底線，0.3em offset）
 - **Tones:** `sl-tone` primary/secondary/success/warning/danger，bg/text/invert 三 slot 自動配色
 - **Sizes:** `sl-size` sm/md/lg，高度吃尺度台階（24/32/40px），字級 12/16/20px
 - **States:** `:disabled` opacity .6；transition 走 transform/shadow/filter 加表面色（background/border/color）

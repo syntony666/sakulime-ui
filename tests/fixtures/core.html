@@ -12,7 +12,7 @@
 
 <!-- buttons -->
 <button sl-button id="btn-def">def</button>
-<button sl-button="invert" id="btn-inv">inv</button>
+<button sl-button="outline" id="btn-out">out</button>
 <button sl-button="ghost" id="btn-gho">gho</button>
 <button sl-button="underline" id="btn-und">und</button>
 <button sl-button sl-size="sm" id="btn-sm">sm</button>
@@ -139,8 +139,8 @@ function main() {
   near('btn min-block = --sl-3xl', cs('btn-def', 'min-height'), varPx('--sl-3xl'));
   near('btn radius = --sl-sm', cs('btn-def', 'border-top-left-radius'), varPx('--sl-sm'));
   eq('btn border transparent', cs('btn-def', 'border-top-color'), TRANS);
-  eq('btn invert border = def bg', cs('btn-inv', 'border-top-color'), cs('btn-def', 'background-color'));
-  neq('btn invert bg != def', cs('btn-inv', 'background-color'), cs('btn-def', 'background-color'));
+  eq('btn outline border = def bg', cs('btn-out', 'border-top-color'), cs('btn-def', 'background-color'));
+  neq('btn outline bg != def', cs('btn-out', 'background-color'), cs('btn-def', 'background-color'));
   eq('btn ghost bg transparent', cs('btn-gho', 'background-color'), TRANS);
   neq('btn ghost color != def', cs('btn-gho', 'color'), cs('btn-def', 'color'));
   eq('btn underline decor', cs('btn-und', 'text-decoration-line'), 'underline');

@@ -51,9 +51,9 @@
 /* variants — the marker's value picks the look; bare sl-button ("" )
    is normal and needs no rule since base already paints it */
 @layer attrs {
-  /* invert carries the page base — the tone drops to ink + border, and
+  /* outline carries the page base — the tone drops to ink + border, and
      an opaque fill keeps it a button on patterned or tinted surfaces */
-  [sl-button="invert"] {
+  [sl-button="outline"] {
     background: var(--sl-bg);
     color: var(--sl-tone-text);
     border-color: var(--sl-tone-bg);
