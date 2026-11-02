@@ -26,3 +26,14 @@ description: 水平排列子元素，放不下就換行，間距由 sl-gap 統�
 間距用 [`sl-gap`](/attrs/gap) 給，寫在 row 自己身上或祖先上都行，預設 `md`。水平間距跟換行後的行距是同一個。
 
 只想改一個容器就寫 `--sl-row-gap`；`sl-gap` 標示在容器自己或外層都行，裡面沒給間距的排版元件會繼承這個間距。
+
+## 對齊
+
+子層預設從頭排起。置中、靠尾或攤開用 [`sl-place`](/attrs/place)，寫在 row 自己身上：
+
+```html
+<div sl-row sl-place="end">
+  <button sl-button>送出</button>
+  <button sl-button>取消</button>
+</div>
+```

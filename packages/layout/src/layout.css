@@ -2,6 +2,7 @@
    Import order is the cascade order: each file's own @layer blocks
    merge into the shared theme/base/attrs layers by name */
 @import "./gap.css";
+@import "./place.css";
 @import "./container.css";
 @import "./stack.css";
 @import "./content.css";

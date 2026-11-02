@@ -45,7 +45,7 @@ fixed 的 bar 不佔版面，body 會在對應邊自動補上 bar 高度的內�
 
 ## 內容排列
 
-內部是 flex 加 `justify-content: space-between`：子層依序往兩端排開，第一個貼左、最後一個貼右，中間的共享剩餘空間。一側要塞多個東西就包一個 `sl-row` 當一個子層：
+內部是 flex 加 `justify-content: space-between`：子層依序往兩端排開，第一個貼左、最後一個貼右，中間的共享剩餘空間。想換別的分佈，把 [`sl-place`](/attrs/place) 寫在 bar 自己身上，例如 `sl-bar sl-place="center"` 全部置中。一側要塞多個東西就包一個 `sl-row` 當一個子層：
 
 ```html
 <div sl-bar="top">
