@@ -1,6 +1,6 @@
 ---
 title: Pad 內距
-description: 整體內距，三階加歸零。
+description: 整體內距三階與歸零，各元件預設不同。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as PadDemos from "../../demos/attrs/pad.demo";
 
 # Pad *內距*
 
-> 整體內距，三階加歸零。
+> 整體內距，三階與歸零。
 
 ## 用法
 
@@ -22,13 +22,13 @@ import * as PadDemos from "../../demos/attrs/pad.demo";
 
 <Demo :render="PadDemos.Cards.render" />
 
-`sl-notice` 也讀，`lg` 適合公告型的多行內容：
+`sl-notice` 同樣可讀，`lg` 適合公告型的多行內容：
 
 <Demo :render="PadDemos.Notices.render" />
 
 ## 選項
 
-px 以根字級 16px 換算，刻度本身是 rem：
+px 以根字級 16px 換算，刻度本身為 rem：
 
 | 選項 | 內距 |
 | --- | --- |
@@ -37,15 +37,13 @@ px 以根字級 16px 換算，刻度本身是 rem：
 | `md` | 16px |
 | `lg` | 24px |
 
-未標示時的預設看元件：`sl-card` 等同 `md`，`sl-notice` 跟 `sl-bar` 等同 `sm`。
+未標示時各元件不同：`sl-card` 等同 `md`，`sl-notice` 與 `sl-bar` 等同 `sm`。
 
 ## 適用元件
 
-整體內距的增減：
-
-| 元件 | 預設 | 備註 |
+| 元件 | 未標示時 | 備註 |
 | --- | --- | --- |
-| [`sl-card`](/core/card) | `md` | `lg` 讓內容不擠 |
-| [`sl-notice`](/core/notice) | `sm` | `lg` 適合公告型的多行內容 |
-| [`sl-bar`](/layout/bar) | `sm` | 只影響上下內距，`lg` 是厚頁尾 |
+| [`sl-card`](/core/card) | `md` | 四面內距 |
+| [`sl-notice`](/core/notice) | `sm` | 四面內距，`lg` 適合多行公告 |
+| [`sl-bar`](/layout/bar) | `sm` | 只影響上下內距 |
 | [`sl-container`](/layout/container) | `md` | 只影響左右內距 |
