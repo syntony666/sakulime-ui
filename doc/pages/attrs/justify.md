@@ -9,7 +9,7 @@ import * as JustifyDemos from "../../demos/attrs/justify.demo";
 
 # Justify *主軸分佈*
 
-> 沿著排列方向的分佈，六個選項。對應 CSS 的 `justify-content`／`justify-items`。標示寫在排版元件自己身上才生效，寫在祖先上會被元件的預設擋下來。
+> 沿著排列方向的分佈，六個選項。對應 CSS 的 `justify-content`／`justify-items`。標示寫在排版元件自己身上才生效，寫在外層上會被元件的預設擋下來。
 
 ## 用法
 
@@ -36,7 +36,7 @@ import * as JustifyDemos from "../../demos/attrs/justify.demo";
 
 `between`／`around`／`evenly` 是 `justify-content` 語意，寫在 `sl-grid` 上時格子語意沒有對應，退回 `stretch`。
 
-`sl-justify` 不繼承，寫在祖先上對裡面的排版元件沒有作用。這跟 [`sl-gap`](/attrs/gap) 相反，間距會繼承、對齊不會。交叉軸方向的對齊看 [`sl-align`](/attrs/align)。
+`sl-justify` 不繼承，寫在外層上對裡面的排版元件沒有作用。這跟 [`sl-gap`](/attrs/gap) 相反，間距會繼承、對齊不會。交叉軸方向的對齊看 [`sl-align`](/attrs/align)。
 
 ## 適用元件
 

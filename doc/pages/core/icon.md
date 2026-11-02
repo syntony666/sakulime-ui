@@ -17,7 +17,7 @@ import * as IconDemos from "../../demos/components/icon.demo";
 
 ### SVG
 
-從 icon 庫（lucide、Simple Icons、icones.js.org）複製一段 SVG 貼進 HTML，加上 `sl-icon` 就生效。這種用法不需要任何 JS。
+從 圖示包（lucide、Simple Icons、icones.js.org）複製一段 SVG 貼進 HTML，加上 `sl-icon` 就生效。這種用法不需要任何 JS。
 
 ```html
 <svg sl-icon viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -48,7 +48,7 @@ import * as IconDemos from "../../demos/components/icon.demo";
 
 ### `icon()` 產生 SVG 字串
 
-SSG 或套模板時用 `icon("package:name")` 產生 SVG 字串。同步執行、不依賴 DOM。
+SSG 或套模板時用 `icon("package:name")` 產生 SVG 字串。同步執行、不依賴瀏覽器環境。
 
 ```ts
 import { icon } from "sakulime-ui";
@@ -109,7 +109,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ### 顏色 `sl-tone`
 
-`sl-icon` 是 `sl-tone` 的適用元件，`sl-tone` 標示在圖示本身；沒給就繼承文字顏色。選項看 [Tone 色調](/attrs/tone)。
+`sl-icon` 是 `sl-tone` 的適用元件，`sl-tone` 標示在圖示本身；未標示就繼承文字顏色。選項看 [Tone 色調](/attrs/tone)。
 
 ### 大小與對齊
 
@@ -127,7 +127,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ### 尺寸 `sl-icon-size`
 
-以所在字級為基準縮放，沒給是 `1em`：
+以所在字級為基準縮放，未標示是 `1em`：
 
 - `sm`：`0.75em`
 - `lg`：`1.5em`
@@ -167,7 +167,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 - `start`：只加前面
 - `end`：只加後面
-- 沒給：兩側都加
+- 未標示：兩側都加
 
 <Demo :render="IconDemos.Spaced.render" />
 

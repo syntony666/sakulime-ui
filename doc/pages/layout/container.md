@@ -37,7 +37,7 @@ import * as ContainerDemos from "../../demos/layout/container.demo";
 ## 尺寸
 
 - `sl-container="sm"`：45rem（720px）
-- `sl-container="md"`：60rem（960px），不給值的預設
+- `sl-container="md"`：60rem（960px），未標示的預設
 - `sl-container="lg"`：75rem（1200px）
 
 寬度是 rem，px 是以根字級 16px 換算的參考。

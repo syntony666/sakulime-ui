@@ -63,7 +63,7 @@ import "@sakulime-ui/theme/umbra.min.css";      // Theme: Umbra
     color-scheme: light;            /* 深色主題就寫 dark */
     --sl-seed-primary: #…;          /* 主色，例如按鈕底色 */
     --sl-seed-secondary: #…;        /* 次要色，背景、文字、框線的色調都跟它走 */
-    --sl-seed-accent: #…;           /* 點綴色，例如連結 */
+    --sl-seed-accent: #…;           /* 強調色，例如連結 */
   }
 }
 ```

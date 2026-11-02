@@ -51,4 +51,4 @@ import * as FloatDemos from "../../demos/layout/float.demo";
 - 通知之間的間隔為 `md`。只想改一個就寫 `--sl-float-gap`；[`sl-gap`](/attrs/gap) 標示在容器自己或外層都行
 - 內容的水平對齊讀 [`sl-align`](/attrs/align)，預設 `stretch`（撐滿寬度）；`sl-notice="fit"` 縮到內容寬之後，`sl-align="start"`／`center`／`end` 決定它靠哪邊
 - 列印時自動回到一般排版，不會每頁重複印出
-- 順序跟堆疊由 DOM 決定，多一個 `sl-notice` 就多一張
+- 順序跟堆疊照寫進頁面的先後，多一個 `sl-notice` 就多一張

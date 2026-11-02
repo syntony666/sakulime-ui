@@ -39,7 +39,7 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 
 ## 跨欄
 
-`sl-grid--span` 標在子層上，讓它佔好幾欄，2 到 12；裸標或 `sl-grid--span="full"` 不管欄數直接跨滿整列：
+`sl-grid--span` 標在子層上，讓它佔好幾欄，2 到 12；未標示或 `sl-grid--span="full"` 不管欄數直接跨滿整列：
 
 ```html
 <div sl-grid sl-grid-cols="4">
@@ -69,9 +69,9 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 
 ## 間距
 
-間距用 [`sl-gap`](/attrs/gap) 給，寫在 grid 自己身上或祖先上都行，預設 `md`。欄距跟行距是同一個。
+間距用 [`sl-gap`](/attrs/gap) 給，寫在 grid 自己身上或外層上都行，預設 `md`。欄距跟行距是同一個。
 
-只想改一個容器就寫 `--sl-grid-gap`；`sl-gap` 標示在容器自己或外層都行，裡面沒給間距的排版元件會繼承這個間距。
+只想改一個容器就寫 `--sl-grid-gap`；`sl-gap` 標示在容器自己或外層都行，裡面未標示間距的排版元件會繼承這個間距。
 
 ## 對齊
 

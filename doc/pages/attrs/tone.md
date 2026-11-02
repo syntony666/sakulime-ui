@@ -34,7 +34,7 @@ import * as ToneDemos from "../../demos/attrs/tone.demo";
 
 ## 適用元件
 
-沒給的話，各元件的預設不同：
+未標示的話，各元件的預設不同：
 
 | 元件 | 預設 |
 | --- | --- |

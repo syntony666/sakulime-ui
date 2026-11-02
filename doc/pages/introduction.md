@@ -53,7 +53,7 @@ import "sakulime-ui/sakulime.min.css";
 </html>
 ```
 
-主題由 `<html>` 上的 `data-theme` 決定，沒給就是 `sakulime`。其他主題和切換方式看[主題](/theme)。
+主題由 `<html>` 上的 `data-theme` 決定，未標示就是 `sakulime`。其他主題和切換方式看[主題](/theme)。
 
 屬性有四種形式，規則跟文法細節看[屬性總覽](/attrs)。
 

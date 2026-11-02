@@ -1,6 +1,6 @@
 ---
 title: Sidebar 側邊欄
-description: 側邊欄加主欄的版面，位置跟 DOM 順序走，主欄太窄就自己換行。
+description: 側邊欄加主欄的版面，位置跟先後順序走，主欄太窄就自己換行。
 ---
 
 <script setup>
@@ -44,4 +44,4 @@ import * as SidebarDemos from "../../demos/layout/sidebar.demo";
 
 間距用 [`sl-gap`](/attrs/gap) 給，寫在容器自己或外層都行，預設 `lg`。
 
-只想改一個容器就寫 `--sl-sidebar-gap`；`sl-gap` 標示在容器自己或外層都行，裡面沒給間距的排版元件會繼承這個間距。
+只想改一個容器就寫 `--sl-sidebar-gap`；`sl-gap` 標示在容器自己或外層都行，裡面未標示間距的排版元件會繼承這個間距。

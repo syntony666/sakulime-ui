@@ -25,13 +25,13 @@ import * as BarDemos from "../../demos/layout/bar.demo";
 
 <Demo :render="BarDemos.BarTop.render" />
 
-`sl-bar` 不給值就是一條一般的橫條，沒有邊緣語意，當區塊分隔用：
+`sl-bar` 未標示就是一條一般的橫條，沒有邊緣語意，當區塊分隔用：
 
 <Demo :render="BarDemos.BarBare.render" />
 
 ## 邊緣跟定位
 
-`sl-bar="top"` 黏頂、`sl-bar="bottom"` 黏底，預設都是 sticky：內容捲到邊就停住，不額外佔版面。`sl-bar="bottom"` 還有個額外好處：父層拉滿視窗高時，頁面再短也會吸在視窗底部（sticky footer）。
+`sl-bar="top"` 黏頂、`sl-bar="bottom"` 黏底，預設都是 sticky：內容捲到邊就停住，不額外佔版面。`sl-bar="bottom"` 還有個額外好處：父層撐滿視窗高時，頁面再短也會黏在視窗底部（sticky footer）。
 
 要固定在視窗邊加 `sl-bar-fixed`，需配邊緣值：
 
@@ -46,11 +46,11 @@ import * as BarDemos from "../../demos/layout/bar.demo";
 
 fixed 的 bar 不佔版面，body 會在對應邊自動補上 bar 高度的內距，下面的內容不會被蓋住；包在什麼容器裡都有效，不用是 body 直接子層。補償讀 `--sl-bar-h`，所以 bar 的實際高度要等於它：改 `sl-pad`、換行成兩列、或加了 safe-area inset，都要在 `:root` 同步改 `--sl-bar-h` 才跟得到。列印時 fixed bar 自動回到一般排版。
 
-兩個祖先陷阱：sticky 的祖先不能設 `overflow`（會換成黏祖先）或 `transform`／`filter`／`perspective`（fixed 的參考框會變成那個祖先，bar 黏在卡片裡不黏視窗）。
+兩個外層陷阱：sticky 的外層不能設 `overflow`（會換成黏外層）或 `transform`／`filter`／`perspective`（fixed 的參考框會變成那個外層，bar 黏在卡片裡不黏視窗）。
 
 ## 內容排列
 
-內部是三欄 grid：左、正中間、右三個固定區域。子層標 `sl-bar--start`、`sl-bar--center`、`sl-bar--end` 決定落在哪一區（`start` 是開始那側、`end` 是結束那側，中文書寫就是左、右）；沒標的子層照順序從左欄依序填入。中間欄寬度跟內容走，所以 `--center` 永遠在整條正中央，跟兩側放了什麼無關。只放想放的區域就行，空的欄不影響其他區：
+內部是左、正中間、右三個區。子層標 `sl-bar--start`、`sl-bar--center`、`sl-bar--end` 決定落在哪一區（`start` 是開始那側、`end` 是結束那側，中文書寫就是左、右）；未標示的子層照順序從左區依序填入。中間區寬度跟內容走，所以 `--center` 永遠在整條正中央，跟兩側放了什麼無關。只放想放的區域就行，空的區不影響其他區：
 
 ```html
 <div sl-bar="top">
@@ -70,7 +70,7 @@ fixed 的 bar 不佔版面，body 會在對應邊自動補上 bar 高度的內�
 ## 尺寸與外觀
 
 - 高度是 `--sl-bar-h`，預設 3.5rem（56px），內容高就撐高
-- 上下內距讀 `--sl-bar-pad-block`，沒設就看 `sl-pad` 標示，再沒有就 `sm`（12px）。頁尾那種厚區塊：`sl-bar="bottom" sl-pad="lg"`
+- 上下內距讀 `--sl-bar-pad-block`，未設定就看 `sl-pad` 標示，再沒有就 `sm`（12px）。頁尾那種厚區塊：`sl-bar="bottom" sl-pad="lg"`
 - 左右內距讀 `--sl-bar-pad-inline`，預設 `lg`（16px），跟上下內距分開調
 - 內部間距預設 `md`。只想改一條就寫 `--sl-bar-gap`；[`sl-gap`](/attrs/gap) 標示在 bar 自己或外層都行
 - 底色 `--sl-bg`、邊緣那側細線（頂→下線、底→上線）、z-index 讀 `--sl-bar-z`（預設 50）
