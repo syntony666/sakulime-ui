@@ -96,7 +96,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 <i sl-card--corner="start" sl-icon="lucide:zap" sl-tone="warning"></i>
 ```
 
-兩種掛法外觀不同：掛 `sl-chip` 是貼著邊的 tab，掛 `sl-dot`／`sl-icon` 是離邊浮起的圓點。角落 chip 調字級用 `sl-size`（`sm`/`md`/`lg`），整顆膠囊等比縮放。
+兩種掛法外觀不同：掛 `sl-chip` 是貼著邊的 tab，掛 `sl-dot`／`sl-icon` 是離邊浮起的圓點。角落 chip 調字級用 `sl-size`（`sm`／`md`／`lg`），整顆膠囊等比縮放。
 
 <Demo :render="CardDemos.CornerPositions.render" />
 <Demo :render="CardDemos.CornerKinds.render" />

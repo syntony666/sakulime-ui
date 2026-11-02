@@ -32,7 +32,7 @@ import * as ButtonDemos from "../../demos/components/button.demo";
 
 ### 顏色 `sl-tone`
 
-`sl-button` 是 `sl-tone` 的適用元件，沒給是 `primary`。填滿的 `normal` 染整顆，`outline`/`ghost`/`underline` 染框線跟字色。選項看 [Tone 色調](/attrs/tone)。
+`sl-button` 是 `sl-tone` 的適用元件，沒給是 `primary`。填滿的 `normal` 染整顆，`outline`／`ghost`／`underline` 染框線跟字色。選項看 [Tone 色調](/attrs/tone)。
 
 ### 尺寸 `sl-size`
 

@@ -34,7 +34,7 @@ import * as JustifyDemos from "../../demos/attrs/justify.demo";
 | `around`  | 每個項目兩側各留一半間距 |
 | `evenly`  | 間距處處相等，含兩端 |
 
-`between`／`around`／`evenly` 是 `justify-content` 語意——寫在 `sl-grid` 上時格子語意沒有對應，退回 `stretch`。
+`between`／`around`／`evenly` 是 `justify-content` 語意，寫在 `sl-grid` 上時格子語意沒有對應，退回 `stretch`。
 
 `sl-justify` 不繼承，寫在祖先上對裡面的排版元件沒有作用。這跟 [`sl-gap`](/attrs/gap) 相反，間距會繼承、對齊不會。交叉軸方向的對齊看 [`sl-align`](/attrs/align)。
 

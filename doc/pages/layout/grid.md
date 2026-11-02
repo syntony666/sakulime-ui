@@ -1,6 +1,6 @@
 ---
 title: Grid 網格系統
-description: 網格系統。預設欄數自適應，要固定欄數配 sl-grid-cols。
+description: 網格系統，預設欄數自適應，要固定欄數配 sl-grid-cols。
 ---
 
 <script setup>

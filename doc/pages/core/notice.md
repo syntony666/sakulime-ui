@@ -1,6 +1,6 @@
 ---
 title: Notice 通知
-description: 通知膠囊。放進內容是頁面橫幅，包進固定在角落的容器就是浮動通知。
+description: 通知膠囊，放進內容是頁面橫幅，包進固定在角落的容器就是浮動通知。
 ---
 
 <script setup>
@@ -15,7 +15,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ## 型態
 
-寬度是 `sl-notice` 的選項，沒給就是滿版（填滿容器）：
+型態是 `sl-notice` 的選項，沒給就是滿版（填滿容器）：
 
 - `fit`：縮成內容的寬度，浮動通知或配合訊息長度的場合
 

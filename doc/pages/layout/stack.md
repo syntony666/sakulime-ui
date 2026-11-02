@@ -41,7 +41,7 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 </div>
 ```
 
-垂直分佈用 [`sl-justify`](/attrs/justify)——只有容器比內容高時才有感，例如把整疊垂直置中或推到底：`sl-stack sl-justify="center"`。
+垂直分佈用 [`sl-justify`](/attrs/justify)，只有容器比內容高時才有感，例如把整疊垂直置中或推到底：`sl-stack sl-justify="center"`。
 
 `sl-align` 也可以標在單一個子層上，只讓那一個離開共同對齊：
 

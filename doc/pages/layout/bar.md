@@ -31,7 +31,7 @@ import * as BarDemos from "../../demos/layout/bar.demo";
 
 ## 邊緣跟定位
 
-`sl-bar="top"` 黏頂、`sl-bar="bottom"` 黏底，預設都是 sticky：內容捲到邊就停住，不佔版面外。`sl-bar="bottom"` 還有個額外好處：父層拉滿視窗高時，頁面再短也會吸在視窗底部（sticky footer）。
+`sl-bar="top"` 黏頂、`sl-bar="bottom"` 黏底，預設都是 sticky：內容捲到邊就停住，不額外佔版面。`sl-bar="bottom"` 還有個額外好處：父層拉滿視窗高時，頁面再短也會吸在視窗底部（sticky footer）。
 
 要固定在視窗邊加 `sl-bar-fixed`，需配邊緣值：
 
@@ -65,7 +65,7 @@ fixed 的 bar 不佔版面，body 會在對應邊自動補上 bar 高度的內�
 
 <Demo :render="BarDemos.BarSpread.render" />
 
-一區要塞多個東西就包一個 `sl-wrap` 當一個子層——同一區標兩個子層會掉到下一行。要直排多段內容，子層裡包一個 `sl-stack`。
+一區要塞多個東西就包一個 `sl-wrap` 當一個子層，同一區標兩個子層會掉到下一行。要直排多段內容，子層裡包一個 `sl-stack`。
 
 ## 尺寸與外觀
 

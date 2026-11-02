@@ -27,7 +27,7 @@ import "sakulime-ui/sakulime.min.css";
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakulime-ui/dist/sakulime.min.css" />
 ```
 
-`import` 和 `<link>` 的寫法不同。`import` 走套件 `exports` 公布的子路徑，寫 `sakulime-ui/sakulime.min.css`；CDN 網址是發布檔的實際位置，路徑帶 `dist/`。檔案路徑不能拿去 `import`，exports 子路徑貼進瀏覽器也找不到檔案。
+`import` 和 `<link>` 的寫法不同。`import` 走套件 `exports` 公布的子路徑，寫 `sakulime-ui/sakulime.min.css`；CDN 網址是發布檔的實際位置，路徑帶 `dist/`。檔案路徑不能拿去 `import`，`exports` 子路徑貼進瀏覽器也找不到檔案。
 
 個別套件的說明：
 

@@ -1,6 +1,6 @@
 ---
 title: Content 內文
-description: 內文欄。子層保留自己的 margin，相鄰之間由容器補節奏。
+description: 內文欄，子層保留自己的 margin，相鄰之間由容器補節奏。
 ---
 
 <script setup>

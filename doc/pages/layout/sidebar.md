@@ -36,7 +36,7 @@ import * as SidebarDemos from "../../demos/layout/sidebar.demo";
 
 ## 尺寸
 
-- 側邊欄寬是 `--sl-sidebar-w`，預設 16rem（256px），可以各別覆寫
+- 側邊欄寬是 `--sl-sidebar-w`，預設 16rem（256px），可以個別覆寫
 - 主欄下限是 `--sl-sidebar-min`，預設 55%：主欄被擠到下限以下時整組換行，rail 寫在主欄前面換行後排在上面，寫在後面排在下面
 - 換行看容器可用寬度，不是視窗斷點，塞進窄容器照樣會掉
 
