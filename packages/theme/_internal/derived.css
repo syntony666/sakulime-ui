@@ -42,7 +42,12 @@
     --sl-secondary: var(--sl-seed-secondary);
 
     /* fg — the tone's own hue pushed to the far ink pole; the clamp
-       is a step on the face's lightness so it flips without a flag */
+       is a step on the face's lightness so it flips without a flag.
+       Faces darker than l=0.62 land the clamp at 0 → 0.95 pale ink;
+       lighter faces land at 1 → 0.95−0.72 = 0.23 dark ink. The ×50
+       squeezes the crossover into a ~0.02-lightness band so mid faces
+       never sit on a muddy mid-tone, and c×0.35 keeps a whisper of
+       the face hue in the fg rather than a dead neutral */
     --sl-primary-fg: oklch(from var(--sl-primary)
       calc(0.95 - clamp(0, (l - 0.62) * 50, 1) * 0.72)
       calc(c * 0.35) h);

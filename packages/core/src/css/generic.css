@@ -14,19 +14,30 @@
    the consumer itself, so a marked element's slots must not inherit
    into a nested consumer. syntax:"*" with no initial-value leaves
    an unset slot guaranteed-invalid, so var() fallbacks still fire.
-   (Theme hooks like --sl-bar-h stay unregistered on purpose — they
-   are meant to be set on :root and inherit.) */
+   (Theme hooks like --sl-bar-h take the opposite contract — they are
+   meant to be set on :root and inherit, so their defaults live as
+   :root declarations; @property can't carry them since font-relative
+   initial-values are computationally dependent and rejected.) */
 @property --sl-size-fs { syntax: "*"; inherits: false; }
 @property --sl-size-h  { syntax: "*"; inherits: false; }
 @property --sl-size-px { syntax: "*"; inherits: false; }
 
 @layer base {
   /* interactive's shared seal — replaces the per-component
-     self-defaults so every consumer reads the same slots */
+     self-defaults so every consumer reads the same slots. The
+     transition is the shared playback timeline: consumers declare
+     none of their own, so the list lives here once */
   :--sl-generic-interactive {
     --sl-interactive-transform: none;
     --sl-interactive-shadow: none;
     --sl-interactive-filter: none;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      filter 0.2s ease,
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease;
   }
 }
 
