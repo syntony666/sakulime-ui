@@ -34,8 +34,6 @@ import * as AlignDemos from "../../demos/attrs/align.demo";
 
 <Demo :render="AlignDemos.AlignStack.render" />
 
-## 寫在子層上
-
 `sl-align` 標在子層就是單獨覆寫，只有標了的那一個離開共同對齊：
 
 <Demo :render="AlignDemos.AlignChild.render" />

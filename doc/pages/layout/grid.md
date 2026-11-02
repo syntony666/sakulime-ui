@@ -67,12 +67,6 @@ import * as GridDemos from "../../demos/layout/grid.demo";
   :render="GridDemos.MinWidth.render"
 />
 
-## 間距
-
-間距用 [`sl-gap`](/attrs/gap) 給，寫在 grid 自己身上或外層上都行，預設 `md`。欄距跟行距是同一個。
-
-只想改一個容器就寫 `--sl-grid-gap`；`sl-gap` 標示在容器自己或外層都行，裡面未標示間距的排版元件會繼承這個間距。
-
 ## 對齊
 
 格子內元素的位置用兩個屬性分開管：[`sl-justify`](/attrs/justify) 管格子內水平（`justify-items`）、[`sl-align`](/attrs/align) 管格子內垂直（`align-items`），預設都是 `stretch` 撐滿格子：
@@ -86,4 +80,10 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 兩個屬性也能標在單一個子層上（`justify-self`／`align-self`），只讓那一格離開共同對齊。`sl-justify` 的 `between` 在格子語意下沒有意義，會退回 `stretch`。
 
 <Demo :render="GridDemos.Aligns.render" />
+
+## 間距
+
+間距用 [`sl-gap`](/attrs/gap) 給，寫在 grid 自己身上或外層上都行，預設 `md`。欄距跟行距是同一個。
+
+只想改一個容器就寫 `--sl-grid-gap`；`sl-gap` 標示在容器自己或外層都行，裡面未標示間距的排版元件會繼承這個間距。
 

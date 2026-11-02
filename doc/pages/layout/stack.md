@@ -27,10 +27,6 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 
 混排內容（標題接段落接卡片）要保留子層自己的 margin 跟寬度的話，改用 [`sl-content`](/layout/content)。
 
-## 間距
-
-間距用 [`sl-gap`](/attrs/gap) 給，寫在 stack 自己身上或外層上都行，預設 `md`。只想改一個容器就寫 `--sl-stack-gap`（例如 `style="--sl-stack-gap: 6px"`）。
-
 ## 對齊
 
 水平對齊用 [`sl-align`](/attrs/align)：`start` 靠左、`center` 置中、`end` 靠右，預設 `stretch` 撐滿。子層一旦對齊就縮回內容寬，不再撐滿：
@@ -51,3 +47,7 @@ import * as StackDemos from "../../demos/layout/stack.demo";
   <div sl-align="end">只有這個靠右</div>
 </div>
 ```
+## 間距
+
+間距用 [`sl-gap`](/attrs/gap) 給，寫在 stack 自己身上或外層上都行，預設 `md`。只想改一個容器就寫 `--sl-stack-gap`（例如 `style="--sl-stack-gap: 6px"`）。
+

@@ -27,12 +27,6 @@ import * as WrapDemos from "../../demos/layout/wrap.demo";
 
 跟 `sl-grid` 的分工：子層寬度看內容、夠放幾個放幾個用 `sl-wrap`；每欄要等寬、欄數要固定的用 `sl-grid`。
 
-## 間距
-
-間距用 [`sl-gap`](/attrs/gap) 給，寫在 wrap 自己身上或外層上都行，預設 `md`。水平間距跟換行後的行距是同一個。
-
-只想改一個容器就寫 `--sl-wrap-gap`；`sl-gap` 標示在容器自己或外層都行，裡面未標示間距的排版元件會繼承這個間距。
-
 ## 對齊
 
 子層預設從頭排起。置中、靠尾或攤開用 [`sl-justify`](/attrs/justify)，寫在 wrap 自己身上：
@@ -45,3 +39,9 @@ import * as WrapDemos from "../../demos/layout/wrap.demo";
 ```
 
 垂直方向看 [`sl-align`](/attrs/align)：子層預設垂直置中，`start` 對齊列頂、`end` 對齊列底。`sl-align` 也能標在單一個子層上讓它離開共同對齊。
+## 間距
+
+間距用 [`sl-gap`](/attrs/gap) 給，寫在 wrap 自己身上或外層上都行，預設 `md`。水平間距跟換行後的行距是同一個。
+
+只想改一個容器就寫 `--sl-wrap-gap`；`sl-gap` 標示在容器自己或外層都行，裡面未標示間距的排版元件會繼承這個間距。
+
