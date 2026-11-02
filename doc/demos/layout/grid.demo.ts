@@ -27,11 +27,13 @@ export const Cols: Demo = {
 
 export const MinWidth: Demo = {
   render: () =>
+    `<div class="axis-row col">` +
     ["8rem", "20rem"]
       .map(
         (min) =>
           `<div class="demo-cell"><span class="demo-w" data-demo>--sl-grid-min: ${min}</span>` +
           `<div sl-grid style="--sl-grid-min: ${min}; margin-top: var(--sl-sm)">${cells()}</div></div>`
       )
-      .join(""),
+      .join("") +
+    `</div>`,
 };

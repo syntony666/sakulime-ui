@@ -101,8 +101,9 @@ export const Indicates: Demo = {
 
 // corner is position only — the look is a small attr on the same element
 const cornerEl = (position: string, kind: string, tone: string, size = "-") => {
-  // "end" is the default corner — only "start" ever gets written
-  const pos = position === "-" || position === "end" ? "" : `="${position}"`;
+  // "-" leaves the value off (bare attr = default end); "end" writes
+  // it out so the vocabulary word is visible in the markup
+  const pos = position === "-" ? "" : `="${position}"`;
   const t = attr("sl-tone", tone);
   const s = kind === "chip" ? attr("sl-size", size) : "";
   if (kind === "dot") return `<i sl-card--corner${pos} sl-dot${t}></i>`;

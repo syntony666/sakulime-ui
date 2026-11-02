@@ -39,8 +39,8 @@ export const AlignStack: Demo = {
 export const AlignChild: Demo = {
   render: () =>
     `<div sl-stack>` +
-    `<div class="demo-cell">大家一起靠左</div>` +
+    `<div class="demo-cell">滿寬（預設）</div>` +
     `<div class="demo-cell" sl-align="end">只有我靠右</div>` +
-    `<div class="demo-cell">大家一起靠左</div>` +
+    `<div class="demo-cell">滿寬（預設）</div>` +
     `</div>`,
 };

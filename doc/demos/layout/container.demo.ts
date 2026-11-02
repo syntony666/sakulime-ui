@@ -10,7 +10,7 @@ type Demo = DemoObj;
 // with the rendered px by Demo's measure prop (data-demo keeps it out
 // of the shown markup)
 const box = (attr: string) =>
-  `<div ${attr} class="demo-frame">${attr} <span class="demo-w" data-demo></span></div>`;
+  `<div ${attr} class="demo-frame"><span data-demo>${attr} <span class="demo-w"></span></span></div>`;
 
 export const ContainerWidths: Demo = {
   render: () => ["sm", "md", "lg"].map((v) => box(`sl-container="${v}"`)).join(""),

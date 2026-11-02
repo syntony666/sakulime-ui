@@ -85,7 +85,7 @@ export const Aligns: Demo = {
     ),
 };
 
-// action playground for the 子元素 section — position × width
+// action playground for the children section — position × width
 const X_BTN = `<button sl-button="ghost" sl-size="sm" sl-notice--action aria-label="關閉"><i sl-icon="lucide:x" sl-icon-size="lg"></i></button>`;
 const BELL_BTN = `<button sl-button="ghost" sl-size="sm" sl-notice--action="start" aria-label="靜音"><i sl-icon="lucide:bell-off" sl-icon-size="lg"></i></button>`;
 const startBtn = (a: string) => (a === "start" || a === "both" ? BELL_BTN : "");
@@ -152,7 +152,7 @@ export const BannerPlay: DemoObj<BannerArgs> = {
 const TOASTS = [
   ["success", "check", "已儲存變更"],
   ["warning", "triangle-alert", "部署已排入佇列，前方還有 2 個 build"],
-  ["-", "bell", `新版本 v0.3.1 可用 <a href="#">查看更新</a>`],
+  ["-", "bell", `功能更新已上線 <a href="#">查看詳情</a>`],
 ];
 
 export const ToastPlay: DemoObj<ToastArgs> = {

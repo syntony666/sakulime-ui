@@ -15,11 +15,13 @@ const frame = (caption: string, inner: string) =>
 // and unmarked render identically
 export const Alone: Demo = {
   render: () =>
+    `<div class="axis-row col">` +
     frame(
       'div 標示 sl-gap="2xl"',
       `<div sl-gap="2xl">${cells()}</div>`
     ) +
-    frame("沒標示", `<div>${cells()}</div>`),
+    frame("沒標示", `<div>${cells()}</div>`) +
+    `</div>`,
 };
 
 // sl-gap on the wrapper feeds every gap-reading child that did not write
