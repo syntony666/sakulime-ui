@@ -35,6 +35,7 @@
     "site": "npm run site -w sakulime-doc",
     "deploy": "npm run deploy -w sakulime-doc",
     "release": "changeset publish",
+    "prepublishOnly": "npm run build",
     "test": "node tests/run.mjs",
     "test:shots": "node tests/run.mjs --shots"
   },
