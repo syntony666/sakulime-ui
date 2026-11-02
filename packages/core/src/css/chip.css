@@ -20,6 +20,8 @@
     gap: 0.3em;
     padding: 0.2em 0.6em;
     font-size: var(--sl-size-fs);
+    /* the compact-copy measure — same 1.4 as notice body text,
+       intentionally un-tokenized: two consumers don't make a scale */
     line-height: 1.4;
     color: var(--sl-tone-text);
     background: color-mix(in srgb, var(--sl-tone-bg) 20%, var(--sl-surface));

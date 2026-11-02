@@ -49,6 +49,8 @@
       var(--sl-notice-action-inset) + var(--sl-notice-action-w) + var(--sl-md) +
         var(--sl-notice-action-gap)
     );
+    /* same compact-copy measure as the chip — kept as a literal on
+       both sides until a third consumer argues for a token */
     line-height: 1.4;
     /* strip proportions — vertical sits at 3/4 of the pad slot,
        horizontal at 3/2 so the capsule ends breathe */

@@ -88,10 +88,12 @@
   }
 
   /* states + spacing — bare sl-icon-space means both sides;
-     aria-disabled reads the same as the attr */
+     aria-disabled reads the same as the attr. Shares the
+     --sl-disabled-opacity hook with a quieter default than
+     the button's .6 — an icon is decoration, a control is not */
   [sl-icon][sl-icon-disabled],
   [sl-icon][aria-disabled="true"] {
-    opacity: 0.4;
+    opacity: var(--sl-disabled-opacity, 0.4);
   }
   [sl-icon][sl-icon-space] {
     margin-inline: 0.3em;
