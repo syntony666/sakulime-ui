@@ -26,12 +26,3 @@
     max-inline-size: var(--sl-container-lg);
   }
 }
-
-@layer attrs {
-  /* sl-pad on container — edge gutter; same value→slot mapping as
-     generic.css's pad rules */
-  [sl-container][sl-pad="none"] { --sl-pad: 0; }
-  [sl-container][sl-pad="sm"]   { --sl-pad: var(--sl-md); }
-  [sl-container][sl-pad="md"]   { --sl-pad: var(--sl-lg); }
-  [sl-container][sl-pad="lg"]   { --sl-pad: var(--sl-2xl); }
-}

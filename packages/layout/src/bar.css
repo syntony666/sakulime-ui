@@ -108,15 +108,3 @@
     }
   }
 }
-
-@layer attrs {
-  /* sl-pad on bar — thicker bands; the attr wiring lives here now that
-     generic pad consumers are core components. Keep the value→slot
-     mapping identical to generic.css's pad rules. "sm" deliberately
-     re-states the base default — all five scale steps stay on the map
-     so the vocabulary reads complete */
-  [sl-bar][sl-pad="none"] { --sl-pad: 0; }
-  [sl-bar][sl-pad="sm"] { --sl-pad: var(--sl-md); }
-  [sl-bar][sl-pad="md"] { --sl-pad: var(--sl-lg); }
-  [sl-bar][sl-pad="lg"] { --sl-pad: var(--sl-2xl); }
-}
