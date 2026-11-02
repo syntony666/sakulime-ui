@@ -58,6 +58,7 @@
     <div sl-grid--span="8" id="sp8">over</div>
     <div sl-grid--span="full" id="spf">full</div>
     <div sl-grid--span="2" id="sp2">two</div>
+    <div sl-grid--span="1" id="sp1">one</div>
     <div sl-grid--span id="spb">bare</div>
     <div>x</div>
   </div>
@@ -241,6 +242,7 @@ function main() {
   near('bare span = full row', rect('spb').width, rect('gr-span').width, 2);
   rec('span 2 = 2 tracks + 1 gap', rect('sp2').width + 'px', '~(640-3*12)/4*2+12',
     Math.abs(rect('sp2').width - (2 * ((640 - 3 * varPx('--sl-md')) / 4) + varPx('--sl-md'))) < 2);
+  near('span 1 = single track', rect('sp1').width, (640 - 3 * varPx('--sl-md')) / 4, 2);
   /* self-default seal — inner bare grid must not inherit the parent's cols */
   eq('inner grid auto-fill 1 track', tracks('gr-inner'), 1);
   neq('inner grid != parent tracks', tracks('gr-inner'), tracks('gr-outer'));
