@@ -1,7 +1,7 @@
 # Layout pages
 
 Pages under `doc/pages/layout/` document one primitive or region each
-(`stack`, `row`, `grid`, `bar`…). Sections are flat `##` named by
+(`stack`, `wrap`, `grid`, `bar`…). Sections are flat `##` named by
 feature, ordered by importance, `間距` always last:
 
 ```markdown
@@ -31,4 +31,5 @@ default — only on gap-reading primitives>
   [`sl-gap`](/attrs/gap); the nine-step scale table lives only in
   `attrs/gap.md`, never re-listed here;
   primitives without a gap knob (`container`) skip the section entirely.
-- Demo file at `doc/demos/layout/<name>.demo.ts`.
+- Demo file at `doc/demos/layout/<name>.demo.ts` — only for pages that
+  have demos; prose-only pages skip the file.

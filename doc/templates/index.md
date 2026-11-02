@@ -42,7 +42,7 @@ pageClass: <name>   # extra class on the page wrapper
 | `####` | `名稱` or ``名稱 `value` `` | ``#### 貼邊 `inset` `` |
 
 A `###` documenting behavior rather than an attribute drops the attr chip
-(e.g. icon's `### 大小與對齊`, row's `### 行為`).
+(e.g. icon's `### 大小與對齊`, notice's `### Banner`).
 
 ## Demo file conventions
 
