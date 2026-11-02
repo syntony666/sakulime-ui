@@ -97,7 +97,7 @@
 <i sl-icon sl-icon-frame="circular" id="ic-frc"></i>
 <i sl-icon sl-icon-frame="rounded" id="ic-frr"></i>
 <i sl-icon sl-icon-spin id="ic-spin"></i>
-<i sl-icon sl-icon-flip="h" id="ic-fh"></i>
+<i sl-icon sl-icon-flip="horizontal" id="ic-fh"></i>
 <i sl-icon sl-icon-rotate="90" id="ic-r90"></i>
 <i sl-icon sl-icon-disabled id="ic-dis"></i>
 <i sl-icon sl-icon-space id="ic-sp"></i>
@@ -226,7 +226,7 @@ function main() {
   eq('icon frame circular', cs('ic-frc', 'border-top-left-radius'), '9999px');
   near('icon frame rounded', cs('ic-frr', 'border-top-left-radius'), varPx('--sl-sm'));
   eq('icon spin animation', cs('ic-spin', 'animation-name'), 'sl-icon-spin');
-  eq('icon flip h', cs('ic-fh', 'scale'), '-1 1');
+  eq('icon flip horizontal', cs('ic-fh', 'scale'), '-1 1');
   eq('icon rotate 90', cs('ic-r90', 'rotate'), '90deg');
   eq('icon disabled opacity', cs('ic-dis', 'opacity'), '0.4');
   near('icon space margin', cs('ic-sp', 'margin-left'), 4.8);

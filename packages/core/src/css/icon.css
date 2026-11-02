@@ -42,10 +42,10 @@
 
   /* orientation — flip/rotate use the independent transform properties
      while spin animates `transform`, so all three stack on one icon */
-  [sl-icon][sl-icon-flip="h"] {
+  [sl-icon][sl-icon-flip="horizontal"] {
     scale: -1 1;
   }
-  [sl-icon][sl-icon-flip="v"] {
+  [sl-icon][sl-icon-flip="vertical"] {
     scale: 1 -1;
   }
   [sl-icon][sl-icon-rotate="90"] {

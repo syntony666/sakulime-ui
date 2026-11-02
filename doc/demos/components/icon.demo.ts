@@ -32,7 +32,7 @@ const meta = {
     name: axisArg("sl-icon", "圖示名稱", NAMES),
     tone: axisArg("sl-tone", "顏色", TONES),
     size: axisArg("sl-icon-size", "尺寸", ["-", "sm", "lg", "xl", "2xl"]),
-    flip: axisArg("sl-icon-flip", "翻轉", ["-", "h", "v"]),
+    flip: axisArg("sl-icon-flip", "翻轉", ["-", "horizontal", "vertical"]),
     rotate: axisArg("sl-icon-rotate", "旋轉", ["-", "90", "180", "270"]),
     spin: boolArg("sl-icon-spin", "旋轉動畫"),
     frame: axisArg("sl-icon-frame", "外框", ["-", "circular", "rounded"]),
@@ -106,7 +106,7 @@ export const ModSizes: Demo = {
 export const Transforms: Demo = {
   render: () =>
     axis(
-      ["-", "flip-h", "flip-v", "rotate-90", "rotate-180", "rotate-270"],
+      ["-", "flip-horizontal", "flip-vertical", "rotate-90", "rotate-180", "rotate-270"],
       (v) => {
         const [kind, val] = v.split("-");
         const a =
