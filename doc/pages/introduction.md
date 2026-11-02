@@ -3,7 +3,7 @@ title: 開始使用
 description: sl-* 屬性加在標籤上，--sl-* 變數管顏色跟尺寸，原本的 class 不用動。
 ---
 
-# Sakulime UI
+# 開始使用
 
 > 用最簡單的方式，讓你的介面變得不再單調
 
@@ -54,6 +54,8 @@ import "sakulime-ui/sakulime.min.css";
 ```
 
 主題由 `<html>` 上的 `data-theme` 決定，沒給就是 `sakulime`。其他主題和切換方式看[主題](/theme)。
+
+屬性有四種形式，規則跟文法細節看[屬性總覽](/attrs)。
 
 ## 全域基底樣式
 
