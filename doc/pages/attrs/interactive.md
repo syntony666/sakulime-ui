@@ -26,7 +26,7 @@ import * as InteractiveDemos from "../../demos/attrs/interactive.demo";
 
 | 選項 | 效果 |
 | --- | --- |
-| `grow`（預設） | 放大 1.03 |
+| `grow`（預設） | 放大 1.03；空白標示或寫了不認識的值也是 grow |
 | `lift` | 浮起 4px 加陰影 |
 | `shadow` | 只有陰影 |
 | `press` | 壓下 0.97 |

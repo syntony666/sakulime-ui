@@ -118,10 +118,11 @@
   }
 
   /* interactive — --sl-interactive-{transform,shadow,filter} slots, played
-     back by the shared hover rule below. Bare sl-interactive ("")
-     means grow */
-  :--sl-generic-interactive[sl-interactive=""],
-  :--sl-generic-interactive[sl-interactive="grow"] {
+     back by the shared hover rule below. Grow is the catch-all:
+     bare sl-interactive, "grow", or any out-of-vocabulary value all
+     mean grow — a typo degrades to the default instead of silently
+     disabling the hover */
+  :--sl-generic-interactive[sl-interactive]:not([sl-interactive="lift"]):not([sl-interactive="shadow"]):not([sl-interactive="press"]):not([sl-interactive="dim"]) {
     --sl-interactive-transform: scale(1.03);
   }
 
