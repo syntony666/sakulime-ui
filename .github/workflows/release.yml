@@ -26,6 +26,10 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      - name: Install chrome-headless-shell
+        run: npx -y @puppeteer/browsers install chrome-headless-shell@stable --path /tmp/chromium
+      - name: Fixture assertions
+        run: SL_CHROMIUM=$(find /tmp/chromium -name chrome-headless-shell -type f | head -1) npm test
       - id: changesets
         uses: changesets/action@v1
         with:
