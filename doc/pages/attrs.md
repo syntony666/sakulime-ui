@@ -81,6 +81,6 @@ description: sl-* 屬性語法總覽：元件標記、元件設定、子元素�
 
 ## 值寫錯的時候
 
-值不在選項表裡的時候，元件當作未標示或落回預設，不會報錯也不會壞版面。例如 `sl-button="inver"`（想寫 `outline` 拼錯）渲染跟裸 `sl-button` 一樣、`sl-grid--span` 給非數字當成滿列。好處是向前相容；壞處是拼錯不會提醒你，寫完對照各頁選項表檢查一次。
+值不在選項表裡的時候，元件當作未標示或落回預設，不會報錯也不會壞版面。例如 `sl-button="inver"`（想寫 `outline` 拼錯）渲染跟裸 `sl-button` 一樣、[`sl-grid--span`](/layout/grid) 給非數字當成滿列。好處是向前相容；壞處是拼錯不會提醒你，寫完對照各頁選項表檢查一次。
 
 各元件頁只記錄自己的標記、設定跟子元素；通用屬性的細節看各自頁面：[Tone 色調](/attrs/tone)、[Size 尺寸](/attrs/size)、[Radius 圓角](/attrs/radius)、[Pad 內距](/attrs/pad)、[Interactive 互動](/attrs/interactive)、[Gap 間距](/attrs/gap)、[Justify 主軸分佈](/attrs/justify)、[Align 對齊](/attrs/align)。

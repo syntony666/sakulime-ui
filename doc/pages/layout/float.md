@@ -44,7 +44,7 @@ import * as FloatDemos from "../../demos/layout/float.demo";
 
 ## 尺寸與間距
 
-- fixed，z-index 讀 `--sl-float-z`（預設 60），會蓋在 `sl-bar`（`--sl-bar-z` 50）上面
+- fixed，z-index 讀 `--sl-float-z`（預設 60），會蓋在 [`sl-bar`](/layout/bar)（`--sl-bar-z` 50）上面
 - 寬度是 `--sl-float-width`，預設 22rem（352px）；視窗放不下自動縮，縮放幅度跟著 `--sl-float-inline` 走
 - 高度上限是視窗高扣掉上下離邊距離，通知太多會在區塊內捲動，不會頂出視窗
 - 離邊距離是 `--sl-float-block`／`--sl-float-inline`，預設都是 `lg`（16px）；底部錨點會自動避開手機 home indicator（safe-area inset）

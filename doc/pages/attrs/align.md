@@ -45,7 +45,7 @@ import * as AlignDemos from "../../demos/attrs/align.demo";
 
 <Demo :render="AlignDemos.AlignChild.render" />
 
-`sl-grid` 的子層也吃：`sl-align` 管格子內垂直、`sl-justify` 管格子內水平，兩個一起寫就是格子內的雙軸定位。
+`sl-grid` 的子層也吃：`sl-align` 管格子內垂直、[`sl-justify`](/attrs/justify) 管格子內水平，兩個一起寫就是格子內的雙軸定位。
 
 ## 適用元件
 

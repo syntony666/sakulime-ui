@@ -33,7 +33,7 @@ import * as ChipDemos from "../../demos/components/chip.demo";
 
 ## 組合
 
-`<i sl-icon>` 放進去，間距自動對、顏色跟著膠囊走。
+`<i sl-icon>` 放進去，間距自動對、顏色跟著膠囊走。圖示本身看 [Icon 圖示](/core/icon)。
 
 <Demo :render="ChipDemos.WithIcon.render" />
 
@@ -41,7 +41,7 @@ meta 列實際長這樣：
 
 <Demo :render="ChipDemos.MetaRow.render" />
 
-疊上 `sl-card--corner` 就固定到卡片角落，適合當數值或版本標籤：
+疊上 [`sl-card--corner`](/core/card) 就固定到卡片角落，適合當數值或版本標籤：
 
 ```html
 <span sl-card--corner sl-chip sl-tone="primary">200ms</span>

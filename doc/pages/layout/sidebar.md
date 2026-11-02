@@ -22,7 +22,7 @@ import * as SidebarDemos from "../../demos/layout/sidebar.demo";
 
 <Demo :render="SidebarDemos.SidebarStart.render" />
 
-底層跟 `sl-wrap` 一樣是 `flex-wrap` 的 flexbox：主欄有最小寬度（`--sl-sidebar-min`，預設 55%），容器放不下時整個 rail 掉到下一行。
+底層跟 [`sl-wrap`](/layout/wrap) 一樣是 `flex-wrap` 的 flexbox：主欄有最小寬度（`--sl-sidebar-min`，預設 55%），容器放不下時整個 rail 掉到下一行。
 
 ## 位置
 

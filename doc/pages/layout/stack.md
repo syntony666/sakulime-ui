@@ -23,7 +23,7 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 
 <Demo :render="StackDemos.Rhythm.render" />
 
-間距只加在相鄰子層之間，第一個上面、最後一個下面都不多留。子層寬度會撐滿容器，要收窄自己寫寬度，或用下面對齊一節的 `sl-align`。
+間距只加在相鄰子層之間，第一個上面、最後一個下面都不多留。子層寬度會撐滿容器，要收窄自己寫寬度，或用下面對齊一節的 [`sl-align`](/attrs/align)。
 
 混排內容（標題接段落接卡片）要保留子層自己的 margin 跟寬度的話，改用 [`sl-content`](/layout/content)。
 

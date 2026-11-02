@@ -25,7 +25,7 @@ px 以根字級 16px 換算。三階跟 [container](/layout/container) 的頁面
 
 ## 斷點後綴
 
-屬性加上 `-<斷點>` 就在該斷點以下生效，窄斷點蓋過寬斷點。目前支援的是 `sl-grid-cols`：
+屬性加上 `-<斷點>` 就在該斷點以下生效，窄斷點蓋過寬斷點。目前支援的是 [`sl-grid-cols`](/layout/grid)：
 
 ```html
 <div sl-grid sl-grid-cols="4" sl-grid-cols-md="2" sl-grid-cols-sm="1">
