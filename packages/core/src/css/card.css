@@ -222,8 +222,10 @@
   }
 
   /* interactive — shared generic: the whole card is clickable; the
-     hover playback is shared in generic.css */
-  [sl-card][sl-interactive] {
+     hover playback is shared in generic.css. Cursor only while the
+     playback can still fire — the shared rule opts out on
+     aria-disabled, and so does this */
+  [sl-card][sl-interactive]:not([aria-disabled="true"]) {
     cursor: pointer;
   }
 

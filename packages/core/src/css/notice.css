@@ -71,6 +71,12 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
   }
 
+  /* cursor only while the hover playback can still fire — same
+     opt-out as the shared rule and sl-card */
+  [sl-notice][sl-interactive]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+
   /* links keep the notice's ink — browser blue would fight the wash.
      the underline stays: color alone can't carry link affordance */
   [sl-notice] a {

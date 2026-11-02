@@ -31,4 +31,10 @@
        in generic.css writes the effect slots */
     transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
   }
+
+  /* cursor only while the hover playback can still fire — same
+     opt-out as the shared rule and sl-card */
+  [sl-chip][sl-interactive]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
 }
