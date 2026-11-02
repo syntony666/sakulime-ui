@@ -1,3 +1,9 @@
+@layer theme {
+  /* band height default — declared once on :root; the body's
+     fixed-bar compensation below inherits the same value */
+  :root { --sl-bar-h: 3.5rem; }
+}
+
 @layer base {
   /* bar — a full-width band at either page edge. Three fixed zones:
      left / dead-center / right — children claim a zone with the
@@ -13,11 +19,9 @@
     grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
     gap: var(--sl-bar-gap, var(--sl-gap, var(--sl-md)));
-    /* 3.5rem default — the standard band height. The literal repeats
-       in the body compensation below: the two rules live on unrelated
-       elements (no shared var), and @property initial-value can't hold
-       a rem — spec requires a computationally independent value */
-    min-block-size: var(--sl-bar-h, 3.5rem);
+    /* 3.5rem default — the standard band height, declared on :root
+       above so the body's fixed-bar compensation reads the same value */
+    min-block-size: var(--sl-bar-h);
     /* self-default --sl-pad so an ancestor's sl-pad can't leak in —
        the attr on the bar itself still wins by specificity */
     --sl-pad: var(--sl-md);
@@ -89,13 +93,13 @@
   @media screen {
     body:has([sl-bar="top"][sl-bar-fixed]) {
       padding-block-start: calc(
-        var(--sl-bar-h, 3.5rem) + env(safe-area-inset-top, 0px)
+        var(--sl-bar-h) + env(safe-area-inset-top, 0px)
       );
     }
 
     body:has([sl-bar="bottom"][sl-bar-fixed]) {
       padding-block-end: calc(
-        var(--sl-bar-h, 3.5rem) + env(safe-area-inset-bottom, 0px)
+        var(--sl-bar-h) + env(safe-area-inset-bottom, 0px)
       );
     }
   }

@@ -1,3 +1,9 @@
+@layer theme {
+  /* column floor default — declared once on :root so every read site
+     uses a bare var(); write --sl-grid-min yourself to override */
+  :root { --sl-grid-min: 14rem; }
+}
+
 @layer base {
   /* grid — auto-fill columns by default; --sl-grid-min is the column
      floor (14rem out of the box) and min() keeps a narrower container
@@ -18,7 +24,7 @@
     --_n: min(var(--_cb), var(--_cl), var(--_cm), var(--_cs));
     --_cols: auto-fill;
     --_cap: var(--_n);
-    --_gf: min(var(--sl-grid-min, 14rem), 100%);
+    --_gf: min(var(--sl-grid-min), 100%);
     /* self-default the justify slot so an ancestor's sl-justify
        can't leak in — grid reads it as justify-items (per-cell
        inline placement), not distribution */
@@ -88,7 +94,7 @@
      level back to auto-fill — it
      restores the column floor and leaves its slot at 12 so it
      doesn't clamp; narrower levels can still declare counts */
-  [sl-grid][sl-grid-cols="auto"] { --_cols: auto-fill; --_gf: min(var(--sl-grid-min, 14rem), 100%); }
+  [sl-grid][sl-grid-cols="auto"] { --_cols: auto-fill; --_gf: min(var(--sl-grid-min), 100%); }
   [sl-grid][sl-grid-cols="1"]  { --_cb: 1;  --_cols: var(--_n); --_gf: 0; }
   [sl-grid][sl-grid-cols="2"]  { --_cb: 2;  --_cols: var(--_n); --_gf: 0; }
   [sl-grid][sl-grid-cols="3"]  { --_cb: 3;  --_cols: var(--_n); --_gf: 0; }
@@ -107,7 +113,7 @@
      hardcoded twins of --sl-container-*). Blocks run wide to narrow so
      the smallest hit wins --_cols/--_gf at equal specificity */
   @media (width < 75rem) {
-    [sl-grid][sl-grid-cols-lg="auto"] { --_cols: auto-fill; --_gf: min(var(--sl-grid-min, 14rem), 100%); }
+    [sl-grid][sl-grid-cols-lg="auto"] { --_cols: auto-fill; --_gf: min(var(--sl-grid-min), 100%); }
     [sl-grid][sl-grid-cols-lg="1"]  { --_cl: 1;  --_cols: var(--_n); --_gf: 0; }
     [sl-grid][sl-grid-cols-lg="2"]  { --_cl: 2;  --_cols: var(--_n); --_gf: 0; }
     [sl-grid][sl-grid-cols-lg="3"]  { --_cl: 3;  --_cols: var(--_n); --_gf: 0; }
@@ -122,7 +128,7 @@
     [sl-grid][sl-grid-cols-lg="12"] { --_cl: 12; --_cols: var(--_n); --_gf: 0; }
   }
   @media (width < 60rem) {
-    [sl-grid][sl-grid-cols-md="auto"] { --_cols: auto-fill; --_gf: min(var(--sl-grid-min, 14rem), 100%); }
+    [sl-grid][sl-grid-cols-md="auto"] { --_cols: auto-fill; --_gf: min(var(--sl-grid-min), 100%); }
     [sl-grid][sl-grid-cols-md="1"]  { --_cm: 1;  --_cols: var(--_n); --_gf: 0; }
     [sl-grid][sl-grid-cols-md="2"]  { --_cm: 2;  --_cols: var(--_n); --_gf: 0; }
     [sl-grid][sl-grid-cols-md="3"]  { --_cm: 3;  --_cols: var(--_n); --_gf: 0; }
@@ -137,7 +143,7 @@
     [sl-grid][sl-grid-cols-md="12"] { --_cm: 12; --_cols: var(--_n); --_gf: 0; }
   }
   @media (width < 45rem) {
-    [sl-grid][sl-grid-cols-sm="auto"] { --_cols: auto-fill; --_gf: min(var(--sl-grid-min, 14rem), 100%); }
+    [sl-grid][sl-grid-cols-sm="auto"] { --_cols: auto-fill; --_gf: min(var(--sl-grid-min), 100%); }
     [sl-grid][sl-grid-cols-sm="1"]  { --_cs: 1;  --_cols: var(--_n); --_gf: 0; }
     [sl-grid][sl-grid-cols-sm="2"]  { --_cs: 2;  --_cols: var(--_n); --_gf: 0; }
     [sl-grid][sl-grid-cols-sm="3"]  { --_cs: 3;  --_cols: var(--_n); --_gf: 0; }
