@@ -34,7 +34,7 @@
 <div sl-content id="ct-def"><h3 id="ct-h">t</h3><div id="ct-1">a</div><div id="ct-2">b</div></div>
 <div sl-content sl-gap="2xl" id="ct-gap"><div id="ct-g1">a</div><div id="ct-g2">b</div></div>
 
-<!-- row -->
+<!-- wrap -->
 <div sl-wrap id="wrap-def"><div>a</div><div>b</div></div>
 <div sl-wrap sl-gap="none" id="wrap-gn"><div>a</div><div>b</div></div>
 <div sl-wrap sl-gap="lg" id="wrap-lg"><div>a</div><div>b</div></div>
@@ -120,79 +120,8 @@
 
 <div id="probe"></div>
 <pre id="results"></pre>
+<script src="helpers.js"></script>
 <script>
-const R = [];
-const $ = id => document.getElementById(id);
-const cs = (el, p) => getComputedStyle($(el)).getPropertyValue(p);
-const px = v => parseFloat(v);
-const rect = id => $(id).getBoundingClientRect();
-const rec = (name, got, want, ok) => R.push({ name, got: String(got), want: String(want), ok });
-const eq = (name, got, want) => rec(name, got, want, got === want);
-const near = (name, got, want, tol = 1.5) => rec(name, got, want + '±' + tol, Math.abs(px(got) - px(want)) <= tol);
-const neq = (name, got, bad) => rec(name, got, 'not ' + bad, got !== bad);
-const probe = $('probe');
-const varPx = name => { probe.style.height = `var(${name},0px)`; return probe.getBoundingClientRect().height; };
-const tracks = el => cs(el, 'grid-template-columns').split(' ').filter(s => s.endsWith('px')).length;
-/* walk the loaded sheets (through @layer/@media) — returns the media
-   text of the nearest enclosing @media for the first rule matching
-   sel, or 'top-level'/'missing' */
-const mediaOf = sel => {
-  let found = null;
-  /* CSSStyleRule.cssRules exists (nesting) and is truthy even when
-     empty — match the selector first, then keep walking group rules */
-  const walk = rules => {
-    for (const r of rules) {
-      if (found) return;
-      if (r.selectorText && r.selectorText.includes(sel)) found = r;
-      if (!found && r.cssRules) walk(r.cssRules);
-    }
-  };
-  for (const s of document.styleSheets) { try { walk(s.cssRules); } catch (e) {} }
-  if (!found) return 'missing';
-  let p = found.parentRule;
-  while (p && p.type !== CSSRule.MEDIA_RULE) p = p.parentRule;
-  return p ? p.media.mediaText : 'top-level';
-};
-/* last declaration value of prop on the rule whose selectorText
-   equals sel — for asserting declarations env() can't prove in
-   computed style (it resolves to 0 in headless) */
-const declOf = (sel, prop) => {
-  let val = null;
-  const walk = rules => {
-    for (const r of rules) {
-      if (r.selectorText === sel && r.style) {
-        const v = r.style.getPropertyValue(prop);
-        if (v) val = v;
-      }
-      if (r.cssRules) walk(r.cssRules);
-    }
-  };
-  for (const s of document.styleSheets) { try { walk(s.cssRules); } catch (e) {} }
-  return val;
-};
-/* last declaration of prop on the rule whose selectorText equals
-   sel and lives inside a @media block whose condition is media */
-const mediaDecl = (sel, prop, media) => {
-  let val = null;
-  const walk = (rules, inside) => {
-    for (const r of rules) {
-      const hit = inside ||
-        (r.type === CSSRule.MEDIA_RULE && r.media.mediaText === media);
-      if (hit && r.selectorText === sel && r.style) {
-        const v = r.style.getPropertyValue(prop);
-        if (v) val = v;
-      }
-      if (r.cssRules) walk(r.cssRules, hit);
-    }
-  };
-  for (const s of document.styleSheets) { try { walk(s.cssRules, false); } catch (e) {} }
-  return val;
-};
-/* fixed-position anchors resolve against the layout viewport, which
-   excludes the scrollbar — documentElement.client* matches it */
-const vw = () => document.documentElement.clientWidth;
-const vh = () => document.documentElement.clientHeight;
-
 function main() {
   /* ---- container ---- */
   near('container def pad = --sl-lg', cs('cont-def', 'padding-left'), varPx('--sl-lg'));
@@ -338,43 +267,6 @@ function main() {
   rec('two rails flank main', rect('sb3-l').left + '<' + rect('sb3-main').left + '<' + rect('sb3-r').left,
     'l<main<r', rect('sb3-l').left < rect('sb3-main').left && rect('sb3-r').left > rect('sb3-main').left);
 }
-
-/* rAF is flaky under --virtual-time-budget (no frames without rendering),
-   so a plain timer drives the run; both paths converge on go(). */
-function go() {
-  R.length = 0;
-  try { main(); } catch (e) { R.push({ name: 'fixture threw', got: String(e && e.stack || e), want: 'no throw', ok: false }); }
-  $('results').textContent = JSON.stringify(R);
-  document.documentElement.setAttribute('data-done', '');
-  labelize();
-}
-/* post-assertion pass: floating id chips at each element's rect so
-   --screenshot output reads as a labeled contact sheet. Absolute
-   positioning keeps layout — and every assertion — untouched. */
-function labelize() {
-  document.querySelectorAll('.tl').forEach(n => n.remove());
-  if (!document.getElementById('tl-style')) {
-    const st = document.createElement('style');
-    st.id = 'tl-style';
-    st.textContent = '.tl{position:absolute;z-index:2147483647;font:600 10px/1.5 ui-monospace,monospace;color:#fff;background:rgba(15,15,20,.62);padding:0 4px;border-radius:3px;pointer-events:none;white-space:nowrap}';
-    document.head.append(st);
-  }
-  for (const el of document.querySelectorAll('[id]')) {
-    if (el.id === 'results' || el.id === 'probe' || el.id === 'tl-style') continue;
-    const r = el.getBoundingClientRect();
-    if (!r.width && !r.height) continue;
-    const tag = document.createElement('i');
-    tag.className = 'tl';
-    tag.textContent = el.id;
-    tag.style.left = Math.max(0, r.left + scrollX) + 'px';
-    tag.style.top = Math.max(0, r.top + scrollY) + 'px';
-    document.body.append(tag);
-  }
-  $('results').style.display = 'none';
-  document.documentElement.setAttribute('data-h', Math.ceil(document.documentElement.scrollHeight));
-}
-setTimeout(go, 0);
-requestAnimationFrame(() => setTimeout(go, 0));
 </script>
 </body>
 </html>
