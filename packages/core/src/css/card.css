@@ -3,7 +3,7 @@
    the card self-defaults the slots it consumes. */
 @layer base {
   [sl-card] {
-    /* consumed generics + defaults — tone feeds indicate/corner via
+    /* consumed generics + defaults — tone feeds indicator/corner via
        inheritance; self-defaulting seals generic attributes set on
        ancestors from leaking in */
     --sl-tone-bg: var(--sl-primary);
@@ -59,20 +59,20 @@
     border: 0;
   }
 
-  /* indicate — accent edge, colored by the tone attribute */
-  [sl-card][sl-card-indicate="top"] {
+  /* indicator — accent edge, colored by the tone attribute */
+  [sl-card][sl-card-indicator="top"] {
     border-top: 3px solid var(--sl-tone-bg);
   }
 
-  [sl-card][sl-card-indicate="bottom"] {
+  [sl-card][sl-card-indicator="bottom"] {
     border-bottom: 3px solid var(--sl-tone-bg);
   }
 
-  [sl-card][sl-card-indicate="start"] {
+  [sl-card][sl-card-indicator="start"] {
     border-inline-start: 3px solid var(--sl-tone-bg);
   }
 
-  [sl-card][sl-card-indicate="end"] {
+  [sl-card][sl-card-indicator="end"] {
     border-inline-end: 3px solid var(--sl-tone-bg);
   }
 

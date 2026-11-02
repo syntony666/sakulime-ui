@@ -41,10 +41,10 @@
 <div sl-card sl-radius="lg" id="card-rl">card</div>
 <div sl-card sl-radius="full" id="card-rf">card</div>
 <div sl-card sl-radius="none" id="card-rn">card</div>
-<div sl-card sl-card-indicate="top" id="card-it">card</div>
-<div sl-card sl-card-indicate="bottom" id="card-ib">card</div>
-<div sl-card sl-card-indicate="start" id="card-is">card</div>
-<div sl-card sl-card-indicate="end" id="card-ie">card</div>
+<div sl-card sl-card-indicator="top" id="card-it">card</div>
+<div sl-card sl-card-indicator="bottom" id="card-ib">card</div>
+<div sl-card sl-card-indicator="start" id="card-is">card</div>
+<div sl-card sl-card-indicator="end" id="card-ie">card</div>
 <div sl-card id="card-sect">
   <div sl-card--section id="sect-1">a</div>
   <div sl-card--section id="sect-2">b</div>
@@ -179,11 +179,11 @@ function main() {
   near('card radius lg = --sl-md', cs('card-rl', 'border-top-left-radius'), varPx('--sl-md'));
   eq('card radius none = 0', cs('card-rn', 'border-top-left-radius'), '0px');
   rec('card radius full capped > 24px', cs('card-rf', 'border-top-left-radius'), '>24px', px(cs('card-rf', 'border-top-left-radius')) > 24);
-  eq('card indicate top bw', cs('card-it', 'border-top-width'), '3px');
-  neq('card indicate top color', cs('card-it', 'border-top-color'), cs('card-def', 'border-top-color'));
-  eq('card indicate bottom bw', cs('card-ib', 'border-bottom-width'), '3px');
-  eq('card indicate start bw', cs('card-is', 'border-left-width'), '3px');
-  eq('card indicate end bw', cs('card-ie', 'border-right-width'), '3px');
+  eq('card indicator top bw', cs('card-it', 'border-top-width'), '3px');
+  neq('card indicator top color', cs('card-it', 'border-top-color'), cs('card-def', 'border-top-color'));
+  eq('card indicator bottom bw', cs('card-ib', 'border-bottom-width'), '3px');
+  eq('card indicator start bw', cs('card-is', 'border-left-width'), '3px');
+  eq('card indicator end bw', cs('card-ie', 'border-right-width'), '3px');
   near('card section bleed margin', cs('sect-1', 'margin-left'), -varPx('--sl-lg'));
   eq('card section 2 divider', cs('sect-2', 'border-top-width'), '1px');
   near('card section 2 gap', cs('sect-2', 'margin-top'), varPx('--sl-lg'));

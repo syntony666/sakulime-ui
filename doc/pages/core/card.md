@@ -55,7 +55,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 ## 元件設定
 
-### 標記 `sl-card-indicate`
+### 標記 `sl-card-indicator`
 
 在卡片邊緣加一條強調色，顏色跟著 `sl-tone` 走（預設 primary）：
 

@@ -48,7 +48,7 @@ const meta = {
     pad: axisArg("sl-pad", "內距", PADS),
     radius: axisArg("sl-radius", "圓角", RADII),
     variant: axisArg("sl-card", "型態", VARIANTS),
-    indicate: axisArg("sl-card-indicate", "標記邊緣", INDICATES),
+    indicate: axisArg("sl-card-indicator", "標記邊緣", INDICATES),
     tone: axisArg("sl-tone", "顏色（搭配標記）", TONES),
     interactive: axisArg("sl-interactive", "互動（滑鼠移過去）", INTERACTIVES),
   },
@@ -75,7 +75,7 @@ export const Card: Demo = {
     `<div ${cardMarker(args.variant)}` +
     attr("sl-pad", args.pad) +
     attr("sl-radius", args.radius) +
-    attr("sl-card-indicate", args.indicate) +
+    attr("sl-card-indicator", args.indicate) +
     attr("sl-tone", args.tone) +
     attr("sl-interactive", args.interactive) +
     ` style="max-width: 360px">` +
@@ -93,7 +93,7 @@ export const Indicates: Demo = {
   render: () =>
     axis(["top", "bottom", "start", "end"], (v) =>
       card(
-        attr("sl-card-indicate", v) + attr("sl-tone", "secondary"),
+        attr("sl-card-indicator", v) + attr("sl-tone", "secondary"),
         `<strong>${label(v)}</strong><p>內容文字</p>`,
       ),
     ),
