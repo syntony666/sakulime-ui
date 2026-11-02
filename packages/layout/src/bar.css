@@ -33,10 +33,14 @@
   [sl-bar] > [sl-bar--center] { grid-column: 2; justify-self: center; }
   [sl-bar] > [sl-bar--end]    { grid-column: 3; justify-self: end; }
 
-  [sl-bar="top"] {
+  [sl-bar="top"],
+  [sl-bar="bottom"] {
     position: sticky;
-    inset-block-start: 0;
     z-index: var(--sl-bar-z, var(--sl-z-bar));
+  }
+
+  [sl-bar="top"] {
+    inset-block-start: 0;
     border-block-end: 1px solid var(--sl-border, #e5e7eb);
     /* notch clearance — mirrors the bottom bar's home-indicator
        padding; env() is 0 on non-notched viewports */
@@ -44,9 +48,7 @@
   }
 
   [sl-bar="bottom"] {
-    position: sticky;
     inset-block-end: 0;
-    z-index: var(--sl-bar-z, var(--sl-z-bar));
     border-block-start: 1px solid var(--sl-border, #e5e7eb);
     /* home-indicator clearance on phones; env() is 0 elsewhere */
     padding-block-end: calc(var(--_bp) + env(safe-area-inset-bottom, 0px));
