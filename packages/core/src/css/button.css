@@ -23,6 +23,9 @@
     border-radius: var(--sl-radius);
     border: 2px solid transparent;
     min-block-size: var(--sl-size-h);
+    /* anchors drop their UA underline — a[sl-card] has the same rule;
+       the underline variant re-adds its own decoration in attrs */
+    text-decoration: none;
     padding: 0 var(--sl-size-px);
     font-size: var(--sl-size-fs);
     cursor: pointer;
