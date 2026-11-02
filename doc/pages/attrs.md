@@ -73,4 +73,4 @@ description: sl-* 屬性語法總覽：元件標記、元件設定、子元素�
 </div>
 ```
 
-各元件頁只記錄自己的標記、設定跟子元素；通用屬性的細節看各自頁面：[Tone 色調](/attrs/tone)、[Size 尺寸](/attrs/size)、[Radius 圓角](/attrs/radius)、[Pad 內距](/attrs/pad)、[Interactive 互動](/attrs/interactive)、[Gap 間距](/attrs/gap)、[Justify 主軸分佈](/attrs/justify)。
+各元件頁只記錄自己的標記、設定跟子元素；通用屬性的細節看各自頁面：[Tone 色調](/attrs/tone)、[Size 尺寸](/attrs/size)、[Radius 圓角](/attrs/radius)、[Pad 內距](/attrs/pad)、[Interactive 互動](/attrs/interactive)、[Gap 間距](/attrs/gap)、[Justify 主軸分佈](/attrs/justify)、[Align 對齊](/attrs/align)。

@@ -32,7 +32,7 @@ import * as JustifyDemos from "../../demos/attrs/justify.demo";
 | `end` | 靠尾排 |
 | `between` | 首尾貼邊，剩餘空間由中間共享 |
 
-`sl-justify` 不繼承，寫在祖先上對裡面的排版元件沒有作用。這跟 [`sl-gap`](/attrs/gap) 相反，間距會繼承、對齊不會。交叉軸方向的對齊看 `sl-align`。
+`sl-justify` 不繼承，寫在祖先上對裡面的排版元件沒有作用。這跟 [`sl-gap`](/attrs/gap) 相反，間距會繼承、對齊不會。交叉軸方向的對齊看 [`sl-align`](/attrs/align)。
 
 ## 適用元件
 

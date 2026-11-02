@@ -40,12 +40,20 @@
 <div sl-wrap sl-justify="between" id="wrap-btw"><div>a</div><div>b</div></div>
 <div sl-justify="end"><div sl-wrap id="wrap-seal"><div>a</div><div>b</div></div></div>
 <div sl-stack sl-justify="between" id="st-jbtw"><div>a</div><div>b</div></div>
+<!-- sl-align: container sets align-items, marked child gets align-self -->
+<div sl-wrap sl-align="end" id="wrap-aend"><div>a</div><div>b</div></div>
+<div sl-wrap id="wrap-aparent"><div sl-align="end" id="wrap-aself">a</div><div>b</div></div>
+<div sl-stack sl-align="center" id="st-actr"><div>a</div><div>b</div></div>
+<div sl-stack id="st-aparent"><div sl-align="start" id="st-aself">a</div><div>b</div></div>
+<div sl-align="end"><div sl-stack id="st-aseal"><div>a</div><div>b</div></div></div>
 
 <!-- grid (640px track width makes counts deterministic) -->
 <div style="width:640px">
   <div sl-grid id="gr-auto"><div>a</div><div>b</div><div>c</div><div>d</div></div>
   <div sl-grid sl-grid-cols="4" id="gr-4"><div>a</div><div>b</div><div>c</div><div>d</div></div>
   <div sl-grid sl-grid-cols="4" sl-justify="center" id="gr-jctr"><div>a</div></div>
+  <div sl-grid sl-grid-cols="4" sl-align="center" id="gr-actr"><div>a</div></div>
+  <div sl-grid sl-grid-cols="4"><div sl-align="end" id="gr-aself">a</div></div>
   <div sl-grid sl-grid-cols="4" id="gr-span">
     <div sl-grid--span="8" id="sp8">over</div>
     <div sl-grid--span="full" id="spf">full</div>
@@ -158,6 +166,11 @@ function main() {
   eq('wrap justify between', cs('wrap-btw', 'justify-content'), 'space-between');
   eq('wrap sealed from ancestor justify', cs('wrap-seal', 'justify-content'), cs('wrap-def', 'justify-content'));
   eq('stack justify between', cs('st-jbtw', 'justify-content'), 'space-between');
+  eq('wrap align end', cs('wrap-aend', 'align-items'), 'end');
+  eq('wrap child align-self end', cs('wrap-aself', 'align-self'), 'end');
+  eq('stack align center', cs('st-actr', 'align-items'), 'center');
+  eq('stack child align-self start', cs('st-aself', 'align-self'), 'start');
+  eq('stack sealed from ancestor align', cs('st-aseal', 'align-items'), 'stretch');
   near('row sl-gap=lg', cs('wrap-lg', 'column-gap'), varPx('--sl-lg'));
   eq('row child min-inline 0', cs('wrap-mc', 'min-width'), '0px');
 
@@ -166,6 +179,8 @@ function main() {
   eq('grid auto-fill tracks = 2 @640px', tracks('gr-auto'), 2);
   eq('grid cols=4 tracks', tracks('gr-4'), 4);
   eq('grid justify=items center', cs('gr-jctr', 'justify-items'), 'center');
+  eq('grid align=items center', cs('gr-actr', 'align-items'), 'center');
+  eq('grid child align-self end', cs('gr-aself', 'align-self'), 'end');
   near('span 8 clamps to 4 tracks', rect('sp8').width, rect('gr-span').width, 2);
   near('span full covers grid', rect('spf').width, rect('gr-span').width, 2);
   near('bare span = full row', rect('spb').width, rect('gr-span').width, 2);

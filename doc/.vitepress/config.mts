@@ -181,6 +181,7 @@ export default defineConfig({
               { text: `Interactive ${zh("互動")}`, link: "/attrs/interactive" },
               { text: `Gap ${zh("間距")}`, link: "/attrs/gap" },
               { text: `Justify ${zh("主軸分佈")}`, link: "/attrs/justify" },
+              { text: `Align ${zh("對齊")}`, link: "/attrs/align" },
             ],
           },
         ],
