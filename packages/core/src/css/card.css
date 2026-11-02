@@ -162,16 +162,19 @@
   }
 
   /* followers own the gap — a section's divider hugs the image edge,
-     anything else gets the pad spacing itself */
-  [sl-card--section="edge"] + * {
+     anything else gets the pad spacing itself. The direct-child
+     prefix matters twice over: nested sections must not be claimed,
+     and the (0,3,0) specificity is what lets the zero below actually
+     beat the divider rule above */
+  [sl-card] > [sl-card--section="edge"] + * {
     margin-block-start: var(--sl-pad);
   }
 
-  [sl-card--section="edge"] + [sl-card--section] {
+  [sl-card] > [sl-card--section="edge"] + [sl-card--section] {
     margin-block-start: 0;
   }
 
-  [sl-card--section="edge"] > :is(img, svg, video, iframe) {
+  [sl-card] > [sl-card--section="edge"] > :is(img, svg, video, iframe) {
     display: block;
     inline-size: 100%;
   }
@@ -186,17 +189,24 @@
     text-align: center;
   }
 
-  [sl-card--section="blank"] :is(h1, h2, h3, h4, p) {
+  /* a blank after real content earns the divider, but the divider's
+     padding-block-start would otherwise crush the symmetric 3xl —
+     same (0,3,0) shape as the divider rule, later order wins */
+  [sl-card] > :not([sl-card--corner]) ~ [sl-card--section="blank"] {
+    padding-block-start: var(--sl-3xl);
+  }
+
+  [sl-card] > [sl-card--section="blank"] :is(h1, h2, h3, h4, p) {
     margin: 0;
   }
 
-  [sl-card--section="blank"] :is(strong, h1, h2, h3, h4) {
+  [sl-card] > [sl-card--section="blank"] :is(strong, h1, h2, h3, h4) {
     font-size: var(--sl-lg);
     font-weight: 600;
     color: var(--sl-text-strong);
   }
 
-  [sl-card--section="blank"] p {
+  [sl-card] > [sl-card--section="blank"] p {
     color: var(--sl-text-secondary);
     font-size: var(--sl-md);
   }
@@ -225,23 +235,24 @@
     padding-block-end: var(--sl-pad);
   }
 
-  :is([sl-card--section="secondary"],
-      [sl-card--section="active"]) + [sl-card--section] {
+  /* same (0,3,0) trick as the edge follower above — without the
+     direct-child prefix this lost to the divider rule and was dead */
+  [sl-card] > :is([sl-card--section="secondary"],
+                  [sl-card--section="active"]) + [sl-card--section] {
     margin-block-start: 0;
   }
 
-  [sl-card] > :is([sl-card--section="secondary"]:first-child,
-                  [sl-card--section="active"]:first-child,
-                  [sl-card--corner]:first-child + [sl-card--section="secondary"],
-                  [sl-card--corner]:first-child + [sl-card--section="active"]) {
+  /* "first"/"last" mean no non-corner sibling before/after — any
+     number of leading or trailing corners still counts as the edge,
+     same idiom the edge-section bleed rules use above */
+  [sl-card] > :is([sl-card--section="secondary"],
+                  [sl-card--section="active"]):not(:not([sl-card--corner]) ~ *) {
     margin-block-start: var(--_pbn);
     padding-block-start: var(--sl-pad);
   }
 
-  [sl-card] > :is([sl-card--section="secondary"]:last-child,
-                  [sl-card--section="active"]:last-child,
-                  [sl-card--section="secondary"]:has(+ [sl-card--corner]:last-child),
-                  [sl-card--section="active"]:has(+ [sl-card--corner]:last-child)) {
+  [sl-card] > :is([sl-card--section="secondary"],
+                  [sl-card--section="active"]):not(:has(~ :not([sl-card--corner]))) {
     margin-block-end: var(--_pbn);
   }
 
