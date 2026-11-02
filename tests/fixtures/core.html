@@ -65,6 +65,17 @@
   <div sl-card--section="active" id="sect-act">i</div>
 </div>
 <div sl-card id="card-corner"><span sl-card--corner sl-dot id="corner-dot"></span></div>
+<div sl-card id="card-2c">
+  <i sl-card--corner="start" sl-dot></i>
+  <i sl-card--corner sl-dot></i>
+  <div sl-card--section id="sect-2c">first</div>
+  <div sl-card--section id="sect-2c2">second</div>
+</div>
+<div sl-card id="card-midc">
+  <div sl-card--section id="sect-mc1">content</div>
+  <i sl-card--corner sl-dot></i>
+  <div sl-card--section id="sect-mc2">after</div>
+</div>
 <div sl-card sl-interactive id="card-i">card</div>
 
 <!-- chips -->
@@ -177,6 +188,10 @@ function main() {
   eq('card section center align', cs('sect-ctr', 'text-align'), 'center');
   neq('card section active bg', cs('sect-act', 'background-color'), TRANS);
   eq('card corner absolute', cs('corner-dot', 'position'), 'absolute');
+  eq('dual corners: first section no divider', cs('sect-2c', 'border-top-width'), '0px');
+  eq('dual corners: first section no gap', cs('sect-2c', 'margin-top'), '0px');
+  eq('dual corners: second section keeps divider', cs('sect-2c2', 'border-top-width'), '1px');
+  eq('mid-DOM corner: following section keeps divider', cs('sect-mc2', 'border-top-width'), '1px');
   has('card interactive grow slot', cs('card-i', '--sl-interactive-transform'), 'scale(1.03)');
 
   /* ---- chip ---- */

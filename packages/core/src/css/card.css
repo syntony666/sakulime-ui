@@ -136,35 +136,28 @@
     padding-inline: var(--sl-pad);
   }
 
-  [sl-card] > * + [sl-card--section] {
+  /* a section earns its divider from real content — a non-corner
+     sibling must come before it, so leading corners never count as
+     content however many the card pins on */
+  [sl-card] > :not([sl-card--corner]) ~ [sl-card--section] {
     margin-block-start: var(--sl-pad);
     border-block-start: 1px solid var(--sl-border);
     padding-block-start: var(--sl-pad);
   }
 
-  /* a leading corner doesn't count as content — the section after it
-     is still the first block, so no divider or gap above it */
-  [sl-card] > [sl-card--corner]:first-child + [sl-card--section] {
-    margin-block-start: 0;
-    border-block-start: 0;
-    padding-block-start: 0;
-  }
-
   /* inset — a padding-cancelled region for edge-to-edge content (img/
-     svg/iframe/block). DOM order picks the bleeding edges; a leading or
-     trailing corner doesn't count as content */
+     svg/iframe/block). DOM order picks the bleeding edges; "first"
+     means no non-corner sibling precedes, "last" none follows */
   [sl-card] > [sl-card--section="inset"] {
     padding: 0;
   }
 
-  [sl-card] > :is([sl-card--section="inset"]:first-child,
-                 [sl-card--corner]:first-child + [sl-card--section="inset"]) {
+  [sl-card] > [sl-card--section="inset"]:not(:not([sl-card--corner]) ~ *) {
     margin-block-start: var(--_pbn);
     border-block-start: 0;
   }
 
-  [sl-card] > :is([sl-card--section="inset"]:last-child,
-                 [sl-card--section="inset"]:has(+ [sl-card--corner]:last-child)) {
+  [sl-card] > [sl-card--section="inset"]:not(:has(~ :not([sl-card--corner]))) {
     margin-block-end: var(--_pbn);
   }
 
