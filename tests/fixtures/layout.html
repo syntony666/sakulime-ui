@@ -41,6 +41,10 @@
 <div sl-row id="row-def"><div>a</div><div>b</div></div>
 <div sl-row sl-gap="lg" id="row-lg"><div>a</div><div>b</div></div>
 <div sl-row id="row-min"><div id="row-mc">a</div></div>
+<div sl-row sl-place="end" id="row-end"><div>a</div><div>b</div></div>
+<div sl-row sl-place="center" id="row-ctr"><div>a</div><div>b</div></div>
+<div sl-row sl-place="between" id="row-btw"><div>a</div><div>b</div></div>
+<div sl-place="end"><div sl-row id="row-seal"><div>a</div><div>b</div></div></div>
 
 <!-- grid (640px track width makes counts deterministic) -->
 <div style="width:640px">
@@ -69,6 +73,7 @@
 <div sl-bar="top" sl-bar-fixed id="bar-fix">fixed</div>
 <div sl-bar="bottom" id="bar-bot">bottom</div>
 <div sl-bar="top" sl-pad="lg" id="bar-pad">padded</div>
+<div sl-bar sl-place="center" id="bar-ctr">band</div>
 
 <!-- floats -->
 <div sl-float id="t-def"><div sl-notice="fit">a</div></div>
@@ -156,6 +161,12 @@ function main() {
   eq('row wrap', cs('row-def', 'flex-wrap'), 'wrap');
   eq('row align center', cs('row-def', 'align-items'), 'center');
   near('row def gap = --sl-md', cs('row-def', 'column-gap'), varPx('--sl-md'));
+  eq('row place end', cs('row-end', 'justify-content'), 'end');
+  eq('row place center', cs('row-ctr', 'justify-content'), 'center');
+  eq('row place between', cs('row-btw', 'justify-content'), 'space-between');
+  eq('row sealed from ancestor place', cs('row-seal', 'justify-content'), cs('row-def', 'justify-content'));
+  eq('bar default between', cs('bar-plain', 'justify-content'), 'space-between');
+  eq('bar place center', cs('bar-ctr', 'justify-content'), 'center');
   near('row sl-gap=lg', cs('row-lg', 'column-gap'), varPx('--sl-lg'));
   eq('row child min-inline 0', cs('row-mc', 'min-width'), '0px');
 

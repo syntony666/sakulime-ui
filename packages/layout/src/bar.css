@@ -6,7 +6,10 @@
   [sl-bar] {
     box-sizing: border-box;
     display: flex;
-    justify-content: space-between;
+    /* self-default the place slot — sl-place on the bar swaps the
+       spread for another distribution */
+    --sl-place: space-between;
+    justify-content: var(--sl-place);
     align-items: center;
     gap: var(--sl-bar-gap, var(--sl-gap, var(--sl-md)));
     /* 3.5rem default — the standard band height */
