@@ -110,6 +110,10 @@
 <div sl-notice sl-tone="danger" id="nt-d">danger</div>
 <div sl-notice sl-pad="lg" id="nt-pl">pad</div>
 <div sl-notice sl-radius="none" id="nt-rn">square</div>
+<div style="writing-mode: vertical-rl">
+  <div sl-card id="v-card"><i sl-card--corner sl-dot id="v-corner"></i>card</div>
+  <div sl-notice id="v-nt">copy <button sl-notice--action id="v-act">x</button></div>
+</div>
 
 <div id="probe"></div>
 <pre id="results"></pre>
@@ -117,6 +121,7 @@
 const R = [];
 const $ = id => document.getElementById(id);
 const cs = (el, p) => getComputedStyle($(el)).getPropertyValue(p);
+const rect = el => $(el).getBoundingClientRect();
 const px = v => parseFloat(v);
 const rec = (name, got, want, ok) => R.push({ name, got: String(got), want: String(want), ok });
 const eq = (name, got, want) => rec(name, got, want, got === want);
@@ -235,6 +240,16 @@ function main() {
   rec('notice fit shrinks', $('nt-fit').getBoundingClientRect().width + 'px', '< def-50', $('nt-fit').getBoundingClientRect().width < $('nt-def').getBoundingClientRect().width - 50);
   rec('notice action lane', cs('nt-act', 'padding-right'), '>50px', px(cs('nt-act', 'padding-right')) > 50);
   eq('notice action absolute', cs('nt-btn', 'position'), 'absolute');
+  near('notice action block-centered', (rect('nt-btn').top + rect('nt-btn').bottom) / 2,
+    (rect('nt-act').top + rect('nt-act').bottom) / 2, 2);
+  /* vertical-rl: block-start maps to the physical right edge,
+     inline-end to bottom — the dot's --sl-sm float offset rides
+     both mappings */
+  near('v corner block-start on right', cs('v-corner', 'right'), varPx('--sl-sm'));
+  near('v corner inline-end on bottom', cs('v-corner', 'bottom'), varPx('--sl-sm'));
+  near('v action centered on horizontal block axis',
+    (rect('v-act').left + rect('v-act').right) / 2,
+    (rect('v-nt').left + rect('v-nt').right) / 2, 2);
   rec('notice align end', cs('nt-al', 'text-align'), 'end|right', ['end', 'right'].includes(cs('nt-al', 'text-align')));
   neq('notice tone danger bg', cs('nt-d', 'background-color'), cs('nt-def', 'background-color'));
   near('notice pad lg v', cs('nt-pl', 'padding-top'), varPx('--sl-2xl') * 0.75);

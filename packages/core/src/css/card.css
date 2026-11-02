@@ -86,7 +86,7 @@
   [sl-card] > [sl-card--corner] {
     position: absolute;
     z-index: 1;
-    top: 0;
+    inset-block-start: 0;
     inset-inline-end: 0;
     font-size: var(--sl-lg);
     font-variant-numeric: tabular-nums;
@@ -110,12 +110,12 @@
   /* a dot or icon floats — it needs air so it doesn't straddle
      the border */
   [sl-card] > [sl-card--corner][sl-dot] {
-    top: var(--sl-sm);
+    inset-block-start: var(--sl-sm);
     inset-inline-end: var(--sl-sm);
   }
 
   [sl-card] > [sl-card--corner][sl-icon] {
-    top: var(--sl-xs);
+    inset-block-start: var(--sl-xs);
     inset-inline-end: var(--sl-xs);
   }
 

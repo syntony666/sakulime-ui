@@ -102,12 +102,15 @@
   }
 
   /* direct-child only — the same contract :has() uses for the lane,
-     so a nested attr can never pin without a lane reserved for it */
+     so a nested attr can never pin without a lane reserved for it.
+     Block-axis centering is opposing insets + auto margins, which
+     stays correct in vertical writing modes where a physical
+     translateY would shift along the wrong axis */
   [sl-notice] > [sl-notice--action] {
     position: absolute;
     inset-inline-end: var(--sl-notice-action-inset);
-    inset-block-start: 50%;
-    translate: 0 -50%;
+    inset-block: 0;
+    margin-block: auto;
   }
 
   /* "start" pins it to the leading edge */
