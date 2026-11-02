@@ -37,4 +37,10 @@
   [sl-chip][sl-interactive]:not([aria-disabled="true"]) {
     cursor: pointer;
   }
+
+  /* shared hook — button uses the same slot at .6 */
+  [sl-chip][aria-disabled="true"] {
+    opacity: var(--sl-disabled-opacity, 0.6);
+    cursor: not-allowed;
+  }
 }

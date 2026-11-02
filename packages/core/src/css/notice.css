@@ -77,6 +77,12 @@
     cursor: pointer;
   }
 
+  /* shared hook — button uses the same slot at .6 */
+  [sl-notice][aria-disabled="true"] {
+    opacity: var(--sl-disabled-opacity, 0.6);
+    cursor: not-allowed;
+  }
+
   /* links keep the notice's ink — browser blue would fight the wash.
      the underline stays: color alone can't carry link affordance */
   [sl-notice] a {
