@@ -13,6 +13,15 @@ export default defineConfig([
     },
   },
   {
+    // fixture helpers run as classic scripts inside headless Chromium —
+    // browser globals, not node
+    files: ['tests/fixtures/**/*.js'],
+    languageOptions: {
+      sourceType: 'script',
+      globals: globals.browser,
+    },
+  },
+  {
     files: ['**/*.{ts,mts}'],
     extends: [
       js.configs.recommended,

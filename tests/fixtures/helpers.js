@@ -1,5 +1,8 @@
 /* shared assertion harness for the fixture pages — loaded before each
    fixture's own script, which defines main() and nothing else */
+/* global main */
+/* eslint-disable no-unused-vars -- helpers are called by each fixture
+   page's inline script, not from this file */
 const R = [];
 const $ = id => document.getElementById(id);
 /* missing ids record a failing assertion instead of throwing — one
@@ -30,7 +33,7 @@ const propRules = () => {
       if (r.cssRules) walk(r.cssRules);
     }
   };
-  for (const s of document.styleSheets) { try { walk(s.cssRules); } catch (e) {} }
+  for (const s of document.styleSheets) { try { walk(s.cssRules); } catch { /* opaque sheet — file:// origin may hide cssRules */ } }
   return out;
 };
 const tracks = el => cs(el, 'grid-template-columns').split(' ').filter(s => s.endsWith('px')).length;
@@ -48,7 +51,7 @@ const mediaOf = sel => {
       if (!found && r.cssRules) walk(r.cssRules);
     }
   };
-  for (const s of document.styleSheets) { try { walk(s.cssRules); } catch (e) {} }
+  for (const s of document.styleSheets) { try { walk(s.cssRules); } catch { /* opaque sheet — file:// origin may hide cssRules */ } }
   if (!found) return 'missing';
   let p = found.parentRule;
   while (p && p.type !== CSSRule.MEDIA_RULE) p = p.parentRule;
@@ -68,7 +71,7 @@ const declOf = (sel, prop) => {
       if (r.cssRules) walk(r.cssRules);
     }
   };
-  for (const s of document.styleSheets) { try { walk(s.cssRules); } catch (e) {} }
+  for (const s of document.styleSheets) { try { walk(s.cssRules); } catch { /* opaque sheet — file:// origin may hide cssRules */ } }
   return val;
 };
 /* last declaration of prop on the rule whose selectorText equals
@@ -86,7 +89,7 @@ const mediaDecl = (sel, prop, media) => {
       if (r.cssRules) walk(r.cssRules, hit);
     }
   };
-  for (const s of document.styleSheets) { try { walk(s.cssRules, false); } catch (e) {} }
+  for (const s of document.styleSheets) { try { walk(s.cssRules, false); } catch { /* opaque sheet — file:// origin may hide cssRules */ } }
   return val;
 };
 /* every @media condition in the loaded sheets — for presence checks
@@ -99,7 +102,7 @@ const mediaList = () => {
       if (r.cssRules) walk(r.cssRules);
     }
   };
-  for (const s of document.styleSheets) { try { walk(s.cssRules); } catch (e) {} }
+  for (const s of document.styleSheets) { try { walk(s.cssRules); } catch { /* opaque sheet — file:// origin may hide cssRules */ } }
   return out;
 };
 /* fixed-position anchors resolve against the layout viewport, which
