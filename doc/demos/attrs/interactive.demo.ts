@@ -16,10 +16,12 @@ export const Interactive: Demo = {
     axis(["-", "grow", "lift", "shadow", "press", "dim"], (v) =>
       frame(
         v === "-" ? "未標示" : `sl-interactive="${v}"`,
-        `<div sl-wrap>` +
+        `<div sl-wrap sl-align="center">` +
           `<div sl-card${attr("sl-interactive", v)} style="width: 7rem; text-align: center">滑鼠移過來</div>` +
           `<button sl-button${attr("sl-interactive", v)}>按鈕</button>` +
-        `</div>`
+          `<span sl-chip${attr("sl-interactive", v)}>標籤</span>` +
+        `</div>` +
+        `<div sl-notice sl-tone="secondary"${attr("sl-interactive", v)} style="margin-top: var(--sl-md)">通知也吃，浮框不會被 hover 蓋掉</div>`
       )
     ),
 };

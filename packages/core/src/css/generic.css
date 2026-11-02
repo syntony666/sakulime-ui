@@ -8,7 +8,7 @@
 @custom-selector :--sl-generic-size [sl-button], [sl-chip];
 @custom-selector :--sl-generic-radius [sl-button], [sl-card], [sl-notice];
 @custom-selector :--sl-generic-pad [sl-card], [sl-notice];
-@custom-selector :--sl-generic-interactive [sl-card], [sl-button];
+@custom-selector :--sl-generic-interactive [sl-card], [sl-button], [sl-chip], [sl-notice];
 
 @layer base {
   /* interactive's shared seal — replaces the per-component

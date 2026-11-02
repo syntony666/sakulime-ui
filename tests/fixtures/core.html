@@ -78,6 +78,9 @@
   <div sl-card--section id="sect-mc2">after</div>
 </div>
 <div sl-card sl-interactive id="card-i">card</div>
+<span sl-chip sl-interactive="lift" id="chip-i">chip</span>
+<div sl-notice sl-interactive="shadow" id="nt-i">notice</div>
+<div sl-notice sl-interactive="bogus" id="nt-ix">notice</div>
 
 <!-- chips -->
 <span sl-chip id="chip-def">tag</span>
@@ -202,6 +205,9 @@ function main() {
   eq('dual corners: second section keeps divider', cs('sect-2c2', 'border-top-width'), '1px');
   eq('mid-DOM corner: following section keeps divider', cs('sect-mc2', 'border-top-width'), '1px');
   has('card interactive grow slot', cs('card-i', '--sl-interactive-transform'), 'scale(1.03)');
+  has('chip interactive lift slot', cs('chip-i', '--sl-interactive-transform'), 'translateY(-4px)');
+  has('notice interactive shadow slot', cs('nt-i', '--sl-interactive-shadow'), '0 3px 10px');
+  rec('notice bogus interactive reads as unmarked', cs('nt-ix', '--sl-interactive-transform'), 'none', cs('nt-ix', '--sl-interactive-transform') === 'none');
 
   /* ---- chip ---- */
   eq('chip display', cs('chip-def', 'display'), 'inline-flex');

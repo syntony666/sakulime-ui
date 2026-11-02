@@ -61,6 +61,9 @@
     border: 3px solid var(--sl-surface);
     box-shadow: 0 0 0 2px color-mix(in srgb, var(--sl-tone-bg) 28%, var(--sl-border));
     border-radius: var(--sl-radius);
+    /* playback timeline for sl-interactive — the shared hover rule
+       in generic.css writes the effect slots */
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
   }
 
   /* links keep the notice's ink — browser blue would fight the wash.
@@ -75,6 +78,17 @@
 
   [sl-notice] a:hover {
     text-decoration-color: currentColor;
+  }
+
+  /* the floating ring is the notice's frame — an interactive shadow
+     stacks outside it instead of replacing it. For effects that
+     leave the slot at none, "none, <ring>" is an invalid list so
+     this rule drops and the base ring stays — transform/filter
+     still apply through the shared playback */
+  [sl-notice][sl-interactive]:hover:not(:disabled) {
+    box-shadow:
+      var(--sl-interactive-shadow),
+      0 0 0 2px color-mix(in srgb, var(--sl-tone-bg) 28%, var(--sl-border));
   }
 }
 

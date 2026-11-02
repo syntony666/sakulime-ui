@@ -40,3 +40,5 @@ import * as InteractiveDemos from "../../demos/attrs/interactive.demo";
 | --- | --- |
 | `sl-card` | 沒有 hover 效果 |
 | `sl-button` | hover 就是 `grow` 放大 |
+| `sl-chip` | 沒有 hover 效果 |
+| `sl-notice` | 沒有 hover 效果；`shadow`／`lift` 的陰影疊在浮框外，不會蓋掉框線 |
