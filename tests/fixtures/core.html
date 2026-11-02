@@ -27,6 +27,7 @@
 <button sl-button sl-interactive="press" id="btn-i3">i3</button>
 <button sl-button sl-interactive="dim" id="btn-i4">i4</button>
 <button sl-button sl-radius="full" id="btn-rf">rf</button>
+<div sl-card id="btn-rf-host"><button sl-button sl-radius="full" id="btn-rfc">rfc</button></div>
 
 <!-- cards -->
 <div sl-card id="card-def">card</div>
@@ -143,6 +144,7 @@ function main() {
   match('btn interactive press slot', cs('btn-i3', '--sl-interactive-transform'), /scale\((0)?\.97\)/);
   has('btn interactive dim slot', cs('btn-i4', '--sl-interactive-filter'), 'brightness');
   eq('btn radius full pill', cs('btn-rf', 'border-top-left-radius'), '9999px');
+  eq('btn radius full inside card stays pill', cs('btn-rfc', 'border-top-left-radius'), '9999px');
 
   /* ---- card ---- */
   eq('card border-width 1px', cs('card-def', 'border-top-width'), '1px');

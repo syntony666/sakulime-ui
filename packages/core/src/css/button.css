@@ -12,6 +12,10 @@
     --sl-size-h: var(--sl-3xl);
     --sl-size-px: var(--sl-md);
     --sl-radius: var(--sl-sm);
+    /* seal the full slot at the plain pill — without it, a card's
+       1lh-capped --sl-radius-full inherits in and a sl-radius="full"
+       button inside a card stops being a pill */
+    --sl-radius-full: var(--sl-radius-pill);
     display: inline-flex;
     align-items: center;
     justify-content: center;
