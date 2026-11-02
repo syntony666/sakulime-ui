@@ -44,7 +44,7 @@ import * as BarDemos from "../../demos/layout/bar.demo";
 
 裸 `sl-bar` 不給邊緣值時 `sl-bar-fixed` 沒有意義。
 
-fixed 的 bar 不佔版面，body 會在對應邊自動補上 bar 高度的內距，下面的內容不會被蓋住；包在什麼容器裡都有效，不用是 body 直接子層。補償讀 `--sl-bar-h`，所以 bar 的實際高度要等於它：改 `sl-pad`、換行成兩列、或加了 safe-area inset，都要在 `:root` 同步改 `--sl-bar-h` 才跟得到。列印時 fixed bar 自動回到一般排版。
+fixed 的 bar 不佔版面，body 會在對應邊自動補上 bar 高度的內距，下面的內容不會被蓋住；包在什麼容器裡都有效，不用是 body 直接子層。補償讀 `--sl-bar-h`，所以 bar 的實際高度要等於它：改 [`sl-pad`](/attrs/pad)、換行成兩列、或加了 safe-area inset，都要在 `:root` 同步改 `--sl-bar-h` 才跟得到。列印時 fixed bar 自動回到一般排版。
 
 兩個外層陷阱：sticky 的外層不能設 `overflow`（會換成黏外層）或 `transform`／`filter`／`perspective`（fixed 的參考框會變成那個外層，bar 黏在卡片裡不黏視窗）。
 
@@ -65,7 +65,7 @@ fixed 的 bar 不佔版面，body 會在對應邊自動補上 bar 高度的內�
 
 <Demo :render="BarDemos.BarSpread.render" />
 
-一區要塞多個東西就包一個 `sl-wrap` 當一個子層，同一區標兩個子層會掉到下一行。要直排多段內容，子層裡包一個 `sl-stack`。
+一區要塞多個東西就包一個 [`sl-wrap`](/layout/wrap) 當一個子層，同一區標兩個子層會掉到下一行。要直排多段內容，子層裡包一個 [`sl-stack`](/layout/stack)。
 
 ## 尺寸與外觀
 

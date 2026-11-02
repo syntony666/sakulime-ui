@@ -88,7 +88,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 - 未標示／`end`：右上
 - `start`：左上
 
-內容組合，`sl-chip` 文字膠囊、`sl-dot` 狀態點、`sl-icon` 圖示都可以放；`sl-tone` 寫在同一個元素上染色：
+內容組合，[`sl-chip`](/core/chip) 文字膠囊、[`sl-dot`](/core/dot) 狀態點、[`sl-icon`](/core/icon) 圖示都可以放；`sl-tone` 寫在同一個元素上染色：
 
 ```html
 <span sl-card--corner sl-chip sl-tone="primary">200ms</span>

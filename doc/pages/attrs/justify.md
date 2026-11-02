@@ -27,7 +27,7 @@ import * as JustifyDemos from "../../demos/attrs/justify.demo";
 
 | 選項 | 分佈 |
 | --- | --- |
-| `start` | 靠頭排（`sl-wrap`、`sl-stack` 預設） |
+| `start` | 靠頭排（[`sl-wrap`](/layout/wrap)、[`sl-stack`](/layout/stack) 預設） |
 | `center` | 置中 |
 | `end` | 靠尾排 |
 | `between` | 首尾貼邊，剩餘空間由中間共享 |
@@ -36,7 +36,7 @@ import * as JustifyDemos from "../../demos/attrs/justify.demo";
 
 `between`／`around`／`evenly` 是 `justify-content` 語意，寫在 `sl-grid` 上時格子語意沒有對應，退回 `stretch`。
 
-`sl-justify` 不繼承，寫在外層上對裡面的排版元件沒有作用。這跟 [`sl-gap`](/attrs/gap) 相反，間距會繼承、對齊不會。交叉軸方向的對齊看 [`sl-align`](/attrs/align)。
+`sl-justify` 不繼承，寫在外層上對裡面的排版元件沒有作用。這跟 `sl-gap` 相反，間距會繼承、對齊不會。交叉軸方向的對齊看 `sl-align`。
 
 ## 適用元件
 
@@ -44,8 +44,8 @@ import * as JustifyDemos from "../../demos/attrs/justify.demo";
 
 | 元件 | 效果 | 預設 |
 | --- | --- | --- |
-| `sl-wrap` | 整排的水平分佈 | `start` |
-| `sl-stack` | 整疊的垂直分佈（容器比內容高才看得出來） | `start` |
-| `sl-grid` | 每個格子內元素的水平位置（`between` 在格子語意下退回 `stretch`） | `stretch` |
+| [`sl-wrap`](/layout/wrap) | 整排的水平分佈 | `start` |
+| [`sl-stack`](/layout/stack) | 整疊的垂直分佈（容器比內容高才看得出來） | `start` |
+| [`sl-grid`](/layout/grid) | 每個格子內元素的水平位置（`between` 在格子語意下退回 `stretch`） | `stretch` |
 
 寫在 `sl-grid` 的子層上是另一回事：`sl-justify` 標在格子內的元素會變成 `justify-self`，單獨控制那個格子的水平位置。其他排版元件的子層沒有對應機制，`sl-justify` 寫在 `sl-wrap`、`sl-stack` 的子層上無效。

@@ -38,14 +38,14 @@ import * as AlignDemos from "../../demos/attrs/align.demo";
 
 <Demo :render="AlignDemos.AlignChild.render" />
 
-`sl-grid` 的子層也吃：`sl-align` 管格子內垂直、[`sl-justify`](/attrs/justify) 管格子內水平，兩個一起寫就是格子內的雙軸定位。
+`sl-grid` 的子層也吃：`sl-align` 管格子內垂直、`sl-justify` 管格子內水平，兩個一起寫就是格子內的雙軸定位。
 
 ## 適用元件
 
 | 元件 | 效果 | 預設 |
 | --- | --- | --- |
-| `sl-wrap` | 子層在列內的垂直位置 | `center` |
-| `sl-stack` | 子層的水平位置 | `stretch`（撐滿） |
-| `sl-grid` | 格子內元素的垂直位置 | `stretch`（撐滿） |
+| [[`sl-wrap`](/layout/wrap)](/layout/wrap) | 子層在列內的垂直位置 | `center` |
+| [[`sl-stack`](/layout/stack)](/layout/stack) | 子層的水平位置 | `stretch`（撐滿） |
+| [[`sl-grid`](/layout/grid)](/layout/grid) | 格子內元素的垂直位置 | `stretch`（撐滿） |
 
-容器寫的 `sl-align` 不會傳進巢狀排版元件，每個元件有自己的預設，外層寫的擋不下來也滲不進去。沿著排列方向的分佈看 [`sl-justify`](/attrs/justify)。
+容器寫的 `sl-align` 不會傳進巢狀排版元件，每個元件有自己的預設，外層寫的擋不下來也滲不進去。沿著排列方向的分佈看 `sl-justify`。
