@@ -1,6 +1,6 @@
 ---
 title: Radius 圓角
-description: 邊角圓弧，五階。
+description: 邊角圓弧五階，`full` 依元件不同而有上限。
 ---
 
 <script setup>
@@ -24,7 +24,7 @@ import * as RadiusDemos from "../../demos/attrs/radius.demo";
 
 ## 選項
 
-px 以根字級 16px 換算，刻度本身是 rem：
+px 以根字級 16px 換算，刻度本身為 rem：
 
 | 選項 | 圓角 |
 | --- | --- |
@@ -34,14 +34,14 @@ px 以根字級 16px 換算，刻度本身是 rem：
 | `lg` | 12px |
 | `full` | 膠囊 |
 
-`sl-card` 跟 `sl-notice` 的 `full` 半徑約一行高加內距份額，元件一長高中段就變直線，不會撐成半圓；`sl-button` 沒有上限，一直是整顆膠囊。
+`sl-card` 與 `sl-notice` 的 `full` 上限約為一行高加上內距。元件一長高，中段就成直線，不會撐成半圓。`sl-button` 沒有上限，整顆保持膠囊。
 
 ## 適用元件
 
-未標示的話都是 `md`，`sl-notice` 例外：
+未標示時皆為 `md`，`sl-notice` 例外：
 
-| 元件 | 預設 |
+| 元件 | 未標示時 |
 | --- | --- |
 | [`sl-button`](/core/button) | `md` |
 | [`sl-card`](/core/card) | `md` |
-| [`sl-notice`](/core/notice) | `full`（膠囊形） |
+| [`sl-notice`](/core/notice) | `full` |
