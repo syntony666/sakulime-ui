@@ -46,13 +46,7 @@ Tests run the fixture pages under headless chromium — `tests/run.mjs` looks fo
 
 ## Releases (changesets)
 
-Write a changeset for every change heading into a release:
-
-```bash
-npx changeset        # pick packages, patch/minor/major, describe → .changeset/*.md
-```
-
-Day-to-day work lives on `release/x.y.z` (x.y.z is the target version — feature branches fork off it and merge back with `--no-ff`). Merging into `master` makes CI open a release PR (version bump + CHANGELOG); merging that PR publishes the four packages to npm. The doc site deploys independently — Cloudflare Workers Builds rebuilds `doc/` on every `master` push, not via the release PR. Afterwards merge `master` back into the next `release/x.y.z`. All four packages bump together (`fixed`). Details in CONTRIBUTING.md.
+Day-to-day work lives on `release/x.y.z`; merging into `master` makes CI open a release PR, and merging that publishes the four packages to npm (`fixed` lockstep). The doc site deploys independently on `master` pushes. Workflow details in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Repository layout (npm workspaces monorepo)
 
