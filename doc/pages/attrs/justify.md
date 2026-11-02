@@ -1,6 +1,6 @@
 ---
 title: Justify 主軸分佈
-description: 沿著排列方向的分佈方式，四個選項，寫在排版元件自己身上才生效。
+description: 沿著排列方向的分佈方式，六個選項，寫在排版元件自己身上才生效。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as JustifyDemos from "../../demos/attrs/justify.demo";
 
 # Justify *主軸分佈*
 
-> 沿著排列方向的分佈，四個選項。對應 CSS 的 `justify-content`／`justify-items`。標示寫在排版元件自己身上才生效，寫在祖先上會被元件的預設擋下來。
+> 沿著排列方向的分佈，六個選項。對應 CSS 的 `justify-content`／`justify-items`。標示寫在排版元件自己身上才生效，寫在祖先上會被元件的預設擋下來。
 
 ## 用法
 
@@ -19,7 +19,7 @@ import * as JustifyDemos from "../../demos/attrs/justify.demo";
 <div sl-grid sl-justify="center">格子內容水平置中</div>
 ```
 
-四個選項在同一排上的樣子：
+六個選項在同一排上的樣子：
 
 <Demo :render="JustifyDemos.Justify.render" />
 
@@ -31,6 +31,10 @@ import * as JustifyDemos from "../../demos/attrs/justify.demo";
 | `center` | 置中 |
 | `end` | 靠尾排 |
 | `between` | 首尾貼邊，剩餘空間由中間共享 |
+| `around`  | 每個項目兩側各留一半間距 |
+| `evenly`  | 間距處處相等，含兩端 |
+
+`between`／`around`／`evenly` 是 `justify-content` 語意——寫在 `sl-grid` 上時格子語意沒有對應，退回 `stretch`。
 
 `sl-justify` 不繼承，寫在祖先上對裡面的排版元件沒有作用。這跟 [`sl-gap`](/attrs/gap) 相反，間距會繼承、對齊不會。交叉軸方向的對齊看 [`sl-align`](/attrs/align)。
 

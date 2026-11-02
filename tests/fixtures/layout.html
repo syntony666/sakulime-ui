@@ -38,6 +38,8 @@
 <div sl-wrap sl-justify="end" id="wrap-end"><div>a</div><div>b</div></div>
 <div sl-wrap sl-justify="center" id="wrap-ctr"><div>a</div><div>b</div></div>
 <div sl-wrap sl-justify="between" id="wrap-btw"><div>a</div><div>b</div></div>
+<div sl-wrap sl-justify="around" id="wrap-ard"><div>a</div><div>b</div></div>
+<div sl-wrap sl-justify="evenly" id="wrap-evn"><div>a</div><div>b</div></div>
 <div sl-justify="end"><div sl-wrap id="wrap-seal"><div>a</div><div>b</div></div></div>
 <div sl-stack sl-justify="between" id="st-jbtw"><div>a</div><div>b</div></div>
 <!-- sl-align: container sets align-items, marked child gets align-self -->
@@ -222,6 +224,8 @@ function main() {
   eq('wrap justify end', cs('wrap-end', 'justify-content'), 'end');
   eq('wrap justify center', cs('wrap-ctr', 'justify-content'), 'center');
   eq('wrap justify between', cs('wrap-btw', 'justify-content'), 'space-between');
+  eq('wrap justify around', cs('wrap-ard', 'justify-content'), 'space-around');
+  eq('wrap justify evenly', cs('wrap-evn', 'justify-content'), 'space-evenly');
   eq('wrap sealed from ancestor justify', cs('wrap-seal', 'justify-content'), cs('wrap-def', 'justify-content'));
   eq('stack justify between', cs('st-jbtw', 'justify-content'), 'space-between');
   eq('wrap align end', cs('wrap-aend', 'align-items'), 'end');

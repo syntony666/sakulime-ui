@@ -10,4 +10,6 @@
   [sl-justify="center"]  { --sl-justify: center; }
   [sl-justify="end"]     { --sl-justify: end; }
   [sl-justify="between"] { --sl-justify: space-between; }
+  [sl-justify="around"]  { --sl-justify: space-around; }
+  [sl-justify="evenly"]  { --sl-justify: space-evenly; }
 }

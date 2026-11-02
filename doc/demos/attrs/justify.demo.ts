@@ -16,7 +16,7 @@ const frame = (caption: string, inner: string) =>
 // placement visible inside the frame
 export const Justify: Demo = {
   render: () =>
-    axis(["start", "center", "end", "between"], (v) =>
+    axis(["start", "center", "end", "between", "around", "evenly"], (v) =>
       frame(
         `sl-justify="${v}"`,
         `<div sl-wrap sl-justify="${v}" style="width: 20rem">${cells()}</div>`
