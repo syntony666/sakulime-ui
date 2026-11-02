@@ -83,7 +83,7 @@ for (const m of generic.matchAll(
   consumers[m[1]] = new Set([...m[2].matchAll(/sl-[a-z]+/g)].map((x) => x[0]));
 }
 /* a selector's component marks are the sl-<name> heads of its attrs —
-   [sl-card--section] and [sl-card-indicate] both count as sl-card */
+   [sl-card--section] and [sl-card-indicator] both count as sl-card */
 const rules = [];
 for (const f of readdirSync(`${coreDir}/src/css`)) {
   if (!f.endsWith(".css") || f === "generic.css") continue;

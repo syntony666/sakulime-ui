@@ -134,6 +134,10 @@ export default defineConfig({
           replacement: src("packages/theme/umbra.css"),
         },
         {
+          find: "@sakulime-ui/theme/derived.css",
+          replacement: src("packages/theme/_internal/derived.css"),
+        },
+        {
           find: "@sakulime-ui/core/index.css",
           replacement: src("packages/core/src/index.css"),
         },
@@ -160,6 +164,10 @@ export default defineConfig({
         {
           find: "sakulime-ui/sakulime.min.css",
           replacement: src("doc/.vitepress/alias-sakulime.css"),
+        },
+        {
+          find: "sakulime-ui/sakulime.min.js",
+          replacement: src("packages/core/src/index.ts"),
         },
         /* bare package entries last — a string find also matches
            subpath specifiers, so these must trail the specific ones */
