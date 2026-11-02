@@ -356,6 +356,24 @@ function main() {
   rec('--sl-grid-gap registered sealed', String(!!props['--sl-grid-gap'] && props['--sl-grid-gap'].inherits), 'true&&false',
     !!props['--sl-grid-gap'] && props['--sl-grid-gap'].inherits === false);
 
+  /* T6 anchors — semantic eq/neq pairs pass vacuously when both sides
+     collapse to the same broken value; pin every compared element's
+     checked prop to a real (non-transparent) computed value */
+  for (const id of ['btn-def', 'btn-out', 'btn-tp', 'btn-ts', 'btn-tok', 'btn-tw', 'btn-td'])
+    neq(`${id} bg solid`, cs(id, 'background-color'), TRANS);
+  for (const id of ['btn-def', 'btn-gho'])
+    neq(`${id} color solid`, cs(id, 'color'), TRANS);
+  neq('card-def bg solid', cs('card-def', 'background-color'), TRANS);
+  for (const id of ['card-def', 'card-it'])
+    neq(`${id} border solid`, cs(id, 'border-top-color'), TRANS);
+  neq('sect-sec bg solid', cs('sect-sec', 'background-color'), TRANS);
+  for (const id of ['chip-def', 'chip-d', 'chip-s'])
+    neq(`${id} color solid`, cs(id, 'color'), TRANS);
+  for (const id of ['dot-def', 'dot-s'])
+    neq(`${id} bg solid`, cs(id, 'background-color'), TRANS);
+  for (const id of ['nt-def', 'nt-d'])
+    neq(`${id} bg solid`, cs(id, 'background-color'), TRANS);
+
   /* ---- shipped bundle executes ---- */
   const t3 = window.__slBundle;
   rec('bundle module ran', String(!!t3), 'true', !!t3);
