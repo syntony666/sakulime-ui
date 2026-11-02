@@ -74,6 +74,6 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### Toast *浮動通知*
 
-放在哪個角落、怎麼疊、什麼時候消失，由頁面決定：
+放在哪個角落、怎麼疊、什麼時候消失，由頁面決定；角落容器看 [Float 角落區](/layout/float)：
 
 <Playground :meta="NoticeDemos.ToastPlay" :render="NoticeDemos.ToastPlay.render" />

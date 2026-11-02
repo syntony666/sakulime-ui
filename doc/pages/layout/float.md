@@ -9,7 +9,7 @@ import * as FloatDemos from "../../demos/layout/float.demo";
 
 # Float *角落區*
 
-> 裝 `sl-notice` 的固定角落容器。通知本身是 `sl-notice`，`sl-float` 只負責把它們疊在角落。
+> 裝 [`sl-notice`](/core/notice) 的固定角落容器。通知本身是 `sl-notice`，`sl-float` 只負責把它們疊在角落。
 
 ## 用法
 
