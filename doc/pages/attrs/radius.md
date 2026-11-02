@@ -1,6 +1,6 @@
 ---
 title: Radius 圓角
-description: 邊角圓弧五階，`full` 依元件不同而有上限。
+description: 五階圓角，full 依元件而定。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as RadiusDemos from "../../demos/attrs/radius.demo";
 
 # Radius *圓角*
 
-> 邊角圓弧，五階。
+> 五階圓角，`none` 是直角，`full` 依元件而有不同取值。
 
 ## 用法
 
@@ -18,13 +18,13 @@ import * as RadiusDemos from "../../demos/attrs/radius.demo";
 <button sl-button sl-radius="none">按鈕</button>
 ```
 
-五階的實際樣子：
+五階套用在元件上的效果：
 
 <Demo :render="RadiusDemos.Radius.render" />
 
 ## 選項
 
-px 以根字級 16px 換算，刻度本身為 rem：
+表中 px 值以根字級 16px 換算，級距本身以 rem 定義：
 
 | 選項 | 圓角 |
 | --- | --- |
@@ -32,16 +32,18 @@ px 以根字級 16px 換算，刻度本身為 rem：
 | `sm` | 4px |
 | `md`（預設） | 8px |
 | `lg` | 12px |
-| `full` | 膠囊 |
-
-`sl-card` 與 `sl-notice` 的 `full` 上限約為一行高加上內距。元件一長高，中段就成直線，不會撐成半圓。`sl-button` 沒有上限，整顆保持膠囊。
+| `full` | 依元件而定 |
 
 ## 適用元件
 
-未標示時皆為 `md`，`sl-notice` 例外：
+| 元件 | `full` 的值 | 未標示時 |
+| --- | --- | --- |
+| [`sl-button`](/core/button) | `9999px` | `md` |
+| [`sl-card`](/core/card) | 約一行高 | `md` |
+| [`sl-notice`](/core/notice) | 約一行高 | `full` |
 
-| 元件 | 未標示時 |
-| --- | --- |
-| [`sl-button`](/core/button) | `md` |
-| [`sl-card`](/core/card) | `md` |
-| [`sl-notice`](/core/notice) | `full` |
+`9999px` 遠超過高度的一半，瀏覽器會夾回一半，按鈕無論多高都呈膠囊狀。
+
+`sl-card` 與 `sl-notice` 的值約為一行高，不隨元件總高放大。
+
+一至兩行時，圓角已達高度的一半，整個區塊都是圓弧；三行起側邊中段成直線，四角仍為圓弧。
