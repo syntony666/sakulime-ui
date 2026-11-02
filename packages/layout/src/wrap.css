@@ -1,8 +1,8 @@
 @layer base {
-  /* row — horizontal run that wraps; tag rows, button groups. Children
+  /* wrap — horizontal run that wraps; tag rows, button groups. Children
      keep content width and wrap; min-inline-size keeps a squishy child
      from blowing the line out */
-  [sl-row] {
+  [sl-wrap] {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -10,10 +10,10 @@
        leak in — the attr only counts on the row itself */
     --sl-place: start;
     justify-content: var(--sl-place);
-    gap: var(--sl-row-gap, var(--sl-gap, var(--sl-md)));
+    gap: var(--sl-wrap-gap, var(--sl-gap, var(--sl-md)));
   }
 
-  [sl-row] > * {
+  [sl-wrap] > * {
     min-inline-size: 0;
   }
 }

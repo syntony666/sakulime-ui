@@ -216,7 +216,7 @@ export default defineConfig({
             items: [
               { text: `Stack ${zh("堆疊")}`, link: "/layout/stack" },
               { text: `Content ${zh("內文")}`, link: "/layout/content" },
-              { text: `Row ${zh("橫列")}`, link: "/layout/row" },
+              { text: `Wrap ${zh("橫列")}`, link: "/layout/wrap" },
               { text: `Grid ${zh("網格系統")}`, link: "/layout/grid" },
             ],
           },

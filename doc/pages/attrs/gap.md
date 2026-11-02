@@ -16,7 +16,7 @@ import * as GapDemos from "../../demos/attrs/gap.demo";
 ```html
 <div sl-gap="2xl">
   <div sl-stack>...</div>      <!-- 間距 2xl -->
-  <div sl-row>...</div>        <!-- 間距 2xl -->
+  <div sl-wrap>...</div>        <!-- 間距 2xl -->
   <div sl-stack sl-gap="xs">...</div> <!-- 給了 xs -->
 </div>
 ```
@@ -25,7 +25,7 @@ import * as GapDemos from "../../demos/attrs/gap.demo";
 
 <Demo :render="GapDemos.Region.render" />
 
-只想改一個、又不想動屬性，就寫它自己的間距變數：`--sl-stack-gap`、`--sl-content-gap`、`--sl-row-gap`、`--sl-grid-gap`、`--sl-sidebar-gap`、`--sl-float-gap`、`--sl-bar-gap`，優先於繼承下來的 `sl-gap`。刻度以外的值（例如 `6px`）也走這條 inline 變數路。
+只想改一個、又不想動屬性，就寫它自己的間距變數：`--sl-stack-gap`、`--sl-content-gap`、`--sl-wrap-gap`、`--sl-grid-gap`、`--sl-sidebar-gap`、`--sl-float-gap`、`--sl-bar-gap`，優先於繼承下來的 `sl-gap`。刻度以外的值（例如 `6px`）也走這條 inline 變數路。
 
 `sl-gap` 只存放間距，自己不排版。裡面沒有讀它的屬性時，標了跟沒標一樣：
 
@@ -53,5 +53,5 @@ px 以根字級 16px 換算，刻度本身是 rem。`sl-gap` 沒有預設，未�
 
 | 分類     | 屬性                                  |
 | -------- | ------------------------------------- |
-| 排列 | `sl-stack`、`sl-content`、`sl-row`、`sl-grid` |
+| 排列 | `sl-stack`、`sl-content`、`sl-wrap`、`sl-grid` |
 | 頁面區塊 | `sl-bar`、`sl-sidebar`、`sl-float`    |

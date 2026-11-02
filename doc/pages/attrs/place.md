@@ -14,7 +14,7 @@ import * as PlaceDemos from "../../demos/attrs/place.demo";
 ## 用法
 
 ```html
-<div sl-row sl-place="end">一排靠右</div>
+<div sl-wrap sl-place="end">一排靠右</div>
 <div sl-bar sl-place="center">橫條內容置中</div>
 ```
 
@@ -26,7 +26,7 @@ import * as PlaceDemos from "../../demos/attrs/place.demo";
 
 | 選項 | 分佈 |
 | --- | --- |
-| `start` | 靠頭排（`sl-row` 預設） |
+| `start` | 靠頭排（`sl-wrap` 預設） |
 | `center` | 置中 |
 | `end` | 靠尾排 |
 | `between` | 首尾貼邊，剩餘空間由中間共享（`sl-bar` 預設） |
@@ -37,5 +37,5 @@ import * as PlaceDemos from "../../demos/attrs/place.demo";
 
 | 元件 | 預設 |
 | --- | --- |
-| `sl-row` | `start` |
+| `sl-wrap` | `start` |
 | `sl-bar` | `between` |

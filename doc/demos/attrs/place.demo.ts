@@ -19,7 +19,7 @@ export const Place: Demo = {
     axis(["start", "center", "end", "between"], (v) =>
       frame(
         `sl-place="${v}"`,
-        `<div sl-row sl-place="${v}" style="width: 20rem">${cells()}</div>`
+        `<div sl-wrap sl-place="${v}" style="width: 20rem">${cells()}</div>`
       )
     ),
 };

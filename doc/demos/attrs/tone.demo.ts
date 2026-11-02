@@ -16,7 +16,7 @@ export const Tones: Demo = {
     axis(TONES, (v) =>
       frame(
         `sl-tone="${v}"`,
-        `<div sl-row>` +
+        `<div sl-wrap>` +
           `<button sl-button${attr("sl-tone", v)}>按鈕</button>` +
           `<span sl-chip${attr("sl-tone", v)}>膠囊</span>` +
           `<i sl-dot${attr("sl-tone", v)}></i>` +

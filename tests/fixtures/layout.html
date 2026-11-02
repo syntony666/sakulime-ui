@@ -32,13 +32,13 @@
 <div sl-content sl-gap="2xl" id="ct-gap"><div id="ct-g1">a</div><div id="ct-g2">b</div></div>
 
 <!-- row -->
-<div sl-row id="row-def"><div>a</div><div>b</div></div>
-<div sl-row sl-gap="lg" id="row-lg"><div>a</div><div>b</div></div>
-<div sl-row id="row-min"><div id="row-mc">a</div></div>
-<div sl-row sl-place="end" id="row-end"><div>a</div><div>b</div></div>
-<div sl-row sl-place="center" id="row-ctr"><div>a</div><div>b</div></div>
-<div sl-row sl-place="between" id="row-btw"><div>a</div><div>b</div></div>
-<div sl-place="end"><div sl-row id="row-seal"><div>a</div><div>b</div></div></div>
+<div sl-wrap id="wrap-def"><div>a</div><div>b</div></div>
+<div sl-wrap sl-gap="lg" id="wrap-lg"><div>a</div><div>b</div></div>
+<div sl-wrap id="wrap-min"><div id="wrap-mc">a</div></div>
+<div sl-wrap sl-place="end" id="wrap-end"><div>a</div><div>b</div></div>
+<div sl-wrap sl-place="center" id="wrap-ctr"><div>a</div><div>b</div></div>
+<div sl-wrap sl-place="between" id="wrap-btw"><div>a</div><div>b</div></div>
+<div sl-place="end"><div sl-wrap id="wrap-seal"><div>a</div><div>b</div></div></div>
 
 <!-- grid (640px track width makes counts deterministic) -->
 <div style="width:640px">
@@ -144,18 +144,18 @@ function main() {
   near('content sl-gap=2xl rhythm', cs('ct-g2', 'margin-top'), varPx('--sl-2xl'));
 
   /* ---- row ---- */
-  eq('row display', cs('row-def', 'display'), 'flex');
-  eq('row wrap', cs('row-def', 'flex-wrap'), 'wrap');
-  eq('row align center', cs('row-def', 'align-items'), 'center');
-  near('row def gap = --sl-md', cs('row-def', 'column-gap'), varPx('--sl-md'));
-  eq('row place end', cs('row-end', 'justify-content'), 'end');
-  eq('row place center', cs('row-ctr', 'justify-content'), 'center');
-  eq('row place between', cs('row-btw', 'justify-content'), 'space-between');
-  eq('row sealed from ancestor place', cs('row-seal', 'justify-content'), cs('row-def', 'justify-content'));
+  eq('row display', cs('wrap-def', 'display'), 'flex');
+  eq('row wrap', cs('wrap-def', 'flex-wrap'), 'wrap');
+  eq('row align center', cs('wrap-def', 'align-items'), 'center');
+  near('row def gap = --sl-md', cs('wrap-def', 'column-gap'), varPx('--sl-md'));
+  eq('row place end', cs('wrap-end', 'justify-content'), 'end');
+  eq('row place center', cs('wrap-ctr', 'justify-content'), 'center');
+  eq('row place between', cs('wrap-btw', 'justify-content'), 'space-between');
+  eq('row sealed from ancestor place', cs('wrap-seal', 'justify-content'), cs('wrap-def', 'justify-content'));
   eq('bar default between', cs('bar-plain', 'justify-content'), 'space-between');
   eq('bar place center', cs('bar-ctr', 'justify-content'), 'center');
-  near('row sl-gap=lg', cs('row-lg', 'column-gap'), varPx('--sl-lg'));
-  eq('row child min-inline 0', cs('row-mc', 'min-width'), '0px');
+  near('row sl-gap=lg', cs('wrap-lg', 'column-gap'), varPx('--sl-lg'));
+  eq('row child min-inline 0', cs('wrap-mc', 'min-width'), '0px');
 
   /* ---- grid ---- */
   eq('grid display', cs('gr-auto', 'display'), 'grid');

@@ -28,7 +28,7 @@ export const Region: Demo = {
   render: () =>
     `<div sl-stack sl-gap="2xl">` +
     frame("sl-stack 沒給 → 用 2xl", `<div sl-stack>${cells()}</div>`) +
-    frame("sl-row 沒給 → 用 2xl", `<div sl-row>${cells()}</div>`) +
+    frame("sl-wrap 沒給 → 用 2xl", `<div sl-wrap>${cells()}</div>`) +
     frame("sl-grid 沒給 → 用 2xl", `<div sl-grid style="--sl-grid-min: 6rem">${cells()}</div>`) +
     frame("sl-stack 自己給 sl-gap=\"xs\" → 還是 xs", `<div sl-stack sl-gap="xs">${cells()}</div>`) +
     `</div>`,

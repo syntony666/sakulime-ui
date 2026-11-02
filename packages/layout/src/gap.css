@@ -4,7 +4,7 @@
    fallbacks in the gap chains still fire */
 @property --sl-stack-gap   { syntax: "*"; inherits: false; }
 @property --sl-content-gap { syntax: "*"; inherits: false; }
-@property --sl-row-gap     { syntax: "*"; inherits: false; }
+@property --sl-wrap-gap    { syntax: "*"; inherits: false; }
 @property --sl-grid-gap    { syntax: "*"; inherits: false; }
 @property --sl-sidebar-gap { syntax: "*"; inherits: false; }
 @property --sl-float-gap   { syntax: "*"; inherits: false; }
