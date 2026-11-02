@@ -63,9 +63,7 @@ import { icon } from "sakulime-ui";
 
 ### Bundler
 
-::: info @iconify-json/*
-`@iconify-json/*` 是永久開源授權的資料檔（lucide 是 ISC、Simple Icons 是 CC0），建議當 devDep 裝。產出的是 SVG 字串，JSON 不會進使用者的 bundle。
-:::
+[@iconify-json/*](https://www.npmjs.com/org/iconify-json) 是永久開源授權的資料檔（lucide 是 ISC、Simple Icons 是 CC0）。
 
 ```ts
 import { registerPack } from "sakulime-ui";
@@ -101,6 +99,8 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 - `packNames()`：列出已註冊的圖示包
 - `iconNames(prefix)`：列出指定包的圖示名
 - `resolveIcons(root)`：手動解析 root 底下的佔位；Shadow DOM 內的元素要自己傳進來
+- `resolve(root)`：對 root 底下跑所有已註冊 `sl-*` 屬性的解析（不限圖示）
+- `installResolver()`：裝 MutationObserver，之後動態加入的內容跟屬性變更會自動解析
 - `registerResolver(attr, fn)`：讓其他 `sl-*` 屬性接上同一套解析機制
 
 :::
@@ -109,7 +109,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ### 顏色 `sl-tone`
 
-`sl-icon` 是 `sl-tone` 的適用元件，`sl-tone` 標示在圖示本身；沒給就繼承文字顏色。
+`sl-icon` 是 `sl-tone` 的適用元件，`sl-tone` 標示在圖示本身；沒給就繼承文字顏色。選項看 [Tone 色調](/attrs/tone)。
 
 ### 大小與對齊
 
