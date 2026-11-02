@@ -49,7 +49,8 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 </div>
 ```
 
-超過當列剩餘欄位就自動掉下一列。固定欄數下，`sl-grid--span` 大於當前欄數會自動變滿列，不會溢出、也不會憑空生出軌道。auto-fill 的網格也能用，欄數跟著容器浮動，要保險的跨列用 `sl-grid--span="full"`（永遠跨滿）。
+超過當列剩餘欄位就自動掉下一列。固定欄數下，`sl-grid--span` 大於當前欄數會自動變滿列，不會溢出、也不會憑空生出軌道。auto-fill 的網格也能用，欄數跟著容器浮動，要保守的跨欄寫法用 `sl-grid--span="full"`（永遠跨滿）。
+
 ## 欄寬
 
 欄數由公式算出，`repeat(auto-fill, minmax(min(--sl-grid-min, 100%), 1fr))`：
@@ -78,7 +79,7 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 
 ```html
 <div sl-grid sl-justify="center" sl-align="center">
-  <div sl-icon>圖示在格子正中央</div>
+  <div><i sl-icon="lucide:zap"></i> 圖示在格子正中央</div>
 </div>
 ```
 

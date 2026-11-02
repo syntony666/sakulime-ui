@@ -96,7 +96,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 <i sl-card--corner="start" sl-icon="lucide:zap" sl-tone="warning"></i>
 ```
 
-角落 chip 調字級用 `sl-size`（`sm`/`md`/`lg`），整顆膠囊等比縮放。
+兩種掛法外觀不同：掛 `sl-chip` 是貼著邊的 tab，掛 `sl-dot`／`sl-icon` 是離邊浮起的圓點。角落 chip 調字級用 `sl-size`（`sm`/`md`/`lg`），整顆膠囊等比縮放。
 
 <Demo :render="CardDemos.CornerPositions.render" />
 <Demo :render="CardDemos.CornerKinds.render" />
@@ -135,7 +135,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 #### 空白 `blank`
 
-沒有框線、內容完全置中的區塊，用來放空狀態、上傳區或查無結果。裡面用 `strong` 寫標題、`p` 寫說明，按鈕放 `sl-button`，不用另外加 class：
+內容完全置中的區塊，用來放空狀態、上傳區或查無結果；作為第一個區塊時沒有框線。裡面用 `strong` 寫標題、`p` 寫說明，按鈕放 `sl-button`，不用另外加 class：
 
 ```html
 <div sl-card="hollow">

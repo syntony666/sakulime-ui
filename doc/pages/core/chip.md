@@ -25,7 +25,7 @@ import * as ChipDemos from "../../demos/components/chip.demo";
 
 <Demo :render="ChipDemos.Sizes.render" />
 
-固定字級用 `sl-size`，chip 只取字級不看高度，選項看 [Size 尺寸](/attrs/size)。padding 和 gap 都是 em，整顆膠囊跟著字級等比縮放：
+固定字級用 `sl-size`，chip 只取字級不看高度，選項看 [Size 尺寸](/attrs/size)。padding 和 gap 都是 em，整顆膠囊跟著字級等比縮放。
 
 ## 組合
 
