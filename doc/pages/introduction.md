@@ -112,6 +112,8 @@ import "sakulime-ui/sakulime.min.css";
 | `--sl-container-md` | 60rem | 960px  |
 | `--sl-container-lg` | 75rem | 1200px |
 
+另外三個不屬於階梯的共用值：`--sl-radius-pill`（膠囊圓角 `9999px`）、`--sl-z-bar`（`sl-bar` 的 z-index `50`）、`--sl-z-float`（`sl-float` 的 `60`）。
+
 ::: tip
 表上沒有的值，在自己的 CSS 裡直接寫數字，不用硬湊最近的階。
 :::

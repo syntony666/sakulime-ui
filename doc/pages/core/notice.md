@@ -37,6 +37,10 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 未標示是 `sm`。`md`／`lg` 是整體內距的增減，`lg` 適合公告型的多行內容。選項看 [Pad 內距](/attrs/pad)。
 
+### 互動 `sl-interactive`
+
+整則通知看起來可以點，游標變成手指，滑鼠移過去就有反應。`sl-interactive` 未標示是 `grow`，`shadow`／`lift` 的陰影疊在浮框外，不會蓋掉框線。效果選項看 [Interactive 互動](/attrs/interactive)。
+
 ## 元件設定
 
 ### 對齊 `sl-notice-align`
@@ -57,7 +61,7 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 - 寫在 `sl-notice` 的直接子層；放到更深層的只是普通內容，不會固定到邊緣
 - 未標示靠右（行尾），`start` 靠左（行首），兩個可以同時存在
-- 垂直置中，文字不會繞到它底下；控制項更寬時調大 `--sl-notice-action-w`
+- 垂直置中，文字不會繞到它底下；控制項更寬時調大 `--sl-notice-action-w`，距邊距離跟字距分別是 `--sl-notice-action-inset` 跟 `--sl-notice-action-gap`
 - 裡面的 `<i>` 跟著按鈕字級，加大用 `sl-icon-size`
 
 <Playground :meta="NoticeDemos.ActionPlay" :render="NoticeDemos.ActionPlay.render" />

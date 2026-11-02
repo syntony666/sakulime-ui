@@ -45,3 +45,7 @@ import * as ButtonDemos from "../../demos/components/button.demo";
 ### 互動 `sl-interactive`
 
 `sl-button` 是 `sl-interactive` 的適用元件。未標示時 hover 本來就是 `grow` 放大；標了換成指定效果。選項看 [Interactive 互動](/attrs/interactive)。
+
+### 停用
+
+寫 `aria-disabled="true"` 會把按鈕淡化、游標變禁用圖示，滑鼠移上去不再放大。透明度是共用 hook `--sl-disabled-opacity`（預設 `0.6`），想整站調淡在 `:root` 覆寫。

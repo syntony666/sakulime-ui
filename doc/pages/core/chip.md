@@ -27,6 +27,10 @@ import * as ChipDemos from "../../demos/components/chip.demo";
 
 固定字級用 `sl-size`，chip 只取字級不看高度，選項看 [Size 尺寸](/attrs/size)。padding 和 gap 都是 em，整顆膠囊跟著字級等比縮放。
 
+### 互動 `sl-interactive`
+
+整顆膠囊看起來可以點，游標變成手指，滑鼠移過去就有反應。`sl-interactive` 未標示是 `grow`，效果選項看 [Interactive 互動](/attrs/interactive)。
+
 ## 組合
 
 `<i sl-icon>` 放進去，間距自動對、顏色跟著膠囊走。
