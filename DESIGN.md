@@ -228,7 +228,7 @@ components:
 - **Surface:** tone 12% wash 膠囊＋tone-text 墨，浮空框：`3px solid var(--sl-surface)` 環帶把 wash 跟外緣 `box-shadow` 2px tone/border 混色細線隔開
 - **Shape:** 預設膠囊端，chip 的 block 級兄弟；`full` 是「一行膠囊」（半徑 = 一行高），一、二行全圓、三行起中段跑直線；`sl-radius` 可轉 `sm/md/lg/none`
 - **Width:** 預設填滿容器（橫幅）；`sl-notice="fit"` 縮內容寬。進 `sl-float` 角落容器就讀成 toast：位置/堆疊由排版層接管，剩 dismiss/timeout 留消費端
-- **Composition:** `display: block` 行內流，icon、訊息、連結同一串文字流；`sl-notice--action` 直接子層 absolute 置中貼邊（預設 end，`="start"` 換左緣），`:has()` 在 padding 預留專用欄（`--sl-notice-action-w` 槽位）；`sl-notice-align="end"` 寫在 notice 自己身上，整串文字對齊右緣
+- **Composition:** `display: block` 行內流，icon、訊息、連結同一串文字流；`sl-notice--action` 直接子層 absolute 置中貼邊（預設 end，`="start"` 換左緣），`:has()` 在 padding 預留專用欄（`--sl-notice-action-w` 槽位）；`sl-notice-align="start|center|end"` 寫在 notice 自己身上，整串文字對齊（roadmap 註記：text-align 家族落地後接管這個 scoped 對齊）
 
 ### Demo Chrome（文件站元件）
 - **Stage:** 圓點格紙背景＋`--sl-3xl` padding＋細框，內容在 Shadow DOM 裡渲染

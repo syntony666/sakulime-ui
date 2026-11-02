@@ -23,7 +23,7 @@ type ToastArgs = { count: string; variant: string };
 const VARIANTS = ["-", "fit"];
 const PADS = ["-", "sm", "md", "lg"];
 const RADII = ["-", "sm", "md", "lg", "full", "none"];
-const ALIGNS = ["-", "end"];
+const ALIGNS = ["-", "start", "center", "end"];
 const ACTIONS = ["-", "end", "start", "both"];
 
 const meta = {
@@ -69,12 +69,18 @@ export const Widths: Demo = {
 
 // sl-notice-align moves the copy, not the frame — "end" parks it at
 // the trailing edge (no visible effect under fit, nothing to push)
+const ALIGN_LABEL: Record<string, string> = {
+  "-": "靠左（預設）",
+  start: "靠左",
+  center: "置中",
+  end: "靠右",
+};
 export const Aligns: Demo = {
   render: () =>
     axis(
-      ["-", "end"],
+      ["-", "start", "center", "end"],
       (v) =>
-        `<div sl-notice sl-tone="secondary"${attr("sl-notice-align", v)}><i sl-icon="lucide:info"></i> ${v === "-" ? "靠左（預設）" : "靠右"}的訊息</div>`,
+        `<div sl-notice sl-tone="secondary"${attr("sl-notice-align", v)}><i sl-icon="lucide:info"></i> ${ALIGN_LABEL[v]}的訊息</div>`,
       true,
     ),
 };

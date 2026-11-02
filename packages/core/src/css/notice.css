@@ -119,8 +119,17 @@
     inset-inline-start: var(--sl-notice-action-inset);
   }
 
-  /* content align — "end" right-aligns every line; copy stops at the
-     reserved action lane, which reads as hugging the action */
+  /* content align — start|center|end set text-align on every line;
+     copy stops at the reserved action lane, which reads as hugging
+     the action */
+  [sl-notice][sl-notice-align="start"] {
+    text-align: start;
+  }
+
+  [sl-notice][sl-notice-align="center"] {
+    text-align: center;
+  }
+
   [sl-notice][sl-notice-align="end"] {
     text-align: end;
   }

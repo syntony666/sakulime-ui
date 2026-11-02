@@ -43,7 +43,8 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 內容的對齊方向，`fit` 時元件跟內容同寬所以沒有差別：
 
-- 沒給：靠左（預設）
+- 沒給／`start`：靠左（預設）
+- `center`：置中；換行後每一行都置中
 - `end`：靠右；換行後每一行都靠右
 
 <Demo :render="NoticeDemos.Aligns.render" />

@@ -107,6 +107,8 @@
 <div sl-notice id="nt-def">hello notice</div>
 <div sl-notice="fit" id="nt-fit">short</div>
 <div sl-notice id="nt-act">copy <button sl-notice--action id="nt-btn">x</button></div>
+<div sl-notice sl-notice-align="start" id="nt-as">aligned</div>
+<div sl-notice sl-notice-align="center" id="nt-ac">aligned</div>
 <div sl-notice sl-notice-align="end" id="nt-al">aligned</div>
 <div sl-notice sl-tone="danger" id="nt-d">danger</div>
 <div sl-notice sl-pad="lg" id="nt-pl">pad</div>
@@ -252,6 +254,8 @@ function main() {
   near('v action centered on horizontal block axis',
     (rect('v-act').left + rect('v-act').right) / 2,
     (rect('v-nt').left + rect('v-nt').right) / 2, 2);
+  rec('notice align start', cs('nt-as', 'text-align'), 'start|left', ['start', 'left'].includes(cs('nt-as', 'text-align')));
+  eq('notice align center', cs('nt-ac', 'text-align'), 'center');
   rec('notice align end', cs('nt-al', 'text-align'), 'end|right', ['end', 'right'].includes(cs('nt-al', 'text-align')));
   neq('notice tone danger bg', cs('nt-d', 'background-color'), cs('nt-def', 'background-color'));
   near('notice pad lg v', cs('nt-pl', 'padding-top'), varPx('--sl-2xl') * 0.75);
