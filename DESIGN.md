@@ -155,7 +155,7 @@ components:
 - **直排 `sl-stack`**：flex column 垂直群組，父層擁有節奏，直接子層 block margin 歸零、寬度拉滿
 - **內文 `sl-content`**：block 內文欄，子層保留自己的 margin，相鄰補 `> * + *` margin 節奏，首末子層對外 margin 清零
 - **橫列 `sl-wrap`**：flex-wrap 水平流（tag 列、按鈕群），子層內容寬換行、`min-inline-size:0`
-- **網格系統 `sl-grid`**：預設 auto-fill 欄，`--sl-grid-min`（14rem）是欄寬地板；設定 `sl-grid-cols="1..12"` 換明確欄數、`sl-grid-cols-lg/md/sm` 各斷點重述；子層 `sl-grid--span="N|full"` 跨欄——clamp 認 `--_cap`：明確欄數下是當前欄數，auto-fill 下仍是 12，span 大於實際欄數會撐出隱含軌，保險跨列用 `"full"`（bare = full）
+- **網格系統 `sl-grid`**：預設 auto-fill 欄，`--sl-grid-min`（14rem）是欄寬地板；設定 `sl-grid-cols="1..12"` 換明確欄數、`sl-grid-cols-lg/md/sm` 各斷點重述——各層存獨立槽、實際欄數取所有已宣告層的 `min()`（越窄只能越少），`"auto"` 讓該層回到 auto-fill；子層 `sl-grid--span="N|full"` 跨欄——clamp 認 `--_cap`：明確欄數下是當前欄數，auto-fill 下仍是 12，span 大於實際欄數會撐出隱含軌，保險跨列用 `"full"`（bare = full）
 - **頁面橫條 `sl-bar`**：三欄 grid（`minmax(0,1fr) auto minmax(0,1fr)`）左中右固定區域，子層標 `sl-bar--start/--center/--end` 落位，中間欄 auto 寬所以 `--center` 永遠正中央；值選邊（`"top"/"bottom"`/bare 版內橫條），edge 值預設 sticky＋同側細線；設定 `sl-bar-fixed` 固定到視窗不佔版面，body `:has()` 在同側自動補 `--sl-bar-h` 內距，列印回 static
 - **側欄 `sl-sidebar`＋`sl-sidebar--rail`**：flex-wrap 排版，rail 由子層標記認領（`--sl-sidebar-w` 16rem），位置跟 DOM 序；主欄 `min-inline-size: var(--sl-sidebar-min,55%)` 就是換行觸發點，不用 media query
 - **角落 `sl-float`**：fixed 角落容器，值是空白分隔的 `<邊> <側>` token（top/bottom × start/center/end 六角落，詞序不拘、只寫一邊也行，bare = 右下）；寬高 clamp 進 viewport，`env()` 讓開 home indicator，列印回 static
