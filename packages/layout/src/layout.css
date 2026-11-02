@@ -1,3 +1,9 @@
+/* the layer order travels with the css — consumers importing this
+   file alone (shadow-dom demos, partial imports) get the declared
+   order no matter which import surfaces first. Same guard as
+   core/index.css */
+@layer theme, base, attrs;
+
 /* layout primitives as sl-* attributes — one file per concern.
    Import order is the cascade order: each file's own @layer blocks
    merge into the shared theme/base/attrs layers by name */
