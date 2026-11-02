@@ -32,18 +32,28 @@
 <div sl-content sl-gap="2xl" id="ct-gap"><div id="ct-g1">a</div><div id="ct-g2">b</div></div>
 
 <!-- row -->
-<div sl-row id="row-def"><div>a</div><div>b</div></div>
-<div sl-row sl-gap="lg" id="row-lg"><div>a</div><div>b</div></div>
-<div sl-row id="row-min"><div id="row-mc">a</div></div>
-<div sl-row sl-place="end" id="row-end"><div>a</div><div>b</div></div>
-<div sl-row sl-place="center" id="row-ctr"><div>a</div><div>b</div></div>
-<div sl-row sl-place="between" id="row-btw"><div>a</div><div>b</div></div>
-<div sl-place="end"><div sl-row id="row-seal"><div>a</div><div>b</div></div></div>
+<div sl-wrap id="wrap-def"><div>a</div><div>b</div></div>
+<div sl-wrap sl-gap="lg" id="wrap-lg"><div>a</div><div>b</div></div>
+<div sl-wrap id="wrap-min"><div id="wrap-mc">a</div></div>
+<div sl-wrap sl-justify="end" id="wrap-end"><div>a</div><div>b</div></div>
+<div sl-wrap sl-justify="center" id="wrap-ctr"><div>a</div><div>b</div></div>
+<div sl-wrap sl-justify="between" id="wrap-btw"><div>a</div><div>b</div></div>
+<div sl-justify="end"><div sl-wrap id="wrap-seal"><div>a</div><div>b</div></div></div>
+<div sl-stack sl-justify="between" id="st-jbtw"><div>a</div><div>b</div></div>
+<!-- sl-align: container sets align-items, marked child gets align-self -->
+<div sl-wrap sl-align="end" id="wrap-aend"><div>a</div><div>b</div></div>
+<div sl-wrap id="wrap-aparent"><div sl-align="end" id="wrap-aself">a</div><div>b</div></div>
+<div sl-stack sl-align="center" id="st-actr"><div>a</div><div>b</div></div>
+<div sl-stack id="st-aparent"><div sl-align="start" id="st-aself">a</div><div>b</div></div>
+<div sl-align="end"><div sl-stack id="st-aseal"><div>a</div><div>b</div></div></div>
 
 <!-- grid (640px track width makes counts deterministic) -->
 <div style="width:640px">
   <div sl-grid id="gr-auto"><div>a</div><div>b</div><div>c</div><div>d</div></div>
   <div sl-grid sl-grid-cols="4" id="gr-4"><div>a</div><div>b</div><div>c</div><div>d</div></div>
+  <div sl-grid sl-grid-cols="4" sl-justify="center" id="gr-jctr"><div>a</div></div>
+  <div sl-grid sl-grid-cols="4" sl-align="center" id="gr-actr"><div>a</div></div>
+  <div sl-grid sl-grid-cols="4"><div sl-align="end" id="gr-aself">a</div></div>
   <div sl-grid sl-grid-cols="4" id="gr-span">
     <div sl-grid--span="8" id="sp8">over</div>
     <div sl-grid--span="full" id="spf">full</div>
@@ -60,14 +70,17 @@
 <!-- bar -->
 <div sl-bar id="bar-plain">band</div>
 <div sl-bar="top" id="bar-top">
-  <div id="bz-s">s</div>
-  <div id="bz-c">c</div>
-  <div id="bz-e">e</div>
+  <div sl-bar--start id="bz-s">s</div>
+  <div sl-bar--center id="bz-c">center</div>
+  <div sl-bar--end id="bz-e">e</div>
+</div>
+<div sl-bar id="bar-sparse">
+  <div sl-bar--center id="bs-c">center</div>
+  <div sl-bar--end id="bs-e">e</div>
 </div>
 <div sl-bar="top" sl-bar-fixed id="bar-fix">fixed</div>
 <div sl-bar="bottom" id="bar-bot">bottom</div>
 <div sl-bar="top" sl-pad="lg" id="bar-pad">padded</div>
-<div sl-bar sl-place="center" id="bar-ctr">band</div>
 
 <!-- floats -->
 <div sl-float id="t-def"><div sl-notice="fit">a</div></div>
@@ -144,23 +157,30 @@ function main() {
   near('content sl-gap=2xl rhythm', cs('ct-g2', 'margin-top'), varPx('--sl-2xl'));
 
   /* ---- row ---- */
-  eq('row display', cs('row-def', 'display'), 'flex');
-  eq('row wrap', cs('row-def', 'flex-wrap'), 'wrap');
-  eq('row align center', cs('row-def', 'align-items'), 'center');
-  near('row def gap = --sl-md', cs('row-def', 'column-gap'), varPx('--sl-md'));
-  eq('row place end', cs('row-end', 'justify-content'), 'end');
-  eq('row place center', cs('row-ctr', 'justify-content'), 'center');
-  eq('row place between', cs('row-btw', 'justify-content'), 'space-between');
-  eq('row sealed from ancestor place', cs('row-seal', 'justify-content'), cs('row-def', 'justify-content'));
-  eq('bar default between', cs('bar-plain', 'justify-content'), 'space-between');
-  eq('bar place center', cs('bar-ctr', 'justify-content'), 'center');
-  near('row sl-gap=lg', cs('row-lg', 'column-gap'), varPx('--sl-lg'));
-  eq('row child min-inline 0', cs('row-mc', 'min-width'), '0px');
+  eq('row display', cs('wrap-def', 'display'), 'flex');
+  eq('row wrap', cs('wrap-def', 'flex-wrap'), 'wrap');
+  eq('row align center', cs('wrap-def', 'align-items'), 'center');
+  near('row def gap = --sl-md', cs('wrap-def', 'column-gap'), varPx('--sl-md'));
+  eq('wrap justify end', cs('wrap-end', 'justify-content'), 'end');
+  eq('wrap justify center', cs('wrap-ctr', 'justify-content'), 'center');
+  eq('wrap justify between', cs('wrap-btw', 'justify-content'), 'space-between');
+  eq('wrap sealed from ancestor justify', cs('wrap-seal', 'justify-content'), cs('wrap-def', 'justify-content'));
+  eq('stack justify between', cs('st-jbtw', 'justify-content'), 'space-between');
+  eq('wrap align end', cs('wrap-aend', 'align-items'), 'end');
+  eq('wrap child align-self end', cs('wrap-aself', 'align-self'), 'end');
+  eq('stack align center', cs('st-actr', 'align-items'), 'center');
+  eq('stack child align-self start', cs('st-aself', 'align-self'), 'start');
+  eq('stack sealed from ancestor align', cs('st-aseal', 'align-items'), 'stretch');
+  near('row sl-gap=lg', cs('wrap-lg', 'column-gap'), varPx('--sl-lg'));
+  eq('row child min-inline 0', cs('wrap-mc', 'min-width'), '0px');
 
   /* ---- grid ---- */
   eq('grid display', cs('gr-auto', 'display'), 'grid');
   eq('grid auto-fill tracks = 2 @640px', tracks('gr-auto'), 2);
   eq('grid cols=4 tracks', tracks('gr-4'), 4);
+  eq('grid justify=items center', cs('gr-jctr', 'justify-items'), 'center');
+  eq('grid align=items center', cs('gr-actr', 'align-items'), 'center');
+  eq('grid child align-self end', cs('gr-aself', 'align-self'), 'end');
   near('span 8 clamps to 4 tracks', rect('sp8').width, rect('gr-span').width, 2);
   near('span full covers grid', rect('spf').width, rect('gr-span').width, 2);
   near('bare span = full row', rect('spb').width, rect('gr-span').width, 2);
@@ -172,15 +192,22 @@ function main() {
   eq('outer grid tracks = 2', tracks('gr-outer'), 2);
 
   /* ---- bar ---- */
-  eq('bar display flex', cs('bar-plain', 'display'), 'flex');
-  eq('bar space-between', cs('bar-plain', 'justify-content'), 'space-between');
+  eq('bar display grid', cs('bar-plain', 'display'), 'grid');
   near('bar min-block = 3.5rem', cs('bar-plain', 'min-height'), 56);
   near('bar pad = --sl-md block', cs('bar-plain', 'padding-top'), varPx('--sl-md'));
   eq('bar top sticky', cs('bar-top', 'position'), 'sticky');
   eq('bar top border-bottom', cs('bar-top', 'border-bottom-width'), '1px');
-  /* space-between: first hugs left, last hugs right, middle floats */
-  near('bar first at left+pad', rect('bz-s').left, rect('bar-top').left + varPx('--sl-lg'), 2);
-  near('bar last at right-pad', rect('bz-e').right, rect('bar-top').right - varPx('--sl-lg'), 2);
+  /* the middle column is auto-width, so --center lands dead-center
+     even when the sides are unequal */
+  near('bar start at left+pad', rect('bz-s').left, rect('bar-top').left + varPx('--sl-lg'), 2);
+  near('bar end at right-pad', rect('bz-e').right, rect('bar-top').right - varPx('--sl-lg'), 2);
+  near('bar center dead-center',
+    rect('bz-c').left + rect('bz-c').width / 2,
+    rect('bar-top').left + rect('bar-top').width / 2, 2);
+  near('bar center dead-center (sparse zones)',
+    rect('bs-c').left + rect('bs-c').width / 2,
+    rect('bar-sparse').left + rect('bar-sparse').width / 2, 2);
+  near('bar sparse end at right-pad', rect('bs-e').right, rect('bar-sparse').right - varPx('--sl-lg'), 2);
   eq('bar fixed', cs('bar-fix', 'position'), 'fixed');
   eq('bar bottom sticky', cs('bar-bot', 'position'), 'sticky');
   eq('bar bottom border-top', cs('bar-bot', 'border-top-width'), '1px');

@@ -16,7 +16,7 @@ export const Sizes: Demo = {
     axis(["sm", "md", "lg"], (v) =>
       frame(
         `sl-size="${v}"`,
-        `<div sl-row>` +
+        `<div sl-wrap>` +
           `<button sl-button${attr("sl-size", v)}>按鈕</button>` +
           `<span sl-chip${attr("sl-size", v)}>膠囊</span>` +
         `</div>`

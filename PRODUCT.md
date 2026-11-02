@@ -30,7 +30,7 @@ sakulime-ui 是一套 CSS-first 設計系統：只有兩件事 — `sl-*` 屬性
 
 ## Capabilities and Constraints
 
-- 文法四型：元件標記 `sl-<comp>="型態"`、元件設定 `sl-<comp>-<attr>`、子元素 `sl-<comp>--<part>`、通用屬性 `sl-<attr>`（tone/size/radius/pad/interactive/gap，只作用於消費名單內的元件）；元件六支（card/button/chip/dot/notice/icon）、`@sakulime-ui/layout` 排版原語八支與響應式 `sl-hide-*`/`sl-show-*`。完整清單與值域看文件站
+- 文法四型：元件標記 `sl-<comp>="型態"`、元件設定 `sl-<comp>-<attr>`、子元素 `sl-<comp>--<part>`、通用屬性 `sl-<attr>`（tone/size/radius/pad/interactive/gap/justify/align，只作用於消費名單內的元件）；元件六支（card/button/chip/dot/notice/icon）、`@sakulime-ui/layout` 排版原語八支與響應式 `sl-hide-*`/`sl-show-*`。完整清單與值域看文件站
 - 顏色用 CSS Color 4/5：`oklch()`、`color-mix()`，目標 WCAG AA
 - Google Fonts 走 `<link>`/`preconnect`，Cloudflare Fonts rewrite 成 same-origin `/cf-fonts`
 - 所有外觀行為純 CSS selector 實作；資料驅動的功能（如圖示名稱解析）走共用 resolver，屬於選配增強
@@ -44,7 +44,7 @@ sakulime-ui 是一套 CSS-first 設計系統：只有兩件事 — `sl-*` 屬性
 ## Evidence on Hand
 
 - 文件站本身即最完整的 demo：每個元件頁有 Playground（demo args/argTypes 驅動）＋靜態 demo 列＋自動縮排的即時 markup
-- `doc/demos/**/*.demo.ts` 是 demo 資料來源 — `components/` 六支（button、card、chip、dot、icon、notice）、`attrs/` 六支（tone、size、radius、pad、gap、interactive）、`layout/` 九支（container、stack、content、row、grid、bar、sidebar、float、responsive）
+- `doc/demos/**/*.demo.ts` 是 demo 資料來源 — `components/` 六支（button、card、chip、dot、icon、notice）、`attrs/` 八支（tone、size、radius、pad、interactive、gap、justify、align）、`layout/` 九支（container、stack、content、wrap、grid、bar、sidebar、float、responsive）
 - 無使用者見證、案例、下載量 — 對外證據目前只有產品本身
 
 ## Product Principles

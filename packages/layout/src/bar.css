@@ -1,15 +1,16 @@
 @layer base {
-  /* bar — a full-width band at either page edge. The value picks the
-     edge and sticks there by default; bare sl-bar is a plain in-flow
-     band. sl-bar-fixed pins to the viewport edge. space-between
-     spreads children across the band */
+  /* bar — a full-width band at either page edge. Three fixed zones:
+     left / dead-center / right — children claim a zone with the
+     sl-bar--start|--center|--end parts; unmarked children auto-fill
+     the columns in source order. The middle column is auto-width so
+     center content is always dead-center no matter what the sides
+     hold. The value picks the edge and sticks there by default;
+     bare sl-bar is a plain in-flow band. sl-bar-fixed pins to the
+     viewport edge */
   [sl-bar] {
     box-sizing: border-box;
-    display: flex;
-    /* self-default the place slot — sl-place on the bar swaps the
-       spread for another distribution */
-    --sl-place: space-between;
-    justify-content: var(--sl-place);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
     gap: var(--sl-bar-gap, var(--sl-gap, var(--sl-md)));
     /* 3.5rem default — the standard band height */
@@ -24,6 +25,13 @@
     padding-inline: var(--sl-bar-pad-inline, var(--sl-lg));
     background: var(--sl-bg, #ffffff);
   }
+
+  /* zone parts — a marked child claims its column and alignment.
+     Siblings landing in the same zone spill into a new row: wrap
+     them in one child (sl-wrap) instead */
+  [sl-bar] > [sl-bar--start]  { grid-column: 1; justify-self: start; }
+  [sl-bar] > [sl-bar--center] { grid-column: 2; justify-self: center; }
+  [sl-bar] > [sl-bar--end]    { grid-column: 3; justify-self: end; }
 
   [sl-bar="top"] {
     position: sticky;

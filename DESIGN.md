@@ -149,17 +149,18 @@ components:
 
 ## Layout
 
-排版元件自成一個套件（`@sakulime-ui/layout`），一個元件一個檔案：`packages/layout/src/` 下 container、stack、content、row、grid、sidebar、bar、float、gap、responsive，由 `layout.css` 依序 import，各檔的 `@layer` 區塊依名併入共享的 theme/base/attrs 三層。文法四種形式：元件標記 `sl-<元件>[="型態"]`、元件設定 `sl-<元件>-<設定>`、子元素 `sl-<元件>--<零件>`（雙 dash 寫在子層）、通用屬性 `sl-<屬性>`；型態槽只裝種類跟位置語意，間距不進值槽。
+排版元件自成一個套件（`@sakulime-ui/layout`），一個元件一個檔案：`packages/layout/src/` 下 container、stack、content、wrap、grid、sidebar、bar、float、gap、justify、align、responsive，由 `layout.css` 依序 import，各檔的 `@layer` 區塊依名併入共享的 theme/base/attrs 三層。文法四種形式：元件標記 `sl-<元件>[="型態"]`、元件設定 `sl-<元件>-<設定>`、子元素 `sl-<元件>--<零件>`（雙 dash 寫在子層）、通用屬性 `sl-<屬性>`；型態槽只裝種類跟位置語意，間距不進值槽。
 
 - **容器 `sl-container`**：值語法 `"sm"|"md"|"lg"`（bare = md），45/60/75rem 刻度，水平 auto＋`--sl-container-pad`（預設 `--sl-lg`）內距；文件站內容欄吃 md
 - **直排 `sl-stack`**：flex column 垂直群組，父層擁有節奏，直接子層 block margin 歸零、寬度拉滿
 - **內文 `sl-content`**：block 內文欄，子層保留自己的 margin，相鄰補 `> * + *` margin 節奏，首末子層對外 margin 清零
-- **橫列 `sl-row`**：flex-wrap 水平流（tag 列、按鈕群），子層內容寬換行、`min-inline-size:0`
+- **橫列 `sl-wrap`**：flex-wrap 水平流（tag 列、按鈕群），子層內容寬換行、`min-inline-size:0`
 - **網格系統 `sl-grid`**：預設 auto-fill 欄，`--sl-grid-min`（14rem）是欄寬地板；設定 `sl-grid-cols="1..12"` 換明確欄數、`sl-grid-cols-lg/md/sm` 各斷點重述；子層 `sl-grid--span="N|full"` 跨欄並 clamp 到當前欄數（bare = full），不炸出隱含軌
-- **頁面橫條 `sl-bar`**：flex＋`space-between`，值選邊（`"top"/"bottom"`/bare 版內橫條），edge 值預設 sticky＋同側細線；設定 `sl-bar-fixed` 固定到視窗不佔版面，body `:has()` 在同側自動補 `--sl-bar-h` 內距，列印回 static
+- **頁面橫條 `sl-bar`**：三欄 grid（`minmax(0,1fr) auto minmax(0,1fr)`）左中右固定區域，子層標 `sl-bar--start/--center/--end` 落位，中間欄 auto 寬所以 `--center` 永遠正中央；值選邊（`"top"/"bottom"`/bare 版內橫條），edge 值預設 sticky＋同側細線；設定 `sl-bar-fixed` 固定到視窗不佔版面，body `:has()` 在同側自動補 `--sl-bar-h` 內距，列印回 static
 - **側欄 `sl-sidebar`＋`sl-sidebar--rail`**：flex-wrap 排版，rail 由子層標記認領（`--sl-sidebar-w` 16rem），位置跟 DOM 序；主欄 `min-inline-size: var(--sl-sidebar-min,55%)` 就是換行觸發點，不用 media query
 - **角落 `sl-float`**：fixed 角落容器，值是六角落 `<邊>-<側>`（top/bottom × start/center/end，bare = bottom-end）；寬高 clamp 進 viewport，`env()` 讓開 home indicator，列印回 static
-- **間距 `sl-gap`**：唯一的間距屬性，設 `--sl-gap` 會繼承——寫在排版元件自己或祖先上，最近的贏；各元件的 `--sl-<元件>-gap` 是自己的間距槽（七個都 `@property` non-inheriting 註冊，外層的間距值滲不進巢狀同名元件），預設 stack/content/row/grid/float/bar = `md`、sidebar = `lg`
+- **間距 `sl-gap`**：唯一的間距屬性，設 `--sl-gap` 會繼承——寫在排版元件自己或祖先上，最近的贏；各元件的 `--sl-<元件>-gap` 是自己的間距槽（七個都 `@property` non-inheriting 註冊，外層的間距值滲不進巢狀同名元件），預設 stack/content/wrap/grid/float/bar = `md`、sidebar = `lg`
+- **對齊雙軸 `sl-justify`＋`sl-align`**：主軸分佈（`start|center|end|between`）跟交叉軸對齊（`start|center|end`）兩個通用屬性，寫在消費者自己身上、不繼承；wrap/stack 讀成 `justify-content`/`align-items`、grid 讀成 `-items`；寫在消費者子層上變 `*-self` 單獨覆寫。消費者：wrap（預設 justify start、align center）、stack（start、stretch）、grid（stretch、stretch）
 - **Slot 封印**：generic 屬性只在列名的消費者上展開 `--sl-*` slot，消費端在 base 把讀取的 slot 自我 default 成 manifest，祖先的同名牌漏不進來
 - **響應式族**：`sl-hide-*`/`sl-show-*` 在斷點兩側互為鏡像，一對 hide/show 跨線換內容；斷點 45/60/75rem 是 `--sl-container-*` 的 hardcode 孿生（media query 讀不到 var，手動同步）
 - **間距節奏**：一律走 xs→5xl 台階；demo stage padding 兩格（`--sl-3xl`）、axis 列 gap 12px（文件站）

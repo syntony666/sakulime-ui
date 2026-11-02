@@ -4,10 +4,24 @@
   [sl-stack] {
     display: flex;
     flex-direction: column;
+    /* self-default the axis slots so an ancestor's sl-align or
+       sl-justify can't leak in — the attrs only count on the stack
+       itself. justify is vertical distribution: only visible when
+       the stack is taller than its content */
+    --sl-align: stretch;
+    align-items: var(--sl-align);
+    --sl-justify: start;
+    justify-content: var(--sl-justify);
     gap: var(--sl-stack-gap, var(--sl-gap, var(--sl-md)));
   }
 
   [sl-stack] > * {
     margin-block: 0;
+  }
+
+  /* sl-align on a child is per-item horizontal placement — only
+     children carrying the attr get the self override */
+  [sl-stack] > [sl-align] {
+    align-self: var(--sl-align);
   }
 }

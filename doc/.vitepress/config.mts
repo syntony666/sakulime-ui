@@ -180,7 +180,8 @@ export default defineConfig({
               { text: `Pad ${zh("內距")}`, link: "/attrs/pad" },
               { text: `Interactive ${zh("互動")}`, link: "/attrs/interactive" },
               { text: `Gap ${zh("間距")}`, link: "/attrs/gap" },
-              { text: `Place ${zh("對齊")}`, link: "/attrs/place" },
+              { text: `Justify ${zh("主軸分佈")}`, link: "/attrs/justify" },
+              { text: `Align ${zh("對齊")}`, link: "/attrs/align" },
             ],
           },
         ],
@@ -216,7 +217,7 @@ export default defineConfig({
             items: [
               { text: `Stack ${zh("堆疊")}`, link: "/layout/stack" },
               { text: `Content ${zh("內文")}`, link: "/layout/content" },
-              { text: `Row ${zh("橫列")}`, link: "/layout/row" },
+              { text: `Wrap ${zh("橫列")}`, link: "/layout/wrap" },
               { text: `Grid ${zh("網格系統")}`, link: "/layout/grid" },
             ],
           },

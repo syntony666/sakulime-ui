@@ -16,7 +16,7 @@ export const Interactive: Demo = {
     axis(["-", "grow", "lift", "raise", "press", "dim"], (v) =>
       frame(
         v === "-" ? "未標示" : `sl-interactive="${v}"`,
-        `<div sl-row>` +
+        `<div sl-wrap>` +
           `<div sl-card${attr("sl-interactive", v)} style="width: 7rem; text-align: center">滑鼠移過來</div>` +
           `<button sl-button${attr("sl-interactive", v)}>按鈕</button>` +
         `</div>`

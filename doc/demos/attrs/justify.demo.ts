@@ -12,14 +12,14 @@ const frame = (caption: string, inner: string) =>
   `<div class="demo-cell"><span class="demo-w" data-demo>${caption}</span>` +
   `<div style="margin-top: var(--sl-sm)">${inner}</div>`;
 
-// the same row distributed four ways — the fixed width makes the
+// the same wrap distributed four ways — the fixed width makes the
 // placement visible inside the frame
-export const Place: Demo = {
+export const Justify: Demo = {
   render: () =>
     axis(["start", "center", "end", "between"], (v) =>
       frame(
-        `sl-place="${v}"`,
-        `<div sl-row sl-place="${v}" style="width: 20rem">${cells()}</div>`
+        `sl-justify="${v}"`,
+        `<div sl-wrap sl-justify="${v}" style="width: 20rem">${cells()}</div>`
       )
     ),
 };

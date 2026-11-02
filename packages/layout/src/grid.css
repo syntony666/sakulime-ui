@@ -9,13 +9,36 @@
     --_cols: auto-fill;
     --_cap: 12;
     --_gf: min(var(--sl-grid-min, 14rem), 100%);
+    /* self-default the justify slot so an ancestor's sl-justify
+       can't leak in — grid reads it as justify-items (per-cell
+       inline placement), not distribution */
+    --sl-justify: stretch;
+    /* same seal for the block-axis slot — grid reads sl-align as
+       align-items (per-cell block placement) */
+    --sl-align: stretch;
     display: grid;
     gap: var(--sl-grid-gap, var(--sl-gap, var(--sl-md)));
+    justify-items: var(--sl-justify);
+    align-items: var(--sl-align);
     grid-template-columns: repeat(var(--_cols), minmax(var(--_gf), 1fr));
   }
 
   [sl-grid] > * {
     min-inline-size: 0;
+  }
+
+  /* sl-justify on a cell child is per-cell inline placement —
+     justify-self. Only children carrying the attr get it, so the
+     container's own sl-justify can't double-apply through
+     inheritance */
+  [sl-grid] > [sl-justify] {
+    justify-self: var(--sl-justify);
+  }
+
+  /* sl-align on a cell child is per-cell block placement —
+     align-self; same attr-scoped rule as justify-self */
+  [sl-grid] > [sl-align] {
+    align-self: var(--sl-align);
   }
 
   /* sl-grid--span — a grid child takes N tracks, clamped to the active
