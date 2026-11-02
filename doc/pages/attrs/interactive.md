@@ -1,6 +1,6 @@
 ---
 title: Interactive 互動
-description: hover 效果，五種。
+description: 五種 hover 效果，滑鼠移入時才出現。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as InteractiveDemos from "../../demos/attrs/interactive.demo";
 
 # Interactive *互動*
 
-> hover 效果，五種。
+> 五種 hover 效果，滑鼠移入時才出現。
 
 ## 用法
 
@@ -26,11 +26,15 @@ import * as InteractiveDemos from "../../demos/attrs/interactive.demo";
 
 | 選項 | 效果 |
 | --- | --- |
-| `grow`（預設） | 放大 1.03；空白標示或寫了不認識的值也是 grow |
-| `lift` | 浮起 4px 加陰影 |
-| `shadow` | 只有陰影 |
-| `press` | 壓下 0.97 |
-| `dim` | 變暗 |
+| `grow`（預設） | 放大至 1.03 |
+| `lift` | 上移 4px 並加陰影 |
+| `shadow` | 只加陰影 |
+| `press` | 縮至 0.97 |
+| `dim` | 調暗 |
+
+未帶值或值不在表中時，一律視為 `grow`。
+
+元件停用時不觸發效果，包含 `disabled` 與 `aria-disabled="true"` 兩種寫法。
 
 ## 適用元件
 
@@ -38,7 +42,7 @@ import * as InteractiveDemos from "../../demos/attrs/interactive.demo";
 
 | 元件 | 未標示時 |
 | --- | --- |
-| [`sl-card`](/core/card) | 沒有 hover 效果 |
-| [`sl-button`](/core/button) | hover 就是 `grow` 放大 |
-| [`sl-chip`](/core/chip) | 沒有 hover 效果 |
-| [`sl-notice`](/core/notice) | 沒有 hover 效果；`shadow`／`lift` 的陰影疊在浮框外，不會蓋掉框線 |
+| [`sl-card`](/core/card) | 無 hover 效果 |
+| [`sl-button`](/core/button) | `grow` |
+| [`sl-chip`](/core/chip) | 無 hover 效果 |
+| [`sl-notice`](/core/notice) | 無 hover 效果。陰影疊在浮框之外，不覆蓋框線 |
