@@ -61,6 +61,8 @@
   <div sl-grid sl-grid-cols="4" sl-justify="center" id="gr-jctr"><div>a</div></div>
   <div sl-grid sl-grid-cols="4" sl-align="center" id="gr-actr"><div>a</div></div>
   <div sl-grid sl-grid-cols="4"><div sl-align="end" id="gr-aself">a</div></div>
+  <div sl-grid sl-grid-cols="4"><div sl-justify="end" id="gr-jself">a</div></div>
+  <div sl-grid id="gr-asp"><div sl-grid--span="2" id="spa">a</div><div>b</div></div>
   <div sl-grid sl-grid-cols="4" id="gr-span">
     <div sl-grid--span="8" id="sp8">over</div>
     <div sl-grid--span="full" id="spf">full</div>
@@ -122,6 +124,10 @@
 <div sl-sidebar id="sb2" style="width:800px">
   <div id="sb2-main">m</div>
   <div sl-sidebar--rail id="sb2-rail">r</div>
+</div>
+<div sl-sidebar id="sb4" style="width:300px">
+  <div sl-sidebar--rail id="sb4-rail">r</div>
+  <div id="sb4-main">m</div>
 </div>
 <div sl-sidebar id="sb3" style="width:1400px">
   <div sl-sidebar--rail id="sb3-l">l</div>
@@ -195,6 +201,10 @@ function main() {
   eq('grid justify=items center', cs('gr-jctr', 'justify-items'), 'center');
   eq('grid align=items center', cs('gr-actr', 'align-items'), 'center');
   eq('grid child align-self end', cs('gr-aself', 'align-self'), 'end');
+  eq('grid child justify-self end', cs('gr-jself', 'justify-self'), 'end');
+  /* auto-fill mode: --_cap stays 12 so span 2 spans real tracks —
+     at 2 tracks wide that's the whole row */
+  near('auto-fill span 2 covers row', rect('spa').width, rect('gr-asp').width, 2);
   near('span 8 clamps to 4 tracks', rect('sp8').width, rect('gr-span').width, 2);
   near('span full covers grid', rect('spf').width, rect('gr-span').width, 2);
   near('bare span = full row', rect('spb').width, rect('gr-span').width, 2);
@@ -289,6 +299,11 @@ function main() {
   rec('rail last sits right', rect('sb2-rail').left + 'px', '> main', rect('sb2-rail').left > rect('sb2-main').left);
   rec('two rails flank main', rect('sb3-l').left + '<' + rect('sb3-main').left + '<' + rect('sb3-r').left,
     'l<main<r', rect('sb3-l').left < rect('sb3-main').left && rect('sb3-r').left > rect('sb3-main').left);
+  /* narrow container: main's 55% min + rail basis + gap > width, so
+     the rail wraps onto its own line above the content */
+  rec('narrow sidebar wraps rail above main',
+    rect('sb4-rail').top + '<' + rect('sb4-main').top,
+    'rail row above main row', rect('sb4-rail').bottom <= rect('sb4-main').top + 1);
 }
 </script>
 </body>
