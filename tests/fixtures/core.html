@@ -31,7 +31,7 @@
 
 <!-- cards -->
 <div sl-card id="card-def">card</div>
-<div sl-card="plain" id="card-plain">card</div>
+<div sl-card="flat" id="card-flat">card</div>
 <div sl-card="hollow" id="card-hollow">card</div>
 <div sl-card="blank" id="card-blank">card</div>
 <div sl-card sl-pad="sm" id="card-ps">card</div>
@@ -166,7 +166,7 @@ function main() {
   eq('card border-width 1px', cs('card-def', 'border-top-width'), '1px');
   near('card radius = --sl-sm', cs('card-def', 'border-top-left-radius'), varPx('--sl-sm'));
   near('card pad = --sl-lg', cs('card-def', 'padding-top'), varPx('--sl-lg'));
-  eq('card plain border 0', cs('card-plain', 'border-top-width'), '0px');
+  eq('card flat border 0', cs('card-flat', 'border-top-width'), '0px');
   eq('card hollow dashed', cs('card-hollow', 'border-top-style'), 'dashed');
   eq('card hollow bw 2px', cs('card-hollow', 'border-top-width'), '2px');
   eq('card hollow bg transparent', cs('card-hollow', 'background-color'), TRANS);

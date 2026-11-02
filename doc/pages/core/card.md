@@ -22,7 +22,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 ```
 
 - `hollow`：虛線描邊、透明底，常用在上傳或空白狀態
-- `plain`：拿掉框線，保留底色和圓角
+- `flat`：拿掉框線，保留底色和圓角
 - `blank`：拿掉框線和底色，只剩內距
 
 <Demo :render="CardDemos.Variants.render" />

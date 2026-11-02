@@ -28,7 +28,7 @@ type SectionArgs = {
 
 const PADS = ["-", "sm", "md", "lg"];
 const RADII = ["-", "none", "sm", "md", "lg", "full"];
-const VARIANTS = ["-", "hollow", "plain", "blank"];
+const VARIANTS = ["-", "hollow", "flat", "blank"];
 const INDICATES = ["-", "top", "bottom", "start", "end"];
 const CORNERS = ["-", "start", "end"];
 const CORNER_KINDS = ["chip", "dot", "icon"];

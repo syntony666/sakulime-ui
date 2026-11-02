@@ -47,8 +47,8 @@
     border-width: 2px;
   }
 
-  /* plain — frameless shell: keeps the surface fill, drops the border */
-  [sl-card="plain"] {
+  /* flat — frameless shell: keeps the surface fill, drops the border */
+  [sl-card="flat"] {
     border: 0;
   }
 
