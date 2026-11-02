@@ -40,12 +40,12 @@
        padding absorbs the rest of --sl-pad */
     --sl-notice-action-inset: calc(var(--sl-pad) - var(--sl-sm));
     /* breathing room the copy keeps from the action lane */
-    --sl-notice-gap: 0.6em;
+    --sl-notice-action-gap: 0.6em;
     /* the lane an edge-pinned action reserves — resolved once so
        each :has() rule just reads it for its own edge */
     --_lane: calc(
       var(--sl-notice-action-inset) + var(--sl-notice-action-w) + var(--sl-md) +
-        var(--sl-notice-gap)
+        var(--sl-notice-action-gap)
     );
     line-height: 1.4;
     /* strip proportions — vertical sits at 3/4 of the pad slot,
