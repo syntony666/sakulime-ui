@@ -16,6 +16,12 @@
     max-inline-size: var(--sl-container-sm);
   }
 
+  /* pin the documented value so a future default change can't
+     silently retarget sl-container="md" to a different width */
+  [sl-container="md"] {
+    max-inline-size: var(--sl-container-md);
+  }
+
   [sl-container="lg"] {
     max-inline-size: var(--sl-container-lg);
   }
