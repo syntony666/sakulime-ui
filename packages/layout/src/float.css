@@ -33,9 +33,10 @@
        room for the notice's 2px outer ring so the edge toasts'
        frame isn't sliced */
     padding: 2px;
-    /* safe-area keeps the region off the home indicator */
+    /* safe-area keeps the region off the home indicator — and off
+       curved edges/notches in landscape */
     inset-block-end: calc(var(--_tb) + env(safe-area-inset-bottom, 0px));
-    inset-inline-end: var(--_te);
+    inset-inline-end: calc(var(--_te) + env(safe-area-inset-right, 0px));
   }
 
   /* the value is space-separated tokens <edge> <side>: "top" flips
@@ -50,7 +51,7 @@
 
   [sl-float~="start"] {
     inset-inline-end: auto;
-    inset-inline-start: var(--_te);
+    inset-inline-start: calc(var(--_te) + env(safe-area-inset-left, 0px));
   }
 
   [sl-float~="center"] {

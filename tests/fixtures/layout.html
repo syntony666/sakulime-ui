@@ -318,6 +318,10 @@ function main() {
   near('float bogus value falls back right', rect('t-bogus').right, vw() - varPx('--sl-lg'), 2);
   near('float bogus value falls back bottom', rect('t-bogus').bottom, vh() - varPx('--sl-lg'), 2);
   eq('float align center', cs('t-alc', 'align-items'), 'center');
+  rec('float end carries safe-area-right', declOf('[sl-float]', 'inset-inline-end'),
+    'contains safe-area-inset-right', (declOf('[sl-float]', 'inset-inline-end') || '').includes('safe-area-inset-right'));
+  rec('float start carries safe-area-left', declOf('[sl-float~="start"]', 'inset-inline-start'),
+    'contains safe-area-inset-left', (declOf('[sl-float~="start"]', 'inset-inline-start') || '').includes('safe-area-inset-left'));
   eq('float sealed from ancestor align', cs('t-alseal', 'align-items'), 'stretch');
   eq('float print is static', mediaDecl('[sl-float]', 'position', 'print'), 'static');
   eq('float print releases clamp', mediaDecl('[sl-float]', 'max-block-size', 'print'), 'none');
