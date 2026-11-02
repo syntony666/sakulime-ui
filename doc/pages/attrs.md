@@ -45,6 +45,8 @@ description: sl-* 屬性語法總覽：元件標記、元件設定、子元素�
 </div>
 ```
 
+子元素標記只認母元素直接包著的第一層；放更深就變普通內容，不會被認領。文件中「子層」指排版元件直接裝的內容物，「子元素」指帶 `sl-*--*` 標記的對象。
+
 ### 通用屬性
 
 `sl-<屬性>[="<選項>"]` 是跨元件共用的標示，只對各自適用的元件有效；標示在外層元素上不會影響裡面的元件。唯一的例外是 `sl-gap`：繼承是它的功能，寫在祖先上裡面的排版屬性都吃得到，最近的設定贏：
@@ -72,5 +74,13 @@ description: sl-* 屬性語法總覽：元件標記、元件設定、子元素�
   <i sl-card--corner sl-dot sl-tone="danger"></i>
 </div>
 ```
+
+## 開放值
+
+`sl-icon` 的值是 `pack:name` 開放資料，`pack` 是註冊時自訂的圖示包前綴、`name` 是包裡的圖示名，數量跟著資料檔走，不在上面四種形式的型態文法裡。用法見 [Icon 圖示](/core/icon)。
+
+## 值寫錯的時候
+
+值不在選項表裡的時候，元件當作沒標或落回預設，不會報錯也不會壞版面。例如 `sl-button="inver"`（想寫 `outline` 拼錯）渲染跟裸 `sl-button` 一樣、`sl-grid--span` 給非數字當成滿列。好處是向前相容；壞處是拼錯不會提醒你，寫完對照各頁選項表檢查一次。
 
 各元件頁只記錄自己的標記、設定跟子元素；通用屬性的細節看各自頁面：[Tone 色調](/attrs/tone)、[Size 尺寸](/attrs/size)、[Radius 圓角](/attrs/radius)、[Pad 內距](/attrs/pad)、[Interactive 互動](/attrs/interactive)、[Gap 間距](/attrs/gap)、[Justify 主軸分佈](/attrs/justify)、[Align 對齊](/attrs/align)。
