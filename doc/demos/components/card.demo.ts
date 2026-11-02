@@ -32,7 +32,7 @@ const VARIANTS = ["-", "hollow", "flat", "blank"];
 const INDICATES = ["-", "top", "bottom", "start", "end"];
 const CORNERS = ["-", "start", "end"];
 const CORNER_KINDS = ["chip", "dot", "icon"];
-const INTERACTIVES = ["-", "grow", "lift", "shadow", "press"];
+const INTERACTIVES = ["-", "grow", "lift", "shadow", "press", "dim"];
 const EDGES = ["-", "top", "middle", "bottom"];
 
 const meta = {
@@ -159,7 +159,7 @@ export const BasicSections: Demo = {
 // carries its own args/argTypes so the md can bind it as a standalone
 // playground (demo object doubles as the Playground meta prop)
 export const Sections: DemoObj<SectionArgs> = {
-  args: { edge: "top", corner: false, pad: "-" },
+  args: { edge: "top", corner: true, pad: "-" },
   argTypes: {
     edge: axisArg('sl-card--section="edge"', "貼邊區塊位置", EDGES),
     corner: boolArg("sl-card--corner", "角落標記（疊在貼邊內容上）"),
