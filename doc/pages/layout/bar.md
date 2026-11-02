@@ -25,7 +25,9 @@ import * as BarDemos from "../../demos/layout/bar.demo";
 
 <Demo :render="BarDemos.BarTop.render" />
 
-`sl-bar` 不給值就是一條一般的橫條，沒有邊緣語意，當區塊分隔用。
+`sl-bar` 不給值就是一條一般的橫條，沒有邊緣語意，當區塊分隔用：
+
+<Demo :render="BarDemos.BarBare.render" />
 
 ## 邊緣跟定位
 

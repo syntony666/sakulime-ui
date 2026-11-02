@@ -35,3 +35,20 @@ export const Region: Demo = {
     frame("sl-stack 自己給 sl-gap=\"xs\" → 還是 xs", `<div sl-stack sl-gap="xs">${cells()}</div>`) +
     `</div>`,
 };
+
+// the whole scale at once — each frame is a two-cell stack spaced by
+// its own value; "none" and the unmarked default bracket the ramp
+export const Scale: Demo = {
+  render: () =>
+    `<div class="axis-row col">` +
+    ["-", "none", "xs", "sm", "md", "lg", "xl", "2xl", "3xl", "4xl", "5xl"]
+      .map(
+        (v) =>
+          frame(
+            v === "-" ? "未標示（預設 md）" : `sl-gap="${v}"`,
+            `<div sl-stack${v === "-" ? "" : ` sl-gap="${v}"`}>${cells(2)}</div>`
+          )
+      )
+      .join("") +
+    `</div>`,
+};

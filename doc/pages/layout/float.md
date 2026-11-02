@@ -40,6 +40,8 @@ import * as FloatDemos from "../../demos/layout/float.demo";
 
 詞序不拘，`"start bottom"` 也通；只寫一邊也行（`"start"` = 下緣左側）。`start`／`end` 是邏輯方向，跟著文字方向走。
 
+<Demo :render="FloatDemos.Corners.render" />
+
 ## 尺寸與間距
 
 - fixed，z-index 讀 `--sl-float-z`（預設 60），會蓋在 `sl-bar`（`--sl-bar-z` 50）上面

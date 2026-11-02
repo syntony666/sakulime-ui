@@ -48,6 +48,8 @@ px 以根字級 16px 換算，刻度本身是 rem。`sl-gap` 沒有預設，未�
 | `4xl` | 40px |
 | `5xl` | 48px |
 
+<Demo :render="GapDemos.Scale.render" />
+
 ## 適用元件
 
 讀 `sl-gap` 的都是排版屬性，在[排版](/layout/)一章介紹：

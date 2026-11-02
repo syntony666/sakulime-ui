@@ -13,5 +13,6 @@ const box = (attr: string) =>
   `<div ${attr} class="demo-frame"><span data-demo>${attr} <span class="demo-w"></span></span></div>`;
 
 export const ContainerWidths: Demo = {
-  render: () => ["sm", "md", "lg"].map((v) => box(`sl-container="${v}"`)).join(""),
+  render: () =>
+    [box("sl-container"), ...["sm", "md", "lg"].map((v) => box(`sl-container="${v}"`))].join(""),
 };
