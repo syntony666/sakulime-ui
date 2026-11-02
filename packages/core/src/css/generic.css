@@ -123,8 +123,9 @@
     --sl-pad: var(--sl-2xl);
   }
 
-  /* interactive — bare or out-of-vocabulary values mean grow */
-  :--sl-generic-interactive[sl-interactive]:not([sl-interactive="lift"]):not([sl-interactive="shadow"]):not([sl-interactive="press"]):not([sl-interactive="dim"]) {
+  /* interactive — grow is the default; bare or out-of-vocabulary
+     values land here, named values override by source order */
+  :--sl-generic-interactive[sl-interactive] {
     --sl-interactive-transform: scale(1.03);
   }
 
@@ -134,6 +135,7 @@
   }
 
   :--sl-generic-interactive[sl-interactive="shadow"] {
+    --sl-interactive-transform: none;
     --sl-interactive-shadow: 0 3px 10px color-mix(in srgb, var(--sl-text) 20%, transparent);
   }
 
@@ -142,6 +144,7 @@
   }
 
   :--sl-generic-interactive[sl-interactive="dim"] {
+    --sl-interactive-transform: none;
     --sl-interactive-filter: brightness(0.92);
   }
 

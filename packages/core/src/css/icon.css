@@ -19,18 +19,19 @@
 }
 
 @layer attrs {
-  /* the glyph stays 1em — scaling font-size scales the icon */
+  /* steps stay em-relative — the icon scales with surrounding text;
+     the shared rem scale would break that contract */
   [sl-icon][sl-icon-size="sm"] {
-    font-size: 0.75em;
+    font-size: var(--sl-icon-size-sm, 0.75em);
   }
   [sl-icon][sl-icon-size="lg"] {
-    font-size: 1.5em;
+    font-size: var(--sl-icon-size-lg, 1.5em);
   }
   [sl-icon][sl-icon-size="xl"] {
-    font-size: 2.5em;
+    font-size: var(--sl-icon-size-xl, 2.5em);
   }
   [sl-icon][sl-icon-size="2xl"] {
-    font-size: 4em;
+    font-size: var(--sl-icon-size-2xl, 4em);
   }
 
   /* flip/rotate use the independent properties so all three stack
