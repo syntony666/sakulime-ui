@@ -23,9 +23,19 @@ const themeFiles = readdirSync(themeDir).filter((f) => f.endsWith(".css"));
    resolves to the dist artifact this script produces. src/layout.css
    is an @import index over per-primitive files; inline them here so
    the published bundle stays a single concatenated sheet */
-const bundle = (path) =>
-  read(path).replace(/@import\s+"([^"]+)"\s*;/g, (_, rel) =>
-    bundle(pjoin(dirname(path), rel)));
+const bundle = (path) => {
+  const css = read(path).replace(
+    /* accept url(), either quote style, and trailing modifiers like
+       layer() — a missed @import would survive into dist pointing at
+       a path that doesn't exist there, so fail loudly instead */
+    /@import\s+(?:url\(\s*)?["']?([^"')\s]+)["']?\s*\)?[^;]*;/g,
+    (_, rel) => bundle(pjoin(dirname(path), rel))
+  );
+  if (/@import/.test(css)) {
+    throw new Error(`uninlined @import left in ${path}`);
+  }
+  return css;
+};
 const layout = bundle(`${layoutDir}/src/layout.css`);
 
 /* media queries can't read vars — layout.css hardcodes the container
@@ -34,7 +44,14 @@ const declared = new Set(
   [...tokens.matchAll(/--sl-container-(?:sm|md|lg):\s*([^;]+);/g)].map((m) => m[1].trim())
 );
 const literals = new Set(
-  [...layout.matchAll(/@media \(width\s*[<>]=?\s*([0-9.]+rem)\)/g)].map((m) => m[1])
+  /* range syntax (width < 60rem) and classic (max-width: 60rem) both
+     count — and px literals get caught as strays, not silently
+     skipped, so the container scale stays the only breakpoint unit */
+  [
+    ...layout.matchAll(
+      /\(\s*(?:min-|max-)?width\s*(?::|[<>]=?)\s*([0-9.]+(?:rem|px))\s*\)/g
+    ),
+  ].map((m) => m[1])
 );
 const missing = [...declared].filter((v) => !literals.has(v));
 const stray = [...literals].filter((v) => !declared.has(v));
@@ -149,11 +166,12 @@ out(`${layoutDir}/dist`);
 writeFileSync(`${layoutDir}/dist/index.min.css`, minify(join(tokens, layout)));
 
 // sakulime-ui — everything: core bundle already carries tokens, themes and
-// components; the meta package only adds layout on top
+// components; the meta package only adds layout on top. Layout's own
+// published css still prepends tokens above — here the bare layout
+// joins so the vars block lands once, not twice
 out("dist");
 const coreCss = read(`${coreDir}/dist/index.min.css`);
-const layoutCss = read(`${layoutDir}/dist/index.min.css`);
-writeFileSync("dist/sakulime.min.css", join(coreCss, layoutCss));
+writeFileSync("dist/sakulime.min.css", join(coreCss, minify(layout)));
 cpSync(`${coreDir}/dist/index.min.js`, "dist/sakulime.min.js");
 
 console.log(`built: theme/${themeFiles.length} layout dist/`);
