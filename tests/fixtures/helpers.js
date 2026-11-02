@@ -89,6 +89,19 @@ const mediaDecl = (sel, prop, media) => {
   for (const s of document.styleSheets) { try { walk(s.cssRules, false); } catch (e) {} }
   return val;
 };
+/* every @media condition in the loaded sheets — for presence checks
+   (print, reduced-motion) that don't need a specific rule */
+const mediaList = () => {
+  const out = [];
+  const walk = rules => {
+    for (const r of rules) {
+      if (r.type === CSSRule.MEDIA_RULE) out.push(r.media.mediaText);
+      if (r.cssRules) walk(r.cssRules);
+    }
+  };
+  for (const s of document.styleSheets) { try { walk(s.cssRules); } catch (e) {} }
+  return out;
+};
 /* fixed-position anchors resolve against the layout viewport, which
    excludes the scrollbar — documentElement.client* matches it */
 const vw = () => document.documentElement.clientWidth;

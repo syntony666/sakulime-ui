@@ -255,6 +255,15 @@ function main() {
   eq('show-md gone above bp', cs('as-md', 'display'), 'none');
   eq('show-lg gone above bp', cs('as-lg', 'display'), 'none');
   eq('cols-lg inert above bp', tracks('ag-cols'), 4);
+
+  /* media presence — print and reduced-motion rules must ship;
+     a deleted block would pass every computed assertion silently */
+  rec('print media present', mediaList().filter(m => m.includes('print')).join(','),
+    'contains print', mediaList().some(m => /print/.test(m)));
+  rec('reduced-motion media present', mediaList().filter(m => m.includes('prefers-reduced-motion')).join(','),
+    'contains prefers-reduced-motion', mediaList().some(m => /prefers-reduced-motion/.test(m)));
+  eq('float static in print', mediaDecl('[sl-float]', 'position', 'print'), 'static');
+  eq('fixed bar static in print', mediaDecl('[sl-bar][sl-bar-fixed]', 'position', 'print'), 'static');
   eq('bar bottom sticky', cs('bar-bot', 'position'), 'sticky');
   eq('bar bottom border-top', cs('bar-bot', 'border-top-width'), '1px');
   near('bar sl-pad=lg block pad', cs('bar-pad', 'padding-top'), varPx('--sl-2xl'));
