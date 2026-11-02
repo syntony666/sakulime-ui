@@ -31,7 +31,7 @@
 <div sl-stack sl-gap="lg"><div sl-stack id="st-inherit2"><div>a</div><div>b</div></div></div>
 
 <!-- content: prose column keeps child margins, adds sibling rhythm -->
-<div sl-content id="ct-def"><h3 id="ct-h">t</h3><div id="ct-1">a</div><div id="ct-2">b</div></div>
+<div sl-content id="ct-def"><h3 id="ct-h">t</h3><div id="ct-1">a</div><p id="ct-2">b</p></div>
 <div sl-content sl-gap="2xl" id="ct-gap"><div id="ct-g1">a</div><div id="ct-g2">b</div></div>
 
 <!-- wrap -->
@@ -41,6 +41,8 @@
 <div sl-wrap id="wrap-min"><div id="wrap-mc">a</div></div>
 <div sl-wrap sl-justify="end" id="wrap-end"><div>a</div><div>b</div></div>
 <div sl-wrap sl-justify="center" id="wrap-ctr"><div>a</div><div>b</div></div>
+<div sl-wrap sl-justify="start" id="wrap-start"><div>a</div><div>b</div></div>
+<div sl-stack style="--sl-stack-gap: 4px" id="st-cust"><div>a</div><div>b</div></div>
 <div sl-wrap sl-justify="between" id="wrap-btw"><div>a</div><div>b</div></div>
 <div sl-wrap sl-justify="around" id="wrap-ard"><div>a</div><div>b</div></div>
 <div sl-wrap sl-justify="evenly" id="wrap-evn"><div>a</div><div>b</div></div>
@@ -62,6 +64,9 @@
   <div sl-grid sl-grid-cols="4" sl-align="center" id="gr-actr"><div>a</div></div>
   <div sl-grid sl-grid-cols="4"><div sl-align="end" id="gr-aself">a</div></div>
   <div sl-grid sl-grid-cols="4"><div sl-justify="end" id="gr-jself">a</div></div>
+  <div sl-grid sl-grid-cols="1" id="gr-1"><div>a</div></div>
+  <div sl-grid sl-grid-cols="12" id="gr-12"><div>a</div></div>
+  <div sl-grid sl-grid-cols="4" sl-justify="between" id="gr-jb"><div>a</div></div>
   <div sl-grid id="gr-asp"><div sl-grid--span="2" id="spa">a</div><div>b</div></div>
   <div sl-grid sl-grid-cols="4" id="gr-span">
     <div sl-grid--span="8" id="sp8">over</div>
@@ -91,6 +96,8 @@
 <div sl-bar="top" sl-bar-fixed id="bar-fix">fixed</div>
 <div sl-bar="bottom" sl-bar-fixed id="bar-fixb">fixed bottom</div>
 <div sl-bar="bottom" id="bar-bot">bottom</div>
+<div sl-bar="top" sl-pad="sm" id="bar-ps">padded sm</div>
+<div sl-bar="top" sl-pad="md" id="bar-pm">padded md</div>
 <div sl-bar="top" sl-pad="lg" id="bar-pad">padded</div>
 
 <!-- above-breakpoint — this fixture runs at 1280px, past all three
@@ -170,15 +177,20 @@ function main() {
   eq('content display block', cs('ct-def', 'display'), 'block');
   eq('content first margin cleared', cs('ct-h', 'margin-top'), '0px');
   near('content sibling rhythm', cs('ct-2', 'margin-top'), varPx('--sl-md'));
+  /* last child is a <p> — its own UA margin-bottom must be cleared;
+     a div would make this assertion vacuous */
+  eq('content last margin cleared', cs('ct-2', 'margin-bottom'), '0px');
   near('content sl-gap=2xl rhythm', cs('ct-g2', 'margin-top'), varPx('--sl-2xl'));
 
   /* ---- row ---- */
   eq('row display', cs('wrap-def', 'display'), 'flex');
-  eq('row wrap', cs('wrap-def', 'flex-wrap'), 'wrap');
-  eq('row align center', cs('wrap-def', 'align-items'), 'center');
-  near('row def gap = --sl-md', cs('wrap-def', 'column-gap'), varPx('--sl-md'));
+  eq('wrap flex-wrap', cs('wrap-def', 'flex-wrap'), 'wrap');
+  eq('wrap align center', cs('wrap-def', 'align-items'), 'center');
+  near('wrap def gap = --sl-md', cs('wrap-def', 'column-gap'), varPx('--sl-md'));
   eq('wrap justify end', cs('wrap-end', 'justify-content'), 'end');
   eq('wrap justify center', cs('wrap-ctr', 'justify-content'), 'center');
+  eq('wrap justify start', cs('wrap-start', 'justify-content'), 'start');
+  eq('stack gap custom var', cs('st-cust', 'row-gap'), '4px');
   eq('wrap justify between', cs('wrap-btw', 'justify-content'), 'space-between');
   eq('wrap justify around', cs('wrap-ard', 'justify-content'), 'space-around');
   eq('wrap justify evenly', cs('wrap-evn', 'justify-content'), 'space-evenly');
@@ -205,6 +217,13 @@ function main() {
   /* auto-fill mode: --_cap stays 12 so span 2 spans real tracks —
      at 2 tracks wide that's the whole row */
   near('auto-fill span 2 covers row', rect('spa').width, rect('gr-asp').width, 2);
+  eq('grid cols=1 single track', tracks('gr-1'), 1);
+  eq('grid cols=12 tracks', tracks('gr-12'), 12);
+  /* sl-justify feeds justify-items on grid — "between" isn't a valid
+     items value; the var() substitution is invalid at computed time
+     so the property lands on its initial "normal", not the base
+     self-default */
+  eq('grid justify=between drops to normal', cs('gr-jb', 'justify-items'), 'normal');
   near('span 8 clamps to 4 tracks', rect('sp8').width, rect('gr-span').width, 2);
   near('span full covers grid', rect('spf').width, rect('gr-span').width, 2);
   near('bare span = full row', rect('spb').width, rect('gr-span').width, 2);
@@ -267,6 +286,8 @@ function main() {
   eq('bar bottom sticky', cs('bar-bot', 'position'), 'sticky');
   eq('bar bottom border-top', cs('bar-bot', 'border-top-width'), '1px');
   near('bar sl-pad=lg block pad', cs('bar-pad', 'padding-top'), varPx('--sl-2xl'));
+  near('bar sl-pad=sm block pad', cs('bar-ps', 'padding-top'), varPx('--sl-md'));
+  near('bar sl-pad=md block pad', cs('bar-pm', 'padding-top'), varPx('--sl-lg'));
 
   /* ---- float ---- */
   eq('float fixed', cs('t-def', 'position'), 'fixed');

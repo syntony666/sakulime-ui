@@ -66,7 +66,9 @@
 <div sl-card id="card-sect6">
   <div sl-card--section="active" id="sect-act">i</div>
 </div>
+<a href="#" sl-card id="card-link">link card</a>
 <div sl-card id="card-corner"><span sl-card--corner sl-dot id="corner-dot"></span></div>
+<div sl-card id="card-ce"><i sl-card--corner="end" sl-dot id="corner-end"></i></div>
 <div sl-card id="card-2c">
   <i sl-card--corner="start" sl-dot></i>
   <i sl-card--corner sl-dot></i>
@@ -107,11 +109,24 @@
 <i sl-icon sl-icon-disabled id="ic-dis"></i>
 <i sl-icon aria-disabled="true" id="ic-aria"></i>
 <i sl-icon sl-icon-space id="ic-sp"></i>
+<i sl-icon sl-icon-size="lg" id="ic-lg"></i>
+<i sl-icon sl-icon-size="xl" id="ic-xl"></i>
+<i sl-icon sl-icon-flip="vertical" id="ic-fv"></i>
+<i sl-icon sl-icon-rotate="180" id="ic-r180"></i>
+<i sl-icon sl-icon-rotate="270" id="ic-r270"></i>
+<i sl-icon sl-icon-space="start" id="ic-sps"></i>
+<i sl-icon sl-icon-space="end" id="ic-spe"></i>
+<button sl-button sl-radius="md" id="btn-rm">rm</button>
+<button sl-button sl-size="md" id="btn-szm">szm</button>
+<button sl-button id="btn-dis" disabled>dis</button>
 
 <!-- notices -->
 <div sl-notice id="nt-def">hello notice</div>
 <div sl-notice="fit" id="nt-fit">short</div>
 <div sl-notice id="nt-act">copy <button sl-notice--action id="nt-btn">x</button></div>
+<div sl-notice id="nt-acts">copy <button sl-notice--action="start" id="nt-bts">x</button></div>
+<div sl-notice id="nt-nest"><span><button sl-notice--action id="nt-nbtn">x</button></span></div>
+<div sl-notice id="nt-link">copy <a href="#" id="nt-a">link</a></div>
 <div sl-notice sl-notice-align="start" id="nt-as">aligned</div>
 <div sl-notice sl-notice-align="center" id="nt-ac">aligned</div>
 <div sl-notice sl-notice-align="end" id="nt-al">aligned</div>
@@ -178,6 +193,10 @@ function main() {
   match('btn interactive press slot', cs('btn-i3', '--sl-interactive-transform'), /scale\((0)?\.97\)/);
   has('btn interactive dim slot', cs('btn-i4', '--sl-interactive-filter'), 'brightness');
   eq('btn aria-disabled opacity', cs('btn-aria', 'opacity'), '0.6');
+  eq('btn :disabled opacity', cs('btn-dis', 'opacity'), '0.6');
+  eq('btn :disabled cursor', cs('btn-dis', 'cursor'), 'not-allowed');
+  near('btn radius md = --sl-sm', cs('btn-rm', 'border-top-left-radius'), varPx('--sl-sm'));
+  near('btn size md fs = --sl-lg', cs('btn-szm', 'font-size'), varPx('--sl-lg'));
   eq('btn radius full pill', cs('btn-rf', 'border-top-left-radius'), '9999px');
   eq('btn radius full inside card stays pill', cs('btn-rfc', 'border-top-left-radius'), '9999px');
 
@@ -213,6 +232,14 @@ function main() {
   eq('card section center align', cs('sect-ctr', 'text-align'), 'center');
   neq('card section active bg', cs('sect-act', 'background-color'), TRANS);
   eq('card corner absolute', cs('corner-dot', 'position'), 'absolute');
+  eq('link card drops underline', cs('card-link', 'text-decoration-line'), 'none');
+  eq('corner end pinned right', cs('corner-end', 'position'), 'absolute');
+  /* dot corner floats --sl-sm inside the border edge */
+  near('corner end at inline-end', rect('card-ce').right - rect('corner-end').right, varPx('--sl-sm') + 1, 2);
+  /* edge section bleeds block-wise too — first+last edge sections
+     pull their outer margins past the card pad */
+  near('edge section bleed top', cs('sect-edge', 'margin-top'), -varPx('--sl-lg'));
+  near('edge section bleed bottom', cs('sect-edge', 'margin-bottom'), -varPx('--sl-lg'));
   eq('dual corners: first section no divider', cs('sect-2c', 'border-top-width'), '0px');
   eq('dual corners: first section no gap', cs('sect-2c', 'margin-top'), '0px');
   eq('dual corners: second section keeps divider', cs('sect-2c2', 'border-top-width'), '1px');
@@ -250,10 +277,19 @@ function main() {
   near('icon frame rounded', cs('ic-frr', 'border-top-left-radius'), varPx('--sl-sm'));
   eq('icon spin animation', cs('ic-spin', 'animation-name'), 'sl-icon-spin');
   eq('icon flip horizontal', cs('ic-fh', 'scale'), '-1 1');
+  eq('icon flip vertical', cs('ic-fv', 'scale'), '1 -1');
   eq('icon rotate 90', cs('ic-r90', 'rotate'), '90deg');
+  eq('icon rotate 180', cs('ic-r180', 'rotate'), '180deg');
+  eq('icon rotate 270', cs('ic-r270', 'rotate'), '270deg');
   eq('icon disabled opacity', cs('ic-dis', 'opacity'), '0.4');
   eq('icon aria-disabled opacity', cs('ic-aria', 'opacity'), '0.4');
   near('icon space margin', cs('ic-sp', 'margin-left'), 4.8);
+  near('icon space start margin', cs('ic-sps', 'margin-left'), 4.8);
+  eq('icon space start no right', cs('ic-sps', 'margin-right'), '0px');
+  near('icon space end margin', cs('ic-spe', 'margin-right'), 4.8);
+  eq('icon space end no left', cs('ic-spe', 'margin-left'), '0px');
+  near('icon size lg', cs('ic-lg', 'width'), 24);
+  near('icon size xl', cs('ic-xl', 'width'), 40);
 
   /* ---- notice ---- */
   eq('notice border 3px', cs('nt-def', 'border-top-width'), '3px');
@@ -264,6 +300,13 @@ function main() {
   rec('notice fit shrinks', $('nt-fit').getBoundingClientRect().width + 'px', '< def-50', $('nt-fit').getBoundingClientRect().width < $('nt-def').getBoundingClientRect().width - 50);
   rec('notice action lane', cs('nt-act', 'padding-right'), '>50px', px(cs('nt-act', 'padding-right')) > 50);
   eq('notice action absolute', cs('nt-btn', 'position'), 'absolute');
+  eq('action start also absolute', cs('nt-bts', 'position'), 'absolute');
+  rec('action start sits leading', (rect('nt-bts').left - rect('nt-acts').left) + 'px',
+    '< 40px (near leading edge)', rect('nt-bts').left - rect('nt-acts').left < 40);
+  /* nested sl-notice--action inside a wrapper is not a direct child —
+     the pin contract deliberately doesn't reach it */
+  neq('nested action not pinned', cs('nt-nbtn', 'position'), 'absolute');
+  eq('notice link underlined', cs('nt-a', 'text-decoration-line'), 'underline');
   near('notice action block-centered', (rect('nt-btn').top + rect('nt-btn').bottom) / 2,
     (rect('nt-act').top + rect('nt-act').bottom) / 2, 2);
   /* vertical-rl: block-start maps to the physical right edge,
