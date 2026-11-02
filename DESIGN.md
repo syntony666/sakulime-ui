@@ -149,7 +149,7 @@ components:
 
 ## Layout
 
-排版元件自成一個套件（`@sakulime-ui/layout`），一個元件一個檔案：`packages/layout/src/` 下 container、stack、content、wrap、grid、sidebar、bar、float、gap、justify、align、responsive，由 `layout.css` 依序 import，各檔的 `@layer` 區塊依名併入共享的 theme/base/attrs 三層。文法四種形式：元件標記 `sl-<元件>[="型態"]`、元件設定 `sl-<元件>-<設定>`、子元素 `sl-<元件>--<零件>`（雙 dash 寫在子層）、通用屬性 `sl-<屬性>`；型態槽只裝種類跟位置語意，間距不進值槽。
+排版元件自成一個套件（`@sakulime-ui/layout`），一個元件一個檔案：`packages/layout/src/` 下 container、stack、content、wrap、grid、sidebar、bar、float、gap、justify、align、responsive，由 `layout.css` 依序 import，各檔的 `@layer` 區塊依名併入共享的 theme/base/attrs 三層。文法四種形式：元件標記 `sl-<元件>[="型態"]`、元件設定 `sl-<元件>-<設定>`、子元素 `sl-<元件>--<零件>`（雙 dash 寫在子層）、通用屬性 `sl-<屬性>`；型態槽只裝種類跟位置語意，間距不進值槽。命名深度上限三段（`sl-a-b`，兩個 dash），唯一例外是斷點後綴 `sl-<component>-<attr>-<viewport>`（目前只有 `sl-grid-cols-lg/md/sm`；未來其他 attr 的斷點版也走同格式）；`--sl-*` var 不受此限。
 
 - **容器 `sl-container`**：值語法 `"sm"|"md"|"lg"`（bare = md），45/60/75rem 刻度，水平 auto＋`--sl-container-pad`（預設 `--sl-lg`）內距；文件站內容欄吃 md
 - **直排 `sl-stack`**：flex column 垂直群組，父層擁有節奏，直接子層 block margin 歸零、寬度拉滿
