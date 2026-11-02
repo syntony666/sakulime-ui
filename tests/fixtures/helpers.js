@@ -1,8 +1,6 @@
-/* shared assertion harness for the fixture pages — loaded before each
-   fixture's own script, which defines main() and nothing else */
-/* global main */
 /* eslint-disable no-unused-vars -- helpers are called by each fixture
    page's inline script, not from this file */
+/* global main */
 const R = [];
 const $ = id => document.getElementById(id);
 /* missing ids record a failing assertion instead of throwing — one
@@ -23,8 +21,6 @@ const match = (name, got, re) => rec(name, got, String(re), re.test(got));
 const probe = $('probe');
 const varPx = name => { probe.style.height = `var(${name},0px)`; return probe.getBoundingClientRect().height; };
 const TRANS = 'rgba(0, 0, 0, 0)';
-/* collect @property registrations from the loaded sheets — plumbing
-   slots are registered element-scoped, theme hooks stay inheriting */
 const propRules = () => {
   const out = {};
   const walk = rules => {
@@ -37,13 +33,8 @@ const propRules = () => {
   return out;
 };
 const tracks = el => cs(el, 'grid-template-columns').split(' ').filter(s => s.endsWith('px')).length;
-/* walk the loaded sheets (through @layer/@media) — returns the media
-   text of the nearest enclosing @media for the first rule matching
-   sel, or 'top-level'/'missing' */
 const mediaOf = sel => {
   let found = null;
-  /* CSSStyleRule.cssRules exists (nesting) and is truthy even when
-     empty — match the selector first, then keep walking group rules */
   const walk = rules => {
     for (const r of rules) {
       if (found) return;
@@ -88,8 +79,6 @@ const ruleCount = frag => {
   for (const s of document.styleSheets) { try { walk(s.cssRules); } catch { /* opaque sheet */ } }
   return n;
 };
-/* last declaration of prop on the rule whose selectorText equals
-   sel and lives inside a @media block whose condition is media */
 const mediaDecl = (sel, prop, media) => {
   let val = null;
   const walk = (rules, inside) => {
@@ -106,8 +95,6 @@ const mediaDecl = (sel, prop, media) => {
   for (const s of document.styleSheets) { try { walk(s.cssRules, false); } catch { /* opaque sheet — file:// origin may hide cssRules */ } }
   return val;
 };
-/* every @media condition in the loaded sheets — for presence checks
-   (print, reduced-motion) that don't need a specific rule */
 const mediaList = () => {
   const out = [];
   const walk = rules => {
@@ -119,14 +106,9 @@ const mediaList = () => {
   for (const s of document.styleSheets) { try { walk(s.cssRules); } catch { /* opaque sheet — file:// origin may hide cssRules */ } }
   return out;
 };
-/* fixed-position anchors resolve against the layout viewport, which
-   excludes the scrollbar — documentElement.client* matches it */
 const vw = () => document.documentElement.clientWidth;
 const vh = () => document.documentElement.clientHeight;
 
-/* token canary — if the theme sheet failed to load every varPx() is
-   0 and near() would pass vacuously on both sides; prove the scale
-   is real before any near() runs */
 function canary() {
   for (const t of [
     '--sl-xs', '--sl-sm', '--sl-md', '--sl-lg', '--sl-xl',
@@ -137,9 +119,6 @@ function canary() {
     const v = varPx(t);
     rec(`token ${t} resolves`, v + 'px', '>0px', v > 0);
   }
-  /* theme-sheet canary: the scale above is inlined into every bundle,
-     so it still resolves when the theme css 404s — prove a theme color
-     made it through too */
   probe.style.color = 'var(--sl-primary)';
   const pc = getComputedStyle(probe).color;
   rec('theme --sl-primary resolves', pc, 'non-default color', pc !== '' && pc !== 'rgb(0, 0, 0)' && !pc.startsWith('(missing'));
@@ -153,9 +132,6 @@ function go() {
   document.documentElement.setAttribute('data-done', '');
   labelize();
 }
-/* post-assertion pass: floating id chips at each element's rect so
-   --screenshot output reads as a labeled contact sheet. Absolute
-   positioning keeps layout — and every assertion — untouched. */
 function labelize() {
   document.querySelectorAll('.tl').forEach(n => n.remove());
   if (!document.getElementById('tl-style')) {

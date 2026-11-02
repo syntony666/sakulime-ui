@@ -60,11 +60,9 @@ type Demo = DemoObj<CardArgs>;
 const card = (attrs: string, content: string, w = 320) =>
   `<div sl-card${attrs} style="width: ${w}px">${content}</div>`;
 
-
 const vcard = (v: string, content: string, w = 320) =>
   `<div ${cardMarker(v)} style="width: ${w}px">${content}</div>`;
 
-// shared content parts — playground cards and section demos
 const sec = (inner: string) => `<div sl-card--section>${inner}</div>`;
 const media = `<div sl-card--section="edge" class="demo-media"><!-- 圖片 --></div>`;
 const TITLE = `<strong>卡片標題</strong><p>卡片內容文字，描述這張卡片在展示什麼。</p>`;
@@ -88,7 +86,6 @@ export const Variants: Demo = {
     axis(VARIANTS, (v) => vcard(v, `<strong>${label(v)}</strong><p>內容文字</p>`)),
 };
 
-// position axis — the tone axis lives on Indicated in the tone section
 export const Indicates: Demo = {
   render: () =>
     axis(["top", "bottom", "start", "end"], (v) =>
@@ -99,10 +96,7 @@ export const Indicates: Demo = {
     ),
 };
 
-// corner is position only — the look is a small attr on the same element
 const cornerEl = (position: string, kind: string, tone: string, size = "-") => {
-  // "-" leaves the value off (bare attr = default end); "end" writes
-  // it out so the vocabulary word is visible in the markup
   const pos = position === "-" ? "" : `="${position}"`;
   const t = attr("sl-tone", tone);
   const s = kind === "chip" ? attr("sl-size", size) : "";
@@ -136,7 +130,6 @@ export const CornerPositions: Demo = {
     ),
 };
 
-// each small attr brings its own look — corner only pins it
 export const CornerKinds: Demo = {
   render: () =>
     axis(CORNER_KINDS, (v) =>
@@ -148,16 +141,11 @@ export const CornerKinds: Demo = {
     ),
 };
 
-// bare sections — header/content/footer hairlines without edge media;
-// content stays inline like the fence example (a lone <p> would carry
-// browser margins and sit visibly low in the section)
 export const BasicSections: Demo = {
   render: () =>
     card("", [sec(`<strong>標題</strong>`), sec(`內容`), sec(FOOT)].join(""), 320),
 };
 
-// carries its own args/argTypes so the md can bind it as a standalone
-// playground (demo object doubles as the Playground meta prop)
 export const Sections: DemoObj<SectionArgs> = {
   args: { edge: "top", corner: true, pad: "-" },
   argTypes: {
@@ -193,7 +181,6 @@ export const Edges: Demo = {
     }),
 };
 
-// blank — borderless centered block; the shell variant picks the frame
 export const Blank: Demo = {
   render: () =>
     axis(["-", "hollow", "blank"], (v) =>
@@ -209,7 +196,6 @@ export const Blank: Demo = {
     ),
 };
 
-// section value axis — emphasis, selected state, hover, alignment
 export const SectionKinds: Demo = {
   render: () =>
     card(

@@ -17,12 +17,9 @@ const props = defineProps<{
 
 const args = reactive<Record<string, unknown>>({ ...(props.meta.args ?? {}) });
 
-// meta.argTypes doubles as the controls schema — axisArg() already emits
-// control.type / options / description
 const fields = computed<Field[]>(() =>
   Object.entries(props.meta.argTypes ?? {}).map(([key, t]) => ({
     key,
-    // axisArg() declares the real sl-* attr name; plain args fall back
     name: t.name ?? key,
     desc: t.description,
     kind:
@@ -35,12 +32,9 @@ const fields = computed<Field[]>(() =>
   })),
 );
 
-// attr names in descriptions render as nowrap code spans — keeps tokens
-// like sl-card--corner from splitting across lines in the narrow column
 const descHtml = (desc?: string) =>
   desc?.replace(/`?(sl-[\w-]+)`?/g, (_, m) => `<code>${m}</code>`) ?? "";
 
-// "-" means "don't write the attribute" — say it once as a legend row
 const hasDashOption = computed(() =>
   fields.value.some((f) => f.options?.includes("-")),
 );

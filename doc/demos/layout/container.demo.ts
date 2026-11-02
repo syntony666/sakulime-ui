@@ -6,9 +6,6 @@ const meta = {
 export default meta;
 type Demo = DemoObj;
 
-// the dashed edge is each container's real bounds; .demo-w is stamped
-// with the rendered px by Demo's measure prop (data-demo keeps it out
-// of the shown markup)
 const box = (attr: string) =>
   `<div ${attr} class="demo-frame"><span data-demo>${attr} <span class="demo-w"></span></span></div>`;
 

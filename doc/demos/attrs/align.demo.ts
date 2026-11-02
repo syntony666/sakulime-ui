@@ -5,7 +5,6 @@ const meta = {} satisfies Meta;
 export default meta;
 type Demo = DemoObj;
 
-// varied heights make cross-axis placement visible inside a wrap line
 const cells = () =>
   `<div class="demo-cell" style="min-height:1.5rem">a</div>` +
   `<div class="demo-cell" style="min-height:3rem">b</div>` +
@@ -15,7 +14,6 @@ const frame = (caption: string, inner: string) =>
   `<div class="demo-cell"><span class="demo-w" data-demo>${caption}</span>` +
   `<div style="margin-top: var(--sl-sm)">${inner}</div></div>`;
 
-// container-level: cross-axis on a wrap is vertical line alignment
 export const AlignWrap: Demo = {
   render: () =>
     axis(["start", "center", "end", "stretch"], (v) =>
@@ -23,8 +21,6 @@ export const AlignWrap: Demo = {
     ),
 };
 
-// container-level on a stack: children shrink-wrap and align
-// horizontally — the axis flips with the layout direction
 export const AlignStack: Demo = {
   render: () =>
     axis(["start", "center", "end"], (v) =>
@@ -35,7 +31,6 @@ export const AlignStack: Demo = {
     ),
 };
 
-// child-level: only the marked child leaves the common alignment
 export const AlignChild: Demo = {
   render: () =>
     `<div sl-stack>` +

@@ -1,8 +1,6 @@
 @layer attrs {
-  /* sl-pad on layout primitives — the shared edge-gutter wiring.
-     Value→slot mapping must stay identical to generic.css's pad
-     rules; one block serves every layout consumer so the map lives
-     in a single place. Add a consumer by extending the :is() list */
+  /* sl-pad — the shared edge-gutter slot for layout primitives; one
+     map serves every consumer, kept identical to generic.css's */
   :is([sl-container], [sl-bar])[sl-pad="none"] { --sl-pad: 0; }
   :is([sl-container], [sl-bar])[sl-pad="sm"]   { --sl-pad: var(--sl-md); }
   :is([sl-container], [sl-bar])[sl-pad="md"]   { --sl-pad: var(--sl-lg); }

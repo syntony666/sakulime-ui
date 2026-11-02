@@ -1,24 +1,13 @@
-/* card — surface container plus its variants, settings, parts and
-   shared-attr wiring. Tone/radius/pad values come from generic.css;
-   the card self-defaults the slots it consumes. */
+/* card — surface plus variants, indicator, corner part, section part.
+   Slots self-default so generic attrs on ancestors can't leak in */
 @layer base {
   [sl-card] {
-    /* consumed generics + defaults — tone feeds indicator/corner via
-       inheritance; self-defaulting seals generic attributes set on
-       ancestors from leaking in */
     --sl-tone-bg: var(--sl-primary);
-    /* ambient slot — no component reads it; it completes the seal
-       manifest and stays as a hook for consumer CSS inside a card */
     --sl-tone-text: color-mix(in srgb, var(--sl-primary) 55%, var(--sl-text));
     --sl-radius: var(--sl-sm);
-    /* "full" caps at one line height plus the pad/border edge share —
-       lh tracks the element's own line-height; a short card reads
-       fully rounded, a taller one runs straight past the first row
-       instead of ballooning into 9999px curves */
+    /* "full" caps at a line height plus the pad/border edge share */
     --sl-radius-full: calc(max(1lh, var(--sl-2xl)) + var(--sl-pad) + 1px);
     --sl-pad: var(--sl-lg);
-    /* negative pad for section bleed — resolved once here; sections
-       inherit it, so it still tracks the card's own --sl-pad */
     --_pbn: calc(var(--sl-pad) * -1);
     display: block;
     position: relative;
@@ -30,35 +19,27 @@
     padding: var(--sl-pad);
   }
 
-  /* a card that is itself a link drops the anchor underline */
   a[sl-card] {
     text-decoration: none;
   }
 }
 
 @layer attrs {
-  /* variants — the marker's value picks the frame; bare sl-card ("")
-     is the default bordered surface and needs no rule */
-  /* hollow — dashed outline for empty/upload states */
   [sl-card="hollow"] {
     background: transparent;
     border-style: dashed;
     border-width: 2px;
   }
 
-  /* flat — frameless shell: keeps the surface fill, drops the border */
   [sl-card="flat"] {
     border: 0;
   }
 
-  /* blank — invisible shell: no border, no fill; pairs with
-     sl-card--section="blank" for a pure blankslate block */
   [sl-card="blank"] {
     background: transparent;
     border: 0;
   }
 
-  /* indicator — accent edge, colored by the tone attribute */
   [sl-card][sl-card-indicator="top"] {
     border-top: 3px solid var(--sl-tone-bg);
   }
@@ -75,13 +56,9 @@
     border-inline-end: 3px solid var(--sl-tone-bg);
   }
 
-  /* corner — pure positional part pinned to a top corner: `end`
-     (default) is the trailing edge, `start` the leading one; the
-     look comes from a small attr on the
-     same element (sl-chip, sl-dot, sl-icon). font-size is the em
-     context — a dot lands at 8px, an icon at 16px, a chip at 14px.
-     z-index keeps it above any pinned or out-of-flow child regardless
-     of DOM order */
+  /* corner pins to a top corner; font-size is the em context for
+     whichever small attr the child carries (dot 8px, icon 16px,
+     chip 14px) */
   [sl-card] > [sl-card--corner] {
     position: absolute;
     z-index: 1;
@@ -96,18 +73,12 @@
     inset-inline-start: 0;
   }
 
-  /* corner tab — a chip hugs the top + side edges with a small
-     uniform radius; the card's overflow clip still rounds the
-     corner-facing corner to its own curve. font-size re-asserts the
-     chip's own slot — the corner's 16px context would otherwise
-     win the attrs layer over it */
   [sl-card] > [sl-card--corner][sl-chip] {
     font-size: var(--sl-size-fs);
     border-radius: var(--sl-xs);
   }
 
-  /* a dot or icon floats — it needs air so it doesn't straddle
-     the border */
+  /* dot/icon float off the edges so they don't straddle the border */
   [sl-card] > [sl-card--corner][sl-dot] {
     inset-block-start: var(--sl-sm);
     inset-inline-end: var(--sl-sm);
@@ -128,29 +99,26 @@
     inset-inline-start: var(--sl-xs);
   }
 
-  /* sections — the box bleeds past the pad frame so divider hairlines
-     run edge to edge; inner padding puts the content back in line */
+  /* sections bleed past the pad so dividers run edge to edge */
   [sl-card] > [sl-card--section] {
     margin-inline: var(--_pbn);
     padding-inline: var(--sl-pad);
   }
 
-  /* a section earns its divider from real content — a non-corner
-     sibling must come before it, so leading corners never count as
-     content however many the card pins on */
+  /* a section earns its divider from real content — leading corners
+     never count */
   [sl-card] > :not([sl-card--corner]) ~ [sl-card--section] {
     margin-block-start: var(--sl-pad);
     border-block-start: 1px solid var(--sl-border);
     padding-block-start: var(--sl-pad);
   }
 
-  /* edge — a padding-cancelled region for edge-to-edge content (img/
-     svg/iframe/block). DOM order picks the bleeding edges; "first"
-     means no non-corner sibling precedes, "last" none follows */
   [sl-card] > [sl-card--section="edge"] {
     padding: 0;
   }
 
+  /* "first"/"last" here mean no NON-corner sibling before/after —
+     the double-:not is how CSS says that */
   [sl-card] > [sl-card--section="edge"]:not(:not([sl-card--corner]) ~ *) {
     margin-block-start: var(--_pbn);
     border-block-start: 0;
@@ -160,11 +128,8 @@
     margin-block-end: var(--_pbn);
   }
 
-  /* followers own the gap — a section's divider hugs the image edge,
-     anything else gets the pad spacing itself. The direct-child
-     prefix matters twice over: nested sections must not be claimed,
-     and the (0,3,0) specificity is what lets the zero below actually
-     beat the divider rule above */
+  /* the (0,3,0) direct-child prefix is what lets the zero below beat
+     the divider rule above */
   [sl-card] > [sl-card--section="edge"] + * {
     margin-block-start: var(--sl-pad);
   }
@@ -178,7 +143,6 @@
     inline-size: 100%;
   }
 
-  /* blank — borderless, fully centered empty-state block */
   [sl-card] > [sl-card--section="blank"] {
     display: grid;
     justify-items: center;
@@ -188,9 +152,7 @@
     text-align: center;
   }
 
-  /* a blank after real content earns the divider, but the divider's
-     padding-block-start would otherwise crush the symmetric 3xl —
-     same (0,3,0) shape as the divider rule, later order wins */
+  /* keeps the blank symmetric even after a real sibling's divider */
   [sl-card] > :not([sl-card--corner]) ~ [sl-card--section="blank"] {
     padding-block-start: var(--sl-3xl);
   }
@@ -210,42 +172,31 @@
     font-size: var(--sl-md);
   }
 
-  /* secondary — quieter section for supporting content */
   [sl-card] > [sl-card--section="secondary"] {
     background: var(--sl-secondary-bg);
   }
 
-  /* active — selected state on the primary family */
   [sl-card] > [sl-card--section="active"] {
     background: color-mix(in srgb, var(--sl-primary) 8%, var(--sl-surface));
   }
 
-  /* interactive — shared generic: the whole card is clickable; the
-     hover playback is shared in generic.css. Cursor only while the
-     playback can still fire — the shared rule opts out on
-     aria-disabled, and so does this */
   [sl-card][sl-interactive]:not([aria-disabled="true"]) {
     cursor: pointer;
   }
 
-  /* bg sections own the gap to the next divider — the fill runs
-     edge to edge instead of leaving a bare strip; at the extremes
-     they bleed to the card edges like inset */
+  /* bg sections own the gap to the next divider and bleed to the
+     card edges at the extremes — same (0,3,0) + double-:not idioms
+     as the edge rules above */
   [sl-card] > :is([sl-card--section="secondary"],
                   [sl-card--section="active"]) {
     padding-block-end: var(--sl-pad);
   }
 
-  /* same (0,3,0) trick as the edge follower above — without the
-     direct-child prefix this lost to the divider rule and was dead */
   [sl-card] > :is([sl-card--section="secondary"],
                   [sl-card--section="active"]) + [sl-card--section] {
     margin-block-start: 0;
   }
 
-  /* "first"/"last" mean no non-corner sibling before/after — any
-     number of leading or trailing corners still counts as the edge,
-     same idiom the edge-section bleed rules use above */
   [sl-card] > :is([sl-card--section="secondary"],
                   [sl-card--section="active"]):not(:not([sl-card--corner]) ~ *) {
     margin-block-start: var(--_pbn);
@@ -257,7 +208,6 @@
     margin-block-end: var(--_pbn);
   }
 
-  /* center — horizontally centered text */
   [sl-card] > [sl-card--section="center"] {
     text-align: center;
   }

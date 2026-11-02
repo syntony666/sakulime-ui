@@ -1,13 +1,11 @@
 @layer base {
-  /* page container — <div sl-container="md">, works on any element;
-     bare sl-container defaults to the md width */
+  /* page container — bare sl-container defaults to the md width */
   [sl-container] {
     box-sizing: border-box;
     inline-size: 100%;
     max-inline-size: var(--sl-container-md);
     margin-inline: auto;
-    /* self-default --sl-pad so an ancestor's sl-pad can't leak in —
-       --sl-container-pad is the per-element override on top of it */
+    /* self-default so an ancestor's sl-pad can't leak in */
     --sl-pad: var(--sl-lg);
     padding-inline: var(--sl-container-pad, var(--sl-pad));
   }
@@ -16,8 +14,8 @@
     max-inline-size: var(--sl-container-sm);
   }
 
-  /* pin the documented value so a future default change can't
-     silently retarget sl-container="md" to a different width */
+  /* pinned so a future default change can't silently retarget
+     sl-container="md" */
   [sl-container="md"] {
     max-inline-size: var(--sl-container-md);
   }

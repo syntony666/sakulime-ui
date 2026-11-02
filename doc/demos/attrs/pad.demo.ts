@@ -19,7 +19,6 @@ export const Cards: Demo = {
     ),
 };
 
-// notice is full-width — needs the column layout to keep its shape
 export const Notices: Demo = {
   render: () =>
     axis(

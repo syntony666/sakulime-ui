@@ -15,8 +15,6 @@ export const Radius: Demo = {
       frame(
         `sl-radius="${v}"`,
         `<div sl-card${attr("sl-radius", v)} style="width: 9rem; text-align: center">${
-          /* the 1lh cap only reads on a multi-line card — a single
-             line renders the same pill either way */
           v === "full" ? "卡片<br>第二行<br>第三行" : "卡片"
         }</div>`
       )

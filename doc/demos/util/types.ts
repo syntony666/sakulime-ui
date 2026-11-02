@@ -1,4 +1,3 @@
-// Minimal demo shape consumed by the docs theme.
 export type Meta<Args = Record<string, unknown>> = {
   args?: Partial<Args>;
   argTypes?: Record<string, unknown>;

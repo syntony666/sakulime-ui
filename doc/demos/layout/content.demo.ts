@@ -4,8 +4,6 @@ const meta = {} satisfies Meta;
 export default meta;
 type Demo = DemoObj;
 
-// the prose column — children keep their own margins and natural
-// widths; sibling rhythm comes from the column, not a flex gap
 export const Rhythm: Demo = {
   render: () =>
     `<article sl-content sl-gap="lg">` +

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-// swatch grid reads --sl-* vars live — switching the nav theme dots
-// recolors every chip, so this page demos the switcher itself
 const groups: [string, string[]][] = [
   ["背景", ["bg", "surface", "border"]],
   ["文字", ["text", "text-strong", "text-accent", "text-invert", "text-secondary", "text-muted"]],

@@ -11,8 +11,6 @@ const frame = (caption: string, inner: string) =>
   `<div class="demo-cell"><span class="demo-w" data-demo>${caption}</span>` +
   `<div style="margin-top: var(--sl-sm)">${inner}</div></div>`;
 
-// sl-gap alone produces nothing — the children here read no gap, so marked
-// and unmarked render identically
 export const Alone: Demo = {
   render: () =>
     `<div class="axis-row col">` +
@@ -24,8 +22,6 @@ export const Alone: Demo = {
     `</div>`,
 };
 
-// sl-gap on the wrapper feeds every gap-reading child that did not write
-// its own value; the xs stack keeps its own
 export const Region: Demo = {
   render: () =>
     `<div sl-stack sl-gap="2xl">` +
@@ -36,8 +32,6 @@ export const Region: Demo = {
     `</div>`,
 };
 
-// the whole scale at once — each frame is a two-cell stack spaced by
-// its own value; "none" and the unmarked default bracket the ramp
 export const Scale: Demo = {
   render: () =>
     `<div class="axis-row col">` +

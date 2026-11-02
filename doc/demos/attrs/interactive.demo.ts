@@ -9,8 +9,6 @@ const frame = (caption: string, inner: string) =>
   `<div class="demo-cell"><span class="demo-w" data-demo>${caption}</span>` +
   `<div style="margin-top: var(--sl-sm)">${inner}</div></div>`;
 
-// "-" is the unmarked baseline — a bare sl-button grows on hover all
-// by itself while the card stays put; named values are the opt-ins
 export const Interactive: Demo = {
   render: () =>
     axis(["-", "grow", "lift", "shadow", "press", "dim"], (v) =>

@@ -1,11 +1,8 @@
 @layer attrs {
-  /* sl-justify — main-axis distribution for flow primitives. Each
-     consumer self-defaults --sl-justify in base, so the attr counts
-     only when written on the primitive itself — an ancestor's
-     write can't leak past that default. Wrap and stack read it as
-     justify-content, grid as justify-items — "between" has no
-     justify-items meaning and falls back to the grid's stretch
-     default there */
+  /* sl-justify — main-axis slot; consumers self-default it so only a
+     write on the primitive itself counts. Wrap/stack read it as
+     justify-content, grid as justify-items (between/around/evenly
+     fall back to the grid's stretch default there) */
   [sl-justify="start"]   { --sl-justify: start; }
   [sl-justify="center"]  { --sl-justify: center; }
   [sl-justify="end"]     { --sl-justify: end; }

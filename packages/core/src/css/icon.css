@@ -1,12 +1,9 @@
-/* icon — marker sizing: an svg carrying sl-icon (or a wrapper element
-   whose sl-icon value the resolver filled) renders at 1em, inherits
-   ink (or --sl-tone-bg when a generic tone is set), and sits on the
-   text baseline */
+/* icon — svg (or resolver-filled wrapper) renders at 1em on the text
+   baseline */
 @layer base {
   [sl-icon] {
-    /* self-default seals ancestor tone slots — inside a filled button
-       --sl-tone-bg IS the button's surface and would turn the icon
-       invisible; sl-tone written on the icon itself still recolors it */
+    /* seal — inside a filled button the inherited --sl-tone-bg IS the
+       button's surface and would turn the icon invisible */
     --sl-tone-bg: currentColor;
     display: inline-flex;
     inline-size: 1em;
@@ -21,12 +18,8 @@
   }
 }
 
-/* modifiers — namespaced attrs alongside the marker, e.g.
-   `<i sl-icon="lucide:zap" sl-icon-spin>`; they also work on a pasted
-   svg (`<svg sl-icon sl-icon-spin>`) */
 @layer attrs {
-  /* sizes — the glyph stays 1em of the element, so scaling its
-     font-size scales the icon relative to context */
+  /* the glyph stays 1em — scaling font-size scales the icon */
   [sl-icon][sl-icon-size="sm"] {
     font-size: 0.75em;
   }
@@ -40,8 +33,8 @@
     font-size: 4em;
   }
 
-  /* orientation — flip/rotate use the independent transform properties
-     while spin animates `transform`, so all three stack on one icon */
+  /* flip/rotate use the independent properties so all three stack
+     with spin's transform */
   [sl-icon][sl-icon-flip="horizontal"] {
     scale: -1 1;
   }
@@ -72,9 +65,8 @@
     }
   }
 
-  /* frames — a bordered box around the glyph, following its ink.
-     content-box keeps the glyph area at 1em — under a border-box reset
-     padding+border would otherwise eat the whole frame */
+  /* content-box keeps the glyph area at 1em — under a border-box
+     reset padding+border would eat the frame */
   [sl-icon][sl-icon-frame] {
     box-sizing: content-box;
     padding: 0.35em;
@@ -87,10 +79,7 @@
     border-radius: var(--sl-sm);
   }
 
-  /* states + spacing — bare sl-icon-space means both sides;
-     aria-disabled reads the same as the attr. Shares the
-     --sl-disabled-opacity hook with a quieter default than
-     the button's .6 — an icon is decoration, a control is not */
+  /* quieter default than the button's .6 — an icon is decoration */
   [sl-icon][sl-icon-disabled],
   [sl-icon][aria-disabled="true"] {
     opacity: var(--sl-disabled-opacity, 0.4);

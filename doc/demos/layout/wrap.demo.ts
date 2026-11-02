@@ -4,9 +4,6 @@ const meta = {} satisfies Meta;
 export default meta;
 type Demo = DemoObj;
 
-// content-width children in a wrapping row — overflow moves to the
-// next line instead of shrinking anyone; the row is narrowed so the
-// wrap is visible on any stage width
 export const Flow: Demo = {
   render: () =>
     `<div sl-wrap style="max-inline-size: 22rem">` +

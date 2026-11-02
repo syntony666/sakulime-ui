@@ -5,7 +5,6 @@ type DotArgs = {
   tone: string;
 };
 
-
 const meta = {
   args: {
     tone: "-",
@@ -22,7 +21,6 @@ export const Dot: Demo = {
   render: (a) => `<i sl-dot${attr("sl-tone", a.tone)}></i>`,
 };
 
-// the dot is 0.5em — it tracks the font-size of whatever it sits inside
 const SIZES = [14, 16, 20, 28];
 export const Sizes: Demo = {
   render: () =>
@@ -47,7 +45,6 @@ export const StatusList: Demo = {
     `</ul>`,
 };
 
-// sl-card--corner pins the dot to a card corner — same element, no wrapper
 export const InCorner: Demo = {
   render: () =>
     `<div sl-card style="width: 240px">` +

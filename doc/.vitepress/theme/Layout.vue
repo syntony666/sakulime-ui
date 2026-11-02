@@ -18,8 +18,6 @@ const switchEl = ref<HTMLElement>();
 const triggerEl = ref<HTMLButtonElement>();
 const optionEls = ref<(HTMLElement | null)[]>([]);
 
-// themes self-discover from the palette package — adding a css file
-// there adds an option; its color is the theme's authored seed
 const palettes = import.meta.glob("../../../packages/theme/*.css", {
   query: "?raw",
   import: "default",
@@ -94,12 +92,6 @@ const onFocusOut = (e: FocusEvent) => {
   if (!switchEl.value?.contains(e.relatedTarget as Node)) open.value = false;
 };
 
-// the page TOC flattens heading markup to plain text — a usage-form h3
-// like "Banner *橫幅*" loses its gloss styling, and an attr h3 like
-// "動作 `sl-notice--action`" loses the code look. wrap the trailing CJK
-// or sl-* run in a span so css can restore the sub-label/code
-// hierarchy. the childElementCount guard keeps the observer from
-// re-entering on its own writes
 const GLOSS_TAIL = /^(.+?)\s+([一-鿿豈-﫿％-￯　-〿]+)$/;
 const ATTR_TAIL = /^(.+?)\s+(sl-\S+)$/;
 const patchOutlineGloss = () => {
@@ -116,13 +108,8 @@ const patchOutlineGloss = () => {
   });
 };
 
-// data-theme drives the sakulime token cascade — SSR has no document,
-// so set it post-mount and on every toggle; the choice persists in
-// localStorage (restored pre-paint by the head script in config.mts)
 onMounted(() => {
   patchOutlineGloss();
-  // outline links land after mount and the whole nav re-renders on
-  // every client nav — the observer covers both, no route hook needed
   const glossObserver = new MutationObserver(patchOutlineGloss);
   glossObserver.observe(document.body, { childList: true, subtree: true });
   const saved = localStorage.getItem("sl-theme");
@@ -132,8 +119,6 @@ onMounted(() => {
     (v) => {
       document.documentElement.dataset.theme = v;
       // the theme's declared color-scheme flips vitepress's own dark
-      // internals (dual shiki themes, dark-only chrome rules); the
-      // flag persists so the head script restores it pre-paint
       const dark = themes.find((t) => t.value === v)?.dark === true;
       document.documentElement.classList.toggle("dark", dark);
       localStorage.setItem("sl-theme", v);

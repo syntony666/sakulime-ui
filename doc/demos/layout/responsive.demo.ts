@@ -4,8 +4,6 @@ const meta = {} satisfies Meta;
 export default meta;
 type Demo = DemoObj;
 
-// live demo — the stage follows the real viewport, so shrinking the
-// browser window shows the tiers kick in and the span clamp to a row
 export const Cols: Demo = {
   render: () =>
     `<div class="demo-cell"><span class="demo-w" data-demo>sl-grid-cols="4" sl-grid-cols-md="2" sl-grid-cols-sm="1"</span>` +
@@ -19,7 +17,6 @@ export const Cols: Demo = {
     `</div></div>`,
 };
 
-// same slot, two card variants — the md breakpoint swaps them
 export const Card: Demo = {
   render: () =>
     `<div sl-card sl-hide-md>` +

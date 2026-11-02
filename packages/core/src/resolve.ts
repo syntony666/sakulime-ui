@@ -1,9 +1,6 @@
-/* Shared attr resolver: features register an attr → handler, resolve()
-   fans out over a root, and installResolver() arms a single
-   MutationObserver for later additions and attribute changes. Features
-   call installResolver() at whatever point makes sense for them (icons
-   wait for registerPack since resolution is data-driven; self-contained
-   enhancements can install at import). Outside a DOM nothing installs. */
+/* shared attr resolver: features register attr → handler, resolve()
+   fans out over a root, installResolver() arms one MutationObserver.
+   Outside a DOM nothing installs */
 
 type AttrResolver = (el: HTMLElement) => void;
 
@@ -35,8 +32,8 @@ export const installResolver = () => {
       }
     }
   });
-  /* attributeFilter is computed at install time — resolvers registered
-     later still resolve via resolve() passes but aren't observed */
+  /* attributeFilter is fixed at install — later registrations resolve
+     via resolve() passes but aren't observed */
   observer.observe(document.documentElement, {
     childList: true,
     subtree: true,

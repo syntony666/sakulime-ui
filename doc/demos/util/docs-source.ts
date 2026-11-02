@@ -1,15 +1,6 @@
-// Shared docs.source transform for gallery demos — the shown code
-// should read like real usage, not the render implementation:
-//   1. strip anonymous wrapper divs (row/stage shells) — stop at any
-//      element carrying an sl-* attribute, that's the real markup
-//   2. drop demo-only elements (data-demo) — demo chrome never reaches
-//      the shown code, its children go with it
-//   3. strip demo-* classes — they aren't part of the API
-//   4. filter inline styles — declarations that carry the mechanism
-//      stay, layout furniture goes
-//   5. collapse anonymous divs around a single element — caption
-//      frames and spacer divs fold to the markup inside
-//   6. one element per line, indented by nesting depth
+/* docs.source transform — shown code should read like real usage, not
+   the render implementation: drop wrapper divs, data-demo chrome,
+   demo-* classes and mechanism-only inline styles */
 const stripShells = (code: string): string => {
   let c = code.trim();
   while (/^<div(?![^>]*\s+sl-)(?![^>]*\sdata-demo[\s=>])[^>]*>/.test(c)) {
@@ -50,12 +41,6 @@ const VOID = new Set([
   "wbr",
 ]);
 
-/* style declarations that carry the mechanism stay in shown code:
-   --* custom props are the var API (--sl-grid-min is grid's public
-   knob), font-size is the em context chip/dot/icon track, box
-   dimensions are the room pinned/spanning parts size against, list-style
-   decides whether a list renders bullets. Position overrides,
-   margins, padding and text-align are stage furniture — they strip */
 const KEEP_DECL =
   /^--|^font-size$|^list-style$|^(?:(?:min|max)-)?(?:width|height|inline-size|block-size)$/;
 
@@ -66,9 +51,6 @@ const filterStyle = (decls: string): string =>
     .filter((d) => KEEP_DECL.test(d.slice(0, d.indexOf(":")).trim()))
     .join("; ");
 
-// attr-level cleanup on a single tag — demo-* classes go, the style
-// filter keeps load-bearing declarations only, and removal residue
-// collapses back to single spaces so `<div  sl-grid--span>` doesn't leak
 const cleanTag = (open: string): string =>
   open
     .replace(/\s+class="([^"]*)"/g, (_, list: string) => {
@@ -82,14 +64,11 @@ const cleanTag = (open: string): string =>
     .replace(/\s{2,}/g, " ")
     .replace(/\s+(\/?>)$/, "$1");
 
-// demo-only elements carry data-demo — the whole subtree drops
 const DATA_DEMO = /\sdata-demo(?:[\s=/>]|$)/;
 
 type El = { tag: string; open: string; kids: (El | string)[]; leaf: boolean };
 
-// shallow tree fold — the transforms above all need parent/child
 // context a flat regex can't see (data-demo subtrees, single-child
-// wrappers). Mismatched closes fall through as text so a malformed
 // demo can't take the transform down with it
 const fold = (code: string): string => {
   const toks = code.match(/<[^>]*>|[^<]+/g) ?? [];
@@ -110,7 +89,6 @@ const fold = (code: string): string => {
       if (!leaf) stack.push(el);
       continue;
     }
-    // text run or comment — kept verbatim, the indenter folds it
     stack[stack.length - 1].kids.push(t);
   }
 
@@ -119,9 +97,6 @@ const fold = (code: string): string => {
     const open = cleanTag(el.open);
     if (el.leaf) return open;
     const inner = el.kids.map((k) => (typeof k === "string" ? k : emit(k))).join("");
-    /* an anonymous div wrapping exactly one element was furniture —
-       unwraps repeat outward until something real stops them; wrappers
-       carrying text or several children group real content */
     const sig = el.kids.filter(
       (k) =>
         (typeof k === "string" && k.trim()) ||
@@ -135,9 +110,6 @@ const fold = (code: string): string => {
   return root.kids.map((k) => (typeof k === "string" ? k : emit(k))).join("");
 };
 
-// indent by nesting depth — tag and text tokens are split cleanly, so
-// `<i></i> 14px` keeps its close tag on the same line and `<x>text</x>`
-// folds into one line when nothing was pushed between open and close
 const indentMarkup = (code: string): string => {
   const toks = (code.match(/<[^>]*>|[^<]+/g) ?? [])
     .map((s) => s.trim())
@@ -165,12 +137,9 @@ const indentMarkup = (code: string): string => {
       continue;
     }
     if (open) {
-      // void / self-closing tag — own line, nothing to close
       lines.push("  ".repeat(stack.length) + t);
       continue;
     }
-    // text run — content glues onto the open element's line; text after
-    // a folded element trails that line with a space
     const top = stack[stack.length - 1];
     if (top?.line === lines.length - 1) lines[top.line] += t;
     else if (lines.length) lines[lines.length - 1] += " " + t;
@@ -182,11 +151,6 @@ const indentMarkup = (code: string): string => {
 export const showMarkup = (code: string): string =>
   indentMarkup(fold(stripShells(code)));
 
-// markup display — the demo's code panel runs the shown source through
-// a tiny tokenizer instead of a full highlighter: sl-* attribute names
-// get the accent color, quoted values get a pill, tag scaffold stays
-// plain. Escaping happens per-token, so the output is safe for v-html.
-// input is already-normalized markup (showMarkup's output)
 const escHtml = (s: string): string =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
