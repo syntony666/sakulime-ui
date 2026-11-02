@@ -1,6 +1,7 @@
 @layer base {
   /* grid — auto-fill columns by default; --sl-grid-min is the column
-     floor and min() keeps a narrower container overflow-free.
+     floor (14rem out of the box) and min() keeps a narrower container
+     overflow-free.
      sl-grid-cols swaps the auto-fill count for an explicit count. The
      private vars self-default here: self-defaulting seals an
      ancestor's sl-grid-cols from leaking into a nested grid */
