@@ -32,25 +32,22 @@
     inset-inline-end: var(--_te);
   }
 
-  /* the value is one of the six corners <edge>-<side>: top-* flips
-     the vertical anchor, *-start flips the inline edge, *-center
-     centres on that edge, *-end reads the base rule. Any value
-     outside the vocabulary falls back to the default bottom-end */
-  [sl-float="top-start"],
-  [sl-float="top-center"],
-  [sl-float="top-end"] {
+  /* the value is space-separated tokens <edge> <side>: "top" flips
+     the vertical anchor, "start" flips the inline edge, "center"
+     centres on that edge. Unmatched words (bottom/end) read the
+     base rule, so anything outside the vocabulary still lands on
+     the default bottom-end */
+  [sl-float~="top"] {
     inset-block-end: auto;
     inset-block-start: calc(var(--_tb) + env(safe-area-inset-top, 0px));
   }
 
-  [sl-float="bottom-start"],
-  [sl-float="top-start"] {
+  [sl-float~="start"] {
     inset-inline-end: auto;
     inset-inline-start: var(--_te);
   }
 
-  [sl-float="bottom-center"],
-  [sl-float="top-center"] {
+  [sl-float~="center"] {
     inset-inline: 0;
     margin-inline: auto;
   }

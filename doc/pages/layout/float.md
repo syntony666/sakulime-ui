@@ -26,19 +26,19 @@ import * as FloatDemos from "../../demos/layout/float.demo";
 
 ## 位置
 
-值是「邊－側」的組合，六個角落，預設 `bottom-end`：
+值是空白分隔的「邊 側」組合，六個角落，預設右下：
 
 | 選項            | 位置           |
 | --------------- | -------------- |
 | 預設            | 右下           |
-| `bottom-start`  | 左下           |
-| `bottom-center` | 中下           |
-| `bottom-end`    | 右下（同預設） |
-| `top-start`     | 左上           |
-| `top-center`    | 中上           |
-| `top-end`       | 右上           |
+| `bottom start`  | 左下           |
+| `bottom center` | 中下           |
+| `bottom end`    | 右下（同預設） |
+| `top start`     | 左上           |
+| `top center`    | 中上           |
+| `top end`       | 右上           |
 
-`start`／`end` 是邏輯方向，跟著文字方向走。
+詞序不拘，`"start bottom"` 也通；只寫一邊也行（`"start"` = 下緣左側）。`start`／`end` 是邏輯方向，跟著文字方向走。
 
 ## 尺寸與間距
 

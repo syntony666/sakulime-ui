@@ -85,13 +85,14 @@
 
 <!-- floats -->
 <div sl-float id="t-def"><div sl-notice="fit">a</div></div>
-<div sl-float="bottom-start" id="t-bs"><div sl-notice="fit">a</div></div>
-<div sl-float="bottom-center" id="t-bc"><div sl-notice="fit">a</div></div>
-<div sl-float="bottom-end" id="t-be"><div sl-notice="fit">a</div></div>
-<div sl-float="top-start" id="t-ts"><div sl-notice="fit">a</div></div>
-<div sl-float="top-center" id="t-tc"><div sl-notice="fit">a</div></div>
-<div sl-float="top-end" id="t-te"><div sl-notice="fit">a</div></div>
-<div sl-float="start" id="t-legacy"><div sl-notice="fit">a</div></div>
+<div sl-float="bottom start" id="t-bs"><div sl-notice="fit">a</div></div>
+<div sl-float="bottom center" id="t-bc"><div sl-notice="fit">a</div></div>
+<div sl-float="bottom end" id="t-be"><div sl-notice="fit">a</div></div>
+<div sl-float="top start" id="t-ts"><div sl-notice="fit">a</div></div>
+<div sl-float="top center" id="t-tc"><div sl-notice="fit">a</div></div>
+<div sl-float="top end" id="t-te"><div sl-notice="fit">a</div></div>
+<div sl-float="start" id="t-partial"><div sl-notice="fit">a</div></div>
+<div sl-float="bogus" id="t-bogus"><div sl-notice="fit">a</div></div>
 
 <!-- sidebar: rail position follows DOM order -->
 <div sl-sidebar id="sb" style="width:800px">
@@ -284,19 +285,21 @@ function main() {
   near('float width 22rem', rect('t-def').width, Math.min(352, vw() - 32), 2);
   near('float def bottom-end right', rect('t-def').right, vw() - varPx('--sl-lg'), 2);
   near('float def bottom-end bottom', rect('t-def').bottom, vh() - varPx('--sl-lg'), 2);
-  near('float bottom-start left', rect('t-bs').left, varPx('--sl-lg'), 2);
-  near('float bottom-start bottom', rect('t-bs').bottom, vh() - varPx('--sl-lg'), 2);
-  near('float bottom-center x', rect('t-bc').left + rect('t-bc').width / 2, vw() / 2, 2);
-  near('float bottom-center bottom', rect('t-bc').bottom, vh() - varPx('--sl-lg'), 2);
-  near('float bottom-end right', rect('t-be').right, vw() - varPx('--sl-lg'), 2);
-  near('float top-start left', rect('t-ts').left, varPx('--sl-lg'), 2);
-  near('float top-start top', rect('t-ts').top, varPx('--sl-lg'), 2);
-  near('float top-center x', rect('t-tc').left + rect('t-tc').width / 2, vw() / 2, 2);
-  near('float top-center top', rect('t-tc').top, varPx('--sl-lg'), 2);
-  near('float top-end right', rect('t-te').right, vw() - varPx('--sl-lg'), 2);
-  near('float top-end top', rect('t-te').top, varPx('--sl-lg'), 2);
-  near('float legacy "start" falls back to bottom-end right', rect('t-legacy').right, vw() - varPx('--sl-lg'), 2);
-  near('float legacy "start" falls back to bottom-end bottom', rect('t-legacy').bottom, vh() - varPx('--sl-lg'), 2);
+  near('float bottom start left', rect('t-bs').left, varPx('--sl-lg'), 2);
+  near('float bottom start bottom', rect('t-bs').bottom, vh() - varPx('--sl-lg'), 2);
+  near('float bottom center x', rect('t-bc').left + rect('t-bc').width / 2, vw() / 2, 2);
+  near('float bottom center bottom', rect('t-bc').bottom, vh() - varPx('--sl-lg'), 2);
+  near('float bottom end right', rect('t-be').right, vw() - varPx('--sl-lg'), 2);
+  near('float top start left', rect('t-ts').left, varPx('--sl-lg'), 2);
+  near('float top start top', rect('t-ts').top, varPx('--sl-lg'), 2);
+  near('float top center x', rect('t-tc').left + rect('t-tc').width / 2, vw() / 2, 2);
+  near('float top center top', rect('t-tc').top, varPx('--sl-lg'), 2);
+  near('float top end right', rect('t-te').right, vw() - varPx('--sl-lg'), 2);
+  near('float top end top', rect('t-te').top, varPx('--sl-lg'), 2);
+  near('float partial "start" left', rect('t-partial').left, varPx('--sl-lg'), 2);
+  near('float partial "start" bottom', rect('t-partial').bottom, vh() - varPx('--sl-lg'), 2);
+  near('float bogus value falls back right', rect('t-bogus').right, vw() - varPx('--sl-lg'), 2);
+  near('float bogus value falls back bottom', rect('t-bogus').bottom, vh() - varPx('--sl-lg'), 2);
   eq('float print is static', mediaDecl('[sl-float]', 'position', 'print'), 'static');
   eq('float print releases clamp', mediaDecl('[sl-float]', 'max-block-size', 'print'), 'none');
   eq('float print releases scroll', mediaDecl('[sl-float]', 'overflow-block', 'print'), 'visible');
