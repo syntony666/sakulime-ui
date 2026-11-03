@@ -18,6 +18,8 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - name: Doc deps guard
+        run: node -e 'const d = require("./doc/package.json"); if (!d.devDependencies?.["postcss-custom-selectors"]) throw new Error("postcss-custom-selectors must stay in doc/package.json — CF builds doc in isolation, root devDeps never reach it")'
       - run: npm run lint
       - run: npm run build
       - name: Install chrome-headless-shell
