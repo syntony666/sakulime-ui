@@ -107,3 +107,7 @@ sticky 的外層不可設定 `overflow`，否則改為黏在外層。
 內部間距由 [`sl-gap`](/attrs/gap) 給定，預設 `md`，寫在 bar 自身或外層皆可。
 
 僅調整單一 bar 時，改寫 `--sl-bar-gap`。
+
+各間距的效果：
+
+<Demo :render="BarDemos.Gaps.render" />

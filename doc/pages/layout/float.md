@@ -59,8 +59,16 @@ import * as FloatDemos from "../../demos/layout/float.demo";
 - 列印時自動回到一般排版，不會於每頁重複出現
 - 順序依寫入頁面的先後堆疊，每多一個 `sl-notice` 即多一張
 
+三組寬度的比較：
+
+<Demo :render="FloatDemos.Sizes.render" />
+
 ## 間距
 
 通知之間的間隔由 [`sl-gap`](/attrs/gap) 給定，預設 `md`，寫在容器自身或外層皆可。
 
 僅調整單一容器時，改寫 `--sl-float-gap`。
+
+各間距的效果：
+
+<Demo :render="FloatDemos.Gaps.render" />

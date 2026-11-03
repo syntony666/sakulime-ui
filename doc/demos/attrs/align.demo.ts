@@ -1,9 +1,21 @@
 import type { Meta, DemoObj } from "../util/types";
-import { axis } from "../util/axis";
+import { axis, axisArg, attr } from "../util/axis";
 
-const meta = {} satisfies Meta;
+type PlayArgs = { align: string };
+
+const ALIGNS = ["-", "start", "center", "end", "stretch"];
+
+const meta = {
+  args: { align: "-" },
+  argTypes: { align: axisArg("sl-align", "交錯軸對齊", ALIGNS) },
+} satisfies Meta<PlayArgs>;
 export default meta;
-type Demo = DemoObj;
+type Demo = DemoObj<PlayArgs>;
+
+export const Play: Demo = {
+  render: (a = { align: "-" }) =>
+    `<div sl-wrap${attr("sl-align", a.align)}>` + cells() + `</div>`,
+};
 
 const cells = () =>
   `<div class="demo-cell" style="min-height:1.5rem">a</div>` +

@@ -24,6 +24,8 @@ import * as AlignDemos from "../../demos/attrs/align.demo";
 
 寫在容器上時套用於全部子層；寫在子層時，僅覆寫該項。
 
+<Playground :meta="AlignDemos.default" :render="AlignDemos.Play.render" />
+
 ## 選項
 
 | 選項 | 效果 |

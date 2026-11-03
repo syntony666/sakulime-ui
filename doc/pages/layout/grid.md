@@ -23,6 +23,10 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 
 底層為 `display: grid`。未指定欄數時，由容器寬度自動計算可容納的欄數（auto-fill），不須 media query。
 
+未標示欄數時依容器寬度自動排欄：
+
+<Demo :render="GridDemos.Basic.render" />
+
 ## 欄數
 
 `sl-grid-cols` 固定欄數，範圍 1 至 12；`auto` 與未標示相同，皆為 auto-fill：
@@ -54,6 +58,10 @@ import * as GridDemos from "../../demos/layout/grid.demo";
   <div sl-card>...</div>
 </div>
 ```
+
+各種跨欄標示的效果：
+
+<Demo :render="GridDemos.Spans.render" />
 
 超出當列剩餘欄位時，自動換至下一列。固定欄數下，跨欄數大於當前欄數時自動改為滿列，不會溢出，也不會產生額外的軌道。
 
@@ -98,3 +106,7 @@ auto-fill 的網格同樣適用；欄數隨容器變動，跨欄寫法以 `full`
 間距由 [`sl-gap`](/attrs/gap) 給定，寫在 grid 自身或外層皆可，預設 `md`。欄距與行距為同一個值。
 
 僅調整單一容器時，改寫 `--sl-grid-gap`。
+
+各間距的效果：
+
+<Demo :render="GridDemos.Gaps.render" />

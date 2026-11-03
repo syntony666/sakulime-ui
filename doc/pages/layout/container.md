@@ -44,6 +44,10 @@ import * as ContainerDemos from "../../demos/layout/container.demo";
 
 調整寬度時，覆寫 `--sl-container-sm`／`--sl-container-md`／`--sl-container-lg`。
 
+外層窄於寬度上限時，容器貼齊外層：
+
+<Demo :render="ContainerDemos.Widths.render" />
+
 ## 內距
 
 左右內距讀取 [`sl-pad`](/attrs/pad) 標示（`none`、`sm`、`md`、`lg`），預設與 `md` 相同（16px）。
@@ -51,3 +55,7 @@ import * as ContainerDemos from "../../demos/layout/container.demo";
 僅調整單一容器時，覆寫 `--sl-container-pad`，或自行指定 `padding-inline`。
 
 覆寫 `--sl-lg` 時，所有引用該變數的元素皆隨之改變。
+
+各內距的效果：
+
+<Demo :render="ContainerDemos.Pads.render" />

@@ -8,6 +8,7 @@ type NoticeArgs = {
   pad: string;
   radius: string;
   align: string;
+  interactive: string;
 };
 
 type ActionArgs = { action: string; variant: string };
@@ -25,6 +26,7 @@ const PADS = ["-", "sm", "md", "lg"];
 const RADII = ["-", "sm", "md", "lg", "full", "none"];
 const ALIGNS = ["-", "start", "center", "end"];
 const ACTIONS = ["-", "end", "start", "both"];
+const INTERACTIVES = ["-", "grow", "lift", "shadow", "press", "dim"];
 
 const meta = {
   args: {
@@ -33,6 +35,7 @@ const meta = {
     pad: "-",
     radius: "-",
     align: "-",
+    interactive: "-",
   },
   argTypes: {
     tone: axisArg("sl-tone", "顏色", TONES),
@@ -40,6 +43,7 @@ const meta = {
     pad: axisArg("sl-pad", "內距", PADS),
     radius: axisArg("sl-radius", "圓角", RADII),
     align: axisArg("sl-notice-align", "對齊", ALIGNS),
+    interactive: axisArg("sl-interactive", "互動效果", INTERACTIVES),
   },
 } satisfies Meta<NoticeArgs>;
 
@@ -52,7 +56,7 @@ const BODY = `<i sl-icon="lucide:info"></i> 系統將於 11月2日 02:00–03:00
 
 export const Notice: Demo = {
   render: (a) =>
-    `<div ${marker(a.variant)}${attr("sl-tone", a.tone)}${attr("sl-pad", a.pad)}${attr("sl-radius", a.radius)}${attr("sl-notice-align", a.align)}>${BODY}</div>`,
+    `<div ${marker(a.variant)}${attr("sl-tone", a.tone)}${attr("sl-pad", a.pad)}${attr("sl-radius", a.radius)}${attr("sl-notice-align", a.align)}${attr("sl-interactive", a.interactive)}>${BODY}</div>`,
 };
 
 export const Widths: Demo = {

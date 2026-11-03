@@ -1,9 +1,21 @@
 import type { Meta, DemoObj } from "../util/types";
-import { axis } from "../util/axis";
+import { axis, axisArg, attr } from "../util/axis";
 
-const meta = {} satisfies Meta;
+type PlayArgs = { justify: string };
+
+const JUSTIFIES = ["-", "start", "center", "end", "between", "around", "evenly"];
+
+const meta = {
+  args: { justify: "-" },
+  argTypes: { justify: axisArg("sl-justify", "主軸對齊", JUSTIFIES) },
+} satisfies Meta<PlayArgs>;
 export default meta;
-type Demo = DemoObj;
+type Demo = DemoObj<PlayArgs>;
+
+export const Play: Demo = {
+  render: (a = { justify: "-" }) =>
+    `<div sl-wrap${attr("sl-justify", a.justify)}>` + cells() + `</div>`,
+};
 
 const cells = (n = 3) =>
   Array.from({ length: n }, (_, i) => `<div class="demo-cell">項目 ${i + 1}</div>`).join("");

@@ -1,9 +1,23 @@
 import type { Meta, DemoObj } from "../util/types";
-import { axis, attr } from "../util/axis";
+import { axis, axisArg, attr } from "../util/axis";
 
-const meta = {} satisfies Meta;
+type PlayArgs = { interactive: string };
+
+const INTERACTIVES = ["-", "grow", "lift", "shadow", "press", "dim"];
+
+const meta = {
+  args: { interactive: "-" },
+  argTypes: {
+    interactive: axisArg("sl-interactive", "互動效果", INTERACTIVES),
+  },
+} satisfies Meta<PlayArgs>;
 export default meta;
-type Demo = DemoObj;
+type Demo = DemoObj<PlayArgs>;
+
+export const Play: Demo = {
+  render: (a = { interactive: "-" }) =>
+    `<div sl-card${attr("sl-interactive", a.interactive)}>滑鼠移入</div>`,
+};
 
 const frame = (caption: string, inner: string) =>
   `<div class="demo-cell"><span class="demo-w" data-demo>${caption}</span>` +
@@ -14,12 +28,7 @@ export const Interactive: Demo = {
     axis(["-", "grow", "lift", "shadow", "press", "dim"], (v) =>
       frame(
         v === "-" ? "未標示" : `sl-interactive="${v}"`,
-        `<div sl-wrap sl-align="center">` +
-          `<div sl-card${attr("sl-interactive", v)} style="width: 7rem; text-align: center">滑鼠移入</div>` +
-          `<button sl-button${attr("sl-interactive", v)}>按鈕</button>` +
-          `<span sl-chip${attr("sl-interactive", v)}>標籤</span>` +
-        `</div>` +
-        `<div sl-notice sl-tone="secondary"${attr("sl-interactive", v)} style="margin-top: var(--sl-md)">通知同樣適用，陰影疊在浮框外，不會覆蓋框線</div>`
+        `<div sl-card${attr("sl-interactive", v)} style="width: 7rem; text-align: center">滑鼠移入</div>`
       )
     ),
 };

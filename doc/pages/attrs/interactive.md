@@ -18,6 +18,8 @@ import * as InteractiveDemos from "../../demos/attrs/interactive.demo";
 <button sl-button sl-interactive="press">按鈕</button>
 ```
 
+<Playground :meta="InteractiveDemos.default" :render="InteractiveDemos.Play.render" />
+
 滑鼠移入後方可看出差異：
 
 <Demo :render="InteractiveDemos.Interactive.render" />

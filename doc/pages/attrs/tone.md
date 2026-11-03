@@ -18,7 +18,9 @@ import * as ToneDemos from "../../demos/attrs/tone.demo";
 <span sl-chip sl-tone="success">完成</span>
 ```
 
-同一色調套用在各元件上的效果：
+<Playground :meta="ToneDemos.default" :render="ToneDemos.Play.render" />
+
+各色調套用於按鈕的效果：
 
 <Demo :render="ToneDemos.Tones.render" />
 
