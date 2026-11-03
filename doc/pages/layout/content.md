@@ -24,7 +24,9 @@ import * as ContentDemos from "../../demos/layout/content.demo";
 
 排版為 block，並非 flex。子層自身的 margin 保留，間距寫在後一個子層的上緣，與前一個子層的下 margin 合併取較大值。
 
-卡片、通知等不帶 margin 的元件以間距隔開，標題與段落則依自身的節奏排列。最前與最後的對外 margin 仍會清除，欄位上下緣不會一側較厚。
+卡片、通知等不帶 margin 的元件以間距隔開，標題與段落則依自身的節奏排列。
+
+最前與最後的對外 margin 仍會清除，欄位上下緣不會一側較厚。
 
 元件群須清除 margin、與容器同寬時，改用 [`sl-stack`](/layout/stack)。
 

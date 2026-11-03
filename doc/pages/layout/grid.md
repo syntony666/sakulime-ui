@@ -33,7 +33,11 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 </div>
 ```
 
-子層依序填入，滿一列後自動換至下一列。欄數固定，不因容器變窄而減少；若須依斷點減少欄數，掛上 `sl-grid-cols-lg`、`sl-grid-cols-md`、`sl-grid-cols-sm`，見[響應式設計](/layout/responsive)。
+子層依序填入，滿一列後自動換至下一列。欄數固定，不因容器變窄而減少。
+
+若須依斷點減少欄數，掛上 `sl-grid-cols-lg`、`sl-grid-cols-md`、`sl-grid-cols-sm`。
+
+見[響應式設計](/layout/responsive)。
 
 <Demo
   :render="GridDemos.Cols.render"
@@ -73,7 +77,9 @@ auto-fill 的網格同樣適用；欄數隨容器變動，跨欄寫法以 `full`
 
 ## 對齊
 
-格子內元素的位置由兩個屬性分別控制：[`sl-justify`](/attrs/justify) 控制水平位置（`justify-items`），[`sl-align`](/attrs/align) 控制垂直位置（`align-items`），兩者預設皆為 `stretch`，填滿格子：
+格子內元素的位置由兩個屬性分別控制。`sl-justify` 控制水平位置（`justify-items`）。
+
+`sl-align` 控制垂直位置（`align-items`）；兩者預設皆為 `stretch`，填滿格子：
 
 ```html
 <div sl-grid sl-justify="center" sl-align="center">
@@ -81,7 +87,9 @@ auto-fill 的網格同樣適用；欄數隨容器變動，跨欄寫法以 `full`
 </div>
 ```
 
-兩個屬性亦可標在單一子層上（`justify-self`／`align-self`），僅該格離開共同對齊。`sl-justify` 的 `between` 不適用於格子，會退回 `stretch`。
+兩個屬性亦可標在單一子層上（`justify-self`／`align-self`），僅該格離開共同對齊。
+
+`sl-justify` 的 `between` 不適用於格子，會退回 `stretch`。
 
 <Demo :render="GridDemos.Aligns.render" />
 

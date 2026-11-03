@@ -22,7 +22,9 @@ import * as SidebarDemos from "../../demos/layout/sidebar.demo";
 
 <Demo :render="SidebarDemos.SidebarStart.render" />
 
-底層與 [`sl-wrap`](/layout/wrap) 相同，為啟用 `flex-wrap` 的 flexbox。主欄設有最小寬度（`--sl-sidebar-min`，預設 55%），容器寬度不足時整組換至下一行。
+底層與 [`sl-wrap`](/layout/wrap) 相同，為啟用 `flex-wrap` 的 flexbox。
+
+主欄設有最小寬度（`--sl-sidebar-min`，預設 55%），容器寬度不足時整組換至下一行。
 
 ## 位置
 
@@ -39,7 +41,8 @@ import * as SidebarDemos from "../../demos/layout/sidebar.demo";
 ## 尺寸
 
 - 側邊欄寬度為 `--sl-sidebar-w`，預設 16rem（256px），可個別覆寫
-- 主欄下限為 `--sl-sidebar-min`，預設 55%：主欄窄於下限時整組換行；rail 寫在主欄之前者換行後排於上方，之後者排於下方
+- 主欄下限為 `--sl-sidebar-min`，預設 55%
+- 主欄窄於下限時整組換行；rail 寫在主欄之前者換行後排於上方，之後者排於下方
 - 換行判斷依據為容器可用寬度，並非視窗斷點；置於窄容器時同樣會換行
 
 ## 間距

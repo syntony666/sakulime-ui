@@ -46,4 +46,8 @@ import * as ContainerDemos from "../../demos/layout/container.demo";
 
 ## 內距
 
-左右內距讀取 [`sl-pad`](/attrs/pad) 標示（`none`／`sm`／`md`／`lg`），預設與 `md` 相同（16px）；僅調整單一容器時，覆寫 `--sl-container-pad`，或自行指定 `padding-inline`。覆寫 `--sl-lg` 時，所有引用該變數的元素皆隨之改變。
+左右內距讀取 [`sl-pad`](/attrs/pad) 標示（`none`、`sm`、`md`、`lg`），預設與 `md` 相同（16px）。
+
+僅調整單一容器時，覆寫 `--sl-container-pad`，或自行指定 `padding-inline`。
+
+覆寫 `--sl-lg` 時，所有引用該變數的元素皆隨之改變。

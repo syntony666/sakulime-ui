@@ -25,7 +25,9 @@ import * as WrapDemos from "../../demos/layout/wrap.demo";
 
 子層垂直置中、寬度不變；總寬超過容器時，整列換到下一行。換行時機取決於內容的實際寬度，沒有固定斷點。
 
-底層為啟用 `flex-wrap` 的 flexbox。與 [`sl-grid`](/layout/grid) 的分工如下。子層寬度依內容決定、欄數隨容器而變時用 `sl-wrap`；每欄等寬、欄數固定時用 `sl-grid`。
+底層為啟用 `flex-wrap` 的 flexbox。與 [`sl-grid`](/layout/grid) 的分工如下。
+
+子層寬度依內容決定、欄數隨容器而變時用 `sl-wrap`；每欄等寬、欄數固定時用 `sl-grid`。
 
 ## 對齊
 
@@ -38,7 +40,9 @@ import * as WrapDemos from "../../demos/layout/wrap.demo";
 </div>
 ```
 
-垂直方向由 [`sl-align`](/attrs/align) 控制。子層預設垂直置中，`start` 對齊列頂、`end` 對齊列底。`sl-align` 亦可標在單一子層上，使該項離開共同對齊。
+垂直方向由 [`sl-align`](/attrs/align) 控制。
+
+子層預設垂直置中，`start` 對齊列頂、`end` 對齊列底。`sl-align` 亦可標在單一子層上，使該項離開共同對齊。
 ## 間距
 
 間距由 [`sl-gap`](/attrs/gap) 給定，寫在 wrap 自身或外層皆可，預設 `md`。水平間距與換行後的行距為同一個值。
