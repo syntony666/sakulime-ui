@@ -1,6 +1,6 @@
 ---
 title: Chip 膠囊
-description: 圖示配一行字的小膠囊，用在標籤列、資訊列這種一排小項目。
+description: 標籤列與資訊列用的小型膠囊。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as ChipDemos from "../../demos/components/chip.demo";
 
 # Chip *膠囊*
 
-> 圖示配一行字的小膠囊，用在標籤列、資訊列這種一排小項目。
+> 單行文字搭配圖示的小膠囊，適合標籤列與資訊列。
 
 <Playground :meta="ChipDemos.default" :render="ChipDemos.Chip.render" />
 
@@ -17,31 +17,35 @@ import * as ChipDemos from "../../demos/components/chip.demo";
 
 ### 顏色 `sl-tone`
 
-`sl-chip` 是 `sl-tone` 的適用元件。未標示是文字顏色調出的中性底色。選項看 [Tone 色調](/attrs/tone)。
+`sl-chip` 為 `sl-tone` 的適用元件。未標示時，底色由文字顏色推導為中性色。選項見 [Tone 色調](/attrs/tone)。
 
 ### 大小與對齊
 
-尺寸用 em，膠囊內的字是所在字級的 `0.875em`，跟著周圍字級一起縮放，不用寫尺寸屬性。
+尺寸以 em 為單位，膠囊內文字為所在字級的 `0.875em`，隨周圍字級縮放，不須指定尺寸屬性。
 
 <Demo :render="ChipDemos.Sizes.render" />
 
-固定字級用 `sl-size`，chip 只取字級不看高度，選項看 [Size 尺寸](/attrs/size)。padding 和 gap 都是 em，整顆膠囊跟著字級等比縮放。
+固定字級時使用 `sl-size`；chip 僅取字級，不取高度，選項見 [Size 尺寸](/attrs/size)。
+
+padding 與 gap 皆以 em 為單位，整個膠囊隨字級等比縮放。
 
 ### 互動 `sl-interactive`
 
-整顆膠囊看起來可以點，游標變成手指，滑鼠移過去就有反應。`sl-interactive` 未標示是 `grow`，效果選項看 [Interactive 互動](/attrs/interactive)。
+膠囊標示後即呈現可點擊的外觀，游標變為手指，滑鼠移入時套用效果。
+
+`sl-interactive` 未標示時為 `grow`，效果選項見 [Interactive 互動](/attrs/interactive)。
 
 ## 組合
 
-`<i sl-icon>` 放進去，間距自動對、顏色跟著膠囊走。圖示本身看 [Icon 圖示](/core/icon)。
+放入 `<i sl-icon>`，間距自動對齊，顏色隨膠囊變化。圖示本身見 [Icon 圖示](/core/icon)。
 
 <Demo :render="ChipDemos.WithIcon.render" />
 
-meta 列實際長這樣：
+實際的 meta 列如下：
 
 <Demo :render="ChipDemos.MetaRow.render" />
 
-疊上 [`sl-card--corner`](/core/card) 就固定到卡片角落，適合當數值或版本標籤：
+疊上 [`sl-card--corner`](/core/card) 後即固定於卡片角落，適合標示數值或版本：
 
 ```html
 <span sl-card--corner sl-chip sl-tone="primary">200ms</span>
