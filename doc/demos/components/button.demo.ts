@@ -9,12 +9,14 @@ type ButtonArgs = {
   variant: string;
   size: string;
   radius: string;
+  interactive: string;
   disabled: boolean;
 };
 
 const VARIANTS = ["-", "normal", "outline", "underline", "ghost"];
 const SIZES = ["-", "sm", "md", "lg"];
 const RADII = ["-", "none", "sm", "md", "lg", "full"];
+const INTERACTIVES = ["-", "grow", "lift", "shadow", "press", "dim"];
 
 const meta = {
   args: {
@@ -23,6 +25,7 @@ const meta = {
     variant: "-",
     size: "-",
     radius: "-",
+    interactive: "-",
     disabled: false,
   },
   argTypes: {
@@ -30,6 +33,7 @@ const meta = {
     variant: axisArg("sl-button", "型態", VARIANTS),
     size: axisArg("sl-size", "尺寸", SIZES),
     radius: axisArg("sl-radius", "圓角", RADII),
+    interactive: axisArg("sl-interactive", "互動效果", INTERACTIVES),
     disabled: boolArg("disabled", "停用（HTML 原生屬性）"),
     label: {
       description: "按鈕文字",
@@ -45,6 +49,7 @@ function slAttrs({
   variant,
   size,
   radius,
+  interactive,
   disabled,
 }: ButtonArgs): string {
   return (
@@ -52,6 +57,7 @@ function slAttrs({
     attr("sl-tone", tone) +
     attr("sl-size", size) +
     attr("sl-radius", radius) +
+    attr("sl-interactive", interactive) +
     (disabled ? " disabled" : "")
   );
 }

@@ -5,18 +5,22 @@ import "../util/icons";
 type ChipArgs = {
   tone: string;
   size: string;
+  interactive: string;
 };
 
 const SIZES = ["-", "sm", "md", "lg"];
+const INTERACTIVES = ["-", "grow", "lift", "shadow", "press", "dim"];
 
 const meta = {
   args: {
     tone: "-",
     size: "-",
+    interactive: "-",
   },
   argTypes: {
     tone: axisArg("sl-tone", "顏色", TONES),
     size: axisArg("sl-size", "尺寸", SIZES),
+    interactive: axisArg("sl-interactive", "互動效果", INTERACTIVES),
   },
 } satisfies Meta<ChipArgs>;
 
@@ -25,7 +29,7 @@ type Demo = DemoObj<ChipArgs>;
 
 export const Chip: Demo = {
   render: (a) =>
-    `<span sl-chip${attr("sl-tone", a.tone)}${attr("sl-size", a.size)}>標籤</span>`,
+    `<span sl-chip${attr("sl-tone", a.tone)}${attr("sl-size", a.size)}${attr("sl-interactive", a.interactive)}>標籤</span>`,
 };
 
 const FONT_SIZES = [14, 16, 20, 28];
