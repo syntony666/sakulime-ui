@@ -1,5 +1,11 @@
 # @sakulime-ui/layout
 
+## 0.4.2
+
+### Patch Changes
+
+- 6f5628d: Docs site fixes: the hero's secondary (alt) action was invisible in dark themes — its text color mapped the wrong slot — and `doc/wrangler.toml` now carries the `sakulime-ui` service name Cloudflare expects. No package code changed.
+
 ## 0.4.1
 
 ### Patch Changes
