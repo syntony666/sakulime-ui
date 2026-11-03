@@ -7,6 +7,10 @@ type Demo = DemoObj;
 
 const cell = (t: string) => `<div class="demo-cell">${t}</div>`;
 
+const frame = (caption: string, inner: string) =>
+  `<div class="demo-cell"><span class="demo-w" data-demo>${caption}</span>` +
+  `<div style="margin-top: var(--sl-sm)">${inner}</div></div>`;
+
 export const BarTop: Demo = {
   render: () =>
     `<div sl-bar="top" style="position: static">` +
@@ -44,6 +48,23 @@ export const Positions: Demo = {
       (v) =>
         `<div sl-bar="top"${v === "-" ? "" : ` ${v}`} style="position: static">` +
         `${cell(v === "-" ? "sticky（預設）" : v)}</div>`,
+      true
+    ),
+};
+
+export const Gaps: Demo = {
+  render: () =>
+    axis(
+      ["sm", "md", "lg"],
+      (v) =>
+        frame(
+          `sl-gap="${v}"`,
+          `<div sl-bar="top" sl-gap="${v}" style="position: static">` +
+            `<div sl-bar--start class="demo-cell">Logo</div>` +
+            `<div sl-bar--center class="demo-cell">中央</div>` +
+            `<div sl-bar--end class="demo-cell">終點</div>` +
+            `</div>`
+        ),
       true
     ),
 };

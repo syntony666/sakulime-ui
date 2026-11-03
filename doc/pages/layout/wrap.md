@@ -43,6 +43,11 @@ import * as WrapDemos from "../../demos/layout/wrap.demo";
 垂直方向由 [`sl-align`](/attrs/align) 控制。
 
 子層預設垂直置中，`start` 對齊列頂、`end` 對齊列底。`sl-align` 亦可標在單一子層上，使該項離開共同對齊。
+
+各選項的效果：
+
+<Demo :render="WrapDemos.Align.render" />
+
 ## 間距
 
 間距由 [`sl-gap`](/attrs/gap) 給定，寫在 wrap 自身或外層皆可，預設 `md`。水平間距與換行後的行距為同一個值。

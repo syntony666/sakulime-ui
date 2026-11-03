@@ -43,6 +43,10 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 </div>
 ```
 
+各選項的效果：
+
+<Demo :render="StackDemos.Align.render" />
+
 垂直分佈用 [`sl-justify`](/attrs/justify)，僅在容器高於內容時可見，例如將整疊垂直置中或推到底。
 
 `sl-align` 亦可標在單一子層上，僅該項離開共同對齊：
@@ -58,3 +62,7 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 間距由 [`sl-gap`](/attrs/gap) 給定，寫在 stack 自身或外層皆可，預設 `md`。
 
 僅調整單一容器時，改寫 `--sl-stack-gap`（例如 `style="--sl-stack-gap: 6px"`）。
+
+各間距的效果：
+
+<Demo :render="StackDemos.Gaps.render" />

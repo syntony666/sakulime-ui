@@ -35,3 +35,7 @@ import * as ContentDemos from "../../demos/layout/content.demo";
 ## 間距
 
 間距由 [`sl-gap`](/attrs/gap) 給定，寫在自身或外層，預設 `md`；僅調整單一容器時，覆寫 `--sl-content-gap`。
+
+各間距的效果：
+
+<Demo :render="ContentDemos.Gaps.render" />
