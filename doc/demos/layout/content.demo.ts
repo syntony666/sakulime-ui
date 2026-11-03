@@ -1,5 +1,5 @@
 import type { Meta, DemoObj } from "../util/types";
-import { axis } from "../util/axis";
+import { axis, attr } from "../util/axis";
 
 const meta = {} satisfies Meta;
 export default meta;
@@ -22,11 +22,11 @@ export const Rhythm: Demo = {
 export const Gaps: Demo = {
   render: () =>
     axis(
-      ["sm", "md", "lg"],
+      ["-", "sm", "md", "lg"],
       (v) =>
         frame(
-          `sl-gap="${v}"`,
-          `<article sl-content sl-gap="${v}">` +
+          v === "-" ? "未標示 → 預設 md" : `sl-gap="${v}"`,
+          `<article sl-content${attr("sl-gap", v)}>` +
             `<h3>標題</h3>` +
             `<p>段落內容，示範相鄰子層之間的間距。</p>` +
             `<div sl-card>卡片內容</div>` +

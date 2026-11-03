@@ -1,5 +1,5 @@
 import type { Meta, DemoObj } from "../util/types";
-import { axis } from "../util/axis";
+import { axis, attr } from "../util/axis";
 
 const meta = {} satisfies Meta;
 export default meta;
@@ -55,11 +55,11 @@ export const Positions: Demo = {
 export const Gaps: Demo = {
   render: () =>
     axis(
-      ["sm", "md", "lg"],
+      ["-", "sm", "md", "lg"],
       (v) =>
         frame(
-          `sl-gap="${v}"`,
-          `<div sl-bar="top" sl-gap="${v}" style="position: static">` +
+          v === "-" ? "未標示 → 預設 md" : `sl-gap="${v}"`,
+          `<div sl-bar="top"${attr("sl-gap", v)} style="position: static">` +
             `<div sl-bar--start class="demo-cell">Logo</div>` +
             `<div sl-bar--center class="demo-cell">中央</div>` +
             `<div sl-bar--end class="demo-cell">終點</div>` +

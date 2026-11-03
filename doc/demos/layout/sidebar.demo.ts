@@ -1,5 +1,5 @@
 import type { Meta, DemoObj } from "../util/types";
-import { axis } from "../util/axis";
+import { axis, attr } from "../util/axis";
 
 const meta = {} satisfies Meta;
 export default meta;
@@ -58,8 +58,12 @@ export const Widths: Demo = {
 export const Gaps: Demo = {
   render: () =>
     axis(
-      ["sm", "md", "lg"],
-      (v) => frame(`sl-gap="${v}"`, sidebar(` sl-gap="${v}"`)),
+      ["-", "sm", "md", "lg"],
+      (v) =>
+        frame(
+          v === "-" ? "未標示 → 預設 lg" : `sl-gap="${v}"`,
+          sidebar(attr("sl-gap", v))
+        ),
       true
     ),
 };

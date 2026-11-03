@@ -1,5 +1,5 @@
 import type { Meta, DemoObj } from "../util/types";
-import { axis } from "../util/axis";
+import { axis, attr } from "../util/axis";
 
 const meta = {
 } satisfies Meta;
@@ -19,6 +19,21 @@ export const ContainerWidths: Demo = {
     [box("sl-container"), ...["sm", "md", "lg"].map((v) => box(`sl-container="${v}"`))].join(""),
 };
 
+export const Pads: Demo = {
+  render: () =>
+    axis(
+      ["-", "none", "sm", "md", "lg"],
+      (v) =>
+        frame(
+          v === "-" ? "未標示 → 預設 md" : `sl-pad="${v}"`,
+          `<div sl-container${attr("sl-pad", v)} style="border: 1px dashed var(--sl-border)">` +
+            `<div class="demo-cell">內容區塊</div>` +
+            `</div>`
+        ),
+      true
+    ),
+};
+
 export const Widths: Demo = {
   render: () =>
     axis(
@@ -30,21 +45,6 @@ export const Widths: Demo = {
             `<div sl-container="${v}" class="demo-frame">` +
             `<span data-demo>內容區塊</span>` +
             `</div></div>`
-        ),
-      true
-    ),
-};
-
-export const Pads: Demo = {
-  render: () =>
-    axis(
-      ["none", "sm", "md", "lg"],
-      (v) =>
-        frame(
-          `sl-pad="${v}"`,
-          `<div sl-container sl-pad="${v}" style="border: 1px dashed var(--sl-border)">` +
-            `<div class="demo-cell">內容區塊</div>` +
-            `</div>`
         ),
       true
     ),
