@@ -1,6 +1,6 @@
 ---
 title: Radius 圓角
-description: 元件邊角的圓弧，最大一階依元件而有不同上限。
+description: 元件邊角的圓弧，上限依元件而定。
 ---
 
 <script setup>

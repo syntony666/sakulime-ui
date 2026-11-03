@@ -72,6 +72,20 @@ import * as XDemos from "../../demos/components/x.demo";
 
 `####` 有兩種用途：把多個 demo 分組，例如按鈕的「實心版本」「框線版本」；或列出零件的值變化，例如卡片的「貼邊 `edge`」。
 
+## Playground 的覆蓋範圍
+
+主 Playground 的 `argTypes` 要涵蓋頁面「屬性」與「元件設定」章節列出的每一個項目，一個都不能少：
+
+| 頁面章節 | 對應控制項 |
+| --- | --- |
+| 型態 `sl-x` | 下拉，列出所有型態 |
+| 屬性 `sl-tone`、`sl-size`、`sl-radius`、`sl-pad`、`sl-interactive` | 各自一個控制項 |
+| 元件設定 `sl-x-<setting>` | 各自一個控制項 |
+
+共用屬性不需要在元件頁另做 demo，Playground 的控制項就是示範。
+
+元件專屬的設定與子元素都要有 demo；子元素另外要有自己的 Playground，`args` 與 `argTypes` 只放該零件的選項。
+
 ## 值清單
 
 值清單只列元件自有的詞彙：標記型態、設定、零件變化。`## 屬性` 不重列通用屬性的選項，只寫元件讀什麼、效果與預設，選項交給屬性頁。

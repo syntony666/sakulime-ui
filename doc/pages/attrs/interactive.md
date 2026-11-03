@@ -36,7 +36,9 @@ import * as InteractiveDemos from "../../demos/attrs/interactive.demo";
 
 未帶值，或值不在表中時，一律視為 `grow`。
 
-元件停用時（`disabled` 與 `aria-disabled="true"`）不觸發效果。
+元件停用後不觸發效果。`sl-button` 可用 `disabled` 或 `aria-disabled="true"`。
+
+其餘元件只能使用 `aria-disabled="true"`。
 
 ## 適用元件
 

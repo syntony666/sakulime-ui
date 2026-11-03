@@ -9,7 +9,13 @@
 
 ## 用法
 
-<語法區塊 + 一句說明 + Demo>
+<語法區塊 + 一句說明>
+
+<Playground 主體：card 優先，不適用才用 button；
+
+gap、justify、align 直接用排版元件>
+
+<Demo>
 
 ## 選項
 
@@ -30,6 +36,10 @@
 
 - frontmatter 的 `description` 與開頭引文都是一句話，不放數量、不放 code span，兩者不要逐字相同。
 - 兩張表都要有。選項與適用範圍一律用表格，不寫成條列或段落。
+- 每頁都要有 Playground 與至少一個 Demo。
+- Playground 的 `meta` 用 demo 檔的 `default` 匯出，`render` 指向新增的 `Play`。
+- 屬性頁的 Playground 只放這一個屬性；選項清單的第一個一律是 `"-"`。
+- Demo 要展演完整的值軸，不要只挑兩三個選項。
 - 適用元件的表格欄名依實際內容命名，不要每頁都叫「備註」。
 - 屬性頁不重述元件頁的用法；元件頁只連過來，不複製選項表。
 - demo 檔放 `doc/demos/attrs/<name>.demo.ts`，側邊欄歸在「通用屬性」群組。
