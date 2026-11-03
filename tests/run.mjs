@@ -26,7 +26,7 @@ const DIST = [
 const FIXTURES = [
   { name: 'core', size: '1280,1000' },
   { name: 'layout', size: '1280,1000' },
-  { name: 'responsive', size: '420,800' },
+  { name: 'responsive', size: '600,800' },
 ];
 
 const missing = DIST.filter(f => !existsSync(join(root, f)));

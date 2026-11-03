@@ -40,8 +40,10 @@
 <script src="helpers.js"></script>
 <script>
 function main() {
-  /* headless clamps --window-size to a ~500px minimum; what the suite
-     actually needs is "below the 45rem sm breakpoint" */
+  /* headless handles --window-size differently across versions: older
+     builds clamp to a ~500px minimum, newer ones honor 420px. The suite
+     needs a real width inside the 448–720px band (2 tracks at the 14rem
+     floor, below the 45rem sm breakpoint), so the runner asks for 600 */
   rec('viewport below sm breakpoint', window.innerWidth + 'px', '<720px', window.innerWidth < 720);
 
   /* cols-<bp> release — below 45rem every breakpoint block hits; the
@@ -56,8 +58,8 @@ function main() {
   eq('sm=6 clamped by md=2', tracks('rg-mono'), 2);
   eq('sm=8 clamped by base=2', tracks('rg-monob'), 2);
   /* "auto" — the level drops out of the clamp and auto-fill returns;
-     the real viewport clamps to 500px so the 14rem floor yields 2
-     tracks (explicit would be 4/2) */
+     at the requested 600px the 14rem floor yields 2 tracks
+     (explicit would be 4/2) */
   eq('sm="auto" returns to auto-fill', tracks('rg-auto'), 2);
   eq('md="auto" releases cols=4', tracks('rg-autom'), 2);
   eq('narrower decl survives md="auto"', tracks('rg-auton'), 2);
