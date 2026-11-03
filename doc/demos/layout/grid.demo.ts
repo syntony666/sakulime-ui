@@ -19,10 +19,10 @@ export const Basic: Demo = {
 export const Spans: Demo = {
   render: () =>
     `<div sl-grid sl-grid-cols="4">` +
-    `<div class="demo-cell" sl-grid--span="2">span 2</div>` +
-    `<div class="demo-cell" sl-grid--span="full">span full</div>` +
+    `<div class="demo-cell" sl-grid--span="2">跨兩欄</div>` +
+    `<div class="demo-cell" sl-grid--span="full">跨滿整列</div>` +
     `<div class="demo-cell">未標示</div>` +
-    `<div class="demo-cell" sl-grid--span="3">span 3</div>` +
+    `<div class="demo-cell" sl-grid--span="3">跨三欄</div>` +
     `</div>`,
 };
 
