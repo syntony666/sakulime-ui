@@ -1,35 +1,32 @@
-# Layout pages
+# 版面頁
 
-Pages under `doc/pages/layout/` document one primitive or region each
-(`stack`, `wrap`, `grid`, `bar`…). Sections are flat `##` named by
-feature, ordered by importance, `間距` always last:
+`pages/layout/` 的頁面，一個檔案寫一個版面元件或區域，例如 `stack`、`wrap`、`grid`、`bar`。
+
+章節是扁平的 `##`，依功能命名，按重要性排序，「間距」固定放最後：
 
 ```markdown
 # <Name> *<中文名>*
 
-> <one-sentence intro in a blockquote>
+> <一句話引文>
 
 ## 用法
 
-<syntax block + demo + the primitive's mechanics in prose>
+<語法區塊 + demo + 這個元件的機制說明>
 
 ## <feature>
 
-<one section per distinct feature — `## 欄數`, `## 跨欄`,
-`## 位置`, `## 內容排列`>
+<每個功能一節，例如 欄數、跨欄、位置、內容排列>
 
 ## 間距
 
-<sl-gap line: written on self or an ancestor + the primitive's own
-default — only on gap-reading primitives>
+<寫在自己或外層 + 這個元件的預設值；只有讀取間距的元件才寫>
 ```
 
-- Mechanics that aren't a feature get written into the `用法` prose:
-  no `行為` grab-bag section, no `屬性` wrapper level.
-- `間距` states the primitive's own default (`md` for most, `lg` for
-  `sl-sidebar`), the per-primitive `--sl-<x>-gap` override, and links to
-  [`sl-gap`](/attrs/gap); the nine-step scale table lives only in
-  `attrs/gap.md`, never re-listed here;
-  primitives without a gap knob (`container`) skip the section entirely.
-- Demo file at `doc/demos/layout/<name>.demo.ts` — only for pages that
-  have demos; prose-only pages skip the file.
+## 規則
+
+- 不屬於功能範疇的機制，寫進「用法」的說明，不另開「行為」章節，也不加「屬性」這一層。
+- 「間距」一節寫三件事：寫在元件自身或外層、這個元件的預設值、單一容器的覆寫變數
+- 預設值多數為 `md`，`sl-sidebar` 為 `lg`；覆寫變數為 `--sl-<x>-gap`
+- 級距表只存在於 `attrs/gap.md`，其他頁連過去，不重列。
+- 沒有間距設定的元件（例如 `container`）整節省略。
+- demo 檔放 `doc/demos/layout/<name>.demo.ts`；純文字頁不建 demo 檔。

@@ -1,12 +1,8 @@
-# Component pages
+# 元件頁
 
-Component pages under `doc/pages/core/` follow the big skeleton below.
-Sections appear in a fixed order; a section with no content is omitted
-entirely rather than left empty. Shared conventions — file layout,
-frontmatter, heading format, demo helpers, prose rules — live in
-[`index.md`](index.md).
+`pages/core/` 的元件頁。章節順序固定，沒有內容的章節整節省略，不留空殼。共用規則見 [`index.md`](index.md)。
 
-## Skeleton
+## 骨架
 
 ```markdown
 <script setup>
@@ -15,7 +11,7 @@ import * as XDemos from "../../demos/components/x.demo";
 
 # <Name> *<中文名>*
 
-<one-sentence intro>
+<一句話介紹>
 
 <Playground :meta="XDemos.default" :render="XDemos.X.render" />
 
@@ -47,45 +43,40 @@ import * as XDemos from "../../demos/components/x.demo";
 ## 組合
 ```
 
-## Section order
+## 章節順序
 
-`##` headings are fixed names in a fixed order. Skip what doesn't apply.
+`##` 名稱固定、順序固定，用不到的整節刪掉，不留空標題。
 
-| `##` | Holds | When present |
-|---|---|---|
-| 使用 | How to write the markup — paste, placeholder, helper | component needs JS or has usage forms |
-| 安裝 | Install per environment (bundler / CDN / pure CSS) | component needs JS |
-| 型態 | Marker values — `sl-x="hollow"` | marker takes values |
-| 屬性 | Generic attrs — applicability, component-specific effect and default, plus a link to the attr page (never the option list) | any generic attr applies |
-| 元件設定 | Component settings `sl-<x>-<setting>` written on the component itself | component has settings |
-| 子元素 | Parts `sl-<x>--<part>` written on inner elements | component has parts |
-| 用法 | The component's own usage forms — same component, different roles (e.g. notice in-flow = banner, inside a fixed wrapper = toast) | component plays distinct roles |
-| 組合 | Use inside/with other components | meaningful combos exist |
+| `##` | 內容 | 何時出現 |
+| --- | --- | --- |
+| 使用 | 標記怎麼寫：貼上、佔位、輔助函式 | 元件需要 JS 或有多種寫法 |
+| 安裝 | 依環境分開的安裝方式（bundler／CDN／純 CSS） | 元件需要 JS |
+| 型態 | 標記的值，例如 `sl-x="hollow"` | 標記帶值 |
+| 屬性 | 通用屬性的適用性、效果與預設，附屬性頁連結 | 有通用屬性適用 |
+| 元件設定 | `sl-<x>-<setting>`，寫在元件自身 | 元件有設定 |
+| 子元素 | `sl-<x>--<part>`，寫在內層元素 | 元件有零件 |
+| 用法 | 同一個元件的不同角色，例如通知在版面內與浮動 | 角色不只一種 |
+| 組合 | 與其他元件搭配 | 有值得示範的組合 |
 
-Inside `## 屬性`, `###` order follows the canonical table in `attrs.md`:
-`sl-tone` → `sl-size` → `sl-radius` → `sl-pad` → `sl-interactive`.
+`## 屬性` 底下的 `###` 依 `attrs.md` 的順序排。
 
-`## 組合` is documented by the component being composed *into* others —
-usually the smaller one shows how it drops into larger pieces (icon shows
-itself inside cards and buttons); container components don't open a section
-per placeable child. Omit the section entirely when no combo is worth showing.
+順序為 `sl-tone`、`sl-size`、`sl-radius`、`sl-pad`、`sl-interactive`。
 
-## Heading extras
+`## 組合` 由被組進去的那一方撰寫。小元件示範自己怎麼放進大元件，容器元件不為每個子元件各開一節。沒有值得示範的組合就整節省略。
 
-A `###` under `## 用法` names a usage form in both languages — English
-first, Chinese as the glossed sub-label, mirroring `# Name *中文名*` (e.g.
-`### Banner *橫幅*`, `### Toast *浮動通知*`). `####` groups demos under
-one `###` (e.g. button's `#### 實心版本` / `#### 框線版本`) or lists a
-part's value variants (e.g. card-section's `#### 貼邊 `edge``).
+## 標題附加規則
 
-## Value lists
+`## 用法` 底下的 `###` 用中英對照，英文在前、中文為斜體。
 
-Value lists are for component-owned vocab only — marker types, settings
-and part variants. Generic attr sections (`## 屬性`) never re-list
-options; state what the component reads, the effect and the default,
-then link to `/attrs/<name>`.
+格式與 `# Name *中文名*` 相同，例如 `### Banner *橫幅*`。
 
-One bullet per value, default annotated:
+`####` 有兩種用途：把多個 demo 分組，例如按鈕的「實心版本」「框線版本」；或列出零件的值變化，例如卡片的「貼邊 `edge`」。
+
+## 值清單
+
+值清單只列元件自有的詞彙：標記型態、設定、零件變化。`## 屬性` 不重列通用屬性的選項，只寫元件讀什麼、效果與預設，選項交給屬性頁。
+
+一個值一行，預設值標在後面：
 
 ```markdown
 - `sm`：小
@@ -93,14 +84,17 @@ One bullet per value, default annotated:
 - `lg`：大
 ```
 
-## Demo and Playground placement
+## demo 與 playground 的放置
 
-| Spot | Component | Rule |
-|---|---|---|
-| Page top | `<Playground>` | main component; controls cover marker values, generic attrs and component settings |
-| `子元素` each `###` | `<Playground>` | every part gets its own playground with its own args/argTypes (`CardDemos.Corner`, `CardDemos.Sections`) |
-| `####` value variants | `<Demo>` | part already adjustable above; variants show a static axis |
-| `型態`/`屬性`/`元件設定` sections | `<Demo>` | already covered by the main playground; sections show static axes |
+| 位置 | 元件 | 規則 |
+| --- | --- | --- |
+| 頁首 | `<Playground>` | 主元件；控制項涵蓋標記值、通用屬性與元件設定 |
+| `子元素` 的每個 `###` | `<Playground>` | 每個零件各自一組 args 與 argTypes |
+| `####` 的值變化 | `<Demo>` | 上方已可調，這裡只展示固定的值軸 |
+| `型態`、`屬性`、`元件設定` | `<Demo>` | 主 playground 已涵蓋，這些章節示範靜態軸 |
 
-Bind a standalone demo with args (no playground chrome) via
-`<Demo :render="X.<Name>.render" :args="X.<Name>.args" />`.
+只給 args、不要 playground 外框時，改用：
+
+```markdown
+<Demo :render="X.<Name>.render" :args="X.<Name>.args" />
+```
