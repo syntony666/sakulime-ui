@@ -85,8 +85,9 @@
   --vp-button-brand-hover-bg: oklch(
     from var(--sl-primary) calc(l - 0.08) c h
   );
-  --vp-button-alt-text: var(--sl-secondary-fg);
+  --vp-button-alt-text: var(--sl-text);
   --vp-button-alt-bg: var(--sl-secondary-bg);
+  --vp-button-alt-border: var(--sl-border);
   --vp-button-alt-hover-text: var(--sl-secondary-fg);
   --vp-button-alt-hover-bg: var(--sl-secondary);
 }
