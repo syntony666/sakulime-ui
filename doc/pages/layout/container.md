@@ -1,6 +1,6 @@
 ---
 title: Container 頁面容器
-description: 限制內容寬度並置中，兩側保留邊距。
+description: 限制內容寬度並置中的版面容器。
 aside: false
 outline: false
 pageClass: container-wide
