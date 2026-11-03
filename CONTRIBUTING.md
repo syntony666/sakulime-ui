@@ -41,6 +41,13 @@ npm run site         # also verify the static site when touching doc/
 - New themes: drop a `.css` in `packages/theme` (three seeds + `color-scheme`; see `_internal/derived.css`), then import it once in `packages/core/src/index.ts` to bundle it into core, and add a `./<name>.css` line to `packages/theme/package.json` exports so the path is importable — plus a matching per-theme alias in both `packages/core/vite.config.ts` and `doc/.vitepress/config.mts`, which hardcode one alias entry per theme and fail to resolve without it
 - Doc pages need frontmatter `title` and `description` — canonical, OG and JSON-LD metadata is generated from them
 
+## Design rules
+
+- Flat by default: surfaces carry no permanent shadow — depth appears via `sl-interactive` hover or floating layers only
+- Readable accent: decorative tones (`primary`, `secondary`, `warning`) are never text colors — text uses `--sl-text-accent` or `--sl-tone-text` mixes
+- `sl-*` attribute names cap at two dashes (`sl-<comp>-<attr>`); the only exception is the responsive suffix `sl-<comp>-<attr>-<viewport>` (e.g. `sl-grid-cols-lg`). `--sl-*` vars are exempt
+- Breakpoints 45/60/75rem are hardcoded twins of `--sl-container-*` — media queries can't read vars, so keep them in sync manually
+
 ## Component CSS rules
 
 - Generic attributes (`sl-tone`, `sl-size`, `sl-radius`, `sl-pad`, `sl-interactive`) live in `css/generic.css`. Each expands through its own `@custom-selector` consumer list and only ever sets `--sl-*` slot variables, never physical properties
