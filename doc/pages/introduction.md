@@ -36,7 +36,9 @@ import "sakulime-ui/sakulime.min.css";
 ```
 
 :::tip
-`import` 填的是套件公布的子路徑 `sakulime-ui/sakulime.min.css`；`<link>` 填的是含 `dist/` 的 CDN 網址。兩者不可互換。
+`import` 填的是套件公布的子路徑 `sakulime-ui/sakulime.min.css`。
+
+`<link>` 填的是含 `dist/` 的 CDN 網址。兩者不可互換。
 :::
 
 ## 第一個頁面
@@ -81,7 +83,9 @@ import "sakulime-ui/sakulime.min.css";
 `sl-*` 的規則皆位於 `@layer` 內，順序為 `theme`、`base`、`attrs`。
 
 :::tip
-未納入任何 `@layer` 的樣式優先於所有分層樣式。以全域 reset `* { margin: 0 }` 為例，覆蓋範圍涵蓋基底設定與 `attrs` 層的元件規則。
+未納入任何 `@layer` 的樣式優先於所有分層樣式。
+
+以全域 reset `* { margin: 0 }` 為例，覆蓋範圍涵蓋基底設定與 `attrs` 層的元件規則。
 :::
 
 若要補充框架未處理的部分，須自行建立一層，宣告在 `theme` 之前：
