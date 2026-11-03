@@ -67,7 +67,7 @@ export const Variants: Demo = {
 
 export const Disabled: Demo = {
   render: () =>
-    `<button ${marker()}>一般</button>
-<button ${marker()} disabled>disabled</button>
-<button ${marker()} aria-disabled="true">aria-disabled</button>`,
+    `<button ${marker("-")}>一般</button>
+<button ${marker("-")} disabled>disabled</button>
+<button ${marker("-")} aria-disabled="true">aria-disabled</button>`,
 };
