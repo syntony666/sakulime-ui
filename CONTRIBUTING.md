@@ -11,7 +11,7 @@
 
 ## Setup
 
-Node.js 22+.
+Node.js 24+ (CI runs 24).
 
 ```bash
 npm install
@@ -23,28 +23,42 @@ npm run dev          # VitePress doc site on :5173
 ```bash
 npm run lint         # eslint
 npm run build        # tsc typecheck + core bundle + per-package dist
+npm test             # headless-chromium fixture assertions — needs dist/, run after build
 npm run site         # also verify the static site when touching doc/
 ```
+
+`npm test` needs a chromium binary — `tests/run.mjs` defaults to `~/.local/bin/chromium`; set `SL_CHROMIUM` to override.
 
 ## Conventions
 
 - `sl-*` attributes carry components, state, and layout; consumer `class` is left alone
 - `--sl-*` variables control color and size; use the shared scales, no arbitrary-value APIs outside the steps
 - CSS layer order: `theme < base < attrs`
-- User-facing strings and `doc/` content (`.md` pages, story text) are Taiwan Traditional Chinese; repo meta-docs (README, CONTRIBUTING, AGENTS) stay in English
+- User-facing strings and `doc/` content (`.md` pages, demo text) are Taiwan Traditional Chinese; repo meta-docs (README, CONTRIBUTING, AGENTS) stay in English
 - Code comments in English only, and only where they add information
 - Commit messages in English, under 50 words, conventional prefixes (`feat:`, `fix:`, `docs:`, `chore:`, `refactor:`)
-- Doc pages: `.md` for prose, `.demo.ts` for demos; demos render through the theme's `<Demo>` and `<Playground>` components. Page structure — fixed section order, heading format, playground placement — is defined in [`doc/page-template.md`](doc/page-template.md); follow it for every component page
-- New themes: drop a `.css` in `packages/theme` (three seeds + `color-scheme`; see `_internal/derived.css`), then import it once in `packages/core/src/index.ts` to bundle it into core, and add a `./<name>.css` line to `packages/theme/package.json` exports so the path is importable
-- Doc pages need frontmatter `title` and `description` — canonical, OG and JSON-LD metadata is generated from them
+- New themes: drop a `.css` in `packages/theme` (three seeds + `color-scheme`; see `_internal/derived.css`), then import it once in `packages/core/src/index.ts` to bundle it into core, and add a `./<name>.css` line to `packages/theme/package.json` exports so the path is importable — plus a matching per-theme alias in both `packages/core/vite.config.ts` and `doc/.vitepress/config.mts`, which hardcode one alias entry per theme and fail to resolve without it
+
+## Design rules
+
+- Flat by default: surfaces carry no permanent shadow — depth appears via `sl-interactive` hover or floating layers only
+- Readable accent: decorative tones (`primary`, `secondary`, `warning`) are never text colors — text uses `--sl-text-accent` or `--sl-tone-text` mixes
+- `sl-*` attribute names cap at two dashes (`sl-<comp>-<attr>`); the only exception is the responsive suffix `sl-<comp>-<attr>-<viewport>` (e.g. `sl-grid-cols-lg`). `--sl-*` vars are exempt
+- Breakpoints 45/60/75rem are hardcoded twins of `--sl-container-*` — media queries can't read vars, so keep them in sync manually
 
 ## Component CSS rules
 
-- Generic attributes (`sl-tone`, `sl-size`, `sl-radius`, `sl-pad`, `sl-interactive`) live in `css/generic.css`. Each expands through its own `@custom-selector` consumer list and only ever sets `--sl-*` slot variables, never physical properties
+- Generic attributes expand through `@custom-selector` consumer lists and only ever set `--sl-*` slot variables, never physical properties. Core-side ones (`sl-tone`, `sl-size`, `sl-radius`, `sl-pad`, `sl-interactive`) live in `css/generic.css`; layout-side ones (`sl-gap`, `sl-justify`, `sl-align`) live in `packages/layout/src/`. `sl-pad` has a second consumer list in `layout/pad.css` (`sl-container`, `sl-bar`) kept identical to generic.css's — update both when changing the scale
 - A component that reads a slot must self-default it inside its own `@layer base` rule. That default is what seals a generic attribute set on an ancestor from leaking in
-- Component parts (`sl-card-corner`, `sl-card-section`) never self-default — they inherit their component's slots, so a part follows the card's `sl-tone`. Adding a part to a consumer list still lets the attribute work when written on the part itself
+- Component parts (`sl-card--corner`, `sl-card--section`) never self-default — a part that reads a slot inherits it from its component (a section follows the card's `--sl-pad`). Adding a part to a consumer list still lets the attribute work when written on the part itself
 - Component-specific attributes are namespaced `sl-<comp>-<attr>`; the marker value carries the variant (`sl-card="hollow"`), a bare marker means the default variant
 - `@custom-selector` expands via `postcss-custom-selectors`; both Vite pipelines (core build and doc site) already run it — never hand-write the `:is()` expansion
+
+## Doc site
+
+- Pages are `.md` under `doc/pages/`; demos are `.demo.ts` under `doc/demos/`, rendered through the theme's `<Demo>` and `<Playground>` components
+- Page structure, tone, and zh-TW writing rules live in [`doc/templates/`](doc/templates/index.md) — read `index.md` plus the skeleton for the page type before editing docs
+- Frontmatter `title` and `description` are required — canonical, OG and JSON-LD metadata is generated from them
 
 ## Workflow
 

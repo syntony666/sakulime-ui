@@ -1,0 +1,22 @@
+@layer base {
+  /* stack — vertical run; the parent owns the spacing so children
+     lose their block margins */
+  [sl-stack] {
+    display: flex;
+    flex-direction: column;
+    /* self-defaults seal ancestor axis writes */
+    --sl-align: stretch;
+    align-items: var(--sl-align);
+    --sl-justify: start;
+    justify-content: var(--sl-justify);
+    gap: var(--sl-stack-gap, var(--sl-gap, var(--sl-md)));
+  }
+
+  [sl-stack] > * {
+    margin-block: 0;
+  }
+
+  [sl-stack] > [sl-align] {
+    align-self: var(--sl-align);
+  }
+}

@@ -1,0 +1,70 @@
+@layer base {
+  /* float — the fixed corner region that holds notices; the value
+     moves the corner */
+  [sl-float] {
+    box-sizing: border-box;
+    position: fixed;
+    z-index: var(--sl-float-z, var(--sl-z-float));
+    display: flex;
+    flex-direction: column;
+    gap: var(--sl-float-gap, var(--sl-gap, var(--sl-md)));
+    --sl-align: stretch;
+    align-items: var(--sl-align);
+    --_tb: var(--sl-float-block, var(--sl-lg));
+    --_te: var(--sl-float-inline, var(--sl-lg));
+    --_tw: var(--sl-float-width, 22rem);
+    /* clamp follows the configured offset so a wider offset can't
+       push the region off the far edge */
+    inline-size: min(var(--_tw), calc(100vw - 2 * var(--_te)));
+    inline-size: min(var(--_tw), calc(100dvw - 2 * var(--_te)));
+    max-block-size: calc(100vh - 2 * var(--_tb));
+    max-block-size: calc(100dvh - 2 * var(--_tb));
+    overflow-block: auto;
+    /* the padding buys room for the notice's outer ring so edge
+       toasts' frames aren't sliced — reads the notice's hook */
+    padding: var(--sl-notice-ring-w, 2px);
+    inset-block-end: calc(var(--_tb) + env(safe-area-inset-bottom, 0px));
+    inset-inline-end: calc(var(--_te) + env(safe-area-inset-right, 0px));
+  }
+
+  /* env() insets are physical but the anchors are logical — in RTL
+     inline-end is the left edge so the insets must swap */
+  [sl-float]:not([sl-float~="start"], [sl-float~="center"]):dir(rtl) {
+    inset-inline-end: calc(var(--_te) + env(safe-area-inset-left, 0px));
+  }
+
+  [sl-float] > [sl-align] {
+    align-self: var(--sl-align);
+  }
+
+  /* the value is <edge> <side> tokens — unmatched words read the
+     base rule so anything outside the vocabulary lands bottom-end */
+  [sl-float~="top"] {
+    inset-block-end: auto;
+    inset-block-start: calc(var(--_tb) + env(safe-area-inset-top, 0px));
+  }
+
+  [sl-float~="start"] {
+    inset-inline-end: auto;
+    inset-inline-start: calc(var(--_te) + env(safe-area-inset-left, 0px));
+  }
+
+  [sl-float~="start"]:dir(rtl) {
+    inset-inline-start: calc(var(--_te) + env(safe-area-inset-right, 0px));
+  }
+
+  [sl-float~="center"] {
+    inset-inline: 0;
+    margin-inline: auto;
+  }
+
+  /* in print a fixed corner would repeat on every page and cover the
+     sheet — going static releases the height clamp and scroll too */
+  @media print {
+    [sl-float] {
+      position: static;
+      max-block-size: none;
+      overflow-block: visible;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+/* per-primitive gap slots are element-scoped — an outer write must
+   not leak into a nested primitive. syntax:"*" with no initial-value
+   leaves unset slots guaranteed-invalid so var() fallbacks fire */
+@property --sl-stack-gap   { syntax: "*"; inherits: false; }
+@property --sl-content-gap { syntax: "*"; inherits: false; }
+@property --sl-wrap-gap    { syntax: "*"; inherits: false; }
+@property --sl-grid-gap    { syntax: "*"; inherits: false; }
+@property --sl-sidebar-gap { syntax: "*"; inherits: false; }
+@property --sl-float-gap   { syntax: "*"; inherits: false; }
+@property --sl-bar-gap     { syntax: "*"; inherits: false; }
+
+@layer attrs {
+  /* sl-gap sets the inherited --sl-gap; the nearest write wins */
+  [sl-gap="none"] { --sl-gap: 0; }
+  [sl-gap="xs"]  { --sl-gap: var(--sl-xs); }
+  [sl-gap="sm"]  { --sl-gap: var(--sl-sm); }
+  [sl-gap="md"]  { --sl-gap: var(--sl-md); }
+  [sl-gap="lg"]  { --sl-gap: var(--sl-lg); }
+  [sl-gap="xl"]  { --sl-gap: var(--sl-xl); }
+  [sl-gap="2xl"] { --sl-gap: var(--sl-2xl); }
+  [sl-gap="3xl"] { --sl-gap: var(--sl-3xl); }
+  [sl-gap="4xl"] { --sl-gap: var(--sl-4xl); }
+  [sl-gap="5xl"] { --sl-gap: var(--sl-5xl); }
+}

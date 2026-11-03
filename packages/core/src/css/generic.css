@@ -1,17 +1,38 @@
-/* generic attributes — the cross-component attribute vocabulary. Each
-   one expands through its own consumer list: the attribute only
-   produces --sl-* slots on elements in that list. Consumers
-   self-default the slots they read in their own base rules, so an
-   attribute on an ancestor can never leak in. */
-@custom-selector :--sl-generic-tone [sl-button], [sl-card], [sl-card-corner], [sl-icon];
-@custom-selector :--sl-generic-size [sl-button];
-@custom-selector :--sl-generic-radius [sl-button], [sl-card];
-@custom-selector :--sl-generic-pad [sl-card];
-@custom-selector :--sl-generic-interactive [sl-card];
+/* generic attributes — each expands through a consumer list into
+   --sl-* slots. Consumers self-default the slots they read so an
+   ancestor's attribute can't leak in */
+@custom-selector :--sl-generic-tone [sl-button], [sl-card], [sl-icon], [sl-dot], [sl-chip], [sl-notice];
+@custom-selector :--sl-generic-size [sl-button], [sl-chip];
+@custom-selector :--sl-generic-radius [sl-button], [sl-card], [sl-notice];
+@custom-selector :--sl-generic-pad [sl-card], [sl-notice];
+@custom-selector :--sl-generic-interactive [sl-card], [sl-button], [sl-chip], [sl-notice];
+
+/* element-scoped slots: syntax:"*" with no initial-value leaves unset
+   slots guaranteed-invalid so var() fallbacks still fire. Theme hooks
+   (e.g. --sl-bar-h) do the opposite — :root defaults that inherit;
+   @property can't carry font-relative initial-values anyway */
+@property --sl-size-fs { syntax: "*"; inherits: false; }
+@property --sl-size-h  { syntax: "*"; inherits: false; }
+@property --sl-size-px { syntax: "*"; inherits: false; }
+
+@layer base {
+  /* shared seal + the hover playback timeline for all interactive consumers */
+  :--sl-generic-interactive {
+    --sl-interactive-transform: none;
+    --sl-interactive-shadow: none;
+    --sl-interactive-filter: none;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      filter 0.2s ease,
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease;
+  }
+}
 
 @layer attrs {
-  /* tone — --sl-tone-{bg,text,text-invert}; text is the tone's readable ink */
-  /* primary is too light for ink — darken it into a readable tone */
+  /* tone */
   :--sl-generic-tone[sl-tone="primary"] {
     --sl-tone-bg: var(--sl-primary);
     --sl-tone-text: color-mix(in srgb, var(--sl-primary) 12%, var(--sl-text));
@@ -20,7 +41,6 @@
 
   :--sl-generic-tone[sl-tone="secondary"] {
     --sl-tone-bg: var(--sl-secondary);
-    /* pale tone — mix toward text for a readable ink */
     --sl-tone-text: color-mix(in srgb, var(--sl-secondary) 12%, var(--sl-text));
     --sl-tone-text-invert: var(--sl-secondary-fg);
   }
@@ -31,12 +51,11 @@
     --sl-tone-text-invert: var(--sl-text-invert);
   }
 
+  /* gold pairs with strong ink in light, inverted ink in dark */
   :--sl-generic-tone[sl-tone="warning"] {
     --sl-tone-bg: var(--sl-warn);
     --sl-tone-text: color-mix(in srgb, var(--sl-warn) 30%, var(--sl-text-strong));
-    /* warn sits opposite the strong ink in every theme — light gold
-       in light themes, deep amber in dark */
-    --sl-tone-text-invert: var(--sl-text-strong);
+    --sl-tone-text-invert: light-dark(var(--sl-text-strong), var(--sl-text-invert));
   }
 
   :--sl-generic-tone[sl-tone="danger"] {
@@ -45,7 +64,7 @@
     --sl-tone-text-invert: var(--sl-text-invert);
   }
 
-  /* size — --sl-size-{fs,h,px} slots */
+  /* size */
   :--sl-generic-size[sl-size="md"] {
     --sl-size-fs: var(--sl-lg);
     --sl-size-h: var(--sl-3xl);
@@ -64,7 +83,7 @@
     --sl-size-px: var(--sl-lg);
   }
 
-  /* radius — --sl-radius slot */
+  /* radius */
   :--sl-generic-radius[sl-radius="sm"] {
     --sl-radius: var(--sl-xs);
   }
@@ -77,15 +96,21 @@
     --sl-radius: var(--sl-md);
   }
 
+  /* components that cap "full" define their own --sl-radius-full
+     (card, notice); everyone else gets the plain pill */
   :--sl-generic-radius[sl-radius="full"] {
-    --sl-radius: 999px;
+    --sl-radius: var(--sl-radius-full, var(--sl-radius-pill));
   }
 
   :--sl-generic-radius[sl-radius="none"] {
     --sl-radius: 0;
   }
 
-  /* pad — --sl-pad slot */
+  /* pad */
+  :--sl-generic-pad[sl-pad="none"] {
+    --sl-pad: 0;
+  }
+
   :--sl-generic-pad[sl-pad="sm"] {
     --sl-pad: var(--sl-md);
   }
@@ -98,23 +123,41 @@
     --sl-pad: var(--sl-2xl);
   }
 
-  /* interactive — --sl-i-{transform,shadow} slots; consumers read them
-     on :hover. Bare sl-interactive ("") means grow */
-  :--sl-generic-interactive[sl-interactive=""],
-  :--sl-generic-interactive[sl-interactive="grow"] {
-    --sl-i-transform: scale(1.05);
+  /* interactive — grow is the default; bare or out-of-vocabulary
+     values land here, named values override by source order */
+  :--sl-generic-interactive[sl-interactive] {
+    --sl-interactive-transform: scale(1.03);
   }
 
   :--sl-generic-interactive[sl-interactive="lift"] {
-    --sl-i-transform: translateY(-4px);
-    --sl-i-shadow: 0 6px 16px color-mix(in srgb, var(--sl-text) 18%, transparent);
+    --sl-interactive-transform: translateY(-4px);
+    --sl-interactive-shadow: 0 8px 20px color-mix(in srgb, var(--sl-text) 24%, transparent);
   }
 
-  :--sl-generic-interactive[sl-interactive="raise"] {
-    --sl-i-shadow: 0 2px 8px color-mix(in srgb, var(--sl-text) 12%, transparent);
+  :--sl-generic-interactive[sl-interactive="shadow"] {
+    --sl-interactive-transform: none;
+    --sl-interactive-shadow: 0 3px 10px color-mix(in srgb, var(--sl-text) 20%, transparent);
   }
 
   :--sl-generic-interactive[sl-interactive="press"] {
-    --sl-i-transform: scale(0.97);
+    --sl-interactive-transform: scale(0.97);
+  }
+
+  :--sl-generic-interactive[sl-interactive="dim"] {
+    --sl-interactive-transform: none;
+    --sl-interactive-filter: brightness(0.92);
+  }
+
+  :--sl-generic-interactive[sl-interactive]:hover:not(:disabled):not([aria-disabled="true"]) {
+    transform: var(--sl-interactive-transform);
+    box-shadow: var(--sl-interactive-shadow);
+    filter: var(--sl-interactive-filter);
+  }
+
+  /* attrs layer so consumer transition shorthands can't outrank it */
+  @media (prefers-reduced-motion: reduce) {
+    :--sl-generic-interactive {
+      transition: none;
+    }
   }
 }

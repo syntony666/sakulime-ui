@@ -1,11 +1,10 @@
-/* generic size scale — spacing, radius, font size share the same steps.
-   layer order for the whole system lives here; files join by name, order free. */
+/* generic scale — spacing, radius and font size share the same steps.
+   layer order for the whole system lives here too */
 
 @layer theme, base, attrs;
 
 @layer theme {
   :root {
-    /* generic scale — any gap, padding, radius or font size */
     --sl-xs: 0.25rem;
     --sl-sm: 0.5rem;
     --sl-md: 0.75rem;
@@ -16,9 +15,24 @@
     --sl-4xl: 2.5rem;
     --sl-5xl: 3rem;
 
-    /* container max width */
+    --sl-radius-pill: 9999px;
+
+    /* media queries can't read vars — the grid/responsive copies are
+       hardcoded twins; keep them in sync */
     --sl-container-sm: 45rem;
     --sl-container-md: 60rem;
     --sl-container-lg: 75rem;
+
+    --sl-z-bar: 50;
+    --sl-z-float: 60;
+
+    --sl-disabled-opacity: 0.5;
+
+    /* unthemed fallbacks — theme files override these in the same
+       layer; they only fire when no theme is loaded */
+    --sl-bg: #ffffff;
+    --sl-text: #111827;
+    --sl-border: #e5e7eb;
+    --sl-text-accent: #d43d5e;
   }
 }

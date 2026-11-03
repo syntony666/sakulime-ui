@@ -1,51 +1,54 @@
-/* icon — marker sizing: an svg carrying sl-icon (or a wrapper element
-   whose sl-icon value the resolver filled) renders at 1em, inherits
-   ink (or --sl-tone-bg when a generic tone is set), and sits on the
-   text baseline */
+/* icon — svg (or resolver-filled wrapper) renders at 1em on the text
+   baseline */
 @layer base {
   [sl-icon] {
-    /* self-default seals ancestor tone slots — inside a filled button
-       --sl-tone-bg IS the button's surface and would turn the icon
-       invisible; sl-tone written on the icon itself still recolors it */
+    /* seal — inside a filled button the inherited --sl-tone-bg IS the
+       button's surface and would turn the icon invisible */
     --sl-tone-bg: currentColor;
     display: inline-flex;
-    width: 1em;
-    height: 1em;
+    inline-size: 1em;
+    block-size: 1em;
     color: var(--sl-tone-bg);
     vertical-align: -0.125em;
   }
 
   [sl-icon] svg {
-    width: 100%;
-    height: 100%;
+    inline-size: 100%;
+    block-size: 100%;
   }
 }
 
-/* modifiers — namespaced attrs alongside the marker, e.g.
-   `<i sl-icon="lucide:zap" sl-icon-spin>`; they also work on a pasted
-   svg (`<svg sl-icon sl-icon-spin>`) */
+@layer theme {
+  /* size-step defaults — em so the icon scales with surrounding text;
+     the shared rem scale would break that contract */
+  :root {
+    --sl-icon-size-sm: 0.75em;
+    --sl-icon-size-lg: 1.5em;
+    --sl-icon-size-xl: 2.5em;
+    --sl-icon-size-2xl: 4em;
+  }
+}
+
 @layer attrs {
-  /* sizes — the glyph stays 1em of the element, so scaling its
-     font-size scales the icon relative to context */
   [sl-icon][sl-icon-size="sm"] {
-    font-size: 0.75em;
+    font-size: var(--sl-icon-size-sm);
   }
   [sl-icon][sl-icon-size="lg"] {
-    font-size: 1.5em;
+    font-size: var(--sl-icon-size-lg);
   }
   [sl-icon][sl-icon-size="xl"] {
-    font-size: 2.5em;
+    font-size: var(--sl-icon-size-xl);
   }
   [sl-icon][sl-icon-size="2xl"] {
-    font-size: 4em;
+    font-size: var(--sl-icon-size-2xl);
   }
 
-  /* orientation — flip/rotate use the independent transform properties
-     while spin animates `transform`, so all three stack on one icon */
-  [sl-icon][sl-icon-flip="h"] {
+  /* flip/rotate use the independent properties so all three stack
+     with spin's transform */
+  [sl-icon][sl-icon-flip="horizontal"] {
     scale: -1 1;
   }
-  [sl-icon][sl-icon-flip="v"] {
+  [sl-icon][sl-icon-flip="vertical"] {
     scale: 1 -1;
   }
   [sl-icon][sl-icon-rotate="90"] {
@@ -72,24 +75,23 @@
     }
   }
 
-  /* frames — a bordered box around the glyph, following its ink.
-     content-box keeps the glyph area at 1em — under a border-box reset
-     padding+border would otherwise eat the whole frame */
+  /* content-box keeps the glyph area at 1em — under a border-box
+     reset padding+border would eat the frame */
   [sl-icon][sl-icon-frame] {
     box-sizing: content-box;
     padding: 0.35em;
     border: 2px solid currentColor;
   }
   [sl-icon][sl-icon-frame="circular"] {
-    border-radius: 999px;
+    border-radius: var(--sl-radius-pill);
   }
   [sl-icon][sl-icon-frame="rounded"] {
     border-radius: var(--sl-sm);
   }
 
-  /* states + spacing — bare sl-icon-space means both sides */
-  [sl-icon][sl-icon-disabled] {
-    opacity: 0.4;
+  [sl-icon][sl-icon-disabled],
+  [sl-icon][aria-disabled="true"] {
+    opacity: var(--sl-disabled-opacity);
   }
   [sl-icon][sl-icon-space] {
     margin-inline: 0.3em;

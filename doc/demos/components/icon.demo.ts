@@ -1,6 +1,5 @@
 import type { Meta, DemoObj } from "../util/types";
-import { showMarkup } from "../util/docs-source";
-import { axis, axisArg, attr, boolArg, label } from "../util/axis";
+import { axis, axisArg, attr, boolArg, label, TONES } from "../util/axis";
 import "../util/icons";
 
 type IconArgs = {
@@ -15,21 +14,9 @@ type IconArgs = {
   space: string;
 };
 
-const TONES = ["-", "primary", "secondary", "success", "warning", "danger"];
 const NAMES = ["star", "zap", "heart", "rocket", "check", "arrow-right", "trash", "plus"];
 
 const meta = {
-  title: "Core/Icon 圖示",
-  tags: ["!dev"],
-  parameters: {
-    docs: {
-      toc: { disable: false },
-      source: {
-        type: "dynamic",
-        transform: showMarkup,
-      },
-    },
-  },
   args: {
     name: "star",
     tone: "-",
@@ -42,15 +29,15 @@ const meta = {
     space: "-",
   },
   argTypes: {
-    name: axisArg("sl-icon", "圖示名稱", "star", NAMES),
-    tone: axisArg("sl-tone", "顏色", "-", TONES),
-    size: axisArg("sl-icon-size", "尺寸", "-", ["-", "sm", "lg", "xl", "2xl"]),
-    flip: axisArg("sl-icon-flip", "翻轉", "-", ["-", "h", "v"]),
-    rotate: axisArg("sl-icon-rotate", "旋轉", "-", ["-", "90", "180", "270"]),
+    name: axisArg("sl-icon", "圖示名稱", NAMES),
+    tone: axisArg("sl-tone", "顏色", TONES),
+    size: axisArg("sl-icon-size", "尺寸", ["-", "sm", "lg", "xl", "2xl"]),
+    flip: axisArg("sl-icon-flip", "翻轉", ["-", "horizontal", "vertical"]),
+    rotate: axisArg("sl-icon-rotate", "旋轉", ["-", "90", "180", "270"]),
     spin: boolArg("sl-icon-spin", "旋轉動畫"),
-    frame: axisArg("sl-icon-frame", "外框", "-", ["-", "circular", "rounded"]),
+    frame: axisArg("sl-icon-frame", "外框", ["-", "circular", "rounded"]),
     disabled: boolArg("sl-icon-disabled", "淡化"),
-    space: axisArg("sl-icon-space", "間距", "-", ["-", "start", "end", "both"]),
+    space: axisArg("sl-icon-space", "間距（both 僅供示範，不寫屬性時兩側都加）", ["-", "start", "end", "both"]),
   },
 } satisfies Meta<IconArgs>;
 
@@ -71,12 +58,6 @@ export const Icon: Demo = {
     `></i>`,
 };
 
-export const Tones: Demo = {
-  render: () =>
-    axis(TONES, (v) => `<i sl-icon="lucide:star"${attr("sl-tone", v)}></i>`),
-};
-
-// 1em — the icon tracks the font-size of whatever it sits inside
 const SIZES = [14, 16, 20, 28];
 export const Sizes: Demo = {
   render: () =>
@@ -85,7 +66,13 @@ export const Sizes: Demo = {
     ),
 };
 
-// mid-sentence — the icon rides the text baseline
+export const Svg: Demo = {
+  render: () =>
+    `<p>圖示包複製的 SVG ` +
+    `<svg sl-icon viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>` +
+    ` 貼進來就生效</p>`,
+};
+
 export const Inline: Demo = {
   render: () =>
     `<p>他很壞 <i sl-icon="lucide:megaphone" sl-tone="danger"></i>` +
@@ -93,17 +80,15 @@ export const Inline: Demo = {
     ` 嘟<i sl-icon="lucide:arrow-up-right"></i> 嘟<i sl-icon="lucide:arrow-right"></i> 嘟<i sl-icon="lucide:arrow-down-right"></i></p>`,
 };
 
-// icons inside real components inherit their ink
 export const InContext: Demo = {
   render: () =>
     axis(["plus", "trash"], (v) =>
-      `<button sl-button${v === "trash" ? '="invert" sl-tone="danger"' : ""}>` +
+      `<button sl-button${v === "trash" ? '="outline" sl-tone="danger"' : ""}>` +
       `<i sl-icon="lucide:${v}"></i> ${v === "trash" ? "刪除" : "新增"}` +
       `</button>`,
     ),
 };
 
-// modifiers — namespaced attrs alongside the marker; "-" is bare
 export const ModSizes: Demo = {
   render: () =>
     axis(["-", "sm", "lg", "xl", "2xl"], (v) =>
@@ -111,11 +96,10 @@ export const ModSizes: Demo = {
     ),
 };
 
-// trending-up reads clearly under flips and rotations
 export const Transforms: Demo = {
   render: () =>
     axis(
-      ["-", "flip-h", "flip-v", "rotate-90", "rotate-180", "rotate-270"],
+      ["-", "flip-horizontal", "flip-vertical", "rotate-90", "rotate-180", "rotate-270"],
       (v) => {
         const [kind, val] = v.split("-");
         const a =
@@ -147,23 +131,18 @@ export const Disabled: Demo = {
     ),
 };
 
-// lyric line — each icon sits where its margin side reads naturally:
-// mid-phrase takes both sides, a line-end icon only needs start, and
-// a word-leading icon only needs end
 export const Spaced: Demo = {
   render: () =>
-    `<p>喔愛<i sl-icon="lucide:heart" sl-icon-space="end"></i>` +
-    `蝦咪喜愛<i sl-icon="lucide:circle-question-mark"></i><br>` +
-    `你跨挖ㄟ<i sl-icon="lucide:eye"></i>眼神，` +
+    `<p>喔愛<i sl-icon="lucide:heart" sl-icon-space></i>` +
+    `蝦咪喜愛<i sl-icon="lucide:circle-question-mark" sl-icon-space></i><br>` +
+    `你跨挖ㄟ<i sl-icon="lucide:eye" sl-icon-space="end"></i>眼神，` +
     `那欸價逆<i sl-icon="lucide:heart" sl-icon-space="start"></i>可愛</p>`,
 };
 
-// card + corner + icon — the corner's tone colors the badge icon,
-// and a plain icon in the title just rides the heading ink
 export const InCard: Demo = {
   render: () =>
     `<div sl-card style="width: 300px">` +
-    `<span sl-card-corner="end indicator" sl-tone="success"><i sl-icon="lucide:star"></i></span>` +
+    `<i sl-card--corner sl-icon="lucide:star" sl-tone="success"></i>` +
     `<strong><i sl-icon="lucide:rocket" sl-icon-space="end"></i> 學了一些俄語，我想對大家說</strong>` +
     `<p>noʎ ʇɹnɥ puɐ ǝı̣ן ɐ ןןǝʇ ɐuuoƃ ɹǝʌǝN
 ǝʎqpooƃ ʎɐs ɐuuoƃ ɹǝʌǝN

@@ -1,0 +1,93 @@
+@layer theme {
+  /* write these to override */
+  :root {
+    --sl-bar-h: 3.5rem;
+    --sl-bar-pad-inline: var(--sl-lg);
+  }
+}
+
+@layer base {
+  /* bar — full-width band with three fixed zones: start / dead-center
+     / end. Children claim a zone with the sl-bar--* parts, unmarked
+     children auto-fill in source order. The middle column is auto so
+     center content stays dead-center whatever the sides hold */
+  [sl-bar] {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: var(--sl-bar-gap, var(--sl-gap, var(--sl-md)));
+    min-block-size: var(--sl-bar-h);
+    --sl-pad: var(--sl-md);
+    --_bp: var(--sl-bar-pad-block, var(--sl-pad));
+    padding-block: var(--_bp);
+    /* physical sides, not inline — env() values are physical too, so
+       landscape notches clear the zones in either direction */
+    padding-left: calc(
+      var(--sl-bar-pad-inline) + env(safe-area-inset-left, 0px)
+    );
+    padding-right: calc(
+      var(--sl-bar-pad-inline) + env(safe-area-inset-right, 0px)
+    );
+    background: var(--sl-bg);
+  }
+
+  /* zones squash below content width — unbreakable content can't
+     push its track over the centered column */
+  [sl-bar] > * {
+    min-inline-size: 0;
+  }
+
+  /* siblings landing in the same zone spill into a new row — wrap
+     them in one child (sl-wrap) instead */
+  [sl-bar] > [sl-bar--start]  { grid-column: 1; justify-self: start; }
+  [sl-bar] > [sl-bar--center] { grid-column: 2; justify-self: center; }
+  [sl-bar] > [sl-bar--end]    { grid-column: 3; justify-self: end; }
+
+  [sl-bar="top"],
+  [sl-bar="bottom"] {
+    position: sticky;
+    z-index: var(--sl-bar-z, var(--sl-z-bar));
+  }
+
+  [sl-bar="top"] {
+    inset-block-start: 0;
+    border-block-end: 1px solid var(--sl-border);
+    padding-block-start: calc(var(--_bp) + env(safe-area-inset-top, 0px));
+  }
+
+  [sl-bar="bottom"] {
+    inset-block-end: 0;
+    border-block-start: 1px solid var(--sl-border);
+    padding-block-end: calc(var(--_bp) + env(safe-area-inset-bottom, 0px));
+  }
+
+  [sl-bar="top"][sl-bar-fixed],
+  [sl-bar="bottom"][sl-bar-fixed] {
+    position: fixed;
+    inset-inline: 0;
+  }
+
+  /* a fixed bar leaves the flow — body pads itself for the bar's
+     height on the matching edge. Screen only: in print the bar goes
+     static and leftover padding would read as a blank band */
+  @media screen {
+    body:has([sl-bar="top"][sl-bar-fixed]) {
+      padding-block-start: calc(
+        var(--sl-bar-h) + env(safe-area-inset-top, 0px)
+      );
+    }
+
+    body:has([sl-bar="bottom"][sl-bar-fixed]) {
+      padding-block-end: calc(
+        var(--sl-bar-h) + env(safe-area-inset-bottom, 0px)
+      );
+    }
+  }
+
+  @media print {
+    [sl-bar][sl-bar-fixed] {
+      position: static;
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import type { Meta, DemoObj } from "../util/types";
-import { showMarkup } from "../util/docs-source";
-import { axis, axisArg, attr, label } from "../util/axis";
+import { axis, axisArg, attr, boolArg, label, TONES, mark } from "../util/axis";
+
+const marker = mark("sl-button");
 
 type ButtonArgs = {
   label: string;
@@ -8,50 +9,34 @@ type ButtonArgs = {
   variant: string;
   size: string;
   radius: string;
+  interactive: string;
   disabled: boolean;
 };
 
-const TONES = ["-", "primary", "secondary", "success", "warning", "danger"];
-const VARIANTS = ["-", "normal", "invert", "underline", "ghost"];
+const VARIANTS = ["-", "normal", "outline", "underline", "ghost"];
 const SIZES = ["-", "sm", "md", "lg"];
 const RADII = ["-", "none", "sm", "md", "lg", "full"];
+const INTERACTIVES = ["-", "grow", "lift", "shadow", "press", "dim"];
 
 const meta = {
-  title: "Core/Button 按鈕",
-  // demos feed the md page; hide them from the sidebar
-  tags: ["!dev"],
-  parameters: {
-    docs: {
-      // opt back into the TOC (disabled globally for prose pages)
-      toc: { disable: false },
-      source: {
-        // evaluated markup, not the .map() render source
-        type: "dynamic",
-        transform: showMarkup,
-      },
-    },
-  },
   args: {
-    label: "Button",
+    label: "按鈕",
     tone: "-",
     variant: "-",
     size: "-",
     radius: "-",
+    interactive: "-",
     disabled: false,
   },
   argTypes: {
-    tone: axisArg("sl-tone", "顏色", "primary", TONES),
-    variant: axisArg("sl-button", "型態", "normal", VARIANTS),
-    size: axisArg("sl-size", "大小", "md", SIZES),
-    radius: axisArg("sl-radius", "圓角", "md", RADII),
-    disabled: {
-      description: "停用（HTML 原生屬性）",
-      table: { type: {}, defaultValue: { summary: "false" } },
-      control: "boolean",
-    },
+    tone: axisArg("sl-tone", "顏色", TONES),
+    variant: axisArg("sl-button", "型態", VARIANTS),
+    size: axisArg("sl-size", "尺寸", SIZES),
+    radius: axisArg("sl-radius", "圓角", RADII),
+    interactive: axisArg("sl-interactive", "互動效果", INTERACTIVES),
+    disabled: boolArg("disabled", "停用（HTML 原生屬性）"),
     label: {
       description: "按鈕文字",
-      table: { type: {}, defaultValue: { summary: '"Button"' } },
     },
   },
 } satisfies Meta<ButtonArgs>;
@@ -59,20 +44,12 @@ const meta = {
 export default meta;
 type Demo = DemoObj<ButtonArgs>;
 
-// the marker itself carries the variant value — bare = normal
-const marker = (v: string) => (v === "-" ? "sl-button" : `sl-button="${v}"`);
-
-// one button per axis value; a fixed variant rides the marker when given
-const btn =
-  (name: string, variant = "") =>
-  (v: string) =>
-    `<button ${variant ? `sl-button="${variant}"` : "sl-button"}${attr(name, v)}>${label(v)}</button>`;
-
 function slAttrs({
   tone,
   variant,
   size,
   radius,
+  interactive,
   disabled,
 }: ButtonArgs): string {
   return (
@@ -80,6 +57,7 @@ function slAttrs({
     attr("sl-tone", tone) +
     attr("sl-size", size) +
     attr("sl-radius", radius) +
+    attr("sl-interactive", interactive) +
     (disabled ? " disabled" : "")
   );
 }
@@ -88,23 +66,14 @@ export const Button: Demo = {
   render: (args) => `<button ${slAttrs(args)}>${args.label}</button>`,
 };
 
-export const Tones: Demo = {
-  render: () => axis(TONES, btn("sl-tone")),
-};
-
-export const TonesInvert: Demo = {
-  render: () => axis(TONES, btn("sl-tone", "invert")),
-};
-
 export const Variants: Demo = {
   render: () =>
     axis(VARIANTS, (v) => `<button ${marker(v)}>${label(v)}</button>`),
 };
 
-export const Sizes: Demo = {
-  render: () => axis(SIZES, btn("sl-size")),
-};
-
-export const Radius: Demo = {
-  render: () => axis(RADII, btn("sl-radius")),
+export const Disabled: Demo = {
+  render: () =>
+    `<button ${marker("-")}>一般</button>
+<button ${marker("-")} disabled>disabled</button>
+<button ${marker("-")} aria-disabled="true">aria-disabled</button>`,
 };

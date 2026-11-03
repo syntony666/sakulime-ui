@@ -1,0 +1,23 @@
+@layer attrs {
+  /* sl-hide / sl-show — the mirror pair; breakpoints are the hardcoded
+     twins of --sl-container-* */
+  @media (width < 75rem) {
+    [sl-hide-lg] { display: none; }
+  }
+  @media (width < 60rem) {
+    [sl-hide-md] { display: none; }
+  }
+  @media (width < 45rem) {
+    [sl-hide-sm] { display: none; }
+  }
+
+  @media (width >= 75rem) {
+    [sl-show-lg] { display: none; }
+  }
+  @media (width >= 60rem) {
+    [sl-show-md] { display: none; }
+  }
+  @media (width >= 45rem) {
+    [sl-show-sm] { display: none; }
+  }
+}

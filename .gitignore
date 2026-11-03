@@ -24,10 +24,6 @@ site
 *.sln
 *.sw?
 
-*storybook.log
-storybook-static
-doc/.storybook/theme.values.ts
-
 # Cloudflare Workers
 .wrangler
 .dev.vars
@@ -35,6 +31,9 @@ doc/.storybook/theme.values.ts
 # Plan files
 plan.md
 *.plan.md
+
+# Visual test output
+tests/shots/
 
 # impeccable-ignore-start
 .impeccable/

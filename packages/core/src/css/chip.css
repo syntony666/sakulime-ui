@@ -1,0 +1,35 @@
+/* chip — small capsule tag; em-based so it scales with the
+   surrounding font-size */
+@layer base {
+  [sl-chip] {
+    /* seal — no tone reads as a neutral text-ink wash */
+    --sl-tone-bg: currentColor;
+    --sl-tone-text: currentColor;
+    --sl-size-fs: 0.875em;
+    /* h/px are unused here — the defaults just keep an ancestor's
+       sl-size slots from leaking through to deeper descendants */
+    --sl-size-h: var(--sl-3xl);
+    --sl-size-px: var(--sl-md);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
+    padding: 0.2em 0.6em;
+    font-size: var(--sl-size-fs);
+    /* same compact-copy measure as notice — kept literal on both
+       until a third consumer argues for a token */
+    line-height: 1.4;
+    color: var(--sl-tone-text);
+    background: color-mix(in srgb, var(--sl-tone-bg) 20%, var(--sl-surface));
+    border-radius: var(--sl-radius-pill);
+    vertical-align: -0.05em;
+  }
+
+  [sl-chip][sl-interactive]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+
+  [sl-chip][aria-disabled="true"] {
+    opacity: var(--sl-disabled-opacity);
+    cursor: not-allowed;
+  }
+}

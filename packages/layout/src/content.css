@@ -1,0 +1,20 @@
+@layer base {
+  /* content — prose column; the container rewrites child margins so
+     the rhythm is the only gap story and edge children can't thicken
+     the ends */
+  [sl-content] {
+    display: block;
+    --_g: var(--sl-content-gap, var(--sl-gap, var(--sl-md)));
+  }
+
+  [sl-content] > * + * {
+    margin-block-start: var(--_g);
+  }
+
+  [sl-content] > :first-child {
+    margin-block-start: 0;
+  }
+  [sl-content] > :last-child {
+    margin-block-end: 0;
+  }
+}

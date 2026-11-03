@@ -1,0 +1,390 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>sl core fixture</title>
+<link rel="stylesheet" href="../../packages/theme/dist/sakulime.min.css">
+<link rel="stylesheet" href="../../packages/core/dist/index.min.css">
+<link rel="stylesheet" href="../../packages/layout/dist/index.min.css">
+<style>body { font-family: system-ui, sans-serif; } #probe { position: absolute; visibility: hidden; }</style>
+</head>
+<body>
+
+<!-- buttons -->
+<button sl-button id="btn-def">def</button>
+<button sl-button="outline" id="btn-out">out</button>
+<button sl-button="ghost" id="btn-gho">gho</button>
+<button sl-button="underline" id="btn-und">und</button>
+<button sl-button sl-size="sm" id="btn-sm">sm</button>
+<button sl-button sl-size="lg" id="btn-lg">lg</button>
+<button sl-button sl-tone="primary" id="btn-tp">p</button>
+<button sl-button sl-tone="secondary" id="btn-ts">s</button>
+<button sl-button sl-tone="success" id="btn-tok">ok</button>
+<button sl-button sl-tone="warning" id="btn-tw">w</button>
+<button sl-button sl-tone="danger" id="btn-td">d</button>
+<button sl-button sl-interactive id="btn-i">i</button>
+<button sl-button sl-interactive="lift" id="btn-i2">i2</button>
+<button sl-button sl-interactive="press" id="btn-i3">i3</button>
+<button sl-button sl-interactive="dim" id="btn-i4">i4</button>
+<button sl-button aria-disabled="true" id="btn-aria">aria</button>
+<button sl-button sl-radius="full" id="btn-rf">rf</button>
+<div sl-card id="btn-rf-host"><button sl-button sl-radius="full" id="btn-rfc">rfc</button></div>
+
+<!-- cards -->
+<div sl-card id="card-def">card</div>
+<div sl-card="flat" id="card-flat">card</div>
+<div sl-card="hollow" id="card-hollow">card</div>
+<div sl-card="blank" id="card-blank">card</div>
+<div sl-card sl-pad="none" id="card-pn">card</div>
+<div sl-card sl-pad="sm" id="card-ps">card</div>
+<div sl-card sl-pad="md" id="card-pm">card</div>
+<div sl-card sl-pad="lg" id="card-pl">card</div>
+<div sl-card sl-radius="sm" id="card-rs">card</div>
+<div sl-card sl-radius="lg" id="card-rl">card</div>
+<div sl-card sl-radius="full" id="card-rf">card</div>
+<div sl-card sl-radius="none" id="card-rn">card</div>
+<div sl-card sl-card-indicator="top" id="card-it">card</div>
+<div sl-card sl-card-indicator="bottom" id="card-ib">card</div>
+<div sl-card sl-card-indicator="start" id="card-is">card</div>
+<div sl-card sl-card-indicator="end" id="card-ie">card</div>
+<div sl-card id="card-sect">
+  <div sl-card--section id="sect-1">a</div>
+  <div sl-card--section id="sect-2">b</div>
+</div>
+<div sl-card id="card-sect2">
+  <div sl-card--section="edge" id="sect-edge"><span>c</span></div>
+</div>
+<div sl-card id="card-sect3">
+  <div sl-card--section="blank" id="sect-blank"><strong>e</strong><p>f</p></div>
+</div>
+<div sl-card id="card-sect4">
+  <div sl-card--section="secondary" id="sect-sec">g</div>
+</div>
+<div sl-card id="card-sect5">
+  <div sl-card--section="center" id="sect-ctr">h</div>
+</div>
+<div sl-card id="card-sect6">
+  <div sl-card--section="active" id="sect-act">i</div>
+</div>
+<a href="#" sl-card id="card-link">link card</a>
+<div sl-card id="card-corner"><span sl-card--corner sl-dot id="corner-dot"></span></div>
+<div sl-card id="card-ce"><i sl-card--corner="end" sl-dot id="corner-end"></i><i sl-card--corner="start" sl-dot id="corner-start"></i></div>
+<div sl-card sl-interactive id="card-int">ci</div>
+<div sl-card sl-interactive aria-disabled="true" id="card-int-ad">ca</div>
+<i sl-icon="t:box" id="ic-t"></i>
+<div sl-card id="card-2c">
+  <i sl-card--corner="start" sl-dot></i>
+  <i sl-card--corner sl-dot></i>
+  <div sl-card--section id="sect-2c">first</div>
+  <div sl-card--section id="sect-2c2">second</div>
+</div>
+<div sl-card id="card-midc">
+  <div sl-card--section id="sect-mc1">content</div>
+  <i sl-card--corner sl-dot></i>
+  <div sl-card--section id="sect-mc2">after</div>
+</div>
+<div sl-card sl-interactive id="card-i">card</div>
+<span sl-chip sl-interactive="lift" id="chip-i">chip</span>
+<div sl-notice sl-interactive="shadow" id="nt-i">notice</div>
+<div sl-notice sl-interactive="bogus" id="nt-ix">notice</div>
+
+<!-- chips -->
+<span sl-chip id="chip-def">tag</span>
+<span sl-chip sl-tone="danger" id="chip-d">tag</span>
+<span sl-chip sl-tone="success" id="chip-s">tag</span>
+<span sl-chip sl-size="sm" id="chip-sm">tag</span>
+<span sl-chip sl-size="lg" id="chip-lg">tag</span>
+
+<!-- dots -->
+<span sl-dot id="dot-def"></span>
+<span sl-dot sl-tone="success" id="dot-s"></span>
+
+<!-- icons -->
+<i sl-icon id="ic-def"></i>
+<i sl-icon sl-icon-size="sm" id="ic-sm"></i>
+<i sl-icon sl-icon-size="2xl" id="ic-2xl"></i>
+<i sl-icon sl-icon-frame id="ic-fr"></i>
+<i sl-icon sl-icon-frame="circular" id="ic-frc"></i>
+<i sl-icon sl-icon-frame="rounded" id="ic-frr"></i>
+<i sl-icon sl-icon-spin id="ic-spin"></i>
+<i sl-icon sl-icon-flip="horizontal" id="ic-fh"></i>
+<i sl-icon sl-icon-rotate="90" id="ic-r90"></i>
+<i sl-icon sl-icon-disabled id="ic-dis"></i>
+<i sl-icon aria-disabled="true" id="ic-aria"></i>
+<i sl-icon sl-icon-space id="ic-sp"></i>
+<i sl-icon sl-icon-size="lg" id="ic-lg"></i>
+<i sl-icon sl-icon-size="xl" id="ic-xl"></i>
+<i sl-icon sl-icon-flip="vertical" id="ic-fv"></i>
+<i sl-icon sl-icon-rotate="180" id="ic-r180"></i>
+<i sl-icon sl-icon-rotate="270" id="ic-r270"></i>
+<i sl-icon sl-icon-space="start" id="ic-sps"></i>
+<i sl-icon sl-icon-space="end" id="ic-spe"></i>
+<button sl-button sl-radius="md" id="btn-rm">rm</button>
+<button sl-button sl-size="md" id="btn-szm">szm</button>
+<button sl-button id="btn-dis" disabled>dis</button>
+
+<!-- notices -->
+<div sl-notice id="nt-def">hello notice</div>
+<div sl-notice="fit" id="nt-fit">short</div>
+<div sl-notice id="nt-act">copy <button sl-notice--action id="nt-btn">x</button></div>
+<div sl-notice id="nt-acts">copy <button sl-notice--action="start" id="nt-bts">x</button></div>
+<div sl-notice id="nt-nest"><span><button sl-notice--action id="nt-nbtn">x</button></span></div>
+<div sl-notice id="nt-link">copy <a href="#" id="nt-a">link</a></div>
+<div sl-notice sl-notice-align="start" id="nt-as">aligned</div>
+<div sl-notice sl-notice-align="center" id="nt-ac">aligned</div>
+<div sl-notice sl-notice-align="end" id="nt-al">aligned</div>
+<div sl-notice sl-tone="danger" id="nt-d">danger</div>
+<div sl-notice sl-pad="lg" id="nt-pl">pad</div>
+<div sl-notice sl-radius="none" id="nt-rn">square</div>
+<div style="writing-mode: vertical-rl">
+  <div sl-card id="v-card"><i sl-card--corner sl-dot id="v-corner"></i>card</div>
+  <div sl-notice id="v-nt">copy <button sl-notice--action id="v-act">x</button></div>
+</div>
+
+<div id="probe"></div>
+<pre id="results"></pre>
+<script src="helpers.js"></script>
+<script type="module">
+  /* shipped-bundle execution: module scripts finish before
+     DOMContentLoaded, which helpers.js now waits on — the stashed
+     values below are read by main() assertions */
+  import { registerPack, icon, resolveIcons, packNames } from "../../packages/core/dist/index.min.js";
+  await registerPack("t", { icons: { box: { body: "<path d='M0 0h10v10z'/>" } } });
+  resolveIcons(document);
+  window.__slBundle = {
+    svg: icon("t:box"),
+    missing: icon("t:nope"),
+    pack: packNames().includes("t"),
+    filled: !!document.querySelector("#ic-t svg"),
+  };
+</script>
+<script>
+function main() {
+  /* ---- @property plumbing ---- */
+  const props = propRules();
+  rec('--sl-size-fs registered sealed', String(!!props['--sl-size-fs'] && props['--sl-size-fs'].inherits), 'true&&false', !!props['--sl-size-fs'] && props['--sl-size-fs'].inherits === false);
+  rec('--sl-size-h registered sealed', String(!!props['--sl-size-h'] && props['--sl-size-h'].inherits), 'true&&false', !!props['--sl-size-h'] && props['--sl-size-h'].inherits === false);
+  rec('--sl-size-px registered sealed', String(!!props['--sl-size-px'] && props['--sl-size-px'].inherits), 'true&&false', !!props['--sl-size-px'] && props['--sl-size-px'].inherits === false);
+  rec('--sl-bar-h stays a theme hook', String(!!props['--sl-bar-h']), 'unregistered', !props['--sl-bar-h']);
+
+  /* ---- button ---- */
+  eq('btn display', cs('btn-def', 'display'), 'inline-flex');
+  near('btn min-block = --sl-3xl', cs('btn-def', 'min-height'), varPx('--sl-3xl'));
+  near('btn radius = --sl-sm', cs('btn-def', 'border-top-left-radius'), varPx('--sl-sm'));
+  eq('btn border transparent', cs('btn-def', 'border-top-color'), TRANS);
+  eq('btn cursor pointer', cs('btn-def', 'cursor'), 'pointer');
+  rec('btn focus-visible ring exists', 'walk sheets', 'rule+solid outline', (() => {
+    const walk = rs => {
+      for (const r of rs) {
+        if (r.selectorText === '[sl-button]:focus-visible') return r;
+        if (r.cssRules) { const f = walk(r.cssRules); if (f) return f; }
+      }
+      return null;
+    };
+    for (const s of document.styleSheets) { try {
+      const f = walk(s.cssRules);
+      /* var() in the shorthand keeps longhands unexpanded — read the
+         shorthand itself */
+      if (f && f.style.outline.includes('solid')) return true;
+    } catch (e) {} }
+    return false;
+  })());
+  eq('btn outline border = def bg', cs('btn-out', 'border-top-color'), cs('btn-def', 'background-color'));
+  neq('btn outline bg != def', cs('btn-out', 'background-color'), cs('btn-def', 'background-color'));
+  eq('btn ghost bg transparent', cs('btn-gho', 'background-color'), TRANS);
+  neq('btn ghost color != def', cs('btn-gho', 'color'), cs('btn-def', 'color'));
+  eq('btn underline decor', cs('btn-und', 'text-decoration-line'), 'underline');
+  near('btn sm h = --sl-2xl', cs('btn-sm', 'min-height'), varPx('--sl-2xl'));
+  near('btn sm fs = --sl-md', cs('btn-sm', 'font-size'), varPx('--sl-md'));
+  near('btn lg h = --sl-4xl', cs('btn-lg', 'min-height'), varPx('--sl-4xl'));
+  near('btn lg fs = --sl-xl', cs('btn-lg', 'font-size'), varPx('--sl-xl'));
+  eq('btn tone primary = def bg', cs('btn-tp', 'background-color'), cs('btn-def', 'background-color'));
+  neq('btn tone secondary bg', cs('btn-ts', 'background-color'), cs('btn-def', 'background-color'));
+  neq('btn tone success bg', cs('btn-tok', 'background-color'), cs('btn-def', 'background-color'));
+  neq('btn tone warning bg', cs('btn-tw', 'background-color'), cs('btn-def', 'background-color'));
+  neq('btn tone danger bg', cs('btn-td', 'background-color'), cs('btn-def', 'background-color'));
+  neq('btn tones distinct (ok!=warn)', cs('btn-tok', 'background-color'), cs('btn-tw', 'background-color'));
+  neq('btn tones distinct (warn!=danger)', cs('btn-tw', 'background-color'), cs('btn-td', 'background-color'));
+  has('btn interactive grow slot', cs('btn-i', '--sl-interactive-transform'), 'scale(1.03)');
+  has('btn interactive lift slot', cs('btn-i2', '--sl-interactive-transform'), 'translateY(-4px)');
+  match('btn interactive press slot', cs('btn-i3', '--sl-interactive-transform'), /scale\((0)?\.97\)/);
+  has('btn interactive dim slot', cs('btn-i4', '--sl-interactive-filter'), 'brightness');
+  eq('btn aria-disabled opacity', cs('btn-aria', 'opacity'), '0.5');
+  eq('btn :disabled opacity', cs('btn-dis', 'opacity'), '0.5');
+  eq('btn :disabled cursor', cs('btn-dis', 'cursor'), 'not-allowed');
+  near('btn radius md = --sl-sm', cs('btn-rm', 'border-top-left-radius'), varPx('--sl-sm'));
+  near('btn size md fs = --sl-lg', cs('btn-szm', 'font-size'), varPx('--sl-lg'));
+  eq('btn radius full pill', cs('btn-rf', 'border-top-left-radius'), '9999px');
+  eq('btn radius full inside card stays pill', cs('btn-rfc', 'border-top-left-radius'), '9999px');
+
+  /* ---- card ---- */
+  eq('card border-width 1px', cs('card-def', 'border-top-width'), '1px');
+  near('card radius = --sl-sm', cs('card-def', 'border-top-left-radius'), varPx('--sl-sm'));
+  near('card pad = --sl-lg', cs('card-def', 'padding-top'), varPx('--sl-lg'));
+  eq('card flat border 0', cs('card-flat', 'border-top-width'), '0px');
+  eq('card hollow dashed', cs('card-hollow', 'border-top-style'), 'dashed');
+  eq('card hollow bw 2px', cs('card-hollow', 'border-top-width'), '2px');
+  eq('card hollow bg transparent', cs('card-hollow', 'background-color'), TRANS);
+  eq('card blank border 0', cs('card-blank', 'border-top-width'), '0px');
+  eq('card blank bg transparent', cs('card-blank', 'background-color'), TRANS);
+  eq('card pad none = 0', cs('card-pn', 'padding-top'), '0px');
+  near('card pad sm = --sl-md', cs('card-ps', 'padding-top'), varPx('--sl-md'));
+  near('card pad md = --sl-lg', cs('card-pm', 'padding-top'), varPx('--sl-lg'));
+  near('card pad lg = --sl-2xl', cs('card-pl', 'padding-top'), varPx('--sl-2xl'));
+  near('card radius sm = --sl-xs', cs('card-rs', 'border-top-left-radius'), varPx('--sl-xs'));
+  near('card radius lg = --sl-md', cs('card-rl', 'border-top-left-radius'), varPx('--sl-md'));
+  eq('card radius none = 0', cs('card-rn', 'border-top-left-radius'), '0px');
+  rec('card radius full capped > 24px', cs('card-rf', 'border-top-left-radius'), '>24px', px(cs('card-rf', 'border-top-left-radius')) > 24);
+  eq('card indicator top bw', cs('card-it', 'border-top-width'), '3px');
+  neq('card indicator top color', cs('card-it', 'border-top-color'), cs('card-def', 'border-top-color'));
+  eq('card indicator bottom bw', cs('card-ib', 'border-bottom-width'), '3px');
+  eq('card indicator start bw', cs('card-is', 'border-left-width'), '3px');
+  eq('card indicator end bw', cs('card-ie', 'border-right-width'), '3px');
+  near('card section bleed margin', cs('sect-1', 'margin-left'), -varPx('--sl-lg'));
+  eq('card section 2 divider', cs('sect-2', 'border-top-width'), '1px');
+  near('card section 2 gap', cs('sect-2', 'margin-top'), varPx('--sl-lg'));
+  eq('card section edge pad 0', cs('sect-edge', 'padding-left'), '0px');
+  eq('card section blank grid', cs('sect-blank', 'display'), 'grid');
+  neq('card section secondary bg', cs('sect-sec', 'background-color'), cs('card-def', 'background-color'));
+  eq('card section center align', cs('sect-ctr', 'text-align'), 'center');
+  neq('card section active bg', cs('sect-act', 'background-color'), TRANS);
+  eq('card corner absolute', cs('corner-dot', 'position'), 'absolute');
+  eq('link card drops underline', cs('card-link', 'text-decoration-line'), 'none');
+  eq('corner end pinned right', cs('corner-end', 'position'), 'absolute');
+  /* dot corner floats --sl-sm inside the border edge */
+  near('corner end at inline-end', rect('card-ce').right - rect('corner-end').right, varPx('--sl-sm') + 1, 2);
+  /* edge section bleeds block-wise too — first+last edge sections
+     pull their outer margins past the card pad */
+  near('edge section bleed top', cs('sect-edge', 'margin-top'), -varPx('--sl-lg'));
+  near('edge section bleed bottom', cs('sect-edge', 'margin-bottom'), -varPx('--sl-lg'));
+  eq('dual corners: first section no divider', cs('sect-2c', 'border-top-width'), '0px');
+  eq('dual corners: first section no gap', cs('sect-2c', 'margin-top'), '0px');
+  eq('dual corners: second section keeps divider', cs('sect-2c2', 'border-top-width'), '1px');
+  eq('mid-DOM corner: following section keeps divider', cs('sect-mc2', 'border-top-width'), '1px');
+  has('card interactive grow slot', cs('card-i', '--sl-interactive-transform'), 'scale(1.03)');
+  has('chip interactive lift slot', cs('chip-i', '--sl-interactive-transform'), 'translateY(-4px)');
+  has('notice interactive shadow slot', cs('nt-i', '--sl-interactive-shadow'), '0 3px 10px');
+  has('bogus interactive falls back to grow', cs('nt-ix', '--sl-interactive-transform'), 'scale(1.03)');
+
+  /* ---- chip ---- */
+  eq('chip display', cs('chip-def', 'display'), 'inline-flex');
+  eq('chip pill radius', cs('chip-def', 'border-top-left-radius'), '9999px');
+  near('chip font-size 0.875em', cs('chip-def', 'font-size'), 14);
+  neq('chip tone danger color', cs('chip-d', 'color'), cs('chip-def', 'color'));
+  neq('chip tone success color', cs('chip-s', 'color'), cs('chip-def', 'color'));
+  neq('chip tones distinct', cs('chip-s', 'color'), cs('chip-d', 'color'));
+  near('chip size sm fs = --sl-md', cs('chip-sm', 'font-size'), varPx('--sl-md'));
+  near('chip size lg fs = --sl-xl', cs('chip-lg', 'font-size'), varPx('--sl-xl'));
+
+  /* ---- dot ---- */
+  near('dot width 0.5em', cs('dot-def', 'width'), 8);
+  near('dot height 0.5em', cs('dot-def', 'height'), 8);
+  eq('dot pill radius', cs('dot-def', 'border-top-left-radius'), '9999px');
+  neq('dot tone bg differs', cs('dot-s', 'background-color'), cs('dot-def', 'background-color'));
+
+  /* ---- icon ---- */
+  eq('icon display', cs('ic-def', 'display'), 'inline-flex');
+  near('icon 1em box w', cs('ic-def', 'width'), 16);
+  near('icon 1em box h', cs('ic-def', 'height'), 16);
+  near('icon size sm', cs('ic-sm', 'width'), 12);
+  near('icon size 2xl', cs('ic-2xl', 'width'), 64);
+  near('icon frame padding', cs('ic-fr', 'padding-top'), 5.6);
+  eq('icon frame border', cs('ic-fr', 'border-top-width'), '2px');
+  eq('icon frame circular', cs('ic-frc', 'border-top-left-radius'), '9999px');
+  near('icon frame rounded', cs('ic-frr', 'border-top-left-radius'), varPx('--sl-sm'));
+  eq('icon spin animation', cs('ic-spin', 'animation-name'), 'sl-icon-spin');
+  eq('icon flip horizontal', cs('ic-fh', 'scale'), '-1 1');
+  eq('icon flip vertical', cs('ic-fv', 'scale'), '1 -1');
+  eq('icon rotate 90', cs('ic-r90', 'rotate'), '90deg');
+  eq('icon rotate 180', cs('ic-r180', 'rotate'), '180deg');
+  eq('icon rotate 270', cs('ic-r270', 'rotate'), '270deg');
+  eq('icon disabled opacity', cs('ic-dis', 'opacity'), '0.5');
+  eq('icon aria-disabled opacity', cs('ic-aria', 'opacity'), '0.5');
+  near('icon space margin', cs('ic-sp', 'margin-left'), 4.8);
+  near('icon space start margin', cs('ic-sps', 'margin-left'), 4.8);
+  eq('icon space start no right', cs('ic-sps', 'margin-right'), '0px');
+  near('icon space end margin', cs('ic-spe', 'margin-right'), 4.8);
+  eq('icon space end no left', cs('ic-spe', 'margin-left'), '0px');
+  near('icon size lg', cs('ic-lg', 'width'), 24);
+  near('icon size xl', cs('ic-xl', 'width'), 40);
+
+  /* ---- notice ---- */
+  eq('notice border 3px', cs('nt-def', 'border-top-width'), '3px');
+  eq('notice border solid', cs('nt-def', 'border-top-style'), 'solid');
+  rec('notice capsule radius > 24px', cs('nt-def', 'border-top-left-radius'), '>24px', px(cs('nt-def', 'border-top-left-radius')) > 24);
+  near('notice pad v = .75*--sl-md', cs('nt-def', 'padding-top'), varPx('--sl-md') * 0.75);
+  near('notice pad h = 1.5*--sl-md', cs('nt-def', 'padding-left'), varPx('--sl-md') * 1.5);
+  rec('notice fit shrinks', rect('nt-fit').width + 'px', '< def-50', rect('nt-fit').width < rect('nt-def').width - 50);
+  rec('notice action lane', cs('nt-act', 'padding-right'), '>50px', px(cs('nt-act', 'padding-right')) > 50);
+  eq('notice action absolute', cs('nt-btn', 'position'), 'absolute');
+  eq('action start also absolute', cs('nt-bts', 'position'), 'absolute');
+  rec('action start sits leading', (rect('nt-bts').left - rect('nt-acts').left) + 'px',
+    '< 40px (near leading edge)', rect('nt-bts').left - rect('nt-acts').left < 40);
+  /* nested sl-notice--action inside a wrapper is not a direct child —
+     the pin contract deliberately doesn't reach it */
+  neq('nested action not pinned', cs('nt-nbtn', 'position'), 'absolute');
+  eq('notice link underlined', cs('nt-a', 'text-decoration-line'), 'underline');
+  near('notice action block-centered', (rect('nt-btn').top + rect('nt-btn').bottom) / 2,
+    (rect('nt-act').top + rect('nt-act').bottom) / 2, 2);
+  /* vertical-rl: block-start maps to the physical right edge,
+     inline-end to bottom — the dot's --sl-sm float offset rides
+     both mappings */
+  near('v corner block-start on right', cs('v-corner', 'right'), varPx('--sl-sm'));
+  near('v corner inline-end on bottom', cs('v-corner', 'bottom'), varPx('--sl-sm'));
+  near('v action centered on horizontal block axis',
+    (rect('v-act').left + rect('v-act').right) / 2,
+    (rect('v-nt').left + rect('v-nt').right) / 2, 2);
+  rec('notice align start', cs('nt-as', 'text-align'), 'start|left', ['start', 'left'].includes(cs('nt-as', 'text-align')));
+  eq('notice align center', cs('nt-ac', 'text-align'), 'center');
+  rec('notice align end', cs('nt-al', 'text-align'), 'end|right', ['end', 'right'].includes(cs('nt-al', 'text-align')));
+  neq('notice tone danger bg', cs('nt-d', 'background-color'), cs('nt-def', 'background-color'));
+  near('notice pad lg v', cs('nt-pl', 'padding-top'), varPx('--sl-2xl') * 0.75);
+  eq('notice radius none', cs('nt-rn', 'border-top-left-radius'), '0px');
+
+  /* ---- audit2 coverage ---- */
+  eq('card interactive cursor', cs('card-int', 'cursor'), 'pointer');
+  eq('chip interactive cursor', cs('chip-i', 'cursor'), 'pointer');
+  neq('card aria-disabled cursor', cs('card-int-ad', 'cursor'), 'pointer');
+  eq('card aria-disabled opacity', cs('card-int-ad', 'opacity'), '0.5');
+  eq('btn aria-disabled cursor', cs('btn-aria', 'cursor'), 'not-allowed');
+  rec('notice start lane', cs('nt-acts', 'padding-left'), '>50px', px(cs('nt-acts', 'padding-left')) > 50);
+  rec('corner start left of end', rect('corner-start').right + 'px', '<=' + rect('corner-end').left,
+    rect('corner-start').right <= rect('corner-end').left);
+  rec('notice interactive hover rule', ruleCount('[sl-notice][sl-interactive]:hover'), '>=1',
+    ruleCount('[sl-notice][sl-interactive]:hover') >= 1);
+  rec('card edge scoped rules', ruleCount('[sl-card--section="edge"]'), '>=3',
+    ruleCount('[sl-card--section="edge"]') >= 3);
+  rec('--sl-grid-gap registered sealed', String(!!props['--sl-grid-gap'] && props['--sl-grid-gap'].inherits), 'true&&false',
+    !!props['--sl-grid-gap'] && props['--sl-grid-gap'].inherits === false);
+
+  /* T6 anchors — semantic eq/neq pairs pass vacuously when both sides
+     collapse to the same broken value; pin every compared element's
+     checked prop to a real (non-transparent) computed value */
+  for (const id of ['btn-def', 'btn-out', 'btn-tp', 'btn-ts', 'btn-tok', 'btn-tw', 'btn-td'])
+    neq(`${id} bg solid`, cs(id, 'background-color'), TRANS);
+  for (const id of ['btn-def', 'btn-gho'])
+    neq(`${id} color solid`, cs(id, 'color'), TRANS);
+  neq('card-def bg solid', cs('card-def', 'background-color'), TRANS);
+  for (const id of ['card-def', 'card-it'])
+    neq(`${id} border solid`, cs(id, 'border-top-color'), TRANS);
+  neq('sect-sec bg solid', cs('sect-sec', 'background-color'), TRANS);
+  for (const id of ['chip-def', 'chip-d', 'chip-s'])
+    neq(`${id} color solid`, cs(id, 'color'), TRANS);
+  for (const id of ['dot-def', 'dot-s'])
+    neq(`${id} bg solid`, cs(id, 'background-color'), TRANS);
+  for (const id of ['nt-def', 'nt-d'])
+    neq(`${id} bg solid`, cs(id, 'background-color'), TRANS);
+
+  /* ---- shipped bundle executes ---- */
+  const t3 = window.__slBundle;
+  rec('bundle module ran', String(!!t3), 'true', !!t3);
+  if (t3) {
+    has('bundle icon() emits svg', t3.svg, '<svg sl-icon');
+    eq('bundle icon() unknown empty', t3.missing, '');
+    eq('bundle pack registered', String(t3.pack), 'true');
+    rec('bundle placeholder filled', String(t3.filled), 'true', t3.filled);
+  }
+}
+</script>
+</body>
+</html>

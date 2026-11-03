@@ -4,8 +4,6 @@
 @import url(@sakulime-ui/core/index.css);
 @import url(@sakulime-ui/layout/index.css);
 
-/* axis demo rows — a separator item sits between the default item and
-   named values; a real flex item so the row's gap keeps it centered */
 .axis-row {
   display: flex;
   flex-wrap: wrap;
@@ -17,21 +15,27 @@
   margin-top: 12px;
 }
 
+.axis-row.col {
+  flex-direction: column;
+  align-items: stretch;
+}
+
 .axis-sep {
   align-self: stretch;
   width: 1px;
   background: var(--sl-text-muted);
 }
 
-/* demo placeholder for edge-to-edge inset content — stands in for a
-   real image so demos don't depend on external assets */
+.axis-row.col .axis-sep {
+  width: auto;
+  height: 1px;
+}
+
 .demo-media {
   height: 7rem;
   background: linear-gradient(135deg, var(--sl-primary), var(--sl-secondary));
 }
 
-/* live container demos — the dashed edge is each container's real
-   bound; .demo-w carries the rendered px stamped by Demo's measure */
 .demo-frame {
   display: flex;
   justify-content: space-between;
@@ -47,4 +51,12 @@
 .demo-w {
   color: var(--sl-text-muted);
   font-variant-numeric: tabular-nums;
+}
+
+.demo-cell {
+  background: var(--sl-surface);
+  border: 1px dashed var(--sl-border);
+  border-radius: var(--sl-sm);
+  padding: var(--sl-sm) var(--sl-md);
+  font-size: 13px;
 }

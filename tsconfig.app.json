@@ -9,6 +9,9 @@
 
     /* Bundler mode */
     "moduleResolution": "bundler",
+    /* docs may import package.json for the displayed version — declare
+       it now instead of hitting a type error at first use */
+    "resolveJsonModule": true,
     /* exports resolve ./icons to an untyped dist bundle; typecheck doc
        imports against the source the vite aliases in doc config use */
     "paths": {

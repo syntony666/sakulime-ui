@@ -1,0 +1,20 @@
+@layer base {
+  /* wrap — horizontal run that wraps; tag rows, button groups */
+  [sl-wrap] {
+    display: flex;
+    flex-wrap: wrap;
+    --sl-align: center;
+    align-items: var(--sl-align);
+    --sl-justify: start;
+    justify-content: var(--sl-justify);
+    gap: var(--sl-wrap-gap, var(--sl-gap, var(--sl-md)));
+  }
+
+  [sl-wrap] > * {
+    min-inline-size: 0;
+  }
+
+  [sl-wrap] > [sl-align] {
+    align-self: var(--sl-align);
+  }
+}

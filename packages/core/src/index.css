@@ -1,12 +1,13 @@
-/* the layer order travels with the css — consumers importing this
-   file alone (shadow-dom demos, partial imports) get the declared
-   order no matter which import surfaces first */
+/* layer order travels with the file — partial imports get the
+   declared order no matter which file surfaces first */
 @layer theme, base, attrs;
 
 @import "./css/generic.css";
 @import "./css/button.css";
 @import "./css/card.css";
-@import "./css/card.attrs.css";
+@import "./css/notice.css";
+@import "./css/dot.css";
+@import "./css/chip.css";
 @import "./css/icon.css";
 
 @layer base {
@@ -24,8 +25,8 @@
 
   body {
     margin: 0;
-    color: var(--sl-text, #111827);
-    background: var(--sl-bg, #ffffff);
+    color: var(--sl-text);
+    background: var(--sl-bg);
   }
 
   button,

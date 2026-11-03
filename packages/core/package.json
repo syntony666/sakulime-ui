@@ -1,6 +1,8 @@
 {
   "name": "@sakulime-ui/core",
   "version": "0.3.0",
+  "description": "CSS-first UI components via sl-* HTML attributes — buttons, cards, notices, icons, and themes",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/syntony666/sakulime-ui.git",
@@ -14,16 +16,25 @@
   "files": [
     "dist"
   ],
+  "sideEffects": [
+    "**/*.css"
+  ],
   "exports": {
     "./package.json": "./package.json",
-    ".": "./dist/index.min.js",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.min.js"
+    },
     "./index.css": "./dist/index.min.css",
-    "./icons": "./dist/index.min.js",
+    "./icons": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.min.js"
+    },
     "./index.min.css": "./dist/index.min.css",
     "./index.min.js": "./dist/index.min.js"
   },
   "scripts": {
-    "build": "vite build"
+    "build": "vite build && tsc -p tsconfig.dts.json"
   },
   "devDependencies": {
     "@sakulime-ui/shared": "*",

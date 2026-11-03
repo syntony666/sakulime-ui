@@ -1,9 +1,7 @@
-/* base recipe — structure + the default (normal) variant paint.
-   The slot defaults at the top are the component's consumed-generic
-   manifest: each one shadows any inherited generic value, so generic
-   attributes only take effect when set on the element itself. */
 @layer base {
   [sl-button] {
+    /* slot self-defaults seal generic writes from ancestors — the
+       triple mirrors generic.css sl-tone="primary" */
     --sl-tone-bg: var(--sl-primary);
     --sl-tone-text: color-mix(in srgb, var(--sl-primary) 12%, var(--sl-text));
     --sl-tone-text-invert: var(--sl-primary-fg);
@@ -11,47 +9,42 @@
     --sl-size-h: var(--sl-3xl);
     --sl-size-px: var(--sl-md);
     --sl-radius: var(--sl-sm);
+    /* without this a card's capped --sl-radius-full inherits in */
+    --sl-radius-full: var(--sl-radius-pill);
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.4em;
     border-radius: var(--sl-radius);
     border: 2px solid transparent;
-    min-height: var(--sl-size-h);
+    min-block-size: var(--sl-size-h);
+    text-decoration: none;
     padding: 0 var(--sl-size-px);
     font-size: var(--sl-size-fs);
-    transition:
-      transform 0.2s ease,
-      background-color 160ms ease,
-      border-color 160ms ease,
-      color 160ms ease;
-    /* normal — the filled default look */
+    cursor: pointer;
     background: var(--sl-tone-bg);
     color: var(--sl-tone-text-invert);
   }
 
-  [sl-button]:hover:not(:disabled) {
-    transform: scale(1.05);
+  [sl-button]:hover:not(:disabled):not([aria-disabled="true"]) {
+    transform: scale(1.03);
   }
 
-  [sl-button]:disabled {
-    opacity: 0.6;
+  [sl-button]:disabled,
+  [sl-button][aria-disabled="true"] {
+    opacity: var(--sl-disabled-opacity);
     cursor: not-allowed;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    [sl-button] {
-      transition: none;
-    }
+  /* the hex keeps the ring readable without the theme package */
+  [sl-button]:focus-visible {
+    outline: 2px solid var(--sl-text-accent);
+    outline-offset: 2px;
   }
 }
 
-/* variants — the marker's value picks the look; bare sl-button ("" )
-   is normal and needs no rule since base already paints it */
 @layer attrs {
-  /* invert carries the page base — the tone drops to ink + border, and
-     an opaque fill keeps it a button on patterned or tinted surfaces */
-  [sl-button="invert"] {
+  [sl-button="outline"] {
     background: var(--sl-bg);
     color: var(--sl-tone-text);
     border-color: var(--sl-tone-bg);

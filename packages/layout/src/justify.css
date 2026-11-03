@@ -1,0 +1,12 @@
+@layer attrs {
+  /* sl-justify — main-axis slot; consumers self-default it so only a
+     write on the primitive itself counts. Wrap/stack read it as
+     justify-content, grid as justify-items (between/around/evenly
+     fall back to the grid's stretch default there) */
+  [sl-justify="start"]   { --sl-justify: start; }
+  [sl-justify="center"]  { --sl-justify: center; }
+  [sl-justify="end"]     { --sl-justify: end; }
+  [sl-justify="between"] { --sl-justify: space-between; }
+  [sl-justify="around"]  { --sl-justify: space-around; }
+  [sl-justify="evenly"]  { --sl-justify: space-evenly; }
+}

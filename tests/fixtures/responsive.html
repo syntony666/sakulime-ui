@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>sl responsive fixture</title>
+<link rel="stylesheet" href="../../packages/theme/dist/sakulime.min.css">
+<link rel="stylesheet" href="../../packages/core/dist/index.min.css">
+<link rel="stylesheet" href="../../packages/layout/dist/index.min.css">
+<style>body { font-family: system-ui, sans-serif; overflow-y: hidden; } #probe { position: absolute; visibility: hidden; }</style>
+</head>
+<body>
+
+<!-- breakpoint sanity + grid-cols suffixes (all three breakpoints fire at 420px) -->
+<div sl-grid sl-grid-cols="4" sl-grid-cols-sm="1" id="rg-sm"><div>a</div><div>b</div><div>c</div><div>d</div></div>
+<div sl-grid sl-grid-cols="4" sl-grid-cols-md="2" id="rg-md"><div>a</div><div>b</div><div>c</div><div>d</div></div>
+<div sl-grid sl-grid-cols="4" sl-grid-cols-lg="3" id="rg-lg"><div>a</div><div>b</div><div>c</div><div>d</div></div>
+<div sl-grid sl-grid-cols="4" sl-grid-cols-lg="3" sl-grid-cols-md="2" sl-grid-cols-sm="1" id="rg-all"><div>a</div><div>b</div><div>c</div><div>d</div></div>
+<div sl-grid sl-grid-cols="4" sl-grid-cols-md="2" id="rg-span"><div sl-grid--span="4" id="rsp">x</div><div>y</div></div>
+
+<!-- monotonic clamp: a narrower level can never exceed a wider
+     declaration; "auto" releases its level back to auto-fill -->
+<div sl-grid sl-grid-cols="8" sl-grid-cols-md="2" sl-grid-cols-sm="6" id="rg-mono"><div>a</div><div>b</div><div>c</div><div>d</div></div>
+<div sl-grid sl-grid-cols="2" sl-grid-cols-sm="8" id="rg-monob"><div>a</div><div>b</div><div>c</div><div>d</div></div>
+<div sl-grid sl-grid-cols="4" sl-grid-cols-sm="auto" id="rg-auto"><div>a</div><div>b</div><div>c</div><div>d</div></div>
+<div sl-grid sl-grid-cols="4" sl-grid-cols-lg="auto" id="rg-autolg"><div>a</div><div>b</div><div>c</div><div>d</div></div>
+<div sl-grid sl-grid-cols="4" sl-grid-cols-md="auto" id="rg-autom"><div>a</div><div>b</div><div>c</div><div>d</div></div>
+<div sl-grid sl-grid-cols-md="auto" sl-grid-cols-sm="2" id="rg-auton"><div>a</div><div>b</div><div>c</div><div>d</div></div>
+
+<!-- hide/show -->
+<div sl-hide-sm id="rh-sm">x</div>
+<div sl-hide-md id="rh-md">x</div>
+<div sl-hide-lg id="rh-lg">x</div>
+<div sl-show-sm id="rs-sm">x</div>
+<div sl-show-md id="rs-md">x</div>
+<div sl-show-lg id="rs-lg">x</div>
+<div id="rs-none">x</div>
+
+<div id="probe"></div>
+<pre id="results"></pre>
+<script src="helpers.js"></script>
+<script>
+function main() {
+  /* headless clamps --window-size to a ~500px minimum; what the suite
+     actually needs is "below the 45rem sm breakpoint" */
+  rec('viewport below sm breakpoint', window.innerWidth + 'px', '<720px', window.innerWidth < 720);
+
+  /* cols-<bp> release — below 45rem every breakpoint block hits; the
+     narrowest suffix wins at equal specificity */
+  eq('cols-sm=1 → 1 track', tracks('rg-sm'), 1);
+  eq('cols-md=2 → 2 tracks', tracks('rg-md'), 2);
+  eq('cols-lg=3 → 3 tracks', tracks('rg-lg'), 3);
+  eq('smallest suffix wins', tracks('rg-all'), 1);
+  near('span clamps to released count', rect('rsp').width, rect('rg-span').width, 2);
+
+  /* monotonic — min of every declared count holds at the width */
+  eq('sm=6 clamped by md=2', tracks('rg-mono'), 2);
+  eq('sm=8 clamped by base=2', tracks('rg-monob'), 2);
+  /* "auto" — the level drops out of the clamp and auto-fill returns;
+     the real viewport clamps to 500px so the 14rem floor yields 2
+     tracks (explicit would be 4/2) */
+  eq('sm="auto" returns to auto-fill', tracks('rg-auto'), 2);
+  eq('md="auto" releases cols=4', tracks('rg-autom'), 2);
+  eq('narrower decl survives md="auto"', tracks('rg-auton'), 2);
+  eq('lg="auto" returns to auto-fill', tracks('rg-autolg'), 2);
+
+  /* hide = gone below the breakpoint; show = gone above it (420px is
+     below all three, so every show stays visible) */
+  eq('hide-sm gone', cs('rh-sm', 'display'), 'none');
+  eq('hide-md gone', cs('rh-md', 'display'), 'none');
+  eq('hide-lg gone', cs('rh-lg', 'display'), 'none');
+  eq('show-sm visible <45rem', cs('rs-sm', 'display'), 'block');
+  eq('show-md visible <60rem', cs('rs-md', 'display'), 'block');
+  eq('show-lg visible <75rem', cs('rs-lg', 'display'), 'block');
+  eq('unmarked control visible', cs('rs-none', 'display'), 'block');
+}
+</script>
+</body>
+</html>

@@ -1,16 +1,14 @@
-/* card — surface container; slots filled by generic attributes in
-   generic.css. */
+/* card — surface plus variants, indicator, corner part, section part.
+   Slots self-default so generic attrs on ancestors can't leak in */
 @layer base {
   [sl-card] {
-    /* consumed generics + defaults — tone feeds indicate/corner via
-       inheritance; self-defaulting seals generic attributes set on
-       ancestors from leaking in */
     --sl-tone-bg: var(--sl-primary);
     --sl-tone-text: color-mix(in srgb, var(--sl-primary) 55%, var(--sl-text));
     --sl-radius: var(--sl-sm);
+    /* "full" caps at a line height plus the pad/border edge share */
+    --sl-radius-full: calc(max(1lh, var(--sl-2xl)) + var(--sl-pad) + 1px);
     --sl-pad: var(--sl-lg);
-    --sl-i-transform: none;
-    --sl-i-shadow: none;
+    --_pbn: calc(var(--sl-pad) * -1);
     display: block;
     position: relative;
     overflow: hidden;
@@ -19,40 +17,203 @@
     border: 1px solid var(--sl-border);
     border-radius: var(--sl-radius);
     padding: var(--sl-pad);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
-  /* a card that is itself a link drops the anchor underline */
   a[sl-card] {
     text-decoration: none;
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    [sl-card] {
-      transition: none;
-    }
-  }
 }
 
-/* variants — the marker's value picks the frame; bare sl-card ("")
-   is the default bordered surface and needs no rule */
 @layer attrs {
-  /* hollow — dashed outline for empty/upload states */
   [sl-card="hollow"] {
     background: transparent;
     border-style: dashed;
     border-width: 2px;
   }
 
-  /* plain — frameless shell: keeps the surface fill, drops the border */
-  [sl-card="plain"] {
+  [sl-card="flat"] {
     border: 0;
   }
 
-  /* blank — invisible shell: no border, no fill; pairs with
-     sl-card-section="blank" for a pure blankslate block */
   [sl-card="blank"] {
     background: transparent;
     border: 0;
+  }
+
+  [sl-card][sl-card-indicator="top"] {
+    border-top: 3px solid var(--sl-tone-bg);
+  }
+
+  [sl-card][sl-card-indicator="bottom"] {
+    border-bottom: 3px solid var(--sl-tone-bg);
+  }
+
+  [sl-card][sl-card-indicator="start"] {
+    border-inline-start: 3px solid var(--sl-tone-bg);
+  }
+
+  [sl-card][sl-card-indicator="end"] {
+    border-inline-end: 3px solid var(--sl-tone-bg);
+  }
+
+  /* corner pins to a top corner; font-size is the em context for
+     whichever small attr the child carries (dot 8px, icon 16px,
+     chip 14px) */
+  [sl-card] > [sl-card--corner] {
+    position: absolute;
+    z-index: 1;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    font-size: var(--sl-lg);
+    font-variant-numeric: tabular-nums;
+  }
+
+  [sl-card] > [sl-card--corner~="start"] {
+    inset-inline-end: auto;
+    inset-inline-start: 0;
+  }
+
+  [sl-card] > [sl-card--corner][sl-chip] {
+    font-size: var(--sl-size-fs);
+    border-radius: var(--sl-xs);
+  }
+
+  /* dot/icon float off the edges so they don't straddle the border */
+  [sl-card] > [sl-card--corner][sl-dot] {
+    inset-block-start: var(--sl-sm);
+    inset-inline-end: var(--sl-sm);
+  }
+
+  [sl-card] > [sl-card--corner][sl-icon] {
+    inset-block-start: var(--sl-xs);
+    inset-inline-end: var(--sl-xs);
+  }
+
+  [sl-card] > [sl-card--corner~="start"][sl-dot] {
+    inset-inline-end: auto;
+    inset-inline-start: var(--sl-sm);
+  }
+
+  [sl-card] > [sl-card--corner~="start"][sl-icon] {
+    inset-inline-end: auto;
+    inset-inline-start: var(--sl-xs);
+  }
+
+  /* sections bleed past the pad so dividers run edge to edge */
+  [sl-card] > [sl-card--section] {
+    margin-inline: var(--_pbn);
+    padding-inline: var(--sl-pad);
+  }
+
+  /* a section earns its divider from real content — leading corners
+     never count */
+  [sl-card] > :not([sl-card--corner]) ~ [sl-card--section] {
+    margin-block-start: var(--sl-pad);
+    border-block-start: 1px solid var(--sl-border);
+    padding-block-start: var(--sl-pad);
+  }
+
+  [sl-card] > [sl-card--section="edge"] {
+    padding: 0;
+  }
+
+  /* "first"/"last" here mean no NON-corner sibling before/after —
+     the double-:not is how CSS says that */
+  [sl-card] > [sl-card--section="edge"]:not(:not([sl-card--corner]) ~ *) {
+    margin-block-start: var(--_pbn);
+    border-block-start: 0;
+  }
+
+  [sl-card] > [sl-card--section="edge"]:not(:has(~ :not([sl-card--corner]))) {
+    margin-block-end: var(--_pbn);
+  }
+
+  /* the (0,3,0) direct-child prefix is what lets the zero below beat
+     the divider rule above */
+  [sl-card] > [sl-card--section="edge"] + * {
+    margin-block-start: var(--sl-pad);
+  }
+
+  [sl-card] > [sl-card--section="edge"] + [sl-card--section] {
+    margin-block-start: 0;
+  }
+
+  [sl-card] > [sl-card--section="edge"] > :is(img, svg, video, iframe) {
+    display: block;
+    inline-size: 100%;
+  }
+
+  [sl-card] > [sl-card--section="blank"] {
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    gap: var(--sl-sm);
+    padding-block: var(--sl-3xl);
+    text-align: center;
+  }
+
+  /* keeps the blank symmetric even after a real sibling's divider */
+  [sl-card] > :not([sl-card--corner]) ~ [sl-card--section="blank"] {
+    padding-block-start: var(--sl-3xl);
+  }
+
+  [sl-card] > [sl-card--section="blank"] :is(h1, h2, h3, h4, p) {
+    margin: 0;
+  }
+
+  [sl-card] > [sl-card--section="blank"] :is(strong, h1, h2, h3, h4) {
+    font-size: var(--sl-lg);
+    font-weight: 600;
+    color: var(--sl-text-strong);
+  }
+
+  [sl-card] > [sl-card--section="blank"] p {
+    color: var(--sl-text-secondary);
+    font-size: var(--sl-md);
+  }
+
+  [sl-card] > [sl-card--section="secondary"] {
+    background: var(--sl-secondary-bg);
+  }
+
+  [sl-card] > [sl-card--section="active"] {
+    background: color-mix(in srgb, var(--sl-primary) 8%, var(--sl-surface));
+  }
+
+  [sl-card][sl-interactive]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+
+  [sl-card][aria-disabled="true"] {
+    opacity: var(--sl-disabled-opacity);
+    cursor: not-allowed;
+  }
+
+  /* bg sections own the gap to the next divider and bleed to the
+     card edges at the extremes — same (0,3,0) + double-:not idioms
+     as the edge rules above */
+  [sl-card] > :is([sl-card--section="secondary"],
+                  [sl-card--section="active"]) {
+    padding-block-end: var(--sl-pad);
+  }
+
+  [sl-card] > :is([sl-card--section="secondary"],
+                  [sl-card--section="active"]) + [sl-card--section] {
+    margin-block-start: 0;
+  }
+
+  [sl-card] > :is([sl-card--section="secondary"],
+                  [sl-card--section="active"]):not(:not([sl-card--corner]) ~ *) {
+    margin-block-start: var(--_pbn);
+    padding-block-start: var(--sl-pad);
+  }
+
+  [sl-card] > :is([sl-card--section="secondary"],
+                  [sl-card--section="active"]):not(:has(~ :not([sl-card--corner]))) {
+    margin-block-end: var(--_pbn);
+  }
+
+  [sl-card] > [sl-card--section="center"] {
+    text-align: center;
   }
 }

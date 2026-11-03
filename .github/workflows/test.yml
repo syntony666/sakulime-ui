@@ -1,0 +1,28 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - master
+      - 'release/*'
+  pull_request:
+
+jobs:
+  test:
+    name: Fixture assertions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+      - name: Install chrome-headless-shell
+        run: npx -y @puppeteer/browsers install chrome-headless-shell@stable --path /tmp/chromium
+      - name: Fixture assertions
+        run: SL_CHROMIUM=$(find /tmp/chromium -name chrome-headless-shell -type f | head -1) npm test
+      - name: Docs site build
+        run: npm run site

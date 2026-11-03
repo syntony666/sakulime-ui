@@ -1,12 +1,10 @@
 /* derived — the whole --sl-* color vocabulary computed from three
-   authored seeds (--sl-seed-primary/-secondary/-accent) plus the
-   theme's color-scheme. Theme files @import this and declare only
-   seeds + scheme; nothing here is theme-specific. */
+   seeds (--sl-seed-primary/-secondary/-accent) plus color-scheme.
+   Theme files @import this and declare only seeds + scheme */
 
 @layer theme {
   :root {
-    /* surfaces — the secondary seed's hue is the material; chroma is
-       scaled near zero, lightness steps fixed per scheme */
+    /* surfaces — the secondary seed's hue, chroma scaled near zero */
     --sl-bg: light-dark(
       oklch(from var(--sl-seed-secondary) 96.5% calc(c * 0.3) h),
       oklch(from var(--sl-seed-secondary) 21.5% calc(c * 0.7) h));
@@ -17,7 +15,7 @@
       oklch(from var(--sl-seed-secondary) 80% calc(c * 0.9) h),
       oklch(from var(--sl-seed-secondary) 44.5% calc(c * 1.1) h));
 
-    /* ink ladder — the same hue at the poles */
+    /* ink ladder */
     --sl-text: light-dark(
       oklch(from var(--sl-seed-secondary) 30% c h),
       oklch(from var(--sl-seed-secondary) 92% calc(c * 0.4) h));
@@ -30,17 +28,20 @@
     --sl-text-secondary: color-mix(in srgb, var(--sl-text) 88%, transparent);
     --sl-text-muted: color-mix(in srgb, var(--sl-text) 78%, transparent);
 
-    /* accent — clamped into the readable ink band for this scheme */
+    /* accent clamped into the AA-readable ink band (49% ceiling
+       holds accent text on the page surfaces) */
     --sl-text-accent: light-dark(
-      oklch(from var(--sl-seed-accent) clamp(0.15, l, 0.55) c h),
+      oklch(from var(--sl-seed-accent) clamp(0.15, l, 0.49) c h),
       oklch(from var(--sl-seed-accent) clamp(0.72, l, 1) c h));
 
-    /* tone faces */
     --sl-primary: var(--sl-seed-primary);
     --sl-secondary: var(--sl-seed-secondary);
 
-    /* fg — the tone's own hue pushed to the far ink pole; the clamp
-       is a step on the face's lightness so it flips without a flag */
+    /* fg — the face's hue pushed to the far ink pole; faces darker
+       than l=0.62 get 0.95 pale ink, lighter get 0.95−0.72 = 0.23
+       dark ink. The ×50 squeezes the crossover into a ~0.02 band so
+       mid faces never sit on a muddy mid-tone; c×0.35 keeps a
+       whisper of the face hue in the fg */
     --sl-primary-fg: oklch(from var(--sl-primary)
       calc(0.95 - clamp(0, (l - 0.62) * 50, 1) * 0.72)
       calc(c * 0.35) h);
@@ -48,7 +49,7 @@
       calc(0.95 - clamp(0, (l - 0.62) * 50, 1) * 0.72)
       calc(c * 0.35) h);
 
-    /* tints — the face hue pushed to a quiet tint depth */
+    /* quiet tints of the face hue */
     --sl-primary-bg: light-dark(
       oklch(from var(--sl-primary) 93% calc(c * 0.35) h),
       oklch(from var(--sl-primary) 30% calc(c * 0.55) h));
@@ -56,10 +57,11 @@
       oklch(from var(--sl-secondary) 95% calc(c * 0.4) h),
       oklch(from var(--sl-secondary) 24.5% calc(c * 0.8) h));
 
-    /* status — universal hues at scheme-fixed depth; warn pairs with
-       the strong ink so it stays deep in dark themes */
-    --sl-ok: light-dark(oklch(51% 0.10 158), oklch(68% 0.12 162));
-    --sl-warn: light-dark(oklch(80% 0.14 82), oklch(54.5% 0.11 86));
-    --sl-danger: light-dark(oklch(51% 0.18 22), oklch(67% 0.16 20));
+    /* status — universal hues at scheme-fixed depth; the light ends
+       sit at the shallowest depth that keeps tone text AA on a 20%
+       wash */
+    --sl-ok: light-dark(oklch(45% 0.10 158), oklch(68% 0.12 162));
+    --sl-warn: light-dark(oklch(80% 0.14 82), oklch(66% 0.13 84));
+    --sl-danger: light-dark(oklch(45% 0.18 22), oklch(72% 0.16 20));
   }
 }

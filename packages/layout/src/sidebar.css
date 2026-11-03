@@ -1,0 +1,21 @@
+@layer base {
+  /* sidebar — rail(s) beside a content column; side follows source
+     order, the content min-width is the wrap trigger */
+  [sl-sidebar] {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sl-sidebar-gap, var(--sl-gap, var(--sl-lg)));
+  }
+
+  [sl-sidebar] > [sl-sidebar--rail] {
+    flex-basis: var(--sl-sidebar-w, 16rem);
+    flex-grow: 1;
+  }
+
+  [sl-sidebar] > :not([sl-sidebar--rail]) {
+    flex-basis: 0;
+    /* any large number wins the free-space race against the rail */
+    flex-grow: 999;
+    min-inline-size: var(--sl-sidebar-min, 55%);
+  }
+}

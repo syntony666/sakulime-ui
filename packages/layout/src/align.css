@@ -1,0 +1,9 @@
+@layer attrs {
+  /* sl-align — cross-axis slot; wrap/stack/float read it as
+     align-items, on a grid cell or wrap/stack child it becomes a
+     self override */
+  [sl-align="start"]   { --sl-align: start; }
+  [sl-align="center"]  { --sl-align: center; }
+  [sl-align="end"]     { --sl-align: end; }
+  [sl-align="stretch"] { --sl-align: stretch; }
+}

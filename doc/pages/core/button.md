@@ -1,6 +1,6 @@
 ---
 title: Button 按鈕
-description: sl-button 按鈕，值決定型態，再用 sl-tone、sl-size、sl-radius 調整外觀。
+description: 按鈕與連結共用的按鈕樣式。
 ---
 
 <script setup>
@@ -9,22 +9,22 @@ import * as ButtonDemos from "../../demos/components/button.demo";
 
 # Button *按鈕*
 
-`sl-button` 寫在 `button` 或 `a` 上，值決定型態，通用屬性調外觀。
+> 把按鈕樣式套用在按鈕或連結元素上。
 
 <Playground :meta="ButtonDemos.default" :render="ButtonDemos.Button.render" />
 
 ## 型態
 
-型態直接寫在 `sl-button` 的值裡，不寫值就是 `normal`：
+型態為 `sl-button` 的選項，未標示時為 `normal`：
 
 ```html
-<button sl-button="invert">按鈕</button>
+<button sl-button="outline">按鈕</button>
 ```
 
-- `normal`：整顆填滿（預設值）
-- `invert`：只剩框線跟字
-- `underline`：只有底線
-- `ghost`：沒底沒框，只有字
+- `normal`：整體填滿（預設）
+- `outline`：僅框線與文字
+- `underline`：僅底線
+- `ghost`：無底色與框線，僅文字
 
 <Demo :render="ButtonDemos.Variants.render" />
 
@@ -32,34 +32,28 @@ import * as ButtonDemos from "../../demos/components/button.demo";
 
 ### 顏色 `sl-tone`
 
-- `primary`：主題主色（預設值）
-- `secondary`：主題副色
-- `success`：代表成功
-- `warning`：代表警告
-- `danger`：代表危險
+`sl-button` 為 `sl-tone` 的適用元件，未標示時為 `primary`。`normal` 為整體上色，其餘型態僅為框線與文字上色。
 
-#### 實心版本
-
-<Demo :render="ButtonDemos.Tones.render" />
-
-#### 框線版本
-
-<Demo :render="ButtonDemos.TonesInvert.render" />
+選項見 [Tone 色調](/attrs/tone)。
 
 ### 尺寸 `sl-size`
 
-- `sm`：小
-- `md`：一般（預設值）
-- `lg`：大
-
-<Demo :render="ButtonDemos.Sizes.render" />
+`sl-button` 為 `sl-size` 的適用元件，未標示時為 `md`，高度、字級與水平內距同時改變。選項見 [Size 尺寸](/attrs/size)。
 
 ### 圓角 `sl-radius`
 
-- `none`：直角
-- `sm`：微圓
-- `md`：一般圓角（預設值）
-- `lg`：很圓
-- `full`：膠囊形，全圓到底
+`sl-button` 為 `sl-radius` 的適用元件，未標示時為 `md`。選項見 [Radius 圓角](/attrs/radius)。
 
-<Demo :render="ButtonDemos.Radius.render" />
+### 互動效果 `sl-interactive`
+
+`sl-button` 為 `sl-interactive` 的適用元件。未標示時，滑鼠移入即為 `grow` 放大。
+
+標示後改用指定效果，選項見 [Interactive 互動效果](/attrs/interactive)。
+
+### 停用
+
+`disabled` 或 `aria-disabled="true"` 皆會使按鈕淡化、游標顯示為禁用，且不再放大。
+
+透明度由共用 hook `--sl-disabled-opacity` 控制（預設 `0.5`），調整全站時於 `:root` 覆寫。
+
+<Demo :render="ButtonDemos.Disabled.render" />

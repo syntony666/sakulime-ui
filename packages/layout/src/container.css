@@ -1,0 +1,26 @@
+@layer base {
+  /* page container — bare sl-container defaults to the md width */
+  [sl-container] {
+    box-sizing: border-box;
+    inline-size: 100%;
+    max-inline-size: var(--sl-container-md);
+    margin-inline: auto;
+    /* self-default so an ancestor's sl-pad can't leak in */
+    --sl-pad: var(--sl-lg);
+    padding-inline: var(--sl-container-pad, var(--sl-pad));
+  }
+
+  [sl-container="sm"] {
+    max-inline-size: var(--sl-container-sm);
+  }
+
+  /* pinned so a future default change can't silently retarget
+     sl-container="md" */
+  [sl-container="md"] {
+    max-inline-size: var(--sl-container-md);
+  }
+
+  [sl-container="lg"] {
+    max-inline-size: var(--sl-container-lg);
+  }
+}

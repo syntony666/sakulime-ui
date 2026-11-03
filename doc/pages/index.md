@@ -5,7 +5,7 @@ titleTemplate: false
 
 hero:
   name: Sakulime UI
-  tagline: CSS 優先 最簡單使用的 UI 介面
+  tagline: 寫幾個屬性，介面就有了
   actions:
     - theme: brand
       text: 開始使用
@@ -15,10 +15,10 @@ hero:
       link: https://github.com/syntony666/sakulime-ui
 
 features:
-  - title: 簡單易用
-    details: 標籤上加一個屬性，按鈕、卡片、排版就出來了。不用學新語法，也不用改你現在的寫法。
-  - title: 自由度高
-    details: 顏色、間距、字級都放在變數裡，想改哪一個就改哪一個，原本的 class 照樣能用。
-  - title: 速度快
-    details: 整包 CSS 不到 10 KB 就有全部元件。JS 只做選配功能，不載也不缺東西。
+  - title: 屬性即介面
+    details: 按鈕、卡片、排版，標籤上加一個屬性就有，不用重學語法。
+  - title: 變數調樣式
+    details: 顏色、間距、字級都是變數，改一個，整套跟著換。
+  - title: 不綁框架
+    details: React、Vue、Svelte 或純 HTML？都能用，JS 不載也照常運作。
 ---

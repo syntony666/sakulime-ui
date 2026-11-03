@@ -1,0 +1,8 @@
+@layer attrs {
+  /* sl-pad — the shared edge-gutter slot for layout primitives; one
+     map serves every consumer, kept identical to generic.css's */
+  :is([sl-container], [sl-bar])[sl-pad="none"] { --sl-pad: 0; }
+  :is([sl-container], [sl-bar])[sl-pad="sm"]   { --sl-pad: var(--sl-md); }
+  :is([sl-container], [sl-bar])[sl-pad="md"]   { --sl-pad: var(--sl-lg); }
+  :is([sl-container], [sl-bar])[sl-pad="lg"]   { --sl-pad: var(--sl-2xl); }
+}

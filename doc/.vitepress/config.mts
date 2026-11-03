@@ -18,15 +18,11 @@ export default defineConfig({
   sitemap: { hostname: SITE },
   head: [
     ["link", { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" }],
-    // restore the saved theme before first paint — without this the page
-    // flashes sakulime for a frame before hydration sets data-theme
     [
       "script",
       {},
       "try{var t=localStorage.getItem('sl-theme');if(t){var d=document.documentElement;d.dataset.theme=t;d.classList.toggle('dark',localStorage.getItem('sl-dark')==='1')}}catch(e){}",
     ],
-    // zh-TW + code faces from Google Fonts — Cloudflare Fonts rewrites
-    // these to same-domain /cf-fonts at the edge, so there is no
     // third-party request in production (Inter is VP-bundled already)
     ["link", { rel: "preconnect", href: "https://fonts.googleapis.com" }],
     [
@@ -96,7 +92,6 @@ export default defineConfig({
     ];
   },
   // these labels are hardcoded in VitePress theme components and have no
-  // config option, so the built HTML gets patched instead
   transformHtml(code) {
     return code
       .replaceAll('aria-label="extra navigation"', 'aria-label="其他導覽"')
@@ -110,11 +105,7 @@ export default defineConfig({
   outDir: "site",
   vite: {
     publicDir: fileURLToPath(new URL("../public", import.meta.url)),
-    /* docs consume core's source css — expand :--sl-* selectors here too */
     css: { postcss: { plugins: [customSelectors()] } },
-    /* package exports point at dist for publishing; alias the specifiers
-       the docs import back to source so edits live-reload — keep this
-       list in sync with the workspaces' exports maps */
     resolve: {
       alias: [
         {
@@ -134,6 +125,10 @@ export default defineConfig({
           replacement: src("packages/theme/umbra.css"),
         },
         {
+          find: "@sakulime-ui/theme/derived.css",
+          replacement: src("packages/theme/_internal/derived.css"),
+        },
+        {
           find: "@sakulime-ui/core/index.css",
           replacement: src("packages/core/src/index.css"),
         },
@@ -142,14 +137,93 @@ export default defineConfig({
           replacement: src("packages/core/src/icons/index.ts"),
         },
         {
+          find: "@sakulime-ui/core/index.min.css",
+          replacement: src("packages/core/src/index.css"),
+        },
+        {
+          find: "@sakulime-ui/core/index.min.js",
+          replacement: src("packages/core/src/index.ts"),
+        },
+        {
           find: "@sakulime-ui/layout/index.css",
           replacement: src("packages/layout/src/layout.css"),
+        },
+        {
+          find: "@sakulime-ui/layout/index.min.css",
+          replacement: src("packages/layout/src/layout.css"),
+        },
+        {
+          find: "sakulime-ui/sakulime.min.css",
+          replacement: src("doc/.vitepress/alias-sakulime.css"),
+        },
+        {
+          find: "sakulime-ui/sakulime.min.js",
+          replacement: src("packages/core/src/index.ts"),
+        },
+        /* bare package entries last — a string find also matches
+           subpath specifiers, so these must trail the specific ones */
+        {
+          find: "@sakulime-ui/core",
+          replacement: src("packages/core/src/index.ts"),
+        },
+        {
+          find: "@sakulime-ui/layout",
+          replacement: src("packages/layout/src/layout.css"),
+        },
+        {
+          find: "sakulime-ui",
+          replacement: src("packages/core/src/index.ts"),
         },
       ],
     },
   },
   themeConfig: {
     outline: { level: [2, 4], label: "本頁目錄" },
+    search: {
+      provider: "local",
+      options: {
+        locales: {
+          root: {
+            translations: {
+              button: { buttonText: "搜尋", buttonAriaLabel: "搜尋" },
+              modal: {
+                displayDetails: "顯示詳細清單",
+                resetButtonTitle: "清除搜尋",
+                backButtonTitle: "返回",
+                noResultsText: "找不到相關結果",
+                footer: {
+                  selectText: "選擇",
+                  selectKeyAriaLabel: "Enter 鍵",
+                  navigateText: "切換",
+                  navigateUpKeyAriaLabel: "上方向鍵",
+                  navigateDownKeyAriaLabel: "下方向鍵",
+                  closeText: "關閉",
+                  closeKeyAriaLabel: "Esc 鍵",
+                },
+              },
+            },
+          },
+        },
+        miniSearch: {
+          options: {
+            tokenize: (text: string) => {
+              const out: string[] = [];
+              const segments = new Intl.Segmenter("zh", {
+                granularity: "word",
+              }).segment(text);
+              for (const { segment, isWordLike } of segments) {
+                if (!isWordLike) continue;
+                out.push(segment);
+                if (segment.length > 1 && /[㐀-鿿]/.test(segment)) {
+                  for (const ch of segment) out.push(ch);
+                }
+              }
+              return out;
+            },
+          },
+        },
+      },
+    },
     logo: "/favicon.svg",
     docFooter: { prev: "上一頁", next: "下一頁" },
     sidebarMenuLabel: "選單",
@@ -166,22 +240,71 @@ export default defineConfig({
     ],
     sidebar: [
       { text: "開始使用", link: "/introduction" },
-      { text: "屬性", link: "/attrs" },
       { text: "主題", link: "/theme" },
       {
-        text: "Layout",
+        text: "屬性 Attributes",
         items: [
-          { text: "說明", link: "/layout/" },
-          { text: `Container ${zh("容器")}`, link: "/layout/container" },
+          { text: "總覽", link: "/attrs" },
+          {
+            text: "通用屬性",
+            items: [
+              { text: `Tone ${zh("色調")}`, link: "/attrs/tone" },
+              { text: `Size ${zh("尺寸")}`, link: "/attrs/size" },
+              { text: `Radius ${zh("圓角")}`, link: "/attrs/radius" },
+              { text: `Pad ${zh("內距")}`, link: "/attrs/pad" },
+              { text: `Interactive ${zh("互動效果")}`, link: "/attrs/interactive" },
+              { text: `Gap ${zh("間距")}`, link: "/attrs/gap" },
+              { text: `Justify ${zh("主軸分佈")}`, link: "/attrs/justify" },
+              { text: `Align ${zh("對齊")}`, link: "/attrs/align" },
+            ],
+          },
         ],
       },
       {
-        text: "Core",
+        text: "元件 Core",
         items: [
-          { text: "說明", link: "/core/" },
-          { text: `Button ${zh("按鈕")}`, link: "/core/button" },
-          { text: `Card ${zh("卡片")}`, link: "/core/card" },
-          { text: `Icon ${zh("圖示")}`, link: "/core/icon" },
+          { text: "安裝", link: "/core/" },
+          {
+            text: "基本元件",
+            items: [
+              { text: `Button ${zh("按鈕")}`, link: "/core/button" },
+              { text: `Icon ${zh("圖示")}`, link: "/core/icon" },
+              { text: `Dot ${zh("狀態點")}`, link: "/core/dot" },
+              { text: `Chip ${zh("膠囊")}`, link: "/core/chip" },
+            ],
+          },
+          {
+            text: "容器",
+            items: [
+              { text: `Card ${zh("卡片")}`, link: "/core/card" },
+              { text: `Notice ${zh("通知")}`, link: "/core/notice" },
+            ],
+          },
+        ],
+      },
+      {
+        text: "排版 Layout",
+        items: [
+          { text: "安裝", link: "/layout/" },
+          {
+            text: "排列",
+            items: [
+              { text: `Stack ${zh("堆疊")}`, link: "/layout/stack" },
+              { text: `Content ${zh("內文欄")}`, link: "/layout/content" },
+              { text: `Wrap ${zh("換行橫列")}`, link: "/layout/wrap" },
+              { text: `Grid ${zh("網格")}`, link: "/layout/grid" },
+            ],
+          },
+          {
+            text: "頁面區塊",
+            items: [
+              { text: `Container ${zh("頁面容器")}`, link: "/layout/container" },
+              { text: `Bar ${zh("頁面橫條")}`, link: "/layout/bar" },
+              { text: `Sidebar ${zh("側邊欄")}`, link: "/layout/sidebar" },
+              { text: `Float ${zh("浮動角落")}`, link: "/layout/float" },
+            ],
+          },
+          { text: `RWD ${zh("響應式設計")}`, link: "/layout/responsive" },
         ],
       },
     ],

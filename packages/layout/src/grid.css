@@ -1,0 +1,127 @@
+@layer theme {
+  /* column floor default — write --sl-grid-min to override */
+  :root { --sl-grid-min: 14rem; }
+}
+
+@layer base {
+  /* grid — auto-fill by default; min() keeps a narrower container
+     overflow-free. sl-grid-cols swaps the count for explicit tracks */
+  [sl-grid] {
+    /* per-level counts sit at 12 when undeclared — --_n is the min,
+       so a narrower breakpoint can only shrink tracks, never grow;
+       --_cap clamps spans to the same resolved count */
+    --_cb: 12;
+    --_cl: 12;
+    --_cm: 12;
+    --_cs: 12;
+    --_n: min(var(--_cb), var(--_cl), var(--_cm), var(--_cs));
+    --_cols: auto-fill;
+    --_cap: var(--_n);
+    --_gf: min(var(--sl-grid-min), 100%);
+    /* grid reads sl-justify as justify-items, sl-align as
+       align-items — self-defaults seal ancestor writes */
+    --sl-justify: stretch;
+    --sl-align: stretch;
+    display: grid;
+    gap: var(--sl-grid-gap, var(--sl-gap, var(--sl-md)));
+    justify-items: var(--sl-justify);
+    align-items: var(--sl-align);
+    grid-template-columns: repeat(var(--_cols), minmax(var(--_gf), 1fr));
+  }
+
+  [sl-grid] > * {
+    min-inline-size: 0;
+  }
+
+  [sl-grid] > [sl-justify] {
+    justify-self: var(--sl-justify);
+  }
+
+  [sl-grid] > [sl-align] {
+    align-self: var(--sl-align);
+  }
+
+  /* span clamps to --_cap; bare or out-of-vocabulary spans every
+     track — the presence rule precedes so a known value wins */
+  [sl-grid] > [sl-grid--span] { grid-column: 1 / -1; }
+  [sl-grid] > [sl-grid--span="1"]  { grid-column: span 1; }
+  [sl-grid] > [sl-grid--span="2"]  { grid-column: span min(2, var(--_cap)); }
+  [sl-grid] > [sl-grid--span="3"]  { grid-column: span min(3, var(--_cap)); }
+  [sl-grid] > [sl-grid--span="4"]  { grid-column: span min(4, var(--_cap)); }
+  [sl-grid] > [sl-grid--span="5"]  { grid-column: span min(5, var(--_cap)); }
+  [sl-grid] > [sl-grid--span="6"]  { grid-column: span min(6, var(--_cap)); }
+  [sl-grid] > [sl-grid--span="7"]  { grid-column: span min(7, var(--_cap)); }
+  [sl-grid] > [sl-grid--span="8"]  { grid-column: span min(8, var(--_cap)); }
+  [sl-grid] > [sl-grid--span="9"]  { grid-column: span min(9, var(--_cap)); }
+  [sl-grid] > [sl-grid--span="10"] { grid-column: span min(10, var(--_cap)); }
+  [sl-grid] > [sl-grid--span="11"] { grid-column: span min(11, var(--_cap)); }
+  [sl-grid] > [sl-grid--span="12"] { grid-column: span min(12, var(--_cap)); }
+  [sl-grid] > [sl-grid--span="full"] { grid-column: 1 / -1; }
+}
+
+@layer attrs {
+  /* sl-grid-cols — explicit count per level; "auto" releases it back
+     to auto-fill. --_gf drops to 0 so tracks size to share —
+     unbreakable content overflows its cell, not the grid */
+  [sl-grid][sl-grid-cols="auto"] { --_cols: auto-fill; --_gf: min(var(--sl-grid-min), 100%); }
+  [sl-grid][sl-grid-cols="1"]  { --_cb: 1;  --_cols: var(--_n); --_gf: 0; }
+  [sl-grid][sl-grid-cols="2"]  { --_cb: 2;  --_cols: var(--_n); --_gf: 0; }
+  [sl-grid][sl-grid-cols="3"]  { --_cb: 3;  --_cols: var(--_n); --_gf: 0; }
+  [sl-grid][sl-grid-cols="4"]  { --_cb: 4;  --_cols: var(--_n); --_gf: 0; }
+  [sl-grid][sl-grid-cols="5"]  { --_cb: 5;  --_cols: var(--_n); --_gf: 0; }
+  [sl-grid][sl-grid-cols="6"]  { --_cb: 6;  --_cols: var(--_n); --_gf: 0; }
+  [sl-grid][sl-grid-cols="7"]  { --_cb: 7;  --_cols: var(--_n); --_gf: 0; }
+  [sl-grid][sl-grid-cols="8"]  { --_cb: 8;  --_cols: var(--_n); --_gf: 0; }
+  [sl-grid][sl-grid-cols="9"]  { --_cb: 9;  --_cols: var(--_n); --_gf: 0; }
+  [sl-grid][sl-grid-cols="10"] { --_cb: 10; --_cols: var(--_n); --_gf: 0; }
+  [sl-grid][sl-grid-cols="11"] { --_cb: 11; --_cols: var(--_n); --_gf: 0; }
+  [sl-grid][sl-grid-cols="12"] { --_cb: 12; --_cols: var(--_n); --_gf: 0; }
+
+  /* breakpoints mirror the container scale — media queries can't
+     read vars so the --sl-container-* twins stay hardcoded */
+  @media (width < 75rem) {
+    [sl-grid][sl-grid-cols-lg="auto"] { --_cols: auto-fill; --_gf: min(var(--sl-grid-min), 100%); }
+    [sl-grid][sl-grid-cols-lg="1"]  { --_cl: 1;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-lg="2"]  { --_cl: 2;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-lg="3"]  { --_cl: 3;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-lg="4"]  { --_cl: 4;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-lg="5"]  { --_cl: 5;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-lg="6"]  { --_cl: 6;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-lg="7"]  { --_cl: 7;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-lg="8"]  { --_cl: 8;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-lg="9"]  { --_cl: 9;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-lg="10"] { --_cl: 10; --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-lg="11"] { --_cl: 11; --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-lg="12"] { --_cl: 12; --_cols: var(--_n); --_gf: 0; }
+  }
+  @media (width < 60rem) {
+    [sl-grid][sl-grid-cols-md="auto"] { --_cols: auto-fill; --_gf: min(var(--sl-grid-min), 100%); }
+    [sl-grid][sl-grid-cols-md="1"]  { --_cm: 1;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-md="2"]  { --_cm: 2;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-md="3"]  { --_cm: 3;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-md="4"]  { --_cm: 4;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-md="5"]  { --_cm: 5;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-md="6"]  { --_cm: 6;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-md="7"]  { --_cm: 7;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-md="8"]  { --_cm: 8;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-md="9"]  { --_cm: 9;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-md="10"] { --_cm: 10; --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-md="11"] { --_cm: 11; --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-md="12"] { --_cm: 12; --_cols: var(--_n); --_gf: 0; }
+  }
+  @media (width < 45rem) {
+    [sl-grid][sl-grid-cols-sm="auto"] { --_cols: auto-fill; --_gf: min(var(--sl-grid-min), 100%); }
+    [sl-grid][sl-grid-cols-sm="1"]  { --_cs: 1;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-sm="2"]  { --_cs: 2;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-sm="3"]  { --_cs: 3;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-sm="4"]  { --_cs: 4;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-sm="5"]  { --_cs: 5;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-sm="6"]  { --_cs: 6;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-sm="7"]  { --_cs: 7;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-sm="8"]  { --_cs: 8;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-sm="9"]  { --_cs: 9;  --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-sm="10"] { --_cs: 10; --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-sm="11"] { --_cs: 11; --_cols: var(--_n); --_gf: 0; }
+    [sl-grid][sl-grid-cols-sm="12"] { --_cs: 12; --_cols: var(--_n); --_gf: 0; }
+  }
+}
