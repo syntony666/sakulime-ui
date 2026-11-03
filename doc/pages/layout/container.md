@@ -44,7 +44,7 @@ import * as ContainerDemos from "../../demos/layout/container.demo";
 
 調整寬度時，覆寫 `--sl-container-sm`／`--sl-container-md`／`--sl-container-lg`。
 
-三種寬度於外層背景下的比較：
+外層窄於寬度上限時，容器貼齊外層：
 
 <Demo :render="ContainerDemos.Widths.render" />
 

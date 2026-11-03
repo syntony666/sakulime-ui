@@ -37,13 +37,13 @@ export const Pads: Demo = {
 export const Widths: Demo = {
   render: () =>
     axis(
-      ["sm", "md", "lg"],
-      (v) =>
+      ["20rem", "34rem", "48rem"],
+      (w) =>
         frame(
-          `sl-container="${v}"`,
-          `<div style="background: var(--sl-secondary-bg)">` +
-            `<div sl-container="${v}" class="demo-frame">` +
-            `<span data-demo>內容區塊</span>` +
+          `外層 ${w}`,
+          `<div style="width: ${w}; max-width: 100%; background: var(--sl-secondary-bg)">` +
+            `<div sl-container="lg" style="border: 1px dashed var(--sl-border)">` +
+            `<div class="demo-cell">sl-container="lg"</div>` +
             `</div></div>`
         ),
       true
