@@ -1,6 +1,6 @@
 ---
 title: Wrap 橫列
-description: 水平排列子層，放不下就換行，間距由 sl-gap 統一給。
+description: 水平排列子層，寬度不足時自動換行，間距由共用屬性統一給定。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as WrapDemos from "../../demos/layout/wrap.demo";
 
 # Wrap *橫列*
 
-> 把子層水平排開，放不下就換行。按鈕群、標籤列這種一排小東西都適用。
+> 水平排列子層，寬度不足時自動換行。
 
 ## 用法
 
@@ -23,13 +23,13 @@ import * as WrapDemos from "../../demos/layout/wrap.demo";
 
 <Demo :render="WrapDemos.Flow.render" />
 
-子層垂直置中、寬度不動，總寬超過容器就整個換到下一行；換行時機看內容實際寬度，沒有固定斷點。
+子層垂直置中、寬度不變；總寬超過容器時，整列換到下一行。換行時機取決於內容的實際寬度，沒有固定斷點。
 
-底層是開了 `flex-wrap` 的 flexbox。跟 [`sl-grid`](/layout/grid) 的分工：子層寬度看內容、夠放幾個放幾個用 `sl-wrap`；每欄要等寬、欄數要固定的用 `sl-grid`。
+底層為啟用 `flex-wrap` 的 flexbox。與 [`sl-grid`](/layout/grid) 的分工如下。子層寬度依內容決定、欄數隨容器而變時用 `sl-wrap`；每欄等寬、欄數固定時用 `sl-grid`。
 
 ## 對齊
 
-子層預設從頭排起。置中、靠尾或攤開用 [`sl-justify`](/attrs/justify)，寫在 wrap 自己身上：
+子層預設自起點排起。置中、靠尾或平均分散用 [`sl-justify`](/attrs/justify)，寫在 wrap 自身：
 
 ```html
 <div sl-wrap sl-justify="end">
@@ -38,10 +38,9 @@ import * as WrapDemos from "../../demos/layout/wrap.demo";
 </div>
 ```
 
-垂直方向看 [`sl-align`](/attrs/align)：子層預設垂直置中，`start` 對齊列頂、`end` 對齊列底。`sl-align` 也能標在單一個子層上讓它離開共同對齊。
+垂直方向由 [`sl-align`](/attrs/align) 控制。子層預設垂直置中，`start` 對齊列頂、`end` 對齊列底。`sl-align` 亦可標在單一子層上，使該項離開共同對齊。
 ## 間距
 
-間距用 [`sl-gap`](/attrs/gap) 給，寫在 wrap 自己身上或外層上都行，預設 `md`。水平間距跟換行後的行距是同一個。
+間距由 [`sl-gap`](/attrs/gap) 給定，寫在 wrap 自身或外層皆可，預設 `md`。水平間距與換行後的行距為同一個值。
 
-只想改一個容器就寫 `--sl-wrap-gap`；`sl-gap` 標示在容器自己或外層都行，裡面未標示間距的排版元件會繼承這個間距。
-
+僅調整單一容器時，改寫 `--sl-wrap-gap`。

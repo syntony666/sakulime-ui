@@ -1,6 +1,6 @@
 ---
 title: Content 內文
-description: 內文欄，子層保留自己的 margin，相鄰之間由容器補節奏。
+description: 內文欄，子層保留自身的 margin，相鄰間距由容器補足。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as ContentDemos from "../../demos/layout/content.demo";
 
 # Content *內文*
 
-> 給文章、混排內容用的垂直欄。跟 `sl-stack` 相反：子層保留自己的 margin 跟自然寬度，容器只在相鄰子層之間補上間距節奏。
+> 供文章與混排內容使用的垂直欄，子層保留自身的 margin 與自然寬度。
 
 ## 用法
 
@@ -22,12 +22,14 @@ import * as ContentDemos from "../../demos/layout/content.demo";
 </article>
 ```
 
-排版是 block 不是 flex：子層自己的 margin 留下來，間距寫在後一個子層的上緣，跟前一個子層的下 margin 合併取大。卡片、通知這種沒 margin 的元件靠間距隔開，標題段落靠自己的節奏。最前面跟最後面的對外 margin 照樣清掉，欄位的上緣下緣不會一邊厚一邊薄。
+排版為 block，並非 flex。子層自身的 margin 保留，間距寫在後一個子層的上緣，與前一個子層的下 margin 合併取較大值。
 
-元件群要清掉 margin、寬度撐滿的話用 [`sl-stack`](/layout/stack)。
+卡片、通知等不帶 margin 的元件以間距隔開，標題與段落則依自身的節奏排列。最前與最後的對外 margin 仍會清除，欄位上下緣不會一側較厚。
+
+元件群須清除 margin、與容器同寬時，改用 [`sl-stack`](/layout/stack)。
 
 <Demo :render="ContentDemos.Rhythm.render" />
 
 ## 間距
 
-間距用 [`sl-gap`](/attrs/gap) 給，寫在自己或外層上，預設 `md`；單點覆寫用 `--sl-content-gap`。
+間距由 [`sl-gap`](/attrs/gap) 給定，寫在自身或外層，預設 `md`；僅調整單一容器時，覆寫 `--sl-content-gap`。
