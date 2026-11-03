@@ -48,7 +48,7 @@
   }
 
   [sl-notice][aria-disabled="true"] {
-    opacity: var(--sl-disabled-opacity, 0.5);
+    opacity: var(--sl-disabled-opacity);
     cursor: not-allowed;
   }
 

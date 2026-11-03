@@ -25,5 +25,7 @@
 
     --sl-z-bar: 50;
     --sl-z-float: 60;
+
+    --sl-disabled-opacity: 0.5;
   }
 }

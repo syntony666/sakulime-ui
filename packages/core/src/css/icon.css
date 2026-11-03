@@ -89,10 +89,9 @@
     border-radius: var(--sl-sm);
   }
 
-  /* quieter default than the button's .6 — an icon is decoration */
   [sl-icon][sl-icon-disabled],
   [sl-icon][aria-disabled="true"] {
-    opacity: var(--sl-disabled-opacity, 0.5);
+    opacity: var(--sl-disabled-opacity);
   }
   [sl-icon][sl-icon-space] {
     margin-inline: 0.3em;
