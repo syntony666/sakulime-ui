@@ -34,6 +34,19 @@ export const Align: Demo = {
     ),
 };
 
+export const Justify: Demo = {
+  render: () =>
+    axis(
+      ["-", "start", "center", "end", "between", "around", "evenly"],
+      (v) =>
+        frame(
+          v === "-" ? "未標示 → 預設 start" : `sl-justify="${v}"`,
+          `<div sl-stack${attr("sl-justify", v)} style="height: 10rem">${cells()}</div>`
+        ),
+      true
+    ),
+};
+
 export const Gaps: Demo = {
   render: () =>
     axis(

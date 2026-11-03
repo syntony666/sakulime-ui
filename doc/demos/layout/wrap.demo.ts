@@ -26,6 +26,32 @@ export const Flow: Demo = {
     `</div>`,
 };
 
+export const Justify: Demo = {
+  render: () =>
+    axis(
+      ["-", "start", "center", "end", "between", "around", "evenly"],
+      (v) =>
+        frame(
+          v === "-" ? "未標示 → 預設 start" : `sl-justify="${v}"`,
+          `<div sl-wrap${attr("sl-justify", v)} style="width: 20rem">${cells()}</div>`
+        ),
+      true
+    ),
+};
+
+export const Gaps: Demo = {
+  render: () =>
+    axis(
+      ["-", "sm", "md", "lg"],
+      (v) =>
+        frame(
+          v === "-" ? "未標示 → 預設 md" : `sl-gap="${v}"`,
+          `<div sl-wrap${attr("sl-gap", v)}>${cells()}</div>`
+        ),
+      true
+    ),
+};
+
 export const Align: Demo = {
   render: () =>
     axis(
