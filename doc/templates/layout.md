@@ -29,4 +29,6 @@
 - 預設值多數為 `md`，`sl-sidebar` 為 `lg`；覆寫變數為 `--sl-<x>-gap`
 - 級距表只存在於 `attrs/gap.md`，其他頁連過去，不重列。
 - 沒有間距設定的元件（例如 `container`）整節省略。
+- 每個章節都要有對應的 demo；同一節裡的不同情形分開示範，例如「用法」示一組、「對齊」示另一組、「跨欄」再一組。
+- 間距的 demo 要含「未標示」，說明文字寫出該元件的預設值（多數為 `md`，`sl-sidebar` 為 `lg`）。
 - demo 檔放 `doc/demos/layout/<name>.demo.ts`；純文字頁不建 demo 檔。
