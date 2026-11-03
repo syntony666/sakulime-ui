@@ -1,4 +1,5 @@
 import { fileURLToPath } from "node:url";
+// keep declared in doc/package.json: CF builds doc in isolation, root devDeps never reach it
 import customSelectors from "postcss-custom-selectors";
 import { defineConfig } from "vitepress";
 
