@@ -64,3 +64,10 @@ export const Variants: Demo = {
   render: () =>
     axis(VARIANTS, (v) => `<button ${marker(v)}>${label(v)}</button>`),
 };
+
+export const Disabled: Demo = {
+  render: () =>
+    `<button ${marker()}>一般</button>
+<button ${marker()} disabled>disabled</button>
+<button ${marker()} aria-disabled="true">aria-disabled</button>`,
+};
