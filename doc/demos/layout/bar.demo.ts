@@ -27,8 +27,8 @@ export const BarSpread: Demo = {
   render: () =>
     `<div sl-bar="top" style="position: static">` +
     `<div sl-bar--start class="demo-cell">Logo</div>` +
-    `<div sl-bar--center class="demo-cell">中間</div>` +
-    `<div sl-bar--end class="demo-cell">右邊</div>` +
+    `<div sl-bar--center class="demo-cell">中央</div>` +
+    `<div sl-bar--end class="demo-cell">終點</div>` +
     `</div>`,
 };
 

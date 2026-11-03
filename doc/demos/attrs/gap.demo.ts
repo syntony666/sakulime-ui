@@ -15,20 +15,20 @@ export const Alone: Demo = {
   render: () =>
     `<div class="axis-row col">` +
     frame(
-      'div 標示 sl-gap="2xl"',
+      'div 標示 sl-gap="2xl" → 無效果',
       `<div sl-gap="2xl">${cells()}</div>`
     ) +
-    frame("未標示", `<div>${cells()}</div>`) +
+    frame("未標示 → 無效果", `<div>${cells()}</div>`) +
     `</div>`,
 };
 
 export const Region: Demo = {
   render: () =>
     `<div sl-stack sl-gap="2xl">` +
-    frame("sl-stack 未標示 → 用 2xl", `<div sl-stack>${cells()}</div>`) +
-    frame("sl-wrap 未標示 → 用 2xl", `<div sl-wrap>${cells()}</div>`) +
-    frame("sl-grid 未標示 → 用 2xl", `<div sl-grid style="--sl-grid-min: 6rem">${cells()}</div>`) +
-    frame("sl-stack 自己給 sl-gap=\"xs\" → 還是 xs", `<div sl-stack sl-gap="xs">${cells()}</div>`) +
+    frame("sl-stack 未標示 → 取 2xl", `<div sl-stack>${cells()}</div>`) +
+    frame("sl-wrap 未標示 → 取 2xl", `<div sl-wrap>${cells()}</div>`) +
+    frame("sl-grid 未標示 → 取 2xl", `<div sl-grid style="--sl-grid-min: 6rem">${cells()}</div>`) +
+    frame("sl-stack 自帶 sl-gap=\"xs\" → 仍為 xs", `<div sl-stack sl-gap="xs">${cells()}</div>`) +
     `</div>`,
 };
 
@@ -39,7 +39,7 @@ export const Scale: Demo = {
       .map(
         (v) =>
           frame(
-            v === "-" ? "未標示（預設 md）" : `sl-gap="${v}"`,
+            v === "-" ? "未標示 → 預設 md" : `sl-gap="${v}"`,
             `<div sl-stack${v === "-" ? "" : ` sl-gap="${v}"`}>${cells(2)}</div>`
           )
       )

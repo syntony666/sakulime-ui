@@ -37,7 +37,7 @@ const meta = {
     spin: boolArg("sl-icon-spin", "旋轉動畫"),
     frame: axisArg("sl-icon-frame", "外框", ["-", "circular", "rounded"]),
     disabled: boolArg("sl-icon-disabled", "淡化"),
-    space: axisArg("sl-icon-space", "間距（both＝裸寫屬性，兩側都加）", ["-", "start", "end", "both"]),
+    space: axisArg("sl-icon-space", "間距（both 僅供示範，不寫屬性時兩側都加）", ["-", "start", "end", "both"]),
   },
 } satisfies Meta<IconArgs>;
 

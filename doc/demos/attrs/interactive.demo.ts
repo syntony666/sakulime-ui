@@ -15,11 +15,11 @@ export const Interactive: Demo = {
       frame(
         v === "-" ? "未標示" : `sl-interactive="${v}"`,
         `<div sl-wrap sl-align="center">` +
-          `<div sl-card${attr("sl-interactive", v)} style="width: 7rem; text-align: center">滑鼠移過來</div>` +
+          `<div sl-card${attr("sl-interactive", v)} style="width: 7rem; text-align: center">滑鼠移入</div>` +
           `<button sl-button${attr("sl-interactive", v)}>按鈕</button>` +
           `<span sl-chip${attr("sl-interactive", v)}>標籤</span>` +
         `</div>` +
-        `<div sl-notice sl-tone="secondary"${attr("sl-interactive", v)} style="margin-top: var(--sl-md)">通知也吃，浮框不會被滑鼠懸停效果蓋掉</div>`
+        `<div sl-notice sl-tone="secondary"${attr("sl-interactive", v)} style="margin-top: var(--sl-md)">通知同樣適用，陰影疊在浮框外，不會覆蓋框線</div>`
       )
     ),
 };

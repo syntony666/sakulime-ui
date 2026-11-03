@@ -37,7 +37,7 @@ const meta = {
   argTypes: {
     tone: axisArg("sl-tone", "顏色", TONES),
     variant: axisArg("sl-notice", "寬度", VARIANTS),
-    pad: axisArg("sl-pad", "厚度", PADS),
+    pad: axisArg("sl-pad", "內距", PADS),
     radius: axisArg("sl-radius", "圓角", RADII),
     align: axisArg("sl-notice-align", "對齊", ALIGNS),
   },
@@ -89,7 +89,7 @@ const endBtn = (a: string) => (a === "end" || a === "both" ? X_BTN : "");
 export const ActionPlay: DemoObj<ActionArgs> = {
   args: { action: "both", variant: "-" },
   argTypes: {
-    action: axisArg("sl-notice--action", "位置（both＝兩邊的 demo 便利選項）", ACTIONS),
+    action: axisArg("sl-notice--action", "位置（both 僅供示範，代表同時標兩側）", ACTIONS),
     variant: axisArg("sl-notice", "寬度", VARIANTS),
   },
   render: (a) =>
@@ -101,7 +101,7 @@ export const ActionPlay: DemoObj<ActionArgs> = {
 };
 
 const LONG =
-  "系統將於 11月2日 02:00–03:00 進行例行維護，期間 API 回應可能延遲，寫入操作會排入佇列，並於維護結束後自動重放，若有長時間執行中的工作請提前儲存。維護完成後會以浮動通知確認，期間如有異常請回報值班工程師。";
+  "系統將於 11月2日 02:00–03:00 進行例行維護，期間 API 回應可能延遲，寫入操作會排入佇列，並於維護結束後自動重新執行，若有長時間執行中的工作請提前儲存。維護完成後會以浮動通知確認，期間如有異常請回報值班工程師。";
 
 export const BannerPlay: DemoObj<BannerArgs> = {
   args: { variant: "-", icon: "有", lines: "單行", align: "-", action: "-" },
@@ -109,18 +109,18 @@ export const BannerPlay: DemoObj<BannerArgs> = {
     variant: axisArg("sl-notice", "寬度", VARIANTS),
     icon: {
       name: "圖示",
-      description: "無 icon 文字從邊緣起頭",
+      description: "無圖示時文字自邊緣開始",
       control: { type: "select" as const },
       options: ["有", "無"],
     },
     lines: {
       name: "內容",
-      description: "切多行看換行行為",
+      description: "多行內容的換行表現",
       control: { type: "select" as const },
       options: ["單行", "多行"],
     },
     align: axisArg("sl-notice-align", "對齊", ALIGNS),
-    action: axisArg("sl-notice--action", "動作位置（both＝兩邊的 demo 便利選項）", ACTIONS),
+    action: axisArg("sl-notice--action", "動作位置（both 僅供示範，代表同時標兩側）", ACTIONS),
   },
   render: (a) => {
     const text = a.lines === "多行" ? LONG : "排程維護將於 30 分鐘後開始";
@@ -147,7 +147,7 @@ export const ToastPlay: DemoObj<ToastArgs> = {
   argTypes: {
     count: {
       name: "數量",
-      description: "容器裡的通知條數",
+      description: "容器中的通知則數",
       control: { type: "select" as const },
       options: ["1", "2", "3"],
     },

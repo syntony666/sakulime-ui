@@ -8,7 +8,7 @@ export const Rhythm: Demo = {
   render: () =>
     `<article sl-content sl-gap="lg">` +
     `<h3>文件標題</h3>` +
-    `<p>標題跟段落保留自己的 margin，相鄰子層之間再補上間距節奏；卡片跟通知沒有 margin，距離就是間距本身。</p>` +
+    `<p>標題與段落保留自身的 margin，相鄰子層之間另補間距；卡片與通知不帶 margin，間距即為兩者距離。</p>` +
     `<div sl-card>卡片內容</div>` +
     `<div sl-notice>通知內容</div>` +
     `</article>`,

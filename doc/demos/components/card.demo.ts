@@ -50,7 +50,7 @@ const meta = {
     variant: axisArg("sl-card", "型態", VARIANTS),
     indicate: axisArg("sl-card-indicator", "標記邊緣", INDICATES),
     tone: axisArg("sl-tone", "顏色（搭配標記）", TONES),
-    interactive: axisArg("sl-interactive", "互動（滑鼠移過去）", INTERACTIVES),
+    interactive: axisArg("sl-interactive", "互動（滑鼠移入）", INTERACTIVES),
   },
 } satisfies Meta<CardArgs>;
 
@@ -109,9 +109,9 @@ export const Corner: DemoObj<CornerArgs> = {
   args: { position: "-", kind: "chip", tone: "-", size: "-" },
   argTypes: {
     position: axisArg("sl-card--corner", "位置", CORNERS),
-    kind: axisArg("組合", "角落內容：同元素疊加的 attr", CORNER_KINDS),
+    kind: axisArg("組合", "角落內容", CORNER_KINDS),
     tone: axisArg("sl-tone", "顏色", TONES),
-    size: axisArg("sl-size", "大小（chip 限定）", ["-", "sm", "md", "lg"]),
+    size: axisArg("sl-size", "尺寸（chip 限定）", ["-", "sm", "md", "lg"]),
   },
   render: (args) =>
     `<div sl-card style="max-width: 360px">` +
