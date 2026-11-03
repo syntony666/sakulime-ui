@@ -104,7 +104,9 @@ import "sakulime-ui/sakulime.min.css";
 
 ## 瀏覽器需求
 
-支援 `Safari 18+`、`Chrome 119+`、`Firefox 128+`。低於上述版本的瀏覽器未經驗證，不保證正常運作。
+支援 `Safari 18.2+`、`Chrome 123+`、`Firefox 128+`。
+
+低於上述版本時，`light-dark()` 或相對色語法缺失，主題色票會失效。
 
 ## 尺寸
 

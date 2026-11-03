@@ -83,7 +83,7 @@ description: sl-* 屬性語法總覽：元件標記、元件設定、子元素�
 </div>
 ```
 
-零件同樣獨立，不繼承元件的通用屬性。要上色時，把 `sl-tone` 寫在實際顯示顏色的元素上：
+零件不繼承元件的 `sl-tone`。要上色時，把 `sl-tone` 寫在實際顯示顏色的元素上：
 
 ```html
 <div sl-card>
@@ -91,6 +91,8 @@ description: sl-* 屬性語法總覽：元件標記、元件設定、子元素�
   <i sl-card--corner sl-dot sl-tone="danger"></i>
 </div>
 ```
+
+內距是例外。`sl-card--section` 會讀卡片的 `sl-pad`，卡片調整內距時，區塊跟著變。
 
 每個通用屬性都有專頁，收錄完整選項與行為。
 

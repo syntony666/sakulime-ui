@@ -33,7 +33,9 @@ padding 與 gap 皆以 em 為單位，整個膠囊隨字級等比縮放。
 
 膠囊標示後即呈現可點擊的外觀，游標變為手指，滑鼠移入時套用效果。
 
-`sl-interactive` 未標示時為 `grow`，效果選項見 [Interactive 互動效果](/attrs/interactive)。
+`sl-interactive` 未標示時為 `grow`。`aria-disabled="true"` 會淡化膠囊並停用效果。
+
+效果選項見 [Interactive 互動效果](/attrs/interactive)。
 
 ## 組合
 

@@ -22,7 +22,7 @@ import * as ContainerDemos from "../../demos/layout/container.demo";
 </div>
 ```
 
-標示於任何元素皆生效。此為純容器，不適用[通用屬性](/attrs)，需要底色與圓角時搭配 [`sl-card`](/core/card)。
+標示於任何元素皆生效。此為純容器，只讀取內距，不套用色調與圓角；需要底色與圓角時搭配 [`sl-card`](/core/card)。
 
 下方為實際容器，數字標籤顯示當下寬度，調整視窗寬度時隨之變化。視窗夠寬時 `lg` 為 75rem（1200px），變窄時貼齊邊緣。
 

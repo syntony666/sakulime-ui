@@ -47,6 +47,8 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 `sl-interactive` 未標示時為 `grow`；`shadow` 與 `lift` 的陰影疊在浮框外，不覆蓋框線。
 
+`aria-disabled="true"` 會淡化通知並停用效果。
+
 效果選項見 [Interactive 互動效果](/attrs/interactive)。
 
 ## 元件設定
