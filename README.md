@@ -61,10 +61,12 @@ npm workspaces monorepo. `packages/` holds the internal workspace; four public e
 | `dist/sakulime.min.css` | everything: core bundle + layout |
 | `doc/` | doc site, deployed via Workers static assets (`doc/wrangler.toml`) |
 
-Inside each package:
+Inside `packages/core`:
 
 - `src/css/*.css` — component styles (demos live in `doc/demos/`)
 - `src/index.ts` — package entry
+
+`packages/layout/src/*.css` holds the layout primitives; `packages/theme/*.css` holds the three palettes.
 
 ## Contributing
 
