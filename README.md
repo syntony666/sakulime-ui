@@ -5,7 +5,7 @@
 
 [![view - Documentation](https://img.shields.io/badge/view-Documentation-f97316?style=for-the-badge)](https://sakulime-ui.syntony666.com)
 
-A CSS-first design system with no framework runtime — React, Vue, Svelte, or plain HTML all work. Two things only: `sl-*` attributes for components, state, and layout, plus `--sl-*` variables for color and size; `class` stays entirely yours. `sakulime-ui` ships everything in one file; `@sakulime-ui/core`, `@sakulime-ui/layout`, and `@sakulime-ui/theme` are the individual entries; `doc` is the Sakulime UI doc site deployed to Cloudflare Workers.
+A CSS-first design system with no framework runtime — React, Vue, Svelte, or plain HTML all work. Two things only: `sl-*` attributes for components, state, and layout, plus `--sl-*` variables for color and size; `class` stays entirely yours.
 
 ## Usage
 
@@ -13,7 +13,7 @@ A CSS-first design system with no framework runtime — React, Vue, Svelte, or p
 import "sakulime-ui/sakulime.min.css";
 ```
 
-Variables, all three themes (`sakulime`, `terra`, `umbra`), components, and layout ship in that single file. Switch themes with `<html data-theme="terra">` — no reload needed.
+One file ships everything: variables, all three themes (`sakulime`, `terra`, `umbra`), components, and layout. Switch themes with `<html data-theme="terra">` — no reload needed.
 
 ```html
 <button sl-button>Save</button>
@@ -27,7 +27,7 @@ Variables, all three themes (`sakulime`, `terra`, `umbra`), components, and layo
 |---|---|
 | Components (with colors) | `@sakulime-ui/core/index.min.css` |
 | Layout | `@sakulime-ui/layout/index.min.css` |
-| Theme palettes only | `@sakulime-ui/theme/sakulime.min.css` |
+| Theme palettes only | `@sakulime-ui/theme/sakulime.css` |
 
 ## Development
 
@@ -44,29 +44,27 @@ npm run lint
 
 Tests run the fixture pages under headless chromium — `tests/run.mjs` looks for `~/.local/bin/chromium` by default; set `SL_CHROMIUM` to point elsewhere.
 
-## Releases (changesets)
+## Releases
 
-Day-to-day work lives on `release/x.y.z`; merging into `master` makes CI open a release PR, and merging that publishes the four packages to npm (`fixed` lockstep). The doc site deploys independently on `master` pushes. Workflow details in [CONTRIBUTING.md](CONTRIBUTING.md).
+Day-to-day work lives on `release/x.y.z`; merging into `master` makes CI open a release PR, and merging that publishes the four packages to npm (`fixed` lockstep). The doc site deploys independently on `master` pushes. Details in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Repository layout (npm workspaces monorepo)
+## Repository layout
 
-`packages/` is the internal workspace area. Four public entries: `sakulime-ui` (everything), `@sakulime-ui/core`, `@sakulime-ui/layout`, `@sakulime-ui/theme`.
+npm workspaces monorepo. `packages/` holds the internal workspace; four public entries: `sakulime-ui` (everything), `@sakulime-ui/core`, `@sakulime-ui/layout`, `@sakulime-ui/theme`.
 
 | Path | Contents |
 |---|---|
 | `packages/shared` | `--sl-*` variables (internal, unpublished) — bundled into each entry at build time |
-| `packages/theme` | theme palettes, minified to `dist/<name>.min.css` |
-| `packages/core` | component entry: variables + themes + components → `index.min.css` / `index.min.js` |
-| `packages/layout` | layout entry: variables + layout → `index.min.css` |
+| `packages/theme` | theme palettes → `dist/<name>.min.css` |
+| `packages/core` | components + themes → `index.min.css` / `index.min.js` |
+| `packages/layout` | layout primitives → `index.min.css` |
 | `dist/sakulime.min.css` | everything: core bundle + layout |
-| `doc/` | Sakulime UI doc site, deployed via Workers static assets (`doc/wrangler.toml`) |
+| `doc/` | doc site, deployed via Workers static assets (`doc/wrangler.toml`) |
 
 Inside each package:
 
 - `src/css/*.css` — component styles (demos live in `doc/demos/`)
-- `src/index.ts` — core lib entry (extracts css + js entry)
-
-The split: `sl-*` attributes carry component markup, state modifiers, and layout — `class` is left to consumers and never collides with the system.
+- `src/index.ts` — package entry
 
 ## Contributing
 
