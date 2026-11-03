@@ -1,13 +1,13 @@
 ---
-title: Grid 網格系統
-description: 依容器寬度自動分欄的網格系統，欄數亦可固定。
+title: Grid 網格
+description: 依容器寬度自動分欄的網格，欄數亦可固定。
 ---
 
 <script setup>
 import * as GridDemos from "../../demos/layout/grid.demo";
 </script>
 
-# Grid *網格系統*
+# Grid *網格*
 
 > 把子層排成網格，欄數隨容器寬度自適應。
 

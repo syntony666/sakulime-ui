@@ -1,5 +1,5 @@
 ---
-title: Interactive 互動
+title: Interactive 互動效果
 description: 滑鼠移入時觸發的動態效果，可設定放大、位移、陰影與亮度。
 ---
 
@@ -7,7 +7,7 @@ description: 滑鼠移入時觸發的動態效果，可設定放大、位移、�
 import * as InteractiveDemos from "../../demos/attrs/interactive.demo";
 </script>
 
-# Interactive *互動*
+# Interactive *互動效果*
 
 > 設定滑鼠移入時套用的動態效果。
 

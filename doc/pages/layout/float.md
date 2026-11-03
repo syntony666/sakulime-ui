@@ -1,5 +1,5 @@
 ---
-title: Float 角落區
+title: Float 浮動角落
 description: 固定於視窗角落的通知容器，可指定落點。
 ---
 
@@ -7,7 +7,7 @@ description: 固定於視窗角落的通知容器，可指定落點。
 import * as FloatDemos from "../../demos/layout/float.demo";
 </script>
 
-# Float *角落區*
+# Float *浮動角落*
 
 > 把通知堆疊在視窗角落的固定容器。
 

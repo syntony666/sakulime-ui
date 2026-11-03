@@ -41,13 +41,13 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 未標示時為 `sm`。`md` 與 `lg` 為整體內距的增減，`lg` 適合多行的公告內容。選項見 [Pad 內距](/attrs/pad)。
 
-### 互動 `sl-interactive`
+### 互動效果 `sl-interactive`
 
 通知標示後即呈現可點擊的外觀，游標變為手指，滑鼠移入時套用效果。
 
 `sl-interactive` 未標示時為 `grow`；`shadow` 與 `lift` 的陰影疊在浮框外，不覆蓋框線。
 
-效果選項見 [Interactive 互動](/attrs/interactive)。
+效果選項見 [Interactive 互動效果](/attrs/interactive)。
 
 ## 元件設定
 
@@ -90,6 +90,6 @@ import * as NoticeDemos from "../../demos/components/notice.demo";
 
 ### Toast *浮動通知*
 
-角落位置、堆疊方式與消失時機皆由頁面決定；角落容器見 [Float 角落區](/layout/float)：
+角落位置、堆疊方式與消失時機皆由頁面決定；角落容器見 [Float 浮動角落](/layout/float)：
 
 <Playground :meta="NoticeDemos.ToastPlay" :render="NoticeDemos.ToastPlay.render" />

@@ -1,5 +1,5 @@
 ---
-title: Content 內文
+title: Content 內文欄
 description: 內文欄，子層保留自身的 margin，相鄰間距由容器補足。
 ---
 
@@ -7,7 +7,7 @@ description: 內文欄，子層保留自身的 margin，相鄰間距由容器補
 import * as ContentDemos from "../../demos/layout/content.demo";
 </script>
 
-# Content *內文*
+# Content *內文欄*
 
 > 供文章與混排內容使用的垂直欄，子層保留自身的 margin 與自然寬度。
 

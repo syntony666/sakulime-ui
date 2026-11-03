@@ -1,5 +1,5 @@
 ---
-title: Wrap 橫列
+title: Wrap 換行橫列
 description: 水平排列子層，寬度不足時自動換行，間距由共用屬性統一給定。
 ---
 
@@ -7,7 +7,7 @@ description: 水平排列子層，寬度不足時自動換行，間距由共用�
 import * as WrapDemos from "../../demos/layout/wrap.demo";
 </script>
 
-# Wrap *橫列*
+# Wrap *換行橫列*
 
 > 水平排列子層，寬度不足時自動換行。
 

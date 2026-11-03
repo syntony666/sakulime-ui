@@ -44,11 +44,11 @@ import * as ButtonDemos from "../../demos/components/button.demo";
 
 `sl-button` 為 `sl-radius` 的適用元件，未標示時為 `md`。選項見 [Radius 圓角](/attrs/radius)。
 
-### 互動 `sl-interactive`
+### 互動效果 `sl-interactive`
 
 `sl-button` 為 `sl-interactive` 的適用元件。未標示時，滑鼠移入即為 `grow` 放大。
 
-標示後改用指定效果，選項見 [Interactive 互動](/attrs/interactive)。
+標示後改用指定效果，選項見 [Interactive 互動效果](/attrs/interactive)。
 
 ### 停用
 

@@ -9,7 +9,7 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 # Card *卡片*
 
-> 帶底色、細框線、圓角與內距的內容容器。
+> 帶底色、細框線、圓角與內距的內容區塊。
 
 <Playground :meta="CardDemos.default" :render="CardDemos.Card.render" />
 
@@ -45,11 +45,11 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 `sl-card` 為 `sl-pad` 的適用元件，未標示時為 `md`。選項見 [Pad 內距](/attrs/pad)。
 
-### 互動 `sl-interactive`
+### 互動效果 `sl-interactive`
 
 卡片標示後即呈現可點擊的外觀，游標變為手指，滑鼠移入時套用效果。
 
-`sl-interactive` 未標示時為 `grow`，效果選項見 [Interactive 互動](/attrs/interactive)。
+`sl-interactive` 未標示時為 `grow`，效果選項見 [Interactive 互動效果](/attrs/interactive)。
 
 需要點擊跳頁時，將屬性寫在 `<a>` 上，卡片本身即為連結：
 
