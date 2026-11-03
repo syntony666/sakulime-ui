@@ -1,10 +1,19 @@
 import type { Meta, DemoObj } from "../util/types";
-import { axis, attr, TONES } from "../util/axis";
-import "../util/icons";
+import { axis, axisArg, attr, TONES } from "../util/axis";
 
-const meta = {} satisfies Meta;
+type PlayArgs = { tone: string };
+
+const meta = {
+  args: { tone: "-" },
+  argTypes: { tone: axisArg("sl-tone", "色調", TONES) },
+} satisfies Meta<PlayArgs>;
 export default meta;
-type Demo = DemoObj;
+type Demo = DemoObj<PlayArgs>;
+
+export const Play: Demo = {
+  render: (a = { tone: "-" }) =>
+    `<button sl-button${attr("sl-tone", a.tone)}>按鈕</button>`,
+};
 
 const frame = (caption: string, inner: string) =>
   `<div class="demo-cell"><span class="demo-w" data-demo>${caption}</span>` +
@@ -15,12 +24,7 @@ export const Tones: Demo = {
     axis(TONES, (v) =>
       frame(
         v === "-" ? "未標示" : `sl-tone="${v}"`,
-        `<div sl-wrap>` +
-          `<button sl-button${attr("sl-tone", v)}>按鈕</button>` +
-          `<span sl-chip${attr("sl-tone", v)}>膠囊</span>` +
-          `<i sl-dot${attr("sl-tone", v)}></i>` +
-          `<i sl-icon="lucide:star"${attr("sl-tone", v)}></i>` +
-          `</div>`
+        `<button sl-button${attr("sl-tone", v)}>按鈕</button>`
       )
     ),
 };

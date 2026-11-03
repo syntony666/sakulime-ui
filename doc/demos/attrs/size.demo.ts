@@ -1,9 +1,21 @@
 import type { Meta, DemoObj } from "../util/types";
-import { axis, attr } from "../util/axis";
+import { axis, axisArg, attr } from "../util/axis";
 
-const meta = {} satisfies Meta;
+type PlayArgs = { size: string };
+
+const SIZES = ["-", "sm", "md", "lg"];
+
+const meta = {
+  args: { size: "-" },
+  argTypes: { size: axisArg("sl-size", "尺寸", SIZES) },
+} satisfies Meta<PlayArgs>;
 export default meta;
-type Demo = DemoObj;
+type Demo = DemoObj<PlayArgs>;
+
+export const Play: Demo = {
+  render: (a = { size: "-" }) =>
+    `<button sl-button${attr("sl-size", a.size)}>按鈕</button>`,
+};
 
 const frame = (caption: string, inner: string) =>
   `<div class="demo-cell"><span class="demo-w" data-demo>${caption}</span>` +
@@ -14,10 +26,7 @@ export const Sizes: Demo = {
     axis(["sm", "md", "lg"], (v) =>
       frame(
         `sl-size="${v}"`,
-        `<div sl-wrap>` +
-          `<button sl-button${attr("sl-size", v)}>按鈕</button>` +
-          `<span sl-chip${attr("sl-size", v)}>膠囊</span>` +
-        `</div>`
+        `<button sl-button${attr("sl-size", v)}>按鈕</button>`
       )
     ),
 };
