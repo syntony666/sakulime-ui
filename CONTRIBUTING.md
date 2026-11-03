@@ -11,7 +11,7 @@
 
 ## Setup
 
-Node.js 22+.
+Node.js 24+ (CI runs 24).
 
 ```bash
 npm install
@@ -48,7 +48,7 @@ npm run site         # also verify the static site when touching doc/
 
 ## Component CSS rules
 
-- Generic attributes (`sl-tone`, `sl-size`, `sl-radius`, `sl-pad`, `sl-interactive`) live in `css/generic.css`. Each expands through its own `@custom-selector` consumer list and only ever sets `--sl-*` slot variables, never physical properties
+- Generic attributes expand through `@custom-selector` consumer lists and only ever set `--sl-*` slot variables, never physical properties. Core-side ones (`sl-tone`, `sl-size`, `sl-radius`, `sl-pad`, `sl-interactive`) live in `css/generic.css`; layout-side ones (`sl-gap`, `sl-justify`, `sl-align`) live in `packages/layout/src/`. `sl-pad` has a second consumer list in `layout/pad.css` (`sl-container`, `sl-bar`) kept identical to generic.css's — update both when changing the scale
 - A component that reads a slot must self-default it inside its own `@layer base` rule. That default is what seals a generic attribute set on an ancestor from leaking in
 - Component parts (`sl-card--corner`, `sl-card--section`) never self-default — a part that reads a slot inherits it from its component (a section follows the card's `--sl-pad`). Adding a part to a consumer list still lets the attribute work when written on the part itself
 - Component-specific attributes are namespaced `sl-<comp>-<attr>`; the marker value carries the variant (`sl-card="hollow"`), a bare marker means the default variant
