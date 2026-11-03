@@ -184,6 +184,11 @@
     cursor: pointer;
   }
 
+  [sl-card][aria-disabled="true"] {
+    opacity: var(--sl-disabled-opacity);
+    cursor: not-allowed;
+  }
+
   /* bg sections own the gap to the next divider and bleed to the
      card edges at the extremes — same (0,3,0) + double-:not idioms
      as the edge rules above */

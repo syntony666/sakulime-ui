@@ -345,6 +345,7 @@ function main() {
   eq('card interactive cursor', cs('card-int', 'cursor'), 'pointer');
   eq('chip interactive cursor', cs('chip-i', 'cursor'), 'pointer');
   neq('card aria-disabled cursor', cs('card-int-ad', 'cursor'), 'pointer');
+  eq('card aria-disabled opacity', cs('card-int-ad', 'opacity'), '0.5');
   eq('btn aria-disabled cursor', cs('btn-aria', 'cursor'), 'not-allowed');
   rec('notice start lane', cs('nt-acts', 'padding-left'), '>50px', px(cs('nt-acts', 'padding-left')) > 50);
   rec('corner start left of end', rect('corner-start').right + 'px', '<=' + rect('corner-end').left,

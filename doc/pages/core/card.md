@@ -51,6 +51,8 @@ import * as CardDemos from "../../demos/components/card.demo";
 
 `sl-interactive` 未標示時為 `grow`，效果選項見 [Interactive 互動效果](/attrs/interactive)。
 
+`aria-disabled="true"` 會淡化卡片並停用效果。
+
 需要點擊跳頁時，將屬性寫在 `<a>` 上，卡片本身即為連結：
 
 ```html
