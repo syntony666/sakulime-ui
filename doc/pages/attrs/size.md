@@ -18,7 +18,9 @@ import * as SizeDemos from "../../demos/attrs/size.demo";
 <span sl-chip sl-size="lg">大膠囊</span>
 ```
 
-`sl-button` 調整高度、字級與水平內距；`sl-chip` 僅套用字級，整個膠囊連帶等比縮放：
+<Playground :meta="SizeDemos.default" :render="SizeDemos.Play.render" />
+
+`sl-button` 調整高度、字級與水平內距：
 
 <Demo :render="SizeDemos.Sizes.render" />
 

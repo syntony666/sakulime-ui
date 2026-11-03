@@ -18,7 +18,9 @@ import * as RadiusDemos from "../../demos/attrs/radius.demo";
 <button sl-button sl-radius="none">按鈕</button>
 ```
 
-五階套用在元件上的效果：
+<Playground :meta="RadiusDemos.default" :render="RadiusDemos.Play.render" />
+
+五階套用在卡片上的效果：
 
 <Demo :render="RadiusDemos.Radius.render" />
 

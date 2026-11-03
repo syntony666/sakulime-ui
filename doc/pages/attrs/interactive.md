@@ -20,6 +20,8 @@ import * as InteractiveDemos from "../../demos/attrs/interactive.demo";
 
 滑鼠移入後方可看出差異：
 
+<Playground :meta="InteractiveDemos.default" :render="InteractiveDemos.Play.render" />
+
 <Demo :render="InteractiveDemos.Interactive.render" />
 
 ## 選項

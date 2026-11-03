@@ -21,6 +21,8 @@ import * as JustifyDemos from "../../demos/attrs/justify.demo";
 
 須寫在排版元件自身。寫於外層時，內部元件仍套用自己的預設值，外層設定不生效。
 
+<Playground :meta="JustifyDemos.default" :render="JustifyDemos.Play.render" />
+
 各選項的效果：
 
 <Demo :render="JustifyDemos.Justify.render" />

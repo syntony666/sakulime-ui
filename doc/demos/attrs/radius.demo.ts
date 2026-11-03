@@ -1,9 +1,21 @@
 import type { Meta, DemoObj } from "../util/types";
-import { axis, attr } from "../util/axis";
+import { axis, axisArg, attr } from "../util/axis";
 
-const meta = {} satisfies Meta;
+type PlayArgs = { radius: string };
+
+const RADII = ["-", "none", "sm", "md", "lg", "full"];
+
+const meta = {
+  args: { radius: "-" },
+  argTypes: { radius: axisArg("sl-radius", "圓角", RADII) },
+} satisfies Meta<PlayArgs>;
 export default meta;
-type Demo = DemoObj;
+type Demo = DemoObj<PlayArgs>;
+
+export const Play: Demo = {
+  render: (a = { radius: "-" }) =>
+    `<div sl-card${attr("sl-radius", a.radius)}>卡片</div>`,
+};
 
 const frame = (caption: string, inner: string) =>
   `<div class="demo-cell"><span class="demo-w" data-demo>${caption}</span>` +

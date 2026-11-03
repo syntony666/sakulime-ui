@@ -23,6 +23,8 @@ import * as GapDemos from "../../demos/attrs/gap.demo";
 
 `sl-gap` 寫入可繼承的 `--sl-gap` 變數。寫於外層時，內部所有讀取間距的排版元件皆一併生效，整區的間距一次設定完成。
 
+<Playground :meta="GapDemos.default" :render="GapDemos.Play.render" />
+
 內層另行設定時，以最近的一層為準：
 
 <Demo :render="GapDemos.Region.render" />

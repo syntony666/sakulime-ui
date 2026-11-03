@@ -18,6 +18,8 @@ import * as PadDemos from "../../demos/attrs/pad.demo";
 <div sl-notice sl-pad="sm">通知</div>
 ```
 
+<Playground :meta="PadDemos.default" :render="PadDemos.Play.render" />
+
 卡片的三階內距：
 
 <Demo :render="PadDemos.Cards.render" />
