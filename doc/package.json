@@ -16,6 +16,7 @@
     "@sakulime-ui/layout": "*",
     "@sakulime-ui/shared": "*",
     "@sakulime-ui/theme": "*",
+    "postcss-custom-selectors": "^9.0.4",
     "vitepress": "^1.6.4",
     "wrangler": "^4.45.0"
   }
