@@ -1,6 +1,6 @@
 ---
 title: Tone 色調
-description: 五個主題色調，元件會依色調自動搭配背景與文字顏色。
+description: 元件色調，會自動搭配對應的背景與文字顏色。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as ToneDemos from "../../demos/attrs/tone.demo";
 
 # Tone *色調*
 
-> 五個色調。元件會依色調自動套用對應的背景與文字顏色。
+> 設定元件的色調，連帶決定背景與文字顏色。
 
 ## 用法
 
@@ -40,7 +40,7 @@ import * as ToneDemos from "../../demos/attrs/tone.demo";
 | --- | --- |
 | [`sl-button`](/core/button) | `primary` |
 | [`sl-card`](/core/card) | `primary`，只作用於邊緣強調條，卡片底色不變 |
-| [`sl-icon`](/core/icon) | 跟隨文字顏色 |
-| [`sl-dot`](/core/dot) | 跟隨文字顏色 |
+| [`sl-icon`](/core/icon) | 隨文字顏色 |
+| [`sl-dot`](/core/dot) | 隨文字顏色 |
 | [`sl-chip`](/core/chip) | 中性底色，由文字顏色推導 |
 | [`sl-notice`](/core/notice) | `primary` 的淺色底 |

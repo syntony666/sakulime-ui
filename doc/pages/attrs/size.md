@@ -1,6 +1,6 @@
 ---
 title: Size 尺寸
-description: 三階尺寸，同時調整字級、高度與水平內距。
+description: 元件尺寸，連帶調整字級、高度與水平內距。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as SizeDemos from "../../demos/attrs/size.demo";
 
 # Size *尺寸*
 
-> 三階尺寸，同時調整字級、高度與水平內距。
+> 設定元件的尺寸，連帶調整字級、高度與水平內距。
 
 ## 用法
 
@@ -18,13 +18,13 @@ import * as SizeDemos from "../../demos/attrs/size.demo";
 <span sl-chip sl-size="lg">大膠囊</span>
 ```
 
-`sl-button` 調整高度、字級與水平內距；`sl-chip` 只套用字級，整個膠囊連帶等比縮放：
+`sl-button` 調整高度、字級與水平內距；`sl-chip` 僅套用字級，整個膠囊連帶等比縮放：
 
 <Demo :render="SizeDemos.Sizes.render" />
 
 ## 選項
 
-px 以根字級 16px 換算，刻度本身為 rem。高度適用於 `sl-button`，`sl-chip` 只取字級：
+表中 px 值以根字級 16px 換算，級距本身以 rem 定義。高度適用於 `sl-button`，`sl-chip` 僅套用字級：
 
 | 選項 | 字級 | 高度 |
 | --- | --- | --- |
@@ -41,4 +41,4 @@ px 以根字級 16px 換算，刻度本身為 rem。高度適用於 `sl-button`�
 | 元件 | 作用 |
 | --- | --- |
 | [`sl-button`](/core/button) | 高度、字級與水平內距 |
-| [`sl-chip`](/core/chip) | 只套用字級，整體等比縮放 |
+| [`sl-chip`](/core/chip) | 僅套用字級，整體等比縮放 |

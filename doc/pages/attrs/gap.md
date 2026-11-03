@@ -1,6 +1,6 @@
 ---
 title: Gap 間距
-description: 排版層唯一的間距屬性，寫在排版元件自身或外層，取最近的一層。
+description: 排版層唯一的間距屬性，由外層繼承，內層就近覆寫。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as GapDemos from "../../demos/attrs/gap.demo";
 
 # Gap *間距*
 
-> 排版層唯一的間距屬性。排版元件不自行存放間距，一律由 `sl-gap` 提供。
+> 設定排版元件之間的間距，整個排版層只有這一個間距屬性。
 
 ## 用法
 
@@ -21,19 +21,23 @@ import * as GapDemos from "../../demos/attrs/gap.demo";
 </div>
 ```
 
-`sl-gap` 寫入可繼承的 `--sl-gap` 槽位。寫在外層時，內部所有讀取間距的排版元件一併生效，整區的節奏可以一次給齊。內層另行設定時，取最近的一層：
+`sl-gap` 寫入可繼承的 `--sl-gap` 變數。寫於外層時，內部所有讀取間距的排版元件皆一併生效，整區的間距一次設定完成。
+
+內層另行設定時，以最近的一層為準：
 
 <Demo :render="GapDemos.Region.render" />
 
-只想調整單一元件、又不願更動屬性時，可改寫該元件的變數：`--sl-stack-gap`、`--sl-content-gap`、`--sl-wrap-gap`、`--sl-grid-gap`、`--sl-sidebar-gap`、`--sl-float-gap`、`--sl-bar-gap`。這些變數優先於繼承而來的 `--sl-gap`，刻度以外的值（例如 `6px`）也走這條路徑。
+僅需調整單一元件、且不改動屬性時，可改寫該元件的 `--sl-<元件>-gap`，例如 `--sl-stack-gap`。
 
-`sl-gap` 只提供數值，本身不參與排版。內部沒有讀取它的元件時，標示與否結果相同：
+這些變數優先於繼承而來的 `--sl-gap`；級距以外的值（例如 `6px`）沒有對應的選項，須寫入這些變數。
+
+`sl-gap` 僅提供數值，本身不參與排版。內部沒有讀取它的元件時，標示與否結果相同：
 
 <Demo :render="GapDemos.Alone.render" />
 
 ## 選項
 
-px 以根字級 16px 換算，刻度本身為 rem。`sl-gap` 沒有預設值，未標示等同未設定；各排版元件另有自己的預設間距，多數為 `md`，`sl-sidebar` 為 `lg`：
+表中 px 值以根字級 16px 換算，級距本身以 rem 定義。`sl-gap` 沒有預設值，未標示即未設定；各排版元件另有預設間距，多數為 `md`，`sl-sidebar` 為 `lg`：
 
 | 選項 | 間距 |
 | --- | --- |
@@ -52,7 +56,7 @@ px 以根字級 16px 換算，刻度本身為 rem。`sl-gap` 沒有預設值，�
 
 ## 適用元件
 
-讀取 `sl-gap` 的皆為排版元件，詳見[排版](/layout/)一章：
+讀取 `sl-gap` 的皆為排版元件，詳見 [排版](/layout/)：
 
 | 分類 | 元件 |
 | --- | --- |

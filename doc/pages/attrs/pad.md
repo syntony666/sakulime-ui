@@ -1,6 +1,6 @@
 ---
 title: Pad 內距
-description: 元件內距三階與歸零，預設值與作用範圍各異。
+description: 元件本身的內距，預設值與作用範圍各異。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as PadDemos from "../../demos/attrs/pad.demo";
 
 # Pad *內距*
 
-> 元件本身的內距，三階與歸零。部分元件只作用於上下或左右。
+> 設定元件本身的內距，部分元件僅套用於單一方向。
 
 ## 用法
 

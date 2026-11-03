@@ -1,6 +1,6 @@
 ---
 title: Radius 圓角
-description: 五階圓角，full 依元件而定。
+description: 元件邊角的圓弧，最大一階依元件而有不同上限。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as RadiusDemos from "../../demos/attrs/radius.demo";
 
 # Radius *圓角*
 
-> 五階圓角，`none` 是直角，`full` 依元件而有不同取值。
+> 設定元件邊角的圓弧，最大一階依元件而有不同上限。
 
 ## 用法
 
