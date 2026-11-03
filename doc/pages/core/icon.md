@@ -161,7 +161,7 @@ registerPack("lucide", lucide);   // 整包 Iconify JSON 一次掛上
 
 ### 淡化 `sl-icon-disabled`
 
-圖示降到 40% 不透明。透明度是共用 hook `--sl-disabled-opacity`（這裡預設 `0.4`）。
+圖示降到 50% 不透明。透明度是共用 hook `--sl-disabled-opacity`（這裡預設 `0.5`）。
 
 <Demo :render="IconDemos.Disabled.render" />
 

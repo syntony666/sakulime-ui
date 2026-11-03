@@ -209,8 +209,8 @@ function main() {
   has('btn interactive lift slot', cs('btn-i2', '--sl-interactive-transform'), 'translateY(-4px)');
   match('btn interactive press slot', cs('btn-i3', '--sl-interactive-transform'), /scale\((0)?\.97\)/);
   has('btn interactive dim slot', cs('btn-i4', '--sl-interactive-filter'), 'brightness');
-  eq('btn aria-disabled opacity', cs('btn-aria', 'opacity'), '0.6');
-  eq('btn :disabled opacity', cs('btn-dis', 'opacity'), '0.6');
+  eq('btn aria-disabled opacity', cs('btn-aria', 'opacity'), '0.5');
+  eq('btn :disabled opacity', cs('btn-dis', 'opacity'), '0.5');
   eq('btn :disabled cursor', cs('btn-dis', 'cursor'), 'not-allowed');
   near('btn radius md = --sl-sm', cs('btn-rm', 'border-top-left-radius'), varPx('--sl-sm'));
   near('btn size md fs = --sl-lg', cs('btn-szm', 'font-size'), varPx('--sl-lg'));
@@ -298,8 +298,8 @@ function main() {
   eq('icon rotate 90', cs('ic-r90', 'rotate'), '90deg');
   eq('icon rotate 180', cs('ic-r180', 'rotate'), '180deg');
   eq('icon rotate 270', cs('ic-r270', 'rotate'), '270deg');
-  eq('icon disabled opacity', cs('ic-dis', 'opacity'), '0.4');
-  eq('icon aria-disabled opacity', cs('ic-aria', 'opacity'), '0.4');
+  eq('icon disabled opacity', cs('ic-dis', 'opacity'), '0.5');
+  eq('icon aria-disabled opacity', cs('ic-aria', 'opacity'), '0.5');
   near('icon space margin', cs('ic-sp', 'margin-left'), 4.8);
   near('icon space start margin', cs('ic-sps', 'margin-left'), 4.8);
   eq('icon space start no right', cs('ic-sps', 'margin-right'), '0px');

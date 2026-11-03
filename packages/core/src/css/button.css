@@ -32,7 +32,7 @@
 
   [sl-button]:disabled,
   [sl-button][aria-disabled="true"] {
-    opacity: var(--sl-disabled-opacity, 0.6);
+    opacity: var(--sl-disabled-opacity, 0.5);
     cursor: not-allowed;
   }
 

@@ -48,6 +48,6 @@ import * as ButtonDemos from "../../demos/components/button.demo";
 
 ### 停用
 
-`disabled` 或 `aria-disabled="true"` 皆使按鈕淡化、游標顯示為禁用，hover 不再放大。透明度由共用 hook `--sl-disabled-opacity` 控制（預設 `0.6`）；調整全站可於 `:root` 覆寫。
+`disabled` 或 `aria-disabled="true"` 皆使按鈕淡化、游標顯示為禁用，hover 不再放大。透明度由共用 hook `--sl-disabled-opacity` 控制（預設 `0.5`）；調整全站可於 `:root` 覆寫。
 
 <Demo :render="ButtonDemos.Disabled.render" />
