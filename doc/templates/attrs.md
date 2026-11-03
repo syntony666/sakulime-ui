@@ -1,33 +1,35 @@
-# Shared-attribute pages
+# 通用屬性頁
 
-Pages under `doc/pages/attrs/` document one generic attribute each. Fixed
-shape — smaller than the component skeleton:
+`pages/attrs/` 的頁面。每頁只寫一個通用屬性，骨架比元件頁小，形狀固定：
 
 ```markdown
 # <Name> *<中文名>*
 
-> <one-sentence intro in a blockquote — what the attr does, plain terms>
+> <一句話，用白話說明這個屬性做什麼>
 
 ## 用法
 
-<syntax block + one-line explanation + Demo>
+<語法區塊 + 一句說明 + Demo>
 
 ## 選項
 
-| 選項 | <data column> |
-<one row per option; the second column holds whatever fits — px, 效果,
-用途; add the rem→16px note when px appears>
+| 選項 | <資料欄> |
+<一個選項一列；第二欄放最合適的內容，px、效果或用途皆可；
+出現 px 時補上 rem 與 16px 的換算說明>
 
 ## 適用元件
 
-<lead-in sentence>
+<引導句>
 
-| 元件 | <behavior column> |
-<one row per applicable element; the column is named for what it
-describes — 預設, 作用, 未標示時, 備註>
+| 元件 | <行為欄> |
+<一個適用元件一列；欄名依內容命名，例如 預設、作用、
+未標示時、備註>
 ```
 
-- Frontmatter `description` and the intro stay a single short sentence.
-- Both tables always — no prose lists for options or scope.
-- Demo file at `doc/demos/attrs/<name>.demo.ts`; sidebar entry in the
-  通用屬性 group.
+## 規則
+
+- frontmatter 的 `description` 與開頭引文都是一句話，不放數量、不放 code span，兩者不要逐字相同。
+- 兩張表都要有。選項與適用範圍一律用表格，不寫成條列或段落。
+- 適用元件的表格欄名依實際內容命名，不要每頁都叫「備註」。
+- 屬性頁不重述元件頁的用法；元件頁只連過來，不複製選項表。
+- demo 檔放 `doc/demos/attrs/<name>.demo.ts`，側邊欄歸在「通用屬性」群組。

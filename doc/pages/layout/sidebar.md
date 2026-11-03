@@ -1,6 +1,6 @@
 ---
 title: Sidebar 側邊欄
-description: 側邊欄加主欄的版面，位置跟先後順序走，主欄太窄就自己換行。
+description: 側邊欄與主欄並排的版面，位置依先後順序決定，空間不足時自動換行。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as SidebarDemos from "../../demos/layout/sidebar.demo";
 
 # Sidebar *側邊欄*
 
-> 側邊欄加主欄的版面。容器標 `sl-sidebar`，側邊欄子層標 `sl-sidebar--rail`，其他子層是主欄。主欄被擠到下限以下時整組換行，不用 media query，看的是容器寬度。
+> 側邊欄與主欄並排的版面，空間不足時整組換行。
 
 ## 用法
 
@@ -22,28 +22,31 @@ import * as SidebarDemos from "../../demos/layout/sidebar.demo";
 
 <Demo :render="SidebarDemos.SidebarStart.render" />
 
-底層跟 [`sl-wrap`](/layout/wrap) 一樣是 `flex-wrap` 的 flexbox：主欄有最小寬度（`--sl-sidebar-min`，預設 55%），容器放不下時整個 rail 掉到下一行。
+底層與 [`sl-wrap`](/layout/wrap) 相同，為啟用 `flex-wrap` 的 flexbox。
+
+主欄設有最小寬度（`--sl-sidebar-min`，預設 55%），容器寬度不足時整組換至下一行。
 
 ## 位置
 
-側邊欄在哪一側跟著先後順序走：寫在主欄前面就在左，寫在後面就在右：
+側邊欄的位置依先後順序決定，寫在主欄之前則在左，之後則在右：
 
 <Demo :render="SidebarDemos.SidebarEnd.render" />
 
-標示兩個 `sl-sidebar--rail` 就左右各一條：
+標示兩個 `sl-sidebar--rail` 時，左右各一條：
 
 <Demo :render="SidebarDemos.SidebarBoth.render" />
 
-結構是一條 rail 配一個主欄（或左右各一條 rail）。位置就是先後順序，要換邊就調整 HTML 順序。
+結構為一條 rail 搭配一個主欄，或左右各一條 rail。位置即先後順序，換邊時調整 HTML 順序即可。
 
 ## 尺寸
 
-- 側邊欄寬是 `--sl-sidebar-w`，預設 16rem（256px），可以個別覆寫
-- 主欄下限是 `--sl-sidebar-min`，預設 55%：主欄被擠到下限以下時整組換行，rail 寫在主欄前面換行後排在上面，寫在後面排在下面
-- 換行看容器可用寬度，不是視窗斷點，塞進窄容器照樣會掉
+- 側邊欄寬度為 `--sl-sidebar-w`，預設 16rem（256px），可個別覆寫
+- 主欄下限為 `--sl-sidebar-min`，預設 55%
+- 主欄窄於下限時整組換行；rail 寫在主欄之前者換行後排於上方，之後者排於下方
+- 換行判斷依據為容器可用寬度，並非視窗斷點；置於窄容器時同樣會換行
 
 ## 間距
 
-間距用 [`sl-gap`](/attrs/gap) 給，寫在容器自己或外層都行，預設 `lg`。
+間距由 [`sl-gap`](/attrs/gap) 給定，寫在容器自身或外層皆可，預設 `lg`。
 
-只想改一個容器就寫 `--sl-sidebar-gap`；`sl-gap` 標示在容器自己或外層都行，裡面未標示間距的排版元件會繼承這個間距。
+僅調整單一容器時，改寫 `--sl-sidebar-gap`。

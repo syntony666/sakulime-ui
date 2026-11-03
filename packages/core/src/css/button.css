@@ -32,13 +32,13 @@
 
   [sl-button]:disabled,
   [sl-button][aria-disabled="true"] {
-    opacity: var(--sl-disabled-opacity, 0.6);
+    opacity: var(--sl-disabled-opacity);
     cursor: not-allowed;
   }
 
   /* the hex keeps the ring readable without the theme package */
   [sl-button]:focus-visible {
-    outline: 2px solid var(--sl-text-accent, #d43d5e);
+    outline: 2px solid var(--sl-text-accent);
     outline-offset: 2px;
   }
 }

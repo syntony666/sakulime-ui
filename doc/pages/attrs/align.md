@@ -1,6 +1,6 @@
 ---
 title: Align 對齊
-description: 垂直於排列方向的對齊，四個選項，寫在容器上一次管全部子層，寫在子層自己身上就單獨覆寫。
+description: 垂直於排列方向的對齊，容器與子層皆可設定。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as AlignDemos from "../../demos/attrs/align.demo";
 
 # Align *對齊*
 
-> 垂直於排列方向的對齊，對應 CSS 的 `align-items`／`align-self`。寫在容器上一次管全部子層；寫在子層自己身上就單獨覆寫那一個。
+> 決定子層在垂直於排列方向上的位置。
 
 ## 用法
 
@@ -22,38 +22,40 @@ import * as AlignDemos from "../../demos/attrs/align.demo";
 </div>
 ```
 
+寫在容器上時套用於全部子層；寫在子層時，僅覆寫該項。
+
 ## 選項
 
 | 選項 | 效果 |
 | --- | --- |
-| `start` | 對齊方向起點 |
+| `start` | 對齊方向的起點 |
 | `center` | 置中 |
-| `end` | 對齊方向終點 |
-| `stretch` | 子層撐滿交叉軸（[`sl-stack`](/layout/stack)、[`sl-grid`](/layout/grid) 預設） |
+| `end` | 對齊方向的終點 |
+| `stretch` | 子層填滿該方向 |
 
-方向跟著排版走：`sl-wrap` 是垂直（上中下），`sl-stack` 是水平（左中右），`sl-grid` 是格子內的垂直位置。
+對齊方向隨排列軸而定。`sl-wrap` 為垂直方向（上中下），`sl-stack` 為水平方向（左中右），`sl-grid` 為格子內的垂直位置。
 
-選項對 `sl-wrap` 子層的垂直位置：
+`sl-wrap` 子層的垂直位置：
 
 <Demo :render="AlignDemos.AlignWrap.render" />
 
-對 `sl-stack` 子層的水平位置：
+`sl-stack` 子層的水平位置：
 
 <Demo :render="AlignDemos.AlignStack.render" />
 
-`sl-align` 標在子層就是單獨覆寫，只有標了的那一個離開共同對齊：
+標在子層時，僅該項離開共同對齊：
 
 <Demo :render="AlignDemos.AlignChild.render" />
 
-`sl-grid` 的子層也吃：`sl-align` 管格子內垂直、[`sl-justify`](/attrs/justify) 管格子內水平，兩個一起寫就是格子內的雙軸定位。
+`sl-grid` 的子層同樣適用。`sl-align` 控制格子內的垂直位置，[`sl-justify`](/attrs/justify) 控制水平位置，兩者並用即完成格子內的定位。
 
 ## 適用元件
 
-| 元件 | 效果 | 預設 |
+| 元件 | 作用 | 未標示時 |
 | --- | --- | --- |
 | [`sl-wrap`](/layout/wrap) | 子層在列內的垂直位置 | `center` |
-| [`sl-stack`](/layout/stack) | 子層的水平位置 | `stretch`（撐滿） |
-| [`sl-grid`](/layout/grid) | 格子內元素的垂直位置 | `stretch`（撐滿） |
+| [`sl-stack`](/layout/stack) | 子層的水平位置 | `stretch` |
+| [`sl-grid`](/layout/grid) | 格子內元素的垂直位置 | `stretch` |
 | [`sl-float`](/layout/float) | 區塊內元素的水平位置 | `stretch` |
 
-容器寫的 `sl-align` 不會傳進巢狀排版元件，每個元件有自己的預設，外層寫的擋不下來也滲不進去。沿著排列方向的分佈看 `sl-justify`。
+**容器上的 `sl-align` 不會傳入巢狀的排版元件**，各元件仍套用自己的預設值。沿排列方向的分佈見 [`sl-justify`](/attrs/justify)。

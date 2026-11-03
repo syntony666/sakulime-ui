@@ -1,15 +1,15 @@
 ---
-title: Float 角落區
-description: 裝 sl-notice 的固定角落容器，六個角落位置可選。
+title: Float 浮動角落
+description: 固定於視窗角落的通知容器，可指定落點。
 ---
 
 <script setup>
 import * as FloatDemos from "../../demos/layout/float.demo";
 </script>
 
-# Float *角落區*
+# Float *浮動角落*
 
-> 裝 [`sl-notice`](/core/notice) 的固定角落容器。通知本身是 `sl-notice`，`sl-float` 只負責把它們疊在角落。
+> 把通知堆疊在視窗角落的固定容器。
 
 ## 用法
 
@@ -20,13 +20,13 @@ import * as FloatDemos from "../../demos/layout/float.demo";
 </div>
 ```
 
-容器寬 22rem、通知之間隔 `md`。下面用靜態定位示意（實際是 fixed 疊在角落）：
+容器寬 22rem，通知間距為 `md`。下方以靜態定位示意，實際為 fixed 疊於角落：
 
 <Demo :render="FloatDemos.Float.render" />
 
 ## 位置
 
-值是空白分隔的「邊 側」組合，六個角落，預設右下：
+值為以空白分隔的「邊 側」組合，預設為右下：
 
 | 選項            | 位置           |
 | --------------- | -------------- |
@@ -38,22 +38,29 @@ import * as FloatDemos from "../../demos/layout/float.demo";
 | `top center`    | 中上           |
 | `top end`       | 右上           |
 
-詞序不拘，`"start bottom"` 也通；只寫一邊也行（`"start"` = 下緣左側）。`start` 是開始那側、`end` 是結束那側，中文書寫就是左、右；阿拉伯文那類右到左的書寫會反過來。`top`／`bottom` 走的是區塊軸，直排書寫（`writing-mode: vertical-*`）時貼的是區塊邊，不是視覺上的上下。
+詞序不拘，`"start bottom"` 亦可；僅寫一邊也能成立（`"start"` 即下緣左側）。
+
+`start` 為開始側、`end` 為結束側，中文書寫即左、右；由右至左的書寫系統則相反。
+
+`top` 與 `bottom` 依區塊軸判斷，直排書寫（`writing-mode: vertical-*`）時貼的是區塊邊，並非視覺上的上下。
 
 <Demo :render="FloatDemos.Corners.render" />
 
 ## 尺寸與間距
 
-- fixed，z-index 讀 `--sl-float-z`（預設 60），會蓋在 [`sl-bar`](/layout/bar)（`--sl-bar-z` 50）上面
-- 寬度是 `--sl-float-width`，預設 22rem（352px）；視窗放不下自動縮，縮放幅度跟著 `--sl-float-inline` 走
-- 高度上限是視窗高扣掉上下離邊距離，通知太多會在區塊內捲動，不會頂出視窗
-- 離邊距離是 `--sl-float-block`／`--sl-float-inline`，預設都是 `lg`（16px）；底部錨點會自動避開手機 home indicator（safe-area inset）
-- 內容的水平對齊讀 [`sl-align`](/attrs/align)，預設 `stretch`（撐滿寬度）；`sl-notice="fit"` 縮到內容寬之後，`sl-align="start"`／`center`／`end` 決定它靠哪邊
-- 列印時自動回到一般排版，不會每頁重複印出
-- 順序跟堆疊照寫進頁面的先後，多一個 `sl-notice` 就多一張
+- fixed；z-index 讀取 `--sl-float-z`（預設 60），層級高於 [`sl-bar`](/layout/bar)（`--sl-bar-z` 50）
+- 寬度為 `--sl-float-width`，預設 22rem（352px）
+- 視窗不足時自動縮小，幅度依 `--sl-float-inline` 而定
+- 高度上限為視窗高扣除上下離邊距離；通知過多時於區塊內捲動，不會超出視窗
+- 離邊距離為 `--sl-float-block`／`--sl-float-inline`，預設皆為 `lg`（16px）
+- 底部錨點會自動避開手機 home indicator（safe-area inset）
+- 內容的水平對齊讀取 [`sl-align`](/attrs/align)，預設為 `stretch`（與容器同寬）
+- `sl-notice="fit"` 縮至內容寬後，靠向哪一側由 `sl-align` 決定
+- 列印時自動回到一般排版，不會於每頁重複出現
+- 順序依寫入頁面的先後堆疊，每多一個 `sl-notice` 即多一張
 
 ## 間距
 
-通知之間的間隔用 [`sl-gap`](/attrs/gap) 給，預設 `md`，寫在容器自己身上或外層上都行。
+通知之間的間隔由 [`sl-gap`](/attrs/gap) 給定，預設 `md`，寫在容器自身或外層皆可。
 
-只想改一個容器就寫 `--sl-float-gap`。
+僅調整單一容器時，改寫 `--sl-float-gap`。

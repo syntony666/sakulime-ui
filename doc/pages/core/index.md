@@ -5,7 +5,7 @@ description: 安裝 @sakulime-ui/core，含元件與主題包。
 
 # 元件
 
-不需要排版工具時，可以只載入元件，裡面也會有主題包：
+僅需元件、不需要排版工具時，可單獨載入元件，內容亦包含主題包：
 
 ```bash
 npm install @sakulime-ui/core
@@ -17,7 +17,7 @@ import "@sakulime-ui/core/index.min.css";
 
 ## CDN
 
-把下面這行放進 `<head>...</head>`：
+將下行放進 `<head>...</head>`：
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sakulime-ui/core/dist/index.min.css" />

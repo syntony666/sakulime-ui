@@ -1,6 +1,6 @@
 ---
 title: Stack 堆疊
-description: 垂直疊放子層，間距由 sl-gap 統一給。
+description: 垂直疊放子層，子層間距由共用屬性統一給定。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 
 # Stack *堆疊*
 
-> 把子層垂直疊起來。子層的上下 margin 會被清掉、寬度撐滿，給下去的間距就是最終間距。
+> 把子層垂直疊放，並統一相鄰子層之間的間距。
 
 ## 用法
 
@@ -23,15 +23,19 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 
 <Demo :render="StackDemos.Rhythm.render" />
 
-間距只加在相鄰子層之間，第一個上面、最後一個下面都不多留。子層寬度會撐滿容器，要收窄自己寫寬度，或用下面對齊一節的 [`sl-align`](/attrs/align)。
+間距只加在相鄰子層之間，第一個的上緣與最後一個的下緣皆不留白。
 
-混排內容（標題接段落接卡片）要保留子層自己的 margin 跟寬度的話，改用 [`sl-content`](/layout/content)。
+子層寬度預設與容器同寬；要收窄須自行指定寬度，或改用下方對齊一節的 [`sl-align`](/attrs/align)。
 
-底層是直排的 flexbox（`display: flex`＋`flex-direction: column`）。
+混排內容（標題、段落、卡片接續）若要保留子層自身的 margin 與寬度，改用 [`sl-content`](/layout/content)。
+
+底層為直排的 flexbox，即 `display: flex` 搭配 `flex-direction: column`。
 
 ## 對齊
 
-水平對齊用 [`sl-align`](/attrs/align)：`start` 靠左、`center` 置中、`end` 靠右，預設 `stretch` 撐滿。子層一旦對齊就縮回內容寬，不再撐滿：
+水平對齊用 [`sl-align`](/attrs/align)：`start` 靠左、`center` 置中、`end` 靠右。
+
+預設為 `stretch`，與容器同寬。子層一旦對齊，寬度即縮回內容寬：
 
 ```html
 <div sl-stack sl-align="center">
@@ -39,9 +43,9 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 </div>
 ```
 
-垂直分佈用 [`sl-justify`](/attrs/justify)，只有容器比內容高時才有感，例如把整疊垂直置中或推到底：`sl-stack sl-justify="center"`。
+垂直分佈用 [`sl-justify`](/attrs/justify)，僅在容器高於內容時可見，例如將整疊垂直置中或推到底。
 
-`sl-align` 也可以標在單一個子層上，只讓那一個離開共同對齊：
+`sl-align` 亦可標在單一子層上，僅該項離開共同對齊：
 
 ```html
 <div sl-stack>
@@ -51,5 +55,6 @@ import * as StackDemos from "../../demos/layout/stack.demo";
 ```
 ## 間距
 
-間距用 [`sl-gap`](/attrs/gap) 給，寫在 stack 自己身上或外層上都行，預設 `md`。只想改一個容器就寫 `--sl-stack-gap`（例如 `style="--sl-stack-gap: 6px"`）。
+間距由 [`sl-gap`](/attrs/gap) 給定，寫在 stack 自身或外層皆可，預設 `md`。
 
+僅調整單一容器時，改寫 `--sl-stack-gap`（例如 `style="--sl-stack-gap: 6px"`）。

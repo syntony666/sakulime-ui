@@ -16,7 +16,7 @@ const meta = {
   },
   argTypes: {
     tone: axisArg("sl-tone", "顏色", TONES),
-    size: axisArg("sl-size", "大小", SIZES),
+    size: axisArg("sl-size", "尺寸", SIZES),
   },
 } satisfies Meta<ChipArgs>;
 

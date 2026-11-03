@@ -28,7 +28,7 @@ const meta = {
   argTypes: {
     tone: axisArg("sl-tone", "顏色", TONES),
     variant: axisArg("sl-button", "型態", VARIANTS),
-    size: axisArg("sl-size", "大小", SIZES),
+    size: axisArg("sl-size", "尺寸", SIZES),
     radius: axisArg("sl-radius", "圓角", RADII),
     disabled: boolArg("disabled", "停用（HTML 原生屬性）"),
     label: {
@@ -63,4 +63,11 @@ export const Button: Demo = {
 export const Variants: Demo = {
   render: () =>
     axis(VARIANTS, (v) => `<button ${marker(v)}>${label(v)}</button>`),
+};
+
+export const Disabled: Demo = {
+  render: () =>
+    `<button ${marker("-")}>一般</button>
+<button ${marker("-")} disabled>disabled</button>
+<button ${marker("-")} aria-disabled="true">aria-disabled</button>`,
 };

@@ -1,15 +1,15 @@
 ---
-title: Grid 網格系統
-description: 網格系統，預設欄數自適應，要固定欄數配 sl-grid-cols。
+title: Grid 網格
+description: 依容器寬度自動分欄的網格，欄數亦可固定。
 ---
 
 <script setup>
 import * as GridDemos from "../../demos/layout/grid.demo";
 </script>
 
-# Grid *網格系統*
+# Grid *網格*
 
-> 網格系統。預設欄數自適應，欄寬不夠就自己換行；要固定欄數配 `sl-grid-cols`。卡片列表、圖片牆這種重複單元都適用。
+> 把子層排成網格，欄數隨容器寬度自適應。
 
 ## 用法
 
@@ -21,11 +21,11 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 </div>
 ```
 
-底層是 `display: grid`，未標示欄數時由容器寬度自動算出能放幾欄（auto-fill），不用 media query。
+底層為 `display: grid`。未指定欄數時，由容器寬度自動計算可容納的欄數（auto-fill），不須 media query。
 
 ## 欄數
 
-`sl-grid-cols` 把欄數寫死，1 到 12（`auto` 跟未標示一樣，回 auto-fill）：
+`sl-grid-cols` 固定欄數，範圍 1 至 12；`auto` 與未標示相同，皆為 auto-fill：
 
 ```html
 <div sl-grid sl-grid-cols="4">
@@ -33,7 +33,11 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 </div>
 ```
 
-子層照順序填，滿一列自動換下一列。欄數固定，不會因為容器變窄掉欄；要分斷點掉欄就掛 `sl-grid-cols-lg`、`sl-grid-cols-md`、`sl-grid-cols-sm`，見[響應式設計](/layout/responsive)。
+子層依序填入，滿一列後自動換至下一列。欄數固定，不因容器變窄而減少。
+
+若須依斷點減少欄數，掛上 `sl-grid-cols-lg`、`sl-grid-cols-md`、`sl-grid-cols-sm`。
+
+見[響應式設計](/layout/responsive)。
 
 <Demo
   :render="GridDemos.Cols.render"
@@ -41,7 +45,7 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 
 ## 跨欄
 
-`sl-grid--span` 標在子層上，讓它佔好幾欄，1 到 12；未標示或 `sl-grid--span="full"` 不管欄數直接跨滿整列：
+`sl-grid--span` 標在子層上，使該項佔用多欄，範圍 1 至 12；未標示或設為 `full` 時，無論欄數皆跨滿整列：
 
 ```html
 <div sl-grid sl-grid-cols="4">
@@ -51,19 +55,21 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 </div>
 ```
 
-超過當列剩餘欄位就自動掉下一列。固定欄數下，`sl-grid--span` 大於當前欄數會自動變滿列，不會溢出、也不會憑空生出軌道。auto-fill 的網格也能用，欄數跟著容器浮動，要保守的跨欄寫法用 `sl-grid--span="full"`（永遠跨滿）。
+超出當列剩餘欄位時，自動換至下一列。固定欄數下，跨欄數大於當前欄數時自動改為滿列，不會溢出，也不會產生額外的軌道。
+
+auto-fill 的網格同樣適用；欄數隨容器變動，跨欄寫法以 `full` 最為保守，永遠跨滿整列。
 
 ## 欄寬
 
 欄數由公式算出，`repeat(auto-fill, minmax(min(--sl-grid-min, 100%), 1fr))`：
 
-- 每欄最窄 `--sl-grid-min`（預設 14rem = 224px）
-- 容器能再放下一欄就多一欄，放不下就掉欄，最少一欄
-- 每欄扣掉間距後平分剩餘空間（`1fr`），所以欄數一樣時越寬欄位越寬
-- 容器比欄寬下限還窄時，欄位縮到容器滿寬，不會凸出去
-- 看的是容器可用寬度，不是視窗斷點
+- 每欄最窄為 `--sl-grid-min`（預設 14rem，即 224px）
+- 容器每多放得下一欄，就增加一欄；放不下則減少，最少一欄
+- 每欄扣除間距後均分剩餘空間（`1fr`），欄數相同時，容器越寬欄位越寬
+- 容器窄於欄寬下限時，欄位縮至容器寬度，不會超出容器
+- 判斷依據為容器可用寬度，並非視窗斷點
 
-改欄寬下限寫 `--sl-grid-min`：
+調整欄寬下限時，改寫 `--sl-grid-min`：
 
 <Demo
   :render="GridDemos.MinWidth.render"
@@ -71,7 +77,9 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 
 ## 對齊
 
-格子內元素的位置用兩個屬性分開管：[`sl-justify`](/attrs/justify) 管格子內水平（`justify-items`）、[`sl-align`](/attrs/align) 管格子內垂直（`align-items`），預設都是 `stretch` 撐滿格子：
+格子內元素的位置由兩個屬性分別控制。`sl-justify` 控制水平位置（`justify-items`）。
+
+`sl-align` 控制垂直位置（`align-items`）；兩者預設皆為 `stretch`，填滿格子：
 
 ```html
 <div sl-grid sl-justify="center" sl-align="center">
@@ -79,13 +87,14 @@ import * as GridDemos from "../../demos/layout/grid.demo";
 </div>
 ```
 
-兩個屬性也能標在單一個子層上（`justify-self`／`align-self`），只讓那一格離開共同對齊。`sl-justify` 的 `between` 在格子語意下沒有意義，會退回 `stretch`。
+兩個屬性亦可標在單一子層上（`justify-self`／`align-self`），僅該格離開共同對齊。
+
+`sl-justify` 的 `between` 不適用於格子，會退回 `stretch`。
 
 <Demo :render="GridDemos.Aligns.render" />
 
 ## 間距
 
-間距用 [`sl-gap`](/attrs/gap) 給，寫在 grid 自己身上或外層上都行，預設 `md`。欄距跟行距是同一個。
+間距由 [`sl-gap`](/attrs/gap) 給定，寫在 grid 自身或外層皆可，預設 `md`。欄距與行距為同一個值。
 
-只想改一個容器就寫 `--sl-grid-gap`；`sl-gap` 標示在容器自己或外層都行，裡面未標示間距的排版元件會繼承這個間距。
-
+僅調整單一容器時，改寫 `--sl-grid-gap`。

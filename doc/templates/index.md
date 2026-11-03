@@ -1,72 +1,124 @@
-# Doc templates
+# 文件模板
 
-Three page types under `doc/pages/`, one file per skeleton:
+`doc/pages/` 下有三種頁面，各自的骨架見對應檔案：
 
-- [`component.md`](component.md) — component pages under `pages/core/`
-- [`attrs.md`](attrs.md) — shared-attribute pages under `pages/attrs/`
-- [`layout.md`](layout.md) — layout pages under `pages/layout/`
+- [`component.md`](component.md)：`pages/core/` 的元件頁
+- [`attrs.md`](attrs.md)：`pages/attrs/` 的通用屬性頁
+- [`layout.md`](layout.md)：`pages/layout/` 的版面元件頁
 
-Everything below is shared by all three.
+本檔說明三種頁面共用的規則：檔案配置、frontmatter、標題、demo 檔、語氣、段落、表格與交付檢查。
 
-## File layout
+## 檔案配置
 
-A page pairs a prose file with a demo file:
+一頁配一個 demo 檔：
 
-- `doc/pages/<group>/<name>.md` — the page (group: `core`, `layout`, `attrs`)
-- `doc/demos/<group>/<name>.demo.ts` — its demos, imported as `*Demos`
+| 檔案 | 內容 |
+| --- | --- |
+| `doc/pages/<group>/<name>.md` | 頁面文字 |
+| `doc/demos/<group>/<name>.demo.ts` | 該頁的 demo，匯入為 `*Demos` |
 
-## Frontmatter
+`<group>` 為 `core`、`layout` 或 `attrs`。
+
+## frontmatter
 
 ```yaml
 ---
 title: <Name> <中文名>
-description: <one sentence; feeds canonical, OG and JSON-LD metadata>
+description: <一句話；用於 canonical、OG 與 JSON-LD>
 ---
 ```
 
-Optional flags for full-bleed pages (e.g. `container.md`):
+`description` 與頁面開頭的引文都是一句話，語氣一致，但不要逐字相同。兩者都不放數量、不放 code span。
+
+滿版頁面可加旗標：
 
 ```yaml
-aside: false        # hide the right-side TOC column
-outline: false      # disable the TOC itself
-pageClass: <name>   # extra class on the page wrapper
+aside: false        # 隱藏右側目錄欄
+outline: false      # 關閉目錄
+pageClass: <name>   # 頁面外層的額外 class
 ```
 
-## Heading format
+## 標題格式
 
-| Level | Format | Example |
-|---|---|---|
+| 層級 | 格式 | 範例 |
+| --- | --- | --- |
 | `#` | `Name *中文名*` | `# Card *卡片*` |
-| `##` | fixed section name, plain | `## 屬性` |
+| `##` | 固定章節名，不加裝飾 | `## 屬性` |
 | `###` | ``中文名 `attr` `` | ``### 角落標記 `sl-card--corner` `` |
-| `####` | `名稱` or ``名稱 `value` `` | ``#### 貼邊 `edge` `` |
+| `####` | `名稱` 或 ``名稱 `value` `` | ``#### 貼邊 `edge` `` |
 
-A `###` documenting behavior rather than an attribute drops the attr chip
-(e.g. icon's `### 大小與對齊`, notice's `### Banner`).
+`###` 若寫的是行為而非屬性，省略 attr 標記，例如 icon 的「大小與對齊」。
 
-## Demo file conventions
+## demo 檔慣例
 
-- Values use `"-"` for "attribute not written" — `attr()` drops it, `axis()`
-  inserts a separator after it, `axisArg()` shows it as the default option.
-- `axisArg(name, desc, options)` — select control; `boolArg(name, desc)`
-  — checkbox for bare flag attrs.
-- `axis(values, item)` renders one element per value in a row;
-  `label(v)` maps `-/sm/md/lg` to natural-language labels.
-- A `DemoObj` carrying `args` + `argTypes` doubles as playground meta.
-- Tokens that merge into one attr value (e.g. corner position + type) get
-  separate args joined in `render`.
+- 未標示屬性時，值一律用 `"-"`。`attr()` 會略過，`axis()` 會補分隔線，`axisArg()` 會顯示為預設選項。
+- `axisArg(name, desc, options)`：下拉選單。`boolArg(name, desc)`：布林開關。
+- `axis(values, item)`：每個值輸出一列。`label(v)` 把 `-/sm/md/lg` 轉成中文標籤。
+- 同時帶 `args` 與 `argTypes` 的 `DemoObj` 可兼作 playground 的 meta。
+- 兩個 token 合成一個屬性值時（例如角落位置加型態），拆成兩個 arg，在 `render` 內合併。
 
-## Prose rules
+## 語氣與用語
 
-- Page content is Taiwan Traditional Chinese; attr names and values stay
-  English inside backticks.
-- One idea per sentence; no em dashes; value lists instead of inline chips
-  when enumerating.
+### 語域
 
-## Guide and reference pages
+採書面語：皆、未、須、為、於、若、即、該、僅。讀者稱「你」，作者稱「我」，不用第一人稱複數。
 
-Non-skeleton pages — `introduction.md`, `attrs.md` (the overview itself),
-`theme.md`, `layout/responsive.md`, section `index.md`s, and the
-`layout: home` landing — name `##` sections by content (`## 安裝`,
-`## CDN`, `## 切換`…) and carry no demos unless a demo file exists for
-them. Everything above still applies.
+不加語氣詞、感嘆與安撫句。操作步驟可以輕一點，規則說明用書面語，同一段不混用。
+
+### 句子
+
+一句一個重點，長句拆短。刪掉只做預告的句子，開頭不必宣告接下來要講什麼。
+
+不用破折號接補充。不用先立錯誤說法再推翻的對比句式，直接陳述事實。不連續三句同一句式。
+
+### 避免
+
+| 類別 | 例子 | 改法 |
+| --- | --- | --- |
+| 口語 | 就好、其實、基本上、滿、蠻、跟著、拿掉、整顆、掉、上場 | 換成動作與結果 |
+| 造詞 | 撐滿、懸停 | 與容器同寬、滑鼠移入 |
+| 模糊歸因 | 研究指出、資料顯示 | 寫出條件或來源 |
+| 主題無關的比喻 | 節奏、鏡子、一刀兩斷 | 直接寫機制 |
+
+### 術語
+
+| 用 | 不用 |
+| --- | --- |
+| 級距 | 刻度、尺度 |
+| 改動 | 更動 |
+| 父元素 | 母元素 |
+| 覆寫 | 蓋掉 |
+| 樣式表 | 主題檔 |
+
+屬性名與值一律留在 code span 內，不翻譯。元件的中文名只在第一次出現時用，之後寫英文元件名。
+
+### 標點
+
+全形標點；中文與英數字之間留一格空白。句中不用冒號，清單、表格與程式碼的引導句除外。
+
+## 段落與行長
+
+每段一行，段落之間空一行。單一換行在多數渲染器會併成空白，中文段落因此多出空格，句與句之間不手動換行。
+
+一行以渲染後的 70 字元為上限，code span 的內容計入，連結網址與反引號不計。超過時在句號處拆成兩段。
+
+一句話含三個以上 code span 時，改成清單或程式碼區塊，不要硬塞在句子裡。
+
+## 表格與提示框
+
+三項以上同質資料用表格。清單只在各項長度相近時使用。
+
+表格單格過長時，把可複製的長字串移到表格下方獨立成行，表格只留決策需要的資訊。
+
+照著做會壞的資訊放提示框，預設 `:::tip`，每節最多一個。導覽句與收尾建議留在正文。
+
+## 交付前檢查
+
+```bash
+~/.agents/skills/writing-style-guideline/scripts/lint.sh doc/pages/<group>/<name>.md
+~/.agents/skills/chinese-content-writing-guideline/scripts/lint.sh doc/pages/<group>/<name>.md
+```
+
+`ERROR` 一律修掉。`WARN` 逐條判斷：引導冒號、字面的「路徑」、不經中介的「直接」可以留。
+
+改完再確認三件事：英文屬性名未被翻譯、同一頁的行長沒有超標、頁內連結指向實際存在的章節。

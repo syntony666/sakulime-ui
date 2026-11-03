@@ -1,6 +1,6 @@
 ---
 title: Container 頁面容器
-description: 把內容限制在一個寬度裡置中。
+description: 限制內容寬度並置中，兩側保留邊距。
 aside: false
 outline: false
 pageClass: container-wide
@@ -12,7 +12,7 @@ import * as ContainerDemos from "../../demos/layout/container.demo";
 
 # Container *頁面容器*
 
-> 把內容限制在一個寬度裡置中，左右留一點邊距。螢幕再寬，一行字也不會拉到讀不下去。
+> 限制內容寬度並置中，兩側保留邊距。
 
 ## 用法
 
@@ -22,9 +22,9 @@ import * as ContainerDemos from "../../demos/layout/container.demo";
 </div>
 ```
 
-標示在任何元素上都生效。這是純容器，不適用[通用屬性](/attrs)，要底色跟圓角的話配 [`sl-card`](/core/card)。
+標示於任何元素皆生效。此為純容器，只讀取內距，不套用色調與圓角；需要底色與圓角時搭配 [`sl-card`](/core/card)。
 
-下面是三個真的容器，數字標籤顯示當下實際的寬度，拉視窗寬度會跟著變。夠寬時 `lg` 就是 `75rem`（1200px），變窄就貼邊。
+下方為實際容器，數字標籤顯示當下寬度，調整視窗寬度時隨之變化。視窗夠寬時 `lg` 為 75rem（1200px），變窄時貼齊邊緣。
 
 <Demo
   :render="ContainerDemos.ContainerWidths.render"
@@ -32,18 +32,22 @@ import * as ContainerDemos from "../../demos/layout/container.demo";
   measure="[sl-container]"
 />
 
-巢狀時寬度上限照樣生效，塞進窄外層的話內層只跟外層一樣寬；但各層會各疊一次左右內距，內容比預期再窄一點。
+巢狀時寬度上限仍然有效；置於較窄的外層時，內層寬度與外層相同。各層會各自疊加左右內距，內容因此比預期更窄。
 
 ## 尺寸
 
 - `sl-container="sm"`：45rem（720px）
-- `sl-container="md"`：60rem（960px），未標示的預設
+- `sl-container="md"`：60rem（960px），未標示時的預設
 - `sl-container="lg"`：75rem（1200px）
 
-寬度是 rem，px 是以根字級 16px 換算的參考。
+寬度以 rem 為單位，px 為以根字級 16px 換算的參考值。
 
-要改寬度的話，覆寫 `--sl-container-sm`／`--sl-container-md`／`--sl-container-lg`。
+調整寬度時，覆寫 `--sl-container-sm`／`--sl-container-md`／`--sl-container-lg`。
 
 ## 內距
 
-左右內距讀 [`sl-pad`](/attrs/pad) 標示（`none`／`sm`／`md`／`lg`），預設等同 `md`（16px）；改單一容器就覆寫 `--sl-container-pad`，或自己寫 `padding-inline`。覆寫 `--sl-lg` 的話，所有用到它的元素都會跟著變。
+左右內距讀取 [`sl-pad`](/attrs/pad) 標示（`none`、`sm`、`md`、`lg`），預設與 `md` 相同（16px）。
+
+僅調整單一容器時，覆寫 `--sl-container-pad`，或自行指定 `padding-inline`。
+
+覆寫 `--sl-lg` 時，所有引用該變數的元素皆隨之改變。

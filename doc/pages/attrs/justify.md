@@ -1,6 +1,6 @@
 ---
 title: Justify 主軸分佈
-description: 沿著排列方向的分佈方式，六個選項，寫在排版元件自己身上才生效。
+description: 沿排列方向的分佈方式，須寫在排版元件自身。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as JustifyDemos from "../../demos/attrs/justify.demo";
 
 # Justify *主軸分佈*
 
-> 沿著排列方向的分佈，六個選項。對應 CSS 的 `justify-content`／`justify-items`。標示寫在排版元件自己身上才生效，寫在外層上會被元件的預設擋下來。
+> 設定項目沿排列方向的位置，以及項目之間的距離分配。
 
 ## 用法
 
@@ -19,7 +19,9 @@ import * as JustifyDemos from "../../demos/attrs/justify.demo";
 <div sl-grid sl-justify="center">格子內容水平置中</div>
 ```
 
-六個選項在同一排上的樣子：
+須寫在排版元件自身。寫於外層時，內部元件仍套用自己的預設值，外層設定不生效。
+
+各選項的效果：
 
 <Demo :render="JustifyDemos.Justify.render" />
 
@@ -27,25 +29,27 @@ import * as JustifyDemos from "../../demos/attrs/justify.demo";
 
 | 選項 | 分佈 |
 | --- | --- |
-| `start` | 靠頭排（[`sl-wrap`](/layout/wrap)、[`sl-stack`](/layout/stack) 預設） |
+| `start` | 靠頭排列，[`sl-wrap`](/layout/wrap) 與 [`sl-stack`](/layout/stack) 的預設 |
 | `center` | 置中 |
-| `end` | 靠尾排 |
-| `between` | 首尾貼邊，剩餘空間由中間共享 |
-| `around`  | 每個項目兩側各留一半間距 |
-| `evenly`  | 間距處處相等，含兩端 |
+| `end` | 靠尾排列 |
+| `between` | 首尾貼邊，剩餘空間由項目之間均分 |
+| `around` | 每個項目兩側各留一半間距 |
+| `evenly` | 間距處處相等，含兩端 |
 
-`between`／`around`／`evenly` 是 `justify-content` 語意，寫在 [`sl-grid`](/layout/grid) 上時格子語意沒有對應，退回 `stretch`。
+`between`、`around`、`evenly` 僅用於分佈整排項目。標示於 [`sl-grid`](/layout/grid) 時不生效，該值將被忽略，元素維持 `stretch`。
 
-`sl-justify` 不繼承，寫在外層上對裡面的排版元件沒有作用。這跟 [`sl-gap`](/attrs/gap) 相反，間距會繼承、對齊不會。交叉軸方向的對齊看 [`sl-align`](/attrs/align)。
+`sl-justify` 不繼承，與 [`sl-gap`](/attrs/gap) 相反。垂直於排列方向的對齊，見 [`sl-align`](/attrs/align)。
 
 ## 適用元件
 
-每個元件讀取的主軸不同：直排的 `sl-stack` 是上下分佈，網格的 `sl-grid` 是每個格子內的水平位置。
+各元件讀取的主軸不同：
 
-| 元件 | 效果 | 預設 |
+| 元件 | 作用 | 未標示時 |
 | --- | --- | --- |
 | [`sl-wrap`](/layout/wrap) | 整排的水平分佈 | `start` |
-| [`sl-stack`](/layout/stack) | 整疊的垂直分佈（容器比內容高才看得出來） | `start` |
-| [`sl-grid`](/layout/grid) | 每個格子內元素的水平位置（`between` 在格子語意下退回 `stretch`） | `stretch` |
+| [`sl-stack`](/layout/stack) | 整疊的垂直分佈，容器高於內容時才可見 | `start` |
+| [`sl-grid`](/layout/grid) | 每個格子內元素的水平位置 | `stretch` |
 
-寫在 `sl-grid` 的子層上是另一回事：`sl-justify` 標在格子內的元素會變成 `justify-self`，單獨控制那個格子的水平位置。其他排版元件的子層沒有對應機制，`sl-justify` 寫在 `sl-wrap`、`sl-stack` 的子層上無效。
+`sl-grid` 的子層用法不同。寫在格子內元素的 `sl-justify` 會成為 `justify-self`，單獨控制該格的水平位置。
+
+`sl-wrap`、`sl-stack` 的子層沒有對應機制，標示後不生效。

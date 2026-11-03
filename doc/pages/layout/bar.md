@@ -1,6 +1,6 @@
 ---
 title: Bar 頁面橫條
-description: 滿寬的頁面橫條，黏頂或黏底，也能固定在視窗邊，內容往兩端排開。
+description: 滿寬的頁面橫條，可黏於頂端或底端，也可固定在視窗邊。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as BarDemos from "../../demos/layout/bar.demo";
 
 # Bar *頁面橫條*
 
-> 頂端或底端的滿寬頁面橫條。值選邊緣，預設捲到邊就黏住，要固定在視窗邊加 `sl-bar-fixed`。內容分左、正中間、右三個固定區域，子層標 `sl-bar--start`／`sl-bar--center`／`sl-bar--end` 落位。
+> 頂端或底端的滿寬頁面橫條，可隨捲動黏在邊緣，或固定在視窗邊。
 
 ## 用法
 
@@ -25,15 +25,19 @@ import * as BarDemos from "../../demos/layout/bar.demo";
 
 <Demo :render="BarDemos.BarTop.render" />
 
-`sl-bar` 未標示就是一條一般的橫條，沒有邊緣語意，當區塊分隔用：
+未標示值時為一般橫條，不帶邊緣行為，可作為區塊分隔：
 
 <Demo :render="BarDemos.BarBare.render" />
 
 ## 邊緣跟定位
 
-`sl-bar="top"` 黏頂、`sl-bar="bottom"` 黏底，預設都是 sticky：內容捲到邊就停住，不額外佔版面。`top`／`bottom` 走的是區塊軸，直排書寫（`writing-mode: vertical-*`）時黏的是區塊邊，不是視覺上的上下。`sl-bar="bottom"` 還有個額外好處：外層撐滿視窗高時，頁面再短也會黏在視窗底部（sticky footer）。
+`sl-bar="top"` 黏於頂端、`sl-bar="bottom"` 黏於底端，預設皆為 sticky。內容捲至邊緣即停住，不額外佔用版面。
 
-要固定在視窗邊加 `sl-bar-fixed`，需配邊緣值：
+`top` 與 `bottom` 依區塊軸判斷。直排書寫（`writing-mode: vertical-*`）時黏的是區塊邊，並非視覺上的上下。
+
+`sl-bar="bottom"` 另有作用。外層與視窗同高時，頁面內容再短也會黏在視窗底部（sticky footer）。
+
+固定在視窗邊時，加上 `sl-bar-fixed`，並須搭配邊緣值：
 
 ```html
 <div sl-bar="top" sl-bar-fixed>固定在視窗頂</div>
@@ -42,15 +46,35 @@ import * as BarDemos from "../../demos/layout/bar.demo";
 
 <Demo :render="BarDemos.Positions.render" />
 
-裸 `sl-bar` 不給邊緣值時 `sl-bar-fixed` 沒有意義。
+未帶邊緣值時，`sl-bar-fixed` 不具作用。
 
-fixed 的 bar 不佔版面，body 會在對應邊自動補上 bar 高度的內距，下面的內容不會被蓋住；包在什麼容器裡都有效，不用是 body 直接子層。補償讀 `--sl-bar-h`，所以 bar 的實際高度要等於它：改 [`sl-pad`](/attrs/pad)、換行成兩列、或加了 safe-area inset，都要在 `:root` 同步改 `--sl-bar-h` 才跟得到。列印時 fixed bar 自動回到一般排版。
+fixed 的 bar 不佔用版面，body 會在對應邊自動補上等高的內距，下方內容不會被遮住。
 
-兩個外層陷阱：sticky 的外層不能設 `overflow`（會換成黏外層）或 `transform`／`filter`／`perspective`（fixed 的參考框會變成那個外層，bar 黏在卡片裡不黏視窗）。
+放在任何容器內皆有效，不須為 body 的直接子層。
+
+補償值讀取 `--sl-bar-h`，因此 bar 的實際高度須與之一致。
+
+調整 [`sl-pad`](/attrs/pad)、換行成兩列或加入 safe-area inset 後，皆須在 `:root` 同步修改。
+
+列印時，fixed bar 自動回到一般排版。
+
+sticky 的外層不可設定 `overflow`，否則改為黏在外層。
+
+也不可設定 `transform`、`filter` 或 `perspective`。
+
+否則 fixed 的參考框會變成該外層，bar 便黏在容器內而非視窗。
 
 ## 內容排列
 
-內部是左、正中間、右三個區。子層標 `sl-bar--start`、`sl-bar--center`、`sl-bar--end` 決定落在哪一區（`start` 是開始那側、`end` 是結束那側，中文書寫就是左、右）；未標示的子層照順序從左區依序填入。中間區寬度跟內容走，所以 `--center` 永遠在整條正中央，跟兩側放了什麼無關。只放想放的區域就行，空的區不影響其他區：
+內部劃分為起點、中央、終點三區，由子層的標記決定落點：
+
+- `sl-bar--start`：起點區
+- `sl-bar--center`：中央區
+- `sl-bar--end`：終點區
+
+`start` 為開始側、`end` 為結束側，中文書寫即左、右。未標示的子層依序填入空欄。
+
+中央區寬度依內容而定，因此 `--center` 恆在整條橫條的正中央，與兩側內容無關。可只使用需要的區，空區不影響其他區：
 
 ```html
 <div sl-bar="top">
@@ -65,20 +89,21 @@ fixed 的 bar 不佔版面，body 會在對應邊自動補上 bar 高度的內�
 
 <Demo :render="BarDemos.BarSpread.render" />
 
-一區要塞多個東西就包一個 [`sl-wrap`](/layout/wrap) 當一個子層，同一區標兩個子層會掉到下一行。要直排多段內容，子層裡包一個 [`sl-stack`](/layout/stack)。
+同一區要放多個元素時，以一個 [`sl-wrap`](/layout/wrap) 包成單一子層；同一區標兩個子層會換到下一行。要直排多段內容，於子層內包一個 [`sl-stack`](/layout/stack)。
 
 ## 尺寸與外觀
 
-- 高度是 `--sl-bar-h`，預設 3.5rem（56px），內容高就撐高
-- 上下內距讀 `--sl-bar-pad-block`，未設定就看 `sl-pad` 標示，再沒有就 `sm`（12px）。頁尾那種厚區塊：`sl-bar="bottom" sl-pad="lg"`
-- 左右內距讀 `--sl-bar-pad-inline`，預設 `lg`（16px），跟上下內距分開調
-- 底色 `--sl-bg`、邊緣那側細線（頂→下線、底→上線）、z-index 讀 `--sl-bar-z`（預設 50）
-- 底部 bar 會自動讓出手機 home indicator 的空間（safe-area inset）
+- 高度為 `--sl-bar-h`，預設 3.5rem（56px），內容較高時隨之增加
+- 上下內距讀取 `--sl-bar-pad-block`；未設定時依 `sl-pad` 標示，皆未設定則為 `sm`（12px）
+- 頁尾等較厚的區塊可寫 `sl-bar="bottom" sl-pad="lg"`
+- 左右內距讀取 `--sl-bar-pad-inline`，預設 `lg`（16px），與上下內距分開調整
+- 底色為 `--sl-bg`；邊緣側另有細線（`top` 於下緣、`bottom` 於上緣）；z-index 讀取 `--sl-bar-z`（預設 50）
+- 底部 bar 自動讓出手機 home indicator 的空間（safe-area inset）
 
 <Demo :render="BarDemos.BarBottom.render" />
 
 ## 間距
 
-內部間距用 [`sl-gap`](/attrs/gap) 給，預設 `md`，寫在 bar 自己身上或外層上都行。
+內部間距由 [`sl-gap`](/attrs/gap) 給定，預設 `md`，寫在 bar 自身或外層皆可。
 
-只想改一條 bar 就寫 `--sl-bar-gap`。
+僅調整單一 bar 時，改寫 `--sl-bar-gap`。

@@ -11,14 +11,14 @@ export const Cols: Demo = {
   render: () =>
     `<div class="demo-cell"><span class="demo-w" data-demo>sl-grid-cols="4"</span>` +
     `<div sl-grid sl-grid-cols="4" style="margin-top: var(--sl-sm)">` +
-    `<div class="demo-cell" sl-grid--span="2">跨兩欄 sl-grid--span="2"</div>` +
+    `<div class="demo-cell" sl-grid--span="2">跨兩欄</div>` +
     `<div class="demo-cell">1</div>` +
     `<div class="demo-cell">2</div>` +
     `<div class="demo-cell">3</div>` +
-    `<div class="demo-cell" sl-grid--span="3">跨三欄 sl-grid--span="3"</div>` +
+    `<div class="demo-cell" sl-grid--span="3">跨三欄</div>` +
     `<div class="demo-cell">4</div>` +
     `<div class="demo-cell">5</div>` +
-    `<div class="demo-cell" sl-grid--span>跨滿整列 sl-grid--span</div>` +
+    `<div class="demo-cell" sl-grid--span>跨滿整列</div>` +
     `<div class="demo-cell">6</div>` +
     `</div></div>`,
 };
@@ -41,7 +41,7 @@ export const Aligns: Demo = {
     `<div class="demo-cell"><span class="demo-w" data-demo>sl-grid sl-justify="center" + 一格 sl-justify="end"</span>` +
     `<div sl-grid sl-grid-cols="3" sl-justify="center" style="margin-top: var(--sl-sm)">` +
     `<div class="demo-cell">中</div>` +
-    `<div class="demo-cell" sl-justify="end">只有我靠右</div>` +
+    `<div class="demo-cell" sl-justify="end">只有這項靠右</div>` +
     `<div class="demo-cell">中</div>` +
     `</div></div>`,
 };

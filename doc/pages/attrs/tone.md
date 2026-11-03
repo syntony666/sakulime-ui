@@ -1,6 +1,6 @@
 ---
 title: Tone 色調
-description: 五個主題色調。
+description: 元件色調，會自動搭配對應的背景與文字顏色。
 ---
 
 <script setup>
@@ -9,7 +9,7 @@ import * as ToneDemos from "../../demos/attrs/tone.demo";
 
 # Tone *色調*
 
-> 五個主題色調，背景跟文字色自動配好。
+> 設定元件的色調，連帶決定背景與文字顏色。
 
 ## 用法
 
@@ -18,7 +18,7 @@ import * as ToneDemos from "../../demos/attrs/tone.demo";
 <span sl-chip sl-tone="success">完成</span>
 ```
 
-同一個 `sl-tone` 套在不同元件上的樣子：
+同一色調套用在各元件上的效果：
 
 <Demo :render="ToneDemos.Tones.render" />
 
@@ -28,19 +28,19 @@ import * as ToneDemos from "../../demos/attrs/tone.demo";
 | --- | --- |
 | `primary` | 主色 |
 | `secondary` | 次要色 |
-| `success` | 成功、完成的回饋 |
-| `warning` | 需要注意的提醒 |
-| `danger` | 錯誤、危險操作 |
+| `success` | 成功與完成的回饋 |
+| `warning` | 需要留意的提醒 |
+| `danger` | 錯誤與危險操作 |
 
 ## 適用元件
 
-未標示的話，各元件的預設不同：
+未標示色調時，各元件的預設行為不同：
 
-| 元件 | 預設 |
+| 元件 | 未標示時 |
 | --- | --- |
 | [`sl-button`](/core/button) | `primary` |
-| [`sl-card`](/core/card) | `primary`，只染邊緣強調條，不動卡片底色 |
-| [`sl-icon`](/core/icon) | 繼承文字顏色 |
-| [`sl-dot`](/core/dot) | 繼承文字顏色 |
-| [`sl-chip`](/core/chip) | 中性底色，由文字顏色調出 |
-| [`sl-notice`](/core/notice) | `primary` 淺底色 |
+| [`sl-card`](/core/card) | `primary`，只作用於邊緣強調條，卡片底色不變 |
+| [`sl-icon`](/core/icon) | 隨文字顏色 |
+| [`sl-dot`](/core/dot) | 隨文字顏色 |
+| [`sl-chip`](/core/chip) | 中性底色，由文字顏色推導 |
+| [`sl-notice`](/core/notice) | `primary` 的淺色底 |
