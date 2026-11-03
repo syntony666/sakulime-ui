@@ -42,8 +42,8 @@ export const Pads: Demo = {
       (v) =>
         frame(
           `sl-pad="${v}"`,
-          `<div sl-container sl-pad="${v}" class="demo-frame">` +
-            `<span data-demo>內容區塊</span>` +
+          `<div sl-container sl-pad="${v}" style="border: 1px dashed var(--sl-border)">` +
+            `<div class="demo-cell">內容區塊</div>` +
             `</div>`
         ),
       true
