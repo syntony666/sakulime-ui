@@ -37,7 +37,9 @@ import * as GapDemos from "../../demos/attrs/gap.demo";
 
 ## 選項
 
-表中 px 值以根字級 16px 換算，級距本身以 rem 定義。`sl-gap` 沒有預設值，未標示即未設定；各排版元件另有預設間距，多數為 `md`，`sl-sidebar` 為 `lg`：
+表中 px 值以根字級 16px 換算，級距本身以 rem 定義。
+
+`sl-gap` 沒有預設值，未標示即未設定；各排版元件另有預設間距，多數為 `md`，`sl-sidebar` 為 `lg`：
 
 | 選項 | 間距 |
 | --- | --- |

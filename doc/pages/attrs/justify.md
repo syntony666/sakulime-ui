@@ -50,4 +50,6 @@ import * as JustifyDemos from "../../demos/attrs/justify.demo";
 | [`sl-stack`](/layout/stack) | 整疊的垂直分佈，容器高於內容時才可見 | `start` |
 | [`sl-grid`](/layout/grid) | 每個格子內元素的水平位置 | `stretch` |
 
-`sl-grid` 的子層用法不同。寫在格子內元素的 `sl-justify` 會成為 `justify-self`，單獨控制該格的水平位置；`sl-wrap`、`sl-stack` 的子層沒有對應機制，標示後不生效。
+`sl-grid` 的子層用法不同。寫在格子內元素的 `sl-justify` 會成為 `justify-self`，單獨控制該格的水平位置。
+
+`sl-wrap`、`sl-stack` 的子層沒有對應機制，標示後不生效。
