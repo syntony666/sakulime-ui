@@ -1,5 +1,11 @@
 # @sakulime-ui/theme
 
+## 0.4.1
+
+### Patch Changes
+
+- d504966: Docs site deployment fix: `postcss-custom-selectors` is declared in `doc/package.json` so the isolated Cloudflare build can resolve it, and CI now guards the declaration against future dependency cleanups. No package code changed.
+
 ## 0.4.0
 
 ### Minor Changes
