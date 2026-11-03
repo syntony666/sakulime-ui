@@ -25,8 +25,8 @@
 
   body {
     margin: 0;
-    color: var(--sl-text, #111827);
-    background: var(--sl-bg, #ffffff);
+    color: var(--sl-text);
+    background: var(--sl-bg);
   }
 
   button,

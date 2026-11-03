@@ -27,5 +27,12 @@
     --sl-z-float: 60;
 
     --sl-disabled-opacity: 0.5;
+
+    /* unthemed fallbacks — theme files override these in the same
+       layer; they only fire when no theme is loaded */
+    --sl-bg: #ffffff;
+    --sl-text: #111827;
+    --sl-border: #e5e7eb;
+    --sl-text-accent: #d43d5e;
   }
 }

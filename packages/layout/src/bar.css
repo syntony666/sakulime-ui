@@ -1,6 +1,9 @@
 @layer theme {
-  /* band height default — write --sl-bar-h to override */
-  :root { --sl-bar-h: 3.5rem; }
+  /* write these to override */
+  :root {
+    --sl-bar-h: 3.5rem;
+    --sl-bar-pad-inline: var(--sl-lg);
+  }
 }
 
 @layer base {
@@ -21,13 +24,12 @@
     /* physical sides, not inline — env() values are physical too, so
        landscape notches clear the zones in either direction */
     padding-left: calc(
-      var(--sl-bar-pad-inline, var(--sl-lg)) + env(safe-area-inset-left, 0px)
+      var(--sl-bar-pad-inline) + env(safe-area-inset-left, 0px)
     );
     padding-right: calc(
-      var(--sl-bar-pad-inline, var(--sl-lg)) + env(safe-area-inset-right, 0px)
+      var(--sl-bar-pad-inline) + env(safe-area-inset-right, 0px)
     );
-    /* hex fallbacks keep the package usable without the theme */
-    background: var(--sl-bg, #ffffff);
+    background: var(--sl-bg);
   }
 
   /* zones squash below content width — unbreakable content can't
@@ -50,13 +52,13 @@
 
   [sl-bar="top"] {
     inset-block-start: 0;
-    border-block-end: 1px solid var(--sl-border, #e5e7eb);
+    border-block-end: 1px solid var(--sl-border);
     padding-block-start: calc(var(--_bp) + env(safe-area-inset-top, 0px));
   }
 
   [sl-bar="bottom"] {
     inset-block-end: 0;
-    border-block-start: 1px solid var(--sl-border, #e5e7eb);
+    border-block-start: 1px solid var(--sl-border);
     padding-block-end: calc(var(--_bp) + env(safe-area-inset-bottom, 0px));
   }
 
