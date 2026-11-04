@@ -4,12 +4,12 @@ on:
   workflow_dispatch:
     inputs:
       release_branch:
-        description: "Source branch, for example release/0.4.5"
-        required: true
+        description: "Release version x.y.z (empty = auto-detect the only release branch)"
+        required: false
         type: string
 
 concurrency:
-  group: start-release-${{ inputs.release_branch }}
+  group: start-release
   cancel-in-progress: false
 
 permissions:
@@ -30,10 +30,27 @@ jobs:
             echo "::error::Run Start Release from master, using release_branch to select the source."
             exit 1
           fi
-          if [[ ! "$RELEASE_BRANCH" =~ ^release/(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
-            echo "::error::release_branch must be release/x.y.z."
+          version="${RELEASE_BRANCH#release/}"
+          if [[ -z "$version" ]]; then
+            refs=$(gh api "repos/$GH_REPO/git/matching-refs/heads/release/" \
+              --jq '.[].ref | sub("refs/heads/"; "")')
+            if [[ -z "$refs" ]]; then
+              echo "::error::No release/* branch exists; pass release_branch."
+              exit 1
+            fi
+            if [[ $(wc -l <<< "$refs") != 1 ]]; then
+              echo "::error::Multiple release branches exist; pass release_branch to choose one:"
+              echo "$refs"
+              exit 1
+            fi
+            version="${refs#release/}"
+            echo "Auto-detected release branch: release/$version"
+          fi
+          if [[ ! "$version" =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
+            echo "::error::release_branch must be x.y.z or release/x.y.z."
             exit 1
           fi
+          echo "RELEASE_BRANCH=release/$version" >> "$GITHUB_ENV"
       - uses: actions/checkout@v5
         with:
           ref: master
