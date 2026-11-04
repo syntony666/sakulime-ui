@@ -42,11 +42,11 @@ npm run deploy       # site build + wrangler deploy → Cloudflare Workers
 npm run lint
 ```
 
-Tests run the fixture pages under headless chromium — `tests/run.mjs` looks for `~/.local/bin/chromium` by default; set `SL_CHROMIUM` to point elsewhere.
+Tests run the fixture pages under headless chromium — `tests/run.mjs` looks for `chromium`/`chrome-headless-shell` on `PATH`, then under `/tmp/chromium`; set `SL_CHROMIUM` to point elsewhere.
 
 ## Releases
 
-Day-to-day work lives on `release/x.y.z`; merging into `master` makes CI open a release PR, and merging that publishes the four packages to npm (`fixed` lockstep). The doc site deploys independently on `master` pushes. Details in [CONTRIBUTING.md](CONTRIBUTING.md).
+Day-to-day work lives on `release/x.y.z`; the maintainer runs **Start Release**, which opens a release PR to `master` — merging it publishes the four packages to npm (`fixed` lockstep). The doc site deploys independently on `master` pushes. Details in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Repository layout
 
