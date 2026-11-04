@@ -190,13 +190,46 @@ test('source validation rejects non-release branches and non-master workflow ref
   assert.ok(validation, 'the workflow must validate input before checkout');
   const run = (branch, ref = 'refs/heads/master') => spawnSync('bash', ['-e', '-c', validation], {
     encoding: 'utf8',
-    env: { ...process.env, RELEASE_BRANCH: branch, GITHUB_REF: ref, GITHUB_OUTPUT: devNull },
+    env: {
+      ...process.env, RELEASE_BRANCH: branch, GITHUB_REF: ref,
+      GITHUB_OUTPUT: devNull, GITHUB_ENV: devNull,
+    },
   });
   assert.equal(run('release/0.4.5').status, 0);
+  assert.equal(run('0.4.5').status, 0);
   for (const branch of ['master', 'release/foo', 'release/01.2.3', 'release/1.2.3; echo unsafe']) {
     assert.notEqual(run(branch).status, 0, branch);
   }
   assert.notEqual(run('release/0.4.5', 'refs/heads/release/0.4.5').status, 0);
+});
+
+test('source validation auto-detects a lone release branch when input is empty', t => {
+  const tmp = mkdtempSync(join(tmpdir(), 'sl-validate-'));
+  t.after(() => rmSync(tmp, { recursive: true, force: true }));
+  const bin = join(tmp, 'bin');
+  mkdirSync(bin);
+  writeFileSync(join(bin, 'gh'), `#!/usr/bin/env node
+console.log(process.env.MOCK_REFS || '');
+`, { mode: 0o755 });
+  const envFile = join(tmp, 'env');
+  const validation = shellBlocks(start)[0];
+  const run = refs => {
+    writeFileSync(envFile, '');
+    const result = spawnSync('bash', ['-e', '-c', validation], {
+      encoding: 'utf8',
+      env: {
+        ...process.env, PATH: `${bin}:${process.env.PATH}`, RELEASE_BRANCH: '',
+        GITHUB_REF: 'refs/heads/master', GITHUB_OUTPUT: devNull, GITHUB_ENV: envFile,
+        GH_REPO: 'example/fixture', MOCK_REFS: refs,
+      },
+    });
+    return { status: result.status, resolved: readFileSync(envFile, 'utf8').trim(), stderr: result.stderr };
+  };
+  const single = run('release/0.4.5');
+  assert.equal(single.status, 0, single.stderr);
+  assert.equal(single.resolved, 'RELEASE_BRANCH=release/0.4.5');
+  assert.notEqual(run('').status, 0);
+  assert.notEqual(run('release/0.4.5\nrelease/0.5.0').status, 0);
 });
 
 test('preparation snapshots the source without rewriting an existing release', () => {
