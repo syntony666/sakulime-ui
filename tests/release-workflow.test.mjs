@@ -208,6 +208,7 @@ test('preparation snapshots the source without rewriting an existing release', (
   assert.match(start, /git commit -m "chore: release \$version"/);
   assert.match(start, /gh pr list[^]*--state all/);
   assert.match(start, /gh pr create --base master --head "\$target"/);
+  assert.match(start, /git push origin --delete "refs\/heads\/\$target"/);
 });
 
 test('Test runs only for PRs and explicit dispatch, not branch pushes', () => {
@@ -458,15 +459,24 @@ test('preparation stops without a changeset instead of pushing an unchanged vers
   assert.equal(fixture.calls().filter(args => args[0] === 'pr' && args[1] === 'create').length, 0);
 });
 
-test('preparation never reopens a merged or closed release PR', t => {
+test('preparation never reopens a merged release PR', t => {
   const fixture = releaseFixture(t);
-  for (const state of ['MERGED', 'CLOSED']) {
-    writeFileSync(fixture.state, JSON.stringify({ state, url: 'https://example.invalid/pull/1' }));
-    const result = fixture.run();
-    assert.notEqual(result.status, 0);
-    assert.match(result.stdout, /already closed or merged/);
-  }
+  writeFileSync(fixture.state, JSON.stringify({ state: 'MERGED', url: 'https://example.invalid/pull/1' }));
+  const result = fixture.run();
+  assert.notEqual(result.status, 0);
+  assert.match(result.stdout, /already merged/);
   assert.equal(fixture.git('rev-parse', 'HEAD'), fixture.git('rev-parse', 'master'));
+});
+
+test('preparation replaces a closed release PR with a fresh one', t => {
+  const fixture = releaseFixture(t);
+  const first = fixture.run();
+  assert.equal(first.status, 0, first.stdout + first.stderr);
+  writeFileSync(fixture.state, JSON.stringify({ state: 'CLOSED', url: 'https://example.invalid/pull/1' }));
+  const retry = fixture.run();
+  assert.equal(retry.status, 0, retry.stdout + retry.stderr);
+  assert.equal(fixture.calls().filter(args => args[0] === 'pr' && args[1] === 'create').length, 2);
+  assert.equal(fixture.git('rev-parse', 'origin/changeset-release/0.4.5^'), fixture.source);
 });
 
 test('installing the workflow without a version bump cannot publish packages', t => {
