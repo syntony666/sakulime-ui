@@ -1,0 +1,45 @@
+name: Install Release Workflow
+
+on:
+  push:
+    branches:
+      - ci/install-start-release
+
+permissions:
+  contents: read
+  pull-requests: write
+  actions: write
+
+concurrency:
+  group: install-release-workflow
+  cancel-in-progress: false
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    env:
+      GH_REPO: ${{ github.repository }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      BRANCH: ${{ github.ref_name }}
+    steps:
+      - name: Open bot installation PR
+        run: |
+          set -euo pipefail
+          merged=$(gh pr list --base master --head "$BRANCH" --state merged --json number --jq 'length')
+          if [[ "$merged" != 0 ]]; then
+            echo "Installation already merged; skipping."
+            exit 0
+          fi
+          author=$(gh pr list --base master --head "$BRANCH" --state open \
+            --json author --jq '.[0].author.login // empty')
+          if [[ -n "$author" && "$author" != github-actions\[bot\] && "$author" != app/github-actions ]]; then
+            echo "::error::Close the human-authored installation PR without merging or deleting the branch, then rerun this job."
+            exit 1
+          fi
+          if [[ -z "$author" ]]; then
+            gh pr create --base master --head "$BRANCH" \
+              --title "ci: install the reviewed release workflow" \
+              --body "One-time workflow installation. The maintainer must Approve and Merge after checks pass. This workflow does not version packages, publish, approve, or merge."
+          fi
+          # GITHUB_TOKEN-created PRs do not start pull_request workflows.
+          gh workflow run test.yml --ref "$BRANCH"
