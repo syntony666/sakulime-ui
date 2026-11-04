@@ -109,7 +109,7 @@ jobs:
             url=$(jq -r .url <<< "$pr")
           fi
 
-          # GITHUB_TOKEN-created PRs do not trigger pull_request workflows.
+          # Explicitly dispatch checks for bot-authored release PRs.
           gh workflow run test.yml --ref "$target"
           printf '## Release prepared\n\n[Review PR](%s)\n\nApprove and Merge manually after Fixture assertions passes.\n' \
             "$url" >> "$GITHUB_STEP_SUMMARY"

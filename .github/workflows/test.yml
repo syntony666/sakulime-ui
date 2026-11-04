@@ -9,12 +9,13 @@ permissions:
   pull-requests: read
 
 concurrency:
-  group: test-${{ github.event.pull_request.head.repo.full_name || github.repository }}-${{ github.head_ref || github.ref_name }}
+  group: test-${{ github.event.pull_request.head.repo.full_name || github.repository }}-${{ github.head_ref || github.ref_name }}-${{ github.event_name }}
   cancel-in-progress: true
 
 jobs:
   test:
-    name: Fixture assertions
+    name: ${{ github.event_name == 'pull_request' && github.event.pull_request.user.login == 'github-actions[bot]' && github.event.pull_request.head.repo.full_name == github.repository && startsWith(github.head_ref, 'changeset-release/') && 'Release checks delegated' || 'Fixture assertions' }}
+    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.user.login != 'github-actions[bot]' || github.event.pull_request.head.repo.full_name != github.repository || !startsWith(github.head_ref, 'changeset-release/') }}
     runs-on: ubuntu-latest
     env:
       VITE_DOC_PREVIEW: "true"
