@@ -1,5 +1,12 @@
 # sakulime-ui
 
+## 0.4.7
+
+### Patch Changes
+
+- c2b3997: Start Release deletes the source release/x.y.z branch once its release PR exists; re-preparing a closed PR requires recreating the branch from master. No published runtime code changes.
+- e75ba5d: Split workflow tests into `tests/workflows/` with shared helpers under `tests/lib/`, reuse the test pipeline in the Release workflow, publish via `changeset publish` directly, and drop the unreachable branch auto-detection from Start Release. No published runtime code changes.
+
 ## 0.4.6
 
 ### Patch Changes
