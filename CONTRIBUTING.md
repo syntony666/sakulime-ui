@@ -68,6 +68,18 @@ Work branches off the current `release/x.y.z` branch, never directly off `master
 2. Branch off it (`fix/…`, `feat/…`, `docs/…`); keep commits small and single-concern
 3. Add a changeset when the change affects published packages: `npx changeset` — the four packages are `fixed`, selecting any one bumps them together. Changeset files are the changelog source: each describes one user-visible change. `CHANGELOG.md` files are generated at release time — never edit them by hand. No changeset needed for `doc/`, CI, or meta-doc changes — they never reach npm
 4. Merge into `release/x.y.z` with `--no-ff` — real merge commits, no fast-forwards
-5. When the release is ready, merge `release/x.y.z` into `master` with `--no-ff` and push
-6. CI opens a "chore: release" PR — it consumes pending `.changeset/*.md`, bumps all four versions together, and rewrites each package's `CHANGELOG.md`. Merging the PR publishes to npm and creates a GitHub release for `sakulime-ui` only (notes taken from the root `CHANGELOG.md` section). The doc site deploys independently via Cloudflare Workers Builds on every `master` push
-7. After the release, merge `master` back into the next `release/x.y.z` to sync versions
+5. Sync the latest `master` into the release branch, push it, and confirm its pending changesets produce the target x.y.z version. Changesets are required to start a versioned release, including a release used to test CI-only changes
+6. In GitHub, open **Actions > Start Release > Run workflow**. Keep the workflow branch on `master` and set `release_branch` to `release/x.y.z`. The workflow creates `changeset-release/x.y.z` from that source, updates all four versions, changelogs and the lockfile, commits as `github-actions[bot]`, and opens one PR to `master`. It explicitly dispatches **Test** on the prepared commit because PRs created with `GITHUB_TOKEN` do not trigger `pull_request` workflows
+7. Wait for **Fixture assertions** to pass. The maintainer clicks **Approve**, then **Merge pull request > Create a merge commit**. Agents must not approve or merge the PR, enable auto-merge, or bypass protection. This is the release's only merge into `master`
+8. The `master` push publishes the already-prepared packages and creates the tag and GitHub release. It does not open another PR. Cloudflare Workers Builds independently deploys the doc site when its watch paths match
+9. After the release, sync `master` into the next release branch to include the version commit
+
+The same manual entry point is available through gh CLI:
+
+```bash
+gh workflow run release-pr.yml --ref master -f release_branch=release/0.4.5
+```
+
+This starts preparation only; it does not approve, merge, publish, or deploy. Re-running the same source reuses the prepared branch and open PR and dispatches checks again. If the source changed after preparation or the PR was closed/merged, preparation stops instead of rewriting commits or approvals. Keep the source unchanged while its release PR is under review.
+
+One-time setup: the workflows must first be installed on the default branch `master` for **Run workflow** to appear. Repository **Settings > Actions > General > Workflow permissions** must allow GitHub Actions to create pull requests. Retain the required **Fixture assertions** check and one approving review, enforced for admins; keep force pushes and deletion disabled. GitHub does not distinguish browser approval from approval through the same account's CLI credentials.
