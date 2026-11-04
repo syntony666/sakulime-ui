@@ -96,6 +96,8 @@ test('Start Release is manual and never approves or merges a PR', () => {
   assert.match(start, /name: Start Release/);
   assert.match(start, /workflow_dispatch:/);
   assert.match(start, /release_branch:/);
+  assert.match(start, /required: true/);
+  assert.doesNotMatch(start, /matching-refs|Auto-detected/);
   assert.doesNotMatch(start, /\n {2}push:/);
   assert.doesNotMatch(start, /gh pr (?:review|merge)|--auto\b|--force\b/);
 });
