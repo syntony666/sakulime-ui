@@ -1,0 +1,28 @@
+name: Release PR
+
+# master requires PR + review: a bot must author the PR because
+# GitHub never lets a PR's own author approve it
+on:
+  push:
+    branches:
+      - 'release/*'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  pr:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          branch="${GITHUB_REF_NAME}"
+          if gh pr list --head "$branch" --state open --json number | grep -q '"number"'; then
+            echo "PR already open for $branch — skipping"
+          else
+            gh pr create --base master --head "$branch" \
+              --title "release: $branch" \
+              --body "Merge into master. Bot-authored so the maintainer can approve — review + Fixture assertions gate the merge."
+          fi
