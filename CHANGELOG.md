@@ -1,5 +1,12 @@
 # sakulime-ui
 
+## 0.4.6
+
+### Patch Changes
+
+- 6631ef2: Require a version input when starting a release: the matching release/x.y.z branch must already exist. No published runtime code changes.
+- 6631ef2: Fix release tagging: configure git identity so changesets creates the annotated tags again, and ensure the release tag exists before pushing. No published runtime code changes.
+
 ## 0.4.5
 
 ### Patch Changes
