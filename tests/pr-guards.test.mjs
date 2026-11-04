@@ -15,8 +15,9 @@ test('CodeQL scans pull requests and master pushes with the security-and-quality
   assert.match(codeql, /security-events: write/);
   assert.match(codeql, /github\/codeql-action\/init@v\d+/);
   assert.match(codeql, /github\/codeql-action\/analyze@v\d+/);
-  assert.match(codeql, /languages: javascript-typescript/);
-  assert.match(codeql, /queries: security-and-quality/);
+  assert.match(codeql, /- language: actions/);
+  assert.match(codeql, /- language: javascript-typescript[^]*queries: security-and-quality/);
+  assert.match(codeql, /languages: \$\{\{ matrix\.language \}\}/);
   assert.doesNotMatch(codeql, /pull_request_target/);
 });
 
