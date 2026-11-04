@@ -1,5 +1,11 @@
 # @sakulime-ui/theme
 
+## 0.4.4
+
+### Patch Changes
+
+- aa0df04: `@sakulime-ui/core` now declares `postcss-custom-selectors` in its own devDependencies (its `vite.config.ts` imports it), and the CI guard checks every workspace that imports the plugin. No package code changed.
+
 ## 0.4.3
 
 ### Patch Changes
