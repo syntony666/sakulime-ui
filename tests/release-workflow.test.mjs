@@ -134,9 +134,9 @@ function releaseFixture(t, { changeset = true } = {}) {
   git('commit', '-m', 'Source changes');
   const source = git('rev-parse', 'HEAD');
   const remote = join(tmp, 'origin.git');
+  git('switch', 'master');
   git('clone', '--bare', repo, remote);
   git('remote', 'add', 'origin', remote);
-  git('switch', 'master');
 
   const log = join(tmp, 'calls.jsonl');
   const state = join(tmp, 'pr.json');
@@ -242,6 +242,8 @@ test('preparation snapshots the source without rewriting an existing release', (
   assert.match(start, /gh pr list[^]*--state all/);
   assert.match(start, /gh pr create --base master --head "\$target"/);
   assert.match(start, /git push origin --delete "refs\/heads\/\$target"/);
+  assert.match(start, /git ls-remote --heads origin "refs\/heads\/\$RELEASE_BRANCH"/);
+  assert.match(start, /git push origin --delete "refs\/heads\/\$RELEASE_BRANCH"/);
 });
 
 test('Test runs only for PRs and explicit dispatch, not branch pushes', () => {
@@ -454,7 +456,7 @@ test('preparation creates one real version commit and retries without another bu
   const head = fixture.git('rev-parse', 'HEAD');
   assert.equal(fixture.git('rev-parse', 'HEAD^'), fixture.source);
   assert.equal(JSON.parse(readFileSync(join(fixture.repo, 'package.json'))).version, '0.4.5');
-  assert.equal(fixture.git('rev-parse', 'origin/release/0.4.5'), fixture.source);
+  assert.equal(fixture.git('ls-remote', '--heads', 'origin', 'refs/heads/release/0.4.5'), '');
   assert.equal(JSON.parse(fixture.git('show', 'master:package.json')).version, '0.4.4');
   assert.equal(fixture.git('log', '-1', '--format=%s'), 'chore: release 0.4.5');
   const retry = fixture.run();
@@ -503,11 +505,20 @@ test('preparation never reopens a merged release PR', t => {
   assert.equal(fixture.git('rev-parse', 'HEAD'), fixture.git('rev-parse', 'master'));
 });
 
+test('preparation requires the source release branch to exist', t => {
+  const fixture = releaseFixture(t);
+  fixture.git('push', 'origin', '--delete', 'release/0.4.5');
+  const result = fixture.run();
+  assert.notEqual(result.status, 0);
+  assert.match(result.stdout, /release\/0\.4\.5 does not exist/);
+});
+
 test('preparation replaces a closed release PR with a fresh one', t => {
   const fixture = releaseFixture(t);
   const first = fixture.run();
   assert.equal(first.status, 0, first.stdout + first.stderr);
   writeFileSync(fixture.state, JSON.stringify({ state: 'CLOSED', url: 'https://example.invalid/pull/1' }));
+  fixture.git('push', 'origin', 'release/0.4.5');
   const retry = fixture.run();
   assert.equal(retry.status, 0, retry.stdout + retry.stderr);
   assert.equal(fixture.calls().filter(args => args[0] === 'pr' && args[1] === 'create').length, 2);
