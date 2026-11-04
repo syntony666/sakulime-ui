@@ -23,7 +23,7 @@ jobs:
         run: node -e 'for (const p of ["doc/package.json", "packages/core/package.json"]) { const d = require("./" + p); if (!d.devDependencies?.["postcss-custom-selectors"]) throw new Error(p + " must declare postcss-custom-selectors — isolated builds never see root devDeps") }'
       - run: npm run lint
       - name: Release workflow checks
-        run: node --test tests/release-workflow.test.mjs
+        run: node --test tests/release-workflow.test.mjs tests/pr-guards.test.mjs
       - run: npm run build
       - name: Install chrome-headless-shell
         run: npx -y @puppeteer/browsers install chrome-headless-shell@stable --path /tmp/chromium
