@@ -128,9 +128,9 @@ test('the shared pipeline builds the preview-flagged site and runs the test suit
   assert.doesNotMatch(checks, /test: "false"/);
   assert.match(pipeline, /\n {8}env:\n {10}VITE_DOC_PREVIEW: "true"/);
   assert.match(pipeline, /run: node --test$/m);
-  assert.match(pipeline, /upload-artifact@v4/);
+  assert.match(pipeline, /upload-artifact@v\d+/);
   assert.match(pipeline, /name: docs-site/);
-  assert.match(checks, /download-artifact@v4/);
+  assert.match(checks, /download-artifact@v\d+/);
 });
 
 test('Preview is gated after checks and does not expose deployment secrets to forks', () => {

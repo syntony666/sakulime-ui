@@ -153,9 +153,9 @@ test('the shared pipeline chains verify, build and test jobs', () => {
   assert.match(pipeline, /\n {2}test:[^]*needs: build[^]*if: inputs\.test == 'true'/);
   assert.match(pipeline, /npm ci/);
   assert.match(pipeline, /check-deps\.mjs/);
-  assert.match(pipeline, /upload-artifact@v4/);
+  assert.match(pipeline, /upload-artifact@v\d+/);
   assert.match(pipeline, /name: dist/);
-  assert.match(pipeline, /download-artifact@v4/);
+  assert.match(pipeline, /download-artifact@v\d+/);
   assert.ok(pipeline.indexOf('npm ci') < pipeline.indexOf('node --test'));
   assert.ok(pipeline.indexOf('npm run build') < pipeline.indexOf('npm test'));
 });
@@ -166,7 +166,7 @@ test('master publishes a prepared version without opening a second PR', () => {
   assert.match(publish, /HEAD\^1:package\.json/);
   assert.match(publish, /uses: \.\/\.github\/workflows\/test-pipeline\.yml\n {4}with:\n {6}test: "false"/);
   assert.match(publish, /needs: \[detect, verify\]/);
-  assert.match(publish, /download-artifact@v4/);
+  assert.match(publish, /download-artifact@v\d+/);
   assert.match(publish, /changeset publish/);
   assert.doesNotMatch(publish, /npm run release|npm run build|chrome-headless-shell@stable|node --test/);
   assert.match(publish, /gh release create/);
