@@ -13,7 +13,7 @@ const checks = readWorkflow('test');
 const publish = readWorkflow('release');
 const pipeline = readWorkflow('test-pipeline');
 
-function releaseFixture(t, { changeset = true } = {}) {
+function releaseFixture(t, { changeset = true, bump = 'patch' } = {}) {
   const tmp = mkdtempSync(join(tmpdir(), 'sl-release-'));
   t.after(() => rmSync(tmp, { recursive: true, force: true }));
   const repo = join(tmp, 'repo');
@@ -45,7 +45,7 @@ function releaseFixture(t, { changeset = true } = {}) {
   git('add', '.');
   git('commit', '-m', 'Initial version');
   git('switch', '-c', 'release/0.4.5');
-  if (changeset) write('.changeset/patch.md', '---\n"sakulime-ui": patch\n---\nRelease fixture.\n');
+  if (changeset) write('.changeset/patch.md', `---\n"sakulime-ui": ${bump}\n---\nRelease fixture.\n`);
   else write('source.txt', 'A CI-only source without a changeset.\n');
   git('add', '.');
   git('commit', '-m', 'Source changes');
@@ -72,7 +72,7 @@ if (args[0] === 'pr' && args[1] === 'list') {
 }
 `);
   mockBin(bin, 'npm', '#!/bin/sh\nprintf \'["npm","%s"]\\n\' "$*" >> "$CALL_LOG"\n');
-  mockBin(bin, 'npx', '#!/bin/sh\nprintf \'["npx","version"]\\n\' >> "$CALL_LOG"\nexec "$TEST_NODE" "$CHANGESET_CLI" version\n');
+  mockBin(bin, 'npx', '#!/bin/sh\nprintf \'["npx","%s"]\\n\' "$3" >> "$CALL_LOG"\nshift 2\nexec "$TEST_NODE" "$CHANGESET_CLI" "$@"\n');
   const env = {
     ...process.env, CI: 'true', TEST_BIN: bin, npm_config_offline: 'true',
     RELEASE_BRANCH: 'release/0.4.5', GH_REPO: 'example/fixture',
@@ -202,7 +202,7 @@ test('preparation creates one real version commit and retries without another bu
   assert.deepEqual(fixture.calls().filter(args => args[0] === 'npm'), [
     ['npm', 'ci'], ['npm', 'install --package-lock-only --ignore-scripts'],
   ]);
-  assert.equal(fixture.calls().filter(args => args[0] === 'npx').length, 1);
+  assert.equal(fixture.calls().filter(args => args[0] === 'npx' && args[1] === 'version').length, 1);
 });
 
 test('preparation refuses a source changed after its PR was prepared', t => {
@@ -230,6 +230,16 @@ test('preparation stops without a changeset instead of pushing an unchanged vers
   assert.equal(fixture.git('ls-remote', '--heads', 'origin', 'refs/heads/changeset-release/0.4.5'), '');
   assert.equal(fixture.calls().filter(args => args[0] === 'pr' && args[1] === 'create').length, 0);
   assert.equal(fixture.calls().filter(args => args[0] === 'npm').length, 0);
+});
+
+test('preparation rejects changesets that produce a different version', t => {
+  const fixture = releaseFixture(t, { bump: 'minor' });
+  const result = fixture.run();
+  assert.notEqual(result.status, 0);
+  assert.match(result.stdout, /produce 0\.5\.0, expected 0\.4\.5/);
+  assert.equal(fixture.calls().filter(args => args[0] === 'pr' && args[1] === 'create').length, 0);
+  assert.equal(fixture.calls().filter(args => args[0] === 'npx' && args[1] === 'version').length, 0);
+  assert.equal(fixture.git('ls-remote', '--heads', 'origin', 'refs/heads/changeset-release/0.4.5'), '');
 });
 
 test('preparation never reopens a merged release PR', t => {
