@@ -16,6 +16,8 @@ jobs:
   test:
     name: Fixture assertions
     runs-on: ubuntu-latest
+    env:
+      VITE_DOC_PREVIEW: "true"
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/test-pipeline
@@ -23,7 +25,7 @@ jobs:
           lint: "true"
           site: "true"
       - name: Release workflow checks
-        run: node --test tests/release-workflow.test.mjs
+        run: node --test tests/release-workflow.test.mjs tests/docs-preview.test.mjs
       - name: Find open PR for Preview
         id: preview
         if: ${{ github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository }}
