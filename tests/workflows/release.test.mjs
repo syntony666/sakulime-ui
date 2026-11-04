@@ -149,6 +149,8 @@ test('master publishes a prepared version without opening a second PR', () => {
   assert.match(publish, /test-pipeline/);
   assert.match(publish, /changeset publish/);
   assert.doesNotMatch(publish, /npm run release|npm run build|chrome-headless-shell@stable/);
+  assert.match(publish, /node --test tests\/workflows\/\{release,preview,guards\}\.test\.mjs/);
+  assert.doesNotMatch(publish, /docs-preview/);
   assert.match(publish, /gh release create/);
   assert.match(publish, /git config user\.name 'github-actions\[bot\]'/);
   assert.match(publish, /git tag -a "\$tag" -m "\$tag" "\$GITHUB_SHA"/);
