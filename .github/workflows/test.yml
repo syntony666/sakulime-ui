@@ -7,15 +7,15 @@ on:
 permissions:
   contents: read
   pull-requests: read
+  statuses: write
 
 concurrency:
-  group: test-${{ github.event.pull_request.head.repo.full_name || github.repository }}-${{ github.head_ref || github.ref_name }}-${{ github.event_name }}
+  group: test-${{ github.event.pull_request.head.repo.full_name || github.repository }}-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 
 jobs:
   test:
-    name: ${{ github.event_name == 'pull_request' && github.event.pull_request.user.login == 'github-actions[bot]' && github.event.pull_request.head.repo.full_name == github.repository && startsWith(github.head_ref, 'changeset-release/') && 'Release checks delegated' || 'Fixture assertions' }}
-    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.user.login != 'github-actions[bot]' || github.event.pull_request.head.repo.full_name != github.repository || !startsWith(github.head_ref, 'changeset-release/') }}
+    name: Fixture assertions
     runs-on: ubuntu-latest
     env:
       VITE_DOC_PREVIEW: "true"
@@ -51,7 +51,9 @@ jobs:
             exit 0
           fi
           echo "name=pr-$number" >> "$GITHUB_OUTPUT"
+          echo "sha=$PR_HEAD_SHA" >> "$GITHUB_OUTPUT"
       - name: Deploy docs Preview
+        id: deploy
         if: ${{ steps.preview.outputs.name != '' }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -64,3 +66,15 @@ jobs:
             --name "$PREVIEW_NAME" --json
           url="$(jq -er 'select(.preview_urls[0] | type == "string" and . != "") | .preview_urls[0]' "$WRANGLER_OUTPUT_FILE_PATH")"
           printf '### Docs Preview\n\n%s\n' "$url" >> "$GITHUB_STEP_SUMMARY"
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+      - name: Publish Preview status
+        if: ${{ steps.deploy.outputs.url != '' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          STATUS_SHA: ${{ steps.preview.outputs.sha }}
+          PREVIEW_URL: ${{ steps.deploy.outputs.url }}
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/statuses/$STATUS_SHA" \
+            -f state=success -f context="Docs Preview" \
+            -f target_url="$PREVIEW_URL" \
+            -f description="Documentation preview"
