@@ -84,7 +84,7 @@ jobs:
           path: .
       - name: Install chrome-headless-shell
         run: npx -y @puppeteer/browsers install chrome-headless-shell@stable --path /tmp/chromium
-      - name: Fixture assertions
+      - name: Fixture tests
         run: SL_CHROMIUM=$(find /tmp/chromium -name chrome-headless-shell -type f | head -1) npm test
       - name: Workflow checks
         run: node --test
