@@ -15,7 +15,6 @@ concurrency:
 permissions:
   contents: write
   pull-requests: write
-  actions: write
 
 jobs:
   prepare:
@@ -109,7 +108,5 @@ jobs:
             url=$(jq -r .url <<< "$pr")
           fi
 
-          # Explicitly dispatch checks for bot-authored release PRs.
-          gh workflow run test.yml --ref "$target"
           printf '## Release prepared\n\n[Review PR](%s)\n\nApprove and Merge manually after Fixture assertions passes.\n' \
             "$url" >> "$GITHUB_STEP_SUMMARY"
