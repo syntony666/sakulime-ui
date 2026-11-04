@@ -22,6 +22,8 @@ Working agreement for coding agents in this repo. Contributor-facing rules live 
 - Merge into `release/x.y.z` and then `master` with `--no-ff` only — no fast-forwards.
 - Merge a topic branch into `release/x.y.z` only on explicit approval — let commits accumulate on the branch first; never merge commit-by-commit.
 - Pushing `master` runs changesets/action → "chore: release" PR → merge publishes to npm via trusted publishing (OIDC + provenance, no token). Cloudflare Workers Builds deploys `doc/` independently on `master` pushes — not part of the Action.
+- Release PRs are authored by `github-actions[bot]`; their `pull_request` workflow runs sit at `action_required` until approved. Merge them with `gh pr merge <n> --merge --admin` — the diff is generated from a tree that already passed Test/Release on `master`.
+- The doc site's build surface is wider than `doc/`: vite aliases compile `packages/` source and the version badge reads root `package.json`. Cloudflare's build watch paths must cover all three or deploys will silently skip release bumps.
 - The docs subtree's history lives under `doc/` — don't rewrite those commits when rebasing.
 - Gate release steps on local facts (`gh release view`, local git tags) — never on registry lookups; npm propagation delay makes them racy.
 - When removing a subsystem, sweep its residue in the same change: hoisted deps, tsconfig includes, type imports, CI references — and run the full build before merging.
