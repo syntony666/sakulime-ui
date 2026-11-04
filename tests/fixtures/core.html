@@ -182,6 +182,40 @@
   attr.setAttribute("sl-icon", "t:box");
   await Promise.resolve(); /* observer callbacks are microtasks — one hop flushes */
 
+  /* a placeholder whose pack is not registered stays unresolved, and a
+     later registerPack still reaches it through the resolve() pass */
+  const wait = document.createElement("i");
+  wait.setAttribute("sl-icon", "late:x");
+  document.body.appendChild(wait);
+  await Promise.resolve();
+  const waitEmpty = wait.innerHTML === "";
+  await registerPack("late", { icons: { x: { body: "<i/>" } } });
+
+  /* attributeFilter froze at install: attribute mutations on resolvers
+     registered afterwards never reach the observer — only an explicit
+     resolve() pass does (a drained childList queue proves the mutation
+     record itself was filtered, not swallowed by another pass) */
+  const post = document.createElement("i");
+  document.body.appendChild(post);
+  await Promise.resolve();
+  let postSeen = 0;
+  registerResolver("sl-post", () => postSeen++);
+  post.setAttribute("sl-post", "x");
+  await Promise.resolve();
+  const postFiltered = postSeen === 0;
+  resolve(document);
+  const postResolved = postSeen === 1;
+
+  /* the observer cannot see inside shadow roots — hosts resolve their
+     own tree via resolveIcons() */
+  const shadowHost = document.createElement("div");
+  document.body.appendChild(shadowHost);
+  shadowHost.attachShadow({ mode: "open" });
+  shadowHost.shadowRoot.innerHTML = '<i sl-icon="t:box"></i>';
+  await Promise.resolve();
+  const shadowEmpty = !shadowHost.shadowRoot.querySelector("svg");
+  resolveIcons(shadowHost.shadowRoot);
+
   window.__slBundle = {
     svg: icon("t:box"),
     missing: icon("t:nope"),
@@ -193,6 +227,12 @@
     fetched: icon("t2:dot"),
     fetchedUrl,
     attrFilled: !!attr.querySelector("svg"),
+    waitEmpty,
+    waitFilled: !!wait.querySelector("svg"),
+    postFiltered,
+    postResolved,
+    shadowEmpty,
+    shadowFilled: !!shadowHost.shadowRoot.querySelector("svg"),
   };
 </script>
 <script>
@@ -426,6 +466,12 @@ function main() {
     eq('bundle registerPack fetch() called with source', t3.fetchedUrl, 'pack:t2.json');
     has('bundle registerPack fetch() source', t3.fetched, '<svg sl-icon');
     rec('bundle observer fills attr change', String(t3.attrFilled), 'true', t3.attrFilled);
+    rec('unregistered pack leaves placeholder empty', String(t3.waitEmpty), 'true', t3.waitEmpty);
+    rec('late pack fills waiting placeholder', String(t3.waitFilled), 'true', t3.waitFilled);
+    rec('post-install attr mutations filtered', String(t3.postFiltered), 'true', t3.postFiltered);
+    rec('resolve() reaches late registrations', String(t3.postResolved), 'true', t3.postResolved);
+    rec('observer skips shadow roots', String(t3.shadowEmpty), 'true', t3.shadowEmpty);
+    rec('resolveIcons fills shadow root', String(t3.shadowFilled), 'true', t3.shadowFilled);
   }
 }
 </script>
