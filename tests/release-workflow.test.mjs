@@ -33,6 +33,62 @@ function shellBlocks(source) {
   return blocks;
 }
 
+function previewFixture(t) {
+  const tmp = mkdtempSync(join(tmpdir(), 'sl-preview-'));
+  t.after(() => rmSync(tmp, { recursive: true, force: true }));
+  const bin = join(tmp, 'bin');
+  mkdirSync(bin);
+  const log = join(tmp, 'calls.jsonl');
+  const output = join(tmp, 'output');
+  const summary = join(tmp, 'summary');
+  writeFileSync(output, '');
+  writeFileSync(summary, '');
+  writeFileSync(join(bin, 'gh'), `#!/usr/bin/env node
+const fs = require('node:fs');
+fs.appendFileSync(process.env.CALL_LOG, JSON.stringify(['gh', ...process.argv.slice(2)]) + '\\n');
+if (process.env.MOCK_GH_FAILURE) process.exit(1);
+console.log(process.env.MOCK_PRS);
+`, { mode: 0o755 });
+  writeFileSync(join(bin, 'npx'), `#!/usr/bin/env node
+const fs = require('node:fs');
+fs.appendFileSync(process.env.CALL_LOG, JSON.stringify(['npx', ...process.argv.slice(2)]) + '\\n');
+if (process.env.MOCK_PREVIEW_FAILURE) process.exit(1);
+console.log(process.env.MOCK_PREVIEW_JSON);
+`, { mode: 0o755 });
+  const pr = {
+    number: 42, state: 'open',
+    head: { ref: 'feature/docs', sha: 'a'.repeat(40), repo: { full_name: 'example/fixture' } },
+  };
+  const run = (name, env = {}) => {
+    const step = checks.split(`      - name: ${name}\n`)[1]?.split('\n      - ')[0];
+    const script = step && shellBlocks(step)[0];
+    assert.ok(script, `the workflow must include the ${name} shell step`);
+    return spawnSync('bash', ['-e', '-o', 'pipefail', '-c', `
+      gh() { "$TEST_BIN/gh" "$@"; }
+      npx() { "$TEST_BIN/npx" "$@"; }
+      ${script}
+    `], {
+      cwd: tmp, encoding: 'utf8',
+      env: {
+        ...process.env, TEST_BIN: bin, CALL_LOG: log,
+        GH_TOKEN: '', GITHUB_TOKEN: '', CLOUDFLARE_API_TOKEN: '', CLOUDFLARE_ACCOUNT_ID: '',
+        GITHUB_OUTPUT: output, GITHUB_STEP_SUMMARY: summary, GITHUB_WORKSPACE: tmp,
+        GITHUB_REPOSITORY: 'example/fixture', GITHUB_REPOSITORY_OWNER: 'example',
+        PR_BRANCH: pr.head.ref, PR_HEAD_SHA: pr.head.sha, PR_NUMBER: String(pr.number),
+        MOCK_PRS: JSON.stringify([pr]), MOCK_GH_FAILURE: '', MOCK_PREVIEW_FAILURE: '',
+        MOCK_PREVIEW_JSON: JSON.stringify({ preview: { urls: ['https://preview.example.invalid'] } }),
+        ...env,
+      },
+    });
+  };
+  return {
+    tmp, pr, run,
+    output: () => readFileSync(output, 'utf8'),
+    summary: () => readFileSync(summary, 'utf8'),
+    calls: () => existsSync(log) ? readFileSync(log, 'utf8').trim().split('\n').map(JSON.parse) : [],
+  };
+}
+
 function releaseFixture(t, { changeset = true } = {}) {
   const tmp = mkdtempSync(join(tmpdir(), 'sl-release-'));
   t.after(() => rmSync(tmp, { recursive: true, force: true }));
@@ -153,6 +209,95 @@ test('Test runs only for PRs and explicit dispatch, not branch pushes', () => {
   assert.match(checks, /\n {2}pull_request:/);
   assert.match(checks, /\n {2}workflow_dispatch:/);
   assert.doesNotMatch(checks, /\n {2}push:/);
+});
+
+test('Preview is gated after checks and does not expose deployment secrets to forks', () => {
+  assert.match(checks, /contents: read/);
+  assert.match(checks, /pull-requests: read/);
+  assert.match(checks, /cancel-in-progress: true/);
+  assert.match(checks, /group: test-\$\{\{ github.event.pull_request.head.repo.full_name \|\| github.repository \}\}-\$\{\{ github.head_ref \|\| github.ref_name \}\}/);
+  assert.match(checks, /if: \$\{\{ github.event_name == 'workflow_dispatch' \|\| github.event.pull_request.head.repo.full_name == github.repository \}\}/);
+  assert.match(checks, /if: \$\{\{ steps.preview.outputs.name != '' \}\}/);
+  assert.match(checks, /PR_BRANCH: \$\{\{ github.head_ref \|\| github.ref_name \}\}/);
+  assert.match(checks, /PR_HEAD_SHA: \$\{\{ github.event.pull_request.head.sha \|\| github.sha \}\}/);
+  assert.match(checks, /PR_NUMBER: \$\{\{ github.event.pull_request.number \|\| 0 \}\}/);
+  const checksEnd = checks.indexOf('run: node --test tests/release-workflow.test.mjs');
+  const lookup = checks.indexOf('- name: Find open PR for Preview');
+  const deployment = checks.indexOf('- name: Deploy docs Preview');
+  assert.ok(checksEnd < lookup && lookup < deployment);
+  assert.doesNotMatch(checks.slice(0, deployment), /secrets\.CLOUDFLARE_/);
+  assert.match(checks.slice(deployment), /CLOUDFLARE_API_TOKEN: \$\{\{ secrets.CLOUDFLARE_API_TOKEN \}\}/);
+  assert.match(checks.slice(deployment), /CLOUDFLARE_ACCOUNT_ID: \$\{\{ secrets.CLOUDFLARE_ACCOUNT_ID \}\}/);
+  assert.doesNotMatch(checks, /pull_request_target|wrangler deploy/);
+});
+
+test('an open same-repository PR resolves to a stable Preview name', t => {
+  const fixture = previewFixture(t);
+  const result = fixture.run('Find open PR for Preview');
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.equal(fixture.output(), 'name=pr-42\n');
+  assert.deepEqual(fixture.calls(), [[
+    'gh', 'api', '--method', 'GET', 'repos/example/fixture/pulls',
+    '-f', 'state=open', '-f', 'head=example:feature/docs',
+  ]]);
+});
+
+test('bot dispatch resolves the open PR without a pull_request event number', t => {
+  const fixture = previewFixture(t);
+  const result = fixture.run('Find open PR for Preview', { PR_NUMBER: '0' });
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.equal(fixture.output(), 'name=pr-42\n');
+});
+
+test('a manual check without an open PR does not schedule a Preview', t => {
+  const fixture = previewFixture(t);
+  const result = fixture.run('Find open PR for Preview', { MOCK_PRS: '[]', PR_NUMBER: '0' });
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.equal(fixture.output(), '');
+});
+
+for (const [name, update] of [
+  ['closed PR', pr => { pr.state = 'closed'; }],
+  ['fork PR', pr => { pr.head.repo.full_name = 'contributor/fork'; }],
+  ['outdated revision', pr => { pr.head.sha = 'b'.repeat(40); }],
+  ['different branch', pr => { pr.head.ref = 'feature/other'; }],
+  ['different PR number', pr => { pr.number = 43; }],
+]) {
+  test(`Preview rejects a ${name}`, t => {
+    const fixture = previewFixture(t);
+    const response = structuredClone(fixture.pr);
+    update(response);
+    const result = fixture.run('Find open PR for Preview', { MOCK_PRS: JSON.stringify([response]) });
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+    assert.equal(fixture.output(), '');
+  });
+}
+
+test('PR lookup failures stop the check instead of authorizing a Preview', t => {
+  const fixture = previewFixture(t);
+  const result = fixture.run('Find open PR for Preview', { MOCK_GH_FAILURE: '1' });
+  assert.notEqual(result.status, 0);
+  assert.equal(fixture.output(), '');
+});
+
+test('Preview deploys the built docs using the local CLI and reports its URL', t => {
+  const fixture = previewFixture(t);
+  const result = fixture.run('Deploy docs Preview', { PREVIEW_NAME: 'pr-42' });
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.deepEqual(fixture.calls(), [[
+    'npx', '--no-install', 'wrangler', 'preview',
+    '--config', join(fixture.tmp, 'doc/wrangler.toml'), '--name', 'pr-42', '--json',
+  ]]);
+  assert.match(fixture.summary(), /https:\/\/preview\.example\.invalid/);
+});
+
+test('Preview command failures or missing URLs fail the check', t => {
+  for (const env of [{ MOCK_PREVIEW_FAILURE: '1' }, { MOCK_PREVIEW_JSON: '{}' }]) {
+    const fixture = previewFixture(t);
+    const result = fixture.run('Deploy docs Preview', { PREVIEW_NAME: 'pr-42', ...env });
+    assert.notEqual(result.status, 0);
+    assert.equal(fixture.summary(), '');
+  }
 });
 
 test('bot-created PRs have an explicit check run on their prepared branch', () => {

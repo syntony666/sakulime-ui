@@ -12,6 +12,7 @@ import pkg from "../../../package.json";
 
 const { Layout } = DefaultTheme;
 const { version } = pkg;
+const isPreview = import.meta.env.VITE_DOC_PREVIEW === "true";
 const theme = ref("sakulime");
 const open = ref(false);
 const switchEl = ref<HTMLElement>();
@@ -133,6 +134,16 @@ onUnmounted(() => document.removeEventListener("click", onClickOutside));
 
 <template>
   <Layout>
+    <template #layout-top>
+      <aside
+        v-if="isPreview"
+        class="sl-preview-banner"
+        role="note"
+        aria-label="預覽版本"
+      >
+        此為預覽版本，僅供測試與審閱。
+      </aside>
+    </template>
     <template #nav-bar-content-after>
       <div>
         <span class="sl-version">v{{ version }}</span>
