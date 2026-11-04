@@ -11,6 +11,10 @@ on:
         required: false
         default: "false"
         type: string
+      test:
+        required: false
+        default: "true"
+        type: string
 
 jobs:
   verify:
@@ -64,6 +68,7 @@ jobs:
   test:
     name: Test
     needs: build
+    if: inputs.test == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5

@@ -49,6 +49,8 @@ jobs:
     permissions:
       contents: read
     uses: ./.github/workflows/test-pipeline.yml
+    with:
+      test: "false"
 
   publish:
     name: Release

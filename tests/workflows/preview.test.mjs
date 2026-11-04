@@ -125,6 +125,7 @@ test('a branch keeps one in-flight check run for any trigger', () => {
 
 test('the shared pipeline builds the preview-flagged site and runs the test suite', () => {
   assert.match(checks, /site: "true"/);
+  assert.doesNotMatch(checks, /test: "false"/);
   assert.match(pipeline, /\n {8}env:\n {10}VITE_DOC_PREVIEW: "true"/);
   assert.match(pipeline, /run: node --test$/m);
   assert.match(pipeline, /upload-artifact@v4/);

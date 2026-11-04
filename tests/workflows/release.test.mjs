@@ -148,8 +148,9 @@ test('the shared pipeline chains verify, build and test jobs', () => {
   assert.match(pipeline, /workflow_call:/);
   assert.match(pipeline, /\n {6}lint:/);
   assert.match(pipeline, /\n {6}site:/);
+  assert.match(pipeline, /\n {6}test:/);
   assert.match(pipeline, /\n {2}build:[^]*needs: verify/);
-  assert.match(pipeline, /\n {2}test:[^]*needs: build/);
+  assert.match(pipeline, /\n {2}test:[^]*needs: build[^]*if: inputs\.test == 'true'/);
   assert.match(pipeline, /npm ci/);
   assert.match(pipeline, /check-deps\.mjs/);
   assert.match(pipeline, /upload-artifact@v4/);
@@ -163,7 +164,7 @@ test('master publishes a prepared version without opening a second PR', () => {
   assert.match(publish, /\n {2}push:\n {4}branches:\n {6}- master/);
   assert.doesNotMatch(publish, /changesets\/action|changeset version|gh pr create/);
   assert.match(publish, /HEAD\^1:package\.json/);
-  assert.match(publish, /uses: \.\/\.github\/workflows\/test-pipeline\.yml/);
+  assert.match(publish, /uses: \.\/\.github\/workflows\/test-pipeline\.yml\n {4}with:\n {6}test: "false"/);
   assert.match(publish, /needs: \[detect, verify\]/);
   assert.match(publish, /download-artifact@v4/);
   assert.match(publish, /changeset publish/);
