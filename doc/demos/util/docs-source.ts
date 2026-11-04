@@ -152,7 +152,8 @@ export const showMarkup = (code: string): string =>
   indentMarkup(fold(stripShells(code)));
 
 const escHtml = (s: string): string =>
-  s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
 
 const hlSpan = (cls: string, s: string): string =>
   `<span class="${cls}">${escHtml(s)}</span>`;
