@@ -8,6 +8,7 @@ import { readWorkflow, shellBlocks } from '../lib/workflow.mjs';
 import { mockBin, readCalls } from '../lib/mocks.mjs';
 
 const checks = readWorkflow('test');
+const pipeline = readWorkflow('test-pipeline');
 
 function previewFixture(t) {
   const tmp = mkdtempSync(join(tmpdir(), 'sl-preview-'));
@@ -102,8 +103,8 @@ test('Test runs only for PRs and explicit dispatch, not branch pushes', () => {
 });
 
 test('every check run executes the same Fixture assertions job', () => {
-  const job = checks.split(/\n {2}test:\n/)[1]?.split('\n    steps:')[0];
-  assert.ok(job, 'the workflow must define the test job');
+  const job = checks.split(/\n {2}verify:\n/)[1]?.split('\n  preview:')[0];
+  assert.ok(job, 'the workflow must define the verify job');
   assert.match(job, /name: Fixture assertions/);
   assert.doesNotMatch(job, /\n {4}if:/);
   assert.doesNotMatch(checks, /Release checks delegated/);
@@ -119,9 +120,13 @@ test('a branch keeps one in-flight check run for any trigger', () => {
   assert.equal(concurrencyGroup(pr), concurrencyGroup(dispatch));
 });
 
-test('Test enables the preview build flag and runs the test suite', () => {
-  assert.match(checks, /\n {4}env:\n {6}VITE_DOC_PREVIEW: "true"/);
-  assert.match(checks, /run: node --test$/m);
+test('the shared pipeline builds the preview-flagged site and runs the test suite', () => {
+  assert.match(checks, /site: "true"/);
+  assert.match(pipeline, /\n {8}env:\n {10}VITE_DOC_PREVIEW: "true"/);
+  assert.match(pipeline, /run: node --test$/m);
+  assert.match(pipeline, /upload-artifact@v4/);
+  assert.match(pipeline, /name: docs-site/);
+  assert.match(checks, /download-artifact@v4/);
 });
 
 test('Preview is gated after checks and does not expose deployment secrets to forks', () => {
@@ -135,11 +140,12 @@ test('Preview is gated after checks and does not expose deployment secrets to fo
   assert.match(checks, /PR_BRANCH: \$\{\{ github.head_ref \|\| github.ref_name \}\}/);
   assert.match(checks, /PR_HEAD_SHA: \$\{\{ github.event.pull_request.head.sha \|\| github.sha \}\}/);
   assert.match(checks, /PR_NUMBER: \$\{\{ github.event.pull_request.number \|\| 0 \}\}/);
-  const checksEnd = checks.indexOf('- name: Workflow checks');
+  const previewJob = checks.indexOf('\n  preview:');
   const lookup = checks.indexOf('- name: Find open PR for Preview');
   const deployment = checks.indexOf('- name: Deploy docs Preview');
   const status = checks.indexOf('- name: Publish Preview status');
-  assert.ok(checksEnd > 0 && checksEnd < lookup && lookup < deployment && deployment < status);
+  assert.ok(previewJob > 0 && previewJob < lookup && lookup < deployment && deployment < status);
+  assert.match(checks, /\n {2}preview:[^]*needs: verify/);
   assert.doesNotMatch(checks.slice(0, deployment), /secrets\.CLOUDFLARE_/);
   assert.match(checks.slice(deployment), /CLOUDFLARE_API_TOKEN: \$\{\{ secrets.CLOUDFLARE_API_TOKEN \}\}/);
   assert.match(checks.slice(deployment), /CLOUDFLARE_ACCOUNT_ID: \$\{\{ secrets.CLOUDFLARE_ACCOUNT_ID \}\}/);

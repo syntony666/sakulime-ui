@@ -1,0 +1,47 @@
+name: Test pipeline
+
+on:
+  workflow_call:
+    inputs:
+      lint:
+        required: false
+        default: "false"
+        type: string
+      site:
+        required: false
+        default: "false"
+        type: string
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          cache: npm
+      - run: npm ci
+      - name: Isolated-workspace deps guard
+        run: node scripts/check-deps.mjs
+      - run: npm run lint
+        if: ${{ inputs.lint == 'true' }}
+      - run: npm run build
+      - name: Install chrome-headless-shell
+        run: npx -y @puppeteer/browsers install chrome-headless-shell@stable --path /tmp/chromium
+      - name: Fixture assertions
+        run: SL_CHROMIUM=$(find /tmp/chromium -name chrome-headless-shell -type f | head -1) npm test
+      - name: Workflow checks
+        run: node --test
+      - name: Docs site build
+        if: ${{ inputs.site == 'true' }}
+        env:
+          VITE_DOC_PREVIEW: "true"
+        run: npm run site
+      - uses: actions/upload-artifact@v4
+        if: ${{ inputs.site == 'true' }}
+        with:
+          name: docs-site
+          path: doc/site
+          retention-days: 1
