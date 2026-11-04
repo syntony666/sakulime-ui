@@ -6,13 +6,11 @@ on:
       - master
       - 'release/*'
   pull_request:
+  workflow_dispatch:
 
 jobs:
   test:
     name: Fixture assertions
-    # changeset-release PRs are generated from an already-tested tree and
-    # their runs always sit at action_required — skip keeps the check green
-    if: ${{ !startsWith(github.head_ref, 'changeset-release/') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -24,6 +22,8 @@ jobs:
       - name: Isolated-workspace deps guard
         run: node -e 'for (const p of ["doc/package.json", "packages/core/package.json"]) { const d = require("./" + p); if (!d.devDependencies?.["postcss-custom-selectors"]) throw new Error(p + " must declare postcss-custom-selectors — isolated builds never see root devDeps") }'
       - run: npm run lint
+      - name: Release workflow checks
+        run: node --test tests/release-workflow.test.mjs
       - run: npm run build
       - name: Install chrome-headless-shell
         run: npx -y @puppeteer/browsers install chrome-headless-shell@stable --path /tmp/chromium
