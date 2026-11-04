@@ -6,13 +6,11 @@ on:
       - master
       - 'release/*'
   pull_request:
+  workflow_dispatch:
 
 jobs:
   test:
     name: Fixture assertions
-    # changeset-release PRs are generated from an already-tested tree and
-    # their runs always sit at action_required — skip keeps the check green
-    if: ${{ !startsWith(github.head_ref, 'changeset-release/') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -20,3 +18,5 @@ jobs:
         with:
           lint: "true"
           site: "true"
+      - name: Release workflow checks
+        run: node --test tests/release-workflow.test.mjs
