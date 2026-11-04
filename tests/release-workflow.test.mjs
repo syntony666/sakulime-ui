@@ -53,7 +53,11 @@ console.log(process.env.MOCK_PRS);
 const fs = require('node:fs');
 fs.appendFileSync(process.env.CALL_LOG, JSON.stringify(['npx', ...process.argv.slice(2)]) + '\\n');
 if (process.env.MOCK_PREVIEW_FAILURE) process.exit(1);
-console.log(process.env.MOCK_PREVIEW_JSON);
+fs.writeFileSync(
+  process.env.WRANGLER_OUTPUT_FILE_PATH,
+  JSON.stringify({ type: 'preview', preview_urls: [process.env.MOCK_PREVIEW_URL] }) + '\\n',
+);
+console.log(process.env.MOCK_PREVIEW_STDOUT);
 `, { mode: 0o755 });
   const pr = {
     number: 42, state: 'open',
@@ -73,10 +77,12 @@ console.log(process.env.MOCK_PREVIEW_JSON);
         ...process.env, TEST_BIN: bin, CALL_LOG: log,
         GH_TOKEN: '', GITHUB_TOKEN: '', CLOUDFLARE_API_TOKEN: '', CLOUDFLARE_ACCOUNT_ID: '',
         GITHUB_OUTPUT: output, GITHUB_STEP_SUMMARY: summary, GITHUB_WORKSPACE: tmp,
+        RUNNER_TEMP: tmp,
         GITHUB_REPOSITORY: 'example/fixture', GITHUB_REPOSITORY_OWNER: 'example',
         PR_BRANCH: pr.head.ref, PR_HEAD_SHA: pr.head.sha, PR_NUMBER: String(pr.number),
         MOCK_PRS: JSON.stringify([pr]), MOCK_GH_FAILURE: '', MOCK_PREVIEW_FAILURE: '',
-        MOCK_PREVIEW_JSON: JSON.stringify({ preview: { urls: ['https://preview.example.invalid'] } }),
+        MOCK_PREVIEW_URL: 'https://preview.example.invalid',
+        MOCK_PREVIEW_STDOUT: 'stdout progress\n{"preview":{"urls":["https://preview.example.invalid"]}}',
         ...env,
       },
     });
@@ -359,8 +365,18 @@ test('Preview deploys the built docs using the local CLI and reports its URL', t
   assert.match(fixture.summary(), /https:\/\/preview\.example\.invalid/);
 });
 
+test('Preview reads the structured output instead of command stdout', t => {
+  const fixture = previewFixture(t);
+  const result = fixture.run('Deploy docs Preview', {
+    PREVIEW_NAME: 'pr-42',
+    MOCK_PREVIEW_STDOUT: '🌀 Starting asset upload...\nnot a JSON payload',
+  });
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.equal(fixture.summary(), '### Docs Preview\n\nhttps://preview.example.invalid\n');
+});
+
 test('Preview command failures or missing URLs fail the check', t => {
-  for (const env of [{ MOCK_PREVIEW_FAILURE: '1' }, { MOCK_PREVIEW_JSON: '{}' }]) {
+  for (const env of [{ MOCK_PREVIEW_FAILURE: '1' }, { MOCK_PREVIEW_URL: '' }]) {
     const fixture = previewFixture(t);
     const result = fixture.run('Deploy docs Preview', { PREVIEW_NAME: 'pr-42', ...env });
     assert.notEqual(result.status, 0);
