@@ -8,14 +8,16 @@ on:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  release:
-    name: Release
+  detect:
+    name: Detect
     runs-on: ubuntu-latest
     permissions:
-      contents: write
-      id-token: write
+      contents: read
+    outputs:
+      publish: ${{ steps.version.outputs.publish }}
+      tag: ${{ steps.version.outputs.tag }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - name: Detect prepared version
@@ -39,18 +41,44 @@ jobs:
           NODE
           echo "publish=true" >> "$GITHUB_OUTPUT"
           echo "tag=sakulime-ui@$version" >> "$GITHUB_OUTPUT"
-      - name: Workflow checks
-        if: steps.version.outputs.publish == 'true'
-        run: node --test tests/workflows/{release,preview,guards}.test.mjs
-      - uses: ./.github/actions/test-pipeline
-        if: steps.version.outputs.publish == 'true'
+
+  verify:
+    name: Verify
+    needs: detect
+    if: needs.detect.outputs.publish == 'true'
+    permissions:
+      contents: read
+    uses: ./.github/workflows/test-pipeline.yml
+    with:
+      test: "false"
+
+  publish:
+    name: Release
+    needs: [detect, verify]
+    if: needs.detect.outputs.publish == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v8
+        with:
+          name: dist
+          path: .
       - name: Configure git identity
-        if: steps.version.outputs.publish == 'true'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
       - name: Publish prepared packages
-        if: steps.version.outputs.publish == 'true'
         run: |
           tag="$RELEASE_TAG"
           if git rev-parse --verify "refs/tags/$tag" >/dev/null 2>&1; then
@@ -60,10 +88,9 @@ jobs:
             npx --no-install changeset publish
           fi
         env:
-          RELEASE_TAG: ${{ steps.version.outputs.tag }}
+          RELEASE_TAG: ${{ needs.detect.outputs.tag }}
           NPM_CONFIG_PROVENANCE: "true"
       - name: Create GitHub release
-        if: steps.version.outputs.publish == 'true'
         run: |
           version=$(node -p "require('./package.json').version")
           tag="sakulime-ui@$version"

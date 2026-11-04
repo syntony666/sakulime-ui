@@ -1,0 +1,90 @@
+name: Test pipeline
+
+on:
+  workflow_call:
+    inputs:
+      lint:
+        required: false
+        default: "false"
+        type: string
+      site:
+        required: false
+        default: "false"
+        type: string
+      test:
+        required: false
+        default: "true"
+        type: string
+
+jobs:
+  verify:
+    name: Verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          cache: npm
+      - run: npm ci
+      - name: Isolated-workspace deps guard
+        run: node scripts/check-deps.mjs
+      - run: npm run lint
+        if: ${{ inputs.lint == 'true' }}
+
+  build:
+    name: Build
+    needs: verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-artifact@v7
+        with:
+          name: dist
+          path: |
+            dist
+            packages/*/dist
+          retention-days: 1
+      - name: Docs site build
+        if: ${{ inputs.site == 'true' }}
+        env:
+          VITE_DOC_PREVIEW: "true"
+        run: npm run site
+      - uses: actions/upload-artifact@v7
+        if: ${{ inputs.site == 'true' }}
+        with:
+          name: docs-site
+          path: doc/site
+          retention-days: 1
+
+  test:
+    name: Test
+    needs: build
+    if: inputs.test == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v8
+        with:
+          name: dist
+          path: .
+      - name: Install chrome-headless-shell
+        run: npx -y @puppeteer/browsers install chrome-headless-shell@stable --path /tmp/chromium
+      - name: Fixture tests
+        run: SL_CHROMIUM=$(find /tmp/chromium -name chrome-headless-shell -type f | head -1) npm test
+      - name: Workflow checks
+        run: node --test

@@ -14,22 +14,33 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
-    name: Fixture assertions
+  verify:
+    name: Verify
+    permissions:
+      contents: read
+    uses: ./.github/workflows/test-pipeline.yml
+    with:
+      lint: "true"
+      site: "true"
+
+  preview:
+    name: Docs Preview
+    needs: verify
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
-    env:
-      VITE_DOC_PREVIEW: "true"
     steps:
-      - uses: actions/checkout@v5
-      - uses: ./.github/actions/test-pipeline
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
-          lint: "true"
-          site: "true"
-      - name: Workflow checks
-        run: node --test
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v8
+        with:
+          name: docs-site
+          path: doc/site
       - name: Find open PR for Preview
         id: preview
-        if: ${{ github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository }}
         env:
           GH_TOKEN: ${{ github.token }}
           PR_BRANCH: ${{ github.head_ref || github.ref_name }}
@@ -78,3 +89,18 @@ jobs:
             -f state=success -f context="Docs Preview" \
             -f target_url="$PREVIEW_URL" \
             -f description="Documentation preview"
+
+  test:
+    name: Fixture assertions
+    needs: [verify, preview]
+    if: always()
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - name: Aggregate job results
+        env:
+          NEEDS: ${{ toJSON(needs) }}
+        run: |
+          echo "$NEEDS" | jq .
+          jq -e '[.[] | .result] | all(. == "success" or . == "skipped")' <<< "$NEEDS" > /dev/null
