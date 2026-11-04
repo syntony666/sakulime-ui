@@ -19,10 +19,11 @@ Working agreement for coding agents in this repo. Contributor-facing rules live 
 - Package exports resolve to **dist** — publish-truthful paths only (`files: ["dist"]` ships nothing else). `doc/.vitepress/config.mts` carries vite aliases pointing the same specifiers back at source for `doc/` live reload; keep both in sync when adding exports. `./package.json` is exported so `createRequire` in `scripts/build.mjs` can resolve package roots; keep it exported.
 - `@sakulime-ui/shared` is internal-only: private and changesets-ignored. Its vars get inlined into every published bundle at build time.
 - All four packages are `fixed` — any changeset bumps them together.
-- Merge into `release/x.y.z` and then `master` with `--no-ff` only — no fast-forwards.
+- Merge into `release/x.y.z` with `--no-ff` only — no fast-forwards, never direct commits.
 - Merge a topic branch into `release/x.y.z` only on explicit approval — let commits accumulate on the branch first; never merge commit-by-commit.
+- **Never merge or push `master`** — protection requires a PR + 1 approval + `Fixture assertions`, enforced for admins too. Stop at "release branch ready": on instruction, push `release/x.y.z` and `release-pr.yml` opens the `release/* → master` PR as `github-actions[bot]` (bot-authored because a PR's own author can never approve it). Only the maintainer can approve and merge it.
 - Pushing `master` runs changesets/action → "chore: release" PR → merge publishes to npm via trusted publishing (OIDC + provenance, no token). Cloudflare Workers Builds deploys `doc/` independently on `master` pushes — not part of the Action.
-- Release PRs are authored by `github-actions[bot]`; their `pull_request` workflow runs sit at `action_required` until approved. Merge them with `gh pr merge <n> --merge --admin` — the diff is generated from a tree that already passed Test/Release on `master`.
+- Release PRs are authored by `github-actions[bot]`; like every master PR they need the maintainer's Approve plus green `Fixture assertions` — never approve or merge them from the agent.
 - The doc site's build surface is wider than `doc/`: vite aliases compile `packages/` source and the version badge reads root `package.json`. Cloudflare's build watch paths must cover all three or deploys will silently skip release bumps.
 - The docs subtree's history lives under `doc/` — don't rewrite those commits when rebasing.
 - Gate release steps on local facts (`gh release view`, local git tags) — never on registry lookups; npm propagation delay makes them racy.
