@@ -31,21 +31,6 @@ jobs:
             exit 1
           fi
           version="${RELEASE_BRANCH#release/}"
-          if [[ -z "$version" ]]; then
-            refs=$(gh api "repos/$GH_REPO/git/matching-refs/heads/release/" \
-              --jq '.[].ref | sub("refs/heads/"; "")')
-            if [[ -z "$refs" ]]; then
-              echo "::error::No release/* branch exists; pass release_branch."
-              exit 1
-            fi
-            if [[ $(wc -l <<< "$refs") != 1 ]]; then
-              echo "::error::Multiple release branches exist; pass release_branch to choose one:"
-              echo "$refs"
-              exit 1
-            fi
-            version="${refs#release/}"
-            echo "Auto-detected release branch: release/$version"
-          fi
           if [[ ! "$version" =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
             echo "::error::release_branch must be x.y.z or release/x.y.z."
             exit 1
