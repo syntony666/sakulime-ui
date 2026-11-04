@@ -88,7 +88,7 @@ if (args[0] === 'pr' && args[1] === 'list') {
   const pr = { state: 'OPEN', url: 'https://example.invalid/pull/1' };
   fs.writeFileSync(process.env.PR_STATE, JSON.stringify(pr));
   console.log(pr.url);
-} else if (args[0] !== 'workflow' || args[1] !== 'run') {
+} else {
   process.exit(1);
 }
 `, { mode: 0o755 });
@@ -146,7 +146,8 @@ test('preparation snapshots the source without rewriting an existing release', (
   assert.match(start, /git commit -m "chore: release \$version"/);
   assert.match(start, /gh pr list[^]*--state all/);
   assert.match(start, /gh pr create --base master --head "\$target"/);
-  assert.match(start, /gh workflow run test.yml --ref "\$target"/);
+  assert.match(start, /git push origin --delete "refs\/heads\/\$target"/);
+  assert.doesNotMatch(start, /gh workflow run|actions: write/);
 });
 
 test('bot-created PRs have an explicit check run on their prepared branch', () => {
@@ -154,7 +155,7 @@ test('bot-created PRs have an explicit check run on their prepared branch', () =
   assert.doesNotMatch(checks, /if:.*changeset-release/);
   assert.match(checks, /name: Fixture assertions/);
   assert.match(checks, /node --test tests\/release-workflow\.test\.mjs/);
-  assert.match(start, /actions: write/);
+  assert.doesNotMatch(start, /actions: write/);
 });
 
 test('master publishes a prepared version without opening a second PR', () => {
@@ -189,7 +190,7 @@ test('preparation creates one real version commit and retries without another bu
   assert.equal(retry.status, 0, retry.stdout + retry.stderr);
   assert.equal(fixture.git('rev-parse', 'HEAD'), head);
   assert.equal(fixture.calls().filter(args => args[0] === 'pr' && args[1] === 'create').length, 1);
-  assert.equal(fixture.calls().filter(args => args.join(' ') === 'workflow run test.yml --ref changeset-release/0.4.5').length, 2);
+  assert.equal(fixture.calls().filter(args => args[0] === 'workflow').length, 0);
   assert.deepEqual(fixture.calls().filter(args => args[0] === 'npm'), [
     ['npm', 'ci'], ['npm', 'install --package-lock-only --ignore-scripts'],
   ]);
@@ -222,15 +223,24 @@ test('preparation stops without a changeset instead of pushing an unchanged vers
   assert.equal(fixture.calls().filter(args => args[0] === 'pr' && args[1] === 'create').length, 0);
 });
 
-test('preparation never reopens a merged or closed release PR', t => {
+test('preparation never reopens a merged release PR', t => {
   const fixture = releaseFixture(t);
-  for (const state of ['MERGED', 'CLOSED']) {
-    writeFileSync(fixture.state, JSON.stringify({ state, url: 'https://example.invalid/pull/1' }));
-    const result = fixture.run();
-    assert.notEqual(result.status, 0);
-    assert.match(result.stdout, /already closed or merged/);
-  }
+  writeFileSync(fixture.state, JSON.stringify({ state: 'MERGED', url: 'https://example.invalid/pull/1' }));
+  const result = fixture.run();
+  assert.notEqual(result.status, 0);
+  assert.match(result.stdout, /already merged/);
   assert.equal(fixture.git('rev-parse', 'HEAD'), fixture.git('rev-parse', 'master'));
+});
+
+test('preparation replaces a closed release PR with a fresh one', t => {
+  const fixture = releaseFixture(t);
+  const first = fixture.run();
+  assert.equal(first.status, 0, first.stdout + first.stderr);
+  writeFileSync(fixture.state, JSON.stringify({ state: 'CLOSED', url: 'https://example.invalid/pull/1' }));
+  const retry = fixture.run();
+  assert.equal(retry.status, 0, retry.stdout + retry.stderr);
+  assert.equal(fixture.calls().filter(args => args[0] === 'pr' && args[1] === 'create').length, 2);
+  assert.equal(fixture.git('rev-parse', 'origin/changeset-release/0.4.5^'), fixture.source);
 });
 
 test('installing the workflow without a version bump cannot publish packages', t => {
