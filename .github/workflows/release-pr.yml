@@ -15,7 +15,6 @@ concurrency:
 permissions:
   contents: write
   pull-requests: write
-  actions: write
 
 jobs:
   prepare:
@@ -50,8 +49,9 @@ jobs:
           target="changeset-release/$version"
           pr=$(gh pr list --head "$target" --base master --state all \
             --json state,url --jq '.[0] // empty')
-          if [[ -n "$pr" && "$(jq -r .state <<< "$pr")" != OPEN ]]; then
-            echo "::error::This release PR is already closed or merged; use a new release branch."
+          state="$(jq -r '.state // empty' <<< "$pr")"
+          if [[ "$state" == MERGED ]]; then
+            echo "::error::This release PR is already merged; use a new release branch."
             exit 1
           fi
 
@@ -65,6 +65,13 @@ jobs:
           fi
 
           existing=$(git ls-remote --heads origin "refs/heads/$target")
+          if [[ "$state" == CLOSED ]]; then
+            if [[ -n "$existing" ]]; then
+              git push origin --delete "refs/heads/$target"
+            fi
+            existing=
+            pr=
+          fi
           if [[ -n "$existing" ]]; then
             git fetch origin "refs/heads/$target"
             git switch --detach FETCH_HEAD
@@ -73,7 +80,7 @@ jobs:
               exit 1
             fi
           else
-            git switch -c "$target" "$source"
+            git switch -C "$target" "$source"
             npm ci
             npx --no-install changeset version
             npm install --package-lock-only --ignore-scripts
@@ -109,7 +116,5 @@ jobs:
             url=$(jq -r .url <<< "$pr")
           fi
 
-          # GITHUB_TOKEN-created PRs do not trigger pull_request workflows.
-          gh workflow run test.yml --ref "$target"
           printf '## Release prepared\n\n[Review PR](%s)\n\nApprove and Merge manually after Fixture assertions passes.\n' \
             "$url" >> "$GITHUB_STEP_SUMMARY"
