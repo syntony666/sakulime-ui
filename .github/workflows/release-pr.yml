@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
     inputs:
       release_branch:
-        description: "Release version x.y.z (empty = auto-detect the only release branch)"
-        required: false
+        description: "x.y.z (release/x.y.z must exist)"
+        required: true
         type: string
 
 concurrency:
