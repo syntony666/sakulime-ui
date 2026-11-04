@@ -1,5 +1,11 @@
 # sakulime-ui
 
+## 0.4.5
+
+### Patch Changes
+
+- d0aac0b: Validate the maintainer-approved release workflow and PR-only documentation previews. No published runtime code changes.
+
 ## 0.4.4
 
 ### Patch Changes
