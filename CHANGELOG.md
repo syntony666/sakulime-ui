@@ -1,5 +1,11 @@
 # sakulime-ui
 
+## 0.4.3
+
+### Patch Changes
+
+- 02b0fa8: Repo docs: AGENTS.md now records the release-PR `--admin` merge path and the doc site's full build surface for Cloudflare watch paths. No package code changed.
+
 ## 0.4.2
 
 ### Patch Changes

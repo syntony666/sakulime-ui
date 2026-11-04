@@ -1,6 +1,6 @@
 {
   "name": "@sakulime-ui/theme",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Color schemes for sakulime-ui — seed-derived palettes with light/dark via light-dark()",
   "license": "MIT",
   "repository": {
