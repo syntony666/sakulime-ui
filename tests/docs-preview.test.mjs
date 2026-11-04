@@ -1,6 +1,9 @@
 import assert from 'node:assert/strict';
 import { execFile, execFileSync } from 'node:child_process';
-import { existsSync, globSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
+import {
+  accessSync, constants, existsSync, globSync, mkdirSync, mkdtempSync,
+  readFileSync, readdirSync, rmSync, statSync, symlinkSync, writeFileSync,
+} from 'node:fs';
 import { createServer } from 'node:http';
 import { homedir, tmpdir } from 'node:os';
 import { extname, join } from 'node:path';
@@ -13,11 +16,30 @@ const cli = join(root, 'node_modules/vitepress/bin/vitepress.js');
 const workflow = readFileSync(join(root, '.github/workflows/test.yml'), 'utf8');
 const execFileP = promisify(execFile);
 
-async function render404(output) {
-  const localBrowser = join(homedir(), '.local/bin/chromium');
-  const chromium = process.env.SL_CHROMIUM || (existsSync(localBrowser)
-    ? localBrowser : globSync('/tmp/chromium/**/chrome-headless-shell')[0]);
-  assert.ok(chromium, 'Chromium is required; set SL_CHROMIUM or run the test pipeline');
+function findChromium({
+  override = process.env.SL_CHROMIUM,
+  localBrowser = join(homedir(), '.local/bin/chromium'),
+  cacheRoot = '/tmp/chromium',
+} = {}) {
+  const candidates = override
+    ? [override]
+    : [localBrowser, ...globSync(join(cacheRoot, '**/chrome-headless-shell'))];
+  for (const candidate of candidates) {
+    try {
+      if (!statSync(candidate).isFile()) continue;
+      accessSync(candidate, constants.X_OK);
+      return candidate;
+    } catch {
+      continue;
+    }
+  }
+  assert.fail(
+    `no executable Chromium found (tried: ${candidates.join(', ') || 'none'}); set SL_CHROMIUM or run the test pipeline`,
+  );
+}
+
+async function render404(output, browserOptions) {
+  const chromium = findChromium(browserOptions);
   const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css' };
   const server = createServer((req, res) => {
     const path = new URL(req.url, 'http://localhost').pathname;
@@ -52,10 +74,66 @@ test('Test enables the preview build flag and runs docs artifact regressions', (
   assert.match(workflow, /node --test tests\/release-workflow\.test\.mjs tests\/docs-preview\.test\.mjs/);
 });
 
+const chromiumCacheFixture = root => {
+  const cacheRoot = join(root, 'cache');
+  const shellDir = join(
+    cacheRoot, 'chrome-headless-shell', 'linux-1', 'chrome-headless-shell-linux64',
+  );
+  mkdirSync(shellDir, { recursive: true });
+  const exe = join(shellDir, 'chrome-headless-shell');
+  writeFileSync(exe, '#!/bin/sh\n', { mode: 0o755 });
+  return { cacheRoot, exe };
+};
+
+test('findChromium resolves the nested executable, not the cache directory', t => {
+  const tmp = mkdtempSync(join(tmpdir(), 'sl-chromium-'));
+  t.after(() => rmSync(tmp, { recursive: true, force: true }));
+  const { cacheRoot, exe } = chromiumCacheFixture(tmp);
+  assert.equal(
+    findChromium({ override: '', localBrowser: join(tmp, 'missing'), cacheRoot }),
+    exe,
+  );
+});
+
+test('findChromium prefers an explicit SL_CHROMIUM override', t => {
+  const tmp = mkdtempSync(join(tmpdir(), 'sl-chromium-'));
+  t.after(() => rmSync(tmp, { recursive: true, force: true }));
+  const exe = join(tmp, 'custom-chromium');
+  writeFileSync(exe, '', { mode: 0o755 });
+  assert.equal(
+    findChromium({ override: exe, localBrowser: join(tmp, 'missing'), cacheRoot: join(tmp, 'cache') }),
+    exe,
+  );
+});
+
+test('findChromium rejects an unusable override instead of falling back', t => {
+  const tmp = mkdtempSync(join(tmpdir(), 'sl-chromium-'));
+  t.after(() => rmSync(tmp, { recursive: true, force: true }));
+  const { cacheRoot } = chromiumCacheFixture(tmp);
+  const fallback = join(tmp, 'fallback-chromium');
+  writeFileSync(fallback, '', { mode: 0o755 });
+  assert.throws(
+    () => findChromium({ override: join(tmp, 'missing'), localBrowser: fallback, cacheRoot }),
+    /SL_CHROMIUM/,
+  );
+});
+
+test('findChromium skips non-executable candidates and fails with an actionable error', t => {
+  const tmp = mkdtempSync(join(tmpdir(), 'sl-chromium-'));
+  t.after(() => rmSync(tmp, { recursive: true, force: true }));
+  const noexec = join(tmp, 'chrome-headless-shell');
+  writeFileSync(noexec, '', { mode: 0o644 });
+  assert.throws(
+    () => findChromium({ override: '', localBrowser: noexec, cacheRoot: join(tmp, 'empty-cache') }),
+    /SL_CHROMIUM/,
+  );
+});
+
 for (const preview of [true, false]) {
   test(`${preview ? 'preview' : 'production'} docs have the correct announcement visibility`, async t => {
     const output = mkdtempSync(join(tmpdir(), 'sl-docs-preview-'));
     t.after(() => rmSync(output, { recursive: true, force: true }));
+    const browser = findChromium();
     execFileSync(process.execPath, [cli, 'build', 'doc', '--outDir', output], {
       cwd: root,
       env: { ...process.env, VITE_DOC_PREVIEW: String(preview) },
@@ -63,6 +141,13 @@ for (const preview of [true, false]) {
       timeout: 120_000,
       maxBuffer: 8 * 1024 * 1024,
     });
+    const cacheRoot = join(output, 'browser-cache');
+    const shellDir = join(
+      cacheRoot, 'chrome-headless-shell', 'linux-1', 'chrome-headless-shell-linux64',
+    );
+    mkdirSync(shellDir, { recursive: true });
+    symlinkSync(browser, join(shellDir, 'chrome-headless-shell'));
+    const browserOptions = { override: '', localBrowser: join(output, 'missing-chromium'), cacheRoot };
     const pages = readdirSync(output, { recursive: true })
       .filter(path => path.endsWith('.html') && path !== '404.html');
     assert.ok(pages.length > 0, 'the build must generate HTML pages');
@@ -71,7 +156,7 @@ for (const preview of [true, false]) {
       assert.equal(html.includes('class="sl-preview-banner"'), preview, page);
       assert.equal(html.includes('此為預覽版本，僅供測試與審閱。'), preview, page);
     }
-    const notFound = await render404(output);
+    const notFound = await render404(output, browserOptions);
     assert.equal(notFound.includes('class="sl-preview-banner"'), preview, 'hydrated 404 page');
     assert.equal(notFound.includes('此為預覽版本，僅供測試與審閱。'), preview, 'hydrated 404 page');
   });
