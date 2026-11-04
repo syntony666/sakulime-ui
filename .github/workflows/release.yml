@@ -41,7 +41,7 @@ jobs:
           echo "tag=sakulime-ui@$version" >> "$GITHUB_OUTPUT"
       - name: Workflow checks
         if: steps.version.outputs.publish == 'true'
-        run: node --test 'tests/workflows/*.test.mjs'
+        run: node --test tests/workflows/{release,preview,guards}.test.mjs
       - uses: ./.github/actions/test-pipeline
         if: steps.version.outputs.publish == 'true'
       - name: Configure git identity
