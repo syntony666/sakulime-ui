@@ -149,6 +149,12 @@ test('preparation snapshots the source without rewriting an existing release', (
   assert.match(start, /gh workflow run test.yml --ref "\$target"/);
 });
 
+test('Test runs only for PRs and explicit dispatch, not branch pushes', () => {
+  assert.match(checks, /\n {2}pull_request:/);
+  assert.match(checks, /\n {2}workflow_dispatch:/);
+  assert.doesNotMatch(checks, /\n {2}push:/);
+});
+
 test('bot-created PRs have an explicit check run on their prepared branch', () => {
   assert.match(checks, /workflow_dispatch:/);
   assert.doesNotMatch(checks, /if:.*changeset-release/);
