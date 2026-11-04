@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   verify:
-    name: Fixture assertions
+    name: Verify
     permissions:
       contents: read
     uses: ./.github/workflows/test-pipeline.yml
@@ -89,3 +89,18 @@ jobs:
             -f state=success -f context="Docs Preview" \
             -f target_url="$PREVIEW_URL" \
             -f description="Documentation preview"
+
+  test:
+    name: Fixture assertions
+    needs: [verify, preview]
+    if: always()
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - name: Aggregate job results
+        env:
+          NEEDS: ${{ toJSON(needs) }}
+        run: |
+          echo "$NEEDS" | jq .
+          jq -e '[.[] | .result] | all(. == "success" or . == "skipped")' <<< "$NEEDS" > /dev/null

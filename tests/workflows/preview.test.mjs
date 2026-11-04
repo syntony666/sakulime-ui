@@ -102,11 +102,14 @@ test('Test runs only for PRs and explicit dispatch, not branch pushes', () => {
   assert.doesNotMatch(checks, /\n {2}push:/);
 });
 
-test('every check run executes the same Fixture assertions job', () => {
-  const job = checks.split(/\n {2}verify:\n/)[1]?.split('\n  preview:')[0];
-  assert.ok(job, 'the workflow must define the verify job');
+test('every check run ends at the required Fixture assertions gate job', () => {
+  const job = checks.split(/\n {2}test:\n/)[1];
+  assert.ok(job, 'the workflow must define the test gate job');
   assert.match(job, /name: Fixture assertions/);
-  assert.doesNotMatch(job, /\n {4}if:/);
+  assert.doesNotMatch(job, /uses:/);
+  assert.match(job, /needs: \[verify, preview\]/);
+  assert.match(job, /if: always\(\)/);
+  assert.match(job, /all\(\. == "success" or \. == "skipped"\)/);
   assert.doesNotMatch(checks, /Release checks delegated/);
 });
 
