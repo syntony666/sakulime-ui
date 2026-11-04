@@ -58,8 +58,9 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           PREVIEW_NAME: ${{ steps.preview.outputs.name }}
         run: |
-          output="$(npx --no-install wrangler preview \
+          export WRANGLER_OUTPUT_FILE_PATH="$RUNNER_TEMP/wrangler-preview.jsonl"
+          npx --no-install wrangler preview \
             --config "$GITHUB_WORKSPACE/doc/wrangler.toml" \
-            --name "$PREVIEW_NAME" --json)"
-          url="$(jq -er '.preview.urls[0]' <<< "$output")"
+            --name "$PREVIEW_NAME" --json
+          url="$(jq -er 'select(.preview_urls[0] | type == "string" and . != "") | .preview_urls[0]' "$WRANGLER_OUTPUT_FILE_PATH")"
           printf '### Docs Preview\n\n%s\n' "$url" >> "$GITHUB_STEP_SUMMARY"
