@@ -151,6 +151,10 @@ test('master publishes a prepared version without opening a second PR', () => {
   assert.doesNotMatch(publish, /npm run release|npm run build|chrome-headless-shell@stable/);
   assert.match(publish, /node --test tests\/workflows\/\{release,preview,guards\}\.test\.mjs/);
   assert.doesNotMatch(publish, /docs-preview/);
+  assert.ok(
+    publish.indexOf('uses: ./.github/actions/test-pipeline') < publish.indexOf('node --test'),
+    'workflow checks require the dependencies installed by the test pipeline',
+  );
   assert.match(publish, /gh release create/);
   assert.match(publish, /git config user\.name 'github-actions\[bot\]'/);
   assert.match(publish, /git tag -a "\$tag" -m "\$tag" "\$GITHUB_SHA"/);
