@@ -10,6 +10,9 @@ on:
 jobs:
   test:
     name: Fixture assertions
+    # changeset-release PRs are generated from an already-tested tree and
+    # their runs always sit at action_required — skip keeps the check green
+    if: ${{ !startsWith(github.head_ref, 'changeset-release/') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
