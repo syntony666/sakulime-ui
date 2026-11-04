@@ -1,17 +1,14 @@
 #!/usr/bin/env node
 import { execFile } from 'node:child_process';
 import { existsSync, mkdirSync } from 'node:fs';
-import { homedir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
+import { findChromium } from './lib/chromium.mjs';
 
 const execFileP = promisify(execFile);
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const shots = process.argv.includes('--shots');
-
-const CHROMIUM =
-  process.env.SL_CHROMIUM || join(homedir(), '.local/bin/chromium');
 const DIST = [
   'packages/theme/dist/sakulime.min.css',
   'packages/theme/dist/terra.min.css',
@@ -35,8 +32,11 @@ if (missing.length) {
   console.error('run npm run build first');
   process.exit(2);
 }
-if (!existsSync(CHROMIUM)) {
-  console.error(`chromium not found at ${CHROMIUM} (set SL_CHROMIUM)`);
+let CHROMIUM;
+try {
+  CHROMIUM = findChromium();
+} catch (e) {
+  console.error(e.message);
   process.exit(2);
 }
 try {

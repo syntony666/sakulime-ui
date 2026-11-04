@@ -25,8 +25,8 @@ jobs:
         with:
           lint: "true"
           site: "true"
-      - name: Release workflow checks
-        run: node --test tests/release-workflow.test.mjs tests/docs-preview.test.mjs tests/pr-guards.test.mjs
+      - name: Workflow checks
+        run: node --test
       - name: Find open PR for Preview
         id: preview
         if: ${{ github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository }}

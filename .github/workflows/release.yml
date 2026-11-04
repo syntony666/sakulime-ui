@@ -39,24 +39,11 @@ jobs:
           NODE
           echo "publish=true" >> "$GITHUB_OUTPUT"
           echo "tag=sakulime-ui@$version" >> "$GITHUB_OUTPUT"
-      - uses: actions/setup-node@v5
+      - name: Workflow checks
         if: steps.version.outputs.publish == 'true'
-        with:
-          node-version: 24
-          registry-url: https://registry.npmjs.org
-          cache: npm
-      - run: npm ci
+        run: node --test 'tests/workflows/*.test.mjs'
+      - uses: ./.github/actions/test-pipeline
         if: steps.version.outputs.publish == 'true'
-      - run: node --test tests/release-workflow.test.mjs
-        if: steps.version.outputs.publish == 'true'
-      - run: npm run build
-        if: steps.version.outputs.publish == 'true'
-      - name: Install chrome-headless-shell
-        if: steps.version.outputs.publish == 'true'
-        run: npx -y @puppeteer/browsers install chrome-headless-shell@stable --path /tmp/chromium
-      - name: Fixture assertions
-        if: steps.version.outputs.publish == 'true'
-        run: SL_CHROMIUM=$(find /tmp/chromium -name chrome-headless-shell -type f | head -1) npm test
       - name: Configure git identity
         if: steps.version.outputs.publish == 'true'
         run: |
@@ -70,7 +57,7 @@ jobs:
             test "$(git rev-list -n 1 "$tag")" = "$GITHUB_SHA"
             echo "$tag already tagged; skipping npm publish."
           else
-            npm run release
+            npx --no-install changeset publish
           fi
         env:
           RELEASE_TAG: ${{ steps.version.outputs.tag }}
