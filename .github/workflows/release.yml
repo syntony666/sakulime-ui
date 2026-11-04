@@ -68,7 +68,10 @@ jobs:
           registry-url: https://registry.npmjs.org
           cache: npm
       - run: npm ci
-      - run: npm run build
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: .
       - name: Configure git identity
         run: |
           git config user.name 'github-actions[bot]'
