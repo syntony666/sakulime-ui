@@ -150,7 +150,7 @@ if (args[0] === 'pr' && args[1] === 'list') {
   const pr = { state: 'OPEN', url: 'https://example.invalid/pull/1' };
   fs.writeFileSync(process.env.PR_STATE, JSON.stringify(pr));
   console.log(pr.url);
-} else if (args[0] !== 'workflow' || args[1] !== 'run') {
+} else {
   process.exit(1);
 }
 `, { mode: 0o755 });
@@ -208,7 +208,6 @@ test('preparation snapshots the source without rewriting an existing release', (
   assert.match(start, /git commit -m "chore: release \$version"/);
   assert.match(start, /gh pr list[^]*--state all/);
   assert.match(start, /gh pr create --base master --head "\$target"/);
-  assert.match(start, /gh workflow run test.yml --ref "\$target"/);
 });
 
 test('Test runs only for PRs and explicit dispatch, not branch pushes', () => {
@@ -225,8 +224,6 @@ const jobExpr = re => {
   assert.ok(match, 'the workflow must define the job expression');
   return match[1];
 };
-const jobRuns = github => evalExpr(jobExpr(/\n {4}if: \$\{\{ (.+?) \}\}/), github);
-const checkName = github => evalExpr(jobExpr(/\n {4}name: \$\{\{ (.+?) \}\}/), github);
 const concurrencyGroup = github => jobExpr(/\n {2}group: (.+)/)
   .replace(/\$\{\{ (.+?) \}\}/g, (_, expression) => String(evalExpr(expression, github)));
 const githubContext = ({
@@ -244,52 +241,30 @@ const githubContext = ({
   },
 });
 
-test('only the bot-authored prepared-release PR delegates its check run', () => {
-  const cases = [
-    ['bot-authored same-repository prepared PR', githubContext({
-      event_name: 'pull_request', login: 'github-actions[bot]', head_ref: 'changeset-release/0.4.5',
-    }), false, 'Release checks delegated'],
-    ['explicit dispatch on the prepared branch', githubContext({
-      event_name: 'workflow_dispatch', ref_name: 'changeset-release/0.4.5',
-    }), true, 'Fixture assertions'],
-    ['an ordinary human PR', githubContext({
-      event_name: 'pull_request', login: 'syntony666', head_ref: 'feature/docs',
-    }), true, 'Fixture assertions'],
-    ['a human PR from a release-like branch', githubContext({
-      event_name: 'pull_request', login: 'syntony666', head_ref: 'changeset-release/0.4.5',
-    }), true, 'Fixture assertions'],
-    ['a bot PR from another branch', githubContext({
-      event_name: 'pull_request', login: 'github-actions[bot]', head_ref: 'bot/updates',
-    }), true, 'Fixture assertions'],
-    ['a bot prepared PR from a fork', githubContext({
-      event_name: 'pull_request', login: 'github-actions[bot]', head_ref: 'changeset-release/0.4.5', headRepo: 'contributor/fork',
-    }), true, 'Fixture assertions'],
-  ];
-  for (const [name, github, runs, expected] of cases) {
-    assert.equal(jobRuns(github), runs, name);
-    assert.equal(checkName(github), expected, name);
-  }
+test('every check run executes the same Fixture assertions job', () => {
+  const job = checks.split(/\n {2}test:\n/)[1]?.split('\n    steps:')[0];
+  assert.ok(job, 'the workflow must define the test job');
+  assert.match(job, /name: Fixture assertions/);
+  assert.doesNotMatch(job, /\n {4}if:/);
+  assert.doesNotMatch(checks, /Release checks delegated/);
 });
 
-test('the delegated PR run cannot cancel the dispatched check', () => {
+test('a branch keeps one in-flight check run for any trigger', () => {
   const pr = githubContext({
     event_name: 'pull_request', login: 'github-actions[bot]', head_ref: 'changeset-release/0.4.5',
   });
   const dispatch = githubContext({
     event_name: 'workflow_dispatch', ref_name: 'changeset-release/0.4.5',
   });
-  assert.notEqual(concurrencyGroup(pr), concurrencyGroup(dispatch));
-  const human = githubContext({
-    event_name: 'pull_request', login: 'syntony666', head_ref: 'changeset-release/0.4.5',
-  });
-  assert.equal(concurrencyGroup(pr), concurrencyGroup(human));
+  assert.equal(concurrencyGroup(pr), concurrencyGroup(dispatch));
 });
 
 test('Preview is gated after checks and does not expose deployment secrets to forks', () => {
   assert.match(checks, /contents: read/);
   assert.match(checks, /pull-requests: read/);
+  assert.match(checks, /statuses: write/);
   assert.match(checks, /cancel-in-progress: true/);
-  assert.match(checks, /group: test-\$\{\{ github.event.pull_request.head.repo.full_name \|\| github.repository \}\}-\$\{\{ github.head_ref \|\| github.ref_name \}\}-\$\{\{ github.event_name \}\}/);
+  assert.match(checks, /group: test-\$\{\{ github.event.pull_request.head.repo.full_name \|\| github.repository \}\}-\$\{\{ github.head_ref \|\| github.ref_name \}\}/);
   assert.match(checks, /if: \$\{\{ github.event_name == 'workflow_dispatch' \|\| github.event.pull_request.head.repo.full_name == github.repository \}\}/);
   assert.match(checks, /if: \$\{\{ steps.preview.outputs.name != '' \}\}/);
   assert.match(checks, /PR_BRANCH: \$\{\{ github.head_ref \|\| github.ref_name \}\}/);
@@ -298,10 +273,17 @@ test('Preview is gated after checks and does not expose deployment secrets to fo
   const checksEnd = checks.indexOf('run: node --test tests/release-workflow.test.mjs');
   const lookup = checks.indexOf('- name: Find open PR for Preview');
   const deployment = checks.indexOf('- name: Deploy docs Preview');
-  assert.ok(checksEnd < lookup && lookup < deployment);
+  const status = checks.indexOf('- name: Publish Preview status');
+  assert.ok(checksEnd < lookup && lookup < deployment && deployment < status);
   assert.doesNotMatch(checks.slice(0, deployment), /secrets\.CLOUDFLARE_/);
   assert.match(checks.slice(deployment), /CLOUDFLARE_API_TOKEN: \$\{\{ secrets.CLOUDFLARE_API_TOKEN \}\}/);
   assert.match(checks.slice(deployment), /CLOUDFLARE_ACCOUNT_ID: \$\{\{ secrets.CLOUDFLARE_ACCOUNT_ID \}\}/);
+  assert.match(checks, /echo "sha=\$PR_HEAD_SHA" >> "\$GITHUB_OUTPUT"/);
+  assert.match(checks, /STATUS_SHA: \$\{\{ steps\.preview\.outputs\.sha \}\}/);
+  assert.match(checks, /PREVIEW_URL: \$\{\{ steps\.deploy\.outputs\.url \}\}/);
+  assert.match(checks, /gh api "repos\/\$GITHUB_REPOSITORY\/statuses\/\$STATUS_SHA"/);
+  assert.match(checks, /context="Docs Preview"/);
+  assert.match(checks, /target_url="\$PREVIEW_URL"/);
   assert.doesNotMatch(checks, /pull_request_target|wrangler deploy/);
 });
 
@@ -309,7 +291,7 @@ test('an open same-repository PR resolves to a stable Preview name', t => {
   const fixture = previewFixture(t);
   const result = fixture.run('Find open PR for Preview');
   assert.equal(result.status, 0, result.stdout + result.stderr);
-  assert.equal(fixture.output(), 'name=pr-42\n');
+  assert.equal(fixture.output(), `name=pr-42\nsha=${'a'.repeat(40)}\n`);
   assert.deepEqual(fixture.calls(), [[
     'gh', 'api', '--method', 'GET', 'repos/example/fixture/pulls',
     '-f', 'state=open', '-f', 'head=example:feature/docs',
@@ -320,7 +302,7 @@ test('bot dispatch resolves the open PR without a pull_request event number', t 
   const fixture = previewFixture(t);
   const result = fixture.run('Find open PR for Preview', { PR_NUMBER: '0' });
   assert.equal(result.status, 0, result.stdout + result.stderr);
-  assert.equal(fixture.output(), 'name=pr-42\n');
+  assert.equal(fixture.output(), `name=pr-42\nsha=${'a'.repeat(40)}\n`);
 });
 
 test('a manual check without an open PR does not schedule a Preview', t => {
@@ -363,6 +345,7 @@ test('Preview deploys the built docs using the local CLI and reports its URL', t
     '--config', join(fixture.tmp, 'doc/wrangler.toml'), '--name', 'pr-42', '--json',
   ]]);
   assert.match(fixture.summary(), /https:\/\/preview\.example\.invalid/);
+  assert.match(fixture.output(), /url=https:\/\/preview\.example\.invalid/);
 });
 
 test('Preview reads the structured output instead of command stdout', t => {
@@ -381,16 +364,33 @@ test('Preview command failures or missing URLs fail the check', t => {
     const result = fixture.run('Deploy docs Preview', { PREVIEW_NAME: 'pr-42', ...env });
     assert.notEqual(result.status, 0);
     assert.equal(fixture.summary(), '');
+    assert.equal(fixture.output(), '');
   }
 });
 
-test('bot-created PRs have an explicit check run on their prepared branch', () => {
-  assert.match(checks, /workflow_dispatch:/);
-  assert.match(checks, /'Release checks delegated'/);
-  assert.match(checks, /'Fixture assertions'/);
+test('a successful Preview publishes its URL as a commit status', t => {
+  const fixture = previewFixture(t);
+  const deploy = fixture.run('Deploy docs Preview', { PREVIEW_NAME: 'pr-42' });
+  assert.equal(deploy.status, 0, deploy.stdout + deploy.stderr);
+  const url = fixture.output().match(/^url=(.+)$/m)[1];
+  const result = fixture.run('Publish Preview status', {
+    STATUS_SHA: fixture.pr.head.sha, PREVIEW_URL: url,
+  });
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.deepEqual(fixture.calls().at(-1), [
+    'gh', 'api', `repos/example/fixture/statuses/${'a'.repeat(40)}`,
+    '-f', 'state=success', '-f', 'context=Docs Preview',
+    '-f', 'target_url=https://preview.example.invalid',
+    '-f', 'description=Documentation preview',
+  ]);
+});
+
+test('the prepared release PR is checked by its own pull_request run', () => {
+  assert.match(checks, /\n {2}pull_request:/);
+  assert.match(checks, /\n {2}workflow_dispatch:/);
+  assert.match(checks, /name: Fixture assertions/);
   assert.match(checks, /node --test tests\/release-workflow\.test\.mjs/);
-  assert.match(start, /actions: write/);
-  assert.doesNotMatch(start, /do not trigger pull_request workflows/);
+  assert.doesNotMatch(start, /gh workflow run|actions: write/);
 });
 
 test('master publishes a prepared version without opening a second PR', () => {
@@ -425,7 +425,7 @@ test('preparation creates one real version commit and retries without another bu
   assert.equal(retry.status, 0, retry.stdout + retry.stderr);
   assert.equal(fixture.git('rev-parse', 'HEAD'), head);
   assert.equal(fixture.calls().filter(args => args[0] === 'pr' && args[1] === 'create').length, 1);
-  assert.equal(fixture.calls().filter(args => args.join(' ') === 'workflow run test.yml --ref changeset-release/0.4.5').length, 2);
+  assert.equal(fixture.calls().filter(args => args[0] === 'workflow').length, 0);
   assert.deepEqual(fixture.calls().filter(args => args[0] === 'npm'), [
     ['npm', 'ci'], ['npm', 'install --package-lock-only --ignore-scripts'],
   ]);
