@@ -1,10 +1,7 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
+import { readWorkflow } from '../lib/workflow.mjs';
 
-const readWorkflow = name => readFileSync(
-  new URL(`../.github/workflows/${name}.yml`, import.meta.url), 'utf8',
-);
 const codeql = readWorkflow('codeql');
 const review = readWorkflow('dependency-review');
 

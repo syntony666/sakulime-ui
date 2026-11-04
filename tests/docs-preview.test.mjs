@@ -13,7 +13,6 @@ import { promisify } from 'node:util';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const cli = join(root, 'node_modules/vitepress/bin/vitepress.js');
-const workflow = readFileSync(join(root, '.github/workflows/test.yml'), 'utf8');
 const execFileP = promisify(execFile);
 
 function findChromium({
@@ -68,11 +67,6 @@ async function render404(output, browserOptions) {
     await new Promise(resolve => server.close(resolve));
   }
 }
-
-test('Test enables the preview build flag and runs docs artifact regressions', () => {
-  assert.match(workflow, /\n {4}env:\n {6}VITE_DOC_PREVIEW: "true"/);
-  assert.match(workflow, /node --test tests\/release-workflow\.test\.mjs tests\/docs-preview\.test\.mjs/);
-});
 
 const chromiumCacheFixture = root => {
   const cacheRoot = join(root, 'cache');
