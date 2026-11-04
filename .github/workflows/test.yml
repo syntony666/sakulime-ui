@@ -16,18 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
+      - uses: ./.github/actions/test-pipeline
         with:
-          node-version: 24
-          cache: npm
-      - run: npm ci
-      - name: Isolated-workspace deps guard
-        run: node -e 'for (const p of ["doc/package.json", "packages/core/package.json"]) { const d = require("./" + p); if (!d.devDependencies?.["postcss-custom-selectors"]) throw new Error(p + " must declare postcss-custom-selectors — isolated builds never see root devDeps") }'
-      - run: npm run lint
-      - run: npm run build
-      - name: Install chrome-headless-shell
-        run: npx -y @puppeteer/browsers install chrome-headless-shell@stable --path /tmp/chromium
-      - name: Fixture assertions
-        run: SL_CHROMIUM=$(find /tmp/chromium -name chrome-headless-shell -type f | head -1) npm test
-      - name: Docs site build
-        run: npm run site
+          lint: "true"
+          site: "true"
