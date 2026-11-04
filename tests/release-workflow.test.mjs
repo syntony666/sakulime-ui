@@ -211,11 +211,79 @@ test('Test runs only for PRs and explicit dispatch, not branch pushes', () => {
   assert.doesNotMatch(checks, /\n {2}push:/);
 });
 
+const evalExpr = (expression, github) => new Function(
+  'github', 'startsWith', `return (${expression});`,
+)(github, (value, prefix) => value.startsWith(prefix));
+const jobExpr = re => {
+  const match = checks.match(re);
+  assert.ok(match, 'the workflow must define the job expression');
+  return match[1];
+};
+const jobRuns = github => evalExpr(jobExpr(/\n {4}if: \$\{\{ (.+?) \}\}/), github);
+const checkName = github => evalExpr(jobExpr(/\n {4}name: \$\{\{ (.+?) \}\}/), github);
+const concurrencyGroup = github => jobExpr(/\n {2}group: (.+)/)
+  .replace(/\$\{\{ (.+?) \}\}/g, (_, expression) => String(evalExpr(expression, github)));
+const githubContext = ({
+  event_name, login = null, head_ref = null, ref_name = 'main',
+  repo = 'example/fixture', headRepo = repo,
+}) => ({
+  event_name,
+  repository: repo,
+  head_ref: event_name === 'pull_request' ? head_ref : null,
+  ref_name,
+  event: {
+    pull_request: event_name === 'pull_request'
+      ? { user: { login }, head: { repo: { full_name: headRepo }, sha: 'a'.repeat(40) }, number: 7 }
+      : { user: { login: null }, head: { repo: { full_name: null }, sha: null }, number: null },
+  },
+});
+
+test('only the bot-authored prepared-release PR delegates its check run', () => {
+  const cases = [
+    ['bot-authored same-repository prepared PR', githubContext({
+      event_name: 'pull_request', login: 'github-actions[bot]', head_ref: 'changeset-release/0.4.5',
+    }), false, 'Release checks delegated'],
+    ['explicit dispatch on the prepared branch', githubContext({
+      event_name: 'workflow_dispatch', ref_name: 'changeset-release/0.4.5',
+    }), true, 'Fixture assertions'],
+    ['an ordinary human PR', githubContext({
+      event_name: 'pull_request', login: 'syntony666', head_ref: 'feature/docs',
+    }), true, 'Fixture assertions'],
+    ['a human PR from a release-like branch', githubContext({
+      event_name: 'pull_request', login: 'syntony666', head_ref: 'changeset-release/0.4.5',
+    }), true, 'Fixture assertions'],
+    ['a bot PR from another branch', githubContext({
+      event_name: 'pull_request', login: 'github-actions[bot]', head_ref: 'bot/updates',
+    }), true, 'Fixture assertions'],
+    ['a bot prepared PR from a fork', githubContext({
+      event_name: 'pull_request', login: 'github-actions[bot]', head_ref: 'changeset-release/0.4.5', headRepo: 'contributor/fork',
+    }), true, 'Fixture assertions'],
+  ];
+  for (const [name, github, runs, expected] of cases) {
+    assert.equal(jobRuns(github), runs, name);
+    assert.equal(checkName(github), expected, name);
+  }
+});
+
+test('the delegated PR run cannot cancel the dispatched check', () => {
+  const pr = githubContext({
+    event_name: 'pull_request', login: 'github-actions[bot]', head_ref: 'changeset-release/0.4.5',
+  });
+  const dispatch = githubContext({
+    event_name: 'workflow_dispatch', ref_name: 'changeset-release/0.4.5',
+  });
+  assert.notEqual(concurrencyGroup(pr), concurrencyGroup(dispatch));
+  const human = githubContext({
+    event_name: 'pull_request', login: 'syntony666', head_ref: 'changeset-release/0.4.5',
+  });
+  assert.equal(concurrencyGroup(pr), concurrencyGroup(human));
+});
+
 test('Preview is gated after checks and does not expose deployment secrets to forks', () => {
   assert.match(checks, /contents: read/);
   assert.match(checks, /pull-requests: read/);
   assert.match(checks, /cancel-in-progress: true/);
-  assert.match(checks, /group: test-\$\{\{ github.event.pull_request.head.repo.full_name \|\| github.repository \}\}-\$\{\{ github.head_ref \|\| github.ref_name \}\}/);
+  assert.match(checks, /group: test-\$\{\{ github.event.pull_request.head.repo.full_name \|\| github.repository \}\}-\$\{\{ github.head_ref \|\| github.ref_name \}\}-\$\{\{ github.event_name \}\}/);
   assert.match(checks, /if: \$\{\{ github.event_name == 'workflow_dispatch' \|\| github.event.pull_request.head.repo.full_name == github.repository \}\}/);
   assert.match(checks, /if: \$\{\{ steps.preview.outputs.name != '' \}\}/);
   assert.match(checks, /PR_BRANCH: \$\{\{ github.head_ref \|\| github.ref_name \}\}/);
@@ -302,10 +370,11 @@ test('Preview command failures or missing URLs fail the check', t => {
 
 test('bot-created PRs have an explicit check run on their prepared branch', () => {
   assert.match(checks, /workflow_dispatch:/);
-  assert.doesNotMatch(checks, /if:.*changeset-release/);
-  assert.match(checks, /name: Fixture assertions/);
+  assert.match(checks, /'Release checks delegated'/);
+  assert.match(checks, /'Fixture assertions'/);
   assert.match(checks, /node --test tests\/release-workflow\.test\.mjs/);
   assert.match(start, /actions: write/);
+  assert.doesNotMatch(start, /do not trigger pull_request workflows/);
 });
 
 test('master publishes a prepared version without opening a second PR', () => {
