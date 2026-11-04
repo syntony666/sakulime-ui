@@ -1,0 +1,37 @@
+name: Test pipeline
+description: npm ci, deps guard, build, headless fixtures (+ optional lint/site)
+inputs:
+  lint:
+    required: false
+    default: "false"
+  site:
+    required: false
+    default: "false"
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v5
+      with:
+        node-version: 24
+        registry-url: https://registry.npmjs.org
+        cache: npm
+    - run: npm ci
+      shell: bash
+    - name: Isolated-workspace deps guard
+      run: node scripts/check-deps.mjs
+      shell: bash
+    - run: npm run lint
+      shell: bash
+      if: ${{ inputs.lint == 'true' }}
+    - run: npm run build
+      shell: bash
+    - name: Install chrome-headless-shell
+      run: npx -y @puppeteer/browsers install chrome-headless-shell@stable --path /tmp/chromium
+      shell: bash
+    - name: Fixture assertions
+      run: SL_CHROMIUM=$(find /tmp/chromium -name chrome-headless-shell -type f | head -1) npm test
+      shell: bash
+    - name: Docs site build
+      run: npm run site
+      shell: bash
+      if: ${{ inputs.site == 'true' }}

@@ -165,6 +165,23 @@
   document.body.appendChild(dyn);
   await new Promise((r) => setTimeout(r));
 
+  /* string source goes through fetch() — stubbed so the assertion does
+     not race real I/O against the runner's virtual-time dump; an
+     already-connected element gaining sl-icon exercises the observer's
+     attributes branch */
+  let fetchedUrl = "";
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = async (u) => {
+    fetchedUrl = String(u);
+    return { json: async () => ({ icons: { dot: { body: "<circle r='5'/>" } } }) };
+  };
+  await registerPack("t2", "pack:t2.json");
+  globalThis.fetch = realFetch;
+  const attr = document.createElement("i");
+  document.body.appendChild(attr);
+  attr.setAttribute("sl-icon", "t:box");
+  await Promise.resolve(); /* observer callbacks are microtasks — one hop flushes */
+
   window.__slBundle = {
     svg: icon("t:box"),
     missing: icon("t:nope"),
@@ -173,6 +190,9 @@
     names: iconNames("t").join(","),
     resolved: pre.dataset.slT === "1",
     dynFilled: !!dyn.querySelector("svg"),
+    fetched: icon("t2:dot"),
+    fetchedUrl,
+    attrFilled: !!attr.querySelector("svg"),
   };
 </script>
 <script>
@@ -403,6 +423,9 @@ function main() {
     eq('bundle iconNames lists pack icons', t3.names, 'box');
     eq('bundle resolve() hits custom resolver', String(t3.resolved), 'true');
     rec('bundle observer fills dynamic icon', String(t3.dynFilled), 'true', t3.dynFilled);
+    eq('bundle registerPack fetch() called with source', t3.fetchedUrl, 'pack:t2.json');
+    has('bundle registerPack fetch() source', t3.fetched, '<svg sl-icon');
+    rec('bundle observer fills attr change', String(t3.attrFilled), 'true', t3.attrFilled);
   }
 }
 </script>

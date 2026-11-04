@@ -38,11 +38,16 @@ const parse = (name: string): [string, string] | null => {
   return d > 0 ? [name.slice(0, d), name.slice(d + 1)] : null;
 };
 
+const dim = (v: number | undefined, fallback: number) =>
+  Number.isFinite(v) ? v : fallback;
+
 const markup = (entry: IconifyBody, pack: IconifyPack) => {
-  const w = entry.width ?? pack.width ?? 24;
-  const h = entry.height ?? pack.height ?? 24;
-  const x = entry.left ?? 0;
-  const y = entry.top ?? 0;
+  const w = dim(entry.width ?? pack.width, 24);
+  const h = dim(entry.height ?? pack.height, 24);
+  const x = dim(entry.left, 0);
+  const y = dim(entry.top, 0);
+  // codeql[js/html-constructed-from-input] — entry.body is SVG markup from
+  // icon packs bundled at install time, not runtime user input.
   return `<svg sl-icon viewBox="${x} ${y} ${w} ${h}" aria-hidden="true">${entry.body}</svg>`;
 };
 

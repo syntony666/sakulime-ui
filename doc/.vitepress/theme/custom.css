@@ -92,6 +92,27 @@
   --vp-button-alt-hover-bg: var(--sl-secondary);
 }
 
+:root:has(.sl-preview-banner) {
+  --vp-layout-top-height: 2.5rem;
+}
+
+.sl-preview-banner {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: calc(var(--vp-z-index-sidebar) + 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--vp-layout-top-height);
+  padding-inline: var(--sl-md);
+  border-bottom: 1px solid var(--sl-border);
+  background: var(--sl-secondary-bg);
+  color: var(--sl-text);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
 .VPHero .VPButton {
   transition:
     transform 0.18s ease,
@@ -113,7 +134,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: calc(100vh - var(--vp-nav-height));
+  min-height: calc(100vh - var(--vp-nav-height) - var(--vp-layout-top-height, 0px));
   margin-bottom: 0;
 }
 
