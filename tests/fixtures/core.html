@@ -148,14 +148,31 @@
   /* shipped-bundle execution: module scripts finish before
      DOMContentLoaded, which helpers.js now waits on — the stashed
      values below are read by main() assertions */
-  import { registerPack, icon, resolveIcons, packNames } from "../../packages/core/dist/index.min.js";
+  import { registerPack, icon, resolveIcons, packNames, iconNames, registerResolver, resolve } from "../../packages/core/dist/index.min.js";
   await registerPack("t", { icons: { box: { body: "<path d='M0 0h10v10z'/>" } } });
   resolveIcons(document);
+
+  /* resolver API — registered after install, so it only resolves via
+     manual resolve() passes; the armed observer still fills dynamic
+     sl-icon elements (its attributeFilter froze at install) */
+  const pre = document.createElement("div");
+  pre.setAttribute("data-sl-t", "");
+  document.body.appendChild(pre);
+  registerResolver("data-sl-t", (el) => { el.dataset.slT = "1"; });
+  resolve(document);
+  const dyn = document.createElement("i");
+  dyn.setAttribute("sl-icon", "t:box");
+  document.body.appendChild(dyn);
+  await new Promise((r) => setTimeout(r));
+
   window.__slBundle = {
     svg: icon("t:box"),
     missing: icon("t:nope"),
     pack: packNames().includes("t"),
     filled: !!document.querySelector("#ic-t svg"),
+    names: iconNames("t").join(","),
+    resolved: pre.dataset.slT === "1",
+    dynFilled: !!dyn.querySelector("svg"),
   };
 </script>
 <script>
@@ -383,6 +400,9 @@ function main() {
     eq('bundle icon() unknown empty', t3.missing, '');
     eq('bundle pack registered', String(t3.pack), 'true');
     rec('bundle placeholder filled', String(t3.filled), 'true', t3.filled);
+    eq('bundle iconNames lists pack icons', t3.names, 'box');
+    eq('bundle resolve() hits custom resolver', String(t3.resolved), 'true');
+    rec('bundle observer fills dynamic icon', String(t3.dynFilled), 'true', t3.dynFilled);
   }
 }
 </script>
