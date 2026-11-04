@@ -14,22 +14,33 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
+  verify:
     name: Fixture assertions
+    permissions:
+      contents: read
+    uses: ./.github/workflows/test-pipeline.yml
+    with:
+      lint: "true"
+      site: "true"
+
+  preview:
+    name: Docs Preview
+    needs: verify
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
-    env:
-      VITE_DOC_PREVIEW: "true"
     steps:
       - uses: actions/checkout@v5
-      - uses: ./.github/actions/test-pipeline
+      - uses: actions/setup-node@v5
         with:
-          lint: "true"
-          site: "true"
-      - name: Workflow checks
-        run: node --test
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: docs-site
+          path: doc/site
       - name: Find open PR for Preview
         id: preview
-        if: ${{ github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository }}
         env:
           GH_TOKEN: ${{ github.token }}
           PR_BRANCH: ${{ github.head_ref || github.ref_name }}

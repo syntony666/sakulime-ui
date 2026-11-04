@@ -11,6 +11,7 @@ import { mockBin, readCalls } from '../lib/mocks.mjs';
 const start = readWorkflow('release-pr');
 const checks = readWorkflow('test');
 const publish = readWorkflow('release');
+const pipeline = readWorkflow('test-pipeline');
 
 function releaseFixture(t, { changeset = true } = {}) {
   const tmp = mkdtempSync(join(tmpdir(), 'sl-release-'));
@@ -138,18 +139,30 @@ test('the prepared release PR is checked by its own pull_request run', () => {
   assert.match(checks, /\n {2}pull_request:/);
   assert.match(checks, /\n {2}workflow_dispatch:/);
   assert.match(checks, /name: Fixture assertions/);
-  assert.match(checks, /run: node --test$/m);
+  assert.match(checks, /uses: \.\/\.github\/workflows\/test-pipeline\.yml/);
+  assert.match(pipeline, /run: node --test$/m);
   assert.doesNotMatch(start, /gh workflow run|actions: write/);
+});
+
+test('the shared pipeline is a reusable workflow with dependencies installed before checks', () => {
+  assert.match(pipeline, /workflow_call:/);
+  assert.match(pipeline, /\n {6}lint:/);
+  assert.match(pipeline, /\n {6}site:/);
+  assert.match(pipeline, /npm ci/);
+  assert.match(pipeline, /check-deps\.mjs/);
+  assert.match(pipeline, /upload-artifact@v4/);
+  assert.ok(pipeline.indexOf('npm ci') < pipeline.indexOf('node --test'));
+  assert.ok(pipeline.indexOf('npm run build') < pipeline.indexOf('npm test'));
 });
 
 test('master publishes a prepared version without opening a second PR', () => {
   assert.match(publish, /\n {2}push:\n {4}branches:\n {6}- master/);
   assert.doesNotMatch(publish, /changesets\/action|changeset version|gh pr create/);
   assert.match(publish, /HEAD\^1:package\.json/);
-  assert.match(publish, /test-pipeline/);
+  assert.match(publish, /uses: \.\/\.github\/workflows\/test-pipeline\.yml/);
+  assert.match(publish, /needs: \[detect, verify\]/);
   assert.match(publish, /changeset publish/);
-  assert.doesNotMatch(publish, /npm run release|npm run build|chrome-headless-shell@stable/);
-  assert.doesNotMatch(publish, /node --test/);
+  assert.doesNotMatch(publish, /npm run release|chrome-headless-shell@stable|node --test/);
   assert.match(publish, /gh release create/);
   assert.match(publish, /git config user\.name 'github-actions\[bot\]'/);
   assert.match(publish, /git tag -a "\$tag" -m "\$tag" "\$GITHUB_SHA"/);
@@ -157,7 +170,7 @@ test('master publishes a prepared version without opening a second PR', () => {
 });
 
 test('every multiline workflow shell command has valid bash syntax', () => {
-  const blocks = [start, checks, publish].flatMap(shellBlocks);
+  const blocks = [start, checks, publish, pipeline].flatMap(shellBlocks);
   assert.ok(blocks.length > 0);
   for (const block of blocks) {
     const result = spawnSync('bash', ['-n'], { input: block, encoding: 'utf8' });
