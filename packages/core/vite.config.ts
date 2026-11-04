@@ -1,4 +1,5 @@
 import { fileURLToPath } from "node:url";
+// keep declared in package.json: isolated builds never see root devDeps
 import customSelectors from "postcss-custom-selectors";
 import { defineConfig } from 'vite'
 

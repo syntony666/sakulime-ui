@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "@sakulime-ui/shared": "*",
-    "@sakulime-ui/theme": "*"
+    "@sakulime-ui/theme": "*",
+    "postcss-custom-selectors": "^9.0.4"
   }
 }
