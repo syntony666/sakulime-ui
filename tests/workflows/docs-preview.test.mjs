@@ -10,9 +10,9 @@ import { extname, join } from 'node:path';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
-import { findChromium } from './lib/chromium.mjs';
+import { findChromium } from '../lib/chromium.mjs';
 
-const root = fileURLToPath(new URL('../', import.meta.url));
+const root = fileURLToPath(new URL('../../', import.meta.url));
 const cli = join(root, 'node_modules/vitepress/bin/vitepress.js');
 const execFileP = promisify(execFile);
 
