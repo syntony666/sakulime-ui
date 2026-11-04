@@ -226,9 +226,10 @@ test('preparation stops without a changeset instead of pushing an unchanged vers
   const fixture = releaseFixture(t, { changeset: false });
   const result = fixture.run();
   assert.notEqual(result.status, 0);
-  assert.match(result.stdout, /No unreleased changesets found/);
+  assert.match(result.stdout, /no pending changesets/);
   assert.equal(fixture.git('ls-remote', '--heads', 'origin', 'refs/heads/changeset-release/0.4.5'), '');
   assert.equal(fixture.calls().filter(args => args[0] === 'pr' && args[1] === 'create').length, 0);
+  assert.equal(fixture.calls().filter(args => args[0] === 'npm').length, 0);
 });
 
 test('preparation never reopens a merged release PR', t => {

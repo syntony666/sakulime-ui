@@ -89,6 +89,12 @@ jobs:
               exit 1
             fi
           else
+            pending=$(git ls-tree -r --name-only "$source" -- .changeset/ \
+              | grep '\.md$' | grep -vc 'README\.md$' || true)
+            if [[ "$pending" -eq 0 ]]; then
+              echo "::error::$RELEASE_BRANCH has no pending changesets; add at least one before starting a release."
+              exit 1
+            fi
             git switch -C "$target" "$source"
             npm ci
             npx --no-install changeset version
