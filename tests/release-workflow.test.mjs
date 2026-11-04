@@ -433,6 +433,8 @@ test('master publishes a prepared version without opening a second PR', () => {
   assert.match(publish, /HEAD\^1:package\.json/);
   assert.match(publish, /npm run release/);
   assert.match(publish, /gh release create/);
+  assert.match(publish, /git config user\.name 'github-actions\[bot\]'/);
+  assert.match(publish, /git tag -a "\$tag" -m "\$tag" "\$GITHUB_SHA"/);
   assert.match(publish, /id-token: write/);
 });
 
