@@ -13,5 +13,11 @@
     --sl-seed-primary: #1f3d3d;
     --sl-seed-secondary: #d6d3d1;
     --sl-seed-accent: #1f3d3d;
+
+    /* the derived 96.5% bg reads near-white on a warm-stone seed —
+       deepen the page field so terra actually reads as stone */
+    --sl-bg: light-dark(
+      oklch(from var(--sl-seed-secondary) 94% calc(c * 0.4) h),
+      oklch(from var(--sl-seed-secondary) 21.5% calc(c * 0.7) h));
   }
 }
