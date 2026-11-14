@@ -1,5 +1,22 @@
 # sakulime-ui
 
+## 0.4.9
+
+### Patch Changes
+
+- c10cfa6: Generalize the isolated-workspace deps guard to check every bare import in workspace build configs against that workspace's declared dependencies, not just postcss-custom-selectors. No published runtime code changes.
+- 7f8744e: Add unit tests for the icon API surface — parsing, markup, warnings,
+  pack registration, and the shared resolver fan-out — plus happy-dom
+  coverage and browser assertions for observer edge cases in the core
+  fixture.
+- f58c257: Start Release now fails fast when the source release branch has no pending changesets, instead of running the full preparation and failing inside changeset version. No published runtime code changes.
+- 62cfbcc: Start Release now compares the version that pending changesets produce
+  against the requested release branch before versioning, failing the
+  prepare step when they differ.
+- 0aee4af: Deepen terra's page background from near-white to a warmer stone field
+  (--sl-bg 96.5% → 94% lightness), keeping surfaces near-white so cards
+  stand out more clearly against the page.
+
 ## 0.4.8
 
 ### Patch Changes
