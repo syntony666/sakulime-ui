@@ -45,6 +45,13 @@ export default defineConfig([
     },
   },
   {
+    // DOM API tests set browser globals from happy-dom before importing
+    files: ['tests/api/**/*-dom.test.mjs'],
+    languageOptions: {
+      globals: { ...globals.node, ...globals.browser },
+    },
+  },
+  {
     files: ['**/*.{ts,mts}'],
     extends: [
       js.configs.recommended,
